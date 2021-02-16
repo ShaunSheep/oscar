@@ -87,18 +87,6 @@
 <td>hexo-renderer-markdown-it-plus</td>
 <td>markdown解析插件</td>
 </tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
 </tbody></table>
 <h1 id="an-zhuang-jiao-cheng"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程<a href="#an-zhuang-jiao-cheng" class="header-anchor">#</a></h1><h2 id="nodejs-an-zhuang-jiao-cheng"><a href="#nodejs安装教程" class="headerlink" title="nodejs安装教程"></a>nodejs安装教程<a href="#nodejs-an-zhuang-jiao-cheng" class="header-anchor">#</a></h2><p>步骤太简单了，难点就是找到合适版本、合适渠道的安装包，推荐国内使用方式2node中文网的方式下载安装</p>
 <table>
@@ -156,7 +144,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#x62;&#x2e;&#99;&#111;&#109;">&#103;&#105;&#116;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#x62;&#x2e;&#99;&#111;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#103;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;">&#103;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
