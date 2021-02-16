@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>网站波尔克</title>
+    <url>/ye-jincheng-website/2021/02/16/readme/</url>
+    <content><![CDATA[<h1 id="波尔克"><a href="#波尔克" class="headerlink" title="波尔克"></a>波尔克</h1><h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>阿里云服务器用了三年了，到期忘了续费。网站文章资料忘了及时导出，也被清空了。于是打算使用免费仓库搭一个个人网站，简单，使用，空间够用。</p>
+<h1 id="网站架构"><a href="#网站架构" class="headerlink" title="网站架构"></a>网站架构</h1><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hexo</td>
+<td>博客服务</td>
+</tr>
+<tr>
+<td>nodejs</td>
+<td>hexo编译环境</td>
+</tr>
+<tr>
+<td>gitee</td>
+<td>码云</td>
+</tr>
+<tr>
+<td>next</td>
+<td>hexo主题</td>
+</tr>
+</tbody></table>
+<h1 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h1><h2 id="nodejs安装教程"><a href="#nodejs安装教程" class="headerlink" title="nodejs安装教程"></a>nodejs安装教程</h2><p>步骤太简单了，难点就是找到合适版本、合适渠道的安装包，推荐国内使用方式2node中文网的方式下载安装</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>缺点</th>
+<th>优点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://nodejs.org/zh-cn/">node官网</a>，点击链接下载，一路next同意协议安装</td>
+<td>国外服务器下载慢</td>
+<td>最新安装包</td>
+</tr>
+<tr>
+<td><a href="http://nodejs.cn/">node中文网</a>，点击链接下载，一路next同意协议安装</td>
+<td>安装包版本落后1-2个版本</td>
+<td>国内服务器下载快</td>
+</tr>
+</tbody></table>
+<h2 id="码云配置网站教程"><a href="#码云配置网站教程" class="headerlink" title="码云配置网站教程"></a>码云配置网站教程</h2><h2 id="git使用教程"><a href="#git使用教程" class="headerlink" title="git使用教程"></a>git使用教程</h2><h2 id="hexo使用教程"><a href="#hexo使用教程" class="headerlink" title="hexo使用教程"></a>hexo使用教程</h2><p>hexo官网有详细步骤，小白可以参考百度上的安装教程博客</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>步骤</th>
+<th>缺点</th>
+<th>优点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://hexo.io/zh-cn/docs/">hexo官网</a>，权威hexo安装步骤</td>
+<td>npm install -g hexo-cli；</td>
+<td>不适合小白用户，命令行操作居多</td>
+<td>简洁，明了，歧义少</td>
+</tr>
+<tr>
+<td>搜索引擎“hexo安装步骤”</td>
+<td><a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html">《参考》</a></td>
+<td>遇到问题较难解答</td>
+<td>傻瓜式，上手快</td>
+</tr>
+</tbody></table>
+<h1 id="hexo常见指令"><a href="#hexo常见指令" class="headerlink" title="hexo常见指令"></a>hexo常见指令</h1><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hexo init</td>
+<td>在当前目录下创建工程</td>
+</tr>
+<tr>
+<td>_config.yml</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#105;&#116;&#x68;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#103;&#105;&#116;&#x68;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+</tr>
+<tr>
+<td>hexo clean</td>
+<td>清除缓存</td>
+</tr>
+<tr>
+<td>hexo g</td>
+<td>生成web</td>
+</tr>
+<tr>
+<td>hexo s</td>
+<td>启动web服务并预览，在浏览器输入 <a href="http://localhost:4000/">http://localhost:4000</a></td>
+</tr>
+<tr>
+<td>hexo d</td>
+<td>发布pulic 目录下的静态页面至github</td>
+</tr>
+<tr>
+<td>git clone url themes/yilia</td>
+<td>下载指定主题到根目录/thems/yilia/ 下</td>
+</tr>
+<tr>
+<td>hexo new “postName”</td>
+<td>新建文章，hexo n</td>
+</tr>
+<tr>
+<td>hexo new page “pageName”</td>
+<td>#新建页面</td>
+</tr>
+<tr>
+<td>hexo generate</td>
+<td>生成静态页面至public目录，hexo g</td>
+</tr>
+<tr>
+<td>hexo server</td>
+<td>开启预览访问端口（默认端口4000，’ctrl + c’关闭server）</td>
+</tr>
+<tr>
+<td>hexo deploy</td>
+<td>hexo d</td>
+</tr>
+<tr>
+<td>hexo s -g</td>
+<td>生成并本地预览</td>
+</tr>
+</tbody></table>
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a><strong>常见问题</strong></h1><h2 id="码云部署hexo站点-css样式不显示？"><a href="#码云部署hexo站点-css样式不显示？" class="headerlink" title="码云部署hexo站点 css样式不显示？"></a><strong>码云部署hexo站点 css样式不显示？</strong></h2><p>原因：仓库地址与个性地址url不一致<br>解决：修改_config.yml<br>    ​<code>xml     url: https://ipvb.gitee.io/blog     root: /blog     ​</code></p>
+<p>其他码云部署的问题参考<a href="https://gitee.com/help/articles/4136#article-header3">这里</a></p>
+<h2 id="hexo如何安装主题"><a href="#hexo如何安装主题" class="headerlink" title="hexo如何安装主题"></a>hexo如何安装主题</h2><ol>
+<li><p>找到合适的主题列表，推荐以下2个：</p>
+<p><a href="https://www.zhihu.com/question/24422335">有哪些好看的 Hexo 主题？</a></p>
+<p><a href="https://hexo.io/themes/">hexo.thems</a></p>
+</li>
+<li><p>安装主题至根目录，例如找到next主题，将其克隆岛根目录/thesms/next下</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="comment">//github.com/iissnan/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure></li>
+<li><p>阅读<a href="https://github.com/iissnan/hexo-theme-next">next文档</a></p>
+<ol>
+<li>引用主题：在config.yml中修改主题名称：<code>theme: next</code></li>
+<li>发布时遇到 bug<code>&#123;% extends '_layout.swig' %&#125;</code>；输入指令解决：<code>npm i hexo-renderer-swig</code></li>
+</ol>
+</li>
+</ol>
+<h2 id="hexo不显示二级目录？"><a href="#hexo不显示二级目录？" class="headerlink" title="hexo不显示二级目录？"></a>hexo不显示二级目录？</h2><p>原因：hexo解析目录是按照1级，1级下面找2级，2级下面找3级的顺序查找目录的，如果只有2级，没有1级，是会显示错误的。</p>
+<p>解决：先写1级标题，再写2级标题，先写大标题，再写小标题。</p>
+<h2 id="hexo不显示三级目录？"><a href="#hexo不显示三级目录？" class="headerlink" title="hexo不显示三级目录？"></a>hexo不显示三级目录？</h2><h2 id="hexo点击二级目录不跳转"><a href="#hexo点击二级目录不跳转" class="headerlink" title="hexo点击二级目录不跳转?"></a>hexo点击二级目录不跳转?</h2><h2 id="hexo自动发布图片至七牛云？"><a href="#hexo自动发布图片至七牛云？" class="headerlink" title="hexo自动发布图片至七牛云？"></a>hexo自动发布图片至七牛云？</h2><p>阿里云-域名管理-解析设置-添加记录-设置以下参数</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>记录类型</td>
+<td>CNAME</td>
+</tr>
+<tr>
+<td>主机记录</td>
+<td>如cdn</td>
+</tr>
+<tr>
+<td>记录值</td>
+<td>从七牛云后台获取</td>
+</tr>
+</tbody></table>
+<p>七牛云-域名管理-加速域名设置值如cdn.yangchaofan.cn；cdn就是主机记录值；创建完毕后，获得一个CNAME值，记住该值，填写至阿里云域名记录值中。</p>
+<h2 id="next如何添加搜索功能？"><a href="#next如何添加搜索功能？" class="headerlink" title="next如何添加搜索功能？"></a>next如何添加搜索功能？</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+<p>编辑全局配置</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+<p>编辑主题配置</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">local_search:</span><br><span class="line">  enable: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="next如何添加评论功能？"><a href="#next如何添加评论功能？" class="headerlink" title="next如何添加评论功能？"></a>next如何添加评论功能？</h2><p>翻墙打开<a href="https://livere.com/">来比力官网</a>，注册填写域名，copy代码块</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;!-- 来必力City版安装代码 --&gt;</span><br><span class="line">&lt;div id=<span class="string">&quot;lv-container&quot;</span> data-id=<span class="string">&quot;city&quot;</span> data-uid=<span class="string">&quot;这里是id&quot;</span>&gt;</span><br><span class="line">	&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">   (<span class="function"><span class="keyword">function</span>(<span class="params">d, s</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">var</span> j, e = d.getElementsByTagName(s)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (<span class="keyword">typeof</span> LivereTower === <span class="string">&#x27;function&#x27;</span>) &#123; <span class="keyword">return</span>; &#125;</span><br><span class="line"></span><br><span class="line">       j = d.createElement(s);</span><br><span class="line">       j.src = <span class="string">&#x27;https://cdn-city.livere.com/js/embed.dist.js&#x27;</span>;</span><br><span class="line">       j.async = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">       e.parentNode.insertBefore(j, e);</span><br><span class="line">   &#125;)(<span class="built_in">document</span>, <span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;noscript&gt; 为正常使用来必力评论功能请激活JavaScript&lt;/noscript&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;!-- City版安装代码已完成 --&gt;</span><br></pre></td></tr></table></figure>
+<p>可以在评论<a href="https://livere.com/insight/communite">后台</a>管理评论内容。</p>
+<h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><ol>
+<li> 定时使用typora编写markdown文章：编写markdown文件</li>
+<li> 导出成html，发布在hexo：使用hexo s</li>
+<li> hexo推送到码云指定仓库地址：hexo d</li>
+<li> 将阿里云的域名解析至码云仓库地址：配置域名解析</li>
+<li> 通过公网域名访问我的网站</li>
+</ol>
+<h1 id="支持"><a href="#支持" class="headerlink" title="支持"></a>支持</h1><ol>
+<li> 使用 Readme_XXX.md 来支持不同的语言，例如 Readme_en.md, Readme_zh.md</li>
+<li> Gitee 官方博客 <a href="https://blog.gitee.com/">blog.gitee.com</a></li>
+<li> 你可以 <a href="https://gitee.com/explore">https://gitee.com/explore</a> 这个地址来了解 Gitee 上的优秀开源项目</li>
+<li> <a href="https://gitee.com/gvp">GVP</a> 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目</li>
+<li> Gitee 官方提供的使用手册 <a href="https://gitee.com/help">https://gitee.com/help</a></li>
+<li> Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 <a href="https://gitee.com/gitee-stars/">https://gitee.com/gitee-stars/</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>标签</category>
+        <category>杂谈</category>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>程序员吃的是青春饭吗？</title>
+    <url>/ye-jincheng-website/2021/02/16/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%90%83%E7%9A%84%E6%98%AF%E9%9D%92%E6%98%A5%E9%A5%AD%E5%90%97%EF%BC%9F/</url>
+    <content><![CDATA[<h1 id="程序员吃的是青春饭吗？"><a href="#程序员吃的是青春饭吗？" class="headerlink" title="程序员吃的是青春饭吗？"></a>程序员吃的是青春饭吗？</h1><p>昨天在知乎上看到一个提问<a href="https://www.zhihu.com/question/444102247">“程序员为什么是吃青春饭，而不是像医生律师一样越老越值钱？”</a></p>
+<p>翻了一百多个回答，大多答主都是顺着题主的逻辑假定答的</p>
+<p>即许多人都是心中假设此前提成立：“程序员是吃青春饭”、“律师医生越老越值钱”</p>
+<p>基于“程序员确实吃青春饭”很容易可以得到以下这些“由果倒因”“贩卖焦虑”的观点：</p>
+<ol>
+<li>医生可以独立出售个人价值，程序员不行</li>
+<li>医生知识更新慢，程序员知识更新快</li>
+<li>医生是非劳动密集，程序员是劳动密集</li>
+<li>医生卖的是个人服务，程序员卖的是coding能力</li>
+<li>医生服务的是人，程序员服务的是计算机</li>
+</ol>
+<p>可如果题主或答主们的前提假定是错的呢？</p>
+<p>如果存在“程序员越老越值钱”的事实呢？</p>
+<h1 id="医生可以独立出售个人价值，程序员不行"><a href="#医生可以独立出售个人价值，程序员不行" class="headerlink" title="医生可以独立出售个人价值，程序员不行"></a>医生可以独立出售个人价值，程序员不行</h1><p>全科医生可以开个人门诊，君只见全科医生一个人坐诊门诊人流大，票子多，不见即使是最牛的全科大夫，也得让病人老老实实去医院拍CT、做血检做常规的检验流程，末了拿着化验报告再来他这看；这一流程下来，全科医生卖的是个人服务吗？难道不是基于医院各科室流程体系下工作的“工人”罢了。</p>
+<p>程序员无法独立出售个人价值？君不见诸如猪八戒、程序员客栈此类外包网站是如何兴起的？个人综合能力强的，此类人有承担软件开发全流程的能力，一个人挑大梁完成”立项-项需-设计-开发-测试-交付”；能力有偏科较弱的，提供“项需-设计-开发-测试-交付”的能力也足以；能力再弱点提供“设计-开发-测试”总可以吧；再不济“开发xx模块”对大多数程序员来说也是很容易达到的。</p>
+<p>能否独立出售个人价值，取决于个人提供的价值有多全面，与行业、年龄无关。</p>
+<p>医生再强，也无法做到治病救人的全流程：</p>
+<ol>
+<li>初诊：问诊病史-专科体格检查-辅助检查（化验、B超、电子镜）-初步诊断-治疗方案-处方和治疗单</li>
+<li>复诊：基于检查调整判断，修正治疗方案</li>
+</ol>
+<p>程序员中综合能力强者，是可以做到一个人全挑系统开发生命周期的：</p>
+<p>立项-项需-设计-开发-测试-交付</p>
+<h1 id="医生更新知识慢，程序员知识更新快"><a href="#医生更新知识慢，程序员知识更新快" class="headerlink" title="医生更新知识慢，程序员知识更新快"></a>医生更新知识慢，程序员知识更新快</h1><p>这里有一层潜台词是：年龄越大，越接受不了知识的频繁更新，越适应不了新知识新技术的摄取</p>
+<p>社会确实存在“上了一定年纪，学不动了，自然被行业抛弃淘汰”的事实。</p>
+<p>网上诸多社区也能看到很多40+找工作力不从心的程序员同行。</p>
+<p>细心观察这一类人的特点：40+年龄，喜欢谈管理，不喜谈coding和架构顶层设计，接受不了技术换代，不愿意投入时间补充新技术，没有精力和心劲追赶新知识新潮流，换言之，这一类人身体老（out）了，思想也老（out）了，身心皆老自然被行业淘汰了。</p>
+<p>如果观察公司身边其他人呢，积极一些现象是：有这么一类年长者，40+年龄，能熟练编写项需，搭建顶层设计，各种新技术选型信手拈来，最潮流的coding技巧耍的有模又有样，末了交付验收bug少，还能跟产品谈需求变更，教导年轻测试人员编写安全测试用例和系统测试用例。这种人身上散发着朝气，充满了光芒，推动着团队前进，身体元气满满，心灵积极向上，所带团队凝聚力强，扔在就业市场上，这一类人行业竞争力自然强。</p>
+<p>是因为年长导致就业困难吗？不是。</p>
+<p>究其本质，是思想衰老不愿意投入精力学习，编码能力已经退化至菜鸟新手级别，此时这类人已经算不上程序员了，无法适应行业要求，就业自然困难；这是诸位选择的结果，温水煮青蛙式的慢性淘汰，消极应对行业需求变更，求仁得仁罢了。</p>
+<p>以上是我对这个问题的一点看法。希望能鼓励到犹豫不决的人，坚定一个行业走下去的心。</p>
+]]></content>
+      <categories>
+        <category>标签</category>
+        <category>杂谈</category>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>程序人生，杂谈</tag>
+      </tags>
+  </entry>
+</search>
