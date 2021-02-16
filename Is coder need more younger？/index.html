@@ -2,10 +2,8 @@
 
 
 
-  
 
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next pisces" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -22,6 +20,7 @@
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
 
 
 
@@ -96,6 +95,15 @@
 <link href="/ye-jincheng-website/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/ye-jincheng-website/function%20small()%20%7B%20%5Bnative%20code%5D%20%7D?v=5.1.2">
+
+
+
+
+
+
   <meta name="keywords" content="程序人生，杂谈," />
 
 
@@ -105,22 +113,17 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/ye-jincheng-website/favicon.ico?v=5.1.2" />
-
-
-
-
 
 
 <meta name="description" content="程序员吃的是青春饭吗？昨天在知乎上看到一个提问“程序员为什么是吃青春饭，而不是像医生律师一样越老越值钱？” 翻了一百多个回答，大多答主都是顺着题主的逻辑假定答的 即许多人都是心中假设此前提成立：“程序员是吃青春饭”、“律师医生越老越值钱” 基于“程序员确实吃青春饭”很容易可以得到以下这些“由果倒因”“贩卖焦虑”的观点：  医生可以独立出售个人价值，程序员不行 医生知识更新慢，程序员知识更新快 医生">
 <meta property="og:type" content="article">
 <meta property="og:title" content="程序员吃的是青春饭吗？">
-<meta property="og:url" content="http://jackyoung123.gitee.io/ye-jincheng-website/2021/02/16/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%90%83%E7%9A%84%E6%98%AF%E9%9D%92%E6%98%A5%E9%A5%AD%E5%90%97%EF%BC%9F/index.html">
+<meta property="og:url" content="http://jackyoung123.gitee.io/ye-jincheng-website/Is%20coder%20need%20more%20younger%EF%BC%9F/index.html">
 <meta property="og:site_name" content="叶金诚的站点">
 <meta property="og:description" content="程序员吃的是青春饭吗？昨天在知乎上看到一个提问“程序员为什么是吃青春饭，而不是像医生律师一样越老越值钱？” 翻了一百多个回答，大多答主都是顺着题主的逻辑假定答的 即许多人都是心中假设此前提成立：“程序员是吃青春饭”、“律师医生越老越值钱” 基于“程序员确实吃青春饭”很容易可以得到以下这些“由果倒因”“贩卖焦虑”的观点：  医生可以独立出售个人价值，程序员不行 医生知识更新慢，程序员知识更新快 医生">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-02-16T01:50:49.000Z">
-<meta property="article:modified_time" content="2021-02-16T11:44:46.465Z">
+<meta property="article:modified_time" content="2021-02-16T13:00:54.949Z">
 <meta property="article:author" content="叶金诚">
 <meta property="article:tag" content="程序人生，杂谈">
 <meta name="twitter:card" content="summary">
@@ -132,10 +135,11 @@
   var CONFIG = {
     root: '',
     scheme: 'Pisces',
+    version: '5.1.2',
     sidebar: {"position":"left","display":"always","offset":16,"offset_float":16,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
-    motion: true,
+    motion: "",
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -152,7 +156,7 @@
 
 
 
-  <link rel="canonical" href="http://jackyoung123.gitee.io/ye-jincheng-website/2021/02/16/程序员吃的是青春饭吗？/"/>
+  <link rel="canonical" href="http://jackyoung123.gitee.io/ye-jincheng-website/Is coder need more younger？/"/>
 
 
 
@@ -160,12 +164,6 @@
 
   <title>程序员吃的是青春饭吗？ | 叶金诚的站点</title>
   
-
-
-
-
-
-
 
 
 
@@ -183,7 +181,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -222,7 +220,7 @@
         <li class="menu-item menu-item-home">
           <a href="/ye-jincheng-website/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             首页
           </a>
@@ -232,7 +230,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/ye-jincheng-website/categories/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             分类
           </a>
@@ -242,9 +240,19 @@
         <li class="menu-item menu-item-about">
           <a href="/ye-jincheng-website/about/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/ye-jincheng-website/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
           </a>
         </li>
       
@@ -252,9 +260,19 @@
         <li class="menu-item menu-item-tags">
           <a href="/ye-jincheng-website/tags/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/ye-jincheng-website/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            站点地图
           </a>
         </li>
       
@@ -325,7 +343,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/2021/02/16/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%90%83%E7%9A%84%E6%98%AF%E9%9D%92%E6%98%A5%E9%A5%AD%E5%90%97%EF%BC%9F/">
+    <link itemprop="mainEntityOfPage" href="http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/Is%20coder%20need%20more%20younger%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -417,9 +435,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/ye-jincheng-website/2021/02/16/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%90%83%E7%9A%84%E6%98%AF%E9%9D%92%E6%98%A5%E9%A5%AD%E5%90%97%EF%BC%9F/#comments" itemprop="discussionUrl">
+                <a href="/ye-jincheng-website/Is%20coder%20need%20more%20younger%EF%BC%9F/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2021/02/16/程序员吃的是青春饭吗？/" itemprop="commentCount"></span>
+                        data-disqus-identifier="Is coder need more younger？/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -447,7 +465,7 @@
       
 
       
-        <h1 id="程序员吃的是青春饭吗？"><a href="#程序员吃的是青春饭吗？" class="headerlink" title="程序员吃的是青春饭吗？"></a>程序员吃的是青春饭吗？</h1><p>昨天在知乎上看到一个提问<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/444102247">“程序员为什么是吃青春饭，而不是像医生律师一样越老越值钱？”</a></p>
+        <h1 id="cheng-xu-yuan-chi-de-shi-qing-chun-fan-ma"><a href="#程序员吃的是青春饭吗？" class="headerlink" title="程序员吃的是青春饭吗？"></a>程序员吃的是青春饭吗？<a href="#cheng-xu-yuan-chi-de-shi-qing-chun-fan-ma" class="header-anchor">#</a></h1><p>昨天在知乎上看到一个提问<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/444102247">“程序员为什么是吃青春饭，而不是像医生律师一样越老越值钱？”</a></p>
 <p>翻了一百多个回答，大多答主都是顺着题主的逻辑假定答的</p>
 <p>即许多人都是心中假设此前提成立：“程序员是吃青春饭”、“律师医生越老越值钱”</p>
 <p>基于“程序员确实吃青春饭”很容易可以得到以下这些“由果倒因”“贩卖焦虑”的观点：</p>
@@ -460,7 +478,7 @@
 </ol>
 <p>可如果题主或答主们的前提假定是错的呢？</p>
 <p>如果存在“程序员越老越值钱”的事实呢？<a id="more"></a></p>
-<h1 id="医生可以独立出售个人价值，程序员不行"><a href="#医生可以独立出售个人价值，程序员不行" class="headerlink" title="医生可以独立出售个人价值，程序员不行"></a>医生可以独立出售个人价值，程序员不行</h1><p>全科医生可以开个人门诊，君只见全科医生一个人坐诊门诊人流大，票子多，不见即使是最牛的全科大夫，也得让病人老老实实去医院拍CT、做血检做常规的检验流程，末了拿着化验报告再来他这看；这一流程下来，全科医生卖的是个人服务吗？难道不是基于医院各科室流程体系下工作的“工人”罢了。</p>
+<h1 id="yi-sheng-ke-yi-du-li-chu-shou-ge-ren-jie-zhi-cheng-xu-yuan-bu-xing"><a href="#医生可以独立出售个人价值，程序员不行" class="headerlink" title="医生可以独立出售个人价值，程序员不行"></a>医生可以独立出售个人价值，程序员不行<a href="#yi-sheng-ke-yi-du-li-chu-shou-ge-ren-jie-zhi-cheng-xu-yuan-bu-xing" class="header-anchor">#</a></h1><p>全科医生可以开个人门诊，君只见全科医生一个人坐诊门诊人流大，票子多，不见即使是最牛的全科大夫，也得让病人老老实实去医院拍CT、做血检做常规的检验流程，末了拿着化验报告再来他这看；这一流程下来，全科医生卖的是个人服务吗？难道不是基于医院各科室流程体系下工作的“工人”罢了。</p>
 <p>程序员无法独立出售个人价值？君不见诸如猪八戒、程序员客栈此类外包网站是如何兴起的？个人综合能力强的，此类人有承担软件开发全流程的能力，一个人挑大梁完成”立项-项需-设计-开发-测试-交付”；能力有偏科较弱的，提供“项需-设计-开发-测试-交付”的能力也足以；能力再弱点提供“设计-开发-测试”总可以吧；再不济“开发xx模块”对大多数程序员来说也是很容易达到的。</p>
 <p>能否独立出售个人价值，取决于个人提供的价值有多全面，与行业、年龄无关。</p>
 <p>医生再强，也无法做到治病救人的全流程：</p>
@@ -470,7 +488,7 @@
 </ol>
 <p>程序员中综合能力强者，是可以做到一个人全挑系统开发生命周期的：</p>
 <p>立项-项需-设计-开发-测试-交付</p>
-<h1 id="医生更新知识慢，程序员知识更新快"><a href="#医生更新知识慢，程序员知识更新快" class="headerlink" title="医生更新知识慢，程序员知识更新快"></a>医生更新知识慢，程序员知识更新快</h1><p>这里有一层潜台词是：年龄越大，越接受不了知识的频繁更新，越适应不了新知识新技术的摄取</p>
+<h1 id="yi-sheng-geng-xin-zhi-shi-man-cheng-xu-yuan-zhi-shi-geng-xin-kuai"><a href="#医生更新知识慢，程序员知识更新快" class="headerlink" title="医生更新知识慢，程序员知识更新快"></a>医生更新知识慢，程序员知识更新快<a href="#yi-sheng-geng-xin-zhi-shi-man-cheng-xu-yuan-zhi-shi-geng-xin-kuai" class="header-anchor">#</a></h1><p>这里有一层潜台词是：年龄越大，越接受不了知识的频繁更新，越适应不了新知识新技术的摄取</p>
 <p>社会确实存在“上了一定年纪，学不动了，自然被行业抛弃淘汰”的事实。</p>
 <p>网上诸多社区也能看到很多40+找工作力不从心的程序员同行。</p>
 <p>细心观察这一类人的特点：40+年龄，喜欢谈管理，不喜谈coding和架构顶层设计，接受不了技术换代，不愿意投入时间补充新技术，没有精力和心劲追赶新知识新潮流，换言之，这一类人身体老（out）了，思想也老（out）了，身心皆老自然被行业淘汰了。</p>
@@ -508,8 +526,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/ye-jincheng-website/2021/02/16/readme/" rel="next" title="网站波尔克">
-                <i class="fa fa-chevron-left"></i> 网站波尔克
+              <a href="/ye-jincheng-website/website_nickname/" rel="next" title="波尔克">
+                <i class="fa fa-chevron-left"></i> 波尔克
               </a>
             
           </div>
@@ -535,6 +553,44 @@
 
     <div class="post-spread">
       
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
     </div>
   </div>
 
@@ -544,16 +600,19 @@
 
 
           
-  <div class="comments" id="comments">
-    
+
+  
+    <div class="comments" id="comments">
       <div id="disqus_thread">
         <noscript>
           Please enable JavaScript to view the
           <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
         </noscript>
       </div>
-    
-  </div>
+    </div>
+
+  
+
 
 
         </div>
@@ -578,104 +637,92 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             站点概览
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/ye-jincheng-website/images/avatar.gif"
-               alt="" />
-          <p class="site-author-name" itemprop="name"></p>
-           
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
               <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/ye-jincheng-website/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/ye-jincheng-website/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/ye-jincheng-website/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
           
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ShaunSheep" target="_blank" title="GitHub">
+                      GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.douban.com/people/jincheng-ycf/" target="_blank" title="豆瓣">
+                      豆瓣</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/OscarWildeHawking" target="_blank" title="知乎">
+                      知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
         </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/ye-jincheng-website/">
-                <span class="site-state-item-count">2</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/ye-jincheng-website/categories/index.html">
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">分类</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/ye-jincheng-website/tags/index.html">
-                <span class="site-state-item-count">2</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/ShaunSheep" target="_blank" title="GitHub">
-                  
-                    
-                      GitHub
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://www.douban.com/people/jincheng-ycf/" target="_blank" title="豆瓣">
-                  
-                    
-                      豆瓣
-                    
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/OscarWildeHawking" target="_blank" title="知乎">
-                  
-                    
-                      知乎
-                    
-                </a>
-              </span>
-            
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
       </section>
 
       
@@ -688,7 +735,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%91%98%E5%90%83%E7%9A%84%E6%98%AF%E9%9D%92%E6%98%A5%E9%A5%AD%E5%90%97%EF%BC%9F"><span class="nav-number">1.</span> <span class="nav-text">程序员吃的是青春饭吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%BB%E7%94%9F%E5%8F%AF%E4%BB%A5%E7%8B%AC%E7%AB%8B%E5%87%BA%E5%94%AE%E4%B8%AA%E4%BA%BA%E4%BB%B7%E5%80%BC%EF%BC%8C%E7%A8%8B%E5%BA%8F%E5%91%98%E4%B8%8D%E8%A1%8C"><span class="nav-number">2.</span> <span class="nav-text">医生可以独立出售个人价值，程序员不行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%BB%E7%94%9F%E6%9B%B4%E6%96%B0%E7%9F%A5%E8%AF%86%E6%85%A2%EF%BC%8C%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9F%A5%E8%AF%86%E6%9B%B4%E6%96%B0%E5%BF%AB"><span class="nav-number">3.</span> <span class="nav-text">医生更新知识慢，程序员知识更新快</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cheng-xu-yuan-chi-de-shi-qing-chun-fan-ma"><span class="nav-number">1.</span> <span class="nav-text">程序员吃的是青春饭吗？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#yi-sheng-ke-yi-du-li-chu-shou-ge-ren-jie-zhi-cheng-xu-yuan-bu-xing"><span class="nav-number">2.</span> <span class="nav-text">医生可以独立出售个人价值，程序员不行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#yi-sheng-geng-xin-zhi-shi-man-cheng-xu-yuan-zhi-shi-geng-xin-kuai"><span class="nav-number">3.</span> <span class="nav-text">医生更新知识慢，程序员知识更新快</span></a></li></ol></div>
             
 
           </div>
@@ -708,30 +755,30 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy;  2016 - 
-  <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">叶金诚</span>
+
+  
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" target="_blank" rel="noopener" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" target="_blank" rel="noopener" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
+
+
+
+
 
 
         
+
+
+
+
+
+
 
         
       </div>
@@ -744,6 +791,8 @@
           <span id="scrollpercent"><span>0</span>%</span>
         
       </div>
+    
+
     
 
   </div>
@@ -778,22 +827,34 @@
 
 
   
-  <script type="text/javascript" src="/ye-jincheng-website/lib/jquery/index.js?v=2.1.3"></script>
+  
+    <script type="text/javascript" src="/ye-jincheng-website/lib/jquery/index.js?v=2.1.3"></script>
+  
 
   
-  <script type="text/javascript" src="/ye-jincheng-website/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+    <script type="text/javascript" src="/ye-jincheng-website/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
   
-  <script type="text/javascript" src="/ye-jincheng-website/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+    <script type="text/javascript" src="/ye-jincheng-website/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
 
   
-  <script type="text/javascript" src="/ye-jincheng-website/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+    <script type="text/javascript" src="/ye-jincheng-website/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
 
   
-  <script type="text/javascript" src="/ye-jincheng-website/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+    <script type="text/javascript" src="/ye-jincheng-website/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
 
   
-  <script type="text/javascript" src="/ye-jincheng-website/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+    <script type="text/javascript" src="/ye-jincheng-website/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
 
 
   
@@ -840,8 +901,8 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://jackyoung123.gitee.io/ye-jincheng-website/2021/02/16/%E7%A8%8B%E5%BA%8F%E5%91%98%E5%90%83%E7%9A%84%E6%98%AF%E9%9D%92%E6%98%A5%E9%A5%AD%E5%90%97%EF%BC%9F/';
-          this.page.identifier = '2021/02/16/程序员吃的是青春饭吗？/';
+          this.page.url = 'http://jackyoung123.gitee.io/ye-jincheng-website/Is%20coder%20need%20more%20younger%EF%BC%9F/';
+          this.page.identifier = 'Is coder need more younger？/';
           this.page.title = '程序员吃的是青春饭吗？';
         };
         var d = document, s = d.createElement('script');
@@ -863,6 +924,12 @@
 
 
   
+
+
+
+
+
+
 
 
 
@@ -1198,6 +1265,9 @@
 
   
 
+  
+
+  
   
 
   
