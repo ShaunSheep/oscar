@@ -180,7 +180,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#x75;&#98;&#46;&#99;&#x6f;&#109;">&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#x75;&#98;&#46;&#99;&#x6f;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#x6d;">&#103;&#105;&#116;&#64;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -228,6 +228,7 @@
 </tr>
 </tbody></table>
 <h1 id="markdwon-shi-yong-ji-qiao"><a href="#markdwon使用技巧" class="headerlink" title="markdwon使用技巧"></a>markdwon使用技巧<a href="#markdwon-shi-yong-ji-qiao" class="header-anchor">#</a></h1><h2 id="suo-fang-tu-pian-si-chong-chong-ji-qiao"><a href="#缩放图片四种种技巧" class="headerlink" title="缩放图片四种种技巧"></a>缩放图片四种种技巧<a href="#suo-fang-tu-pian-si-chong-chong-ji-qiao" class="header-anchor">#</a></h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;img src=&quot;&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;</span><br><span class="line">![test image size](url)&#123;:class=&quot;img-responsive&quot;&#125;</span><br><span class="line">![test image size](url)&#123;:height=&quot;50%&quot; width=&quot;50%&quot;&#125;</span><br><span class="line">![test image size](url)&#123;:height=&quot;100px&quot; width=&quot;400px&quot;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="she-zhi-zi-ti-yan-se"><a href="#设置字体颜色" class="headerlink" title="设置字体颜色"></a>设置字体颜色<a href="#she-zhi-zi-ti-yan-se" class="header-anchor">#</a></h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">style</span>=<span class="string">&quot;color:green&quot;</span>&gt;</span>**数学日记**<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 <h1 id="chang-jian-wen-ti"><a href="#常见问题" class="headerlink" title="常见问题**"></a>常见问题**<a href="#chang-jian-wen-ti" class="header-anchor">#</a></h1><h2 id="ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi"><a href="#码云部署hexo站点-css样式不显示？" class="headerlink" title="码云部署hexo站点 css样式不显示？"></a><strong>码云部署hexo站点 css样式不显示？</strong><a href="#ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi" class="header-anchor">#</a></h2><p>原因：仓库地址与个性地址url不一致<br>解决：修改_config.yml<br>    ​<code>xml     url: https://ipvb.gitee.io/blog     root: /blog     ​</code></p>
@@ -338,8 +339,8 @@
   </entry>
   <entry>
     <title>《超效学习方法解码》心得</title>
-    <url>/ye-jincheng-website/chaoxiaxuexifangfjiema/</url>
-    <content><![CDATA[<h1 id="chao-xiao-xue-xi-fang-fa-jie-ma-xin-de"><a href="#《超效学习方法解码》心得" class="headerlink" title="《超效学习方法解码》心得"></a>《超效学习方法解码》心得<a href="#chao-xiao-xue-xi-fang-fa-jie-ma-xin-de" class="header-anchor">#</a></h1><table>
+    <url>/ye-jincheng-website/chao-xiao-xue-xi-fang-fa-jie-ma/</url>
+    <content><![CDATA[<h1 id="chao-xiao-xue-xi-fang-fa-jie-ma"><a href="#《超效学习方法解码》" class="headerlink" title="《超效学习方法解码》"></a>《超效学习方法解码》<a href="#chao-xiao-xue-xi-fang-fa-jie-ma" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
 <th>名称</th>
@@ -384,9 +385,33 @@
 <p>预习过后已经看懂的主题，听课中可以集中精力背诵该主题，减少听的时间</p>
 <p>听课中，抽出精力背诵重点精华内容，老师重复讲的，章节段落核心，讲解思路，老师对知识点联系的描述，重点，难点，画外音，<strong>以及课本上没有的内容</strong></p>
 <p><strong>符号笔记：</strong>听课中，老师提到的内容，<strong>如果在课本已有</strong>，用符号标记如波浪线、三角号、着重号标记；<strong>如果课本没有</strong>，则记住关键字，课后提问、搜索引擎。</p>
+<h1 id="ru-he-xue-shu-xue"><a href="#如何学数学" class="headerlink" title="如何学数学"></a>如何学数学<a href="#ru-he-xue-shu-xue" class="header-anchor">#</a></h1><h2 id="ding-yi"><a href="#定义-2" class="headerlink" title="定义"></a>定义<a href="#ding-yi" class="header-anchor">#</a></h2><p>数学是一门抽象思维学科，有着独特的描述语言和符号</p>
+<h2 id="fang-fa"><a href="#方法-2" class="headerlink" title="方法"></a>方法<a href="#fang-fa" class="header-anchor">#</a></h2><h2 id="ru-he-zuo-li-ti"><a href="#如何做例题" class="headerlink" title="如何做例题"></a>如何做例题<a href="#ru-he-zuo-li-ti" class="header-anchor">#</a></h2><h3 id="ding-yi"><a href="#定义-3" class="headerlink" title="定义"></a>定义<a href="#ding-yi" class="header-anchor">#</a></h3><p>例题是基础题，一般为简单题，主要用于表现定理、公式的基本特征，可用于训练解题步骤</p>
+<h3 id="fang-fa"><a href="#方法-3" class="headerlink" title="方法"></a>方法<a href="#fang-fa" class="header-anchor">#</a></h3><p>将例题当做训练解题步骤的母题</p>
+<h3 id="jie-ti-bu-zou"><a href="#解题步骤" class="headerlink" title="解题步骤"></a>解题步骤<a href="#jie-ti-bu-zou" class="header-anchor">#</a></h3><h4 id="shen-ti"><a href="#审题" class="headerlink" title="审题"></a>审题<a href="#shen-ti" class="header-anchor">#</a></h4><p>了解题意</p>
+<p>获取题目直接条件：概念常用的性质、特定条件、函数的定义域、值域、方程变量的取值范围、图形的取值范围</p>
+<p>分析题目隐含条件</p>
+<p>明确题目考察要求</p>
+<p>找寻数学基本工具，概念、公式、定理</p>
+<h4 id="qiu-jie"><a href="#求解" class="headerlink" title="求解"></a>求解<a href="#qiu-jie" class="header-anchor">#</a></h4><p><strong>联想条件的直接结论</strong>，可根据直接条件联想条件可得出的结论；根据结论再联想它对应的结论；可重复联系对应结论；</p>
+<p><strong>溯源结论推导过程</strong>，条件-推导过程-结论-结论推出的结论-结论的结论推导出的结论，有时考察的并非条件、结论，考察的是推导过程，所以要溯源推导过程，过程中的变量、不变量是解题的关键</p>
+<h4 id="zong-jie"><a href="#总结" class="headerlink" title="总结"></a>总结<a href="#zong-jie" class="header-anchor">#</a></h4><p>题目条件的总结：直接条件的获取方式、间接条件的推导过程，思考去掉条件，会引起什么变化；思考逆向推导的能力，即由结论找寻条件的过程；总结题目的描述规律、考察规律、解题步骤、题型划分等</p>
+<h2 id="ru-he-jian-yan-da-an"><a href="#如何检验答案" class="headerlink" title="如何检验答案"></a>如何检验答案<a href="#ru-he-jian-yan-da-an" class="header-anchor">#</a></h2><h3 id="ding-yi"><a href="#定义-4" class="headerlink" title="定义"></a>定义<a href="#ding-yi" class="header-anchor">#</a></h3><p>检验答案正确性，是做题的关键步骤，必要时会导致答案的修改</p>
+<h3 id="fang-fa"><a href="#方法-4" class="headerlink" title="方法"></a>方法<a href="#fang-fa" class="header-anchor">#</a></h3><h4 id="fang-fa-1-ji-ben-gai-nian-jian-yan-fa"><a href="#方法1基本概念检验法" class="headerlink" title="方法1基本概念检验法"></a>方法1基本概念检验法<a href="#fang-fa-1-ji-ben-gai-nian-jian-yan-fa" class="header-anchor">#</a></h4><p>概念性错误是最容易忽视的，基本概念、法则、公式的适用条件是否满足，是否位于边界情况，都是要严格检查的。</p>
+<h4 id="fang-fa-2-dui-cheng-yuan-li-jian-yan-fa"><a href="#方法2对称原理检验法" class="headerlink" title="方法2对称原理检验法"></a>方法2对称原理检验法<a href="#fang-fa-2-dui-cheng-yuan-li-jian-yan-fa" class="header-anchor">#</a></h4><p>对称的公式、定理，势必导致结论的对称，利用对称原理可以快速检验反比例函数和二次函数的答案</p>
+<h4 id="fang-fa-3-te-shu-qing-xing-jian-yan-fa"><a href="#方法3特殊情形检验法" class="headerlink" title="方法3特殊情形检验法"></a>方法3特殊情形检验法<a href="#fang-fa-3-te-shu-qing-xing-jian-yan-fa" class="header-anchor">#</a></h4><p>特殊值、特例、极端情况是检验答案的快捷方法</p>
+<h4 id="fang-fa-4-bu-bian-liang-jian-yan-fa"><a href="#方法4不变量检验法" class="headerlink" title="方法4不变量检验法"></a>方法4不变量检验法<a href="#fang-fa-4-bu-bian-liang-jian-yan-fa" class="header-anchor">#</a></h4><p>某一类数学问题在变化、变形过程中，有的量保持不变，不变的量可以验证答案的正确性。</p>
+<p>如图形旋转、平移、翻转时，图形面积、体积不变。</p>
+<h4 id="fang-fa-5-deng-jie-guan-xi-jian-yan-fa"><a href="#方法5等价关系检验法" class="headerlink" title="方法5等价关系检验法"></a>方法5等价关系检验法<a href="#fang-fa-5-deng-jie-guan-xi-jian-yan-fa" class="header-anchor">#</a></h4><p>等价替换答案，检验正确性</p>
+<h4 id="fang-fa-6-luo-ji-tui-li-jian-yan-fa"><a href="#方法6逻辑推理检验法" class="headerlink" title="方法6逻辑推理检验法"></a>方法6逻辑推理检验法<a href="#fang-fa-6-luo-ji-tui-li-jian-yan-fa" class="header-anchor">#</a></h4><h4 id="fang-fa-7-zheng-ti-jian-yan-fa"><a href="#方法7整体检验法" class="headerlink" title="方法7整体检验法"></a>方法7整体检验法<a href="#fang-fa-7-zheng-ti-jian-yan-fa" class="header-anchor">#</a></h4><h4 id="fang-fa-8-shu-xue-jie-he-jian-yan-fa"><a href="#方法8数学结合检验法" class="headerlink" title="方法8数学结合检验法"></a>方法8数学结合检验法<a href="#fang-fa-8-shu-xue-jie-he-jian-yan-fa" class="header-anchor">#</a></h4><h4 id="fang-fa-9-yi-ti-duo-jie-jian-yan-fa"><a href="#方法9一题多解检验法" class="headerlink" title="方法9一题多解检验法"></a>方法9一题多解检验法<a href="#fang-fa-9-yi-ti-duo-jie-jian-yan-fa" class="header-anchor">#</a></h4><h4 id="fan-fu-10-cao-gao-yun-suan-bu-zou-he-cha-fa"><a href="#反复10草稿运算步骤核查法" class="headerlink" title="反复10草稿运算步骤核查法"></a>反复10草稿运算步骤核查法<a href="#fan-fu-10-cao-gao-yun-suan-bu-zou-he-cha-fa" class="header-anchor">#</a></h4><h2 id="xie-shu-xue-ri-ji"><a href="#写数学日记" class="headerlink" title="写数学日记"></a>写数学日记<a href="#xie-shu-xue-ri-ji" class="header-anchor">#</a></h2><h3 id="ri-ji-nei-rong"><a href="#日记内容" class="headerlink" title="日记内容"></a>日记内容<a href="#ri-ji-nei-rong" class="header-anchor">#</a></h3><p>事件日记：学习中自己感兴趣的活动、故事、事件、主题知识，受到了什么启发，得到了哪些锻炼，自己有什么感受</p>
+<p>引导日记：课堂中老师的引导过程、例题推导过程，自己内心有什么感受</p>
+<p>练习日记：习题、考试后的心得，哪些做得好，哪些做得不好，改正的步骤，自己五官有什么感受</p>
+<h3 id="ri-ji-yao-qiu"><a href="#日记要求" class="headerlink" title="日记要求"></a>日记要求<a href="#ri-ji-yao-qiu" class="header-anchor">#</a></h3><p>简练的描述自己的感受</p>
+<p>简练的描述主题知识和内容，详细的部分放在笔记里</p>
+<p>将感受和主题知识联系起来</p>
 <h1 id="ru-he-xue-zheng-zhi"><a href="#如何学政治" class="headerlink" title="如何学政治"></a>如何学政治<a href="#ru-he-xue-zheng-zhi" class="header-anchor">#</a></h1><p>##定义</p>
 <p>描述了学习政治学科的方法</p>
-<h2 id="fang-fa"><a href="#方法-2" class="headerlink" title="方法"></a>方法<a href="#fang-fa" class="header-anchor">#</a></h2><p><strong>画知识体系图：</strong>以单元标题-章节标题-框标题-小标题-自然段为<strong>主</strong>题，画思维导图，建立每个知识点的联系。</p>
+<h2 id="fang-fa"><a href="#方法-5" class="headerlink" title="方法"></a>方法<a href="#fang-fa" class="header-anchor">#</a></h2><p><strong>画知识体系图：</strong>以单元标题-章节标题-框标题-小标题-自然段为<strong>主</strong>题，画思维导图，建立每个知识点的联系。</p>
 <p>谁是知识体系的基础：自然段是知识体系的基础，只有理解自然段才能建立<strong>主题知识体系</strong>。</p>
 <p><strong>能够提问，层层发问：</strong>政治内容，每句话都有前因后果。每个自然段，不断问“是什么”，“为什么”，“怎么办”。</p>
 <p>层层发文的目的：让一个段落诞生几句话，一个段落扩展成几个段落，最终建立主题之间的联系，形成知识体系。</p>
@@ -395,9 +420,9 @@
 <p>##知识体系</p>
 <p>主题-提问-推理-主题建立联系-根据联系绘制思维导图</p>
 <p>##配图</p>
-<p>流程图、概念图、思维导图、学科专业配图等</p>
-<h1 id="ru-he-zuo-ti"><a href="#如何做题" class="headerlink" title="如何做题"></a>如何做题<a href="#ru-he-zuo-ti" class="header-anchor">#</a></h1><h2 id="ding-yi"><a href="#定义-2" class="headerlink" title="定义"></a>定义<a href="#ding-yi" class="header-anchor">#</a></h2><p>描述了做题的基本流程，前后步骤。</p>
-<h2 id="fang-fa"><a href="#方法-3" class="headerlink" title="方法"></a>方法<a href="#fang-fa" class="header-anchor">#</a></h2><p><strong>范围选择：</strong>课后题、例题、错题、考试真题</p>
+<p>暂无：流程图、概念图、思维导图、学科专业配图等</p>
+<h1 id="ru-he-zuo-ti"><a href="#如何做题" class="headerlink" title="如何做题"></a>如何做题<a href="#ru-he-zuo-ti" class="header-anchor">#</a></h1><h2 id="ding-yi"><a href="#定义-5" class="headerlink" title="定义"></a>定义<a href="#ding-yi" class="header-anchor">#</a></h2><p>描述了做题的基本流程，前后步骤。</p>
+<h2 id="fang-fa"><a href="#方法-6" class="headerlink" title="方法"></a>方法<a href="#fang-fa" class="header-anchor">#</a></h2><p><strong>范围选择：</strong>课后题、例题、错题、考试真题</p>
 <p><strong>先后顺序：</strong>书中主题内容看懂，再做题。</p>
 <p><strong>时间原则：</strong>做题时要限时，题目时间分配合理，阻塞的题目立刻跳过</p>
 <p>**开始原则:**做题任务计时开始，就立刻做，不拖延</p>
@@ -415,12 +440,13 @@
 <p>只有<strong>事后做好归纳总结</strong>（题型归类、基本步骤、解题方法、隐含条件、隐含结论），才能积累考题题型，做到不重不漏。</p>
 <p>只有<strong>学会数学工具（画图等10几个数学工具）</strong>，才能翻译出题目的考点。</p>
 <p>只有<strong>记住上述内容</strong>，才能提高解题速度。</p>
-<h1 id="zong-jie"><a href="#总结" class="headerlink" title="总结"></a>总结<a href="#zong-jie" class="header-anchor">#</a></h1><p>本书读了几章，有什么收获，对之前知识点有什么影响，对未来的什么方面有影响</p>
-<p>可以把什么知识点用在什么地方，可以获得哪些利益，潜在风险是什么</p>
+<h1 id="zong-jie"><a href="#总结-1" class="headerlink" title="总结"></a>总结<a href="#zong-jie" class="header-anchor">#</a></h1><p>本书读完，最大的收获是预习、听课、学政治、学数学、如何做题五个方面。</p>
+<p>听课给我的启发是：在预习的基础上，对课堂所讲知识结构心中有数，能轻易的跟上、超过老师的讲课节奏，在充分预习的基础上，可以利用课堂时间背诵重点、难点、核心点，利用听课时间、老师的思路引导知识记忆，可以充分提高学习效率。</p>
+<p>尤其是学数学，提倡的<label style="color:green"><strong>数学日记</strong></label>让我很意外，也很开心，事事都可以写日记，日记不同于笔记，更加自由，口语化，能更融入个人的情感，激发具象思维，提升学习兴趣。利于孩童学习，也利于成人读书。</p>
+<p>学习数学一节，如何做题的思路也启发了我，提醒我做题应当分为审题、解题、总结三步骤。审题和总结是大多数容易忽视的，不可轻敌，解题中的两个方法联想隐藏条件法和溯源推导过程找间接条件法对我也启发很大，提示我们做题要正向条件-结论思考，也要反向结论-推导过程-条件思考，有时隐藏条件就在推导过程中，而非题目本身给出的直接条件。</p>
 ]]></content>
       <categories>
-        <category>家庭教育</category>
-        <category>学习方法</category>
+        <category>-[家庭教育,学习方法]</category>
       </categories>
       <tags>
         <tag>-[学习方法]</tag>
@@ -699,6 +725,50 @@ Handler(Looper looper, Callback callback, boolean async)
       <tags>
         <tag>Android</tag>
         <tag>Handler</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>《高效学习方法全集》日记</title>
+    <url>/ye-jincheng-website/super-learn-skills/</url>
+    <content><![CDATA[<a id="more"></a>
+
+<h1 id="shu-ji"><a href="#书籍" class="headerlink" title="书籍"></a>书籍<a href="#shu-ji" class="header-anchor">#</a></h1><h1 id="shu-ji"><a href="#书籍-1" class="headerlink" title="书籍"></a>书籍<a href="#shu-ji" class="header-anchor">#</a></h1><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>详情</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>封面</strong></td>
+<td><img src="http://cdn.yangchaofan.cn/gaoxiao%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95.jpg" width="50%" height="50%"></td>
+</tr>
+<tr>
+<td><strong>作者</strong></td>
+<td>曹婷</td>
+</tr>
+<tr>
+<td><strong>出版社</strong></td>
+<td>星火教育研究院</td>
+</tr>
+<tr>
+<td><strong>介绍</strong></td>
+<td>分为学习基础篇、学习修炼篇、学习问题对症篇；学习对症篇主要解决语文、数学、英文、历史、政治的疑难杂症；学习修炼篇提供了预习、听课、复习、做题的基本思路，克服困难的方法；学习基础篇主要讲了时间管理、注意力管理、记忆力的小技巧。</td>
+</tr>
+</tbody></table>
+<h1 id="bi-ji"><a href="#笔记" class="headerlink" title="笔记"></a>笔记<a href="#bi-ji" class="header-anchor">#</a></h1><h2 id="zhi-shi-dian-1"><a href="#知识点1" class="headerlink" title="知识点1"></a>知识点1<a href="#zhi-shi-dian-1" class="header-anchor">#</a></h2><p>###定义</p>
+<h3 id="yong-tu"><a href="#用途" class="headerlink" title="用途"></a>用途<a href="#yong-tu" class="header-anchor">#</a></h3><p>###知识体系</p>
+<p>###配图</p>
+<p>流程图、概念图、思维导图、学科专业配图等</p>
+<h1 id="zong-jie"><a href="#总结" class="headerlink" title="总结"></a>总结<a href="#zong-jie" class="header-anchor">#</a></h1><p>本书读了几章，有什么收获，对之前知识点有什么影响，对未来的什么方面有影响</p>
+<p>可以把什么知识点用在什么地方，可以获得哪些利益，潜在风险是什么</p>
+]]></content>
+      <categories>
+        <category>家庭教育</category>
+        <category>学习方法</category>
+      </categories>
+      <tags>
+        <tag>学习方法</tag>
       </tags>
   </entry>
 </search>
