@@ -93,7 +93,7 @@
 </tr>
 <tr>
 <td>leanclound</td>
-<td>阅读量统计插件</td>
+<td>阅读量统计插件，如何配置<a href="https://blog.csdn.net/lijing742180/article/details/87928554">参考文章</a></td>
 </tr>
 </tbody></table>
 <h1 id="mo-ban-jia-gou"><a href="#模板架构" class="headerlink" title="模板架构"></a>模板架构<a href="#mo-ban-jia-gou" class="header-anchor">#</a></h1><table>
@@ -180,7 +180,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#105;&#116;&#104;&#x75;&#x62;&#46;&#x63;&#111;&#x6d;">&#103;&#105;&#x74;&#x40;&#103;&#105;&#116;&#104;&#x75;&#x62;&#46;&#x63;&#111;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#x75;&#98;&#46;&#99;&#x6f;&#109;">&#x67;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#x75;&#98;&#46;&#99;&#x6f;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
