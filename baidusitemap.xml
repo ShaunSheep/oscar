@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/website_nickname/</loc>
+    <loc>http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/%E8%A7%84%E5%88%92/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/learing-plan/</loc>
+    <lastmod>2021-02-18</lastmod>
+  </url>
+  <url>
+    <loc>http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/learn-relovation-notes/</loc>
+    <lastmod>2021-02-18</lastmod>
+  </url>
+  <url>
+    <loc>http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/website_nickname/</loc>
+    <lastmod>2021-02-18</lastmod>
+  </url>
+  <url>
+    <loc>http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/super-learn-skills/</loc>
     <lastmod>2021-02-17</lastmod>
   </url>
   <url>
-    <loc>http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/learing-plan/</loc>
+    <loc>http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/chao-xiao-xue-xi-fang-fa-jie-ma/</loc>
     <lastmod>2021-02-17</lastmod>
   </url>
   <url>
-    <loc>http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/super-learn-skills/</loc>
+    <loc>http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/%E9%9D%A2%E8%AF%95/handler%20TOP%20100%20Questions/</loc>
     <lastmod>2021-02-17</lastmod>
   </url>
   <url>
-    <loc>http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/chao-xiao-xue-xi-fang-fa-jie-ma/</loc>
-    <lastmod>2021-02-17</lastmod>
-  </url>
-  <url>
-    <loc>http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/handler%20TOP%20100%20Questions/</loc>
-    <lastmod>2021-02-17</lastmod>
-  </url>
-  <url>
-    <loc>http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/Is%20coder%20need%20more%20younger%EF%BC%9F/</loc>
+    <loc>http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/Is%20coder%20need%20more%20younger%EF%BC%9F/</loc>
     <lastmod>2021-02-16</lastmod>
   </url>
 </urlset> 
