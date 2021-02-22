@@ -1,8 +1,333 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>波尔克</title>
+    <url>/ye-jincheng-website/blog/2021/02/website_nickname/</url>
+    <content><![CDATA[<h1 id="bo-er-ke"><a href="#波尔克" class="headerlink" title="波尔克"></a>波尔克<a href="#bo-er-ke" class="header-anchor">#</a></h1><h1 id="jie-shao"><a href="#介绍" class="headerlink" title="介绍"></a>介绍<a href="#jie-shao" class="header-anchor">#</a></h1><p>个人网站一直部署在阿里云，服务器用了小三年，上个月到期忘续费，云服务器上的文章资料没能及时导出，最后被阿里清空了，甚是心疼。于是花了一天时间，使用码云仓库搭一个小型静态网站，免费，简单，便捷，关键是动静分离，空间够用。这篇文章主要包含了个人网站的技术架构和常见问题。包括使用的oss管理平台、域名管理、评论管理、文章编辑与发布、网站编辑管理等功能的设计与实现。<a id="more"></a></p>
+<h1 id="wang-zhan-jia-gou"><a href="#网站架构" class="headerlink" title="网站架构"></a>网站架构<a href="#wang-zhan-jia-gou" class="header-anchor">#</a></h1><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>typora</td>
+<td>markdown编辑器</td>
+</tr>
+<tr>
+<td>hexo</td>
+<td>博客服务</td>
+</tr>
+<tr>
+<td>nodejs</td>
+<td>hexo编译环境</td>
+</tr>
+<tr>
+<td>gitee</td>
+<td>码云代码仓库</td>
+</tr>
+<tr>
+<td>next</td>
+<td>hexo主题</td>
+</tr>
+<tr>
+<td>七牛云</td>
+<td>oss图片文件仓库</td>
+</tr>
+<tr>
+<td>阿里云域名</td>
+<td>域名转发、cdn转发</td>
+</tr>
+<tr>
+<td>hexo-toc</td>
+<td>文档插件显示二级目录，响应点击事件</td>
+</tr>
+<tr>
+<td>hexo-renderer-markdown-it-plus</td>
+<td>markdown解析插件</td>
+</tr>
+<tr>
+<td>leanclound</td>
+<td>阅读量统计插件，如何配置<a href="https://blog.csdn.net/lijing742180/article/details/87928554">参考文章</a></td>
+</tr>
+</tbody></table>
+<h1 id="mo-ban-jia-gou"><a href="#模板架构" class="headerlink" title="模板架构"></a>模板架构<a href="#mo-ban-jia-gou" class="header-anchor">#</a></h1><table>
+<thead>
+<tr>
+<th>模板名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>android-xx-Tips</td>
+<td>Android百问百答模板</td>
+</tr>
+<tr>
+<td>book-note-model</td>
+<td>读书笔记模板</td>
+</tr>
+<tr>
+<td>draft</td>
+<td>草稿模板</td>
+</tr>
+<tr>
+<td>page</td>
+<td>页面模板</td>
+</tr>
+<tr>
+<td>post</td>
+<td>文章模板</td>
+</tr>
+</tbody></table>
+<h1 id="an-zhuang-jiao-cheng"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程<a href="#an-zhuang-jiao-cheng" class="header-anchor">#</a></h1><h2 id="nodejs-an-zhuang-jiao-cheng"><a href="#nodejs安装教程" class="headerlink" title="nodejs安装教程"></a>nodejs安装教程<a href="#nodejs-an-zhuang-jiao-cheng" class="header-anchor">#</a></h2><p>步骤太简单了，难点就是找到合适版本、合适渠道的安装包，推荐国内使用方式2node中文网的方式下载安装</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>缺点</th>
+<th>优点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://nodejs.org/zh-cn/">node官网</a>，点击链接下载，一路next同意协议安装</td>
+<td>国外服务器下载慢</td>
+<td>最新安装包</td>
+</tr>
+<tr>
+<td><a href="http://nodejs.cn/">node中文网</a>，点击链接下载，一路next同意协议安装</td>
+<td>安装包版本落后1-2个版本</td>
+<td>国内服务器下载快</td>
+</tr>
+</tbody></table>
+<h2 id="ma-yun-pei-zhi-wang-zhan-jiao-cheng"><a href="#码云配置网站教程" class="headerlink" title="码云配置网站教程"></a>码云配置网站教程<a href="#ma-yun-pei-zhi-wang-zhan-jiao-cheng" class="header-anchor">#</a></h2><h2 id="git-shi-yong-jiao-cheng"><a href="#git使用教程" class="headerlink" title="git使用教程"></a>git使用教程<a href="#git-shi-yong-jiao-cheng" class="header-anchor">#</a></h2><h2 id="hexo-shi-yong-jiao-cheng"><a href="#hexo使用教程" class="headerlink" title="hexo使用教程"></a>hexo使用教程<a href="#hexo-shi-yong-jiao-cheng" class="header-anchor">#</a></h2><p>hexo官网有详细步骤，小白可以参考百度上的安装教程博客</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>步骤</th>
+<th>缺点</th>
+<th>优点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://hexo.io/zh-cn/docs/">hexo官网</a>，权威hexo安装步骤</td>
+<td>npm install -g hexo-cli；</td>
+<td>不适合小白用户，命令行操作居多</td>
+<td>简洁，明了，歧义少</td>
+</tr>
+<tr>
+<td>搜索引擎“hexo安装步骤”</td>
+<td><a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html">《参考》</a></td>
+<td>遇到问题较难解答</td>
+<td>傻瓜式，上手快</td>
+</tr>
+</tbody></table>
+<h1 id="hexo-chang-jian-zhi-ling"><a href="#hexo常见指令" class="headerlink" title="hexo常见指令"></a>hexo常见指令<a href="#hexo-chang-jian-zhi-ling" class="header-anchor">#</a></h1><table>
+<thead>
+<tr>
+<th>指令</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hexo init</td>
+<td>在当前目录下创建工程</td>
+</tr>
+<tr>
+<td>_config.yml</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#105;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;">&#x67;&#105;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+</tr>
+<tr>
+<td>hexo clean</td>
+<td>清除缓存</td>
+</tr>
+<tr>
+<td>hexo g</td>
+<td>生成web</td>
+</tr>
+<tr>
+<td>hexo s</td>
+<td>启动web服务并预览，在浏览器输入 <a href="http://localhost:4000/">http://localhost:4000</a></td>
+</tr>
+<tr>
+<td>hexo d</td>
+<td>发布pulic 目录下的静态页面至github</td>
+</tr>
+<tr>
+<td>git clone url themes/yilia</td>
+<td>下载指定主题到根目录/thems/yilia/ 下</td>
+</tr>
+<tr>
+<td>hexo new “postName”</td>
+<td>新建文章，hexo n</td>
+</tr>
+<tr>
+<td>hexo new page “pageName”</td>
+<td>#新建页面</td>
+</tr>
+<tr>
+<td>hexo generate</td>
+<td>生成静态页面至public目录，hexo g</td>
+</tr>
+<tr>
+<td>hexo server</td>
+<td>开启预览访问端口（默认端口4000，’ctrl + c’关闭server）</td>
+</tr>
+<tr>
+<td>hexo deploy</td>
+<td>hexo d</td>
+</tr>
+<tr>
+<td>hexo s -g</td>
+<td>生成并本地预览</td>
+</tr>
+</tbody></table>
+<h1 id="markdwon-shi-yong-ji-qiao"><a href="#markdwon使用技巧" class="headerlink" title="markdwon使用技巧"></a>markdwon使用技巧<a href="#markdwon-shi-yong-ji-qiao" class="header-anchor">#</a></h1><h2 id="suo-fang-tu-pian-si-chong-chong-ji-qiao"><a href="#缩放图片四种种技巧" class="headerlink" title="缩放图片四种种技巧"></a>缩放图片四种种技巧<a href="#suo-fang-tu-pian-si-chong-chong-ji-qiao" class="header-anchor">#</a></h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;img src=&quot;&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;</span><br><span class="line">![test image size](url)&#123;:class=&quot;img-responsive&quot;&#125;</span><br><span class="line">![test image size](url)&#123;:height=&quot;50%&quot; width=&quot;50%&quot;&#125;</span><br><span class="line">![test image size](url)&#123;:height=&quot;100px&quot; width=&quot;400px&quot;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="she-zhi-zi-ti-yan-se"><a href="#设置字体颜色" class="headerlink" title="设置字体颜色"></a>设置字体颜色<a href="#she-zhi-zi-ti-yan-se" class="header-anchor">#</a></h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">style</span>=<span class="string">&quot;color:green&quot;</span>&gt;</span>**数学日记**<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="shi-yong-shu-xue-gong-shi"><a href="#使用数学公式" class="headerlink" title="使用数学公式"></a>使用数学公式<a href="#shi-yong-shu-xue-gong-shi" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>文档名称</th>
+<th>优点</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://katex.org/docs/supported.html#accents">KaTeX公式文档</a></td>
+<td>网站清新，简洁，数学公式非常全，导航详细</td>
+<td></td>
+</tr>
+<tr>
+<td>CTEX公式文档</td>
+<td>导航较为隐晦，除了数学公式外还有其他公式</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="chang-jian-wen-ti"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题<a href="#chang-jian-wen-ti" class="header-anchor">#</a></h1><h2 id="ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi"><a href="#码云部署hexo站点-css样式不显示？" class="headerlink" title="码云部署hexo站点 css样式不显示？"></a><strong>码云部署hexo站点 css样式不显示？</strong><a href="#ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi" class="header-anchor">#</a></h2><p>原因：仓库地址与个性地址url不一致<br>解决：修改_config.yml<br>    ​<code>xml     url: https://ipvb.gitee.io/blog     root: /blog     ​</code></p>
+<p>其他码云部署的问题参考<a href="https://gitee.com/help/articles/4136#article-header3">这里</a></p>
+<h2 id="hexo-ru-he-suo-fang-tu-pian"><a href="#hexo如何缩放图片" class="headerlink" title="hexo如何缩放图片"></a>hexo如何缩放图片<a href="#hexo-ru-he-suo-fang-tu-pian" class="header-anchor">#</a></h2><p><code>&lt;img src=&quot;&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;</code></p>
+<h2 id="hexo-ru-he-an-zhuang-zhu-ti"><a href="#hexo如何安装主题" class="headerlink" title="hexo如何安装主题"></a>hexo如何安装主题<a href="#hexo-ru-he-an-zhuang-zhu-ti" class="header-anchor">#</a></h2><ol>
+<li><p>找到合适的主题列表，推荐以下2个：</p>
+<p><a href="https://www.zhihu.com/question/24422335">有哪些好看的 Hexo 主题？</a></p>
+<p><a href="https://hexo.io/themes/">hexo.thems</a></p>
+</li>
+<li><p>安装主题至根目录，例如找到next主题，将其克隆岛根目录/thesms/next下</p>
+ <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="comment">//github.com/iissnan/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure></li>
+<li><p>阅读<a href="https://github.com/iissnan/hexo-theme-next">next文档</a></p>
+<ol>
+<li>引用主题：在config.yml中修改主题名称：<code>theme: next</code></li>
+<li>发布时遇到 bug<code>&#123;% extends '_layout.swig' %&#125;</code>；输入指令解决：<code>npm i hexo-renderer-swig</code></li>
+</ol>
+</li>
+</ol>
+<h2 id="hexo-bu-xian-shi-er-ji-mu-lu"><a href="#hexo不显示二级目录？" class="headerlink" title="hexo不显示二级目录？"></a>hexo不显示二级目录？<a href="#hexo-bu-xian-shi-er-ji-mu-lu" class="header-anchor">#</a></h2><p>原因：hexo解析目录是按照1级，1级下面找2级，2级下面找3级的顺序查找目录的，如果只有2级，没有1级，是会显示错误的。</p>
+<p>解决：先写1级标题，再写2级标题，先写大标题，再写小标题。</p>
+<p>原因：markdown解析问题</p>
+<p>解决：参考<a href="https://www.cnblogs.com/Createsequence/p/14150758.html">渲染错误解决和超链接乱码解决方案</a>、参考<a href="https://convivae.top/posts/hexo-bo-ke-cai-keng/#%E6%96%B9%E6%B3%95-2">markdown-it的bug</a></p>
+<h2 id="hexo-dian-ji-er-ji-mu-lu-bu-tiao-zhuan"><a href="#hexo点击二级目录不跳转" class="headerlink" title="hexo点击二级目录不跳转?"></a>hexo点击二级目录不跳转?<a href="#hexo-dian-ji-er-ji-mu-lu-bu-tiao-zhuan" class="header-anchor">#</a></h2><p>原因：markdown解析问题</p>
+<p>解决：参考<a href="https://www.cnblogs.com/Createsequence/p/14150758.html">渲染错误解决和超链接乱码解决方案</a>、参考<a href="https://convivae.top/posts/hexo-bo-ke-cai-keng/#%E6%96%B9%E6%B3%95-2">markdown-it的bug</a></p>
+<h2 id="hexo-zi-dong-fa-bu-tu-pian-zhi-qi-niu-yun"><a href="#hexo自动发布图片至七牛云？" class="headerlink" title="hexo自动发布图片至七牛云？"></a>hexo自动发布图片至七牛云？<a href="#hexo-zi-dong-fa-bu-tu-pian-zhi-qi-niu-yun" class="header-anchor">#</a></h2><p>阿里云-域名管理-解析设置-添加记录-设置以下参数</p>
+<table>
+<thead>
+<tr>
+<th>键</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>记录类型</td>
+<td>CNAME</td>
+</tr>
+<tr>
+<td>主机记录</td>
+<td>如cdn</td>
+</tr>
+<tr>
+<td>记录值</td>
+<td>从七牛云后台获取</td>
+</tr>
+</tbody></table>
+<p>七牛云-域名管理-加速域名设置值如cdn.yangchaofan.cn；cdn就是主机记录值；创建完毕后，获得一个CNAME值，记住该值，填写至阿里云域名记录值中。</p>
+<p><a href="https://portal.qiniu.com/kodo/overview"></a></p>
+<h2 id="next-ru-he-da-kai-bai-du-fen-xiang"><a href="#next如何打开百度分享？" class="headerlink" title="next如何打开百度分享？"></a>next如何打开百度分享？<a href="#next-ru-he-da-kai-bai-du-fen-xiang" class="header-anchor">#</a></h2><p>主题文件中插入以下代码</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">baidushare:</span><br><span class="line">  type: button</span><br><span class="line">  baidushare: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="next-ru-he-tian-jia-sou-suo-gong-neng"><a href="#next如何添加搜索功能？" class="headerlink" title="next如何添加搜索功能？"></a>next如何添加搜索功能？<a href="#next-ru-he-tian-jia-sou-suo-gong-neng" class="header-anchor">#</a></h2><p>安装插件</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+<p>编辑全局配置</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+<p>编辑主题配置</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">local_search:</span><br><span class="line">  enable: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="next-ru-he-tian-jia-ping-lun-gong-neng"><a href="#next如何添加评论功能？" class="headerlink" title="next如何添加评论功能？"></a>next如何添加评论功能？<a href="#next-ru-he-tian-jia-ping-lun-gong-neng" class="header-anchor">#</a></h2><p>翻墙打开<a href="https://livere.com/">来比力官网</a>，注册填写域名，copy代码块中的data-uid</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;!-- 来必力City版安装代码 --&gt;</span><br><span class="line">&lt;div id=<span class="string">&quot;lv-container&quot;</span> data-id=<span class="string">&quot;city&quot;</span> data-uid=<span class="string">&quot;这里是id&quot;</span>&gt;</span><br><span class="line">	&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">   (<span class="function"><span class="keyword">function</span>(<span class="params">d, s</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">var</span> j, e = d.getElementsByTagName(s)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (<span class="keyword">typeof</span> LivereTower === <span class="string">&#x27;function&#x27;</span>) &#123; <span class="keyword">return</span>; &#125;</span><br><span class="line"></span><br><span class="line">       j = d.createElement(s);</span><br><span class="line">       j.src = <span class="string">&#x27;https://cdn-city.livere.com/js/embed.dist.js&#x27;</span>;</span><br><span class="line">       j.async = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">       e.parentNode.insertBefore(j, e);</span><br><span class="line">   &#125;)(<span class="built_in">document</span>, <span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;noscript&gt; 为正常使用来必力评论功能请激活JavaScript&lt;/noscript&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;!-- City版安装代码已完成 --&gt;</span><br></pre></td></tr></table></figure>
+<p>配置完成后可以在评论<a href="https://livere.com/insight/communite">后台</a>管理评论内容。</p>
+<h2 id="next-ru-he-tian-jia-zhi-ding-gong-neng"><a href="#next如何添加置顶功能？" class="headerlink" title="next如何添加置顶功能？"></a>next如何添加置顶功能？<a href="#next-ru-he-tian-jia-zhi-ding-gong-neng" class="header-anchor">#</a></h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm uninstall hexo-generator-index --save</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-index-pin-top --save</span></span><br></pre></td></tr></table></figure>
+<p>文章插入top属性，top数值按大小倒序排序</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">title: 置顶</span><br><span class="line">date: 2019-09-09 09:09:09</span><br><span class="line">top: true</span><br><span class="line">top: 1</span><br></pre></td></tr></table></figure>
+<p>设置置顶样式：</p>
+<p>打开：<code>/blog/themes/next/layout/_macro</code>目录下的<code>post.swig</code>文件，定位到<code>&lt;div class=&quot;post-meta&quot;&gt;</code>标签下，插入如下代码：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;post-meta&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;post-time&quot;</span>&gt;</span></span><br><span class="line">在此之下插入代码，包含在 span块内        </span><br><span class="line">          &#123;% if post.top %&#125;</span><br><span class="line">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;fa fa-thumb-tack&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">7D26CD</span>&gt;</span>置顶<span class="tag">&lt;/<span class="name">font</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;post-meta-divider&quot;</span>&gt;</span>|<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">          &#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="next-ru-he-tiao-zhuan-zhi-zhan-nei-xiang-dui-lu-jing"><a href="#next如何跳转至站内相对路径？" class="headerlink" title="next如何跳转至站内相对路径？"></a>next如何跳转至站内相对路径？<a href="#next-ru-he-tiao-zhuan-zhi-zhan-nei-xiang-dui-lu-jing" class="header-anchor">#</a></h2><h2 id="hexo-ru-he-chuang-jian-mo-ban"><a href="#hexo如何创建模板？" class="headerlink" title="hexo如何创建模板？"></a>hexo如何创建模板？<a href="#hexo-ru-he-chuang-jian-mo-ban" class="header-anchor">#</a></h2><p><strong>模板有什么用？</strong></p>
+<p>模板可以当做一类文章的格式，按照指定格式批量创建文章，减少重复内容的编写工作。如创建读书笔记模板、创建一类任务计划模板。</p>
+<p><strong>创建模板步骤？</strong></p>
+<ul>
+<li>新建md文件，文件头插入以下内容，并将文件移动至<code>根目录/scaffolds</code> 下</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">title: 《超效学习方法解码》心得</span><br><span class="line">date: <span class="number">2021</span>-<span class="number">02</span>-<span class="number">17</span> <span class="number">11</span>:<span class="number">37</span>:<span class="number">23</span></span><br><span class="line">entitle:</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用指令读取模板创建文章</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> hexo new 模板名称 <span class="string">&quot;title&quot;</span></span></span><br><span class="line">hexo new book-note-model &quot;《超效学习方法解码》心得&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="hexo-ru-he-chuang-jian-cao-gao"><a href="#hexo如何创建草稿？" class="headerlink" title="hexo如何创建草稿？"></a>hexo如何创建草稿？<a href="#hexo-ru-he-chuang-jian-cao-gao" class="header-anchor">#</a></h2><p><strong>草稿的用途？</strong></p>
+<p>文章写到一半，未完成，并不想发布。可以向存到指定位置。hexo提供了_drafts目录存放草稿。</p>
+<p><strong>创建草稿的步骤？</strong></p>
+<ul>
+<li>​创建草稿</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> hexo new draft <span class="string">&quot;title&quot;</span></span></span><br><span class="line">hexo new draft &quot;Android性能优化百问百答&quot;</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Created: </span><br><span class="line">D:\workspace\gitblog\hexoblogcode\source\_drafts\Android性能优化百问百答.md</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>发布草稿</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> hexo publish 布局类型 <span class="string">&quot;title&quot;</span></span></span><br><span class="line">hexo publish draft &quot;Android性能优化百问百答&quot;</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Published: D:\workspace\gitblog\hexoblogcode\source\_posts\Android性能优化百问百答.md</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="next-wen-zhang-zi-gua-ying-ping-mu-kuan-du"><a href="#next文章自适应屏幕宽度" class="headerlink" title="next文章自适应屏幕宽度"></a>next文章自适应屏幕宽度<a href="#next-wen-zhang-zi-gua-ying-ping-mu-kuan-du" class="header-anchor">#</a></h2><p><code>\themes\next\source/css/_schemes/Picses/_layout.styl</code>在文件末尾添加代码</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 以下为新增代码！！修改post宽度</span><br><span class="line"><span class="selector-tag">header</span>&#123; <span class="attribute">width</span>: <span class="number">80%</span> <span class="meta">!important</span>; &#125;</span><br><span class="line"><span class="selector-tag">header</span><span class="selector-class">.post-header</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: auto <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-class">.main-inner</span> &#123; <span class="attribute">width</span>: <span class="number">80%</span>; &#125;</span><br><span class="line"><span class="selector-class">.content-wrap</span> &#123; <span class="attribute">width</span>: <span class="built_in">calc</span>(<span class="number">100%</span> - <span class="number">260px</span>); &#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.header</span> &#123;</span><br><span class="line">  +tablet() &#123;</span><br><span class="line">    <span class="attribute">width</span>: auto <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  +mobile() &#123;</span><br><span class="line">    <span class="attribute">width</span>: auto <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-class">.main-inner</span> &#123;</span><br><span class="line">  +tablet() &#123;</span><br><span class="line">    <span class="attribute">width</span>: auto <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  +mobile() &#123;</span><br><span class="line">    <span class="attribute">width</span>: auto <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.content-wrap</span> &#123;</span><br><span class="line">  +tablet() &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span> <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  +mobile() &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span> <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="next-tian-jia-tou-xiang"><a href="#next添加头像" class="headerlink" title="next添加头像"></a>next添加头像<a href="#next-tian-jia-tou-xiang" class="header-anchor">#</a></h2><p>打开themes/next/_config.yml</p>
+<p>打开并放入头像/themes/next/source/images/</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">avatar: /images/avatar_2.gif</span><br></pre></td></tr></table></figure>
+<h1 id="shi-yong-shuo-ming"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明<a href="#shi-yong-shuo-ming" class="header-anchor">#</a></h1><ol>
+<li> 定时使用typora编写markdown文章：编写markdown文件</li>
+<li> 导出成html，发布在hexo：使用hexo s</li>
+<li> hexo推送到码云指定仓库地址：hexo d</li>
+<li> 将阿里云的域名解析至码云仓库地址：配置域名解析</li>
+<li> 通过公网域名访问我的网站</li>
+</ol>
+<h1 id="zhi-chi"><a href="#支持" class="headerlink" title="支持"></a>支持<a href="#zhi-chi" class="header-anchor">#</a></h1><ol>
+<li> <a href="https://support.typora.io/Resize-Image/">typora使用手册</a></li>
+<li> <a href="https://gitee.com/help">Gitee 官方提供的使用手册</a></li>
+<li> <a href="https://portal.qiniu.com/kodo/overview">七牛云</a> </li>
+<li> <a href="https://homenew.console.aliyun.com/home/dashboard/ProductAndService">阿里云</a> </li>
+<li> <a href="https://hexo.io/zh-cn/docs">hexo中文文档</a></li>
+<li> <a href="http://theme-next.iissnan.com/third-party-services.html#comment-system">next中文文档</a></li>
+<li> <a href="https://console.leancloud.cn/apps">leanclound统计云</a></li>
+<li> <a href="https://livere.com/insight/communite">来比力评论云</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>杂谈</category>
+        <category>日记</category>
+      </categories>
+      <tags>
+        <tag>杂谈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>2015-2021学习计划</title>
-    <url>/ye-jincheng-website/2015/learing-plan/</url>
+    <url>/ye-jincheng-website/blog/2015/08/learing-plan/</url>
     <content><![CDATA[<h1 id="2015-2021-xue-xi-ji-hua-ji-xiao-jie"><a href="#2015-2021学习计划及小结" class="headerlink" title="2015-2021学习计划及小结"></a>2015-2021学习计划及小结<a href="#2015-2021-xue-xi-ji-hua-ji-xiao-jie" class="header-anchor">#</a></h1><h1 id="gai-shu"><a href="#概述" class="headerlink" title="概述"></a>概述<a href="#gai-shu" class="header-anchor">#</a></h1><p>这里存放2015年-2021年的学习内容，包括已经学习的，正在学习的，</p>
 <p>内容为：音频课程、视频课程、电子书、实体书、专栏课程、认证课程等。</p>
 <p>内容来源自kindle、知乎、极客学院、慕课网、阿里云大学、光环国际、黑马培训、拉钩培训、三节课培训等</p>
@@ -61,7 +386,7 @@
   </entry>
   <entry>
     <title>《学习革命解读》心得</title>
-    <url>/ye-jincheng-website/2021/learn-relovation-notes/</url>
+    <url>/ye-jincheng-website/blog/2021/02/learn-relovation-notes/</url>
     <content><![CDATA[<h1 id="shu-ji"><a href="#书籍" class="headerlink" title="书籍"></a>书籍<a href="#shu-ji" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
@@ -298,7 +623,7 @@
   </entry>
   <entry>
     <title>《高效学习方法全集》日记</title>
-    <url>/ye-jincheng-website/2021/super-learn-skills/</url>
+    <url>/ye-jincheng-website/blog/2021/02/super-learn-skills/</url>
     <content><![CDATA[<h1 id="gao-xiao-xue-xi-fang-fa-quan-ji-gao-zhong-ban"><a href="#高效学习方法全集高中版" class="headerlink" title="高效学习方法全集高中版"></a>高效学习方法全集高中版<a href="#gao-xiao-xue-xi-fang-fa-quan-ji-gao-zhong-ban" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
@@ -394,9 +719,21 @@
       </tags>
   </entry>
   <entry>
+    <title>谈一谈学习法</title>
+    <url>/ye-jincheng-website/blog/2021/02/talk-about-learn-skills/</url>
+    <content><![CDATA[<h1 id="tan-yi-tan-xue-xi-fa"><a href="#谈一谈学习法" class="headerlink" title="谈一谈学习法"></a>谈一谈学习法<a href="#tan-yi-tan-xue-xi-fa" class="header-anchor">#</a></h1>]]></content>
+      <categories>
+        <category>家庭教育</category>
+        <category>学习方法</category>
+      </categories>
+      <tags>
+        <tag>学习方法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>《如何高效学习》心得</title>
-    <url>/ye-jincheng-website/2021/study-more-efficiency/</url>
-    <content><![CDATA[<h3 id="ru-he-gao-xiao-xue-xi"><a href="#如何高效学习" class="headerlink" title="如何高效学习"></a>如何高效学习<a href="#ru-he-gao-xiao-xue-xi" class="header-anchor">#</a></h3><table>
+    <url>/ye-jincheng-website/blog/2021/02/study-more-efficiency/</url>
+    <content><![CDATA[<h1 id="ru-he-gao-xiao-xue-xi"><a href="#如何高效学习" class="headerlink" title="如何高效学习"></a>如何高效学习<a href="#ru-he-gao-xiao-xue-xi" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
 <th><strong>名称</strong></th>
@@ -417,21 +754,104 @@
 </tr>
 <tr>
 <td><strong>介绍</strong></td>
-<td></td>
+<td>“学习的最高原则：定义出学习的活动，并做到它们”<br>如何用整体学习法学会作者提倡的整体学习法？如何用比喻记住比喻技术——比喻法-光线摄入眼球，眼球对光的感觉，视网膜的感觉，大脑对光的感觉，大脑中的声音<br><img src="http://cdn.yangchaofan.cn/biyufa.png" width="20%"><br>当我的思维库里有如此多的思维技术，我该如何运用呢？<br>学习理论和学习技术是整体性学习策略的重要组成部分，它俩同等重要，没有先后。<br>我喜欢在这两个技术中融入自己的学习方法，如《学习革命的解读》、《超效学方法解码》、《高效学习方法全集》中的一些方法。<br>将“学习理论”和“学习技术”应用实践到生活中去是非常必要的步骤，我喜欢做一些智力挑战、智力思维训练巩固我的整体性学习策略。<br>我需要选择，选择将哪些技术当作我习惯技术——好比趁手的兵器。<br>我需要问为什么，当前场景下为什么需要使用这种技术，而不用其他技术；<br>我需要练习薄弱的思维，我思维弱项是处理抽象数据、数学公式等，那我就要着重训练内在化、随意信息的处理。<br></td>
 </tr>
 </tbody></table>
 <a id="more"></a>
 
-<h1 id="bi-ji"><a href="#笔记" class="headerlink" title="笔记"></a>笔记<a href="#bi-ji" class="header-anchor">#</a></h1><h1 id="zheng-ti-xing-xue-xi-ji-zhu"><a href="#整体性学习技术" class="headerlink" title="整体性学习技术"></a>整体性学习技术<a href="#zheng-ti-xing-xue-xi-ji-zhu" class="header-anchor">#</a></h1><h2 id="ding-yi"><a href="#定义" class="headerlink" title="定义"></a>定义<a href="#ding-yi" class="header-anchor">#</a></h2><p>是作者斯科特杨提倡的学习技术</p>
-<h2 id="huo-qu-zhi-shi"><a href="#获取知识" class="headerlink" title="获取知识"></a>获取知识<a href="#huo-qu-zhi-shi" class="header-anchor">#</a></h2><h3 id="ding-yi"><a href="#定义-1" class="headerlink" title="定义"></a><strong>定义</strong><a href="#ding-yi" class="header-anchor">#</a></h3><h3 id="fang-fa"><a href="#方法" class="headerlink" title="方法"></a>方法<a href="#fang-fa" class="header-anchor">#</a></h3><h4 id="yue-du-fa"><a href="#阅读法" class="headerlink" title="阅读法"></a>阅读法<a href="#yue-du-fa" class="header-anchor">#</a></h4><p><strong>以下方法练习频率：一个月为单位，任意材料，每天15分钟指读法、15分钟练习阅读法、15分钟积极阅读法</strong></p>
+<h1 id="zheng-ti-xing-xue-xi-ji-zhu"><a href="#整体性学习技术" class="headerlink" title="整体性学习技术"></a>整体性学习技术<a href="#zheng-ti-xing-xue-xi-ji-zhu" class="header-anchor">#</a></h1><h2 id="ding-yi"><a href="#定义" class="headerlink" title="定义"></a>定义<a href="#ding-yi" class="header-anchor">#</a></h2><p>整体性学习是一种学习理论，通过结构-模型-高速公路三种概念描述了大脑是如何运转，是作者斯科特杨结合自身一年通过MIT33门考试得来的学习方法实践。</p>
+<h2 id="zu-cheng-bu-fen"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分<a href="#zu-cheng-bu-fen" class="header-anchor">#</a></h2><h3 id="jie-gou"><a href="#结构" class="headerlink" title="结构"></a>结构<a href="#jie-gou" class="header-anchor">#</a></h3><p>结构是指优秀的知识地图，在各个坐标物之间建立尽可能多$N : N$的关系。</p>
+<h4 id="hao-de-jie-gou-li-zi"><a href="#好的结构例子" class="headerlink" title="好的结构例子"></a>好的结构例子<a href="#hao-de-jie-gou-li-zi" class="header-anchor">#</a></h4><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>介绍</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>感知结构</td>
+<td>你的五官摄取的声音、视觉图像、情感构成了最直接的感知结构</td>
+</tr>
+<tr>
+<td>关系结构</td>
+<td>思维导图、逻辑树、组织结构图等关系，能最简洁的表达出关系结构</td>
+</tr>
+<tr>
+<td>数学结构</td>
+<td>成熟的数学结构是最好的模型工具</td>
+</tr>
+</tbody></table>
+<img src="http://cdn.yangchaofan.cn/jiegou.png" width="50%">
+
+<h3 id="mo-xing"><a href="#模型" class="headerlink" title="模型"></a>模型<a href="#mo-xing" class="header-anchor">#</a></h3><p>模型是地图上的坐标物，是简化的地图，是地图上的一个个快照、坐标点。具体来说，模型是压缩过后的概念。<strong>是一份没有建立各个点之间联系的坐标系</strong>。比喻法是最好的建立模型的工具。<img src="http://cdn.yangchaofan.cn/model.png" width="50%"></p>
+<p><strong>模型更抽象也是解释更具体的得例子</strong></p>
+<img src="http://cdn.yangchaofan.cn/qipan.png" width="50%">
+
+<h3 id="gao-su-gong-lu"><a href="#高速公路" class="headerlink" title="高速公路"></a>高速公路<a href="#gao-su-gong-lu" class="header-anchor">#</a></h3><p>高速公路是将知识地图链接起来的最佳力量。通过使用比喻法、联想法能建立强有力的知识链接。</p>
+<img src="http://cdn.yangchaofan.cn/freeway.png" width="50%">
+
+<h2 id="shun-xu"><a href="#顺序" class="headerlink" title="顺序"></a>顺序<a href="#shun-xu" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>阶段名称</th>
+<th>定义</th>
+<th>步骤</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>获取</td>
+<td>通过五官摄取知识的必要步骤</td>
+<td>简化:规律法、分解小问题、缩小范文等记忆方法在这一步非常关键<br>容量:容量比精读，有的时候更有用，读100本书比读1-2本知道的多<br>速度:30分钟读完一篇文章比1个小时读完，大脑的吸收率前者高后者低<br></td>
+<td></td>
+</tr>
+<tr>
+<td>理解</td>
+<td>是理解的初级阶段，主要为理解语言表面意思</td>
+<td>使用基本的语言能力存储知识</td>
+<td>认识数学符号的意义，死记硬背文言文、数学定理等</td>
+</tr>
+<tr>
+<td>拓展</td>
+<td>是理解的中级阶段，大多数无法到达这一步<br><font color="red">也是整体性学习方法的真正开始第一步</font><br>运用它解决实际生活问题；了解它的推导过程，背景意义,了解每个组成部分的真实含义；了解可以改变哪些成分，改变会产生怎样变化；了解它与其他概念的相同、不同之处。</td>
+<td>深度扩展:在它的内部找寻联系，它的组成部分能产生怎样联系？<br>横向扩展：类似的结论、相反的结论；结论的事实、在其他维度类似的结论…<br>纵向扩展：比喻法、内在和是最好的方法，如奶牛和女人皮肤<br></td>
+<td></td>
+</tr>
+<tr>
+<td>纠错</td>
+<td>是理解的高级阶段</td>
+<td></td>
+<td>生物进化模拟公司演化存在问题，要有发现问题的能力<br></td>
+</tr>
+<tr>
+<td>应用</td>
+<td>将知识运用于实践</td>
+<td></td>
+<td>如SMART法管理企业、5W法做策划案，编程做游戏</td>
+</tr>
+<tr>
+<td>测试</td>
+<td>主要测试以上各个步骤</td>
+<td>测验获取阶段:我以前看过这个知识吗？<br>测验理解阶段:我现在知道知识的字面含义吗<br>测验拓展阶段:我知道知识从哪里推导吗，与那些知识有联系吗?<br>测验纠错阶段:我有发现不恰当的联系并删除吗？<br>测试应用阶段：我将知识用到了生活中哪些方面？</td>
+<td></td>
+</tr>
+<tr>
+<td>复盘</td>
+<td>以上环节哪一个是弱项；每天用整体学习法，哪一点做得不够好</td>
+<td>1.不擅长获取吗？<br>不擅长理解吗？<br>不擅长拓展吗？<br>我今天又做纠错吗<br>我今天有将知识运用到生活吗<br></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="huo-qu-zhi-shi"><a href="#获取知识" class="headerlink" title="获取知识"></a>获取知识<a href="#huo-qu-zhi-shi" class="header-anchor">#</a></h2><h3 id="ding-yi"><a href="#定义-1" class="headerlink" title="定义"></a><strong>定义</strong><a href="#ding-yi" class="header-anchor">#</a></h3><p>通过你的五官获取知识，如双眼、眼神经、大脑，将书本、音频、视频内容存入在脑海中。</p>
+<h3 id="fang-fa"><a href="#方法" class="headerlink" title="方法"></a>方法<a href="#fang-fa" class="header-anchor">#</a></h3><h4 id="yue-du-fa"><a href="#阅读法" class="headerlink" title="阅读法"></a>阅读法<a href="#yue-du-fa" class="header-anchor">#</a></h4><p><strong>以下方法练习频率：一个月为单位，任意材料，每天15分钟指读法、15分钟练习阅读法、15分钟积极阅读法</strong></p>
 <table>
 <thead>
 <tr>
-<th>方法名称</th>
-<th>定义</th>
-<th>实践步骤</th>
-<th>优点</th>
-<th>缺点</th>
+<th><div style="width: 10%">方法名称 </div></th>
+<th><div style="width: 20%">定义    </div></th>
+<th><div style="width: 30%">实践步骤 </div></th>
+<th><div style="width: 20%">优点 </div></th>
+<th><div style="width: 20%"> 缺点 </div></th>
 </tr>
 </thead>
 <tbody><tr>
@@ -471,14 +891,11 @@
 <ul>
 <li>听到电视机里的手机铃声，我会不受控制的掏出自己手机查看</li>
 </ul>
-<h4 id="bi-ji-liu"><a href="#笔记流" class="headerlink" title="笔记流"></a>笔记流<a href="#bi-ji-liu" class="header-anchor">#</a></h4><p><strong>笔记流定义</strong></p>
-<p>提供一个画面、绘图文件，用来联系学到的东西。通常未划线、画圈。</p>
-<p><strong>笔记流的原则</strong></p>
-<p>通过重复训练，达到一次学会,在听课时不关注笔记是否漂亮，只关注笔记效果和笔记的目的。</p>
+<h4 id="bi-ji-liu"><a href="#笔记流" class="headerlink" title="笔记流"></a>笔记流<a href="#bi-ji-liu" class="header-anchor">#</a></h4><h5 id="bi-ji-liu-ding-yi"><a href="#笔记流定义" class="headerlink" title="笔记流定义"></a><strong>笔记流定义</strong><a href="#bi-ji-liu-ding-yi" class="header-anchor">#</a></h5><p>提供一个画面、绘图文件，用来联系学到的东西。通常未划线、画圈。</p>
+<h5 id="bi-ji-liu-de-yuan-ze"><a href="#笔记流的原则" class="headerlink" title="笔记流的原则"></a><strong>笔记流的原则</strong><a href="#bi-ji-liu-de-yuan-ze" class="header-anchor">#</a></h5><p>通过重复训练，达到一次学会,在听课时不关注笔记是否漂亮，只关注笔记效果和笔记的目的。</p>
 <p>禁止写冗长段落，用短语替代完整句子，降低可读性。减少时间、细节、过程等用词。</p>
 <p>画出主题、主题之间间联系箭头、关系用短语描述，最终整理出一张网状图。</p>
-<p><strong>笔记流的难点</strong></p>
-<p>记录技术的扩展：融合联想、对比、比喻法</p>
+<h5 id="bi-ji-liu-de-nan-dian"><a href="#笔记流的难点" class="headerlink" title="笔记流的难点"></a><strong>笔记流的难点</strong><a href="#bi-ji-liu-de-nan-dian" class="header-anchor">#</a></h5><p>记录技术的扩展：融合联想、对比、比喻法</p>
 <p>记录信息的选择：什么是重点，什么是核心，什么是难点，什么是考点</p>
 <p>记录信息的删减：删除哪些信息，重新建立联系</p>
 <p>以下方法练习频率：2周内，每天练习1次，课堂听课使用混合型笔记流，建立课堂上的知识点联系；下课后写一份课下笔记流，重新梳理知识点联系。</p>
@@ -514,12 +931,36 @@
 <td>损失笔记的精度</td>
 </tr>
 </tbody></table>
-<p><strong>综合笔笔记流的例子</strong></p>
-<img src="http://cdn.yangchaofan.cn/zonghebijiliu.png" width="50%" height="50%">
-
-<img src="http://cdn.yangchaofan.cn/%E7%AC%94%E8%AE%B0%E5%8E%8B%E7%BC%A9%E7%A4%BA%E4%BE%8B.png" width="50%">
-
-<h2 id="lian-xi-guan-dian"><a href="#联系观点" class="headerlink" title="联系观点"></a>联系观点<a href="#lian-xi-guan-dian" class="header-anchor">#</a></h2><h3 id="ding-yi"><a href="#定义-2" class="headerlink" title="定义"></a>定义<a href="#ding-yi" class="header-anchor">#</a></h3><p>将观点转化的过程</p>
+<h5 id="bi-ji-liu-de-li-zi"><a href="#笔记流的例子" class="headerlink" title="笔记流的例子"></a>笔记流的例子<a href="#bi-ji-liu-de-li-zi" class="header-anchor">#</a></h5><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>例子</th>
+<th>总结</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>综合笔笔记流的例子</strong></td>
+<td><img src="http://cdn.yangchaofan.cn/zonghebijiliu.png" width="50%" height="50%"></td>
+<td></td>
+</tr>
+<tr>
+<td>内在化的笔记流</td>
+<td><img src="http://cdn.yangchaofan.cn/%E8%AE%A9%E7%AC%A6%E5%8F%B7%E5%8A%A8%E8%B5%B7%E6%9D%A5%20%E7%9A%84%E7%AC%94%E8%AE%B0%E6%B5%81.png"></td>
+<td></td>
+</tr>
+<tr>
+<td>压缩笔记流的例子</td>
+<td><img src="http://cdn.yangchaofan.cn/%E7%AC%94%E8%AE%B0%E5%8E%8B%E7%BC%A9%E7%A4%BA%E4%BE%8B.png" width="50%"></td>
+<td></td>
+</tr>
+<tr>
+<td>流程图笔记流的例子</td>
+<td><img src="http://cdn.yangchaofan.cn/%E6%B5%81%E7%A8%8B%E5%9B%BE%2B%E6%AF%94%E5%96%BB%E6%B3%95%E7%9A%84%E7%BB%BC%E5%90%88%E7%AC%94%E8%AE%B0%E6%B5%81.png"></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="lian-xi-guan-dian"><a href="#联系观点" class="headerlink" title="联系观点"></a>联系观点<a href="#lian-xi-guan-dian" class="header-anchor">#</a></h2><h3 id="ding-yi"><a href="#定义-2" class="headerlink" title="定义"></a>定义<a href="#ding-yi" class="header-anchor">#</a></h3><p>联系观点是一组步骤的统称，包括<font color="red">理解</font>和<font color="red">拓展</font>两个步骤。<strong>主要用途</strong>是<font color="red">将信息转化为知识模型的过程</font></p>
 <h3 id="fang-fa"><a href="#方法-1" class="headerlink" title="方法"></a>方法<a href="#fang-fa" class="header-anchor">#</a></h3><table>
 <thead>
 <tr>
@@ -532,10 +973,10 @@
 </thead>
 <tbody><tr>
 <td>比喻</td>
-<td>适合抽象信息</td>
-<td></td>
-<td></td>
-<td></td>
+<td>将物体与其他物体联系在一起，将不熟悉的知识和熟悉的知识建立桥梁</td>
+<td>1.确定要理解的信息，a<br>2.在个人经验、知识库中找与信息相似的东西，直到找十几个相似的知识，Q<br>3.重复上述过程，修改集合Q中的知识，并描述a和Q中元素的联系</td>
+<td>1.在两个物体身上找到一点相似的地方<br>2.视觉、听觉、感觉、过程、原理、情感、声音</td>
+<td>容易忘记使用比喻</td>
 </tr>
 <tr>
 <td>视觉</td>
@@ -574,22 +1015,25 @@
 </tr>
 </tbody></table>
 <h4 id="bi-yu"><a href="#比喻" class="headerlink" title="比喻"></a>比喻<a href="#bi-yu" class="header-anchor">#</a></h4><h5 id="ding-yi"><a href="#定义-3" class="headerlink" title="定义"></a>定义<a href="#ding-yi" class="header-anchor">#</a></h5><p>将一个物体与另外一个物体联系起来的工具。如女性身材和沙漏比喻，形容女性身材曼妙，沙子不停向下流淌；肌肉壮的像头牛。</p>
-<h5 id="bi-yu-de-ji-qiao"><a href="#比喻的技巧" class="headerlink" title="比喻的技巧"></a><strong>比喻的技巧</strong><a href="#bi-yu-de-ji-qiao" class="header-anchor">#</a></h5><p>有找寻比喻的意识，在整体学习每一步都使用比喻</p>
-<p>有找到更好比喻的意识，每次比喻都列举10-20个比喻，直到找个最好的哪个</p>
-<p>有修改比喻的意识，没有合适的比喻，就在列举出的比喻中修改，改成合适的</p>
-<p>有测试比喻的意识，每次使用比喻，都要检查是否理解错误，改善理解错误的比喻</p>
-<h5 id="bi-yu-de-li-zi"><a href="#比喻的例子" class="headerlink" title="比喻的例子"></a><strong>比喻的例子</strong><a href="#bi-yu-de-li-zi" class="header-anchor">#</a></h5><p>条件反射-狗吐舌头</p>
+<h5 id="bi-yu-de-ji-qiao"><a href="#比喻的技巧" class="headerlink" title="比喻的技巧"></a><strong>比喻的技巧</strong><a href="#bi-yu-de-ji-qiao" class="header-anchor">#</a></h5><p>有<font color="red"><strong>找寻比喻的意识</strong></font>，在整体学习每一步都使用比喻，在阅读信息的时候比喻</p>
+<p>有<font color="red"><strong>找到更好比喻的意识</strong></font>，每次比喻都列举10-20个比喻，直到找个最好的哪个</p>
+<p>有<font color="red"><strong>修改比喻的意识</strong></font>，没有合适的比喻，就在列举出的比喻中修改，改成合适的</p>
+<p>有<font color="red"><strong>测试比喻的意识</strong></font>，每次使用比喻，都要检查是否理解错误，改善理解错误的比喻</p>
+<h5 id="bi-yu-de-li-zi"><a href="#比喻的例子" class="headerlink" title="比喻的例子"></a><strong>比喻的例子</strong><a href="#bi-yu-de-li-zi" class="header-anchor">#</a></h5><p>女性身体-沙漏</p>
+<p>男性肌肉-公牛</p>
+<p>女性皮肤-牛奶</p>
+<p>条件反射-狗吐舌头</p>
 <p>条件反射-雪地里找脚印的路</p>
 <p>导数-汽车仪表盘里程表和速度表</p>
 <h5 id="bi-yu-de-lian-xi"><a href="#比喻的练习" class="headerlink" title="比喻的练习"></a>比喻的练习<a href="#bi-yu-de-lian-xi" class="header-anchor">#</a></h5><p>每个主题写20个比喻。</p>
 <p>每个主题写20个比喻后修改5个比喻</p>
-<p>将比喻讲给其他人听，别人是否能理解。0</p>
+<p>将比喻讲给其他人听，别人是否能理解。</p>
 <h4 id="nei-zai-hua"><a href="#内在化" class="headerlink" title="内在化"></a>内在化<a href="#nei-zai-hua" class="header-anchor">#</a></h4><h5 id="ding-yi"><a href="#定义-4" class="headerlink" title="定义"></a>定义<a href="#ding-yi" class="header-anchor">#</a></h5><p>将知识转化未视觉、听觉、动觉的信息。</p>
 <h5 id="nei-zai-hua-ji-qiao"><a href="#内在化技巧" class="headerlink" title="内在化技巧"></a>内在化技巧<a href="#nei-zai-hua-ji-qiao" class="header-anchor">#</a></h5><table>
 <thead>
 <tr>
-<th></th>
-<th></th>
+<th>步骤</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -597,15 +1041,32 @@
 <td>生物学过程还是面向对象的代码</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>在脑海中建立图像</td>
+<td>手写图案，脑海中画出图案</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>脑海中让图案动起来</td>
+<td>行列式想象成左右手搬东西，搬东西需要左手先，右手后</td>
+</tr>
+<tr>
+<td>调动身体其他器官与图像建立联系</td>
+<td>脚步、身体躯干弯腰、挺直身体等，张开嘴咬，伸出鼻子闻</td>
+</tr>
+<tr>
+<td>加入情感</td>
+<td>悲伤、恐惧、兴趣盎然、害怕，如砸到脚、高兴的跳起来</td>
+</tr>
+<tr>
+<td>调整图案的运动模式、调整身体的动作、调整情感</td>
+<td>优化上述步骤</td>
 </tr>
 </tbody></table>
-<h5 id="nei-zai-hua-de-li-zi"><a href="#内在化的例子" class="headerlink" title="内在化的例子"></a><strong>内在化的例子</strong><a href="#nei-zai-hua-de-li-zi" class="header-anchor">#</a></h5><p>行列式计算-使用右手、左手搬物体</p>
+<h5 id="nei-zai-hua-de-li-zi"><a href="#内在化的例子" class="headerlink" title="内在化的例子"></a><strong>内在化的例子</strong><a href="#nei-zai-hua-de-li-zi" class="header-anchor">#</a></h5><p>行列式计算-使用右手、左手搬物体，感觉变轻了</p>
+<p>比喻法-光线摄入眼球，眼球对光的感觉，视网膜的感觉，大脑对光的感觉，大脑中的声音</p>
+<img src="http://cdn.yangchaofan.cn/biyufa.png" width="20%">
+
+
+
 <h2 id="sui-yi-xin-xi-de-chu-li"><a href="#随意信息的处理" class="headerlink" title="随意信息的处理"></a>随意信息的处理<a href="#sui-yi-xin-xi-de-chu-li" class="header-anchor">#</a></h2><h3 id="ding-yi"><a href="#定义-5" class="headerlink" title="定义"></a>定义<a href="#ding-yi" class="header-anchor">#</a></h3><p>作者将学习类信息分为5种，随意信息作为其中之一。具体表现未抽象的信息：</p>
 <ul>
 <li>日期</li>
@@ -755,9 +1216,73 @@
 <td>数学知识描述<br>学数学的步骤<br>思想<br>故事联想<br>数学实际知识应用<br></td>
 </tr>
 </tbody></table>
-<h1 id="zong-jie"><a href="#总结" class="headerlink" title="总结"></a>总结<a href="#zong-jie" class="header-anchor">#</a></h1><p>我确认每一个知识点都写清楚了</p>
-<p>我确定每一个知识点联系我都想清楚，并写清楚了</p>
-<p>我确定在文字末尾，我已经用整体学习技术将知识串联起来了</p>
+<h1 id="fei-man-ji-qiao"><a href="#费曼技巧" class="headerlink" title="费曼技巧"></a>费曼技巧<a href="#fei-man-ji-qiao" class="header-anchor">#</a></h1><h2 id="yong-tu"><a href="#用途" class="headerlink" title="用途"></a>用途<a href="#yong-tu" class="header-anchor">#</a></h2><p><strong>理解那些你没有真正掌握的知识点</strong></p>
+<p><strong>记住你能理解，却在考试忘掉的知识点</strong></p>
+<h2 id="fang-fa"><a href="#方法-5" class="headerlink" title="方法"></a>方法<a href="#fang-fa" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>实践</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>选择要学习的概念</td>
+<td>对于该概念，要有深入理解的动机<br>拿白纸，在中间写下概念名称<br></td>
+<td></td>
+</tr>
+<tr>
+<td>设想你是老师，正在试图教会一个新生知识点</td>
+<td>对于该新生，你要当作纯小白、小学生<br><font color="red">把你的解释过程录音、写文字记录下来。记住这一步至关重要</font><br>因为在自我解释那些你认为已经理解或不理解的知识的过程中，你会理解的更好，原先混淆的地方也得以理清 <br></td>
+<td></td>
+</tr>
+<tr>
+<td>询问自己是否有疑惑</td>
+<td>如果有请停止向下学习，返回至学习步骤，重新阅读参考材料，听讲座，找老师解答。直到搞懂位置</td>
+<td></td>
+</tr>
+<tr>
+<td>整体化学习技巧</td>
+<td>比喻、内在化、联想法、笔记流，重新理解它。</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="gao-xiao-lu-xue-sheng"><a href="#高效率学生" class="headerlink" title="高效率学生"></a>高效率学生<a href="#gao-xiao-lu-xue-sheng" class="header-anchor">#</a></h1><p>斯科特杨认为高效率的学生应该有以下特点：</p>
+<table>
+<thead>
+<tr>
+<th>特点</th>
+<th>特点解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量管理</td>
+<td>1.增加日常能量储备：<br>每周3-5次运动，每次40分钟；<br>每天7-8小时睡眠<br>禁止高糖、高脂肪、高蛋白质食物<br>建议粗纤维、粗加工食物<br>一天7杯水<br>多餐、少吃、每餐7分饱<br>2.2/8原则<br>20%的时间处理不重要的事情，80%的时间处理重要的事情<br>重要的事情只做1-2件<br>精力充沛的时间点做重要的事情<br>3.番茄闹钟，25+5原则<br></td>
+</tr>
+<tr>
+<td>不要“学习”</td>
+<td>1.不要表演“学习”,即不要嘴里没有东西，还要假装在吃个不停。<br>2.要买菜、摘菜、洗菜、炒菜、夹菜、咀嚼、消化、吸收，去做学习（吃饭）应该做的事情<br>3.学习的最高原则：定义出学习的活动，并做到它们：<br>整体学习法规定的每个活动</td>
+</tr>
+<tr>
+<td>绝不拖延</td>
+<td>周日目标体系法<br>甘特图法<br>2/8法<br></td>
+</tr>
+<tr>
+<td>批处理</td>
+<td>20%的时间处理以下事情：不重要的、单个时间小于1小时<br>不重要的任务：一次性完成，不要拆分到多个时间段<br></td>
+</tr>
+<tr>
+<td>有组织</td>
+<td>关键事件组织规划一些：<br>随身笔记本，随时记、日积月累<br>任务日历、甘特图、思维导图工具的便捷打开方式<br></td>
+</tr>
+</tbody></table>
+<h1 id="zong-jie"><a href="#总结" class="headerlink" title="总结"></a>总结<a href="#zong-jie" class="header-anchor">#</a></h1><p>学习理论和学习技术是整体性学习策略的重要组成部分，它俩同等重要，没有先后。</p>
+<p>我喜欢在这两个技术中融入自己的学习方法，如《学习革命的解读》、《超效学方法解码》、《高效学习方法全集》中的一些方法。</p>
+<p>将“学习理论”和“学习技术”应用实践到生活中去是非常必要的步骤，我喜欢做一些智力挑战、智力思维训练巩固我的整体性学习策略。</p>
+<p>当我的思维库里有如此多的思维技术，我该如何运用呢？</p>
+<p>我需要选择，选择将哪些技术当作我习惯技术——好比趁手的兵器。</p>
+<p>我需要问为什么，当前场景下为什么需要使用这种技术，而不用其他技术；</p>
+<p>我需要练习薄弱的思维，我思维弱项是处理抽象数据、数学公式等，那我就要着重训练内在化、随意信息的处理。</p>
 ]]></content>
       <categories>
         <category>家庭教育</category>
@@ -769,7 +1294,7 @@
   </entry>
   <entry>
     <title>《超效学习方法解码》心得</title>
-    <url>/ye-jincheng-website/2021/chao-xiao-xue-xi-fang-fa-jie-ma/</url>
+    <url>/ye-jincheng-website/blog/2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/</url>
     <content><![CDATA[<h1 id="chao-xiao-xue-xi-fang-fa-jie-ma"><a href="#《超效学习方法解码》" class="headerlink" title="《超效学习方法解码》"></a>《超效学习方法解码》<a href="#chao-xiao-xue-xi-fang-fa-jie-ma" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
@@ -885,7 +1410,7 @@
   </entry>
   <entry>
     <title>程序员吃的是青春饭吗？</title>
-    <url>/ye-jincheng-website/2021/Is%20coder%20need%20more%20younger%EF%BC%9F/</url>
+    <url>/ye-jincheng-website/blog/2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</url>
     <content><![CDATA[<h1 id="cheng-xu-yuan-chi-de-shi-qing-chun-fan-ma"><a href="#程序员吃的是青春饭吗？" class="headerlink" title="程序员吃的是青春饭吗？"></a>程序员吃的是青春饭吗？<a href="#cheng-xu-yuan-chi-de-shi-qing-chun-fan-ma" class="header-anchor">#</a></h1><p>昨天在知乎上看到一个提问<a href="https://www.zhihu.com/question/444102247">“程序员为什么是吃青春饭，而不是像医生律师一样越老越值钱？”</a></p>
 <p>翻了一百多个回答，大多答主都是顺着题主的逻辑假定答的</p>
 <p>即许多人都是心中假设此前提成立：“程序员是吃青春饭”、“律师医生越老越值钱”</p>
@@ -928,605 +1453,8 @@
       </tags>
   </entry>
   <entry>
-    <title>波尔克</title>
-    <url>/ye-jincheng-website/2021/website_nickname/</url>
-    <content><![CDATA[<h1 id="bo-er-ke"><a href="#波尔克" class="headerlink" title="波尔克"></a>波尔克<a href="#bo-er-ke" class="header-anchor">#</a></h1><h1 id="jie-shao"><a href="#介绍" class="headerlink" title="介绍"></a>介绍<a href="#jie-shao" class="header-anchor">#</a></h1><p>阿里云服务器用了三年了，上个月到期忘了续费。云服务器上的文章资料忘了及时导出，也被阿里清空了，甚是心疼。于是花了一天时间，使用码云仓库搭一个个人网站，免费，简单，便捷，空间够用。这篇文章主要包含了个人网站的技术架构。包括使用的oss管理平台、域名管理、评论管理、文章编辑与发布、网站编辑管理等功能的设计与实现。<a id="more"></a></p>
-<h1 id="wang-zhan-jia-gou"><a href="#网站架构" class="headerlink" title="网站架构"></a>网站架构<a href="#wang-zhan-jia-gou" class="header-anchor">#</a></h1><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>typora</td>
-<td>markdown编辑器</td>
-</tr>
-<tr>
-<td>hexo</td>
-<td>博客服务</td>
-</tr>
-<tr>
-<td>nodejs</td>
-<td>hexo编译环境</td>
-</tr>
-<tr>
-<td>gitee</td>
-<td>码云代码仓库</td>
-</tr>
-<tr>
-<td>next</td>
-<td>hexo主题</td>
-</tr>
-<tr>
-<td>七牛云</td>
-<td>oss图片文件仓库</td>
-</tr>
-<tr>
-<td>阿里云域名</td>
-<td>域名转发、cdn转发</td>
-</tr>
-<tr>
-<td>hexo-toc</td>
-<td>文档插件显示二级目录，响应点击事件</td>
-</tr>
-<tr>
-<td>hexo-renderer-markdown-it-plus</td>
-<td>markdown解析插件</td>
-</tr>
-<tr>
-<td>leanclound</td>
-<td>阅读量统计插件，如何配置<a href="https://blog.csdn.net/lijing742180/article/details/87928554">参考文章</a></td>
-</tr>
-</tbody></table>
-<h1 id="mo-ban-jia-gou"><a href="#模板架构" class="headerlink" title="模板架构"></a>模板架构<a href="#mo-ban-jia-gou" class="header-anchor">#</a></h1><table>
-<thead>
-<tr>
-<th>模板名称</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>android-xx-Tips</td>
-<td>Android百问百答模板</td>
-</tr>
-<tr>
-<td>book-note-model</td>
-<td>读书笔记模板</td>
-</tr>
-<tr>
-<td>draft</td>
-<td>草稿模板</td>
-</tr>
-<tr>
-<td>page</td>
-<td>页面模板</td>
-</tr>
-<tr>
-<td>post</td>
-<td>文章模板</td>
-</tr>
-</tbody></table>
-<h1 id="an-zhuang-jiao-cheng"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程<a href="#an-zhuang-jiao-cheng" class="header-anchor">#</a></h1><h2 id="nodejs-an-zhuang-jiao-cheng"><a href="#nodejs安装教程" class="headerlink" title="nodejs安装教程"></a>nodejs安装教程<a href="#nodejs-an-zhuang-jiao-cheng" class="header-anchor">#</a></h2><p>步骤太简单了，难点就是找到合适版本、合适渠道的安装包，推荐国内使用方式2node中文网的方式下载安装</p>
-<table>
-<thead>
-<tr>
-<th>方式</th>
-<th>缺点</th>
-<th>优点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://nodejs.org/zh-cn/">node官网</a>，点击链接下载，一路next同意协议安装</td>
-<td>国外服务器下载慢</td>
-<td>最新安装包</td>
-</tr>
-<tr>
-<td><a href="http://nodejs.cn/">node中文网</a>，点击链接下载，一路next同意协议安装</td>
-<td>安装包版本落后1-2个版本</td>
-<td>国内服务器下载快</td>
-</tr>
-</tbody></table>
-<h2 id="ma-yun-pei-zhi-wang-zhan-jiao-cheng"><a href="#码云配置网站教程" class="headerlink" title="码云配置网站教程"></a>码云配置网站教程<a href="#ma-yun-pei-zhi-wang-zhan-jiao-cheng" class="header-anchor">#</a></h2><h2 id="git-shi-yong-jiao-cheng"><a href="#git使用教程" class="headerlink" title="git使用教程"></a>git使用教程<a href="#git-shi-yong-jiao-cheng" class="header-anchor">#</a></h2><h2 id="hexo-shi-yong-jiao-cheng"><a href="#hexo使用教程" class="headerlink" title="hexo使用教程"></a>hexo使用教程<a href="#hexo-shi-yong-jiao-cheng" class="header-anchor">#</a></h2><p>hexo官网有详细步骤，小白可以参考百度上的安装教程博客</p>
-<table>
-<thead>
-<tr>
-<th>方式</th>
-<th>步骤</th>
-<th>缺点</th>
-<th>优点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://hexo.io/zh-cn/docs/">hexo官网</a>，权威hexo安装步骤</td>
-<td>npm install -g hexo-cli；</td>
-<td>不适合小白用户，命令行操作居多</td>
-<td>简洁，明了，歧义少</td>
-</tr>
-<tr>
-<td>搜索引擎“hexo安装步骤”</td>
-<td><a href="https://www.cnblogs.com/liuxianan/p/build-blog-website-by-hexo-github.html">《参考》</a></td>
-<td>遇到问题较难解答</td>
-<td>傻瓜式，上手快</td>
-</tr>
-</tbody></table>
-<h1 id="hexo-chang-jian-zhi-ling"><a href="#hexo常见指令" class="headerlink" title="hexo常见指令"></a>hexo常见指令<a href="#hexo-chang-jian-zhi-ling" class="header-anchor">#</a></h1><table>
-<thead>
-<tr>
-<th>指令</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>hexo init</td>
-<td>在当前目录下创建工程</td>
-</tr>
-<tr>
-<td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#104;&#117;&#x62;&#46;&#x63;&#x6f;&#109;">&#x67;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#104;&#117;&#x62;&#46;&#x63;&#x6f;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
-</tr>
-<tr>
-<td>hexo clean</td>
-<td>清除缓存</td>
-</tr>
-<tr>
-<td>hexo g</td>
-<td>生成web</td>
-</tr>
-<tr>
-<td>hexo s</td>
-<td>启动web服务并预览，在浏览器输入 <a href="http://localhost:4000/">http://localhost:4000</a></td>
-</tr>
-<tr>
-<td>hexo d</td>
-<td>发布pulic 目录下的静态页面至github</td>
-</tr>
-<tr>
-<td>git clone url themes/yilia</td>
-<td>下载指定主题到根目录/thems/yilia/ 下</td>
-</tr>
-<tr>
-<td>hexo new “postName”</td>
-<td>新建文章，hexo n</td>
-</tr>
-<tr>
-<td>hexo new page “pageName”</td>
-<td>#新建页面</td>
-</tr>
-<tr>
-<td>hexo generate</td>
-<td>生成静态页面至public目录，hexo g</td>
-</tr>
-<tr>
-<td>hexo server</td>
-<td>开启预览访问端口（默认端口4000，’ctrl + c’关闭server）</td>
-</tr>
-<tr>
-<td>hexo deploy</td>
-<td>hexo d</td>
-</tr>
-<tr>
-<td>hexo s -g</td>
-<td>生成并本地预览</td>
-</tr>
-</tbody></table>
-<h1 id="markdwon-shi-yong-ji-qiao"><a href="#markdwon使用技巧" class="headerlink" title="markdwon使用技巧"></a>markdwon使用技巧<a href="#markdwon-shi-yong-ji-qiao" class="header-anchor">#</a></h1><h2 id="suo-fang-tu-pian-si-chong-chong-ji-qiao"><a href="#缩放图片四种种技巧" class="headerlink" title="缩放图片四种种技巧"></a>缩放图片四种种技巧<a href="#suo-fang-tu-pian-si-chong-chong-ji-qiao" class="header-anchor">#</a></h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">&lt;img src=&quot;&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;</span><br><span class="line">![test image size](url)&#123;:class=&quot;img-responsive&quot;&#125;</span><br><span class="line">![test image size](url)&#123;:height=&quot;50%&quot; width=&quot;50%&quot;&#125;</span><br><span class="line">![test image size](url)&#123;:height=&quot;100px&quot; width=&quot;400px&quot;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="she-zhi-zi-ti-yan-se"><a href="#设置字体颜色" class="headerlink" title="设置字体颜色"></a>设置字体颜色<a href="#she-zhi-zi-ti-yan-se" class="header-anchor">#</a></h2><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">style</span>=<span class="string">&quot;color:green&quot;</span>&gt;</span>**数学日记**<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h2 id="shi-yong-shu-xue-gong-shi"><a href="#使用数学公式" class="headerlink" title="使用数学公式"></a>使用数学公式<a href="#shi-yong-shu-xue-gong-shi" class="header-anchor">#</a></h2><table>
-<thead>
-<tr>
-<th>文档名称</th>
-<th>优点</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a href="https://katex.org/docs/supported.html#accents">KaTeX公式文档</a></td>
-<td>网站清新，简洁，数学公式非常全，导航详细</td>
-<td></td>
-</tr>
-<tr>
-<td>CTEX公式文档</td>
-<td>导航较为隐晦，除了数学公式外还有其他公式</td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<h1 id="chang-jian-wen-ti"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题<a href="#chang-jian-wen-ti" class="header-anchor">#</a></h1><h2 id="ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi"><a href="#码云部署hexo站点-css样式不显示？" class="headerlink" title="码云部署hexo站点 css样式不显示？"></a><strong>码云部署hexo站点 css样式不显示？</strong><a href="#ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi" class="header-anchor">#</a></h2><p>原因：仓库地址与个性地址url不一致<br>解决：修改_config.yml<br>    ​<code>xml     url: https://ipvb.gitee.io/blog     root: /blog     ​</code></p>
-<p>其他码云部署的问题参考<a href="https://gitee.com/help/articles/4136#article-header3">这里</a></p>
-<h2 id="hexo-ru-he-suo-fang-tu-pian"><a href="#hexo如何缩放图片" class="headerlink" title="hexo如何缩放图片"></a>hexo如何缩放图片<a href="#hexo-ru-he-suo-fang-tu-pian" class="header-anchor">#</a></h2><p><code>&lt;img src=&quot;&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;</code></p>
-<h2 id="hexo-ru-he-an-zhuang-zhu-ti"><a href="#hexo如何安装主题" class="headerlink" title="hexo如何安装主题"></a>hexo如何安装主题<a href="#hexo-ru-he-an-zhuang-zhu-ti" class="header-anchor">#</a></h2><ol>
-<li><p>找到合适的主题列表，推荐以下2个：</p>
-<p><a href="https://www.zhihu.com/question/24422335">有哪些好看的 Hexo 主题？</a></p>
-<p><a href="https://hexo.io/themes/">hexo.thems</a></p>
-</li>
-<li><p>安装主题至根目录，例如找到next主题，将其克隆岛根目录/thesms/next下</p>
- <figure class="highlight js"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="comment">//github.com/iissnan/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure></li>
-<li><p>阅读<a href="https://github.com/iissnan/hexo-theme-next">next文档</a></p>
-<ol>
-<li>引用主题：在config.yml中修改主题名称：<code>theme: next</code></li>
-<li>发布时遇到 bug<code>&#123;% extends '_layout.swig' %&#125;</code>；输入指令解决：<code>npm i hexo-renderer-swig</code></li>
-</ol>
-</li>
-</ol>
-<h2 id="hexo-bu-xian-shi-er-ji-mu-lu"><a href="#hexo不显示二级目录？" class="headerlink" title="hexo不显示二级目录？"></a>hexo不显示二级目录？<a href="#hexo-bu-xian-shi-er-ji-mu-lu" class="header-anchor">#</a></h2><p>原因：hexo解析目录是按照1级，1级下面找2级，2级下面找3级的顺序查找目录的，如果只有2级，没有1级，是会显示错误的。</p>
-<p>解决：先写1级标题，再写2级标题，先写大标题，再写小标题。</p>
-<p>原因：markdown解析问题</p>
-<p>解决：参考<a href="https://www.cnblogs.com/Createsequence/p/14150758.html">渲染错误解决和超链接乱码解决方案</a>、参考<a href="https://convivae.top/posts/hexo-bo-ke-cai-keng/#%E6%96%B9%E6%B3%95-2">markdown-it的bug</a></p>
-<h2 id="hexo-dian-ji-er-ji-mu-lu-bu-tiao-zhuan"><a href="#hexo点击二级目录不跳转" class="headerlink" title="hexo点击二级目录不跳转?"></a>hexo点击二级目录不跳转?<a href="#hexo-dian-ji-er-ji-mu-lu-bu-tiao-zhuan" class="header-anchor">#</a></h2><p>原因：markdown解析问题</p>
-<p>解决：参考<a href="https://www.cnblogs.com/Createsequence/p/14150758.html">渲染错误解决和超链接乱码解决方案</a>、参考<a href="https://convivae.top/posts/hexo-bo-ke-cai-keng/#%E6%96%B9%E6%B3%95-2">markdown-it的bug</a></p>
-<h2 id="hexo-zi-dong-fa-bu-tu-pian-zhi-qi-niu-yun"><a href="#hexo自动发布图片至七牛云？" class="headerlink" title="hexo自动发布图片至七牛云？"></a>hexo自动发布图片至七牛云？<a href="#hexo-zi-dong-fa-bu-tu-pian-zhi-qi-niu-yun" class="header-anchor">#</a></h2><p>阿里云-域名管理-解析设置-添加记录-设置以下参数</p>
-<table>
-<thead>
-<tr>
-<th>键</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>记录类型</td>
-<td>CNAME</td>
-</tr>
-<tr>
-<td>主机记录</td>
-<td>如cdn</td>
-</tr>
-<tr>
-<td>记录值</td>
-<td>从七牛云后台获取</td>
-</tr>
-</tbody></table>
-<p>七牛云-域名管理-加速域名设置值如cdn.yangchaofan.cn；cdn就是主机记录值；创建完毕后，获得一个CNAME值，记住该值，填写至阿里云域名记录值中。</p>
-<p><a href="https://portal.qiniu.com/kodo/overview"></a></p>
-<h2 id="next-ru-he-da-kai-bai-du-fen-xiang"><a href="#next如何打开百度分享？" class="headerlink" title="next如何打开百度分享？"></a>next如何打开百度分享？<a href="#next-ru-he-da-kai-bai-du-fen-xiang" class="header-anchor">#</a></h2><p>主题文件中插入以下代码</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">baidushare:</span><br><span class="line">  type: button</span><br><span class="line">  baidushare: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h2 id="next-ru-he-tian-jia-sou-suo-gong-neng"><a href="#next如何添加搜索功能？" class="headerlink" title="next如何添加搜索功能？"></a>next如何添加搜索功能？<a href="#next-ru-he-tian-jia-sou-suo-gong-neng" class="header-anchor">#</a></h2><p>安装插件</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
-<p>编辑全局配置</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: <span class="number">10000</span></span><br></pre></td></tr></table></figure>
-<p>编辑主题配置</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">local_search:</span><br><span class="line">  enable: <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<h2 id="next-ru-he-tian-jia-ping-lun-gong-neng"><a href="#next如何添加评论功能？" class="headerlink" title="next如何添加评论功能？"></a>next如何添加评论功能？<a href="#next-ru-he-tian-jia-ping-lun-gong-neng" class="header-anchor">#</a></h2><p>翻墙打开<a href="https://livere.com/">来比力官网</a>，注册填写域名，copy代码块中的data-uid</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;!-- 来必力City版安装代码 --&gt;</span><br><span class="line">&lt;div id=<span class="string">&quot;lv-container&quot;</span> data-id=<span class="string">&quot;city&quot;</span> data-uid=<span class="string">&quot;这里是id&quot;</span>&gt;</span><br><span class="line">	&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">   (<span class="function"><span class="keyword">function</span>(<span class="params">d, s</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">var</span> j, e = d.getElementsByTagName(s)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (<span class="keyword">typeof</span> LivereTower === <span class="string">&#x27;function&#x27;</span>) &#123; <span class="keyword">return</span>; &#125;</span><br><span class="line"></span><br><span class="line">       j = d.createElement(s);</span><br><span class="line">       j.src = <span class="string">&#x27;https://cdn-city.livere.com/js/embed.dist.js&#x27;</span>;</span><br><span class="line">       j.async = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">       e.parentNode.insertBefore(j, e);</span><br><span class="line">   &#125;)(<span class="built_in">document</span>, <span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;noscript&gt; 为正常使用来必力评论功能请激活JavaScript&lt;/noscript&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;!-- City版安装代码已完成 --&gt;</span><br></pre></td></tr></table></figure>
-<p>配置完成后可以在评论<a href="https://livere.com/insight/communite">后台</a>管理评论内容。</p>
-<h2 id="next-ru-he-tian-jia-zhi-ding-gong-neng"><a href="#next如何添加置顶功能？" class="headerlink" title="next如何添加置顶功能？"></a>next如何添加置顶功能？<a href="#next-ru-he-tian-jia-zhi-ding-gong-neng" class="header-anchor">#</a></h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm uninstall hexo-generator-index --save</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-index-pin-top --save</span></span><br></pre></td></tr></table></figure>
-<p>文章插入top属性，top数值按大小倒序排序</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">title: 置顶</span><br><span class="line">date: 2019-09-09 09:09:09</span><br><span class="line">top: true</span><br><span class="line">top: 1</span><br></pre></td></tr></table></figure>
-<p>设置置顶样式：</p>
-<p>打开：<code>/blog/themes/next/layout/_macro</code>目录下的<code>post.swig</code>文件，定位到<code>&lt;div class=&quot;post-meta&quot;&gt;</code>标签下，插入如下代码：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;post-meta&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;post-time&quot;</span>&gt;</span></span><br><span class="line">在此之下插入代码，包含在 span块内        </span><br><span class="line">          &#123;% if post.top %&#125;</span><br><span class="line">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">&quot;fa fa-thumb-tack&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">7D26CD</span>&gt;</span>置顶<span class="tag">&lt;/<span class="name">font</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;post-meta-divider&quot;</span>&gt;</span>|<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">          &#123;% endif %&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="next-ru-he-tiao-zhuan-zhi-zhan-nei-xiang-dui-lu-jing"><a href="#next如何跳转至站内相对路径？" class="headerlink" title="next如何跳转至站内相对路径？"></a>next如何跳转至站内相对路径？<a href="#next-ru-he-tiao-zhuan-zhi-zhan-nei-xiang-dui-lu-jing" class="header-anchor">#</a></h2><h2 id="hexo-ru-he-chuang-jian-mo-ban"><a href="#hexo如何创建模板？" class="headerlink" title="hexo如何创建模板？"></a>hexo如何创建模板？<a href="#hexo-ru-he-chuang-jian-mo-ban" class="header-anchor">#</a></h2><p><strong>模板有什么用？</strong></p>
-<p>模板可以当做一类文章的格式，按照指定格式批量创建文章，减少重复内容的编写工作。如创建读书笔记模板、创建一类任务计划模板。</p>
-<p><strong>创建模板步骤？</strong></p>
-<ul>
-<li>新建md文件，文件头插入以下内容，并将文件移动至<code>根目录/scaffolds</code> 下</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">title: 《超效学习方法解码》心得</span><br><span class="line">date: <span class="number">2021</span>-<span class="number">02</span>-<span class="number">17</span> <span class="number">11</span>:<span class="number">37</span>:<span class="number">23</span></span><br><span class="line">entitle:</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用指令读取模板创建文章</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> hexo new 模板名称 <span class="string">&quot;title&quot;</span></span></span><br><span class="line">hexo new book-note-model &quot;《超效学习方法解码》心得&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="hexo-ru-he-chuang-jian-cao-gao"><a href="#hexo如何创建草稿？" class="headerlink" title="hexo如何创建草稿？"></a>hexo如何创建草稿？<a href="#hexo-ru-he-chuang-jian-cao-gao" class="header-anchor">#</a></h2><p><strong>草稿的用途？</strong></p>
-<p>文章写到一半，未完成，并不想发布。可以向存到指定位置。hexo提供了_drafts目录存放草稿。</p>
-<p><strong>创建草稿的步骤？</strong></p>
-<ul>
-<li>​创建草稿</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> hexo new draft <span class="string">&quot;title&quot;</span></span></span><br><span class="line">hexo new draft &quot;Android性能优化百问百答&quot;</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Created: </span><br><span class="line">D:\workspace\gitblog\hexoblogcode\source\_drafts\Android性能优化百问百答.md</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ul>
-<li>发布草稿</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> hexo publish 布局类型 <span class="string">&quot;title&quot;</span></span></span><br><span class="line">hexo publish draft &quot;Android性能优化百问百答&quot;</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Published: D:\workspace\gitblog\hexoblogcode\source\_posts\Android性能优化百问百答.md</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="next-wen-zhang-zi-gua-ying-ping-mu-kuan-du"><a href="#next文章自适应屏幕宽度" class="headerlink" title="next文章自适应屏幕宽度"></a>next文章自适应屏幕宽度<a href="#next-wen-zhang-zi-gua-ying-ping-mu-kuan-du" class="header-anchor">#</a></h2><p><code>\themes\next\source/css/_schemes/Picses/_layout.styl</code>在文件末尾添加代码</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">// 以下为新增代码！！修改post宽度</span><br><span class="line"><span class="selector-tag">header</span>&#123; <span class="attribute">width</span>: <span class="number">80%</span> <span class="meta">!important</span>; &#125;</span><br><span class="line"><span class="selector-tag">header</span><span class="selector-class">.post-header</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: auto <span class="meta">!important</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-class">.main-inner</span> &#123; <span class="attribute">width</span>: <span class="number">80%</span>; &#125;</span><br><span class="line"><span class="selector-class">.content-wrap</span> &#123; <span class="attribute">width</span>: <span class="built_in">calc</span>(<span class="number">100%</span> - <span class="number">260px</span>); &#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.header</span> &#123;</span><br><span class="line">  +tablet() &#123;</span><br><span class="line">    <span class="attribute">width</span>: auto <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  +mobile() &#123;</span><br><span class="line">    <span class="attribute">width</span>: auto <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> <span class="selector-class">.main-inner</span> &#123;</span><br><span class="line">  +tablet() &#123;</span><br><span class="line">    <span class="attribute">width</span>: auto <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  +mobile() &#123;</span><br><span class="line">    <span class="attribute">width</span>: auto <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.content-wrap</span> &#123;</span><br><span class="line">  +tablet() &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span> <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  +mobile() &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span> <span class="meta">!important</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h2 id="next-tian-jia-tou-xiang"><a href="#next添加头像" class="headerlink" title="next添加头像"></a>next添加头像<a href="#next-tian-jia-tou-xiang" class="header-anchor">#</a></h2><p>打开themes/next/_config.yml</p>
-<p>打开并放入头像/themes/next/source/images/</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">avatar: /images/avatar_2.gif</span><br></pre></td></tr></table></figure>
-<h1 id="shi-yong-shuo-ming"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明<a href="#shi-yong-shuo-ming" class="header-anchor">#</a></h1><ol>
-<li> 定时使用typora编写markdown文章：编写markdown文件</li>
-<li> 导出成html，发布在hexo：使用hexo s</li>
-<li> hexo推送到码云指定仓库地址：hexo d</li>
-<li> 将阿里云的域名解析至码云仓库地址：配置域名解析</li>
-<li> 通过公网域名访问我的网站</li>
-</ol>
-<h1 id="zhi-chi"><a href="#支持" class="headerlink" title="支持"></a>支持<a href="#zhi-chi" class="header-anchor">#</a></h1><ol>
-<li> <a href="https://support.typora.io/Resize-Image/">typora使用手册</a></li>
-<li> <a href="https://gitee.com/help">Gitee 官方提供的使用手册</a></li>
-<li> <a href="https://portal.qiniu.com/kodo/overview">七牛云</a> </li>
-<li> <a href="https://homenew.console.aliyun.com/home/dashboard/ProductAndService">阿里云</a> </li>
-<li> <a href="https://hexo.io/zh-cn/docs">hexo中文文档</a></li>
-<li> <a href="http://theme-next.iissnan.com/third-party-services.html#comment-system">next中文文档</a></li>
-<li> <a href="https://console.leancloud.cn/apps">leanclound统计云</a></li>
-<li> <a href="https://livere.com/insight/communite">来比力评论云</a></li>
-</ol>
-]]></content>
-      <categories>
-        <category>杂谈</category>
-        <category>日记</category>
-      </categories>
-      <tags>
-        <tag>杂谈</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>AndroidHandler百问百答</title>
-    <url>/ye-jincheng-website/2020/handler%20TOP%20100%20Questions/</url>
-    <content><![CDATA[<h1 id="android-bai-wen-bai-da-na-xie-nian-bei-wen-guo-de-handler-yuan-li"><a href="#Android百问百答-《那些年被问过的Handler原理》" class="headerlink" title="Android百问百答-《那些年被问过的Handler原理》"></a>Android百问百答-《那些年被问过的Handler原理》<a href="#android-bai-wen-bai-da-na-xie-nian-bei-wen-guo-de-handler-yuan-li" class="header-anchor">#</a></h1><p>文章迁移自<a href="https://blog.csdn.net/chivalrousman/article/details/108014580">我的csdn博客</a></p>
-<p>关于Handler，安卓面试最热门的知识点之一。本篇文章将围绕3点展开：</p>
-<p>可以提问哪些Questions？</p>
-<p>面试官会怎样follow up？</p>
-<p>以及怎样寻找答案。</p>
-<h2 id="handler-chang-jian-ti-wen"><a href="#Handler常见提问" class="headerlink" title="Handler常见提问"></a>Handler常见提问<a href="#handler-chang-jian-ti-wen" class="header-anchor">#</a></h2><ol>
-<li>哪些场景使用到了Handler？用Handler做什么业务？</li>
-<li>用Handler遇到什么问题？怎么解决这些问题的？</li>
-<li>说一说Handler原理？</li>
-<li>能自己实现一个Handler吗？</li>
-<li>说一说Handler延时原理？</li>
-<li>Handler延时有哪些缺陷？造成这些缺陷的原因？</li>
-<li>你知道Handler#handleMessage原理吗？</li>
-<li>Handler的post与sendMessage有哪些区别？</li>
-<li>子线程能使用Handler吗？</li>
-<li>子线程能创建Handler吗？</li>
-<li>了解过HandlerThread吗？</li>
-<li>了解过IdleHandler吗？</li>
-</ol>
-<h2 id="handler-chang-jian-follow-up"><a href="#Handler常见Follow-Up" class="headerlink" title="Handler常见Follow Up"></a>Handler常见Follow Up<a href="#handler-chang-jian-follow-up" class="header-anchor">#</a></h2><ol>
-<li>你刚才提到了Message，消息屏障听过吗？有几种Message？</li>
-<li>Message有什么用？存储了哪些信息？以什么数据结构存储？</li>
-<li>APP内最多能有几个Handler？</li>
-<li>App内最多能有多少Message？</li>
-<li>App内最多能有几个Looper？</li>
-<li>App内最多能有几个MessageQueue？</li>
-<li>Message如何知道发给哪一个MessageQueue？发给哪个Handler？</li>
-<li>MessageQueue如何存储消息，以什么结构存储？</li>
-<li>你提到了Looper，请问子线程如何获取Looper？</li>
-<li>你提到了Looper，说一说Looper的消息队列模型？</li>
-<li>主线程Looper为什么不会阻塞？为什么不会ANR？</li>
-<li>子线程跟主线程如何通过Handler通信？</li>
-<li>子线程创建Handler这么麻烦，有什么替代方法吗？</li>
-<li>主线程Looper什么时候启动的？</li>
-<li>对Handler做过哪些优化？</li>
-</ol>
-<h2 id="handler-yuan-ma-fen-xi"><a href="#Handler源码分析" class="headerlink" title="Handler源码分析"></a>Handler源码分析<a href="#handler-yuan-ma-fen-xi" class="header-anchor">#</a></h2><h3 id="handler-gou-zao-han-shu-yuan-li"><a href="#Handler-构造函数原理" class="headerlink" title="Handler#构造函数原理"></a>Handler#构造函数原理<a href="#handler-gou-zao-han-shu-yuan-li" class="header-anchor">#</a></h3><p>Handler有7个构造函数</p>
-<pre><code>Handler()
-Handler(Handler.Callback callback)
-Handler(Looper looper)
-Handler(Looper looper, Handler.Callback callback)
-Handler(boolean async)
-Handler(Callback callback, boolean async)
-Handler(Looper looper, Callback callback, boolean async)
-</code></pre>
-<p>先从其中一个构造函数看起：<br><img src="https://img-blog.csdnimg.cn/20200814220917812.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoaXZhbHJvdXNtYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>提到了MessageQueue、Looper，Message,CallBack暂且记下。</p>
-<p>我们根据经验及面试题，关注Handler几个关键API</p>
-<ul>
-<li>obtainMessage</li>
-<li>post</li>
-<li>sendMessage</li>
-<li>postDelayed</li>
-<li>sendMessageDelayed</li>
-</ul>
-<p>接着我们关注这些API的底层实现，一个一个分析吧！</p>
-<h3 id="handler-obtainmessage-yuan-li"><a href="#Handler-obtainMessage-原理" class="headerlink" title="Handler#obtainMessage 原理"></a>Handler#obtainMessage 原理<a href="#handler-obtainmessage-yuan-li" class="header-anchor">#</a></h3><p>Handler#obtainMessage 调用了Message#obtain()</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-T7alw6p4-1597413794308)(C:\Users\lenovo\AppData\Local\Temp\1597329263919.png)]</p>
-<p>可以看到obtain函数从Message链表中获取message，这是一种内存复用，节省了频繁创建内存，如果Message链表为空，则创建一个Message。如果你对Message是个链表有疑问，那么请继续看下面的内容吧！</p>
-<h3 id="message-yuan-ma-fen-xi"><a href="#Message源码分析" class="headerlink" title="Message源码分析"></a>Message源码分析<a href="#message-yuan-ma-fen-xi" class="header-anchor">#</a></h3><p>Message有如下公有属性，供程序员调用：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">int</span> what;<span class="comment">//消息标示，</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">int</span> arg1; <span class="comment">//简单int类型数据</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">int</span> arg2;<span class="comment">//简单int类型数据</span></span><br><span class="line"><span class="keyword">public</span> Object obj;<span class="comment">//简单Object类型数据</span></span><br><span class="line"><span class="keyword">public</span> Messenger replyTo;<span class="comment">//跨进程信使</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">int</span> sendingUid = -<span class="number">1</span>;<span class="comment">//Messenger消息标示</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-<p>Message有如下私有属性,用途如下：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*package*/</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FLAG_IN_USE = <span class="number">1</span> &lt;&lt; <span class="number">0</span>;<span class="comment">//正在使用中</span></span><br><span class="line"><span class="comment">/*package*/</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FLAG_ASYNCHRONOUS = <span class="number">1</span> &lt;&lt; <span class="number">1</span>;<span class="comment">//消息同步标识</span></span><br><span class="line"><span class="comment">/*package*/</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FLAGS_TO_CLEAR_ON_COPY_FROM = FLAG_IN_USE;<span class="comment">//</span></span><br><span class="line"><span class="comment">/*package*/</span> <span class="keyword">int</span> flags;<span class="comment">//消息执行标识</span></span><br><span class="line"><span class="comment">/*package*/</span> <span class="keyword">long</span> when;<span class="comment">//执行时间</span></span><br><span class="line"><span class="comment">/*package*/</span> Bundle data;<span class="comment">//装载的数据</span></span><br><span class="line"><span class="comment">/*package*/</span> Handler target;<span class="comment">//目标载体</span></span><br><span class="line"><span class="comment">/*package*/</span> Runnable callback;<span class="comment">//任务线程</span></span><br><span class="line"><span class="comment">/*package*/</span> Message next;<span class="comment">//消息链表，下一个消息</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object sPoolSync = <span class="keyword">new</span> Object();<span class="comment">//锁对象</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Message sPool;<span class="comment">//消息池</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> sPoolSize = <span class="number">0</span>;<span class="comment">//消息池大小</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_POOL_SIZE = <span class="number">50</span>;<span class="comment">//消息池最大消息数常量</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> gCheckRecycle = <span class="keyword">true</span>;<span class="comment">//循环检查</span></span><br></pre></td></tr></table></figure>
-<p>Message的源码，我们可以得出如下结论，Message是一种链表结构，每个Message持有以下信息：</p>
-<ol>
-<li>用于传递的数据，如what、arg1、arg2、obj</li>
-<li>用于执行当前Message的Handler</li>
-<li>用于执行当前Message的回调接口CallBack、子线程Runnable</li>
-<li>当前Message的属性，如延时时间、执行标识、Bundle数据，下一个Message引用。这种结构构成了链表。</li>
-</ol>
-<h3 id="handler-post-de-yuan-li"><a href="#Handler-post的原理" class="headerlink" title="Handler#post的原理"></a>Handler#post的原理<a href="#handler-post-de-yuan-li" class="header-anchor">#</a></h3><p>post函数入口接收一个子线程Runnable对象</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">post</span><span class="params">(Runnable r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="keyword">return</span>  sendMessageDelayed(getPostMessage(r), <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>getPostMessage()做了如下工作：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Message <span class="title">getPostMessage</span><span class="params">(Runnable r)</span> </span>&#123;</span><br><span class="line">    Message m = Message.obtain();</span><br><span class="line">    m.callback = r;</span><br><span class="line">    <span class="keyword">return</span> m;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>sendMessageDelayed做了如下工作：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">sendMessageDelayed</span><span class="params">(Message msg, <span class="keyword">long</span> delayMillis)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (delayMillis &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        delayMillis = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sendMessageAtTime(msg, SystemClock.uptimeMillis() + delayMillis);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>sendMessageAtTime做了如下工作：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">sendMessageAtTime</span><span class="params">(Message msg, <span class="keyword">long</span> uptimeMillis)</span> </span>&#123;</span><br><span class="line">    MessageQueue queue = mQueue;</span><br><span class="line">    <span class="keyword">if</span> (queue == <span class="keyword">null</span>) &#123;</span><br><span class="line">        RuntimeException e = <span class="keyword">new</span> RuntimeException(</span><br><span class="line">                <span class="keyword">this</span> + <span class="string">&quot; sendMessageAtTime() called with no mQueue&quot;</span>);</span><br><span class="line">        Log.w(<span class="string">&quot;Looper&quot;</span>, e.getMessage(), e);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> enqueueMessage(queue, msg, uptimeMillis);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>最终走下了MessageQueue#enqueueMessage</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">enqueueMessage</span><span class="params">(MessageQueue queue, Message msg, <span class="keyword">long</span> uptimeMillis)</span> </span>&#123;</span><br><span class="line">    msg.target = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">if</span> (mAsynchronous) &#123;</span><br><span class="line">        msg.setAsynchronous(<span class="keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> queue.enqueueMessage(msg, uptimeMillis);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这一步总结如下</p>
-<ol>
-<li>getPostMessage将Message与Handler绑定</li>
-<li>通过SystemClock.uptimeMillis() + delayMillis计算延时时间，delayMillis默认为0</li>
-<li>将Message与计算得出的时间值，传递给MessageQueue#enqueueMessage，交由MessageQueue处理Message。</li>
-</ol>
-<h3 id="handler-sendmessage-yuan-li"><a href="#Handler-sendMessage原理" class="headerlink" title="Handler#sendMessage原理"></a>Handler#sendMessage原理<a href="#handler-sendmessage-yuan-li" class="header-anchor">#</a></h3><p>入口接收Message对象</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">sendMessage</span><span class="params">(Message msg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> sendMessageDelayed(msg, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>后续执行过程与post相同，最终都将Message交由MessageQueue#enqueueMessage处理。</p>
-<h3 id="handler-postdelayed-yuan-li"><a href="#Handler-postDelayed原理" class="headerlink" title="Handler#postDelayed原理"></a>Handler#postDelayed原理<a href="#handler-postdelayed-yuan-li" class="header-anchor">#</a></h3><p>与post相比，postDelayed函数入口除了接收Runnable子线程对象，还接收一个时间戳，用于延时时间的计算。其他过程与post相同。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">postDelayed</span><span class="params">(Runnable r, <span class="keyword">long</span> delayMillis)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> sendMessageDelayed(getPostMessage(r), delayMillis);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="handler-sendmessagedelayed-yuan-li"><a href="#Handler-sendMessageDelayed原理" class="headerlink" title="Handler#sendMessageDelayed原理"></a>Handler#sendMessageDelayed原理<a href="#handler-sendmessagedelayed-yuan-li" class="header-anchor">#</a></h3><p>与sendMessage类似，多了一个时间戳，用于计算延时时间。其他过程与sendMessage、相同。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">sendMessageDelayed</span><span class="params">(Message msg, <span class="keyword">long</span> delayMillis)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (delayMillis &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        delayMillis = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sendMessageAtTime(msg, SystemClock.uptimeMillis() + delayMillis);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>看完源码，我们得出几个结论：</p>
-<ol>
-<li>无论是Handler#post或者是Handler#sendMessage，Messag都会交由MessageQueue#enqueueMessage执行</li>
-<li>MessageQueue#enqueueMessage接收两个参数Message和long型的时间戳</li>
-<li>时间戳计算方式是SystemClock.uptimeMillis() + delayMillis</li>
-<li>post与sendMessage的区别是入参参数不一样，post接收Runnable子线程，将子线程绑定到Message上；sendMessage持有的是主线程</li>
-</ol>
-<p>那么我们心中很自然会产生疑问，MessageQueue#enqueueMessage是如何执行的？</p>
-<h2 id="messagequeue-yuan-ma-fen-xi"><a href="#MessageQueue源码分析" class="headerlink" title="MessageQueue源码分析"></a>MessageQueue源码分析<a href="#messagequeue-yuan-ma-fen-xi" class="header-anchor">#</a></h2><p>源码分析的思路是构造函数和enqueueMessage</p>
-<h3 id="messagequeue-gou-zao-han-shu-yuan-li"><a href="#MessageQueue-构造函数原理" class="headerlink" title="MessageQueue#构造函数原理"></a>MessageQueue#构造函数原理<a href="#messagequeue-gou-zao-han-shu-yuan-li" class="header-anchor">#</a></h3><p>首先来看看构造函数</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">MessageQueue(<span class="keyword">boolean</span> quitAllowed) &#123;</span><br><span class="line">    mQuitAllowed = quitAllowed;</span><br><span class="line">    mPtr = nativeInit();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>构造函数之上定义了很多native方法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">native</span> <span class="keyword">static</span> <span class="keyword">long</span> <span class="title">nativeInit</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">native</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">nativeDestroy</span><span class="params">(<span class="keyword">long</span> ptr)</span></span>;<span class="comment">// 阻塞</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">native</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">nativeWake</span><span class="params">(<span class="keyword">long</span> ptr)</span></span>; <span class="comment">// 唤醒</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">native</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">nativeIsPolling</span><span class="params">(<span class="keyword">long</span> ptr)</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">native</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">nativeSetFileDescriptorEvents</span><span class="params">(<span class="keyword">long</span> ptr, <span class="keyword">int</span> fd, <span class="keyword">int</span> events)</span></span>;</span><br></pre></td></tr></table></figure>
-<p>native之上定义了几类数据结构，Message、ArrayList、SparseArray、数组</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Message mMessages; <span class="comment">// 头结点</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">final</span> ArrayList&lt;IdleHandler&gt; mIdleHandlers = <span class="keyword">new</span> ArrayList&lt;IdleHandler&gt;();</span><br><span class="line">   <span class="keyword">private</span> SparseArray&lt;FileDescriptorRecord&gt; mFileDescriptorRecords;</span><br><span class="line">   <span class="keyword">private</span> IdleHandler[] mPendingIdleHandlers;</span><br></pre></td></tr></table></figure>
-<p>接着我们来看看enqueueMessage是如何处理Message的吧</p>
-<h3 id="messagequeue-enqueuemessage-yuan-li"><a href="#MessageQueue-enqueueMessage原理" class="headerlink" title="MessageQueue#enqueueMessage原理"></a>MessageQueue#enqueueMessage原理<a href="#messagequeue-enqueuemessage-yuan-li" class="header-anchor">#</a></h3><p><img src="https://img-blog.csdnimg.cn/20200814221037199.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoaXZhbHJvdXNtYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<ul>
-<li>图中 1处会判断如果 Message 中的 target 没有被设置，则直接抛出异常；</li>
-<li>图中2和 3 处会按照 Message 的时间 when 来有序得插入 MessageQueue 中，可以看出 MessageQueue 实际上是一个链表维护的有序队列，只不过是按照 Message 的执行时间来排序。</li>
-</ul>
-<p>看到这里，思路似乎终止了，我们跟随Handler、MessQueue的脚步，只看到了Message被插入到MessageQueue的私有队列中。那我们产生的Message什么时候会背消费呢？</p>
-<p>视角再次回到一开始的地方——Handler的构造函数原理，在那一节我们提到了Handler构造函数初始化Looper.myLooper()，mLooper.mQueue，接下来我们看看Looper吧！</p>
-<h2 id="looper-yuan-ma-fen-xi"><a href="#Looper源码分析" class="headerlink" title="Looper源码分析"></a>Looper源码分析<a href="#looper-yuan-ma-fen-xi" class="header-anchor">#</a></h2><p>查看源码可知，Looper是final类型的，禁止被外部继承修改。</p>
-<h3 id="looper-zi-xian-cheng-yong-li"><a href="#Looper-子线程用例" class="headerlink" title="Looper#子线程用例"></a>Looper#子线程用例<a href="#looper-zi-xian-cheng-yong-li" class="header-anchor">#</a></h3><p>首先在Looper类的注释上，我们看到了如下信息，提示我们在子线程中用个Looper.prepare()+Looper.looper()的方式使用Handler<br><img src="https://img-blog.csdnimg.cn/2020081422110294.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoaXZhbHJvdXNtYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>为什么需要用这种方式开启Looper呢？</p>
-<p>答案是在任何线程要开启Loop，都要用Looper.prepare()+Looper.looper()的方式。以APP主进程为例，APP进程启动入口的main方法，也是通过这种方式开启loop的。与子线程细微不同的是，主线程开启looper用的是prepareMainLooper。</p>
-<p><strong>ActivityThread #main方法</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20200814221126574.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoaXZhbHJvdXNtYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>带着以下疑问，我们去追看源码：Looper构造函数做了什么？prepare做了什么？loop做了什么？</p>
-<h3 id="looper-gou-zao-han-shu-yuan-li"><a href="#Looper-构造函数原理" class="headerlink" title="Looper#构造函数原理"></a>Looper#构造函数原理<a href="#looper-gou-zao-han-shu-yuan-li" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">Looper</span><span class="params">(<span class="keyword">boolean</span> quitAllowed)</span> </span>&#123;</span><br><span class="line">    mQueue = <span class="keyword">new</span> MessageQueue(quitAllowed);</span><br><span class="line">    mThread = Thread.currentThread();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Looper构造函数做了两件事情，初始化消息队列MessageQueue对象，记录当前线程信息。</p>
-<h3 id="looper-mylooper-yuan-li"><a href="#Looper-myLooper-原理" class="headerlink" title="Looper#myLooper()原理"></a>Looper#myLooper()原理<a href="#looper-mylooper-yuan-li" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return the Looper object associated with the current thread.  Returns</span></span><br><span class="line"><span class="comment"> * null if the calling thread is not associated with a Looper.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="meta">@Nullable</span> <span class="function">Looper <span class="title">myLooper</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> sThreadLocal.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到myLooper是从threadLocal中取出Looper对象。在Looper类中定义了如下变量sThreadLocal、mQueue、sMainLooper、mThread</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// sThreadLocal.get() will return null unless you&#x27;ve called prepare().</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal&lt;Looper&gt; sThreadLocal = <span class="keyword">new</span> ThreadLocal&lt;Looper&gt;();</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> Looper sMainLooper;  <span class="comment">// guarded by Looper.class</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">final</span> MessageQueue mQueue;</span><br><span class="line"><span class="keyword">final</span> Thread mThread;</span><br></pre></td></tr></table></figure>
-<h3 id="looper-prepare-yuan-li"><a href="#Looper-prepare原理" class="headerlink" title="Looper#prepare原理"></a>Looper#prepare原理<a href="#looper-prepare-yuan-li" class="header-anchor">#</a></h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">prepare</span><span class="params">(<span class="keyword">boolean</span> quitAllowed)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (sThreadLocal.get() != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;Only one Looper may be created per thread&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    sThreadLocal.set(<span class="keyword">new</span> Looper(quitAllowed));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>prepare就是 new 出一个 Looper。核心之处在于将 new 出的 Looper 设置到了线程本地变量 sThreadLocal 中。也就是说创建的 Looper 与当前线程发生了绑定。</p>
-<p>Looper#prepareMainLooper原理</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">prepareMainLooper</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    prepare(<span class="keyword">false</span>);</span><br><span class="line">    <span class="keyword">synchronized</span> (Looper.class) &#123;</span><br><span class="line">        <span class="keyword">if</span> (sMainLooper != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">&quot;The main Looper has already been prepared.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        sMainLooper = myLooper();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>prepareMainLooper只有在APP进程启动的时候有用，并不推荐开发者调用这个函数。</p>
-<h3 id="looper-loop-yuan-li"><a href="#Looper-loop原理" class="headerlink" title="Looper#loop原理"></a>Looper#loop原理<a href="#looper-loop-yuan-li" class="header-anchor">#</a></h3><p><img src="https://img-blog.csdnimg.cn/20200814221152760.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoaXZhbHJvdXNtYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>图1 取出Looper对象</p>
-<p>图2 校验当前线程是否持有Looper，是否启动而来Looper.prepare</p>
-<p>图3 从Looper中取出对应的MessageQueue，主线程Looper就取出主线程的MessageQueue，子线程就取出子线程MessageQueue</p>
-<p>图4 从MessageQueue中取出Message</p>
-<p>图5 Message#target属性，即handler，调用Message绑定好的handler#dispatchMessage，处理消息。</p>
-<p>也就是说，Message最终交由与Message绑定的Handler处理。Looper只是负责无限循环+从MessageQueue中读取。</p>
-<h3 id="handler-dispatchmessage"><a href="#Handler-dispatchMessage" class="headerlink" title="Handler#dispatchMessage"></a>Handler#dispatchMessage<a href="#handler-dispatchmessage" class="header-anchor">#</a></h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">  * Handle system messages here.</span><br><span class="line">  *&#x2F;</span><br><span class="line"> public void dispatchMessage(Message msg) &#123;</span><br><span class="line">     if (msg.callback !&#x3D; null) &#123;</span><br><span class="line">         handleCallback(msg);&#x2F;&#x2F; 1</span><br><span class="line">     &#125; else &#123;</span><br><span class="line">         if (mCallback !&#x3D; null) &#123;</span><br><span class="line">             if (mCallback.handleMessage(msg)) &#123;&#x2F;&#x2F; 2</span><br><span class="line">                 return;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         handleMessage(msg);&#x2F;&#x2F; 3</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到有3处可以处理Message</p>
-<p>图 1触发了Message#Runnable的run方法，要知道callback就是个Runnable子线程</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">handleCallback</span><span class="params">(Message message)</span> </span>&#123;</span><br><span class="line">    message.callback.run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>图2 触发了 Handler#Callback接口，Callback是Handler构造函数初始化的时候传递进来的。参考Handler#构造函数原理</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Callback</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> msg A &#123;<span class="doctag">@link</span> android.os.Message Message&#125; object</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> True if no further handling is desired</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>图3 触发了Handler的handleMessage方法，这是个空实现，一般由开发者复写实现。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Subclasses must implement this to receive messages.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>在Looper这一节，我们暂停脚步总结一下：</p>
-<ol>
-<li><p>主线程和子线程都可以使用Handler，Handler使用方式都是要Looper.prepare+Lopper.loop,</p>
-</li>
-<li><p>子线程Handler用法</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LooperThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">  <span class="keyword">public</span> Handler mHandler;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">   Looper.prepare();</span><br><span class="line"></span><br><span class="line">   mHandler = <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">	   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">		   <span class="comment">// process incoming messages here</span></span><br><span class="line">	   &#125;</span><br><span class="line">   &#125;;</span><br><span class="line"></span><br><span class="line">   Looper.loop();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"><span class="keyword">new</span> LooperThread().start();</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<p>回答这些面试题吧</p>
-<h2 id="mian-shi-ti-jie-xi"><a href="#面试题解析" class="headerlink" title="面试题解析"></a>面试题解析<a href="#mian-shi-ti-jie-xi" class="header-anchor">#</a></h2><h3 id="na-xie-chang-jing-shi-yong-dao-liao-handler-yong-handler-zuo-shi-me-ye-wu"><a href="#哪些场景使用到了Handler？用Handler做什么业务？" class="headerlink" title="哪些场景使用到了Handler？用Handler做什么业务？"></a>哪些场景使用到了Handler？用Handler做什么业务？<a href="#na-xie-chang-jing-shi-yong-dao-liao-handler-yong-handler-zuo-shi-me-ye-wu" class="header-anchor">#</a></h3><h4 id="zui-jian-dan-de-xiao-xi-fa-song"><a href="#最简单的消息发送" class="headerlink" title="最简单的消息发送"></a>最简单的消息发送<a href="#zui-jian-dan-de-xiao-xi-fa-song" class="header-anchor">#</a></h4><p>主线程使用Handler， 主线程里或子线程里发送消息，或延迟发送消息的方式更新UI如，启动应用时Splash页面的延迟2，3秒后，跳转到主页面</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> WHAT_UPDATE_ICON = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> Handler handler = <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">       <span class="meta">@Override</span></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">           <span class="keyword">switch</span> (msg.what) &#123;</span><br><span class="line">               <span class="keyword">case</span> WHAT_UPDATE_ICON:</span><br><span class="line">                   Log.e(Tag, <span class="string">&quot;receive message:&quot;</span> + msg.obj);</span><br><span class="line">                   <span class="keyword">break</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"> &#125;;</span><br><span class="line">   </span><br><span class="line">   Message msg = handler.obtainMessage(WHAT_UPDATE_ICON);</span><br><span class="line">   msg.obj = <span class="string">&quot;update the imageview&quot;</span>;</span><br><span class="line">   handler.sendMessage(msg);</span><br></pre></td></tr></table></figure>
-<p>使用消息的时候，尽量使用 obtainMessage 的方式来获取Message，避免多次创建Message对象，消耗内存，效率低下。</p>
-<p>记住：消息不一定是更新UI的消息，可以再handlerMessage中做很多事情！</p>
-<h4 id="jie-he-handlerthread-chu-li-hao-shi-ren-wu"><a href="#结合HandlerThread处理耗时任务" class="headerlink" title="结合HandlerThread处理耗时任务"></a>结合HandlerThread处理耗时任务<a href="#jie-he-handlerthread-chu-li-hao-shi-ren-wu" class="header-anchor">#</a></h4><p>结合HandlerThread，串行的处理单个耗时任务，如单任务下载</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DownloadOneByOne</span> <span class="keyword">extends</span> <span class="title">HandlerThread</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DownloadOneByOne</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(DownloadOneByOne.class.getSimpleName());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLooperPrepared</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onLooperPrepared();</span><br><span class="line">        <span class="comment">// 初始化下载组件</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> HandlerThread mHandlerThread;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> Handler downloadHandler = <span class="keyword">new</span> Handler()&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.handleMessage(msg);</span><br><span class="line">        String url = (String) msg.obj;</span><br><span class="line">        <span class="comment">// 使用下载组件开始下载</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initHandler</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 初始化Handler</span></span><br><span class="line">    mHandlerThread = <span class="keyword">new</span> DownloadOneByOne();</span><br><span class="line">    mHandlerThread.start();</span><br><span class="line">    </span><br><span class="line">    downloadHandler = <span class="keyword">new</span> Handler(mHandlerThread.getLooper());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sendDownloadTask</span><span class="params">(String downloadUrl)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 发送下载任务</span></span><br><span class="line">    Message msg = downloadHandler.obtainMessage(WHAT_DOWNLOAD_TASK);</span><br><span class="line">    msg.obj = downloadUrl;</span><br><span class="line">    downloadHandler.sendMessage(msg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="dao-ji-shi-view-de-jian-yi-shi-xian"><a href="#倒计时View的简易实现" class="headerlink" title="倒计时View的简易实现"></a>倒计时View的简易实现<a href="#dao-ji-shi-view-de-jian-yi-shi-xian" class="header-anchor">#</a></h4><p>通过Handler我们还可以快速简易，并且不占用太多性能的实现一个简易的倒计时View。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CountDownView</span> <span class="keyword">extends</span> <span class="title">AppCompatTextView</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 总时间</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> seconds;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当前分钟</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> minutes;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 当前秒数</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> second = <span class="number">60</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SECONDS_PER_MINUTE = <span class="number">60</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MILLS_PER_SECOND = <span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MILLS_PER_MINUTE = SECONDS_PER_MINUTE * <span class="number">1000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> WHAT_DONE = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> WHAT_TICK = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> marginEnd;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> StringBuilder content = <span class="keyword">new</span> StringBuilder();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CountDownView</span><span class="params">(Context context, <span class="meta">@Nullable</span> AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</span><br><span class="line">        DeviceProfile deviceProfile = Launcher.getLauncher(getContext()).getDeviceProfile();</span><br><span class="line">        <span class="keyword">int</span> size = (<span class="keyword">int</span>) (MeasureSpec.getSize(widthMeasureSpec) / deviceProfile.inv.numColumns);</span><br><span class="line">        marginEnd = marginEnd == <span class="number">0</span> ? (size - deviceProfile.iconSizePx) / <span class="number">2</span> : marginEnd;</span><br><span class="line"></span><br><span class="line">        setMarginEnd(marginEnd);</span><br><span class="line">        <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setMarginEnd</span><span class="params">(<span class="keyword">int</span> marginEnd)</span> </span>&#123;</span><br><span class="line">        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) getLayoutParams();</span><br><span class="line">        layoutParams.setMarginEnd(marginEnd);</span><br><span class="line">        layoutParams.resolveLayoutDirection(layoutParams.getLayoutDirection());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDetachedFromWindow</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDetachedFromWindow();</span><br><span class="line">        <span class="keyword">if</span> (handler.hasMessages(WHAT_TICK)) &#123;</span><br><span class="line">            handler.removeMessages(WHAT_TICK);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Handler handler = <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">switch</span> (msg.what) &#123;</span><br><span class="line">                <span class="keyword">case</span> WHAT_DONE:</span><br><span class="line">                    setVisibility(View.GONE);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    setText(content.toString());</span><br><span class="line">                    handler.post(runnable);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/***</span></span><br><span class="line"><span class="comment">     * 设置倒计时</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> millis</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCountDownMills</span><span class="params">(<span class="keyword">long</span> millis)</span> </span>&#123;</span><br><span class="line">        seconds = (<span class="keyword">long</span>) Math.floor(millis / MILLS_PER_SECOND);</span><br><span class="line">        minutes = (<span class="keyword">long</span>) Math.floor(millis / MILLS_PER_MINUTE) - <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// start after one second</span></span><br><span class="line">        handler.postDelayed(runnable, MILLS_PER_SECOND);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Runnable runnable = <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (seconds &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                handler.sendEmptyMessage(WHAT_DONE);</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            seconds--;</span><br><span class="line">            <span class="keyword">if</span> (second &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                second = SECONDS_PER_MINUTE;</span><br><span class="line">                minutes = (<span class="keyword">long</span>) Math.floor(seconds / SECONDS_PER_MINUTE);</span><br><span class="line">            &#125;</span><br><span class="line">            second--;</span><br><span class="line">            content.delete(<span class="number">0</span>, content.length());</span><br><span class="line"></span><br><span class="line">            appendZeroWhenLower10(minutes);</span><br><span class="line">            content.append(<span class="string">&quot;:&quot;</span>);</span><br><span class="line">            appendZeroWhenLower10(second);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (handler.hasMessages(WHAT_TICK)) &#123;</span><br><span class="line">                handler.removeMessages(WHAT_TICK);</span><br><span class="line">            &#125;</span><br><span class="line">            handler.sendEmptyMessageDelayed(WHAT_TICK, MILLS_PER_SECOND);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> StringBuilder <span class="title">appendZeroWhenLower10</span><span class="params">(<span class="keyword">long</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (value &lt; <span class="number">10</span>) &#123;</span><br><span class="line">            content.append(<span class="string">&quot;0&quot;</span>).append(value);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            content.append(value);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> content;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="jie-he-intentservice-de-shi-yong"><a href="#结合IntentService的使用" class="headerlink" title="结合IntentService的使用"></a>结合IntentService的使用<a href="#jie-he-intentservice-de-shi-yong" class="header-anchor">#</a></h4><p>使用IntentService处理耗时的任务相对比较简单，我们来个有难度的，结合AlarmManager的调度，息屏唤醒IntentService定时处理任务的案例来讲</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ACTION_WAKE_UP = <span class="string">&quot;com.doze.cpu.wakeup&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">registerAlarm</span><span class="params">(Context context, <span class="keyword">int</span> wakeType)</span> </span>&#123;</span><br><span class="line">    type = wakeType;</span><br><span class="line">    <span class="keyword">if</span> (alarmManager == <span class="keyword">null</span>)</span><br><span class="line">        alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (operation != <span class="keyword">null</span>) alarmManager.cancel(operation);</span><br><span class="line"></span><br><span class="line">    schedule(context);</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">schedule</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">    intent.setAction(ACTION_WAKE_UP);</span><br><span class="line">    operation = PendingIntent.getBroadcast(context, <span class="number">0</span>, intent, PendingIntent.FLAG_UPDATE_CURRENT);</span><br><span class="line">    <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">            AlarmUtils.setRTCWakeup(alarmManager, AlarmUtils.DEFAULT_TRIGGER_AT_MILLIS, operation);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            AlarmUtils.setElapsedWakeup(alarmManager, AlarmUtils.DEFAULT_TRIGGER_AT_MILLIS, operation);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>定时5分钟发送一个Action为com.doze.cpu.wakeup的广播，我们的广播需要继承 WakefulBroadcastReceiver， 在onReceive里，调用startWakefulService方法，会创建一个1分钟的WakeLock，唤醒cpu处理我们的任务，我们的任务IntentService处理最好不过了，处理完就销毁，不会有多余的占用</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WakeCPUReceiver</span> <span class="keyword">extends</span> <span class="title">WakefulBroadcastReceiver</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        Intent wakefulIntent = <span class="keyword">new</span> Intent(context, WorkService.class);</span><br><span class="line">        startWakefulService(context, wakefulIntent);</span><br><span class="line">        schedule(context);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>startWakefulService的源码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ComponentName <span class="title">startWakefulService</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (mActiveWakeLocks) &#123;</span><br><span class="line">            <span class="keyword">int</span> id = mNextId;</span><br><span class="line">            mNextId++;</span><br><span class="line">            <span class="keyword">if</span> (mNextId &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">                mNextId = <span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            intent.putExtra(EXTRA_WAKE_LOCK_ID, id);</span><br><span class="line">            ComponentName comp = context.startService(intent);</span><br><span class="line">            <span class="keyword">if</span> (comp == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            PowerManager pm = (PowerManager)context.getSystemService(Context.POWER_SERVICE);</span><br><span class="line">            PowerManager.WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,</span><br><span class="line">                    <span class="string">&quot;wake:&quot;</span> + comp.flattenToShortString());</span><br><span class="line">            wl.setReferenceCounted(<span class="keyword">false</span>);</span><br><span class="line">            wl.acquire(<span class="number">60</span>*<span class="number">1000</span>);</span><br><span class="line">            mActiveWakeLocks.put(id, wl);</span><br><span class="line">            <span class="keyword">return</span> comp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>在IntentService里，我们在onHandleIntent处理我们的任务后，再调用WakefulBroadcastReceiver的静态方法completeWakefulIntent，释放WakeLock，减少电量的消耗</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WorkService</span> <span class="keyword">extends</span> <span class="title">IntentService</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onHandleIntent</span><span class="params">(Intent intent)</span> </span>&#123;</span><br><span class="line">        Log.e(WakeCPUReceiver.TAG, <span class="string">&quot;WorkService is working&quot;</span>);</span><br><span class="line">        <span class="comment">// TODO 处理我们的任务</span></span><br><span class="line">        WakeCPUReceiver.completeWakefulIntent(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>completeWakefulIntent源码</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">completeWakefulIntent</span><span class="params">(Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> <span class="keyword">int</span> id = intent.getIntExtra(EXTRA_WAKE_LOCK_ID, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (id == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">synchronized</span> (mActiveWakeLocks) &#123;</span><br><span class="line">            PowerManager.WakeLock wl = mActiveWakeLocks.get(id);</span><br><span class="line">            <span class="keyword">if</span> (wl != <span class="keyword">null</span>) &#123;</span><br><span class="line">                wl.release();</span><br><span class="line">                mActiveWakeLocks.remove(id);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// We return true whether or not we actually found the wake lock</span></span><br><span class="line">            <span class="comment">// the return code is defined to indicate whether the Intent contained</span></span><br><span class="line">            <span class="comment">// an identifier for a wake lock that it was supposed to match.</span></span><br><span class="line">            <span class="comment">// We just log a warning here if there is no wake lock found, which could</span></span><br><span class="line">            <span class="comment">// happen for example if this function is called twice on the same</span></span><br><span class="line">            <span class="comment">// intent or the process is killed and restarted before processing the intent.</span></span><br><span class="line">            Log.w(<span class="string">&quot;WakefulBroadcastReceiver&quot;</span>, <span class="string">&quot;No active wake lock id #&quot;</span> + id);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h4 id="idlehandler-yong-yu-ui-xing-neng-you-hua"><a href="#IdleHandler-用于UI性能优化" class="headerlink" title="IdleHandler 用于UI性能优化"></a>IdleHandler 用于UI性能优化<a href="#idlehandler-yong-yu-ui-xing-neng-you-hua" class="header-anchor">#</a></h4><p>先计算任务放在Activity绘制结束完成之后，节省了90Ms计算时间。参考面试题你了解过IdleHandler 吗？<br><img src="https://img-blog.csdnimg.cn/20200814221240437.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoaXZhbHJvdXNtYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h4 id="handlerthread-yong-yu-dan-xian-cheng-xiao-xi-tong-zhi-qi"><a href="#HandlerThread用于单线程消息通知器" class="headerlink" title="HandlerThread用于单线程消息通知器"></a><strong>HandlerThread</strong>用于单线程消息通知器<a href="#handlerthread-yong-yu-dan-xian-cheng-xiao-xi-tong-zhi-qi" class="header-anchor">#</a></h4><p>在用户操作某些界面元素的时候，如收藏、点赞、转发，有一个小的问题，就是如果有一个操作生成10个快速连续的增删改查操作，那么我们的UI就会收到10次回调，而这种场景下我们其实只需要最后一次回调就够了，中间操作其实不用刷新UI的。如何合并这些频繁操作，只在最后一次操作结束时候响应UI更新呢。</p>
-<p>答：HandlerThread+反射MessageQueue+idelHandler<br><img src="https://img-blog.csdnimg.cn/20200814221259759.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoaXZhbHJvdXNtYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h3 id="yong-handler-yu-dao-shi-me-wen-ti-zen-me-jie-jue-zhe-xie-wen-ti-de"><a href="#用Handler遇到什么问题？怎么解决这些问题的？" class="headerlink" title="用Handler遇到什么问题？怎么解决这些问题的？"></a>用Handler遇到什么问题？怎么解决这些问题的？<a href="#yong-handler-yu-dao-shi-me-wen-ti-zen-me-jie-jue-zhe-xie-wen-ti-de" class="header-anchor">#</a></h3><h4 id="wen-ti-handler-yan-shi-bu-zhun-que-jing-chang-dao-liao-shi-jian-bu-xiang-ying-ye-wu"><a href="#问题：Handler延时不准确，经常到了时间不响应业务" class="headerlink" title="问题：Handler延时不准确，经常到了时间不响应业务"></a>问题：Handler延时不准确，经常到了时间不响应业务<a href="#wen-ti-handler-yan-shi-bu-zhun-que-jing-chang-dao-liao-shi-jian-bu-xiang-ying-ye-wu" class="header-anchor">#</a></h4><p>解决：<strong>SystemClock.uptimeMillis()**表示系统</strong>开机到当前的时间总数**，单位是毫秒，但是，当系统进入深度睡眠（CPU休眠、屏幕休眠、设备等待外部输入）时间就会停止，但是不会受到时钟缩放、空闲或者其他节能机制的影响。</p>
-<p>使用其他延时方式</p>
-<ol>
-<li>用concurrent包的TimeUnit类延时sleep()方法延时</li>
-<li>Timer+TimeTask</li>
-<li>AlarmManager  </li>
-<li>ScheduledExecutorService</li>
-</ol>
-<h4 id="wen-ti-zi-xian-cheng-chuang-jian-handler-shi-bai"><a href="#问题：子线程创建Handler失败" class="headerlink" title="问题：子线程创建Handler失败"></a>问题：子线程创建Handler失败<a href="#wen-ti-zi-xian-cheng-chuang-jian-handler-shi-bai" class="header-anchor">#</a></h4><p>解决：参考Looper#子线程用例部分</p>
-<h4 id="wen-ti-fei-jing-tai-lei-dao-zhi-de-nei-cun-xie-lou"><a href="#问题：非静态类导致的内存泄漏" class="headerlink" title="问题：非静态类导致的内存泄漏"></a>问题：非静态类导致的内存泄漏<a href="#wen-ti-fei-jing-tai-lei-dao-zhi-de-nei-cun-xie-lou" class="header-anchor">#</a></h4><p>解决：static+WeakReference</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">MyHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span></span>&#123;</span><br><span class="line">     WeakReference&lt;MainActivity&gt; mActivity;</span><br><span class="line">     MyHandler(MainActivity activity)&#123;</span><br><span class="line">         mActivity = <span class="keyword">new</span> WeakReference&lt;MainActivity&gt;(activity);</span><br><span class="line">     &#125;</span><br><span class="line">   <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">int</span> cuttent = msg.what;</span><br><span class="line"></span><br><span class="line">        MainActivity activity = mActivity.get();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(activity.currentlayout!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            Animation set2 = <span class="keyword">new</span> TranslateAnimation(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,-<span class="number">100</span>);</span><br><span class="line">            set2.setDuration(<span class="number">500</span>);</span><br><span class="line">            activity.currentlayout.setAnimation(set2);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        activity.linearLayout.removeAllViews();</span><br><span class="line"></span><br><span class="line">        activity.currentlayout = activity.initView(cuttent);</span><br><span class="line"></span><br><span class="line">        Animation set1 = <span class="keyword">new</span> TranslateAnimation(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">0</span>);</span><br><span class="line">        set1.setDuration(<span class="number">500</span>);</span><br><span class="line">        activity.currentlayout.setAnimation(set1);</span><br><span class="line"></span><br><span class="line">        activity.linearLayout.addView(activity.currentlayout);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">super</span>.handleMessage(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="shuo-yi-shuo-handler-yuan-li"><a href="#说一说Handler原理？" class="headerlink" title="说一说Handler原理？"></a>说一说Handler原理？<a href="#shuo-yi-shuo-handler-yuan-li" class="header-anchor">#</a></h3><p>原理的定义是：某个类的提供哪些功能，这些功能是如何实现的？</p>
-<p>我认为回答这个问题包含三步：Handler是什么，关键API是什么，关键对象是什么？</p>
-<h4 id="di-yi-bu-hui-da-handler-shi-shi-me-you-na-xie-chang-jing"><a href="#第一步：回答Handler是什么，有哪些场景。" class="headerlink" title="第一步：回答Handler是什么，有哪些场景。"></a>第一步：回答Handler是什么，有哪些场景。<a href="#di-yi-bu-hui-da-handler-shi-shi-me-you-na-xie-chang-jing" class="header-anchor">#</a></h4><p>答：Handler是Android消息通信组件，用于线程间通信，收发消息，更新UI等参考面试题目1。</p>
-<h4 id="di-er-bu-handler-de-guan-jian-api-shi-shi-me-yong-tu-shi-shi-me-ru-he-shi-xian-de"><a href="#第二步：Handler的关键API是什么，用途是什么，如何实现的。" class="headerlink" title="第二步：Handler的关键API是什么，用途是什么，如何实现的。"></a>第二步：Handler的关键API是什么，用途是什么，如何实现的。<a href="#di-er-bu-handler-de-guan-jian-api-shi-shi-me-yong-tu-shi-shi-me-ru-he-shi-xian-de" class="header-anchor">#</a></h4><p>答：关键API有：</p>
-<p>构造函数：用于绑定MessageQueue、Looper、Message、Runnable、CallBack等</p>
-<p>obtainMessage：用于复用Message</p>
-<p>post、sendMessage：不同的执行Message方式，前者是接收Runnable参数，后者是当前线程</p>
-<p>sendMessageAtTime：消息延时的实现入口，调用MessageQueue#enqueueMessage</p>
-<h4 id="di-san-bu-handler-de-guan-jian-dui-xiang-shi-shi-me-ti-gong-na-xie-gong-neng-zhe-xie-gong-neng-ru-he-shi-xian-de"><a href="#第三步：Handler的关键对象是什么，提供哪些功能，这些功能如何实现的。" class="headerlink" title="第三步：Handler的关键对象是什么，提供哪些功能，这些功能如何实现的。"></a>第三步：Handler的关键对象是什么，提供哪些功能，这些功能如何实现的。<a href="#di-san-bu-handler-de-guan-jian-dui-xiang-shi-shi-me-ti-gong-na-xie-gong-neng-zhe-xie-gong-neng-ru-he-shi-xian-de" class="header-anchor">#</a></h4><p>答：关键对象有：</p>
-<p>Message</p>
-<p>Message是一种链表结构的子节点，作为载体可以存储的信息有：公开信息arg1、arg2、handler、Message，私有信息when、Runnable。Message有2种Flag，使用中、同步中，三种消息类型，如普通消息、异步消息、消息屏障。</p>
-<p>MessageQueue</p>
-<p>MessageQueue提供一种链表数据结构，包括头结点信息，插入节点的方式是按照 Message 的时间 when 顺序，时间小的先插入 。</p>
-<p>Looper</p>
-<p>开启无限循环，不断从 MessageQueue 中取出 Message，然后处理 Message 中指定的任务。典型的Looper是主线程Looper，在 ActivityThread 的 main 方法中，除了调用 Looper.prepareMainLooper 初始化 Looper 对象之外，还调用了 Looper.loop 方法开启无限循环，Looper 的主要功能就是在这个循环中完成的。</p>
-<p>Looper提供了一些native方法用于唤醒阻塞状态如nativePollOnce</p>
-<p>Looper不断loop的结果，就是调用msg.target.handleMessage,即执行开发者定义好的Handler#handleMessage方法体中的业务。</p>
-<h3 id="neng-zi-ji-shi-xian-yi-ge-handler-ma"><a href="#能自己实现一个Handler吗？" class="headerlink" title="能自己实现一个Handler吗？"></a>能自己实现一个Handler吗？<a href="#neng-zi-ji-shi-xian-yi-ge-handler-ma" class="header-anchor">#</a></h3><p>根据Handler的类图，我们可以抽象出Handler消息组件的基本架构。<br><img src="https://img-blog.csdnimg.cn/20200814221418179.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoaXZhbHJvdXNtYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h4 id="jian-ban-handler"><a href="#简版Handler" class="headerlink" title="简版Handler"></a>简版Handler<a href="#jian-ban-handler" class="header-anchor">#</a></h4><p>概要设计：</p>
-<p>首先我们仿照Android的Handler定义了：阻塞队列、处理消息的回调、分发和发送消息的方法<br>其次然后在创建Handler时，我们获取了当前线程的Looper和MessageQueue</p>
-<p>最后，当我们发送消息的时候，将消息添加进之前得到的MessageQueue</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> MyMessageQueue queue;<span class="comment">// 用于进行线程间通信的阻塞队列</span></span><br><span class="line">    <span class="keyword">private</span> CallBack callBack; <span class="comment">// 处理消息的回调</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyHandler</span><span class="params">(CallBack callBack)</span> </span>&#123;</span><br><span class="line">        MyLooper looper = MyLooper.myLooper();</span><br><span class="line">        <span class="keyword">if</span> (looper == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;在新开的线程中。创建MyHandler对象需要先调用MyLooper.prepare()方法。&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        queue = looper.queue;</span><br><span class="line">        <span class="keyword">this</span>.callBack = callBack;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//消息接收的回调</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CallBack</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(MyMessage msg)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//发送消息</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMessage</span><span class="params">(MyMessage msg)</span> </span>&#123;</span><br><span class="line">        msg.target = <span class="keyword">this</span>;</span><br><span class="line">        queue.enqueueMessage(msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//派发消息</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispatchMessage</span><span class="params">(MyMessage msg)</span> </span>&#123;</span><br><span class="line">        callBack.handleMessage(msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="jian-ban-looper"><a href="#简版Looper" class="headerlink" title="简版Looper"></a>简版Looper<a href="#jian-ban-looper" class="header-anchor">#</a></h4><ol>
-<li>在Looper中，我们用一个ThreadLocal存储当前Looper的相关数据</li>
-<li>定义了一个消息队列，用来管理消息</li>
-<li>在prepare()时，用ThreadLocal存储Looper的数据；在myLooper时，读取ThreadLocal存储的Looper数据</li>
-<li>在loop()时,用一个死循环来不断的接受和分发消息</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyLooper</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ThreadLocal&lt;MyLooper&gt; threadLocal = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> MyLooper myLooper;</span><br><span class="line">    <span class="keyword">public</span> MyMessageQueue queue;<span class="comment">//一个线程对应一个阻塞队列</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">MyLooper</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        queue = <span class="keyword">new</span> MyMessageQueue();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获取当前线程相对应的Looper对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MyLooper <span class="title">myLooper</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> threadLocal.get();<span class="comment">//当未调用prepare()方法时。ThreadLocal.get()方法返回的为null;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//为本线程准备对应的MyLooper对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">prepare</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (threadLocal.get() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException( <span class="string">&quot;Only one MyLooper may be created per thread&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        threadLocal.set(<span class="keyword">new</span> MyLooper());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//这里启动消息循环</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            myLooper = myLooper();</span><br><span class="line">            MyMessageQueue mQueue = myLooper.queue;</span><br><span class="line">            senior.thread_concurrent.handler.MyMessage msg = mQueue.next();<span class="comment">// take()方法是个阻塞方法。线程运行到此会阻塞住。以准备接收发过来的消息</span></span><br><span class="line">            msg.target.dispatchMessage(msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="jian-ban-messagequeue"><a href="#简版MessageQueue" class="headerlink" title="简版MessageQueue"></a>简版MessageQueue<a href="#jian-ban-messagequeue" class="header-anchor">#</a></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMessageQueue</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> BlockingQueue&lt;MyMessage&gt; queue;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> quit = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyMessageQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        queue = <span class="keyword">new</span> LinkedBlockingQueue&lt;&gt;();</span><br><span class="line">        queue.clear();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//入队</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">enqueueMessage</span><span class="params">(MyMessage msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (msg.target == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">&quot;消息必须有一个消息处理者&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            queue.put(msg);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//出队</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MyMessage <span class="title">next</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        MyMessage msg = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (quit) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            msg = queue.take();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//销毁</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">quit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        quit = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="jian-ban-message"><a href="#简版Message" class="headerlink" title="简版Message"></a>简版Message<a href="#jian-ban-message" class="header-anchor">#</a></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMessage</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> msg1;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> msg2;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> what;</span><br><span class="line">    <span class="keyword">public</span> Object obj;</span><br><span class="line">    <span class="keyword">public</span> MyHandler target;</span><br><span class="line">    <span class="keyword">public</span> Runnable runnable;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="xie-yi-ge-wang-luo-qing-qiu-de-ce-shi-yong-li"><a href="#写一个网络请求的测试用例" class="headerlink" title="写一个网络请求的测试用例"></a>写一个网络请求的测试用例<a href="#xie-yi-ge-wang-luo-qing-qiu-de-ce-shi-yong-li" class="header-anchor">#</a></h4><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> senior.thread_concurrent.handler.MyHandler mainHandler;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> TestClient().test();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//初始化主线程Looper</span></span><br><span class="line">        MyLooper.prepare();</span><br><span class="line">        mainHandler = <span class="keyword">new</span> senior.thread_concurrent.handler.MyHandler(<span class="keyword">new</span> senior.thread_concurrent.handler.MyHandler.CallBack() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(senior.thread_concurrent.handler.MyMessage msg)</span> </span>&#123;</span><br><span class="line">                <span class="comment">// 刷新界面</span></span><br><span class="line">                String obj = (String) msg.obj;</span><br><span class="line">                LogUtil.print(<span class="string">&quot;刷新界面:&quot;</span> + obj);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//发起网络请求</span></span><br><span class="line">        LogUtil.print(<span class="string">&quot;在主线程发起一个网络请求&quot;</span>);</span><br><span class="line">        NetThread netThread = <span class="keyword">new</span> NetThread(<span class="string">&quot;http://baidu.com&quot;</span>);</span><br><span class="line">        netThread.start();</span><br><span class="line">        LogUtil.print(<span class="string">&quot;在主线程继续其它操作&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//开始消息循环</span></span><br><span class="line">        MyLooper.loop();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//网络线程类</span></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">NetThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> String url;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">NetThread</span><span class="params">(String url)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.url = url;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            String body = getWebData(url);</span><br><span class="line">            senior.thread_concurrent.handler.MyMessage msg = <span class="keyword">new</span> senior.thread_concurrent.handler.MyMessage();</span><br><span class="line">            msg.obj = body;</span><br><span class="line">            mainHandler.sendMessage(msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//执行网络请求</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">getWebData</span><span class="params">(String url)</span> </span>&#123;</span><br><span class="line">        LogUtil.print(<span class="string">&quot;执行请求网络:&quot;</span> + url);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        String body = <span class="string">&quot;这是&quot;</span> + url + <span class="string">&quot;的响应值&quot;</span>;</span><br><span class="line">        LogUtil.print(<span class="string">&quot;请求网络成功:&quot;</span> + body);</span><br><span class="line">        <span class="keyword">return</span> body;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="shuo-yi-shuo-handler-yan-shi-yuan-li"><a href="#说一说Handler延时原理？" class="headerlink" title="说一说Handler延时原理？"></a>说一说Handler延时原理？<a href="#shuo-yi-shuo-handler-yan-shi-yuan-li" class="header-anchor">#</a></h3><p>首先Handler无论是post还是sendMessage方式处理Message过程中，都会产生一个时间戳，计算方式是SystemClock.uptimeMillis() + delayMillis，这个时间戳会赋值给Message.when，影响Message在MessageQueue链表中的位置。时间戳值越大，越晚执行。</p>
-<p>Handler延时存在时间不准的问题，问题产生原因以及解决办法以及在<u>面试题2问题：Handler延时不准确，经常到了时间不响应业务</u>提到。</p>
-<h3 id="handler-yan-shi-you-na-xie-que-xian-zao-cheng-zhe-xie-que-xian-de-yuan-yin"><a href="#Handler延时有哪些缺陷？造成这些缺陷的原因？" class="headerlink" title="Handler延时有哪些缺陷？造成这些缺陷的原因？"></a>Handler延时有哪些缺陷？造成这些缺陷的原因？<a href="#handler-yan-shi-you-na-xie-que-xian-zao-cheng-zhe-xie-que-xian-de-yuan-yin" class="header-anchor">#</a></h3><p>参考<u>面试题2问题：Handler延时不准确，经常到了时间不响应业务</u></p>
-<p>Handler的post与sendMessage有哪些区别？</p>
-<p>post需要指定Runnable参数，将传入的Runnable绑定至Handler默认的Message，很多值都为默认值，换言之post方法只是为了执行Runnable子线程的任务。</p>
-<p>sendMessage需要传入开发者自定义的Message参数，将Message中的信息载体传递下去，sendMessage方法是为了传递消息。</p>
-<p>两者最终都会将Message传递下去，区别是Message中的数据信息赋值数量的不同。</p>
-<h3 id="zi-xian-cheng-neng-shi-yong-handler-ma"><a href="#子线程能使用Handler吗？" class="headerlink" title="子线程能使用Handler吗？"></a>子线程能使用Handler吗？<a href="#zi-xian-cheng-neng-shi-yong-handler-ma" class="header-anchor">#</a></h3><p>能，可以使用handler对象以及对应的方法。区别是Handler的创建位置，如果Handler在主线程创建，那么只能在主线程中处理消息。如果在子线程创建Handler，那么才能在子线程处理消息。</p>
-<h3 id="zi-xian-cheng-neng-chuang-jian-handler-ma"><a href="#子线程能创建Handler吗？" class="headerlink" title="子线程能创建Handler吗？"></a>子线程能创建Handler吗？<a href="#zi-xian-cheng-neng-chuang-jian-handler-ma" class="header-anchor">#</a></h3><p>能，前提是需要Looper.prepare+Looper.loop</p>
-<p>Looper.prepare是将当前线程添加到sThreadLocal中，Looper.loop是开启无限循环，不断执行Message</p>
-<h3 id="zi-xian-cheng-chuang-jian-handler-zhe-me-ma-fan-you-shi-me-ti-dai-fang-fa-ma-liao-jie-guo-handlerthread-ma"><a href="#子线程创建Handler这么麻烦，有什么替代方法吗？了解过HandlerThread吗？" class="headerlink" title="子线程创建Handler这么麻烦，有什么替代方法吗？了解过HandlerThread吗？"></a>子线程创建Handler这么麻烦，有什么替代方法吗？了解过HandlerThread吗？<a href="#zi-xian-cheng-chuang-jian-handler-zhe-me-ma-fan-you-shi-me-ti-dai-fang-fa-ma-liao-jie-guo-handlerthread-ma" class="header-anchor">#</a></h3><p>HandlerThread的run方法中替我们做了Looper.prepare+Looper.loop</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">HandlerThread handlerThread = <span class="keyword">new</span> HandlerThread(<span class="string">&quot;handler-thread&quot;</span>);</span><br><span class="line">handlerThread.start(); <span class="comment">// 必须在Handler创建前调用，因为线程start后才会创建Looper</span></span><br><span class="line"></span><br><span class="line">Handler threadHandler = <span class="keyword">new</span> Handler(handlerThread.getLooper()) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.handleMessage(msg);</span><br><span class="line">        <span class="comment">// 处理消息，因为这个方法是在子线程调用，所以可以在这执行耗时任务</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<h3 id="liao-jie-guo-idlehandler-ma"><a href="#了解过IdleHandler吗？" class="headerlink" title="了解过IdleHandler吗？"></a>了解过IdleHandler吗？<a href="#liao-jie-guo-idlehandler-ma" class="header-anchor">#</a></h3><p>IdleHandler 用途：</p>
-<ol>
-<li>IdleHandler 是 Handler 提供的一种在消息队列空闲时，执行任务的时机；</li>
-<li>当 MessageQueue 当前没有立即需要处理的消息时，会执行 IdleHandler；</li>
-<li>Activity界面绘制结束的回调时机</li>
-</ol>
-<p>IdleHandler 缺点：</p>
-<ol>
-<li>但它执行的时机依赖消息队列的情况，那么如果 MessageQueue 一直有待执行的消息时，IdleHandler 就一直得不到执行，也就是它的执行时机是不可控的，不适合执行一些对时机要求比较高的任务。</li>
-</ol>
-<p>IdleHandler场景</p>
-<p>如果我们想在界面绘制出来后做点什么，那么在onResume里面是不合适的，它先于measure等流程了<strong>， **有人可能会说在onResume里面post一个runnable可以吗？还是不行，因为那样就会变成这个样子</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20200814221532843.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoaXZhbHJvdXNtYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>所以你的行为一样会在绘制之前执行，这个时候我们的主角IdleHandler就发挥作用了，我们前面说了，它是在looper里面message暂时执行完毕了就会回调，顾名思义嘛，Idle就是队列为空的意思，那么我们的onResume和measure, layout, draw都是一个个message的话，这个IdleHandler就提供了一个它们都执行完毕的回调了，大概就是这样<br><img src="https://img-blog.csdnimg.cn/20200814221511481.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoaXZhbHJvdXNtYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>也就是说IdleHandler可以再界面绘制的消息回调之后执行。<br><img src="https://img-blog.csdnimg.cn/20200814221456646.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoaXZhbHJvdXNtYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p>优化前：</p>
-<p>这个是我们地图的公交详情页面， 进入之后产品要求左边的页卡需要展示，可以看到左边的页卡是一个非常复杂的布局，那么进入之后的效果可以明显看到头部的展示信息是先显示空白再100毫秒左右之后才展示出来的，原因就是这个页卡的内容比较复杂，用数据向它填充的时候花了较长时间，代码如下：<br><img src="https://img-blog.csdnimg.cn/2020081422161443.png#pic_center" alt="在这里插入图片描述"></p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9mLndldGVzdC5xcS5jb20vZ3FvcC8xMDAwMC8yMDAwMC9MYWJJbWFnZV8xNjY0ODA1Yjc3YTAxZDE5MGUwY2Y2MGY2YjkxMGI1MS5naWY"></p>
-<p>可以看到这个detailView就是这个侧滑的页卡了，填充里面的数据花了90ms，如果这个时间是用在了界面view绘制之前的话，就会出现以上的效果了，view先是白的，再出现，这样就体验不好了。</p>
-<p>优化后：如果我们把它放到IdleHandler里面呢？</p>
-<p>结果非常明显：顶部的页卡先展示出来了，这样体验是不是会更好一些呢。虽然只有短短90ms，不过我们做app也应该关注这种细节优化的，是吧~ 这个做法也提供了一种思路，android本身提供的activity框架和fragment框架并没有提供绘制完成的回调，如果我们自己实现一个框架，就可以使用这个IdleHandler来实现一个onRenderFinished这种回调了。</p>
-<p>代码如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/20200814221558397.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NoaXZhbHJvdXNtYW4=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9mLndldGVzdC5xcS5jb20vZ3FvcC8xMDAwMC8yMDAwMC9MYWJJbWFnZV83MTliYjQ0YjE3NTZkOTE4OGJkOGExMzQyNTE1NWIzYS5naWY"><br>特别参考</p>
-<p><a href="https://wetest.qq.com/lab/view/352.html">https://wetest.qq.com/lab/view/352.html</a></p>
-<p><a href="https://blog.csdn.net/u013718120/article/details/51945490">https://blog.csdn.net/u013718120/article/details/51945490</a></p>
-]]></content>
-      <categories>
-        <category>Android，面试</category>
-      </categories>
-      <tags>
-        <tag>Android，Handler</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AndroidHandler百问百答</title>
-    <url>/ye-jincheng-website/2020/handler%20TOP%20100%20Questions/</url>
+    <url>/ye-jincheng-website/blog/2020/08/handler%20TOP%20100%20Questions/</url>
     <content><![CDATA[<h1 id="android-bai-wen-bai-da-na-xie-nian-bei-wen-guo-de-handler-yuan-li"><a href="#Android百问百答-《那些年被问过的Handler原理》" class="headerlink" title="Android百问百答-《那些年被问过的Handler原理》"></a>Android百问百答-《那些年被问过的Handler原理》<a href="#android-bai-wen-bai-da-na-xie-nian-bei-wen-guo-de-handler-yuan-li" class="header-anchor">#</a></h1><p>文章迁移自<a href="https://blog.csdn.net/chivalrousman/article/details/108014580">我的csdn博客</a></p>
 <p>关于Handler，安卓面试最热门的知识点之一。本篇文章将围绕3点展开：</p>
 <p>可以提问哪些Questions？</p>
