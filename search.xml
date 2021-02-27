@@ -144,7 +144,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#x69;&#x74;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#105;&#x74;&#64;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#99;&#111;&#x6d;">&#x67;&#105;&#x74;&#64;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#99;&#111;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -435,7 +435,12 @@
   <entry>
     <title>mtk-log</title>
     <url>/ye-jincheng-website/blog/2021/02/mtk-log/</url>
-    <content><![CDATA[<h1 id="mtk-log"><a href="#MTK-log" class="headerlink" title="MTK log"></a><a href="https://www.pianshen.com/article/4121163154/">MTK log</a><a href="#mtk-log" class="header-anchor">#</a></h1><h2 id="log-zong-lan"><a href="#Log总览" class="headerlink" title="Log总览"></a><strong>Log总览</strong><a href="#log-zong-lan" class="header-anchor">#</a></h2><ul>
+    <content><![CDATA[<h1 id="mtk-log"><a href="#MTK-log" class="headerlink" title="MTK log"></a><a href="https://www.pianshen.com/article/4121163154/">MTK log</a><a href="#mtk-log" class="header-anchor">#</a></h1><h2 id="jie-shao"><a href="#介绍" class="headerlink" title="介绍"></a>介绍<a href="#jie-shao" class="header-anchor">#</a></h2><p>mtklog是由log生成工具MTKLogger生成的一系列问题追踪文件，其主要作用就是对系统或者应用产生的异常进行快速定位，从而解决问题。</p>
+<p>log文件名称为：<br>crash_log ：崩溃日志，主要输出 程序崩溃造成的crash log<br>events_log：事件日志，主要输出记录各个activity周期及事件<br>kernel_log：底层驱动，按键，低内存相关log<br>sys_log：系统日志，Exception定位点<br>radio_log：输出通话，网络状态变化<br>main_log：详尽输出每一步的log</p>
+<a id="more"></a>
+
+<h2 id="kai-qi-he-guan-bi"><a href="#开启和关闭" class="headerlink" title="开启和关闭"></a>开启和关闭<a href="#kai-qi-he-guan-bi" class="header-anchor">#</a></h2><p>（1）在拨号盘界面输入*#9646633# ：<br>（2）进入EngineerMode的第一个Telephony界面：<br>（3）向左滑动进入Log and Debugging界面：<br>（4）点击MTKLogger 菜单：点击log设置图标可进入log设置界面，如果我只要打印MobileLog可将ModemLog，NetworkLog，GPSlog关闭，点击蓝底色1 即可：<br>（5）点击开始（红色播放按键）按键：<br>（6）log 开启：<br>（7）当我们已经发现异常时，当关闭log，并截图记录时间点，下拉进入下拉栏界面，点击MTKLogger is running：<br>（8）点击停止按键</p>
+<h2 id="log-zong-lan"><a href="#Log总览" class="headerlink" title="Log总览**"></a>Log总览**<a href="#log-zong-lan" class="header-anchor">#</a></h2><ul>
 <li><strong>Android Log</strong></li>
 </ul>
 <ol>
@@ -734,7 +739,7 @@
 <p>造成这些问题的原因大多分为以下几种：有些是条件语句执行错误，有些是Java层的Exception如空指针、集合边界越界问题，有些是较难找到原因的OOM、ANR、Crash、系统SWT重启问题。面对扑面而来的问题，程序员很容易束手无策。笔者结合自己的经验，总结了BugFree中必不可少的三剑客：异常、日志、工具，期望通过这3个“帮手”，帮助各位排查开发难题。</p>
 <a id="more"></a>
 
-<h1 id="can-kao-yue-du"><a href="#参考阅读" class="headerlink" title="参考阅读"></a>参考阅读<a href="#can-kao-yue-du" class="header-anchor">#</a></h1><p>你可能会喜欢我的其他文章a</p>
+<h1 id="can-kao-yue-du"><a href="#参考阅读" class="headerlink" title="参考阅读"></a>参考阅读<a href="#can-kao-yue-du" class="header-anchor">#</a></h1><p><a href="/ye-jincheng-website/blog/2021/02/mtk-log/index.html">Mtk Log使用指南</a></p>
 <h1 id="yi-chang"><a href="#异常" class="headerlink" title="异常"></a>异常<a href="#yi-chang" class="header-anchor">#</a></h1><h2 id="yi-chang-de-fen-lei"><a href="#异常的分类" class="headerlink" title="异常的分类"></a>异常的分类<a href="#yi-chang-de-fen-lei" class="header-anchor">#</a></h2><p>Android是一个庞大而复杂的系统，涉及多种语言，所以其异常也很复杂。根据android系统架构层次，我们也把android异常层次化，分为JE、NE、KE、EE、其他类别</p>
 <table>
 <thead>
@@ -1061,6 +1066,12 @@
 <td></td>
 </tr>
 </tbody></table>
+<h2 id="adb"><a href="#adb" class="headerlink" title="adb"></a>adb<a href="#adb" class="header-anchor">#</a></h2><ol>
+<li>adb logcat&gt;main.txt 重定向log</li>
+<li>adb logcat -b main -v time&gt;app.log 打印应用程序的log</li>
+<li>adb logcat -bradio -v time&gt; radio.log 打印射频相关的log，SIM STK 也会在里面，modem相关的ATcommand等。</li>
+<li>adb logcat -bevents -v time 打印系统事件的日志，比如触屏事件；</li>
+</ol>
 ]]></content>
       <categories>
         <category>Android</category>
