@@ -44,12 +44,20 @@
 <td>文档插件显示二级目录，响应点击事件</td>
 </tr>
 <tr>
+<td>hexo-admin</td>
+<td>管理后台</td>
+</tr>
+<tr>
 <td>hexo-renderer-markdown-it-plus</td>
 <td>markdown解析插件</td>
 </tr>
 <tr>
 <td>leanclound</td>
 <td>阅读量统计插件，如何配置<a href="https://blog.csdn.net/lijing742180/article/details/87928554">参考文章</a></td>
+</tr>
+<tr>
+<td>Mpic</td>
+<td>图床发布工具，自动发布七牛</td>
 </tr>
 </tbody></table>
 <h1 id="mo-ban-jia-gou"><a href="#模板架构" class="headerlink" title="模板架构"></a>模板架构<a href="#mo-ban-jia-gou" class="header-anchor">#</a></h1><table>
@@ -136,7 +144,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#x69;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;">&#103;&#105;&#116;&#64;&#103;&#x69;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#x69;&#x74;&#x40;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -422,6 +430,646 @@
       </categories>
       <tags>
         <tag>个人教育</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mtk-log</title>
+    <url>/ye-jincheng-website/blog/2021/02/mtk-log/</url>
+    <content><![CDATA[<h1 id="mtk-log"><a href="#MTK-log" class="headerlink" title="MTK log"></a><a href="https://www.pianshen.com/article/4121163154/">MTK log</a><a href="#mtk-log" class="header-anchor">#</a></h1><h2 id="log-zong-lan"><a href="#Log总览" class="headerlink" title="Log总览"></a><strong>Log总览</strong><a href="#log-zong-lan" class="header-anchor">#</a></h2><ul>
+<li><strong>Android Log</strong></li>
+</ul>
+<ol>
+<li>Android java层和native层 log</li>
+<li>main log、system log、radio log、event log</li>
+</ol>
+<ul>
+<li><strong>Kernel Log</strong></li>
+</ul>
+<ol>
+<li>Linux Kernel内核和驱动log</li>
+<li>UART Log</li>
+</ol>
+<ul>
+<li><strong>Exception Datebase(db)</strong></li>
+</ul>
+<p>系统死机/重启等问题发生时候的原始RAW data</p>
+<h2 id="log-tools"><a href="#Log-Tools" class="headerlink" title="Log Tools"></a><strong>Log Tools</strong><a href="#log-tools" class="header-anchor">#</a></h2><ul>
+<li>mtklogger</li>
+<li>PC tool</li>
+</ul>
+<p><img src="http://cdn.yangchaofan.cn/blog/20210227/br8ouvYv45G7.jpg?imageslim" alt="mark"></p>
+<h3 id="shou-ji-duan-mtklogger"><a href="#手机端mtklogger" class="headerlink" title="手机端mtklogger"></a><strong>手机端mtklogger</strong><a href="#shou-ji-duan-mtklogger" class="header-anchor">#</a></h3><p><img src="http://cdn.yangchaofan.cn/blog/20210227/DiGViDp5mmch.png?imageslim" alt="mark"></p>
+<p><img src="http://cdn.yangchaofan.cn/blog/20210227/qgVnqzd6p6IJ.png?imageslim" alt="mark"></p>
+<h4 id="ge-ren-you-hua"><a href="#个人优化" class="headerlink" title="个人优化"></a><strong>个人优化</strong><a href="#ge-ren-you-hua" class="header-anchor">#</a></h4><h5 id="mtklog-zhua-qu-wan-zheng-kernel-log"><a href="#mtklog抓取完整kernel-log" class="headerlink" title="mtklog抓取完整kernel log"></a><strong>mtklog抓取完整kernel log</strong><a href="#mtklog-zhua-qu-wan-zheng-kernel-log" class="header-anchor">#</a></h5><ul>
+<li><strong>默认抓不全原因</strong></li>
+</ul>
+<p>由于Mobilelog service运行要在android system init阶段，而从kernel启动到这个阶段，kernel log已经在不断地送入log ring buffer，log量大的情况下ring buffer就会被覆盖</p>
+<p>默认抓取到的kernel_log.boot不是从0s开始，对于研发debug阶段,只能靠抓取uart log来获取0s开始的log，非常影响debug效率</p>
+<ul>
+<li><strong>解决方法</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">alps&#x2F;kernel-3.18&#x2F;init&#x2F;Kconfig</span><br><span class="line">config LOG_BUF_SHIFT</span><br><span class="line">       default 17  --- &gt; 21   2^21&#x3D;2MB buffer</span><br><span class="line"></span><br><span class="line">alps&#x2F;system&#x2F;core&#x2F;liblog&#x2F;include&#x2F;private&#x2F;android_logger.h</span><br><span class="line">#define LOG_BUFFER_SIZE (2048 * 1024)    #log和logd一致</span><br><span class="line">123456</span><br></pre></td></tr></table></figure>
+<h3 id="dian-nao-duan-pc-tool"><a href="#电脑端PC-tool" class="headerlink" title="电脑端PC tool"></a><strong>电脑端PC tool</strong><a href="#dian-nao-duan-pc-tool" class="header-anchor">#</a></h3><h4 id="adb"><a href="#adb" class="headerlink" title="adb"></a><strong>adb</strong><a href="#adb" class="header-anchor">#</a></h4><h5 id="logcat"><a href="#logcat" class="headerlink" title="logcat"></a><strong>logcat</strong><a href="#logcat" class="header-anchor">#</a></h5><ul>
+<li><strong>介绍</strong></li>
+</ul>
+<p>logcat是android中的一个命令行工具，可以用于得到程序的log信息</p>
+<p>常见的日志纪录方法包括：</p>
+<table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">v(String,String) (vervbose)</td>
+<td align="left">显示全部信息</td>
+</tr>
+<tr>
+<td align="left">d(String,String)(debug)</td>
+<td align="left">显示调试信息</td>
+</tr>
+<tr>
+<td align="left">i(String,String)(information)</td>
+<td align="left">显示一般信息</td>
+</tr>
+<tr>
+<td align="left">w(String,String)(waning)</td>
+<td align="left">显示警告信息</td>
+</tr>
+<tr>
+<td align="left">e(String,String)(error)</td>
+<td align="left">显示错误信息</td>
+</tr>
+</tbody></table>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;开发过程中获取log</span><br><span class="line">Log.i(&quot;MyActivity&quot;,&quot;MyClass.getView() - get item number&quot;+position);</span><br><span class="line">&#x2F;&#x2F;adb获取log</span><br><span class="line">adb logcat</span><br><span class="line">1234</span><br></pre></td></tr></table></figure>
+<p>adb logcat输出的日志格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">I&#x2F;ActivityManager( 1754): Waited long enough for: ServiceRecord&#123;2b24178c u0 com.google.android.gms&#x2F;.checkin.CheckinService&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>实例</strong></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">adb logcat –b radio</span><br><span class="line">adb logcat –b system</span><br><span class="line">adb logcat –b events</span><br><span class="line">adb logcat –b main</span><br><span class="line">1234</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>优势</strong></li>
+</ul>
+<ol>
+<li>缓冲区强大，不会因为数据量过大而丢失log</li>
+<li>过滤性能好</li>
+<li>语法简洁，使用方便</li>
+</ol>
+<h5 id="ti-qu-db"><a href="#提取db" class="headerlink" title="提取db"></a><strong>提取db</strong><a href="#ti-qu-db" class="header-anchor">#</a></h5><ul>
+<li><strong>位置</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;data&#x2F;aee_exp</span><br><span class="line">&#x2F;data&#x2F;vendor&#x2F;mtklog&#x2F;aee_exp</span><br><span class="line">12</span><br></pre></td></tr></table></figure>
+<h4 id="gat"><a href="#GAT" class="headerlink" title="GAT"></a><strong>GAT</strong><a href="#gat" class="header-anchor">#</a></h4><p><img src="http://cdn.yangchaofan.cn/blog/20210227/nwDUjynnBdXh.png?imageslim" alt="mark"></p>
+<ul>
+<li><strong>BugReport</strong></li>
+</ul>
+<p><img src="http://cdn.yangchaofan.cn/blog/20210227/VRnI24X9QxKP.png?imageslim" alt="mark"></p>
+<ul>
+<li><strong>DB puller</strong></li>
+</ul>
+<p><img src="http://cdn.yangchaofan.cn/blog/20210227/POXrsi3L2V0k.png?imageslim" alt="mark"></p>
+<ul>
+<li><strong>Mediatek LogView</strong></li>
+</ul>
+<p><img src="http://cdn.yangchaofan.cn/blog/20210227/59zvGw73P6Qr.png?imageslim" alt="mark"></p>
+<h2 id="ge-chong-mode-zhua-mobile-log"><a href="#各种mode抓mobile-log" class="headerlink" title="各种mode抓mobile log"></a><strong>各种mode抓mobile log</strong><a href="#ge-chong-mode-zhua-mobile-log" class="header-anchor">#</a></h2><h3 id="normal-mode"><a href="#Normal-mode" class="headerlink" title="Normal mode"></a><strong>Normal mode</strong><a href="#normal-mode" class="header-anchor">#</a></h3><ol>
+<li>GAT (user版本只能抓main log，eng版本还能抓到kernel log)</li>
+<li>mtklogger(user版本通过*#<em>#3646633#</em>#*进入工模选择)，会暂时录制到/data/log_temp下，等SD卡ready后再copy到mtklog/mobilelog/APLog路径下</li>
+</ol>
+<h3 id="meta-mode-pc-meta-tool"><a href="#Meta-mode-PC-meta-tool" class="headerlink" title="Meta mode(PC meta tool)"></a><strong>Meta mode(PC meta tool)</strong><a href="#meta-mode-pc-meta-tool" class="header-anchor">#</a></h3><ul>
+<li>会先录制到/data/log_temp/meta/下，等外卡ready后再copy到sdcard1/mtklog/mobilelog/APLog路径下，然后删除源文件(data/log_temp)。</li>
+</ul>
+<h3 id="factory-mode-power-down-key"><a href="#Factory-mode-power-down-key" class="headerlink" title="Factory mode(power + down key)"></a><strong>Factory mode(power + down key)</strong><a href="#factory-mode-power-down-key" class="header-anchor">#</a></h3><ul>
+<li>同Meta mode</li>
+</ul>
+<h3 id="recovery-mode-power-up-key"><a href="#Recovery-mode-power-up-key" class="headerlink" title="Recovery mode(power + up key)"></a><strong>Recovery mode(power + up key)</strong><a href="#recovery-mode-power-up-key" class="header-anchor">#</a></h3><ol>
+<li>先存在tmp/recovery.log，Reboot进入normal后存在cache/recovery</li>
+<li>user 版本需要下载eng的recovery.img和boot.img才能抓log</li>
+</ol>
+<h3 id="ipo-mode"><a href="#IPO-mode" class="headerlink" title="IPO mode"></a><strong>IPO mode</strong><a href="#ipo-mode" class="header-anchor">#</a></h3><ol>
+<li>设置IPO关机后，关机期间的log会录制到/data/log_temp/ipo/下，等再次开机后再copy到/mtklog/mobilelog/APLog路径下，然后删除源文件。</li>
+<li>GAT</li>
+</ol>
+<h2 id="ge-chong-chang-jing-zhua-log"><a href="#各种场景抓log" class="headerlink" title="各种场景抓log"></a><strong>各种场景抓log</strong><a href="#ge-chong-chang-jing-zhua-log" class="header-anchor">#</a></h2><h3 id="preloader-amp-lk-jie-duan-mei-you-logo-huo-qia-zai-logo-jie-mian-kai-ji-log"><a href="#Preloader-amp-LK阶段（没有logo或卡在logo界面）开机log" class="headerlink" title="Preloader &amp; LK阶段（没有logo或卡在logo界面）开机log"></a><strong>Preloader &amp; LK阶段（没有logo或卡在logo界面）开机log</strong><a href="#preloader-amp-lk-jie-duan-mei-you-logo-huo-qia-zai-logo-jie-mian-kai-ji-log" class="header-anchor">#</a></h3><ul>
+<li>抓取uart log</li>
+</ul>
+<h3 id="kernel-jie-duan-you-logo-huo-kai-ji-dong-hua-kai-ji-log"><a href="#Kernel阶段（有logo或开机动画-开机log" class="headerlink" title="Kernel阶段（有logo或开机动画)开机log"></a>Kernel阶段（有logo或开机动画)开机log<a href="#kernel-jie-duan-you-logo-huo-kai-ji-dong-hua-kai-ji-log" class="header-anchor">#</a></h3><ol>
+<li>如果是User版本，先用对应ENG 版本的lk 替换掉user 版本的lk</li>
+<li>或者在user load的<code>alps/bootable/bootloader/lk/app/mt_boot/mt_boot.c</code>中，将所有<code>printk.disable_uart=1</code>改成<code>printk.disable_uart=0</code>，然后重新编译lk, download lk 即可。</li>
+</ol>
+<h3 id="android-jie-duan-you-kai-ji-dong-hua-kai-ji-log"><a href="#Android阶段（有开机动画）开机log" class="headerlink" title="Android阶段（有开机动画）开机log"></a><strong>Android阶段（有开机动画）开机log</strong><a href="#android-jie-duan-you-kai-ji-dong-hua-kai-ji-log" class="header-anchor">#</a></h3><p>Adbd进程起来后，可以使用GAT抓取开机log（录制前先关机）。</p>
+<p>若mtklogger可用，可以通过设置mobile log开机自启动录制开机log。</p>
+<p>停止录制状态下mtklogger-&gt;settings-&gt;mobile log-&gt;start automticaly</p>
+<p>若TP无法使用，可以参考FAQ06939使用adb命令控制mtklogger录制。</p>
+<h3 id="user-build-zhua-kai-ji-xiang-dao-huo-zhe-bu-kai-ji-log"><a href="#user-build-抓开机向导或者不开机log" class="headerlink" title="user build 抓开机向导或者不开机log"></a><strong>user build 抓开机向导或者不开机log</strong><a href="#user-build-zhua-kai-ji-xiang-dao-huo-zhe-bu-kai-ji-log" class="header-anchor">#</a></h3><p>编译一版eng版本对应软件，做如下修改：</p>
+<p><a href="https://ad.plus/?utm_source=pianshen.com&utm_medium=protag-in_article_video&utm_campaign=brand_logo">Powered by <strong>Ad.Plus</strong></a></p>
+<p><video class="pa_video pa_size_640_360" playsinline muted width="640" height="360" style="box-sizing: border-box; display: inline-block; vertical-align: baseline; overflow: hidden; max-width: 100%; height: 225px; transition: height 0s ease-out 0s; width: 400px;"></video></p>
+<iframe src="https://imasdk.googleapis.com/js/core/bridge3.444.1_zh.html#goog_420327109" allowfullscreen allow="autoplay" width="640" height="360" style="box-sizing: border-box; height: 225px !important; width: 400px !important; border: 0px; opacity: 1; margin: 0px; padding: 0px; position: relative; color-scheme: light;"></iframe>
+
+
+
+<ol>
+<li><code>alps/system/core/rootdir/init.rc</code></li>
+</ol>
+<figure class="highlight r"><table><tr><td class="code"><pre><span class="line">on property:ro.debuggable=<span class="number">1</span></span><br><span class="line">    <span class="comment"># Give writes to anyone for the trace folder on debug builds.</span></span><br><span class="line">    <span class="comment"># The folder is used to store method traces.</span></span><br><span class="line">    chmod <span class="number">0773</span> /data/misc/trace</span><br><span class="line">    start console</span><br><span class="line">//add begin</span><br><span class="line">on property:ro.debuggable=<span class="number">0</span></span><br><span class="line">    <span class="comment"># Give writes to anyone for the trace folder on debug builds.</span></span><br><span class="line">    <span class="comment"># The folder is used to store method traces.</span></span><br><span class="line">    chmod <span class="number">0773</span> /data/misc/trace</span><br><span class="line">    start console</span><br><span class="line">setprop persist.sys.usb.config mass_storage,adb //add end</span><br><span class="line">123456789101112</span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>alps/kernel-3.18/drivers/misc/mediatek/mtprof/bootprof.c</code></li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> CONFIG_MT_PRINTK_UART_CONSOLE</span></span><br><span class="line">    <span class="comment">//mt_disable_uart();</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="number">123</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li><code>alps/build/make/core/main.mk</code></li>
+</ol>
+<figure class="highlight makefile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ifeq</span> (true,<span class="variable">$(<span class="built_in">strip</span> <span class="variable">$(enable_target_debugging)</span>)</span>)  <span class="comment"># Target is more debuggable and adbd is on by default</span></span><br><span class="line">  ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1  <span class="comment"># Enable Dalvik lock contention logging.</span></span><br><span class="line">  ADDITIONAL_BUILD_PROPERTIES += dalvik.vm.lockprof.threshold=500   <span class="comment"># Include the debugging/testing OTA keys in this build.</span></span><br><span class="line">  INCLUDE_TEST_OTA_KEYS := true</span><br><span class="line"><span class="keyword">else</span> <span class="comment"># !enable_target_debugging</span></span><br><span class="line">  <span class="comment"># Target is less debuggable and adbd is off by default</span></span><br><span class="line">  ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1</span><br><span class="line"><span class="keyword">endif</span> <span class="comment"># !enable_target_debugging</span></span><br><span class="line">12345678</span><br></pre></td></tr></table></figure>
+<p>编译好后，user版本刷入eng版本的lk+boot， 抓取uart 或者上层log</p>
+<p>如需抓取开机向导前的log，由于系统还未正式起来，请焊uart线，uart log中输入<code>adb logcat &amp;</code>将上层log输出到uart log中</p>
+<h2 id="aee-yi-chang-ji-zhi"><a href="#AEE异常机制" class="headerlink" title="AEE异常机制"></a><strong>AEE异常机制</strong><a href="#aee-yi-chang-ji-zhi" class="header-anchor">#</a></h2><h3 id="aee-jie-shao"><a href="#AEE介绍" class="headerlink" title="AEE介绍"></a><strong>AEE介绍</strong><a href="#aee-jie-shao" class="header-anchor">#</a></h3><p><code>AEE (Android Exception Engine)</code>是安卓的一个异常捕获和调试信息生成机制。</p>
+<p>手机发生错误（异常重启/卡死）时生成db文件（一种被加密过的二进制文件）</p>
+<h3 id="why-do-we-need-aee"><a href="#why-do-we-need-AEE" class="headerlink" title="why do we need AEE"></a><strong>why do we need AEE</strong><a href="#why-do-we-need-aee" class="header-anchor">#</a></h3><p>用来保存和记录异常发生时候的所有内存信息，通过调试和仿真这些信息，可以追踪到异常的原因</p>
+<h3 id="db-wen-jian-jie-shao"><a href="#DB文件介绍" class="headerlink" title="DB文件介绍"></a><strong>DB文件介绍</strong><a href="#db-wen-jian-jie-shao" class="header-anchor">#</a></h3><table>
+<thead>
+<tr>
+<th align="left"><strong>File</strong></th>
+<th align="left"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>__exp_main.txt</strong></td>
+<td align="left">异常类型，调用栈等关键信息</td>
+</tr>
+<tr>
+<td align="left">_exp_detail.txt</td>
+<td align="left">详细异常信息</td>
+</tr>
+<tr>
+<td align="left"><strong>SYS_ANDROID_LOG</strong></td>
+<td align="left">android buffer log(logcat -d -v time *:v)</td>
+</tr>
+<tr>
+<td align="left"><strong>SYS_KERNEL_LOG</strong></td>
+<td align="left">kernel log</td>
+</tr>
+<tr>
+<td align="left"><strong>SYS_LAST_KMSG</strong></td>
+<td align="left">上次重启前的kernel log</td>
+</tr>
+<tr>
+<td align="left"><strong>SYS_MINI_RDUMP</strong></td>
+<td align="left">类似coredump，可以用gdb/trace32调试</td>
+</tr>
+<tr>
+<td align="left">SYS_WDT_LOG</td>
+<td align="left">看门狗复位信息</td>
+</tr>
+<tr>
+<td align="left">SYS_REBOOT_REASON</td>
+<td align="left">重启时的硬件记录的信息</td>
+</tr>
+<tr>
+<td align="left">SYS_VERSION_INFO</td>
+<td align="left">kernel版本，用于和vmlinux对比，只有匹配的vmlinux才能用于分析这个异常</td>
+</tr>
+<tr>
+<td align="left">SYS_ANDROID_EVENT_LOG</td>
+<td align="left">android event log(logcat -b events -v time -d *:v)</td>
+</tr>
+<tr>
+<td align="left">SYS_ANDROID_RADIO_LOG</td>
+<td align="left">android buffer log(logcat -b radio -v time -d *:v)</td>
+</tr>
+<tr>
+<td align="left"><strong>PROCESS_COREDUMP</strong></td>
+<td align="left">native program core dump</td>
+</tr>
+<tr>
+<td align="left"><strong>SYS_PROPERTIES</strong></td>
+<td align="left">system properties</td>
+</tr>
+<tr>
+<td align="left">SWT_JBT_TRACES</td>
+<td align="left">/data/anr/.</td>
+</tr>
+<tr>
+<td align="left">ZZ_INTERNAL</td>
+<td align="left">基本异常信息</td>
+</tr>
+<tr>
+<td align="left">SYS_CPU_INFO</td>
+<td align="left">cpu 信息(top -n 1 -d 1 -m 30 -t)</td>
+</tr>
+<tr>
+<td align="left">SYS_MEMORY_INFO</td>
+<td align="left">memory information (/proc/meminfo)</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>重启原因记录</strong></li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">last_reboot_reason</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> fiq_step;</span><br><span class="line">    <span class="keyword">uint32_t</span> exp_type; <span class="comment">/* 0xaeedeadX: X=1 (HWT), X=2 (KE), X=3 (nested panic) */</span></span><br><span class="line">    <span class="keyword">uint32_t</span> reboot_mode;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint32_t</span> last_irq_enter[NR_CPUS];</span><br><span class="line">    <span class="keyword">uint64_t</span> jiffies_last_irq_enter[NR_CPUS];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint32_t</span> last_irq_exit[NR_CPUS];</span><br><span class="line">    <span class="keyword">uint64_t</span> jiffies_last_irq_exit[NR_CPUS];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint64_t</span> jiffies_last_sched[NR_CPUS];</span><br><span class="line">    <span class="keyword">char</span> last_sched_comm[NR_CPUS][TASK_COMM_LEN];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint8_t</span> hotplug_data1[NR_CPUS], <span class="keyword">uint8_t</span> hotplug_data2;</span><br><span class="line">    <span class="keyword">uint64_t</span> hotplug_data3;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint32_t</span> mcdi_wfi, mcdi_r15, deepidle_data, sodi_data, spm_suspend_data;</span><br><span class="line">    <span class="keyword">uint64_t</span> cpu_dormant[NR_CPUS];</span><br><span class="line">    <span class="keyword">uint32_t</span> clk_data[<span class="number">8</span>], suspend_debug_flag;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint8_t</span> cpu_dvfs_vproc_big, cpu_dvfs_vproc_little, cpu_dvfs_oppidx, cpu_dvfs_status;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint8_t</span> gpu_dvfs_vgpu, gpu_dvfs_oppidx, gpu_dvfs_status;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint64_t</span> ptp_cpu_big_volt, ptp_cpu_little_volt, ptp_gpu_volt, ptp_temp;</span><br><span class="line">    <span class="keyword">uint8_t</span> ptp_status;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint8_t</span> thermal_temp1, thermal_temp2, thermal_temp3, thermal_temp4, thermal_temp5;</span><br><span class="line">    <span class="keyword">uint8_t</span> thermal_status;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> *kparams;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="number">12345678910111213141516171819202122232425262728293031323334</span></span><br></pre></td></tr></table></figure>
+<h2 id="shi-ji-ying-yong-zong-jie"><a href="#实际应用总结" class="headerlink" title="实际应用总结"></a><strong>实际应用总结</strong><a href="#shi-ji-ying-yong-zong-jie" class="header-anchor">#</a></h2><h3 id="usr-zhuang-tai-bu-tong-xian-xiang-shou-ji-ru-he-zhua-qu-you-xiao-log"><a href="#usr状态，不同现象手机如何抓取有效log" class="headerlink" title="usr状态，不同现象手机如何抓取有效log"></a><strong>usr状态，不同现象手机如何抓取有效log</strong><a href="#usr-zhuang-tai-bu-tong-xian-xiang-shou-ji-ru-he-zhua-qu-you-xiao-log" class="header-anchor">#</a></h3><ol>
+<li>可正常开机</li>
+</ol>
+<p>A：MTKlogger基本足矣</p>
+<ol>
+<li>卡logo，不开机</li>
+</ol>
+<p>A：</p>
+<ul>
+<li>刷入eng的lk和boot，再跳线抓取uart log，并开启logcat抓取从开机到异常出现时的所有底层和上层log</li>
+<li>如果偶尔可以开机，第一时间进入系统提取db信息</li>
+<li>如上述方式无法提取到关键db，则需要通过flashtool来回读db的原始raw分区，再通过自制expdb解压工具展开</li>
+</ul>
+<h3 id="debug-jie-duan-shou-ji-ru-he-zhua-qu-you-xiao-log"><a href="#debug阶段，手机如何抓取有效log" class="headerlink" title="debug阶段，手机如何抓取有效log"></a><strong>debug阶段，手机如何抓取有效log</strong><a href="#debug-jie-duan-shou-ji-ru-he-zhua-qu-you-xiao-log" class="header-anchor">#</a></h3><ol>
+<li>无ctp情况下如何调试手机</li>
+</ol>
+<p>A：连接adb，通过adb发送ctp报点与手势，来操作手机</p>
+<ol>
+<li>无lcd情况下如何调试手机</li>
+</ol>
+<p>A：使用GAT工具，实时抓取手机内部frame buffer，投影到电脑上，并用adb命令操作手机</p>
+<ol>
+<li>UART Log量太大，无法找出重要log怎么办</li>
+</ol>
+<p>A：采用adb logcat方式实时过滤带关键字关键level的log （包括kernel log）</p>
+<h3 id="log-fen-xi-yu-diao-shi-ji-qiao"><a href="#Log分析与调试技巧" class="headerlink" title="Log分析与调试技巧"></a><strong>Log分析与调试技巧</strong><a href="#log-fen-xi-yu-diao-shi-ji-qiao" class="header-anchor">#</a></h3><h4 id="android-kai-ji-liu-cheng-tu"><a href="#Android开机流程图" class="headerlink" title="Android开机流程图"></a><strong>Android开机流程图</strong><a href="#android-kai-ji-liu-cheng-tu" class="header-anchor">#</a></h4><p><img src="http://cdn.yangchaofan.cn/blog/20210227/Qm2wlH7QktoL.png?imageslim" alt="mark"></p>
+<h4 id="bootprof"><a href="#bootprof" class="headerlink" title="bootprof"></a><strong>bootprof</strong><a href="#bootprof" class="header-anchor">#</a></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">adb shell cat &#x2F;proc&#x2F;bootprof or mktlog bootprof file</span><br></pre></td></tr></table></figure>
+<p><img src="http://cdn.yangchaofan.cn/blog/20210227/Xchbq9MizBGV.png?imageslim" alt="mark"></p>
+<h4 id="shi-ji-an-li-bu-kai-ji-lei"><a href="#实际案例（不开机类）" class="headerlink" title="实际案例（不开机类）"></a><strong>实际案例（不开机类）</strong><a href="#shi-ji-an-li-bu-kai-ji-lei" class="header-anchor">#</a></h4><h5 id="wen-jian-xi-tong-sun-pi-dao-zhi-gua-zai-shi-bai"><a href="#文件系统损坏导致挂载失败" class="headerlink" title="文件系统损坏导致挂载失败"></a><strong>文件系统损坏导致挂载失败</strong><a href="#wen-jian-xi-tong-sun-pi-dao-zhi-gua-zai-shi-bai" class="header-anchor">#</a></h5><p>System mount fail 导致 service 起不来，readback system分区对比看是否文件破坏。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[138:kworker&#x2F;u16:2]device-mapper: verity: 179:30: metadata block 716579 is corrupted</span><br><span class="line">[246:init]JBD2: IO error reading journal superblock</span><br><span class="line">[246:init]EXT4-fs (dm-0): error loading journal</span><br><span class="line">[246:init]fs_mgr: __mount(source&#x3D;&#x2F;dev&#x2F;block&#x2F;dm-0,target&#x3D;&#x2F;system,type&#x3D;ext4)&#x3D;-1  &lt;&lt;&#x3D;&#x3D;&#x3D;文件系统挂载失败</span><br><span class="line">[246:init]EXT4-fs (mmcblk0p31): VFS: Can&#39;t find ext4 filesystem</span><br><span class="line">12345</span><br></pre></td></tr></table></figure>
+<p>经常遇到无法开机的问题，低概率、难复现，而且软、硬体跨度大，不易掌握与追踪；</p>
+<p>事后分析:</p>
+<p>部分有硬件实际损坏、系统映像档被破坏，或用户拔电池导致系统核心文件损坏…等几种原因。其中一部分导致无法开机的问题是由于不当操作使得文件损坏导致的。</p>
+<p>PS:产线也会报小概率不开机的问题。</p>
+<p>Donwload完整性检查和开机检查客制化</p>
+<p>检查kernel log是否有<strong>emmc i/o error</strong>相关log</p>
+<p>如果是单机问题检查emmc相关供电或作替换物料交叉实验</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[ 5.030802] &lt;0&gt;.(0)[165:mmcqd&#x2F;0]mmcblk0: error -110 transferring data, sector 5448262, nr 442, cmd</span><br><span class="line">response 0x900, card status 0x0</span><br><span class="line">[ 5.032358] &lt;0&gt;.(0)[165:mmcqd&#x2F;0]blk_update_request: I&#x2F;O error, dev mmcblk0, sector 5448262</span><br><span class="line">[ 5.130190] &lt;0&gt;.(0)[179:init]EXT4-fs (dm-0): unable to read superblock</span><br><span class="line">[ 5.131325] &lt;0&gt;.(0)[179:init]fs_mgr: __mount(source&#x3D;&#x2F;dev&#x2F;block&#x2F;dm-0,target&#x3D;&#x2F;system,type&#x3D;ext4)&#x3D;-1  &lt;&lt;&#x3D;&#x3D;&#x3D;文件系统挂载失败</span><br><span class="line">12345</span><br></pre></td></tr></table></figure>
+<h5 id="preloader-hang-by-mem-test-fail"><a href="#preloader-hang-by-mem-test-fail" class="headerlink" title="preloader hang by mem test fail"></a><strong>preloader hang by mem test fail</strong><a href="#preloader-hang-by-mem-test-fail" class="header-anchor">#</a></h5><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[50:31:154] [MEM] complex R&#x2F;W mem test fail :FFFFFFFF</span><br><span class="line">[50:31:155] &lt;ASSERT&gt; memory.c:line 105 0</span><br><span class="line">[50:31:155] PL fatal error</span><br><span class="line">[50:31:155] PL delay for Long Press Reboot</span><br><span class="line">[50:31:159] power key is pressed</span><br><span class="line">[50:36:117] [PLF]Emergency Dwld mode(timeout: 5s)</span><br><span class="line">[50:36:119] mtk_arch_reset at pre-loader!</span><br><span class="line">1234567</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>场景追溯</strong></li>
+</ul>
+<ol>
+<li>此问题发生的背景，是产线样机？研发样机？还是客退机？</li>
+<li>问题发生概率如何？有固定的复现路径吗？目前遇到的问题是在什么测试下发生的？</li>
+<li>问题发生是在一台机器，还是多台机器都有遇到？—- 如果是单机问题该memory硬件问题可能性大</li>
+<li>用料是否为MTK QVL上已经验证OK的？其他项目上是否已经使用过？</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+        <category>BugFree</category>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>BugFree</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>BugFree三剑客异常、日志、工具</title>
+    <url>/ye-jincheng-website/blog/2021/02/android-bugfree-three-lines/</url>
+    <content><![CDATA[<h1 id="bugfree-san-jian-ke-yi-chang-ri-zhi-gong-ju-android-kai-fa-pai-cha-wen-ti-xiao-jie"><a href="#BugFree三剑客异常、日志、工具—Android开发排查问题小结" class="headerlink" title="BugFree三剑客异常、日志、工具—Android开发排查问题小结"></a>BugFree三剑客异常、日志、工具—Android开发排查问题小结<a href="#bugfree-san-jian-ke-yi-chang-ri-zhi-gong-ju-android-kai-fa-pai-cha-wen-ti-xiao-jie" class="header-anchor">#</a></h1><h1 id="qian-yan"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#qian-yan" class="header-anchor">#</a></h1><p>程序员编写程序、调试代码的时候不可避免的会遇到各种问题，如页面显示不正确，如数据层数据组装操作未按照期望的业务逻辑执行。</p>
+<p>造成这些问题的原因大多分为以下几种：有些是条件语句执行错误，有些是Java层的Exception如空指针、集合边界越界问题，有些是较难找到原因的OOM、ANR、Crash、系统SWT重启问题。面对扑面而来的问题，程序员很容易束手无策。笔者结合自己的经验，总结了BugFree中必不可少的三剑客：异常、日志、工具，期望通过这3个“帮手”，帮助各位排查开发难题。</p>
+<a id="more"></a>
+
+<h1 id="can-kao-yue-du"><a href="#参考阅读" class="headerlink" title="参考阅读"></a>参考阅读<a href="#can-kao-yue-du" class="header-anchor">#</a></h1><p>你可能会喜欢我的其他文章a</p>
+<h1 id="yi-chang"><a href="#异常" class="headerlink" title="异常"></a>异常<a href="#yi-chang" class="header-anchor">#</a></h1><h2 id="yi-chang-de-fen-lei"><a href="#异常的分类" class="headerlink" title="异常的分类"></a>异常的分类<a href="#yi-chang-de-fen-lei" class="header-anchor">#</a></h2><p>Android是一个庞大而复杂的系统，涉及多种语言，所以其异常也很复杂。根据android系统架构层次，我们也把android异常层次化，分为JE、NE、KE、EE、其他类别</p>
+<table>
+<thead>
+<tr>
+<th>w</th>
+<th>w</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JE <br>(Java layer exception)</td>
+<td>一般是在应用层和框架层发生的异常，通常是由Java代码，XML代码引起的。比如各种RuntimeException, ANR（Application Not Responding）、SWT（Software Watchdog Timeout）等</td>
+</tr>
+<tr>
+<td>NE <br>(Native layer exception)</td>
+<td>发生在Linux用户空间的异常，通常是由C/C++代码和库文件引起的。比如内核发出的NE信号（SIGILL、 SIGABRT、 SIGBUS等）</td>
+</tr>
+<tr>
+<td>KE<br> (Kernel layer execption)</td>
+<td>通常指内核故障或内核错误，由于在内核模式下出错，这类异常是非常严重的，往往会导致重启、死机或无法开机等</td>
+</tr>
+<tr>
+<td>EE <br>(External (Modem) exception)</td>
+<td>从名字看就能猜到Modem这一部分是比较特殊的，独立的。Modem有自己的内存空间和代码，为手机通讯提供服务，一旦这一部分发生异常，需要MDlog，此log需用AEE-LogVie工具解析，解析是需要对应版本的数据文件</td>
+</tr>
+</tbody></table>
+<h1 id="ri-zhi"><a href="#日志" class="headerlink" title="日志"></a>日志<a href="#ri-zhi" class="header-anchor">#</a></h1><h2 id="yong-tu"><a href="#用途" class="headerlink" title="用途"></a>用途<a href="#yong-tu" class="header-anchor">#</a></h2><h3 id="sou-suo-guan-jian-yi-chang"><a href="#搜索关键异常" class="headerlink" title="搜索关键异常"></a><strong>搜索关键异常</strong><a href="#sou-suo-guan-jian-yi-chang" class="header-anchor">#</a></h3><p><strong>1.常见应用crash</strong></p>
+<p>（系统提示***已停止运行） 可以在main log中或crash_log中直接搜索“ fatal exception” ；也可以在event_log中搜索am_crash快速定位到问题</p>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>原理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>uncaughtException</td>
+<td>Android 顶级异常捕获</td>
+</tr>
+<tr>
+<td>Exception</td>
+<td>Java 异常基类</td>
+</tr>
+<tr>
+<td>NetworkOnMainThreadException</td>
+<td>网络异常</td>
+</tr>
+<tr>
+<td>ANR Warning</td>
+<td>ANR TAG</td>
+</tr>
+<tr>
+<td>Application Not Response</td>
+<td>ANR TAG</td>
+</tr>
+<tr>
+<td>FATAL</td>
+<td>异常 TAG</td>
+</tr>
+<tr>
+<td>ANRManager</td>
+<td>ANR TAG</td>
+</tr>
+<tr>
+<td>Log的TAG</td>
+<td>Log工具类的TAG</td>
+</tr>
+</tbody></table>
+<p><strong>2.应用闪退</strong></p>
+<p>应用闪退一般有如下三种原因：</p>
+<p>1).目前遇到最多的主要是因为low memory killer机制在内存达到一定阈值的时候会将大于对应adj进程给kill掉（这个一般在kernel log中搜索关键字“ low memory kill ”就可以确认哪些是因为lmk机制而被kill）;一般此情况下跟性能有关……。 </p>
+<p>2). 关联进程被kill导致;</p>
+<p><img src="E:\学习资料\mtklog学习\kill.png" alt="kill"></p>
+<p>一般在进行闪退分析时可以在events log中搜索关键字” am_kill “或者” in dying proc “等</p>
+<p>3).应用本身逻辑有执行finish动作而出现，比如点击锁屏通知进入某个对应界面而界面没有出现，这种情况需要分析对应的main_log、event_log；</p>
+<p>a：根据出现闪退时间点在event_log搜索am_resume_activity等am_*_activity相关判断这过程中应用是否有启动和退出的动作。 </p>
+<p>b: 在main_log或sys_log搜索“ACT-AM_”相关信息查看对应activy生命周期相关信息。</p>
+<p>其次就根据log跟踪对应代码流程……</p>
+<h3 id="sou-suo-oom"><a href="#搜索OOM" class="headerlink" title="搜索OOM"></a>搜索OOM<a href="#sou-suo-oom" class="header-anchor">#</a></h3><h4 id="oom-miao-shu"><a href="#OOM描述" class="headerlink" title="OOM描述"></a>OOM描述<a href="#oom-miao-shu" class="header-anchor">#</a></h4><p>Android应用内存管理机制是在Java内存管理机制基础上改进的，所以造成OOM的原因两者差不多，即所有对象都在堆上分配空间，堆是有大小限制的，当分配的对象不能被回收仍然占据堆空间，新分配的对象不能获取足够的堆空间时，就会OOM。为什么会这样呢？这就是GC不足的地方，GC只能回收自己记录（有向树）里面不可达的对象，对可达对象认为是有用的，不会被回收。但是可达对象并非一定是有用对象，他们可能是废弃对象（死对象、冗余对象、电灯泡，僵尸），但却无法被GC回收，占据着进程堆空间，下面是网上的一个对象实例化简图</p>
+<img src="http://images2015.cnblogs.com/blog/625153/201704/625153-20170420202014712-1062539791.jpg">
+
+
+
+<h4 id="oom-qing-jing"><a href="#OOM情景" class="headerlink" title="OOM情景"></a>OOM情景<a href="#oom-qing-jing" class="header-anchor">#</a></h4><p>资源对象没有回收，如cursor，bitmap等</p>
+<p>1通常关闭Cursor的方法：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Cursor cursor = mDownloadManager.query(<span class="keyword">new</span> Query());</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (cursor.moveToFirst()) &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> index = cursor.getColumnIndex(DownloadManager.COLUMN_ID);</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> downloadId = cursor.getLong(index);</span><br><span class="line"></span><br><span class="line">ids.add(downloadId);</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">while</span> (cursor.moveToNext());</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"></span><br><span class="line">cursor.close();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>另外，在adapter中使用cursor时，需在cursor改变的时候先关闭原来的cursor， 但通常我们都是用android提供的CursorAdapter，其changeCursor函数会将原来的Cursor释放掉，并替换为新的Cursor，所以你不用担心原来的Cursor没有被关闭。</p>
+<p>2 注册没有对应的去注册，如各种监听</p>
+<p>3 生命周期问题引起的无法回收，如果static、线程等</p>
+<p>4其他所有发生OOM情景最终都可以认为是对象没有被回收，如，cursor没有close()，bitmap没有recycle()，监听没有unregister…()等等都是因为对象没有被回收，GC认为这些对象是可达的、正在使用的，导致这些应该被回收的对象不能被回收，最终造成OOM。</p>
+<p>大多数的回收方法，如close()、recycle()、unregister…()，其实都是把不再使用的对象置为null，这样GC就能回收原来对象所占空间。所以在编程的时候，对全局变量，特别是容器之类的对象和status 修饰对象，要关注其生命周期，不再需要就及时置为null或调用相应的回收方法</p>
+<h4 id="oom-de-fen-xi-si-lu"><a href="#OOM的分析思路" class="headerlink" title="OOM的分析思路"></a>OOM的分析思路<a href="#oom-de-fen-xi-si-lu" class="header-anchor">#</a></h4><h5 id="gong-ju-zhun-bei"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备<a href="#gong-ju-zhun-bei" class="header-anchor">#</a></h5><p>1.log</p>
+<p>2.MAT</p>
+<p>3.Profiler</p>
+<p>4.hprof</p>
+<h5 id="fu-xian-chang-jing"><a href="#复现场景" class="headerlink" title="复现场景"></a>复现场景<a href="#fu-xian-chang-jing" class="header-anchor">#</a></h5><p>1.按log所显示的步骤，多次重复该步骤</p>
+<p>2.抓取hrof日志</p>
+<p>3.设定怀疑点</p>
+<p>4.打印该点的内存大小，如bitmap、集合、集合持有的对象</p>
+<h5 id="que-ren-huai-yi-dian"><a href="#确认怀疑点" class="headerlink" title="确认怀疑点"></a>确认怀疑点<a href="#que-ren-huai-yi-dian" class="header-anchor">#</a></h5><p>及时释放掉该对象</p>
+<h4 id="oom-fen-lei"><a href="#OOM分类" class="headerlink" title="OOM分类"></a>OOM分类<a href="#oom-fen-lei" class="header-anchor">#</a></h4><p>内存泄露</p>
+<ul>
+<li>Context泄露</li>
+<li>Handler泄露</li>
+<li>Cache泄漏</li>
+<li>线程未释放导致的泄漏</li>
+</ul>
+<p>内存抖动</p>
+<ul>
+<li>频繁创建对象</li>
+</ul>
+<p>内存溢出</p>
+<ul>
+<li>可用内存不足</li>
+<li>瞬时申请内存超过了系统可分配内存</li>
+<li>大图、长图、宽图</li>
+<li>序列过多的图片</li>
+</ul>
+<h4 id="oom-you-hua-si-lu"><a href="#OOM优化思路" class="headerlink" title="OOM优化思路"></a>OOM优化思路<a href="#oom-you-hua-si-lu" class="header-anchor">#</a></h4><p>这些问题大多是比较难解的问题，大部分都是随机的，往往都是很难复现的，找出规律是很重要的！</p>
+<p>另外，内存泄露不容易发现，一些轻微的泄露，可能要使用一个月才能发现，所以对自己的模块，要自己去检查有没有OOM，可以下班时挂上monkey，有时候是能跑出来的</p>
+<p>从OOM联想到性能问题，性能问题很多是界面刷新、对象生命周期、冗余操作、不必要的线程等引起的……</p>
+<h3 id="sou-suo-swt"><a href="#搜索SWT" class="headerlink" title="搜索SWT"></a>搜索SWT<a href="#sou-suo-swt" class="header-anchor">#</a></h3><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>步骤</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/MTCwv77J4QE9.png"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/iedG22YWjV1n.png"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>具体信息主要查找log文件有sys_log和mtklog\aee_exp\db.fatal.00.SWT\db.fatal.00.SWT.dbg.DEC</p>
+<h3 id="sou-suo-si-ji"><a href="#搜索死机" class="headerlink" title="搜索死机"></a>搜索死机<a href="#sou-suo-si-ji" class="header-anchor">#</a></h3><p>这里说的死机就是冻屏，停留在一个界面没反应。死机问题很少遇到，且大多不是一个用层问题，下面简单说下可能造成死机的原因和分析需要信息</p>
+<h4 id="gong-ju-zhun-bei"><a href="#工具准备-1" class="headerlink" title="工具准备"></a>工具准备<a href="#gong-ju-zhun-bei" class="header-anchor">#</a></h4><p>MTK提供了多种抓取和查看LOG的工具, 如:mtklogger，GAT，Catcher，LogView，QAAT等，这些工具在文档《MediaTek_Logging_SOP》中都有描述</p>
+<p><img src="http://cdn.yangchaofan.cn/blog/20210227/382aVmPG0k6V.jpg?imageslim" alt="mark"></p>
+<h5 id="mtklogger"><a href="#Mtklogger" class="headerlink" title="Mtklogger*"></a>Mtklogger*<a href="#mtklogger" class="header-anchor">#</a></h5><p>Mtklogger是抓取log的apk，整合了ModemLog，MobileLog，NetworkLog and SystemLogger，在工程模式操作就可以打相关log了。</p>
+<h5 id="gat"><a href="#GAT" class="headerlink" title="GAT"></a><strong>GAT</strong><a href="#gat" class="header-anchor">#</a></h5><p>基于SDK调试开发的GUI工具，新增了Log Recoder，Debug Configuration Setting，DBpuller，adb command，Process Information view，Profiling Tools，LogView，Plug-in Script。是调试和抓log的神器，使用说明阅读文档《GAT_User_Guide(Customer).pdf》</p>
+<p>工具获取路径（以W1444版本为例）：</p>
+<p>私服SVN：\rd\MTK_TOOL\AndroidTool\W1444\W1444_full.zip\Debugging Tools (Binary)\GAT</p>
+<h5 id="catcher"><a href="#Catcher" class="headerlink" title="Catcher"></a><strong>Catcher</strong><a href="#catcher" class="header-anchor">#</a></h5><p>是抓取和解析ModemLog的PC端工具，我们经常使用来查看ModemLog，使用说明阅读文档《Catcher_User_Manual_for_Customer.pdf》</p>
+<p>工具获取路径：</p>
+<p>私服SVN：\rd\MTK_TOOL\AndroidTool\W1444\W1444_full.zip\Catcher</p>
+<h5 id="logview"><a href="#LogView" class="headerlink" title="LogView"></a><strong>LogView</strong><a href="#logview" class="header-anchor">#</a></h5><p>可以查看APlog，Taglog，MTKlog，但最常用的是用来查看NE时产生的AEE DB文件里的log，具体使用参考《GAT_User_Guide(Customer).pdf》</p>
+<p>工具获取路径：</p>
+<p>此工具已集成到GAT</p>
+<h5 id="qaat"><a href="#QAAT" class="headerlink" title="QAAT"></a><strong>QAAT</strong><a href="#qaat" class="header-anchor">#</a></h5><p>快速分析log的工具，涵盖错误类型较广，很多地方都可以用，其实他的原理就是过滤关键字，把各种类型的错误过滤出来，是一个分析LOG非常便捷的工具，具体使用参考《MediaTek_Logging_SOP.pdf》</p>
+<p><strong>死机可能原因：</strong></p>
+<ol>
+<li><p>输入系统或者输入驱动问题</p>
+</li>
+<li><p>系统逻辑问题或阻塞</p>
+</li>
+<li><p>Surfacefinger问题</p>
+</li>
+<li><p>显示系统或LCM驱动问题</p>
+</li>
+</ol>
+<p><strong>相关信息和抓log：</strong></p>
+<ol>
+<li><p>确认adb是否可用</p>
+</li>
+<li><p>抓取bugreport，adb bugreport &gt; d:/bugreport.txt</p>
+</li>
+<li><p>抓取dumpstate信息，adb shell dumpstate &gt; d:/dumpstate.txt</p>
+</li>
+<li><p>抓取CPU信息，adb shell top –t –m 5 &gt; d:/cpu.txt</p>
+</li>
+<li><p>确认是否可以拨打电话，adb shell am start –a android.intent.action.CALL tel:10086(看界面是否能够更新)</p>
+</li>
+<li><p>查看按键和触屏报点，adb shell getevent</p>
+</li>
+<li><p>抓取Surfacefinger进程信息，先adb shell ps –p找出pid，然后使用adb shell rtt –f bt –p pid &gt; rtt.txt</p>
+</li>
+</ol>
+<h3 id="sou-suo-chong-qi"><a href="#搜索重启" class="headerlink" title="搜索重启"></a>搜索重启<a href="#sou-suo-chong-qi" class="header-anchor">#</a></h3><p>从异常分类来看，重启异常大多数和NE、KE和硬件问题有关，JE方面引起重启死机大多是和系统进程有关，如system_process进程发生了Crash、SWT、JVM Error，AP应用一般是不会引起重启死机的，但偶尔也会</p>
+<p>72平台上，发送短信内容为‘==’时会重启</p>
+<img src="http://images2015.cnblogs.com/blog/625153/201704/625153-20170420202046243-314090766.jpg">
+
+
+
+<p>虽然是Mms引起的，但最终也是System_process挂掉了，导致重启</p>
+<p>重启异常分析步骤（JE）：</p>
+<ol>
+<li><p>确认异常类型（用QAAT跑一下做初步判断，如果是NE、KE让驱动人员帮忙解决）</p>
+</li>
+<li><p>找到第一时间发生错误的地方，因为后面的错误多半是因为前面错误引起的，那就没有意义</p>
+</li>
+<li><p>根据JE类型，结合对应工具分析LOG</p>
+</li>
+</ol>
+<h3 id="sou-suo-anr"><a href="#搜索ANR" class="headerlink" title="搜索ANR"></a>搜索ANR<a href="#sou-suo-anr" class="header-anchor">#</a></h3><h4 id="anr-ding-yi"><a href="#ANR定义" class="headerlink" title="ANR定义"></a><strong>ANR定义</strong><a href="#anr-ding-yi" class="header-anchor">#</a></h4><p>Application Not Responding</p>
+<h4 id="anr-chong-lei"><a href="#ANR种类" class="headerlink" title="ANR种类"></a><strong>ANR种类</strong><a href="#anr-chong-lei" class="header-anchor">#</a></h4><p><strong>1). Key Dispatch Timeout (8s)</strong></p>
+<p>按键或触摸事件在特定时间内无响应（origin:5s）</p>
+<p>KEY_DISPATCHING_TIMEOUT = 8*1000</p>
+<p><strong>2) .Broadcast Timeout</strong></p>
+<p>BroadcastReceiver在特定时间内无法处理完成</p>
+<p>BROADCAST_FG_TIMEOUT: 10s</p>
+<p>BROADCAST_BG_TIMEOUT: 60s</p>
+<p>按键和广播事件时间内未响应，时间限定定义在<strong>ActivityManagerService.java</strong>类中</p>
+<p><strong>3).Service Timeout （20s）——-小概率类型</strong></p>
+<p>Service在特定的时间内无法处理完成</p>
+<p>service时间内未响应时间限定在<strong>ActiveServices.java</strong>类中</p>
+<p>SERVICE_TIMEOUT = 20*1000;</p>
+<h4 id="anr-yuan-yin"><a href="#ANR原因" class="headerlink" title="ANR原因"></a>ANR原因<a href="#anr-yuan-yin" class="header-anchor">#</a></h4><p>1）应用进程有一个主线程（main thread）和一个信息队列(main message queue) main thead == activity thread</p>
+<p>2）主线程负责处理像Draw、Listen、receive等UI事件</p>
+<p>3）主线程负责从消息队列中取出信息并分发它</p>
+<p>4）主线程在完成当前信息处理之前，不会再取信息队列中的信息</p>
+<p>5）如果主线程在处理当前信息时卡住，没有及时分发，ANR就会出现</p>
+<h4 id="anr-de-fen-xi-si-lu"><a href="#ANR的分析思路" class="headerlink" title="ANR的分析思路"></a>ANR的分析思路<a href="#anr-de-fen-xi-si-lu" class="header-anchor">#</a></h4><h5 id="gong-ju-zhun-bei"><a href="#工具准备-2" class="headerlink" title="工具准备"></a>工具准备<a href="#gong-ju-zhun-bei" class="header-anchor">#</a></h5><p>1 MTKlog，主要是其中的Aee_exp和MobileLog</p>
+<p>2Trace.txt文件（data/anr目录下）或者bugreport日志（使用adb bugreport &gt; bugreport.txt或者GAT工具输出）</p>
+<p>3BlockCanary，记录超时后的log</p>
+<p>4一般当出现异常（JE\SWT\NE\KE等）时，会在手机中的/data/aee_exp目录下保存异常的db。 对于异常的类型和具体信息，需要通过GAT工具解析db档案</p>
+<p>5.bugreport</p>
+<p>6.aee_exp</p>
+<h5 id="trace-fen-xi-liu-cheng"><a href="#Trace分析流程" class="headerlink" title="Trace分析流程"></a>Trace分析流程<a href="#trace-fen-xi-liu-cheng" class="header-anchor">#</a></h5><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>步骤</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/iITTadTui5mQ.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/JwYHHTncMMip.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/VkiuF6SpNL7b.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/FwcDyrQFhFAa.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/poTh8Et0Or0w.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/5M4Dwh0H2ugg.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/2H8AlTBdueFO.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/Dl36A6cYlbzF.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="anr-jie-jue-fang-an"><a href="#ANR解决方案" class="headerlink" title="ANR解决方案"></a>ANR解决方案<a href="#anr-jie-jue-fang-an" class="header-anchor">#</a></h4><p>1)：UI线程尽量只做跟UI相关的工作</p>
+<p>2)：耗时的工作（比如数据库操作，I/O，连接网络或者别的有可能阻碍UI线程的操作）把它放入单独的线程处理</p>
+<p>3)：尽量用Handler来处理UIthread和别的thread之间的交互</p>
+<h4 id="anr-you-hua-si-lu"><a href="#ANR优化思路" class="headerlink" title="ANR优化思路"></a>ANR优化思路<a href="#anr-you-hua-si-lu" class="header-anchor">#</a></h4><p>优化UI线程的任务：</p>
+<p>1)：UI线程尽量只做跟UI相关的工作</p>
+<p>2)：耗时的工作（比如数据库操作，I/O，连接网络或者别的有可能阻碍UI线程的操作）把它放入单独的线程处理</p>
+<p>3)：尽量用Handler来处理UIthread和别的thread之间的交互</p>
+<p>UI线程的主要任务是：</p>
+<p>1).Activity:onCreate(), onResume(), onDestroy(), onKeyDown(), onClick()等</p>
+<p>2).AsyncTask: onPreExecute(), onProgressUpdate(), onPostExecute(), onCancel等</p>
+<p>3).Mainthread handler: handleMessage(), post*(runnable r)等</p>
+<h1 id="gong-ju"><a href="#工具" class="headerlink" title="工具"></a>工具<a href="#gong-ju" class="header-anchor">#</a></h1><table>
+<thead>
+<tr>
+<th>工具包名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>联发科MTK组件</td>
+<td>MTKLogger</td>
+</tr>
+<tr>
+<td></td>
+<td>GAT</td>
+</tr>
+<tr>
+<td></td>
+<td>LogView</td>
+</tr>
+<tr>
+<td></td>
+<td>QAAT</td>
+</tr>
+<tr>
+<td>BlockCanary</td>
+<td>开源框架，卡顿日志</td>
+</tr>
+<tr>
+<td>Android SDK</td>
+<td>ADB LogCat</td>
+</tr>
+<tr>
+<td></td>
+<td>MAT</td>
+</tr>
+<tr>
+<td>Android Studio</td>
+<td>Profile</td>
+</tr>
+<tr>
+<td></td>
+<td>TraceView</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>Android</category>
+        <category>BugFree</category>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>BugFree</tag>
       </tags>
   </entry>
   <entry>
@@ -1759,8 +2407,8 @@ Handler(Looper looper, Callback callback, boolean async)
 ]]></content>
       <categories>
         <category>Android</category>
-        <category>应用层</category>
         <category>面试</category>
+        <category>应用层</category>
       </categories>
       <tags>
         <tag>Android</tag>

@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/ye-jincheng-website/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/ye-jincheng-website/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/ye-jincheng-website/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/ye-jincheng-website/function%20small()%20%7B%20%5Bnative%20code%5D%20%7D?v=5.1.2">
+
+
+
+
+
+
+  <meta name="keywords" content="Android,BugFree," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="BugFree三剑客异常、日志、工具—Android开发排查问题小结前言程序员编写程序、调试代码的时候不可避免的会遇到各种问题，如页面显示不正确，如数据层数据组装操作未按照期望的业务逻辑执行。 造成这些问题的原因大多分为以下几种：有些是条件语句执行错误，有些是Java层的Exception如空指针、集合边界越界问题，有些是较难找到原因的OOM、ANR、Crash、系统SWT重启问题。面对扑面而来的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BugFree三剑客异常、日志、工具">
+<meta property="og:url" content="http://jackyoung123.gitee.io/ye-jincheng-website/blog/2021/02/android-bugfree-three-lines/index.html">
+<meta property="og:site_name" content="叶金诚的站点">
+<meta property="og:description" content="BugFree三剑客异常、日志、工具—Android开发排查问题小结前言程序员编写程序、调试代码的时候不可避免的会遇到各种问题，如页面显示不正确，如数据层数据组装操作未按照期望的业务逻辑执行。 造成这些问题的原因大多分为以下几种：有些是条件语句执行错误，有些是Java层的Exception如空指针、集合边界越界问题，有些是较难找到原因的OOM、ANR、Crash、系统SWT重启问题。面对扑面而来的">
+<meta property="og:locale">
+<meta property="og:image" content="e:/学习资料/mtklog学习/kill.png">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/625153/201704/625153-20170420202014712-1062539791.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/MTCwv77J4QE9.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/iedG22YWjV1n.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/382aVmPG0k6V.jpg?imageslim">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/625153/201704/625153-20170420202046243-314090766.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/iITTadTui5mQ.png?imageslim">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/JwYHHTncMMip.png?imageslim">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/VkiuF6SpNL7b.png?imageslim">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/FwcDyrQFhFAa.png?imageslim">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/poTh8Et0Or0w.png?imageslim">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/5M4Dwh0H2ugg.png?imageslim">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/2H8AlTBdueFO.png?imageslim">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/Dl36A6cYlbzF.png?imageslim">
+<meta property="article:published_time" content="2021-02-27T00:13:12.000Z">
+<meta property="article:modified_time" content="2021-02-27T03:55:09.869Z">
+<meta property="article:author" content="叶金诚">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="BugFree">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="e:/学习资料/mtklog学习/kill.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":16,"offset_float":16,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: "",
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jackyoung123.gitee.io/ye-jincheng-website/blog/2021/02/android-bugfree-three-lines/"/>
+
+
+
+
+
+  <title>BugFree三剑客异常、日志、工具 | 叶金诚的站点</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f6796a81afe3e2f22bc40222eb19971f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/ye-jincheng-website/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">叶金诚的站点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">汇贤雅叙</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/ye-jincheng-website/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/ye-jincheng-website/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/ye-jincheng-website/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/ye-jincheng-website/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/ye-jincheng-website/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://jackyoung123.gitee.io/ye-jincheng-website/ye-jincheng-website/blog/2021/02/android-bugfree-three-lines/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/ye-jincheng-website/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BugFree三剑客异常、日志、工具</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+		        
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-27T08:13:12+08:00">
+                2021-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ye-jincheng-website/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ye-jincheng-website/categories/Android/BugFree/" itemprop="url" rel="index">
+                    <span itemprop="name">BugFree</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/ye-jincheng-website/categories/Android/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/ye-jincheng-website/blog/2021/02/android-bugfree-three-lines/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="blog/2021/02/android-bugfree-three-lines/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/ye-jincheng-website/blog/2021/02/android-bugfree-three-lines/" class="leancloud_visitors" data-flag-title="BugFree三剑客异常、日志、工具">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="bugfree-san-jian-ke-yi-chang-ri-zhi-gong-ju-android-kai-fa-pai-cha-wen-ti-xiao-jie"><a href="#BugFree三剑客异常、日志、工具—Android开发排查问题小结" class="headerlink" title="BugFree三剑客异常、日志、工具—Android开发排查问题小结"></a>BugFree三剑客异常、日志、工具—Android开发排查问题小结<a href="#bugfree-san-jian-ke-yi-chang-ri-zhi-gong-ju-android-kai-fa-pai-cha-wen-ti-xiao-jie" class="header-anchor">#</a></h1><h1 id="qian-yan"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#qian-yan" class="header-anchor">#</a></h1><p>程序员编写程序、调试代码的时候不可避免的会遇到各种问题，如页面显示不正确，如数据层数据组装操作未按照期望的业务逻辑执行。</p>
+<p>造成这些问题的原因大多分为以下几种：有些是条件语句执行错误，有些是Java层的Exception如空指针、集合边界越界问题，有些是较难找到原因的OOM、ANR、Crash、系统SWT重启问题。面对扑面而来的问题，程序员很容易束手无策。笔者结合自己的经验，总结了BugFree中必不可少的三剑客：异常、日志、工具，期望通过这3个“帮手”，帮助各位排查开发难题。</p>
+<a id="more"></a>
+
+<h1 id="can-kao-yue-du"><a href="#参考阅读" class="headerlink" title="参考阅读"></a>参考阅读<a href="#can-kao-yue-du" class="header-anchor">#</a></h1><p>你可能会喜欢我的其他文章a</p>
+<h1 id="yi-chang"><a href="#异常" class="headerlink" title="异常"></a>异常<a href="#yi-chang" class="header-anchor">#</a></h1><h2 id="yi-chang-de-fen-lei"><a href="#异常的分类" class="headerlink" title="异常的分类"></a>异常的分类<a href="#yi-chang-de-fen-lei" class="header-anchor">#</a></h2><p>Android是一个庞大而复杂的系统，涉及多种语言，所以其异常也很复杂。根据android系统架构层次，我们也把android异常层次化，分为JE、NE、KE、EE、其他类别</p>
+<table>
+<thead>
+<tr>
+<th>w</th>
+<th>w</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JE <br>(Java layer exception)</td>
+<td>一般是在应用层和框架层发生的异常，通常是由Java代码，XML代码引起的。比如各种RuntimeException, ANR（Application Not Responding）、SWT（Software Watchdog Timeout）等</td>
+</tr>
+<tr>
+<td>NE <br>(Native layer exception)</td>
+<td>发生在Linux用户空间的异常，通常是由C/C++代码和库文件引起的。比如内核发出的NE信号（SIGILL、 SIGABRT、 SIGBUS等）</td>
+</tr>
+<tr>
+<td>KE<br> (Kernel layer execption)</td>
+<td>通常指内核故障或内核错误，由于在内核模式下出错，这类异常是非常严重的，往往会导致重启、死机或无法开机等</td>
+</tr>
+<tr>
+<td>EE <br>(External (Modem) exception)</td>
+<td>从名字看就能猜到Modem这一部分是比较特殊的，独立的。Modem有自己的内存空间和代码，为手机通讯提供服务，一旦这一部分发生异常，需要MDlog，此log需用AEE-LogVie工具解析，解析是需要对应版本的数据文件</td>
+</tr>
+</tbody></table>
+<h1 id="ri-zhi"><a href="#日志" class="headerlink" title="日志"></a>日志<a href="#ri-zhi" class="header-anchor">#</a></h1><h2 id="yong-tu"><a href="#用途" class="headerlink" title="用途"></a>用途<a href="#yong-tu" class="header-anchor">#</a></h2><h3 id="sou-suo-guan-jian-yi-chang"><a href="#搜索关键异常" class="headerlink" title="搜索关键异常"></a><strong>搜索关键异常</strong><a href="#sou-suo-guan-jian-yi-chang" class="header-anchor">#</a></h3><p><strong>1.常见应用crash</strong></p>
+<p>（系统提示***已停止运行） 可以在main log中或crash_log中直接搜索“ fatal exception” ；也可以在event_log中搜索am_crash快速定位到问题</p>
+<table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>原理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>uncaughtException</td>
+<td>Android 顶级异常捕获</td>
+</tr>
+<tr>
+<td>Exception</td>
+<td>Java 异常基类</td>
+</tr>
+<tr>
+<td>NetworkOnMainThreadException</td>
+<td>网络异常</td>
+</tr>
+<tr>
+<td>ANR Warning</td>
+<td>ANR TAG</td>
+</tr>
+<tr>
+<td>Application Not Response</td>
+<td>ANR TAG</td>
+</tr>
+<tr>
+<td>FATAL</td>
+<td>异常 TAG</td>
+</tr>
+<tr>
+<td>ANRManager</td>
+<td>ANR TAG</td>
+</tr>
+<tr>
+<td>Log的TAG</td>
+<td>Log工具类的TAG</td>
+</tr>
+</tbody></table>
+<p><strong>2.应用闪退</strong></p>
+<p>应用闪退一般有如下三种原因：</p>
+<p>1).目前遇到最多的主要是因为low memory killer机制在内存达到一定阈值的时候会将大于对应adj进程给kill掉（这个一般在kernel log中搜索关键字“ low memory kill ”就可以确认哪些是因为lmk机制而被kill）;一般此情况下跟性能有关……。 </p>
+<p>2). 关联进程被kill导致;</p>
+<p><img src="E:\学习资料\mtklog学习\kill.png" alt="kill"></p>
+<p>一般在进行闪退分析时可以在events log中搜索关键字” am_kill “或者” in dying proc “等</p>
+<p>3).应用本身逻辑有执行finish动作而出现，比如点击锁屏通知进入某个对应界面而界面没有出现，这种情况需要分析对应的main_log、event_log；</p>
+<p>a：根据出现闪退时间点在event_log搜索am_resume_activity等am_*_activity相关判断这过程中应用是否有启动和退出的动作。 </p>
+<p>b: 在main_log或sys_log搜索“ACT-AM_”相关信息查看对应activy生命周期相关信息。</p>
+<p>其次就根据log跟踪对应代码流程……</p>
+<h3 id="sou-suo-oom"><a href="#搜索OOM" class="headerlink" title="搜索OOM"></a>搜索OOM<a href="#sou-suo-oom" class="header-anchor">#</a></h3><h4 id="oom-miao-shu"><a href="#OOM描述" class="headerlink" title="OOM描述"></a>OOM描述<a href="#oom-miao-shu" class="header-anchor">#</a></h4><p>Android应用内存管理机制是在Java内存管理机制基础上改进的，所以造成OOM的原因两者差不多，即所有对象都在堆上分配空间，堆是有大小限制的，当分配的对象不能被回收仍然占据堆空间，新分配的对象不能获取足够的堆空间时，就会OOM。为什么会这样呢？这就是GC不足的地方，GC只能回收自己记录（有向树）里面不可达的对象，对可达对象认为是有用的，不会被回收。但是可达对象并非一定是有用对象，他们可能是废弃对象（死对象、冗余对象、电灯泡，僵尸），但却无法被GC回收，占据着进程堆空间，下面是网上的一个对象实例化简图</p>
+<img src="http://images2015.cnblogs.com/blog/625153/201704/625153-20170420202014712-1062539791.jpg">
+
+
+
+<h4 id="oom-qing-jing"><a href="#OOM情景" class="headerlink" title="OOM情景"></a>OOM情景<a href="#oom-qing-jing" class="header-anchor">#</a></h4><p>资源对象没有回收，如cursor，bitmap等</p>
+<p>1通常关闭Cursor的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Cursor cursor = mDownloadManager.query(<span class="keyword">new</span> Query());</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (cursor.moveToFirst()) &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> index = cursor.getColumnIndex(DownloadManager.COLUMN_ID);</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> downloadId = cursor.getLong(index);</span><br><span class="line"></span><br><span class="line">ids.add(downloadId);</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">while</span> (cursor.moveToNext());</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"></span><br><span class="line">cursor.close();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>另外，在adapter中使用cursor时，需在cursor改变的时候先关闭原来的cursor， 但通常我们都是用android提供的CursorAdapter，其changeCursor函数会将原来的Cursor释放掉，并替换为新的Cursor，所以你不用担心原来的Cursor没有被关闭。</p>
+<p>2 注册没有对应的去注册，如各种监听</p>
+<p>3 生命周期问题引起的无法回收，如果static、线程等</p>
+<p>4其他所有发生OOM情景最终都可以认为是对象没有被回收，如，cursor没有close()，bitmap没有recycle()，监听没有unregister…()等等都是因为对象没有被回收，GC认为这些对象是可达的、正在使用的，导致这些应该被回收的对象不能被回收，最终造成OOM。</p>
+<p>大多数的回收方法，如close()、recycle()、unregister…()，其实都是把不再使用的对象置为null，这样GC就能回收原来对象所占空间。所以在编程的时候，对全局变量，特别是容器之类的对象和status 修饰对象，要关注其生命周期，不再需要就及时置为null或调用相应的回收方法</p>
+<h4 id="oom-de-fen-xi-si-lu"><a href="#OOM的分析思路" class="headerlink" title="OOM的分析思路"></a>OOM的分析思路<a href="#oom-de-fen-xi-si-lu" class="header-anchor">#</a></h4><h5 id="gong-ju-zhun-bei"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备<a href="#gong-ju-zhun-bei" class="header-anchor">#</a></h5><p>1.log</p>
+<p>2.MAT</p>
+<p>3.Profiler</p>
+<p>4.hprof</p>
+<h5 id="fu-xian-chang-jing"><a href="#复现场景" class="headerlink" title="复现场景"></a>复现场景<a href="#fu-xian-chang-jing" class="header-anchor">#</a></h5><p>1.按log所显示的步骤，多次重复该步骤</p>
+<p>2.抓取hrof日志</p>
+<p>3.设定怀疑点</p>
+<p>4.打印该点的内存大小，如bitmap、集合、集合持有的对象</p>
+<h5 id="que-ren-huai-yi-dian"><a href="#确认怀疑点" class="headerlink" title="确认怀疑点"></a>确认怀疑点<a href="#que-ren-huai-yi-dian" class="header-anchor">#</a></h5><p>及时释放掉该对象</p>
+<h4 id="oom-fen-lei"><a href="#OOM分类" class="headerlink" title="OOM分类"></a>OOM分类<a href="#oom-fen-lei" class="header-anchor">#</a></h4><p>内存泄露</p>
+<ul>
+<li>Context泄露</li>
+<li>Handler泄露</li>
+<li>Cache泄漏</li>
+<li>线程未释放导致的泄漏</li>
+</ul>
+<p>内存抖动</p>
+<ul>
+<li>频繁创建对象</li>
+</ul>
+<p>内存溢出</p>
+<ul>
+<li>可用内存不足</li>
+<li>瞬时申请内存超过了系统可分配内存</li>
+<li>大图、长图、宽图</li>
+<li>序列过多的图片</li>
+</ul>
+<h4 id="oom-you-hua-si-lu"><a href="#OOM优化思路" class="headerlink" title="OOM优化思路"></a>OOM优化思路<a href="#oom-you-hua-si-lu" class="header-anchor">#</a></h4><p>这些问题大多是比较难解的问题，大部分都是随机的，往往都是很难复现的，找出规律是很重要的！</p>
+<p>另外，内存泄露不容易发现，一些轻微的泄露，可能要使用一个月才能发现，所以对自己的模块，要自己去检查有没有OOM，可以下班时挂上monkey，有时候是能跑出来的</p>
+<p>从OOM联想到性能问题，性能问题很多是界面刷新、对象生命周期、冗余操作、不必要的线程等引起的……</p>
+<h3 id="sou-suo-swt"><a href="#搜索SWT" class="headerlink" title="搜索SWT"></a>搜索SWT<a href="#sou-suo-swt" class="header-anchor">#</a></h3><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>步骤</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/MTCwv77J4QE9.png"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/iedG22YWjV1n.png"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>具体信息主要查找log文件有sys_log和mtklog\aee_exp\db.fatal.00.SWT\db.fatal.00.SWT.dbg.DEC</p>
+<h3 id="sou-suo-si-ji"><a href="#搜索死机" class="headerlink" title="搜索死机"></a>搜索死机<a href="#sou-suo-si-ji" class="header-anchor">#</a></h3><p>这里说的死机就是冻屏，停留在一个界面没反应。死机问题很少遇到，且大多不是一个用层问题，下面简单说下可能造成死机的原因和分析需要信息</p>
+<h4 id="gong-ju-zhun-bei"><a href="#工具准备-1" class="headerlink" title="工具准备"></a>工具准备<a href="#gong-ju-zhun-bei" class="header-anchor">#</a></h4><p>MTK提供了多种抓取和查看LOG的工具, 如:mtklogger，GAT，Catcher，LogView，QAAT等，这些工具在文档《MediaTek_Logging_SOP》中都有描述</p>
+<p><img src="http://cdn.yangchaofan.cn/blog/20210227/382aVmPG0k6V.jpg?imageslim" alt="mark"></p>
+<h5 id="mtklogger"><a href="#Mtklogger" class="headerlink" title="Mtklogger*"></a>Mtklogger*<a href="#mtklogger" class="header-anchor">#</a></h5><p>Mtklogger是抓取log的apk，整合了ModemLog，MobileLog，NetworkLog and SystemLogger，在工程模式操作就可以打相关log了。</p>
+<h5 id="gat"><a href="#GAT" class="headerlink" title="GAT"></a><strong>GAT</strong><a href="#gat" class="header-anchor">#</a></h5><p>基于SDK调试开发的GUI工具，新增了Log Recoder，Debug Configuration Setting，DBpuller，adb command，Process Information view，Profiling Tools，LogView，Plug-in Script。是调试和抓log的神器，使用说明阅读文档《GAT_User_Guide(Customer).pdf》</p>
+<p>工具获取路径（以W1444版本为例）：</p>
+<p>私服SVN：\rd\MTK_TOOL\AndroidTool\W1444\W1444_full.zip\Debugging Tools (Binary)\GAT</p>
+<h5 id="catcher"><a href="#Catcher" class="headerlink" title="Catcher"></a><strong>Catcher</strong><a href="#catcher" class="header-anchor">#</a></h5><p>是抓取和解析ModemLog的PC端工具，我们经常使用来查看ModemLog，使用说明阅读文档《Catcher_User_Manual_for_Customer.pdf》</p>
+<p>工具获取路径：</p>
+<p>私服SVN：\rd\MTK_TOOL\AndroidTool\W1444\W1444_full.zip\Catcher</p>
+<h5 id="logview"><a href="#LogView" class="headerlink" title="LogView"></a><strong>LogView</strong><a href="#logview" class="header-anchor">#</a></h5><p>可以查看APlog，Taglog，MTKlog，但最常用的是用来查看NE时产生的AEE DB文件里的log，具体使用参考《GAT_User_Guide(Customer).pdf》</p>
+<p>工具获取路径：</p>
+<p>此工具已集成到GAT</p>
+<h5 id="qaat"><a href="#QAAT" class="headerlink" title="QAAT"></a><strong>QAAT</strong><a href="#qaat" class="header-anchor">#</a></h5><p>快速分析log的工具，涵盖错误类型较广，很多地方都可以用，其实他的原理就是过滤关键字，把各种类型的错误过滤出来，是一个分析LOG非常便捷的工具，具体使用参考《MediaTek_Logging_SOP.pdf》</p>
+<p><strong>死机可能原因：</strong></p>
+<ol>
+<li><p>输入系统或者输入驱动问题</p>
+</li>
+<li><p>系统逻辑问题或阻塞</p>
+</li>
+<li><p>Surfacefinger问题</p>
+</li>
+<li><p>显示系统或LCM驱动问题</p>
+</li>
+</ol>
+<p><strong>相关信息和抓log：</strong></p>
+<ol>
+<li><p>确认adb是否可用</p>
+</li>
+<li><p>抓取bugreport，adb bugreport &gt; d:/bugreport.txt</p>
+</li>
+<li><p>抓取dumpstate信息，adb shell dumpstate &gt; d:/dumpstate.txt</p>
+</li>
+<li><p>抓取CPU信息，adb shell top –t –m 5 &gt; d:/cpu.txt</p>
+</li>
+<li><p>确认是否可以拨打电话，adb shell am start –a android.intent.action.CALL tel:10086(看界面是否能够更新)</p>
+</li>
+<li><p>查看按键和触屏报点，adb shell getevent</p>
+</li>
+<li><p>抓取Surfacefinger进程信息，先adb shell ps –p找出pid，然后使用adb shell rtt –f bt –p pid &gt; rtt.txt</p>
+</li>
+</ol>
+<h3 id="sou-suo-chong-qi"><a href="#搜索重启" class="headerlink" title="搜索重启"></a>搜索重启<a href="#sou-suo-chong-qi" class="header-anchor">#</a></h3><p>从异常分类来看，重启异常大多数和NE、KE和硬件问题有关，JE方面引起重启死机大多是和系统进程有关，如system_process进程发生了Crash、SWT、JVM Error，AP应用一般是不会引起重启死机的，但偶尔也会</p>
+<p>72平台上，发送短信内容为‘==’时会重启</p>
+<img src="http://images2015.cnblogs.com/blog/625153/201704/625153-20170420202046243-314090766.jpg">
+
+
+
+<p>虽然是Mms引起的，但最终也是System_process挂掉了，导致重启</p>
+<p>重启异常分析步骤（JE）：</p>
+<ol>
+<li><p>确认异常类型（用QAAT跑一下做初步判断，如果是NE、KE让驱动人员帮忙解决）</p>
+</li>
+<li><p>找到第一时间发生错误的地方，因为后面的错误多半是因为前面错误引起的，那就没有意义</p>
+</li>
+<li><p>根据JE类型，结合对应工具分析LOG</p>
+</li>
+</ol>
+<h3 id="sou-suo-anr"><a href="#搜索ANR" class="headerlink" title="搜索ANR"></a>搜索ANR<a href="#sou-suo-anr" class="header-anchor">#</a></h3><h4 id="anr-ding-yi"><a href="#ANR定义" class="headerlink" title="ANR定义"></a><strong>ANR定义</strong><a href="#anr-ding-yi" class="header-anchor">#</a></h4><p>Application Not Responding</p>
+<h4 id="anr-chong-lei"><a href="#ANR种类" class="headerlink" title="ANR种类"></a><strong>ANR种类</strong><a href="#anr-chong-lei" class="header-anchor">#</a></h4><p><strong>1). Key Dispatch Timeout (8s)</strong></p>
+<p>按键或触摸事件在特定时间内无响应（origin:5s）</p>
+<p>KEY_DISPATCHING_TIMEOUT = 8*1000</p>
+<p><strong>2) .Broadcast Timeout</strong></p>
+<p>BroadcastReceiver在特定时间内无法处理完成</p>
+<p>BROADCAST_FG_TIMEOUT: 10s</p>
+<p>BROADCAST_BG_TIMEOUT: 60s</p>
+<p>按键和广播事件时间内未响应，时间限定定义在<strong>ActivityManagerService.java</strong>类中</p>
+<p><strong>3).Service Timeout （20s）——-小概率类型</strong></p>
+<p>Service在特定的时间内无法处理完成</p>
+<p>service时间内未响应时间限定在<strong>ActiveServices.java</strong>类中</p>
+<p>SERVICE_TIMEOUT = 20*1000;</p>
+<h4 id="anr-yuan-yin"><a href="#ANR原因" class="headerlink" title="ANR原因"></a>ANR原因<a href="#anr-yuan-yin" class="header-anchor">#</a></h4><p>1）应用进程有一个主线程（main thread）和一个信息队列(main message queue) main thead == activity thread</p>
+<p>2）主线程负责处理像Draw、Listen、receive等UI事件</p>
+<p>3）主线程负责从消息队列中取出信息并分发它</p>
+<p>4）主线程在完成当前信息处理之前，不会再取信息队列中的信息</p>
+<p>5）如果主线程在处理当前信息时卡住，没有及时分发，ANR就会出现</p>
+<h4 id="anr-de-fen-xi-si-lu"><a href="#ANR的分析思路" class="headerlink" title="ANR的分析思路"></a>ANR的分析思路<a href="#anr-de-fen-xi-si-lu" class="header-anchor">#</a></h4><h5 id="gong-ju-zhun-bei"><a href="#工具准备-2" class="headerlink" title="工具准备"></a>工具准备<a href="#gong-ju-zhun-bei" class="header-anchor">#</a></h5><p>1 MTKlog，主要是其中的Aee_exp和MobileLog</p>
+<p>2Trace.txt文件（data/anr目录下）或者bugreport日志（使用adb bugreport &gt; bugreport.txt或者GAT工具输出）</p>
+<p>3BlockCanary，记录超时后的log</p>
+<p>4一般当出现异常（JE\SWT\NE\KE等）时，会在手机中的/data/aee_exp目录下保存异常的db。 对于异常的类型和具体信息，需要通过GAT工具解析db档案</p>
+<p>5.bugreport</p>
+<p>6.aee_exp</p>
+<h5 id="trace-fen-xi-liu-cheng"><a href="#Trace分析流程" class="headerlink" title="Trace分析流程"></a>Trace分析流程<a href="#trace-fen-xi-liu-cheng" class="header-anchor">#</a></h5><table>
+<thead>
+<tr>
+<th>序号</th>
+<th>步骤</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/iITTadTui5mQ.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/JwYHHTncMMip.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/VkiuF6SpNL7b.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/FwcDyrQFhFAa.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/poTh8Et0Or0w.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/5M4Dwh0H2ugg.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/2H8AlTBdueFO.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td><img src="http://cdn.yangchaofan.cn/blog/20210227/Dl36A6cYlbzF.png?imageslim" alt="mark"></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="anr-jie-jue-fang-an"><a href="#ANR解决方案" class="headerlink" title="ANR解决方案"></a>ANR解决方案<a href="#anr-jie-jue-fang-an" class="header-anchor">#</a></h4><p>1)：UI线程尽量只做跟UI相关的工作</p>
+<p>2)：耗时的工作（比如数据库操作，I/O，连接网络或者别的有可能阻碍UI线程的操作）把它放入单独的线程处理</p>
+<p>3)：尽量用Handler来处理UIthread和别的thread之间的交互</p>
+<h4 id="anr-you-hua-si-lu"><a href="#ANR优化思路" class="headerlink" title="ANR优化思路"></a>ANR优化思路<a href="#anr-you-hua-si-lu" class="header-anchor">#</a></h4><p>优化UI线程的任务：</p>
+<p>1)：UI线程尽量只做跟UI相关的工作</p>
+<p>2)：耗时的工作（比如数据库操作，I/O，连接网络或者别的有可能阻碍UI线程的操作）把它放入单独的线程处理</p>
+<p>3)：尽量用Handler来处理UIthread和别的thread之间的交互</p>
+<p>UI线程的主要任务是：</p>
+<p>1).Activity:onCreate(), onResume(), onDestroy(), onKeyDown(), onClick()等</p>
+<p>2).AsyncTask: onPreExecute(), onProgressUpdate(), onPostExecute(), onCancel等</p>
+<p>3).Mainthread handler: handleMessage(), post*(runnable r)等</p>
+<h1 id="gong-ju"><a href="#工具" class="headerlink" title="工具"></a>工具<a href="#gong-ju" class="header-anchor">#</a></h1><table>
+<thead>
+<tr>
+<th>工具包名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>联发科MTK组件</td>
+<td>MTKLogger</td>
+</tr>
+<tr>
+<td></td>
+<td>GAT</td>
+</tr>
+<tr>
+<td></td>
+<td>LogView</td>
+</tr>
+<tr>
+<td></td>
+<td>QAAT</td>
+</tr>
+<tr>
+<td>BlockCanary</td>
+<td>开源框架，卡顿日志</td>
+</tr>
+<tr>
+<td>Android SDK</td>
+<td>ADB LogCat</td>
+</tr>
+<tr>
+<td></td>
+<td>MAT</td>
+</tr>
+<tr>
+<td>Android Studio</td>
+<td>Profile</td>
+</tr>
+<tr>
+<td></td>
+<td>TraceView</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/ye-jincheng-website/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/ye-jincheng-website/tags/BugFree/" rel="tag"># BugFree</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/ye-jincheng-website/blog/2021/02/learn-relovation-notes/" rel="next" title="《学习革命解读》心得">
+                <i class="fa fa-chevron-left"></i> 《学习革命解读》心得
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/ye-jincheng-website/blog/2021/02/mtk-log/" rel="prev" title="mtk-log">
+                mtk-log <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/ye-jincheng-website/images/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/ye-jincheng-website/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/ye-jincheng-website/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/ye-jincheng-website/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ShaunSheep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.douban.com/people/jincheng-ycf/" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/OscarWildeHawking" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://yangchaofan.cn" target="_blank" title="首页">
+                      
+                        <i class="fa fa-fw fa-globe"></i>首页</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bugfree-san-jian-ke-yi-chang-ri-zhi-gong-ju-android-kai-fa-pai-cha-wen-ti-xiao-jie"><span class="nav-number">1.</span> <span class="nav-text">BugFree三剑客异常、日志、工具—Android开发排查问题小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#qian-yan"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#can-kao-yue-du"><span class="nav-number">3.</span> <span class="nav-text">参考阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#yi-chang"><span class="nav-number">4.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#yi-chang-de-fen-lei"><span class="nav-number">4.1.</span> <span class="nav-text">异常的分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ri-zhi"><span class="nav-number">5.</span> <span class="nav-text">日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#yong-tu"><span class="nav-number">5.1.</span> <span class="nav-text">用途</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sou-suo-guan-jian-yi-chang"><span class="nav-number">5.1.1.</span> <span class="nav-text">搜索关键异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sou-suo-oom"><span class="nav-number">5.1.2.</span> <span class="nav-text">搜索OOM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#oom-miao-shu"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">OOM描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oom-qing-jing"><span class="nav-number">5.1.2.2.</span> <span class="nav-text">OOM情景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oom-de-fen-xi-si-lu"><span class="nav-number">5.1.2.3.</span> <span class="nav-text">OOM的分析思路</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gong-ju-zhun-bei"><span class="nav-number">5.1.2.3.1.</span> <span class="nav-text">工具准备</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#fu-xian-chang-jing"><span class="nav-number">5.1.2.3.2.</span> <span class="nav-text">复现场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#que-ren-huai-yi-dian"><span class="nav-number">5.1.2.3.3.</span> <span class="nav-text">确认怀疑点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oom-fen-lei"><span class="nav-number">5.1.2.4.</span> <span class="nav-text">OOM分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oom-you-hua-si-lu"><span class="nav-number">5.1.2.5.</span> <span class="nav-text">OOM优化思路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sou-suo-swt"><span class="nav-number">5.1.3.</span> <span class="nav-text">搜索SWT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sou-suo-si-ji"><span class="nav-number">5.1.4.</span> <span class="nav-text">搜索死机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gong-ju-zhun-bei"><span class="nav-number">5.1.4.1.</span> <span class="nav-text">工具准备</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mtklogger"><span class="nav-number">5.1.4.1.1.</span> <span class="nav-text">Mtklogger*</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gat"><span class="nav-number">5.1.4.1.2.</span> <span class="nav-text">GAT</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#catcher"><span class="nav-number">5.1.4.1.3.</span> <span class="nav-text">Catcher</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#logview"><span class="nav-number">5.1.4.1.4.</span> <span class="nav-text">LogView</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#qaat"><span class="nav-number">5.1.4.1.5.</span> <span class="nav-text">QAAT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sou-suo-chong-qi"><span class="nav-number">5.1.5.</span> <span class="nav-text">搜索重启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sou-suo-anr"><span class="nav-number">5.1.6.</span> <span class="nav-text">搜索ANR</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#anr-ding-yi"><span class="nav-number">5.1.6.1.</span> <span class="nav-text">ANR定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr-chong-lei"><span class="nav-number">5.1.6.2.</span> <span class="nav-text">ANR种类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr-yuan-yin"><span class="nav-number">5.1.6.3.</span> <span class="nav-text">ANR原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr-de-fen-xi-si-lu"><span class="nav-number">5.1.6.4.</span> <span class="nav-text">ANR的分析思路</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gong-ju-zhun-bei"><span class="nav-number">5.1.6.4.1.</span> <span class="nav-text">工具准备</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#trace-fen-xi-liu-cheng"><span class="nav-number">5.1.6.4.2.</span> <span class="nav-text">Trace分析流程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr-jie-jue-fang-an"><span class="nav-number">5.1.6.5.</span> <span class="nav-text">ANR解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr-you-hua-si-lu"><span class="nav-number">5.1.6.6.</span> <span class="nav-text">ANR优化思路</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gong-ju"><span class="nav-number">6.</span> <span class="nav-text">工具</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">叶金诚</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/ye-jincheng-website/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ye-jincheng-website/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ye-jincheng-website/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ye-jincheng-website/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ye-jincheng-website/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/ye-jincheng-website/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/ye-jincheng-website/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/ye-jincheng-website/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/ye-jincheng-website/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/ye-jincheng-website/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/ye-jincheng-website/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/ye-jincheng-website/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/ye-jincheng-website/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://jincheng.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://jackyoung123.gitee.io/ye-jincheng-website/blog/2021/02/android-bugfree-three-lines/';
+          this.page.identifier = 'blog/2021/02/android-bugfree-three-lines/';
+          this.page.title = 'BugFree三剑客异常、日志、工具';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jincheng.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/ye-jincheng-website/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz", "pi8Pa2aH3XpcaovMyqIXVuOP");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
