@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>波尔克</title>
-    <url>/website/blog/2021/02/website_nickname/</url>
+    <url>/blog//2021/02/website_nickname/</url>
     <content><![CDATA[<h1 id="bo-er-ke"><a href="#波尔克" class="headerlink" title="波尔克"></a>波尔克<a href="#bo-er-ke" class="header-anchor">#</a></h1><p>（谐音“博儿客”）</p>
 <h1 id="jie-shao"><a href="#介绍" class="headerlink" title="介绍"></a>介绍<a href="#jie-shao" class="header-anchor">#</a></h1><p>个人网站用了有四年了，期间一直都是用PHP+MySql的方式部署在阿里云，备案域名折腾服务器，调试各种插件，制定学习计划，学完课程又是边写文章边研究Markdown排版，种种事情花了很大功夫。今年1月份发生了一件事情——服务器到期，那会儿工作忙一直拖着续费的事情。阿里清空了磁盘，我也是事后才注意到通知短信，发现网站的文章数据全丢的那一刻，整个人浑身感觉都不好了。</p>
 <p>痛定思痛，决定文章还是要继续写，写哪里呢CSDN、博客园、简书、掘金都只适合当存档的地方，毕竟没有个人网站用起来有感情。想起来之前工作的时候，为了写音视频直播学了Node，注意过Hexo框架，这个框架可以快速搭个人网站。哎哟不错哦，一拍大腿说干就干。谁让咱是行动派！</p>
@@ -150,7 +150,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#103;&#105;&#x74;&#x40;&#x67;&#x69;&#x74;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;">&#103;&#105;&#x74;&#x40;&#x67;&#x69;&#x74;&#104;&#x75;&#98;&#x2e;&#99;&#111;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#103;&#x69;&#116;&#x40;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;">&#103;&#x69;&#116;&#x40;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -341,7 +341,7 @@
   </entry>
   <entry>
     <title>2015-2021学习计划</title>
-    <url>/website/blog/2015/08/learing-plan/</url>
+    <url>/blog//2015/08/learing-plan/</url>
     <content><![CDATA[<h1 id="2015-2021-xue-xi-ji-hua-ji-xiao-jie"><a href="#2015-2021学习计划及小结" class="headerlink" title="2015-2021学习计划及小结"></a>2015-2021学习计划及小结<a href="#2015-2021-xue-xi-ji-hua-ji-xiao-jie" class="header-anchor">#</a></h1><h1 id="gai-shu"><a href="#概述" class="headerlink" title="概述"></a>概述<a href="#gai-shu" class="header-anchor">#</a></h1><p>这里存放2015年-2021年的学习内容，包括已经学习的，正在学习的，</p>
 <p>内容为：音频课程、视频课程、电子书、实体书、专栏课程、认证课程等。</p>
 <p>内容来源自kindle、知乎、极客学院、慕课网、阿里云大学、光环国际、黑马培训、拉钩培训、三节课培训等</p>
@@ -451,7 +451,7 @@
   </entry>
   <entry>
     <title>mtk-log</title>
-    <url>/website/blog/2021/02/mtk-log/</url>
+    <url>/blog//2021/02/mtk-log/</url>
     <content><![CDATA[<h1 id="mtk-log"><a href="#MTK-log" class="headerlink" title="MTK log"></a><a href="https://www.pianshen.com/article/4121163154/">MTK log</a><a href="#mtk-log" class="header-anchor">#</a></h1><h2 id="jie-shao"><a href="#介绍" class="headerlink" title="介绍"></a>介绍<a href="#jie-shao" class="header-anchor">#</a></h2><p>mtklog是由log生成工具MTKLogger生成的一系列问题追踪文件，其主要作用就是对系统或者应用产生的异常进行快速定位，从而解决问题。</p>
 <p>log文件名称为：<br>crash_log ：崩溃日志，主要输出 程序崩溃造成的crash log<br>events_log：事件日志，主要输出记录各个activity周期及事件<br>kernel_log：底层驱动，按键，低内存相关log<br>sys_log：系统日志，Exception定位点<br>radio_log：输出通话，网络状态变化<br>main_log：详尽输出每一步的log</p>
 <a id="more"></a>
@@ -751,7 +751,7 @@
   </entry>
   <entry>
     <title>BugFree三剑客异常、日志、工具</title>
-    <url>/website/blog/2021/02/android-bugfree-three-lines/</url>
+    <url>/blog//2021/02/android-bugfree-three-lines/</url>
     <content><![CDATA[<h1 id="bugfree-san-jian-ke-yi-chang-ri-zhi-gong-ju-android-kai-fa-pai-cha-wen-ti-xiao-jie"><a href="#BugFree三剑客异常、日志、工具—Android开发排查问题小结" class="headerlink" title="BugFree三剑客异常、日志、工具—Android开发排查问题小结"></a>BugFree三剑客异常、日志、工具—Android开发排查问题小结<a href="#bugfree-san-jian-ke-yi-chang-ri-zhi-gong-ju-android-kai-fa-pai-cha-wen-ti-xiao-jie" class="header-anchor">#</a></h1><h1 id="qian-yan"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#qian-yan" class="header-anchor">#</a></h1><p>程序员编写程序、调试代码的时候不可避免的会遇到各种问题，如页面显示不正确，如数据层数据组装操作未按照期望的业务逻辑执行。</p>
 <p>造成这些问题的原因大多分为以下几种：有些是条件语句执行错误，有些是Java层的Exception如空指针、集合边界越界问题，有些是较难找到原因的OOM、ANR、Crash、系统SWT重启问题。面对扑面而来的问题，程序员很容易束手无策。笔者结合自己的经验，总结了BugFree中必不可少的三剑客：异常、日志、工具，期望通过这3个“帮手”，帮助各位排查开发难题。</p>
 <a id="more"></a>
@@ -1102,7 +1102,7 @@
   </entry>
   <entry>
     <title>《学习革命解读》心得</title>
-    <url>/website/blog/2021/02/learn-relovation-notes/</url>
+    <url>/blog//2021/02/learn-relovation-notes/</url>
     <content><![CDATA[<h1 id="shu-ji"><a href="#书籍" class="headerlink" title="书籍"></a>书籍<a href="#shu-ji" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
@@ -1339,7 +1339,7 @@
   </entry>
   <entry>
     <title>《高效学习方法全集》日记</title>
-    <url>/website/blog/2021/02/super-learn-skills/</url>
+    <url>/blog//2021/02/super-learn-skills/</url>
     <content><![CDATA[<h1 id="gao-xiao-xue-xi-fang-fa-quan-ji-gao-zhong-ban"><a href="#高效学习方法全集高中版" class="headerlink" title="高效学习方法全集高中版"></a>高效学习方法全集高中版<a href="#gao-xiao-xue-xi-fang-fa-quan-ji-gao-zhong-ban" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
@@ -1436,7 +1436,7 @@
   </entry>
   <entry>
     <title>谈一谈学习法</title>
-    <url>/website/blog/2021/02/talk-about-learn-skills/</url>
+    <url>/blog//2021/02/talk-about-learn-skills/</url>
     <content><![CDATA[<h1 id="tan-yi-tan-xue-xi-fa"><a href="#谈一谈学习法" class="headerlink" title="谈一谈学习法"></a>谈一谈学习法<a href="#tan-yi-tan-xue-xi-fa" class="header-anchor">#</a></h1>]]></content>
       <categories>
         <category>家庭教育</category>
@@ -1448,7 +1448,7 @@
   </entry>
   <entry>
     <title>《如何高效学习》心得</title>
-    <url>/website/blog/2021/02/study-more-efficiency/</url>
+    <url>/blog//2021/02/study-more-efficiency/</url>
     <content><![CDATA[<h1 id="ru-he-gao-xiao-xue-xi"><a href="#如何高效学习" class="headerlink" title="如何高效学习"></a>如何高效学习<a href="#ru-he-gao-xiao-xue-xi" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
@@ -2010,7 +2010,7 @@
   </entry>
   <entry>
     <title>《超效学习方法解码》心得</title>
-    <url>/website/blog/2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/</url>
+    <url>/blog//2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/</url>
     <content><![CDATA[<h1 id="chao-xiao-xue-xi-fang-fa-jie-ma"><a href="#《超效学习方法解码》" class="headerlink" title="《超效学习方法解码》"></a>《超效学习方法解码》<a href="#chao-xiao-xue-xi-fang-fa-jie-ma" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
@@ -2126,7 +2126,7 @@
   </entry>
   <entry>
     <title>程序员吃的是青春饭吗？</title>
-    <url>/website/blog/2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</url>
+    <url>/blog//2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</url>
     <content><![CDATA[<h1 id="cheng-xu-yuan-chi-de-shi-qing-chun-fan-ma"><a href="#程序员吃的是青春饭吗？" class="headerlink" title="程序员吃的是青春饭吗？"></a>程序员吃的是青春饭吗？<a href="#cheng-xu-yuan-chi-de-shi-qing-chun-fan-ma" class="header-anchor">#</a></h1><p>昨天在知乎上看到一个提问<a href="https://www.zhihu.com/question/444102247">“程序员为什么是吃青春饭，而不是像医生律师一样越老越值钱？”</a></p>
 <p>翻了一百多个回答，大多答主都是顺着题主的逻辑假定答的</p>
 <p>即许多人都是心中假设此前提成立：“程序员是吃青春饭”、“律师医生越老越值钱”</p>
@@ -2170,7 +2170,7 @@
   </entry>
   <entry>
     <title>AndroidHandler百问百答</title>
-    <url>/website/blog/2020/08/handler%20TOP%20100%20Questions/</url>
+    <url>/blog//2020/08/handler%20TOP%20100%20Questions/</url>
     <content><![CDATA[<h1 id="android-bai-wen-bai-da-na-xie-nian-bei-wen-guo-de-handler-yuan-li"><a href="#Android百问百答-《那些年被问过的Handler原理》" class="headerlink" title="Android百问百答-《那些年被问过的Handler原理》"></a>Android百问百答-《那些年被问过的Handler原理》<a href="#android-bai-wen-bai-da-na-xie-nian-bei-wen-guo-de-handler-yuan-li" class="header-anchor">#</a></h1><p>文章迁移自<a href="https://blog.csdn.net/chivalrousman/article/details/108014580">我的csdn博客</a></p>
 <p>关于Handler，安卓面试最热门的知识点之一。本篇文章将围绕3点展开：</p>
 <p>可以提问哪些Questions？</p>
@@ -2445,7 +2445,7 @@ Handler(Looper looper, Callback callback, boolean async)
   </entry>
   <entry>
     <title>Android 百大框架排行榜</title>
-    <url>/website/blog/2016/04/Android-TOP-100-Program/</url>
+    <url>/blog//2016/04/Android-TOP-100-Program/</url>
     <content><![CDATA[<blockquote>
 <p>说明：无聊之时作的一篇笔记式文章，</p>
 <p>精力有限，很多错误之处，受时间与能力限制，没能及时修改，隐隐懊悔，<br>受读者启发，遂将此文公之于众，旨在号召大家共同编辑、共同参与，让此排行榜帮助更多的Android开发者。</p>
