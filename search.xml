@@ -4,7 +4,7 @@
     <title>波尔克</title>
     <url>/blog//2021/02/website_nickname/</url>
     <content><![CDATA[<h1 id="bo-er-ke"><a href="#波尔克" class="headerlink" title="波尔克"></a>波尔克<a href="#bo-er-ke" class="header-anchor">#</a></h1><p>（谐音“博儿客”）</p>
-<h1 id="jie-shao"><a href="#介绍" class="headerlink" title="介绍"></a>介绍<a href="#jie-shao" class="header-anchor">#</a></h1><p>个人网站用了有四年了，期间一直都是用PHP+MySql的方式部署在阿里云，备案域名折腾服务器，调试各种插件，制定学习计划，学完课程又是边写文章边研究Markdown排版，种种事情花了很大功夫。今年1月份发生了一件事情——服务器到期，那会儿工作忙一直拖着续费的事情。阿里清空了磁盘，我也是事后才注意到通知短信，发现网站的文章数据全丢的那一刻，整个人浑身感觉都不好了。</p>
+<h1 id="jie-shao"><a href="#介绍" class="headerlink" title="介绍"></a>介绍<a href="#jie-shao" class="header-anchor">#</a></h1><p>个人网站用了有四年了，期间一直都是用PHP+MySql的方式部署在阿里云，从备案域名折腾服务器，到调试各种插件，从制定学习计划，到学课程，又是边写文章边研究Markdown排版，种种事情花了很大功夫。今年1月份发生了一件事情——服务器到期，那会儿工作忙一直拖着续费的事情。阿里清空了磁盘，我也是事后才注意到通知短信，发现网站的文章数据全丢的那一刻，整个人浑身感觉都不好了。</p>
 <p>痛定思痛，决定文章还是要继续写，写哪里呢CSDN、博客园、简书、掘金都只适合当存档的地方，毕竟没有个人网站用起来有感情。想起来之前工作的时候，为了写音视频直播学了Node，注意过Hexo框架，这个框架可以快速搭个人网站。哎哟不错哦，一拍大腿说干就干。谁让咱是行动派！</p>
 <p>最终我花了一天时间，使用码云仓库+Hexo搭一个小型静态网站。优点是：免费，简单，便捷，最大优点是动静分离，静态资源放国内仓库，占磁盘空间的图片资源放CDN服务器，通过域名转发访问，加载效率杠杠滴。</p>
 <p>这篇文章主要包含了个人网站的技术架构和常见问题。包括使用的oss管理平台、域名管理、评论管理、文章编辑与发布、网站编辑管理等功能的设计与实现。</p>
@@ -52,6 +52,10 @@
 <tr>
 <td>hexo-admin</td>
 <td>管理后台</td>
+</tr>
+<tr>
+<td>hexo-wordcount</td>
+<td>统计字数</td>
 </tr>
 <tr>
 <td>hexo-renderer-markdown-it-plus</td>
@@ -150,7 +154,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#103;&#x69;&#116;&#x40;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;">&#103;&#x69;&#116;&#x40;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#99;&#111;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#x69;&#116;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#98;&#46;&#99;&#111;&#x6d;">&#x67;&#x69;&#116;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#98;&#46;&#99;&#111;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -313,6 +317,34 @@
 <h2 id="next-tian-jia-tou-xiang"><a href="#next添加头像" class="headerlink" title="next添加头像"></a>next添加头像<a href="#next-tian-jia-tou-xiang" class="header-anchor">#</a></h2><p>打开themes/next/_config.yml</p>
 <p>打开并放入头像/themes/next/source/images/</p>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line">avatar: /images/avatar_2.gif</span><br></pre></td></tr></table></figure>
+<h2 id="next-tong-ji-zi-shu"><a href="#next统计字数" class="headerlink" title="next统计字数"></a>next统计字数<a href="#next-tong-ji-zi-shu" class="header-anchor">#</a></h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">pm i --save hexo-wordcount</span><br></pre></td></tr></table></figure>
+<p>在站点配置文件添加如下配置</p>
+<pre><code># Dependencies: https://github.com/willin/hexo-wordcount
+post_wordcount:
+  item_text: true
+  wordcount: true         #文章字数统计
+  min2read: true          #文阅读时长
+  totalcount: false       
+  separated_meta: true
+</code></pre>
+<p>在NexT主题配置文件添加如下配置（NexT主题已支持该插件，有的话无需再添加）</p>
+<pre><code># Dependencies: https://github.com/willin/hexo-wordcount
+post_wordcount:
+  item_text: true
+  wordcount: true         #文章字数统计
+  min2read: true          #文阅读时长
+  totalcount: false       
+  separated_meta: true
+</code></pre>
+<h2 id="next-bu-suan-zi-shi-xiao-wen-ti"><a href="#next不蒜子失效问题" class="headerlink" title="next不蒜子失效问题"></a>next不蒜子失效问题<a href="#next-bu-suan-zi-shi-xiao-wen-ti" class="header-anchor">#</a></h2><p>hexo-theme-next主题中使用了dn-lbstatics.qbox.me域名的文件位置为：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">themes\next\layout\_third-party\analytics\busuanzi-counter.swi</span><br></pre></td></tr></table></figure>
+<p>找到如下代码：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script <span class="keyword">async</span> src=<span class="string">&quot;https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>修改为：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;script <span class="keyword">async</span> src=<span class="string">&quot;https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+
 <h1 id="shi-yong-shuo-ming"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明<a href="#shi-yong-shuo-ming" class="header-anchor">#</a></h1><ol>
 <li> 定时使用typora编写markdown文章：编写markdown文件</li>
 <li> 导出成html，发布在hexo：使用hexo s</li>
