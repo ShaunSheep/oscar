@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/function%20small()%20%7B%20%5Bnative%20code%5D%20%7D?v=5.1.2">
+
+
+
+
+
+
+  <meta name="keywords" content="Android,Communication," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="摘自本人16年的的博客《详解 Android 通信》 什么是通信？# 通信 ，顾名思义，指的就是信息的传递或者交换 #看完本文能收获什么？ 按目录索引，你可以学习到    1. 组件间的通信，Activity，fragment，Service， Provider，Receiver    2. 进程间的通信，AIDL    3. 线程间的通信，Handler，AnsycTask，IntentServ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《详解 Android 通信》">
+<meta property="og:url" content="http://idolcoder.gitee.io/blog/2021/03/android-communication/index.html">
+<meta property="og:site_name" content="叶金诚的站点">
+<meta property="og:description" content="摘自本人16年的的博客《详解 Android 通信》 什么是通信？# 通信 ，顾名思义，指的就是信息的传递或者交换 #看完本文能收获什么？ 按目录索引，你可以学习到    1. 组件间的通信，Activity，fragment，Service， Provider，Receiver    2. 进程间的通信，AIDL    3. 线程间的通信，Handler，AnsycTask，IntentServ">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-03-06T13:39:07.712Z">
+<meta property="article:modified_time" content="2021-03-06T13:47:21.109Z">
+<meta property="article:author" content="叶金诚">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Communication">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":16,"offset_float":16,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: "",
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://idolcoder.gitee.io/blog/2021/03/android-communication/"/>
+
+
+
+
+
+  <title>《详解 Android 通信》 | 叶金诚的站点</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f6796a81afe3e2f22bc40222eb19971f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">叶金诚的站点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">汇贤雅叙</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idolcoder.gitee.io/blog/blog/2021/03/android-communication/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《详解 Android 通信》</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+		        
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-06T21:39:07+08:00">
+                2021-03-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Android/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Android/%E5%BA%94%E7%94%A8%E5%B1%82/" itemprop="url" rel="index">
+                    <span itemprop="name">应用层</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2021/03/android-communication/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="/2021/03/android-communication/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/blog/2021/03/android-communication/" class="leancloud_visitors" data-flag-title="《详解 Android 通信》">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  7.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  29
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘自本人16年的的博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/chivalrousman/article/details/51623122">《详解 Android 通信》</a></p>
+<h1 id="shi-me-shi-tong-xin"><a href="#什么是通信？" class="headerlink" title="什么是通信？"></a><strong>什么是通信？</strong><a href="#shi-me-shi-tong-xin" class="header-anchor">#</a></h1><p><font size="4"> 通信 ，顾名思义，指的就是信息的传递或者交换</font></p>
+<p>#<strong>看完本文能收获什么？</strong></p>
+<p><font size="3">按目录索引，你可以学习到<br>    1. 组件间的通信，Activity，fragment，Service， Provider，Receiver<br>    2. 进程间的通信，AIDL<br>    3. 线程间的通信，Handler，AnsycTask，IntentService<br>    4. 多个App间的通信<br>    5. 使用大型开源框架完成组件通信，EventBus，otto<br>    6. 网络通信基础篇：Google 课程–AnsycTask+HttpClient<br>    7. 网络通信提高篇：开源框架Ansyc-Httpclient，okttp，Retrofit</font></p>
+<p>#<strong>建议阅读本文时遵循以下学习思路</strong></p>
+<p><font size="3">1. <strong>研究对象</strong>：Activity，fragment等组件</font></p>
+<p><font size="3">2. <strong>信息存在形式</strong>：Intent，Bundle，静态变量，全局变量，还是点击事件，触摸事件的回调监听，或者文件形式（Sharepreference，SQLite，File , NetStream） ，本质就是<font color="red">信息源<br><font size="3" color="black"><br><font size="3">3. <strong>信息传递的形式</strong>：网路，回调监听，线程，Intent，全局Application  </font></font></font></font></p>
+<p><font size="3">4. <strong>相同形式的思路</strong>，不会出现第二次，请读者举一反三</font></p>
+<p><font size="3">5. <strong>最后强调研究对象是单一的</strong> </font></p>
+<p>#<strong>Activity通信</strong></p>
+<p><strong><font size="6">Activity 和 Activity</font></strong></p>
+<p><font size="4"><strong>1.  常规方式：Intent Bundle</strong></font></p>
+<p><font size="4">通过Intent 启动另一个Activity时，有两种重载方式：</font></p>
+<ul>
+<li> startActivity(new Intent(),new Bundle());</li>
+<li> startActivityForResult(new Intent(),FLAG,new Bundle());</li>
+</ul>
+<p><font size="4">从参数列表就可以总结出来，有Intent，和Bundle,可以传递8种基本数据类型和可序列化的数据类型，比如字符串和字节数组。提到可序列化，就引发 Intent和Bundle 的局限性了:</font></p>
+<ul>
+<li> Intent Bundle 无法传递“不可序列化”的数据，比如Bitmap，InputStream，解决办法有很多种，最简单的就是将“不可序列化”的对象，转换成字节数组，这里因为主要是讲解通信，所以不展开讲了。</li>
+<li> Intent Bundle 能传递的数据大小在40K以内 。 </li>
+</ul>
+<p><font size="4">PS : 很多人不理解为什么把Intent和Bundle放在一起谈，因为Intent 底层存储信息的原理也是通过Bundle存储！</font></p>
+<p><font size="4"><strong>2. 公有静态变量</strong> </font></p>
+<p><font size="3"> 比如 public static String flag=“中国”；</font></p>
+<p><font size="3">使用方式 比如 在其他Activity当中  FirstActivity.flag=“china”; 修改 静态变量的值  </font></p>
+<p><font size="4"><strong>3. 基于物理形式：</strong></font></p>
+<p><font size="3">比如 File，SQLite，Sharepreference 物理形式</font></p>
+<p><font size="4"><strong>4. 全局变量：</strong></font></p>
+<p><font size="3">比如Application：Application是与Activity，Service齐名的组件，非常强大，它的特点是全局组件共用，单例形式存在，在其他组件中，我们只需要Context.getApplication（）获得该对象的引用即可</font></p>
+<p><strong><font size="6">Activity 和Fragment，Service，BrodcastReceiver</font></strong></p>
+<p>,<font size="4">首先都遵循，如何启动它们，就如何传递信息的原则： </font></p>
+<p><font size="5"><strong>1. Activity与Fragment</strong> </font></p>
+<p><font size="4">1. 通过构造函数传递 2.获取Fragment的实例对象</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;CustFragment 是自定义的fragment，参数列表也可以自己定义咯，</span><br><span class="line"> getSupportFragmentManager().beginTransaction()</span><br><span class="line">			 .add(new CustFragment(自定义的的参数列表),new String(&quot;参数&quot;))</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;------------------method two-----------------------</span><br><span class="line">  getSupportFragmentManager().findFragmentById(R.id.headlines_fragment);</span><br><span class="line">  &#x2F;&#x2F;------------------method three----------------------</span><br><span class="line">   getSupportFragmentManager().findFragmentByTag(&quot;HeadLines&quot;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>聪明的读者可能会问Fragment如何与Activity通信类似的问题，这是个好问题，请注意我们的研究的原则是单一目标原则，在这节我研究的是Activity，你的疑惑在后面都会一一解答</p>
+</blockquote>
+<p><font size="5"><strong>2. Activity与Service</strong> </font></p>
+<p><font size="4">Activity启动Service的两种方式：</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;&#x2F;CustomService 是自定义Service，完成一些后台操作</span><br><span class="line"></span><br><span class="line">startService(new Intent(FirstActivity.this，CustomService.class));</span><br><span class="line"></span><br><span class="line">bindService(new Intent(FirstActivity.this，CustomService.class)), new ServiceConnection() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public void onServiceConnected(ComponentName name, IBinder service) &#123;</span><br><span class="line">		&#x2F;&#x2F;当前启动的service 一些数据就会回调回这里，我们在Activity中操作这些数据即可</span><br><span class="line">		get</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          @Override</span><br><span class="line">          public void onServiceDisconnected(ComponentName name) &#123;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,flags);</span><br></pre></td></tr></table></figure>
+<p><font size="4">从启动方式就可以看出，通过Bundle对象的形式存储，通过Intent传输，来完成Activity向Service传递数据的操作</font></p>
+<p><font size="5"><strong>3. Activity与BroadcastReceiver</strong></font></p>
+<p><font size="4">启动广播的形式也有两种: </font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;method one ！！！-----------------------------------------------</span><br><span class="line">registerReceiver(new BroadcastReceiver() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">              </span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,new IntentFilter(),&quot;&quot;,new Handler());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;method two ！！！-----------------------------------------------     </span><br><span class="line">registerReceiver(new BroadcastReceiver() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,new IntentFilter());</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><font size="4">关于method one 的第三个参数Handler很多人会很费解</font></p>
+<p><font size="4">参照registerReceiver中源码关于该Handler参数的解释：</font></p>
+<p><font size="4">Handler identifying the thread that will receive the Intent.  If null, the main thread of the process will be used.</font></p>
+<blockquote>
+<p><font size="4">定义了一个用于接收Intent的子线程，如果不填或者默认为null，那么就会在主线程中完成接收Intent的操作  </font></p>
+</blockquote>
+</blockquote>
+<p><font size="5">很明显，Activity与BroadcastReceiver通信时，用的也是Intent传递，Bundle存储</font></p>
+<p><font size="5"><strong>4. 通讯时的同步问题</strong></font></p>
+<blockquote>
+<p><font size="4">这里的同步通讯问题，为下文Fragment通讯作铺垫，不是这个问题不重要，不值得引起你注意，只是我想把问题放在它最应该出现的位置。</font></p>
+</blockquote>
+<p><font size="4">以上只是基础的传递数据的形式，大部分都是静态的，现在有一种需求，用户操作Activity，发出了某些指令，比如按下，滑动，触摸等操作，如何完成这些信息传递呢？这就要求同步了。</font></p>
+<p><font size="4">同步传递消息也很简单，就是调用系统写好的回调接口</font></p>
+<p><font size="4">首先我们要知道，用户 点击，触摸 这些行为 也属于 通信的范畴—点击和触摸属于 信息源；<br><font size="4">比如用户行为进行点击，那就实现 ：</font></font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">new Button(mCotext).setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">       @Override</span><br><span class="line">       public void onClick(View v) &#123;</span><br><span class="line">           new ImageView(mCotext).invalidate();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
+<p><font size="4">通过此招提示指定的ImageView：嘿！老兄，你该刷新了</font></p>
+<p><font size="4">又或者 当用户 进行触摸操作，我们需要实现放大缩小平移指定的区域：</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">new RelativeLayout(mCotext).setOnTouchListener(new View.OnTouchListener() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public boolean onTouch(View v, MotionEvent event) &#123;</span><br><span class="line">              &#x2F;&#x2F;缩放</span><br><span class="line">              v.setScaleX(1f);</span><br><span class="line">              v.setScaleY(1f);</span><br><span class="line">              &#x2F;&#x2F;平移</span><br><span class="line">              v.setTranslationX(1f);</span><br><span class="line">              v.setTranslationY(1f); </span><br><span class="line">              v.setTranslationY(1f);</span><br><span class="line">              &#x2F;&#x2F;旋转</span><br><span class="line">              v.setRotation(2f);</span><br><span class="line">              v.setRotationX(2f);</span><br><span class="line">              v.setRotationY(2f);</span><br><span class="line"></span><br><span class="line">              v.invalidate();</span><br><span class="line">              return true;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
+<p><font size="4">嘿，你看，当用户进行触摸操作，我们可以通过回调onTouchListenter来完成“触摸”这一操作</font></p>
+<blockquote>
+<p><font size="4">关于View重绘机制以及优化刷新UI的细节，不属于本文讨论范围。</font></p>
+</blockquote>
+<p>#<strong>Fragment</strong></p>
+<p><font size="5"><strong>1. Fragment 与Activity通信</strong></font></p>
+<p><font size="4">通过实例对象传递</font></p>
+<p><font size="4">同样的，在Fragment中         getActivity()可以获取到它相关联的 Activity实例，就可以轻松获取并且修改Activity的数据</font></p>
+<p><font size="5"><strong>2. Fragment 与 多个Fragment通信</strong></font></p>
+<p><font size="4">首先，两个Fragment之间不可能直接通信（非正规因素除外），Google官方提出的解决办法是 通过相关联的Activity来完成两个Fragment的通信</font></p>
+<p><font size="4">只需要记住三步：</font></p>
+<p><font size="4"><strong>1. <font size="4">定义一个接口：</font></strong></font></p>
+<p> 在让Fragment关联Activity之前，可以在Fragment中定义一个接口，然后让宿主Activity来实现这个接口。接着，在Fragment中捕获这个接口，并且在onAttach()中 捕获Activity实例 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;只需关注接口是如何定义的，以及onAttack中的实现</span><br><span class="line">public class HeadlinesFragment extends ListFragment &#123;</span><br><span class="line">	&#x2F;&#x2F;定义的接口引用</span><br><span class="line">    OnHeadlineSelectedListener mCallback;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 自定义回调接口，宿主Activity必须要实现它</span><br><span class="line">    public interface OnHeadlineSelectedListener &#123;</span><br><span class="line">        public void onArticleSelected(int position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onAttach(Activity activity) &#123;</span><br><span class="line">        super.onAttach(activity);</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F; 在这里只是为了确保Activity实现了我们定义的接口，如果没有实现，则抛出异常</span><br><span class="line">        try &#123;</span><br><span class="line">            mCallback &#x3D; (OnHeadlineSelectedListener) activity;</span><br><span class="line">        &#125; catch (ClassCastException e) &#123;</span><br><span class="line">            throw new ClassCastException(activity.toString()</span><br><span class="line">                    + &quot; must implement OnHeadlineSelectedListener&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><font size="4">一旦Activity通过OnHeadlineSelectedListener 的实例mCallBack回调 onArticleSelected（），Fragment就可以传递信息 给Activity了</font></p>
+<p><font size="4">例如 下面是 ListFragment的一个回调方法，当用户点击了list 中的item，这个Fragment就会通过回调接口向宿主Activity传递事件</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">   public void onListItemClick(ListView l, View v, int position, long id) &#123;</span><br><span class="line">       &#x2F;&#x2F; 向Activity传递事件信息</span><br><span class="line">       mCallback.onArticleSelected(position);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p><font size="4"><strong>2. 在宿主Activity实现这个接口</strong></font></p>
+<p><font size="4">怎么实现？很简单，参考下面代码：</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static class MainActivity extends Activity</span><br><span class="line">        implements HeadlinesFragment.OnHeadlineSelectedListener&#123;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    public void onArticleSelected(int position) &#123;</span><br><span class="line">        &#x2F;&#x2F; 用户从从 HeadlinesFragment选中了一个标题</span><br><span class="line">        &#x2F;&#x2F;响应用户的操作，做一些业务逻辑</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><font size="4"><strong>3. 向其他Fragment传递信息 （完成通信）</strong></font></p>
+<p><font size="4">宿主Activity可以通过findFragmentById()向指定的Fragment传递信息，宿主Activity可以直接获取Fragment实例，回调Fragment的公有方法</font></p>
+<p><font size="4">例如：</font></p>
+<p><font size="4">宿主Activity 包含了一个Listfragment用来展示条目信息，当每个条目被点击的时候，我们希望ListFragment向另外一个DetailsFragment传递一个信息用来 展示不同的细节</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> public static class MainActivity extends Activity</span><br><span class="line">        implements HeadlinesFragment.OnHeadlineSelectedListener&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">     public void onArticleSelected(int position) &#123;</span><br><span class="line">        &#x2F;&#x2F; 用户在 HeadlinesFragment中选中了一个item </span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;在activity中添加新的fragment</span><br><span class="line">        ArticleFragment articleFrag &#x3D; (ArticleFragment)</span><br><span class="line">                getSupportFragmentManager().findFragmentById(R.id.article_fragment);</span><br><span class="line"></span><br><span class="line">        if (articleFrag !&#x3D; null) &#123;</span><br><span class="line">            &#x2F;&#x2F; If article 对象 可以复用, 我们就不需要创建两遍了</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 回调articleFrag 更新</span><br><span class="line">            articleFrag.updateArticleView(position);</span><br><span class="line"></span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            &#x2F;&#x2F; 创建 Fragment 并为其添加一个参数，用来指定应显示的文章</span><br><span class="line">            ArticleFragment newFragment &#x3D; new ArticleFragment();</span><br><span class="line">            Bundle args &#x3D; new Bundle();</span><br><span class="line">            args.putInt(ArticleFragment.ARG_POSITION, position);</span><br><span class="line">            newFragment.setArguments(args);</span><br><span class="line"></span><br><span class="line">            FragmentTransaction transaction &#x3D; getSupportFragmentManager().beginTransaction();</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 将 fragment_container View 时中的内容替换为此 Fragment ，</span><br><span class="line">            &#x2F;&#x2F; 然后将该事务添加到返回堆栈，以便用户可以向后回滚</span><br><span class="line">            transaction.replace(R.id.fragment_container, newFragment);</span><br><span class="line">            int setTransition&#x3D;TRANSIT_FRAGMENT_OPEN;</span><br><span class="line">            transaction.setTransition(setTransition);</span><br><span class="line">            transaction.addToBackStack(null);</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F; 执行事务</span><br><span class="line">            transaction.commit();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><font size="4">下面我写了一个实例来供大家理解：</font></p>
+<p><font size="4">各个类的联系图：</font></p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-2fkIgsA8-1615037919702)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/cc05c541780f609b7f6663236e9cb19d9d5e7c4a/%E9%80%9A%E4%BF%A1fragment.jpg)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/cc05c541780f609b7f6663236e9cb19d9d5e7c4a/%E9%80%9A%E4%BF%A1fragment.jpg)]</a></p>
+<p><font size="4">效果如下：</font></p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-aagFBVdk-1615037919704)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/Fragment%E9%80%9A%E4%BF%A1gif.gif)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/Fragment%E9%80%9A%E4%BF%A1gif.gif)]</a></p>
+<p><font size="4"><a target="_blank" rel="noopener" href="http://download.csdn.net/detail/chivalrousman/9545616">Fragment通信demo实例</a></font></p>
+<p>#<strong>Service</strong></p>
+<p><strong><font size="5"> Service 与Activity通信</font></strong> </p>
+<p><font size="4">主要是如何获得Service实例的问题<br><font size="4">总结来说两步： </font></font></p>
+<ol>
+<li> 在Service定义内部类，继承Binder，封装Service作为内部类的属性，并且在onBind方法中返回内部类的实例对象</li>
+<li> 在Activity中实现ServiceConnection ，获取到Binder对象，再通过Binder获取Service<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class LocalService extends Service &#123;</span><br><span class="line">    &#x2F;&#x2F; 传递给客户端的Binder</span><br><span class="line">    private final IBinder mBinder &#x3D; new LocalBinder();</span><br><span class="line">    &#x2F;&#x2F;构造Random对象</span><br><span class="line">    private final Random mGenerator &#x3D; new Random();</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 这个类提供给客户端  ，因为Service总是运行在同一个进程中的</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public class LocalBinder extends Binder &#123;</span><br><span class="line">        LocalService getService() &#123;</span><br><span class="line">            &#x2F;&#x2F; 当客户端回调的时候，返回LoacalService实例</span><br><span class="line">            return LocalService.this;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public IBinder onBind(Intent intent) &#123;</span><br><span class="line">        return mBinder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**交给客户端回调的方法 *&#x2F;</span><br><span class="line">    public int getRandomNumber() &#123;</span><br><span class="line">      return mGenerator.nextInt(100);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">public class BindingActivity extends Activity &#123;</span><br><span class="line">    LocalService mService;</span><br><span class="line">    boolean mBound &#x3D; false;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.main);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onStart() &#123;</span><br><span class="line">        super.onStart();</span><br><span class="line">        &#x2F;&#x2F; 绑定 LocalService</span><br><span class="line">        Intent intent &#x3D; new Intent(this, LocalService.class);</span><br><span class="line">        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onStop() &#123;</span><br><span class="line">        super.onStop();</span><br><span class="line">        &#x2F;&#x2F; 解绑 service</span><br><span class="line">        if (mBound) &#123;</span><br><span class="line">            unbindService(mConnection);</span><br><span class="line">            mBound &#x3D; false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**button已经通过 android:onClick (attribute) 设置此方法响应用户click*&#x2F;</span><br><span class="line">    public void onButtonClick(View v) &#123;</span><br><span class="line">        if (mBound) &#123;</span><br><span class="line">            &#x2F;&#x2F; 回调 LocalService的方法.</span><br><span class="line">            &#x2F;&#x2F;因为在主线程中刷新UI，可能会造成线程阻塞，这里只是为了测试</span><br><span class="line">            int num &#x3D; mService.getRandomNumber();</span><br><span class="line">            Toast.makeText(this, &quot;number: &quot; + num, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**定义通过bindService 回调的Binder *&#x2F;</span><br><span class="line">    private ServiceConnection mConnection &#x3D; new ServiceConnection() &#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onServiceConnected(ComponentName className,</span><br><span class="line">                IBinder service) &#123;</span><br><span class="line">           &#x2F;&#x2F;先通过Binder获得Service的内部类 LoacalBinder</span><br><span class="line">            LocalBinder binder &#x3D; (LocalBinder) service;</span><br><span class="line">             &#x2F;&#x2F; 现在可以获得service对象了</span><br><span class="line">            mService &#x3D; binder.getService();</span><br><span class="line">            mBound &#x3D; true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onServiceDisconnected(ComponentName arg0) &#123;</span><br><span class="line">            mBound &#x3D; false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<font size="4">除了这种回调的方式外</font></li>
+</ol>
+<p><font size="4">还有一种方式 是在Service中 发送广播，</font></p>
+<p><font size="4">比如 在Service中 开启了一个子线程执行任务，就在子线程的run（）方法中去sendBroadcast(intent);<br><font color="red">数据用Intent封装，传递形式用广播<br><font color="black"></font></font></font></p>
+<h1 id="aidl-wan-cheng-jin-cheng-jian-tong-xin"><a href="#AIDL完成进程间通信" class="headerlink" title="AIDL完成进程间通信"></a><strong>AIDL完成进程间通信</strong><a href="#aidl-wan-cheng-jin-cheng-jian-tong-xin" class="header-anchor">#</a></h1><font size="4">
+关于进程和线程的细节改天详细说明，我们首先了解一下进程和线程的概念：
+
+<blockquote>
+<p>当某个应用组件启动且该应用没有运行其他任何组件时，Android 系统会使用单个执行线程为应用启动新的 Linux<br>进程。默认情况下，同一应用的所有组件在相同的进程和线程（称为“主”线程）中运行。<br>如果某个应用组件启动且该应用已存在进程（因为存在该应用的其他组件），则该组件会在此进程内启动并使用相同的执行线程。<br>但是，我们也可以安排应用中的其他组件在单独的进程中运行，并为任何进程创建额外的线程。</p>
+<p>各类组件元素的清单文件条目—：activity，servicer，eceiver 和 provider均支持 android:process 属性，此属性可以指定该组件应在哪个进程运行。我们可以设置此属性，使每个组件均在各自的进程中运行，或者使一些组件共享一个进程，而其他组件则不共享。 此外，我们还可以设置 android:process，使不同应用的组件在相同的进程中运行</p>
+</blockquote>
+<p><font size="4">以及了解一下 进程间通信的概念 </font></p>
+<blockquote>
+<p>Android 利用远程过程调用 (RPC) 提供了一种进程间通信 (IPC) 机制，通过这种机制，由 Activity<br>或其他应用组件调用的方法将（在其他进程中）远程执行，而所有结果将返回给调用方。这就要求把方法调用及其数据分解至操作系统可以识别的程度，并将其从本地进程和地址空间传输至远程进程和地址空间，然后在远程进程中重新组装并执行该调用。<br>然后，返回值将沿相反方向传输回来。 Android 提供了执行这些 IPC 事务所需的全部代码，因此我们只需集中精力定义和实现 RPC<br>编程接口即可。</p>
+<p>要执行 IPC，必须使用 bindService() 将应用绑定到服务上。</p>
+</blockquote>
+<p><font size="4">具体实现 可以 <a target="_blank" rel="noopener" href="http://blog.csdn.net/u013478336/article/details/43818185">参考这个实例</a>  和文末给出的官方文档</font></p>
+<h1 id="xian-cheng-jian-tong-xin"><a href="#线程间通信" class="headerlink" title="线程间通信"></a><strong>线程间通信</strong><a href="#xian-cheng-jian-tong-xin" class="header-anchor">#</a></h1><p><font size="4">Handler 和AsyncTask都是用来完成子线程和主线程即UI线程通信的</font></p>
+<p><font size="4">都可以解决主线程 处理耗时操作，造成界面卡顿或者程序无响应ANR异常 这一类问题</font></p>
+<p><font size="4">Handler  是 一种机制【Handler+Message+Looper】，所有的数据通过Message携带，，所有的执行顺序按照队列的形式执行，Looper用来轮询判断消息队列，Handler用来接收和发送Message</font></p>
+<p><font size="4"> AsyncTask 是一个单独的类，设计之初的目的只是为了 异步方式完成耗时操作的，顺便可以通知主线程刷新Ui，AsyncTask的内部机制则是维护了一个线程池，提升性能。</font></p>
+<p><font size="4"> 在这里提供另一种优雅的做法完成线程间的通信： </font></p>
+<p><font size="4"> <strong>扩展 IntentService 类</strong> </font></p>
+<p><font size="4"> 由于大多数启动服务都不必同时处理多个请求（实际上，这种多线程情况可能很危险），因此使用 IntentService 类实现服务值得一试。<br><font size="4">但如需同时处理多个启动请求，则更适合使用该基类Service。</font></font></p>
+<p><font size="4"> IntentService 执行以下操作：</font></p>
+<ul>
+<li> <font size="4"> 创建默认的工作线程，用于在应用的主线程外执行传递给 onStartCommand() 的所有 Intent。</font></li>
+<li> <font size="4">创建工作队列，用于将一个 Intent 逐一传递给 onHandleIntent() 实现，这样我们就永远不必担心多线程问题。</font></li>
+<li> <font size="4">在处理完所有启动请求后停止服务，因此我们不必调用 stopSelf()。</font></li>
+<li> <font size="4">提供 onBind() 的默认实现（返回 null）。</font></li>
+<li><font size="4">提供 onStartCommand() 的默认实现，可将 Intent 依次发送到工作队列和 onHandleIntent() 实现。<br>综上所述，您只需实现 onHandleIntent() 来完成客户端提供的工作即可。（不过，我们还需要为服务提供小型构造函数。）</font></li>
+</ul>
+<p><font size="4"> 以下是 IntentService 的实现示例：</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class HelloIntentService extends IntentService &#123;</span><br><span class="line"></span><br><span class="line">  &#x2F;**</span><br><span class="line">   * 必须有构造函数 必须调用父 IntentService(String)带有name的构造函数来执行工作线程</span><br><span class="line">   *&#x2F;</span><br><span class="line">  public HelloIntentService() &#123;</span><br><span class="line">      super(&quot;HelloIntentService&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &#x2F;**</span><br><span class="line">   * IntentService 调用默认的工作线程启动服务</span><br><span class="line">   * 当此方法结束，, IntentService 服务结束</span><br><span class="line">   *&#x2F;</span><br><span class="line">  @Override</span><br><span class="line">  protected void onHandleIntent(Intent intent) &#123;</span><br><span class="line">      &#x2F;&#x2F; 通常在这里会执行一些操作，比如下载文件</span><br><span class="line">      &#x2F;&#x2F;在这里只是sleep 5 s</span><br><span class="line">      long endTime &#x3D; System.currentTimeMillis() + 5*1000;</span><br><span class="line">      while (System.currentTimeMillis() &lt; endTime) &#123;</span><br><span class="line">          synchronized (this) &#123;</span><br><span class="line">              try &#123;</span><br><span class="line">                  wait(endTime - System.currentTimeMillis());</span><br><span class="line">              &#125; catch (Exception e) &#123;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><font size="4">看吧，我们只需要一个构造函数和一个 onHandleIntent() 实现即可。</font></p>
+<p><font size="4">对于Service 当然也有基础一点的做法，来完成多线程的操作，只不过代码量更多了：</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">public class HelloService extends Service &#123;</span><br><span class="line">  private Looper mServiceLooper;</span><br><span class="line">  private ServiceHandler mServiceHandler;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; Handler 接收来自主线程的Message</span><br><span class="line">  private final class ServiceHandler extends Handler &#123;</span><br><span class="line">      public ServiceHandler(Looper looper) &#123;</span><br><span class="line">          super(looper);</span><br><span class="line">      &#125;</span><br><span class="line">      @Override</span><br><span class="line">      public void handleMessage(Message msg) &#123;</span><br><span class="line">         &#x2F;&#x2F;执行任务，比如下载什么的，这里只是 让线程sleep </span><br><span class="line">          long endTime &#x3D; System.currentTimeMillis() + 5*1000;</span><br><span class="line">          while (System.currentTimeMillis() &lt; endTime) &#123;</span><br><span class="line">              synchronized (this) &#123;</span><br><span class="line">                  try &#123;</span><br><span class="line">                      wait(endTime - System.currentTimeMillis());</span><br><span class="line">                  &#125; catch (Exception e) &#123;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          &#x2F;&#x2F; 手动停止服务，来处理下一个线程</span><br><span class="line">          stopSelf(msg.arg1);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public void onCreate() &#123;</span><br><span class="line">    &#x2F;&#x2F;启动线程.  注意我们在主线程中创建了一些子线程, 这些线程都没有加锁同步. 这些现场都是后台线程，所以不会阻塞UI线程</span><br><span class="line">    HandlerThread thread &#x3D; new HandlerThread(&quot;ServiceStartArguments&quot;,</span><br><span class="line">            Process.THREAD_PRIORITY_BACKGROUND);</span><br><span class="line">    thread.start();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Handler开始轮询遍历了</span><br><span class="line">    mServiceLooper &#x3D; thread.getLooper();</span><br><span class="line">    mServiceHandler &#x3D; new ServiceHandler(mServiceLooper);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public int onStartCommand(Intent intent, int flags, int startId) &#123;</span><br><span class="line">      Toast.makeText(this, &quot;service starting&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line"></span><br><span class="line">      &#x2F;&#x2F; 每一次请求，都会通过handler发送Message</span><br><span class="line">      &#x2F;&#x2F; startID只是为了让我们知道正在进行的是哪一个线程，以便于我们停止服务</span><br><span class="line">      Message msg &#x3D; mServiceHandler.obtainMessage();</span><br><span class="line">      msg.arg1 &#x3D; startId;</span><br><span class="line">      mServiceHandler.sendMessage(msg);</span><br><span class="line"></span><br><span class="line">      &#x2F;&#x2F; If we get killed, after returning from here, restart</span><br><span class="line">      return START_STICKY;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public IBinder onBind(Intent intent) &#123;</span><br><span class="line">      &#x2F;&#x2F; 不提供 binding, 所以返回空</span><br><span class="line">      return null;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public void onDestroy() &#123;</span><br><span class="line">    Toast.makeText(this, &quot;service done&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#<strong>多个App间的通信</strong></p>
+<p><font size="4">首先我们要知道以下两点：</font></p>
+<ol>
+<li><p>Android 应用一般具有若干个Activity。每个Activity显示一个用户界面，用户可通过该界面执行特定任务（比如，查看地图或拍照）。要将用户从一个Activity转至另一Activity，应用必须使用 Intent 定义做某事的“意向”。 当我们使用诸如 startActivity() 的方法将 Intent 传递至系统时，系统会使用 Intent 识别和启动相应的应用组件。使用意向甚至可以让我们的应用开始另一个应用中包含的Activity。</p>
+</li>
+<li><p>Intent 可以为 显式 以便启动特定组件（特定的 Activity 实例）或隐式 以便启动处理意向操作（比如“拍摄照片”）的任何组件。</p>
+</li>
+</ol>
+<p><font size="4"><strong>1.向另一个应用发送用户</strong><br>Android最重要的功能之一，是可以操作其他应用，比如在我们的应用中，需要使用地图显示公司地址，我们无序在地图应用程序中构建Activity，而是直接创建Intent查看 地址的请求，Android系统之后启动  可以在地图上显示 地址的应用。</font></p>
+<p><font size="4"><strong>1) 构建隐式的意图</strong> </font></p>
+<p><font size="3">隐式意图不用声明要启动的组件类名称，而是声明操作，比如查看，编辑，发送，或者获取某项。</font></p>
+<p><font size="3"><font size="3">如果您我们的数据是Uri，可以这样构建Intent：</font></font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;当我们的应用通过startActivity()调用此Intent时，电话应用会发起向指定电话号码呼叫</span><br><span class="line">Uri number &#x3D; Uri.parse(&quot;tel:5551234&quot;);</span><br><span class="line">Intent callIntent &#x3D; new Intent(Intent.ACTION_DIAL, number);</span><br></pre></td></tr></table></figure>
+<p><font size="4">这里还有一些其他Intent的操作和Uri数据对:</font></p>
+<ul>
+<li><font size="3">查看地图：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 基于地址的地图位置</span><br><span class="line">Uri location &#x3D; Uri.parse(&quot;geo:0,0?q&#x3D;1600+Amphitheatre+Parkway,+Mountain+View,+California&quot;);</span><br><span class="line">&#x2F;&#x2F; 基于经纬度的地图位置</span><br><span class="line">&#x2F;&#x2F; Uri location &#x3D; Uri.parse(&quot;geo:37.422219,-122.08364?z&#x3D;14&quot;); &#x2F;&#x2F; z param is zoom level</span><br><span class="line">Intent mapIntent &#x3D; new Intent(Intent.ACTION_VIEW, location);</span><br></pre></td></tr></table></figure></font></li>
+<li><font size="3">查看网页：</font></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Uri webpage &#x3D; Uri.parse(&quot;http:&#x2F;&#x2F;www.android.com&quot;);</span><br><span class="line">Intent webIntent &#x3D; new Intent(Intent.ACTION_VIEW, webpage);</span><br></pre></td></tr></table></figure>
+<p>有的同学会问了，我从哪里可以知道，Intent可以传递的 Uri的类型，或者其他数据类型呢？<br>答：可以查阅<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/content/Intent.html#ACTION_VIEW">Google Intent的Api</a></p>
+<p><font size="4"><strong>2) 确认是否存在 接收意向的应用</strong> </font></p>
+<blockquote>
+<p>注意：如果调用了意向，但设备上没有可用于处理意向的应用，我们的应用将崩溃。 </p>
+</blockquote>
+<p>要确认是否存在可响应意向的可用Activity，请调用 queryIntentActivities() 来获取能够处理ntent 的Activity列表。 如果返回的 List 不为空，则可以安全地使用该意向。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PackageManager packageManager &#x3D; getPackageManager();</span><br><span class="line">List activities &#x3D; packageManager.queryIntentActivities(intent,</span><br><span class="line">        PackageManager.MATCH_DEFAULT_ONLY);</span><br><span class="line">boolean isIntentSafe &#x3D; activities.size() &gt; 0;</span><br></pre></td></tr></table></figure>
+<p>如果 isIntentSafe 是 true，则至少有一个应用将响应该意向。 如果它是 false，则没有任何应用处理该意向。</p>
+<p><font size="4"><strong>3) 启动指定Activity</strong></font></p>
+<p> 当我指定意图后，通过startActivity(intent);就可以启动指定Activity<br>此处有一个Google官方的示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 构建Intent</span><br><span class="line">Uri location &#x3D; Uri.parse(&quot;geo:0,0?q&#x3D;1600+Amphitheatre+Parkway,+Mountain+View,+California&quot;);</span><br><span class="line">Intent mapIntent &#x3D; new Intent(Intent.ACTION_VIEW, location);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 确定意图可以被接收</span><br><span class="line">PackageManager packageManager &#x3D; getPackageManager();</span><br><span class="line">List&lt;ResolveInfo&gt; activities &#x3D; packageManager.queryIntentActivities(mapIntent, 0);</span><br><span class="line">boolean isIntentSafe &#x3D; activities.size() &gt; 0;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;启动指定应用</span><br><span class="line">if (isIntentSafe) &#123;</span><br><span class="line">    startActivity(mapIntent);</span><br><span class="line">&#125;</span><br><span class="line">显</span><br></pre></td></tr></table></figure>
+<p><font size="4"><strong>4) 显示应用选择器</strong></font></p>
+<p>比如我们要完成”分享操作“，用户可以使用多个App完成分享，我们应明确显示 选择器对话框，如图<a target="_blank" rel="noopener" href="https://developer.android.com/images/training/basics/intent-chooser.png">这里写链接内容</a></p>
+<p>要显示选择器，需要使用Intent的createChooser()方法 创建Intent，并将其传递至startActivity()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Intent intent &#x3D; new Intent(Intent.ACTION_SEND);</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">String title &#x3D; getResources().getString(R.string.chooser_title);</span><br><span class="line">&#x2F;&#x2F; Create intent to show chooser</span><br><span class="line">Intent chooser &#x3D; Intent.createChooser(intent, title);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Verify the intent will resolve to at least one activity</span><br><span class="line">if (intent.resolveActivity(getPackageManager()) !&#x3D; null) &#123;</span><br><span class="line">    startActivity(chooser);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这将显示一个对话框，其中有响应传递给 createChooser() 方法的意向的应用列表，并且将提供的文本用作 对话框标题</p>
+<p><strong><font size="4">2. 接收其他Activity返回的结果</font></strong></p>
+<p><font size="3">通过Intent.startActivityForResult()来完成。</font></p>
+<p> <font size="3">首先在启动另一个Activity时，我们需要指定request code以便返回结果时，我们可以正常处理它。</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">static final int PICK_CONTACT_REQUEST &#x3D; 1;  &#x2F;&#x2F; The request code</span><br><span class="line">...</span><br><span class="line">private void pickContact() &#123;</span><br><span class="line">    Intent pickContactIntent &#x3D; new Intent(Intent.ACTION_PICK, Uri.parse(&quot;content:&#x2F;&#x2F;contacts&quot;));</span><br><span class="line">    pickContactIntent.setType(Phone.CONTENT_TYPE); </span><br><span class="line">    startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><font size="3">当用户完成操作后，返回数据，系统会调用Activity的 onActivityResult()方法，</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">    &#x2F;&#x2F; 检查requestCode是否真确</span><br><span class="line">    if (requestCode &#x3D;&#x3D; PICK_CONTACT_REQUEST) &#123;</span><br><span class="line">        &#x2F;&#x2F; 确保请求时成功的</span><br><span class="line">        if (resultCode &#x3D;&#x3D; RESULT_OK) &#123;</span><br><span class="line">           &#x2F;&#x2F;完成我们的业务逻辑</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>为了成功处理结果，我们必须了解Intent的格式，比如联系人返回的是带内容的URI，照相机返回的是Bitmap</p>
+</blockquote>
+<p><font size="3">如何根据返回的URI来读取数据，我们需要对ContentResolver 和 ContentProvider 有了解</font></p>
+<p><font size="3">下面就是一个三者结合的获取联系人的实例：</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">    &#x2F;&#x2F; 检查requestCode</span><br><span class="line">    if (requestCode &#x3D;&#x3D; PICK_CONTACT_REQUEST) &#123;</span><br><span class="line">        &#x2F;&#x2F; 确保请求成功</span><br><span class="line">        if (resultCode &#x3D;&#x3D; RESULT_OK) &#123;</span><br><span class="line">            &#x2F;&#x2F;获得选择的联系人的URI</span><br><span class="line">            Uri contactUri &#x3D; data.getData();</span><br><span class="line">            &#x2F;&#x2F; 我们只需要NUMBER这一列的信息，</span><br><span class="line">            String[] projection &#x3D; &#123;Phone.NUMBER&#125;;</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 显示根据NUMBER查询的结果</span><br><span class="line">            &#x2F;&#x2F; We don&#39;t need a selection or sort order (there&#39;s only one result for the given URI)</span><br><span class="line">            &#x2F;&#x2F; 在这里我们并没有对查询的结果进行排序，因为在主线程中进行这种数据库操作，有可能阻塞线程</span><br><span class="line">            &#x2F;&#x2F;优化方案是异步完成排序的操作，这里只是展示多个App间的通信</span><br><span class="line">            Cursor cursor &#x3D; getContentResolver()</span><br><span class="line">                    .query(contactUri, projection, null, null, null);</span><br><span class="line">            cursor.moveToFirst();</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;从NUMBER那一列当中取回phone NUMBER</span><br><span class="line">            int column &#x3D; cursor.getColumnIndex(Phone.NUMBER);</span><br><span class="line">            String number &#x3D; cursor.getString(column);</span><br><span class="line">			&#x2F;&#x2F;接下来就是要操作这些phone number了</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><font size="4">3. 接收其他Activity返回的结果</font></strong></p>
+<p>要允许其他应用开始您的Activity，需要 <intent-filter> 在相应元素的宣示说明文件中添加一个 <activity> 元素。</activity></intent-filter></p>
+<p>例如，此处有一个在数据类型为文本或图像时处理 ACTION_SEND 意向的意向过滤器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity android:name&#x3D;&quot;ShareActivity&quot;&gt;</span><br><span class="line">    &lt;intent-filter&gt;</span><br><span class="line">        &lt;action android:name&#x3D;&quot;android.intent.action.SEND&quot;&#x2F;&gt;</span><br><span class="line">        &lt;category android:name&#x3D;&quot;android.intent.category.DEFAULT&quot;&#x2F;&gt;</span><br><span class="line">        &lt;data android:mimeType&#x3D;&quot;text&#x2F;plain&quot;&#x2F;&gt;</span><br><span class="line">        &lt;data android:mimeType&#x3D;&quot;image&#x2F;*&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;intent-filter&gt;</span><br><span class="line">&lt;&#x2F;activity&gt;</span><br></pre></td></tr></table></figure>
+<p><action>定义操作，通常是系统定义的值之一，比如ACTION_SEND 或 ACTION_VIEW。<br><data>定义与Intent关联的数据，只需通过 android:mimeType 指定我们接收的数据类型，比如text/plain 或 image/jpeg。<br><category>所有的隐式Intent，都使用 CATEGORY_DEFAULT 进行定义</category></data></action></p>
+<p><strong><font size="4">4. 处理Activity中的Intent</font></strong></p>
+<p><font size="3">当Activity开始时，调用getIntent检索开始Activity的Intent，</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    super.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">    setContentView(R.layout.main);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Intent intent &#x3D; getIntent();</span><br><span class="line">    Uri data &#x3D; intent.getData();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 指出接收的数据类型</span><br><span class="line">    if (intent.getType().indexOf(&quot;image&#x2F;&quot;) !&#x3D; -1) &#123;</span><br><span class="line">        &#x2F;&#x2F; 处理带有图片的Intent</span><br><span class="line">    &#125; else if (intent.getType().equals(&quot;text&#x2F;plain&quot;)) &#123;</span><br><span class="line">        &#x2F;&#x2F; 处理带有文本的Intent</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><font size="4">5. 向指定Activity中返回数据</font></strong><br><font size="3">只需调用setResult指定结果代码和Intent</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent result &#x3D; new Intent(&quot;com.example.RESULT_ACTION&quot;, Uri.parse(&quot;content:&#x2F;&#x2F;result_uri&quot;);</span><br><span class="line">setResult(Activity.RESULT_OK, result);</span><br><span class="line">finish();</span><br></pre></td></tr></table></figure>
+<p><font size="3">记住必须为结果指定结果码，通常为 RESULT_OK 或 RESULT_CANCELED。</font></p>
+<p><font size="3">我们也可以在Intent中 用Bundle存储额外的信息</font></p>
+<p><font size="3">细心的同学可能发现一个问题： </font></p>
+<p><font size="3"> 启动Activity 有startActivity() 和startActivityForResult() 两种启动方式，返回结果的形式id偶有setResult()吗？</font></p>
+<p><font size="3"> 如果开启当前Activity的Intent可能需要结果，只需调用 setResult()。 如果原始Activity已调用 startActivityForResult()，则系统将向其传递您提供给 setResult() 的结果；否则，会忽略结果。</font></p>
+<p>#<strong>使用大型开源框架完成组件间的通信</strong></p>
+<p><font size="4">Github上非常火的两大通信组件EventBus和otto：</font></p>
+<p><strong><font size="5"> 1. EventBus</font></strong> </p>
+<p><font size="4">EventBus 是一个 Android 事件发布/订阅框架，通过解耦发布者和订阅者简化 Android 事件传递，这里的事件可以理解为消息，本文中统一称为事件。事件传递既可用于 Android 四大组件间通讯，也可以用户异步线程和主线程间通讯等等。</font></p>
+<p><font size="4">传统的事件传递方式包括：Handler、BroadCastReceiver、Interface 回调，相比之下 EventBus 的优点是代码简洁，使用简单，并将事件发布和订阅充分解耦。</font></p>
+<p><font size="5">1）概念：</font></p>
+<p><font size="4">事件(Event)：又可称为消息，本文中统一用事件表示。其实就是一个对象，可以是网络请求返回的字符串，也可以是某个开关状态等等。事件类型(EventType)指事件所属的 Class。<br>事件分为一般事件和 Sticky 事件，相对于一般事件，Sticky 事件不同之处在于，当事件发布后，再有订阅者开始订阅该类型事件，依然能收到该类型事件最近一个 Sticky 事件。</font></p>
+<p><font size="4">订阅者(Subscriber)：订阅某种事件类型的对象。当有发布者发布这类事件后，EventBus 会执行订阅者的 onEvent 函数，这个函数叫事件响应函数。订阅者通过 register 接口订阅某个事件类型，unregister 接口退订。订阅者存在优先级，优先级高的订阅者可以取消事件继续向优先级低的订阅者分发，默认所有订阅者优先级都为 0。 </font></p>
+<p><font size="4">发布者(Publisher)：发布某事件的对象，通过 post 接口发布事件。</font></p>
+<p><font size="4">本项目较为简单，总体设计和流程图：<br>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-hjeut613-1615037919707)(<a target="_blank" rel="noopener" href="https://github.com/greenrobot/EventBus/raw/master/EventBus-Publish-Subscribe.png)]">https://github.com/greenrobot/EventBus/raw/master/EventBus-Publish-Subscribe.png)]</a></font></p>
+<p><strong><font size="5">2)使用方式：</font></strong></p>
+<ul>
+<li>build.gradle 中加入依赖<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile &#39;org.greenrobot:eventbus:3.0.0&#39;</span><br></pre></td></tr></table></figure></li>
+<li>代码中指需三步 </li>
+</ul>
+<p><strong><font size="3">1.  定义事件：只需要是一个Java类</font></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  public class MessageEvent &#123;</span><br><span class="line">    public final String message;</span><br><span class="line"></span><br><span class="line">    public MessageEvent(String message) &#123;</span><br><span class="line">        this.message &#x3D; message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>   <strong><font size="3">2.  完成订阅者</font></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;MessageEvent被Eventbus post提交的时候 将会回调这个方法</span><br><span class="line">&#x2F;&#x2F;这种方式 提示我们可以直接定义自己的事件</span><br><span class="line">@Subscribe</span><br><span class="line">public void onMessageEvent(MessageEvent event)&#123;</span><br><span class="line">    Toast.makeText(getActivity(), event.message, Toast.LENGTH_SHORT).show();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 当一些其他事件post提交的时候，回调这个方法</span><br><span class="line">@Subscribe</span><br><span class="line">public void handleSomethingElse(SomeOtherEvent event)&#123;</span><br><span class="line">    doSomethingWith(event);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在Activity或者Fragment中绑定订阅者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onStart() &#123;</span><br><span class="line">    super.onStart();</span><br><span class="line">    EventBus.getDefault().register(this);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onStop() &#123;</span><br><span class="line">   EventBus.getDefault().unregister(this);</span><br><span class="line">    super.onStop();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><font size="3">3.  发布事件：</font></strong></p>
+<pre><code>​```
+EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
+​```
+</code></pre>
+<p>#<strong>很遗憾未完成的部分</strong></p>
+<ol start="5">
+<li>Binder 机制以及应用</li>
+<li>网络通信基础篇：Google 课程–AnsycTask+HttpClient </li>
+<li>网络通信提高篇：开源框架Ansyc-Httpclient，okttp，Retrofit</li>
+</ol>
+<p>#<strong>本文参考并翻译</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/training/basics/fragments/communicating.html"> Google 课程 Communicating with Other Fragments</a> </li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/aidl.html">Google 解释 AIDL进程间通信</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/training/multiple-threads/communicate-ui.html">Google 解释 Handler</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/os/AsyncTask.html">Google 解释 AsyncTask</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/content/BroadcastReceiver.html">Google BroadcastReceiver API</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/training/basics/intents/index.html?hl=vi"> Google 课程 Interacting with Other Apps</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/guide/topics/providers/content-provider-creating.html">Google  解释 contentprovider </a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/content/BroadcastReceiver.html">Google BroadcastReceiver 课程</a> </li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/services.html">Google  Service 课程</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/processes-and-threads.html#">Google 解释 进程和线程</a></li>
+<li><a target="_blank" rel="noopener" href="http://greenrobot.org/eventbus/documentation/">EventBus官方文档</a></li>
+</ol>
+</font>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/blog/tags/Communication/" rel="tag"># Communication</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2021/02/mtk-log/" rel="next" title="mtk-log">
+                <i class="fa fa-chevron-left"></i> mtk-log
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/blog/images/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/blog/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ShaunSheep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.douban.com/people/jincheng-ycf/" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/OscarWildeHawking" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://yangchaofan.cn" target="_blank" title="首页">
+                      
+                        <i class="fa fa-fw fa-globe"></i>首页</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shi-me-shi-tong-xin"><span class="nav-number">1.</span> <span class="nav-text">什么是通信？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#aidl-wan-cheng-jin-cheng-jian-tong-xin"><span class="nav-number">2.</span> <span class="nav-text">AIDL完成进程间通信</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xian-cheng-jian-tong-xin"><span class="nav-number">3.</span> <span class="nav-text">线程间通信</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">叶金诚</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数 </i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://jincheng.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://idolcoder.gitee.io/blog/2021/03/android-communication/';
+          this.page.identifier = '/2021/03/android-communication/';
+          this.page.title = '《详解 Android 通信》';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jincheng.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/blog/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz", "pi8Pa2aH3XpcaovMyqIXVuOP");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: ,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

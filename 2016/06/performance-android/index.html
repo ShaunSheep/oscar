@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/function%20small()%20%7B%20%5Bnative%20code%5D%20%7D?v=5.1.2">
+
+
+
+
+
+
+  <meta name="keywords" content="Android,Performance," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="摘自本人16年的的博客《Google官方  详解  Android 性能优化【史诗巨著之内存篇】》 #为什么关注性能  对于一款APP，用户首先关注的是 app的性能，而不是APP本身的属性功能，用户不关心你是否是搞社交，是否搞电商，是否是一款强大的美图滤镜app，用户首先关注的是 性能—-性能不好，用户会直接卸载，在应用市场给一个恶狠狠得差评，小则影响产品口碑，大则影响公司的品牌和声誉，作为程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="性能优化【史诗巨著之内存篇】">
+<meta property="og:url" content="http://idolcoder.gitee.io/blog/2016/06/performance-android/index.html">
+<meta property="og:site_name" content="叶金诚的站点">
+<meta property="og:description" content="摘自本人16年的的博客《Google官方  详解  Android 性能优化【史诗巨著之内存篇】》 #为什么关注性能  对于一款APP，用户首先关注的是 app的性能，而不是APP本身的属性功能，用户不关心你是否是搞社交，是否搞电商，是否是一款强大的美图滤镜app，用户首先关注的是 性能—-性能不好，用户会直接卸载，在应用市场给一个恶狠狠得差评，小则影响产品口碑，大则影响公司的品牌和声誉，作为程序">
+<meta property="og:locale">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/aee4a58d58a1f48cf83bee00191ac4dc.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b8eeebf564c906276013a33b4db3a7a0.png">
+<meta property="article:published_time" content="2016-06-01T13:34:41.000Z">
+<meta property="article:modified_time" content="2021-03-06T13:48:11.727Z">
+<meta property="article:author" content="叶金诚">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="Performance">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/aee4a58d58a1f48cf83bee00191ac4dc.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"always","offset":16,"offset_float":16,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: "",
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://idolcoder.gitee.io/blog/2016/06/performance-android/"/>
+
+
+
+
+
+  <title>性能优化【史诗巨著之内存篇】 | 叶金诚的站点</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?f6796a81afe3e2f22bc40222eb19971f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">叶金诚的站点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">汇贤雅叙</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idolcoder.gitee.io/blog/blog/2016/06/performance-android/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">性能优化【史诗巨著之内存篇】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+		        
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-01T21:34:41+08:00">
+                2016-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Android/%E5%BA%94%E7%94%A8%E5%B1%82/" itemprop="url" rel="index">
+                    <span itemprop="name">应用层</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Android/Performance/" itemprop="url" rel="index">
+                    <span itemprop="name">Performance</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/blog/2016/06/performance-android/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="/2016/06/performance-android/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/blog/2016/06/performance-android/" class="leancloud_visitors" data-flag-title="性能优化【史诗巨著之内存篇】">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  9.6k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  40
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摘自本人16年的的博客<a target="_blank" rel="noopener" href="http://blog.csdn.net/chivalrousman/article/details/51553114#t16">《Google官方  详解  Android 性能优化【史诗巨著之内存篇】》</a></p>
+<p>#<strong>为什么关注性能</strong></p>
+<hr>
+<p>对于一款APP，用户首先关注的是 app的性能，而不是APP本身的属性功能，用户不关心你是否是搞社交，是否搞电商，是否是一款强大的美图滤镜app，用户首先关注的是 性能—-<font color="##000000"><strong>性能不好</strong>，用户会直接卸载，在应用市场给一个恶狠狠得差评，小则影响产品口碑，大则影响公司的品牌和声誉，作为程序员，app的性能更应该作为我们关注的一个功能，而不是出了问题 才去门头苦恼加班加点的负担。</font></p>
+<p>老实说，提高app性能的确非常难，处理这些问题 你必须知道：</p>
+<ol>
+<li>应用速度慢的原因</li>
+<li>还必须正确使用分析工具来分析数据</li>
+</ol>
+<p>为此诞生了本文：</p>
+<ol>
+<li>了解这些工具并用它们找到造成性能不好的原因</li>
+<li>从理论角度了解它们</li>
+</ol>
+<p>#<strong>如何优化app的性能</strong>？</p>
+<hr>
+<p>性能优化听上去是一项非常艰巨的功能，但仔细思考，其实非常简单：</p>
+<ol>
+<li><p>获取信息，</p>
+<p>有人说你应用慢，应用闪退（崩掉，crash掉）的时候你需要找到原因。</p>
+<p>通过运行 分析和反馈工具软件来收集应用相关的信息，我们需要明确哪些可以测量，哪些可以优化</p>
+<p>也就是说任何应用开始优化时，整个过程取决于问题的可测性以及性能优化的可评价性。 开发中经常遇到的坎，问题不可复现，以及对于某一个细节是否需要优化 拿不定主意，这个需要我们自己身处其境 考虑分析各方面因素 得出结论，而不是纯粹得靠感觉。</p>
+</li>
+<li><p>分析数据，</p>
+</li>
+</ol>
+<p> 很多时候，我们并不能直接理解问题的原因，比如内存溢出（OOM）的error，判断内存溢出需要计算很多个变量得内存大小，我们并不能直观通过眼球看出来一个app 运行过程那些变量的内存，这里我们就需要运行分析工具来帮助我们，将其转化为可视化的图表，</p>
+<pre><code>在这里，我们可能还是看不懂那些图表，横线竖线，具体是个什么玩意，
+
+没有关系，去弄懂它们！就可以成为性能大师了.
+
+现在你看那些内存中的二进制转换成图表的过程，就类似于古代的算命大师，
+
+步骤1和步骤2 会不断的循环，搜集数据，分析数据···
+
+ 有时候我们不只使用一种搜集工具和分析工具，这就需要自己针对性能得种类来深入研究了
+</code></pre>
+<ol start="3">
+<li><p>Tack action!</p>
+<p>发现了问题，找到了问题所在以及发生的原因，我们必须要恰当的去解决它，根据项目进度，该性能的优化成本，性能优先级，考虑项目中使用的java库或者android开源框架，其中的一些严格限制，</p>
+<p>在你的方案提出之前，这些因素都是我们需要考虑的，因为提出的优化方案，不一定会被公司高层接受（除非你就是高层）。</p>
+</li>
+</ol>
+<blockquote>
+<p>工具不是规则，理解事物的规则和流程更重要</p>
+</blockquote>
+<p>#<strong>为什么关注内存</strong></p>
+<blockquote>
+<p>内存大小属于手机性能之一</p>
+</blockquote>
+<p>举个简单的例子，内存就像你的卧室一样，当你在老家住着动辄几百平的村庄，舒服惯了，突然变卖家产一门心思想创业来到北京，家里的老本只够你住几平米的卫生间的时候，你就会注意到内存【房间】大小的重要性了。</p>
+<p>首先我们要知道内存是如何影响系统运行</p>
+<p>通常我们认为代码执行速度等同于物理硬件的执行速度，我们的代码指令都是通过使用内存来完成的。通过为实例对象，常量，变量分配内存，来完成操作，但是如何释放这些内存，通常我们并不清楚。</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-edGKKLu1-1615037605194)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/2222.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/2222.png)]</a></p>
+<p>一旦分配出去的内存没有及时回收，会引造成系统卡顿，执行操作缓慢现象，这种现象称之为内存泄漏，Memory leak</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-jOOPaHuq-1615037605197)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/12a89c01adce51b97a72f7d025e9a47372b58006/333.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/12a89c01adce51b97a72f7d025e9a47372b58006/333.png)]</a></p>
+<p>##<strong>java垃圾回收机制官方详解</strong></p>
+<blockquote>
+<p>java中的JVM就是一个抽象的计算机，和实际的计算机一样，它具有指令集并使用不同的存储区域，JVM负责执行代码，管理数据，管理内存和寄存器。</p>
+</blockquote>
+<p>垃圾回收机制只做两件基本的事情：</p>
+<ol>
+<li> 发现无用的对象</li>
+<li> 回收被无用对象占用的内存空间，使得该空间可以被程序再次利用</li>
+</ol>
+<p>通常，垃圾回收具有如下特点：</p>
+<ol>
+<li><p>垃圾回收机制的工作目标是回收无用对象的内存空间，这些内存空间都是JVM堆内存的内存资源，对于其他物理资源，比如数据库连接，磁盘I/O 等资源无能为力</p>
+</li>
+<li><p>为了让垃圾回收机制尽快回收那些对象，可以将该对象引用变量置为null，</p>
+</li>
+<li><p><font color="#0000FF"><strong>垃圾回收发生的不可预知性</strong></font>，不同JVM 采用不同的算法和机制，有可能定时回收，有可能cpu空闲回收，也有可能内存消耗极限发生，即使通过Runtime对象的gc（），System.gc（）来建议系统进行回收，但这之属于建议，不能精确控制垃圾回收机制的执行,</p>
+</li>
+</ol>
+<pre><code>&gt; 意思就是说，垃圾回收机制什么时候开始执行，并不是我们程序员能控制的，我们只能给予建议。
+</code></pre>
+<p><font color="#0000FF">那么问题来了，如何精确的进行垃圾回收呢？</font><br><font color="#0000FF">那么问题来了，如何精确的进行垃圾回收呢？</font><br><font color="#0000FF">那么问题来了，如何精确的进行垃圾回收呢？</font></p>
+<p>回答很明确，确保每一个对象都进行了有效的释放。对于不再需要的对象，不要引用他们，一旦在别的地方保持对这个对象的引用，垃圾回收机制 暂时不会回收该对象，则会导致严重得问题—-<font color="#FF00FF">系统可用内存越来越少，垃圾回收执行的频率越来越高，cpu全都被垃圾回收的操作占有了，系统性能自然而然就下降了！</font></p>
+<p>java8 已经删除了永生代内存，即一些常驻内存，不会回收的数据，而是改为使用本地内存来存储类的元数据，称之为元空间（Metaspace），不过貌似和Android开发没关系(-__-)。</p>
+<p>回顾完java垃圾回收，下面介绍<br>###<strong>Android 自己的回收机制-Runtime 回收机制</strong><br>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-Jp7F1mU9-1615037605199)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/androidruntimeheap.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/androidruntimeheap.png)]</a></p>
+<p>经由为数据分配内存的类型，以及系统如何有效的利用gc回收内存，并为新的对象分配内存。</p>
+<p>所有要申请的内存都被划分到内存空间中，根据这些特点，哪些数据分配到哪些内存中，取决于Android的版本，</p>
+<p>最为重要的一点，Android系统为每个运行中的app分配了预设的内存通常为16m-32m之间，当分配的内存越多，系统内存不足时，系统就可能会执行内存清理，注意，是可能会执行，是否执行垃圾清理是由系统自己判断的。</p>
+<p>进行垃圾回收，以确保有足够的内存分配给其他的应用操作，不同的Android版本，会有不同的gc操作，例如在davailk中，gc代表终止程序操作，<br>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-KKwp7D47-1615037605206)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/%E7%A9%BA%E9%97%B4%E9%A2%84%E8%AE%BE%E5%A4%A7%E5%B0%8F.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/%E7%A9%BA%E9%97%B4%E9%A2%84%E8%AE%BE%E5%A4%A7%E5%B0%8F.png)]</a></p>
+<p>###<strong>代码是如何影响程序执行的？</strong></p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-hGbslb9x-1615037605211)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc1.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc1.png)]</a></p>
+<p>上图是正常的界面刷新流程，</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-38RhVcBw-1615037605213)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc2.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc2.png)]</a></p>
+<p>上图，gc占据了一大块的时间，对于我们人类来说很短，但是对于系统来说很长了。</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-TrHiFJmM-1615037605216)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc3.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc3.png)]</a></p>
+<p>综合三张图分析：代码质量很差，使得系统为我们的app分配了过多内存，而且没有及时回收，系统需要更多的时间去执行gc回收，那么系统就没时间去保持界面的活跃，所以就造成了卡顿的现象。，</p>
+<blockquote>
+<p>在一个循环体中，重复得创建对象，就会造成内存污染，马上就会有很多gc<br>启动，由于这一额外的内存压力，内存泄漏仍然会产生，当可用内存降低到一定总量时，会强制系统gc执行，那循环体中的那部分操作会显示出卡顿的情况，甚至有可能在内存极限的时候，我们开发的应用会闪退。</p>
+</blockquote>
+<p>所以，唯一的解决办法是：减少代码申请的内存量，不使用的对象及时回收。</p>
+<p>#<strong>使用内存分析工具Memory Monitor</strong></p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-C3c0bqKO-1615037605219)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc4.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc4.png)]</a></p>
+<p>整个层叠图，代表还有多少内存可用<br>深蓝色区域：代表正在使用的内存大小<br>浅灰色区域：代表空闲未分配内存</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-4gf51Heh-1615037605223)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc5.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc5.png)]</a></p>
+<p>这个红色箭头所指的坡度表示急需大量的内存，内存分配也急剧的增加。<br>上图是一个内存管理良好的例子</p>
+<p>下图我们看一个内存糟糕的例子</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-ZVigsvZu-1615037605227)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc6.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc6.png)]</a></p>
+<blockquote>
+<p>分析</p>
+</blockquote>
+<p><font color="#fff22f22">这里有一部分代码占用了大量的内存，然后又一下子释放了内存，生成不断重复又窄又长的曲线，这就是程序在花大量的时间在进行垃圾清理，运行垃圾清理的时间越多，其他操作可用的时间就越少，比如跟网络交互数据，页面刷新，打电话，听歌等等，这样就造成了卡顿<font></font></font></p>
+<p>###<strong>使用Montior过程中遇到的 No Debugable Application的问题</strong></p>
+<p> [外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-Vka7aF2D-1615037605234)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/montior.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/montior.png)]</a></p>
+<blockquote>
+<p>solution：Tools-Android-Android adb interact</p>
+<p>最初并不会见效，重启app即可，</p>
+</blockquote>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-gygcO5jn-1615037605250)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/montior2.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/montior2.png)]</a></p>
+<h2 id="nei-cun-xie-lou"><a href="#内存泄漏" class="headerlink" title="#内存泄漏"></a>#<strong>内存泄漏</strong><a href="#nei-cun-xie-lou" class="header-anchor">#</a></h2><p>在这里我才开始引入内存泄漏的原因【虽然文章前面已经提到，但是在这里才着重拿出来作为一节】</p>
+<p>网络上和一些书籍对内存泄漏解释是 应该回收的对象没有回收，有点不全面，我认为深一点来说，内存泄漏是针对系统而言的，内存泄漏指的是不能被使用的内存，但是垃圾回收器无法识别出来，对其进行回收，这些对象一直存在于堆中，并且持续占据着内存空间，无法被删除，随着不断泄漏，系统可用的内存就越来越小，意味着系统又需要花更多的时间 去进行内存清理操作，进行垃圾回收操作的次数越来越多，</p>
+<blockquote>
+<p>简单的内存泄漏：对没有使用的对象 循环引用<br>复杂一点的：在listview还没有绘制完成时就添加到activity  &gt;</p>
+</blockquote>
+<h1 id="heap-viewer"><a href="#Heap-Viewer" class="headerlink" title="Heap Viewer"></a>Heap Viewer<a href="#heap-viewer" class="header-anchor">#</a></h1><blockquote>
+<p>Heap viewer使用步骤，我录制了gift图，详情请看：</p>
+</blockquote>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-Fbh6ehyr-1615037605265)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/heapviewer.gif)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/heapviewer.gif)]</a></p>
+<blockquote>
+<p> 了解Heap Viewer:<br> Heap Viewer可以有效的分析程序在堆中分配的数据类型及数量和 大小小</p>
+</blockquote>
+<p> <img src="https://img-blog.csdnimg.cn/img_convert/aee4a58d58a1f48cf83bee00191ac4dc.png" alt="这里写图片描述">  </p>
+<blockquote>
+<p>  这里表示 byte数组和boolean数组的数量为177，占用了1.423M的内存</p>
+</blockquote>
+<p>#<strong>内存泄漏的情况</strong><br>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-zARMpThX-1615037605276)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc7.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc7.png)]</a></p>
+<p>绿色箭头标出来的那部分 代码就是有问题的部分，原因在于，可以内存几乎为0，所有的内存已经被程序占用，首先记住，我们的代码有问题，造成了内存泄漏，并且，垃圾回收机制无法回收那部分内存空间</p>
+<p>下图为30s之后的内存回收情况</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-j6jrwdKa-1615037605279)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc8.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc8.png)]</a></p>
+<p>启动第二次gc，此时Android调整并提高应用的内存上限，这样做的同时，如果漏洞没有修复，表明内存泄漏仍然存在，那么还会有第三次，第四次同样的gc操作，直至系统无法调整提高给应用更高的内存上限，造成内存溢出，甚至可能死机，</p>
+<p>#<strong>Trace Viewer分配追踪器</strong><br>  <img src="https://img-blog.csdnimg.cn/img_convert/b8eeebf564c906276013a33b4db3a7a0.png" alt="这里写图片描述"></p>
+<blockquote>
+<blockquote>
+<p>Trace Viewer可以精确追踪到代码的位置，限于篇幅请按照上图点击 那几个按钮  自行摸索考功它的功能能</p>
+</blockquote>
+</blockquote>
+<p>#<strong>高效加载图片图片</strong></p>
+<h2 id="wei-shi-me-zhi-guan-zhu-tu-pian-jia-zai-er-bu-qu-chu-li-qi-ta-shu-ju-lai-jie-jue-nei-cun-bu-zu-de-wen-ti"><a href="#为什么只关注图片加载，而不去处理其他数据来解决内存不足的问题？" class="headerlink" title="为什么只关注图片加载，而不去处理其他数据来解决内存不足的问题？"></a><strong>为什么只关注图片加载，而不去处理其他数据来解决内存不足的问题？</strong><a href="#wei-shi-me-zhi-guan-zhu-tu-pian-jia-zai-er-bu-qu-chu-li-qi-ta-shu-ju-lai-jie-jue-nei-cun-bu-zu-de-wen-ti" class="header-anchor">#</a></h2><ol>
+<li><p>Android 加载图片会创建Bitmap,drawable实例，占用内存空间，如果不进行高效处理，程序会很快达到 Android系统分配给APP的内存上限，直至挂掉</p>
+</li>
+<li><p>图片资源相比文本资源，在内存中会占据更大的内存，从字节数就可以看出来</p>
+</li>
+<li><p>在我们的应用中正确恰当高效的加载 图片资源 是一件非常棘手的事情</p>
+</li>
+</ol>
+<blockquote>
+<ol>
+<li>Android 系统会分配给单个APP至少 16M左右的内存，） Android Compatibility Definition Document (CDD)中，根据不同手机的尺寸和屏幕像素来要求应用最小内存，我们开发 的应用需要优化内存至最低内存限制，然而请记住，许多手机对内存有着更高的要求。</li>
+<li>图片消耗大量的内存，尤其是高像素的图片，比如入门级单反相机拍摄出来的一张图片，都有可能超出APP的最低内存限制</li>
+<li>app 中一些常见的UI 比如 ListView, GridView and ViewPager，都需要立刻加载大量的图片，注意是立刻，这对内存管理提出了很高的要求。</li>
+</ol>
+</blockquote>
+<p><strong>所以我们需要高效得加载图片。</strong></p>
+<h1 id="gao-xiao-de-jia-zai-da-tu"><a href="#高效的加载大图：" class="headerlink" title="高效的加载大图："></a><strong>高效的加载大图：</strong><a href="#gao-xiao-de-jia-zai-da-tu" class="header-anchor">#</a></h1><p>一张图片的像素，尺寸，分别率，由可能超过Android的UI组件本身大小，UI组件的大小是由手机设备屏幕决定的，这些超出的部分，会消耗更多的内存。</p>
+<p>应该让图片去匹配我们的手机设备，所以，我们需要对图片进行处理：</p>
+<ol>
+<li>不能超过每个应用程序的内存限制</li>
+<li>用最小的内存加载图片</li>
+</ol>
+<h1 id="zhi-xu-san-bu"><a href="#只需三步" class="headerlink" title="只需三步"></a><strong>只需三步</strong><a href="#zhi-xu-san-bu" class="header-anchor">#</a></h1><p><strong>1. 读取内存中Bitmap的尺寸和类型</strong></p>
+<p> BitmapFactory类提供了很多解析Bitmap的方法（decodeByteArray(), decodeFile(), decodeResource(), etc.），每一种解析方法都有一个额外的参数 BitmapFactory.Options，设置inJustDecodeBounds 属性为true可以禁止应用分配内存，此时bitmap返回为null，但是我们可以通过BitmapFactory.Options对象来获取很多有用的参数</p>
+<p> 此时 你可以通过BitmapFactory.Options来读取图片的尺寸和类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">BitmapFactory.Options options &#x3D; new BitmapFactory.Options();</span><br><span class="line">options.inJustDecodeBounds &#x3D; true;</span><br><span class="line">BitmapFactory.decodeResource(getResources(), R.id.myimage, options);</span><br><span class="line">int imageHeight &#x3D; options.outHeight;</span><br><span class="line">int imageWidth &#x3D; options.outWidth;</span><br><span class="line">String imageType &#x3D; options.outMimeType;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>总结：为了避免java.lang.OutOfMemory ，在加载图片之前需要检查原图的大小是否超出最低内存限制。</p>
+</blockquote>
+<p><strong>2. 加载一张小图，使得系统分配较少的内存给它。</strong></p>
+<blockquote>
+<p>现在我们已经获取到了图片的尺寸，加载一张图片之前，我们需要考虑：</p>
+</blockquote>
+<ul>
+<li><p>计算整张图片需要多大的内存</p>
+</li>
+<li><p>我们希望给它多大的内存</p>
+</li>
+<li><p>加载图片的组件比如Imageview的尺寸是多大</p>
+</li>
+<li><p>当前手机设备的屏幕尺寸和分辨率</p>
+</li>
+</ul>
+<p>例如一张1080<em>720的图片要展示在一个128</em>72的Imageview上</p>
+<p>实际 项目中，比如一张2048x1536的图片，我们通过设置inSampleSize为4，来创建实际大小为512x384的bitmap，这样需要的内存为0.75MB而不是之前的12MB（色彩模式都是ARGB_8888的情况下），</p>
+<p>Google官方提供了两个方法来供我们使用，可以封装到自己的工具类中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public static int calculateInSampleSize(</span><br><span class="line">            BitmapFactory.Options options, int reqWidth, int reqHeight) &#123;</span><br><span class="line">    &#x2F;&#x2F; 获得内存中图片的宽高</span><br><span class="line">    final int height &#x3D; options.outHeight;</span><br><span class="line">    final int width &#x3D; options.outWidth;</span><br><span class="line">    int inSampleSize &#x3D; 1;</span><br><span class="line"></span><br><span class="line">    if (height &gt; reqHeight || width &gt; reqWidth) &#123;</span><br><span class="line"></span><br><span class="line">        final int halfHeight &#x3D; height &#x2F; 2;</span><br><span class="line">        final int halfWidth &#x3D; width &#x2F; 2;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; 计算出一个数值，必须符合为2的幂（1，2，4，8，tec），赋值给inSampleSize</span><br><span class="line">        &#x2F;&#x2F; 图片宽高应大于期望的宽高的时候，才进行计算</span><br><span class="line">        while ((halfHeight &#x2F; inSampleSize) &gt; reqHeight</span><br><span class="line">                &amp;&amp; (halfWidth &#x2F; inSampleSize) &gt; reqWidth) &#123;</span><br><span class="line">            inSampleSize *&#x3D; 2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return inSampleSize;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,</span><br><span class="line">        int reqWidth, int reqHeight) &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 第一次解析 inJustDecodeBounds&#x3D;true 只是用来获取bitmap在内存中的尺寸和类型，系统并不会为其分配内存，</span><br><span class="line">    final BitmapFactory.Options options &#x3D; new BitmapFactory.Options();</span><br><span class="line">    options.inJustDecodeBounds &#x3D; true;</span><br><span class="line">    BitmapFactory.decodeResource(res, resId, options);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 计算出一个数值</span><br><span class="line">    options.inSampleSize &#x3D; calculateInSampleSize(options, reqWidth, reqHeight);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 根据inSampleSize 数值来解析bitmap</span><br><span class="line">    options.inJustDecodeBounds &#x3D; false;</span><br><span class="line">    return BitmapFactory.decodeResource(res, resId, options);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>研究一个新的函数，我们先关注函数的输入和输出提高阅读能力</p>
+</blockquote>
+<p>  <strong>3.接着为我们的UI组件ImageView设置一张缩略图咯：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mImageView.setImageBitmap(</span><br><span class="line">    decodeSampledBitmapFromResource(getResources(), R.id.myimage, 100, 100));</span><br></pre></td></tr></table></figure>
+<p>为了完全理解这一部分，初学者请自行查阅</p>
+<ol>
+<li> BitmapFactory.decode   </li>
+<li> BitmapFactory.Options</li>
+</ol>
+<h1 id="shi-asynctask-jia-zai-bitmap"><a href="#使AsyncTask加载Bitmap" class="headerlink" title="使AsyncTask加载Bitmap"></a><strong>使AsyncTask加载Bitmap</strong><a href="#shi-asynctask-jia-zai-bitmap" class="header-anchor">#</a></h1><p>当图片资源来自网络或者硬盘的时候，最好不要直接在主线程中加载它，例如IO资源或者数据库资源都会占用CPU，CPU 要做的事情过多，Android手机会造成卡顿得现象，</p>
+<p><strong>好在Google 提供了解决办法–AsyncTask异步加载工具</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class BitmapWorkerTask extends AsyncTask&lt;Integer, Void, Bitmap&gt; &#123;</span><br><span class="line">    private final WeakReference&lt;ImageView&gt; imageViewReference;</span><br><span class="line">    private int data &#x3D; 0;</span><br><span class="line"></span><br><span class="line">    public BitmapWorkerTask(ImageView imageView) &#123;</span><br><span class="line">        &#x2F;&#x2F; 用弱引用确保能被垃圾回收机制回收</span><br><span class="line">        imageViewReference &#x3D; new WeakReference&lt;ImageView&gt;(imageView);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;在后台解析bitmap</span><br><span class="line">    @Override</span><br><span class="line">    protected Bitmap doInBackground(Integer... params) &#123;</span><br><span class="line">        data &#x3D; params[0];</span><br><span class="line">        return decodeSampledBitmapFromResource(getResources(), data, 100, 100));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 一旦完成，imageView将会加载bitmap</span><br><span class="line">    @Override</span><br><span class="line">    protected void onPostExecute(Bitmap bitmap) &#123;</span><br><span class="line">        if (imageViewReference !&#x3D; null &amp;&amp; bitmap !&#x3D; null) &#123;</span><br><span class="line">            final ImageView imageView &#x3D; imageViewReference.get();</span><br><span class="line">            if (imageView !&#x3D; null) &#123;</span><br><span class="line">                imageView.setImageBitmap(bitmap);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着我们在主线程中执行它即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public void loadBitmap(int resId, ImageView imageView) &#123;</span><br><span class="line">    BitmapWorkerTask task &#x3D; new BitmapWorkerTask(imageView);</span><br><span class="line">    task.execute(resId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#<strong>使用Lrucache缓存图片</strong> </p>
+<p><font size="4"><strong>1.  为什么要缓存图片？</strong><font></font></font></p>
+<p>对于如何高效的加载一张图片 ，我们似乎已经得心应手了，这里要泼一盆凉水给大家，因为我们的应用不仅只是加载一张图片这么简单，比如ListView, GridView or ViewPager，RecyclerView，需要立刻加载出大量的bitmap，滑动的过程不断加载bitmap，还要求不卡顿，内存够用，这似乎又是一件棘手的事情。</p>
+<p>Google 又提供了一种解决思路：对于ListView，RecyclerView，有可见的item和不可见的item，回收不可见的item  内存，分配给可见的，这样内存得到了重复利用，避免重复创建对象，不断申请并分配新的内存空间，触发最低内存限制的危险。</p>
+<p>所以我们要管理 这些 已经创建好的内存。</p>
+<p><font size="4"><strong>2.  使用内存缓存</strong><font></font></font></p>
+<ol>
+<li><p>为什么优先使用内存缓存？ </p>
+<p>答：相比硬盘缓存的读取速度，读取内存中的数据更快</p>
+</li>
+<li><p>Google官方有什么建议？  </p>
+<p>答：Google推荐Lrucache类，底层使用用强引用封装的LinkedHashMap，来存储最近使用的对象，它自动会回收最近使用的对象当中，使用的最少的那一个对象的内存，这一点毋庸置疑值得推荐！</p>
+</li>
+</ol>
+<blockquote>
+<p>一种过时的做法，是用虚引用或者弱引用来标记bitmap，这种方法在Android 3.0以后已经不提倡了，因为类似JDK1.8那样，bitmap的内存是放在本地内存中的，它的回收是不确定的，有可能导致APP挂掉，切勿使用。 </p>
+</blockquote>
+<pre><code>  3.  Lrucache这么棒，我们该如何用？
+
+Lrucache就可以当作一种存储数据的结构，类似list，set，可以存储对象，获取对象，对应的有add（） 和get（）方法，它与数组一样，初始化的时候需要指定一个初始的大小。
+  
+那么Lrucache实例 初始的大小该如何确定？
+在计算大小之前，我们需要明确几件事情：
+</code></pre>
+<ul>
+<li><p>我们的Activity和Application还有多少可用内存？</p>
+</li>
+<li><p>我们的Activity和Application还有多少可用内存？</p>
+</li>
+<li><p>第一次加载的时候，需要为多少图片分配内存？可见的item数量，决定了图片的数量，图片的数量*每张图片的内存大小就是初始化需要分配的内存。</p>
+</li>
+<li><p>用户当前手机的屏幕尺寸和屏幕密度（为什么要这俩参数？大屏幕手机 ，初始化的时候会加载更多的item，需要的内存更大）</p>
+</li>
+<li><p>这张图片我们要怎样配置？图片的尺寸如何设置，颜色模式如何配置？根据不同的需求，比如是做用户头像，还是信息展示？都有各自的应用场景的要求。我们需要分类判断.</p>
+</li>
+<li><p>cache大小是由内存大小决定的，而不是 它存储数据的个数决定</p>
+<blockquote>
+<p>这让我想起一个在项目开发中常见的bug，use a bitmap which has bean recycler</p>
+</blockquote>
+<p> font size=4&gt;<strong>3. Lrucache使用实例</strong><font>     </font></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">private LruCache&lt;String, Bitmap&gt; mMemoryCache;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    ...</span><br><span class="line">    &#x2F;&#x2F; 当Lrucache使用的内存大小超过虚拟机最大的可用内存时候，Android会抛出OutOfMemory exception</span><br><span class="line">  </span><br><span class="line">    final int maxMemory &#x3D; (int) (Runtime.getRuntime().maxMemory() &#x2F; 1024);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 使用虚拟机可用1&#x2F;8</span><br><span class="line">        final int cacheSize &#x3D; maxMemory &#x2F; 8;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;  在Lrucache构造函数中初始化它的大小</span><br><span class="line">    &#x2F;&#x2F; int in its constructor</span><br><span class="line">    mMemoryCache &#x3D; new LruCache&lt;String, Bitmap&gt;(cacheSize) &#123;</span><br><span class="line">        @Override</span><br><span class="line">        protected int sizeOf(String key, Bitmap bitmap) &#123;</span><br><span class="line">     </span><br><span class="line">     &#x2F;&#x2F;cache大小是由内存大小决定的，而不是 它存储数据的个数决定</span><br><span class="line">         return bitmap.getByteCount() &#x2F; 1024;</span><br><span class="line">        &#125;</span><br><span class="line">   public void addBitmapToMemoryCache(String key, Bitmap bitmap) &#123;</span><br><span class="line">    if (getBitmapFromMemCache(key) &#x3D;&#x3D; null) &#123;</span><br><span class="line">        mMemoryCache.put(key, bitmap);</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"> public Bitmap getBitmapFromMemCache(String key) &#123;</span><br><span class="line">    return mMemoryCache.get(key);</span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>loadBitmap的过程很简洁：如果内存缓存中有这张bitmap，则直接刷新imageview，如果bitmap为空，则启动后台线程去加载bitmap，接着刷新imageview</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">  public void loadBitmap(int resId, ImageView imageView) &#123;</span><br><span class="line">    final String imageKey &#x3D; String.valueOf(resId);</span><br><span class="line"></span><br><span class="line">    final Bitmap bitmap &#x3D; getBitmapFromMemCache(imageKey);</span><br><span class="line">    if (bitmap !&#x3D; null) &#123;</span><br><span class="line">        mImageView.setImageBitmap(bitmap);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        mImageView.setImageResource(R.drawable.image_placeholder);</span><br><span class="line">        BitmapWorkerTask task &#x3D; new BitmapWorkerTask(mImageView);</span><br><span class="line">        task.execute(resId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>异步线程  BitmapWorkerTask</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class BitmapWorkerTask extends AsyncTask&lt;Integer, Void, Bitmap&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">    &#x2F;&#x2F; Decode image in background.</span><br><span class="line">    @Override</span><br><span class="line">    protected Bitmap doInBackground(Integer... params) &#123;</span><br><span class="line">        final Bitmap bitmap &#x3D; decodeSampledBitmapFromResource(</span><br><span class="line">                getResources(), params[0], 100, 100));</span><br><span class="line">        addBitmapToMemoryCache(String.valueOf(params[0]), bitmap);</span><br><span class="line">        return bitmap;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><font size="4"><strong>4. 磁盘缓存</strong><font><br>与内存缓存相结合的还有磁盘缓存，虽然磁盘读取速度较慢，但是持久存储的，不像内存缓存那样，在内存极限情况下仍然会被清理，比如后台正在执行数据加载，突然打进来一个电话，内存不足系统可能会进行垃圾回收。缓存就没有了</font></font></p>
+<p>Google官方提供直接DiskLruCache 类</p>
+<p>为什么要使用DiskLruCache 很明了：就是解决当内存缓存不可用的情形</p>
+<blockquote>
+<p>内当需要频繁访问缓存的图片资源时，比如APP的画廊功能，可以考虑使用ContentProvider解决更为妥当。</p>
+</blockquote>
+<p>下面是它的源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">private DiskLruCache mDiskLruCache;</span><br><span class="line">private final Object mDiskCacheLock &#x3D; new Object();</span><br><span class="line">private boolean mDiskCacheStarting &#x3D; true;</span><br><span class="line">private static final int DISK_CACHE_SIZE &#x3D; 1024 * 1024 * 10; &#x2F;&#x2F; 10MB</span><br><span class="line">private static final String DISK_CACHE_SUBDIR &#x3D; &quot;thumbnails&quot;;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    ...</span><br><span class="line">    &#x2F;&#x2F; Initialize memory cache</span><br><span class="line">    ...</span><br><span class="line">    &#x2F;&#x2F; Initialize disk cache on background thread</span><br><span class="line">    File cacheDir &#x3D; getDiskCacheDir(this, DISK_CACHE_SUBDIR);</span><br><span class="line">    new InitDiskCacheTask().execute(cacheDir);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class InitDiskCacheTask extends AsyncTask&lt;File, Void, Void&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected Void doInBackground(File... params) &#123;</span><br><span class="line">        synchronized (mDiskCacheLock) &#123;</span><br><span class="line">            File cacheDir &#x3D; params[0];</span><br><span class="line">            mDiskLruCache &#x3D; DiskLruCache.open(cacheDir, DISK_CACHE_SIZE);</span><br><span class="line">            mDiskCacheStarting &#x3D; false; &#x2F;&#x2F; Finished initialization</span><br><span class="line">            mDiskCacheLock.notifyAll(); &#x2F;&#x2F; Wake any waiting threads</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class BitmapWorkerTask extends AsyncTask&lt;Integer, Void, Bitmap&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line">    &#x2F;&#x2F; Decode image in background.</span><br><span class="line">    @Override</span><br><span class="line">    protected Bitmap doInBackground(Integer... params) &#123;</span><br><span class="line">        final String imageKey &#x3D; String.valueOf(params[0]);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; Check disk cache in background thread</span><br><span class="line">        Bitmap bitmap &#x3D; getBitmapFromDiskCache(imageKey);</span><br><span class="line"></span><br><span class="line">        if (bitmap &#x3D;&#x3D; null) &#123; &#x2F;&#x2F; Not found in disk cache</span><br><span class="line">            &#x2F;&#x2F; Process as normal</span><br><span class="line">            final Bitmap bitmap &#x3D; decodeSampledBitmapFromResource(</span><br><span class="line">                    getResources(), params[0], 100, 100));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; Add final bitmap to caches</span><br><span class="line">        addBitmapToCache(imageKey, bitmap);</span><br><span class="line"></span><br><span class="line">        return bitmap;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public void addBitmapToCache(String key, Bitmap bitmap) &#123;</span><br><span class="line">    &#x2F;&#x2F; Add to memory cache as before</span><br><span class="line">    if (getBitmapFromMemCache(key) &#x3D;&#x3D; null) &#123;</span><br><span class="line">        mMemoryCache.put(key, bitmap);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Also add to disk cache</span><br><span class="line">    synchronized (mDiskCacheLock) &#123;</span><br><span class="line">        if (mDiskLruCache !&#x3D; null &amp;&amp; mDiskLruCache.get(key) &#x3D;&#x3D; null) &#123;</span><br><span class="line">            mDiskLruCache.put(key, bitmap);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public Bitmap getBitmapFromDiskCache(String key) &#123;</span><br><span class="line">    synchronized (mDiskCacheLock) &#123;</span><br><span class="line">        &#x2F;&#x2F; Wait while disk cache is started from background thread</span><br><span class="line">        while (mDiskCacheStarting) &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                mDiskCacheLock.wait();</span><br><span class="line">            &#125; catch (InterruptedException e) &#123;&#125;</span><br><span class="line">        &#125;</span><br><span class="line">        if (mDiskLruCache !&#x3D; null) &#123;</span><br><span class="line">            return mDiskLruCache.get(key);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Creates a unique subdirectory of the designated app cache directory. Tries to use external</span><br><span class="line">&#x2F;&#x2F; but if not mounted, falls back on internal storage.</span><br><span class="line">public static File getDiskCacheDir(Context context, String uniqueName) &#123;</span><br><span class="line">    &#x2F;&#x2F; Check if media is mounted or storage is built-in, if so, try and use external cache dir</span><br><span class="line">    &#x2F;&#x2F; otherwise use internal cache dir</span><br><span class="line">    final String cachePath &#x3D;</span><br><span class="line">            Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()) ||</span><br><span class="line">                    !isExternalStorageRemovable() ? getExternalCacheDir(context).getPath() :</span><br><span class="line">                            context.getCacheDir().getPath();</span><br><span class="line"></span><br><span class="line">    return new File(cachePath + File.separator + uniqueName);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>5.处理运行时变更的缓存</strong><br>当屏幕旋转，或者其他原因导致Activity  restart，这个时候难道又让我们重新创建大量的图像资源？<br>回答是否定的，Google提供了一种解决方案：</p>
+<p>通过在Activity中使用fragment，构造Fragment时，通过设置 setRetainInstance(true))来设置缓存，<br>话不多说，直接上代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">private LruCache&lt;String, Bitmap&gt; mMemoryCache;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    ...</span><br><span class="line">    RetainFragment retainFragment &#x3D;</span><br><span class="line">            RetainFragment.findOrCreateRetainFragment(getFragmentManager());</span><br><span class="line">    mMemoryCache &#x3D; retainFragment.mRetainedCache;</span><br><span class="line">    if (mMemoryCache &#x3D;&#x3D; null) &#123;</span><br><span class="line">        mMemoryCache &#x3D; new LruCache&lt;String, Bitmap&gt;(cacheSize) &#123;</span><br><span class="line">            ... &#x2F;&#x2F; Initialize cache here as usual</span><br><span class="line">        &#125;</span><br><span class="line">        retainFragment.mRetainedCache &#x3D; mMemoryCache;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class RetainFragment extends Fragment &#123;</span><br><span class="line">    private static final String TAG &#x3D; &quot;RetainFragment&quot;;</span><br><span class="line">    public LruCache&lt;String, Bitmap&gt; mRetainedCache;</span><br><span class="line"></span><br><span class="line">    public RetainFragment() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    public static RetainFragment findOrCreateRetainFragment(FragmentManager fm) &#123;</span><br><span class="line">        RetainFragment fragment &#x3D; (RetainFragment) fm.findFragmentByTag(TAG);</span><br><span class="line">        if (fragment &#x3D;&#x3D; null) &#123;</span><br><span class="line">            fragment &#x3D; new RetainFragment();</span><br><span class="line">            fm.beginTransaction().add(fragment, TAG).commit();</span><br><span class="line">        &#125;</span><br><span class="line">        return fragment;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setRetainInstance(true);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>尊重博主原创，如需转载，请附上本文链接接：<br><a target="_blank" rel="noopener" href="http://blog.csdn.net/chivalrousman/article/details/51567118">http://blog.csdn.net/chivalrousman/article/details/51567118</a></p>
+</blockquote>
+<p>#<strong>补充-UI组件并发性问题</strong></p>
+<p>这一部分涉及到UI细节，例如ListView，Viewpager的优化</p>
+<p>#<strong>ViewPager</strong></p>
+<p>ViewPager是一个非常棒的组件，通过使用ViewPager和PagerAdapter可以实现类似新闻标题的滑动条以及常见的画廊功能。</p>
+<p>谈到优化，Google 建议使用 PagerAdapter的子类FragmentStatePagerAdapter ，它可以在后台自动销毁和保存ViewPager中使用的Fragment的数据，通过使用它可以节省内存开销。</p>
+<blockquote>
+<p>Note：当然，如果我们可以使用PagerAdapter来完成少许图片资源的展示，毕竟我们的优化是为了节省内存开销。</p>
+</blockquote>
+<p>下面实例展示了带有ImageView的ViewPager，在主activity持有ViewPager和它的适配器。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">public class ImageDetailActivity extends FragmentActivity &#123;</span><br><span class="line">    public static final String EXTRA_IMAGE &#x3D; &quot;extra_image&quot;;</span><br><span class="line"></span><br><span class="line">    private ImagePagerAdapter mAdapter;</span><br><span class="line">    private ViewPager mPager;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; A static dataset to back the ViewPager adapter</span><br><span class="line">    public final static Integer[] imageResIds &#x3D; new Integer[] &#123;</span><br><span class="line">            R.drawable.sample_image_1, R.drawable.sample_image_2, R.drawable.sample_image_3,</span><br><span class="line">            R.drawable.sample_image_4, R.drawable.sample_image_5, R.drawable.sample_image_6,</span><br><span class="line">            R.drawable.sample_image_7, R.drawable.sample_image_8, R.drawable.sample_image_9&#125;;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.image_detail_pager); &#x2F;&#x2F; Contains just a ViewPager</span><br><span class="line"></span><br><span class="line">        mAdapter &#x3D; new ImagePagerAdapter(getSupportFragmentManager(), imageResIds.length);</span><br><span class="line">        mPager &#x3D; (ViewPager) findViewById(R.id.pager);</span><br><span class="line">        mPager.setAdapter(mAdapter);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static class ImagePagerAdapter extends FragmentStatePagerAdapter &#123;</span><br><span class="line">        private final int mSize;</span><br><span class="line"></span><br><span class="line">        public ImagePagerAdapter(FragmentManager fm, int size) &#123;</span><br><span class="line">            super(fm);</span><br><span class="line">            mSize &#x3D; size;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public int getCount() &#123;</span><br><span class="line">            return mSize;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public Fragment getItem(int position) &#123;</span><br><span class="line">            return ImageDetailFragment.newInstance(position);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在适配器的getItem中使用了自定义的Fragment，它持有ImageView，并负责完成展示</p>
+<p>##<strong>看上去已经大功告成 了，但事实真的如此吗？</strong></p>
+<p>下面是ImageDetailFragment的细节，通过ImageDetailFragment，看上去已经大功告成 了，但事实真的如此吗？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public class ImageDetailFragment extends Fragment &#123;</span><br><span class="line">    private static final String IMAGE_DATA_EXTRA &#x3D; &quot;resId&quot;;</span><br><span class="line">    private int mImageNum;</span><br><span class="line">    private ImageView mImageView;</span><br><span class="line"></span><br><span class="line">    static ImageDetailFragment newInstance(int imageNum) &#123;</span><br><span class="line">        final ImageDetailFragment f &#x3D; new ImageDetailFragment();</span><br><span class="line">        final Bundle args &#x3D; new Bundle();</span><br><span class="line">        args.putInt(IMAGE_DATA_EXTRA, imageNum);</span><br><span class="line">        f.setArguments(args);</span><br><span class="line">        return f;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Empty constructor, required as per Fragment docs</span><br><span class="line">    public ImageDetailFragment() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        mImageNum &#x3D; getArguments() !&#x3D; null ? getArguments().getInt(IMAGE_DATA_EXTRA) : -1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public View onCreateView(LayoutInflater inflater, ViewGroup container,</span><br><span class="line">            Bundle savedInstanceState) &#123;</span><br><span class="line">        &#x2F;&#x2F; image_detail_fragment.xml contains just an ImageView</span><br><span class="line">        final View v &#x3D; inflater.inflate(R.layout.image_detail_fragment, container, false);</span><br><span class="line">        mImageView &#x3D; (ImageView) v.findViewById(R.id.imageView);</span><br><span class="line">        return v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onActivityCreated(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onActivityCreated(savedInstanceState);</span><br><span class="line">        final int resId &#x3D; ImageDetailActivity.imageResIds[mImageNum];</span><br><span class="line">        mImageView.setImageResource(resId); &#x2F;&#x2F;为ImageView设置图片</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>阅读一段代码，除了学习外，还要思考它有什么缺点，如果是我，我该如何提高。</p>
+</blockquote>
+<p>希望你能注意到这些问题，上述代码是在UI线程中加载的，可能会导致我们开发的应用长时间无响应而被迫挂掉。所以，请使用AsyncTask开启子线程来加载图片：</p>
+<blockquote>
+<p>在阅读这段代码之前，请首先阅读上一篇博文 内存优化中的AsyncTsak部分</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class ImageDetailActivity extends FragmentActivity &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    public void loadBitmap(int resId, ImageView imageView) &#123;</span><br><span class="line">        mImageView.setImageResource(R.drawable.image_placeholder);</span><br><span class="line">        BitmapWorkerTask task &#x3D; new BitmapWorkerTask(mImageView);</span><br><span class="line">        task.execute(resId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ... &#x2F;&#x2F; include BitmapWorkerTask class，</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class ImageDetailFragment extends Fragment &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onActivityCreated(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onActivityCreated(savedInstanceState);</span><br><span class="line">        if (ImageDetailActivity.class.isInstance(getActivity())) &#123;</span><br><span class="line">            final int resId &#x3D; ImageDetailActivity.imageResIds[mImageNum];</span><br><span class="line">            &#x2F;&#x2F; 使用子线程来加载图片</span><br><span class="line">            ((ImageDetailActivity) getActivity()).loadBitmap(resId, mImageView);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 请至少阅读完上一篇内存优化的LruCache部分才能保证你理解这里</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class ImageDetailActivity extends FragmentActivity &#123;</span><br><span class="line">    ...</span><br><span class="line">    private LruCache&lt;String, Bitmap&gt; mMemoryCache;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        ...</span><br><span class="line">        &#x2F;&#x2F; initialize LruCache</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void loadBitmap(int resId, ImageView imageView) &#123;</span><br><span class="line">        final String imageKey &#x3D; String.valueOf(resId);</span><br><span class="line"></span><br><span class="line">        final Bitmap bitmap &#x3D; mMemoryCache.get(imageKey);</span><br><span class="line">        if (bitmap !&#x3D; null) &#123;</span><br><span class="line">            mImageView.setImageBitmap(bitmap);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            mImageView.setImageResource(R.drawable.image_placeholder);</span><br><span class="line">            BitmapWorkerTask task &#x3D; new BitmapWorkerTask(mImageView);</span><br><span class="line">            task.execute(resId);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ... &#x2F;&#x2F; include updated BitmapWorkerTask </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意，只有阅读完上一篇内存优化中的Lrucache部分和AsyncTask部分才能保证你完全读懂上述代码</p>
+</blockquote>
+<p>#<strong>RecyclerView   GridView  ListView</strong></p>
+<p>下面可能是大家经常的做法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">public class ImageGridFragment extends Fragment implements AdapterView.OnItemClickListener &#123;</span><br><span class="line">    private ImageAdapter mAdapter;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; A static dataset to back the GridView adapter</span><br><span class="line">    public final static Integer[] imageResIds &#x3D; new Integer[] &#123;</span><br><span class="line">            R.drawable.sample_image_1, R.drawable.sample_image_2, R.drawable.sample_image_3,</span><br><span class="line">            R.drawable.sample_image_4, R.drawable.sample_image_5, R.drawable.sample_image_6,</span><br><span class="line">            R.drawable.sample_image_7, R.drawable.sample_image_8, R.drawable.sample_image_9&#125;;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Empty constructor as per Fragment docs</span><br><span class="line">    public ImageGridFragment() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        mAdapter &#x3D; new ImageAdapter(getActivity());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public View onCreateView(</span><br><span class="line">            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) &#123;</span><br><span class="line">        final View v &#x3D; inflater.inflate(R.layout.image_grid_fragment, container, false);</span><br><span class="line">        final GridView mGridView &#x3D; (GridView) v.findViewById(R.id.gridView);</span><br><span class="line">        mGridView.setAdapter(mAdapter);</span><br><span class="line">        mGridView.setOnItemClickListener(this);</span><br><span class="line">        return v;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onItemClick(AdapterView&lt;?&gt; parent, View v, int position, long id) &#123;</span><br><span class="line">        final Intent i &#x3D; new Intent(getActivity(), ImageDetailActivity.class);</span><br><span class="line">        i.putExtra(ImageDetailActivity.EXTRA_IMAGE, position);</span><br><span class="line">        startActivity(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private class ImageAdapter extends BaseAdapter &#123;</span><br><span class="line">        private final Context mContext;</span><br><span class="line"></span><br><span class="line">        public ImageAdapter(Context context) &#123;</span><br><span class="line">            super();</span><br><span class="line">            mContext &#x3D; context;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public int getCount() &#123;</span><br><span class="line">            return imageResIds.length;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public Object getItem(int position) &#123;</span><br><span class="line">            return imageResIds[position];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public long getItemId(int position) &#123;</span><br><span class="line">            return position;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public View getView(int position, View convertView, ViewGroup container) &#123;</span><br><span class="line">            ImageView imageView;</span><br><span class="line">            if (convertView &#x3D;&#x3D; null) &#123; &#x2F;&#x2F; if it&#39;s not recycled, initialize some attributes</span><br><span class="line">                imageView &#x3D; new ImageView(mContext);</span><br><span class="line">                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);</span><br><span class="line">                imageView.setLayoutParams(new GridView.LayoutParams(</span><br><span class="line">                        LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                imageView &#x3D; (ImageView) convertView;</span><br><span class="line">            &#125;</span><br><span class="line">            imageView.setImageResource(imageResIds[position]); &#x2F;&#x2F; Load image into ImageView</span><br><span class="line">            return imageView;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>看上去非常棒，对吗？但是我们如何才能做的更好？</p>
+<p>如果你能发现主线程加载图片的问题，恭喜你，有一点点进步。但是重复提醒你使用AsyncTask，显然不是我写这一节的目的。</p>
+<p>我们还需要警惕GridView 中的<strong>并发</strong>问题，因为iGridView 会回收子View的内存空间。</p>
+<p>##<strong>并发问题</strong></p>
+<p>像ListView和GridView，与RecyclerView使用AsyncTask的时候，不能忽视一个问题：Android系统为了高效分配内存，这些组件都会在上下滑动的时候回收子view的内存。在滑动的时候，并不能保证AsyncTask可以完成当前任务。此外，也不能保证异步任务可以按照顺序完成。</p>
+<p>Google在<a target="_blank" rel="noopener" href="http://android-developers.blogspot.com/2010/07/multithreading-for-performance.html%20%20%20%20%20%E2%80%9C%20Multithreading%20for%20Performance%E2%80%9D"> Multithreading for Performance</a> 提供了建议：在AsyncTask中，用弱引用来存储ImageView，通过使用弱引用来被检查ImageView是否加载完成</p>
+<p>好吧，理论上是这样，我们开始行动：</p>
+<p><strong>1.</strong>  <strong>自定义Drawable去存储异步任务重的弱引用，只有这样，才能保证task执行完毕之后，ImageView才会显示图片</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">static class AsyncDrawable extends BitmapDrawable &#123;</span><br><span class="line">    private final WeakReference&lt;BitmapWorkerTask&gt; bitmapWorkerTaskReference;</span><br><span class="line"></span><br><span class="line">    public AsyncDrawable(Resources res, Bitmap bitmap,</span><br><span class="line">            BitmapWorkerTask bitmapWorkerTask) &#123;</span><br><span class="line">        super(res, bitmap);</span><br><span class="line">        bitmapWorkerTaskReference &#x3D;</span><br><span class="line">            new WeakReference&lt;BitmapWorkerTask&gt;(bitmapWorkerTask);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public BitmapWorkerTask getBitmapWorkerTask() &#123;</span><br><span class="line">        return bitmapWorkerTaskReference.get();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <strong>2.  在执行BitmapWorkerTask之前，你需要创建 AsyncDrawable 并且绑定到ImageView上，通过如下代码：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public void loadBitmap(int resId, ImageView imageView) &#123;</span><br><span class="line">    if (cancelPotentialWork(resId, imageView)) &#123;</span><br><span class="line">        final BitmapWorkerTask task &#x3D; new BitmapWorkerTask(imageView);</span><br><span class="line">        final AsyncDrawable asyncDrawable &#x3D;</span><br><span class="line">                new AsyncDrawable(getResources(), mPlaceHolderBitmap, task);</span><br><span class="line">        imageView.setImageDrawable(asyncDrawable);</span><br><span class="line">        task.execute(resId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>3. 仅仅这些代码还是不够的，Google 还引入 cancelPotentialWork（）来检查是否有其他的task任务在使用当前ImageView，如果有，就会取消当前任务，取消这个做法是不是很让人眼前一亮呢！</strong></p>
+<p> 这是cancelPotentialWork（）的实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public static boolean cancelPotentialWork(int data, ImageView imageView) &#123;</span><br><span class="line">    final BitmapWorkerTask bitmapWorkerTask &#x3D; getBitmapWorkerTask(imageView);</span><br><span class="line"></span><br><span class="line">    if (bitmapWorkerTask !&#x3D; null) &#123;</span><br><span class="line">        final int bitmapData &#x3D; bitmapWorkerTask.data;</span><br><span class="line">        &#x2F;&#x2F; If bitmapData is not yet set or it differs from the new data</span><br><span class="line">        if (bitmapData &#x3D;&#x3D; 0 || bitmapData !&#x3D; data) &#123;</span><br><span class="line">            &#x2F;&#x2F; Cancel previous task</span><br><span class="line">            bitmapWorkerTask.cancel(true);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            &#x2F;&#x2F; The same work is already in progress</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; No task associated with the ImageView, or an existing task was cancelled</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>4. 我们还需要get方法获得相关的ImageView</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) &#123;</span><br><span class="line">   if (imageView !&#x3D; null) &#123;</span><br><span class="line">       final Drawable drawable &#x3D; imageView.getDrawable();</span><br><span class="line">       if (drawable instanceof AsyncDrawable) &#123;</span><br><span class="line">           final AsyncDrawable asyncDrawable &#x3D; (AsyncDrawable) drawable;</span><br><span class="line">           return asyncDrawable.getBitmapWorkerTask();</span><br><span class="line">       &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>5. 最后就是更新task中的onPostExecute（）检查任务是否取消，</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class BitmapWorkerTask extends AsyncTask&lt;Integer, Void, Bitmap&gt; &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onPostExecute(Bitmap bitmap) &#123;</span><br><span class="line">        if (isCancelled()) &#123;</span><br><span class="line">            bitmap &#x3D; null;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (imageViewReference !&#x3D; null &amp;&amp; bitmap !&#x3D; null) &#123;</span><br><span class="line">            final ImageView imageView &#x3D; imageViewReference.get();</span><br><span class="line">            final BitmapWorkerTask bitmapWorkerTask &#x3D;</span><br><span class="line">                    getBitmapWorkerTask(imageView);</span><br><span class="line">            if (this &#x3D;&#x3D; bitmapWorkerTask &amp;&amp; imageView !&#x3D; null) &#123;</span><br><span class="line">                imageView.setImageBitmap(bitmap);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，我们已经了解Google 对于并发加载的解决方案，只需要在getView（）实现它们就可以啦！</p>
+<p>##<strong>在GridView解决并发</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">public class ImageGridFragment extends Fragment implements AdapterView.OnItemClickListener &#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    private class ImageAdapter extends BaseAdapter &#123;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public View getView(int position, View convertView, ViewGroup container) &#123;</span><br><span class="line">            ...</span><br><span class="line">            loadBitmap(imageResIds[position], imageView)</span><br><span class="line">            return imageView;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void loadBitmap(int resId, ImageView imageView) &#123;</span><br><span class="line">        if (cancelPotentialWork(resId, imageView)) &#123;</span><br><span class="line">            final BitmapWorkerTask task &#x3D; new BitmapWorkerTask(imageView);</span><br><span class="line">            final AsyncDrawable asyncDrawable &#x3D;</span><br><span class="line">                    new AsyncDrawable(getResources(), mPlaceHolderBitmap, task);</span><br><span class="line">            imageView.setImageDrawable(asyncDrawable);</span><br><span class="line">            task.execute(resId);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static class AsyncDrawable extends BitmapDrawable &#123;</span><br><span class="line">        private final WeakReference&lt;BitmapWorkerTask&gt; bitmapWorkerTaskReference;</span><br><span class="line"></span><br><span class="line">        public AsyncDrawable(Resources res, Bitmap bitmap,</span><br><span class="line">                BitmapWorkerTask bitmapWorkerTask) &#123;</span><br><span class="line">            super(res, bitmap);</span><br><span class="line">            bitmapWorkerTaskReference &#x3D;</span><br><span class="line">                new WeakReference&lt;BitmapWorkerTask&gt;(bitmapWorkerTask);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public BitmapWorkerTask getBitmapWorkerTask() &#123;</span><br><span class="line">            return bitmapWorkerTaskReference.get();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static boolean cancelPotentialWork(int data, ImageView imageView) &#123;</span><br><span class="line">        final BitmapWorkerTask bitmapWorkerTask &#x3D; getBitmapWorkerTask(imageView);</span><br><span class="line"></span><br><span class="line">        if (bitmapWorkerTask !&#x3D; null) &#123;</span><br><span class="line">            final int bitmapData &#x3D; bitmapWorkerTask.data;</span><br><span class="line">            if (bitmapData !&#x3D; data) &#123;</span><br><span class="line">                &#x2F;&#x2F; Cancel previous task</span><br><span class="line">                bitmapWorkerTask.cancel(true);</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                &#x2F;&#x2F; The same work is already in progress</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F; No task associated with the ImageView, or an existing task was cancelled</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static BitmapWorkerTask getBitmapWorkerTask(ImageView imageView) &#123;</span><br><span class="line">       if (imageView !&#x3D; null) &#123;</span><br><span class="line">           final Drawable drawable &#x3D; imageView.getDrawable();</span><br><span class="line">           if (drawable instanceof AsyncDrawable) &#123;</span><br><span class="line">               final AsyncDrawable asyncDrawable &#x3D; (AsyncDrawable) drawable;</span><br><span class="line">               return asyncDrawable.getBitmapWorkerTask();</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ... &#x2F;&#x2F; include updated BitmapWorkerTask class</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这样解决并发的办法，同理适用于ListView， Recycler<br>这也是热门加载框架ImageLoader，Volley  的加载原理。原理还是Google提出的！</p>
+</blockquote>
+<p>这样就可以流畅的展示图片。</p>
+<p>##<strong>View Holder设计模式</strong></p>
+<p>我们的代码可能会调用findViewById（），尤其是当滑动ListView，RecyclerView，GridView的时候，会使得app性能变得糟糕。甚至Adapter会返回一个已经被Android系统回收的View，可是你仍然需要初始化加载这个view并刷新它。</p>
+<p>Google提出了使用 “View Holder” 设计模式</p>
+<p><strong>1. 首先创建 ViewHolder类，存储子View内部所有需要展示的布局</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">static class ViewHolder &#123;</span><br><span class="line">  TextView text;</span><br><span class="line">  TextView timestamp;</span><br><span class="line">  ImageView icon;</span><br><span class="line">  ProgressBar progress;</span><br><span class="line">  int position;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>2.  接着填充ViewHolder并且存储到布局中</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ViewHolder holder &#x3D; new ViewHolder();</span><br><span class="line">holder.icon &#x3D; (ImageView) convertView.findViewById(R.id.listitem_image);</span><br><span class="line">holder.text &#x3D; (TextView) convertView.findViewById(R.id.listitem_text);</span><br><span class="line">holder.timestamp &#x3D; (TextView) convertView.findViewById(R.id.listitem_timestamp);</span><br><span class="line">holder.progress &#x3D; (ProgressBar) convertView.findViewById(R.id.progress_spinner);</span><br><span class="line">convertView.setTag(holder);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>‘view holder’ 设计模式同样也适用于ListView，RecyclerView，GridView</p>
+</blockquote>
+<hr>
+<p>#<strong>有趣的是</strong></p>
+<p>当我通宵赶完这篇博客的时候，我的计算机也提醒我内存不足了 (●’◡’●)</p>
+<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-W4c5wrNV-1615037605287)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc9.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc9.png)]</a></p>
+<p>#**写本文所参考的： **  </p>
+<ol>
+<li><a target="_blank" rel="noopener" href="http://blog.csdn.net/testcs_dn/article/details/45719357">Markdown字体颜色写法</a></li>
+<li><a target="_blank" rel="noopener" href="https://classroom.udacity.com/courses/ud825/lessons">Google 官方 Android Performance 课程</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/training/building-graphics.html">Google 官方 Android  Diplaying  Bitmaps Efficiently 课程</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/training/articles/memory.html">Managing Your App’s Memory</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/training/displaying-bitmaps/process-bitmap.html#concurrency">Google 官方 Processing Bitmaps Off the UI Thread课程</a> </li>
+<li><a target="_blank" rel="noopener" href="https://developer.android.com/training/displaying-bitmaps/process-bitmap.html#concurrency"> Multithreading for Performance </a></li>
+</ol>
+<p>#<strong>说明</strong><br>后续会更新</p>
+<ul>
+<li> Google官方提供的ListView，RecyclerView的优化方案以及</li>
+<li> Android内存管理机制</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/blog/tags/Performance/" rel="tag"># Performance</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2016/04/Android-TOP-100-Program/" rel="next" title="Android 百大框架排行榜">
+                <i class="fa fa-chevron-left"></i> Android 百大框架排行榜
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2020/08/handler%20TOP%20100%20Questions/" rel="prev" title="AndroidHandler百问百答">
+                AndroidHandler百问百答 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/blog/images/avatar.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/blog/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/ShaunSheep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.douban.com/people/jincheng-ycf/" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/OscarWildeHawking" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://yangchaofan.cn" target="_blank" title="首页">
+                      
+                        <i class="fa fa-fw fa-globe"></i>首页</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nei-cun-xie-lou"><span class="nav-number">1.</span> <span class="nav-text">#内存泄漏</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#heap-viewer"><span class="nav-number"></span> <span class="nav-text">Heap Viewer</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#wei-shi-me-zhi-guan-zhu-tu-pian-jia-zai-er-bu-qu-chu-li-qi-ta-shu-ju-lai-jie-jue-nei-cun-bu-zu-de-wen-ti"><span class="nav-number">1.</span> <span class="nav-text">为什么只关注图片加载，而不去处理其他数据来解决内存不足的问题？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gao-xiao-de-jia-zai-da-tu"><span class="nav-number"></span> <span class="nav-text">高效的加载大图：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zhi-xu-san-bu"><span class="nav-number"></span> <span class="nav-text">只需三步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shi-asynctask-jia-zai-bitmap"><span class="nav-number"></span> <span class="nav-text">使AsyncTask加载Bitmap</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">叶金诚</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">本站访客数 </i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://jincheng.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://idolcoder.gitee.io/blog/2016/06/performance-android/';
+          this.page.identifier = '/2016/06/performance-android/';
+          this.page.title = '性能优化【史诗巨著之内存篇】';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://jincheng.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/blog/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz", "pi8Pa2aH3XpcaovMyqIXVuOP");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: ,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

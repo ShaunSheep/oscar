@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://idolcoder.gitee.io/blog/blog//2016/06/performance-android/</loc>
+    <lastmod>2021-03-06</lastmod>
+  </url>
+  <url>
+    <loc>http://idolcoder.gitee.io/blog/blog//2021/03/android-communication/</loc>
+    <lastmod>2021-03-06</lastmod>
+  </url>
+  <url>
     <loc>http://idolcoder.gitee.io/blog/blog//2015/08/learing-plan/</loc>
     <lastmod>2021-03-03</lastmod>
   </url>
