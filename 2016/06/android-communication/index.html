@@ -122,12 +122,16 @@
 <meta property="og:site_name" content="叶金诚的站点">
 <meta property="og:description" content="摘自本人16年的的博客《详解 Android 通信》 什么是通信？# 通信 ，顾名思义，指的就是信息的传递或者交换 看完本文能收获什么？#按目录索引，你可以学习到    1. 组件间的通信，Activity，fragment，Service， Provider，Receiver    2. 进程间的通信，AIDL    3. 线程间的通信，Handler，AnsycTask，IntentServi">
 <meta property="og:locale">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/通信fragment.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/Fragment通信gif.gif">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/BlogGifRes/20210306/qrFh6gW0eeyS.webp">
 <meta property="article:published_time" content="2016-06-08T13:39:07.000Z">
-<meta property="article:modified_time" content="2021-03-06T14:23:36.577Z">
+<meta property="article:modified_time" content="2021-03-06T15:56:53.066Z">
 <meta property="article:author" content="叶金诚">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="Communication">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.yangchaofan.cn/通信fragment.jpg">
 
 
 
@@ -483,7 +487,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  7.2k
+                  7.1k
                 </span>
               
 
@@ -609,9 +613,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> public static class MainActivity extends Activity</span><br><span class="line">        implements HeadlinesFragment.OnHeadlineSelectedListener&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">     public void onArticleSelected(int position) &#123;</span><br><span class="line">        &#x2F;&#x2F; 用户在 HeadlinesFragment中选中了一个item </span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;在activity中添加新的fragment</span><br><span class="line">        ArticleFragment articleFrag &#x3D; (ArticleFragment)</span><br><span class="line">                getSupportFragmentManager().findFragmentById(R.id.article_fragment);</span><br><span class="line"></span><br><span class="line">        if (articleFrag !&#x3D; null) &#123;</span><br><span class="line">            &#x2F;&#x2F; If article 对象 可以复用, 我们就不需要创建两遍了</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 回调articleFrag 更新</span><br><span class="line">            articleFrag.updateArticleView(position);</span><br><span class="line"></span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            &#x2F;&#x2F; 创建 Fragment 并为其添加一个参数，用来指定应显示的文章</span><br><span class="line">            ArticleFragment newFragment &#x3D; new ArticleFragment();</span><br><span class="line">            Bundle args &#x3D; new Bundle();</span><br><span class="line">            args.putInt(ArticleFragment.ARG_POSITION, position);</span><br><span class="line">            newFragment.setArguments(args);</span><br><span class="line"></span><br><span class="line">            FragmentTransaction transaction &#x3D; getSupportFragmentManager().beginTransaction();</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 将 fragment_container View 时中的内容替换为此 Fragment ，</span><br><span class="line">            &#x2F;&#x2F; 然后将该事务添加到返回堆栈，以便用户可以向后回滚</span><br><span class="line">            transaction.replace(R.id.fragment_container, newFragment);</span><br><span class="line">            int setTransition&#x3D;TRANSIT_FRAGMENT_OPEN;</span><br><span class="line">            transaction.setTransition(setTransition);</span><br><span class="line">            transaction.addToBackStack(null);</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F; 执行事务</span><br><span class="line">            transaction.commit();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><font size="4">下面我写了一个实例来供大家理解：</font></p>
 <p><font size="4">各个类的联系图：</font></p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-2fkIgsA8-1615037919702)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/cc05c541780f609b7f6663236e9cb19d9d5e7c4a/%E9%80%9A%E4%BF%A1fragment.jpg)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/cc05c541780f609b7f6663236e9cb19d9d5e7c4a/%E9%80%9A%E4%BF%A1fragment.jpg)]</a></p>
+<img src="http://cdn.yangchaofan.cn/通信fragment.jpg">
+
+
+
+
+
 <p><font size="4">效果如下：</font></p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-aagFBVdk-1615037919704)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/Fragment%E9%80%9A%E4%BF%A1gif.gif)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/Fragment%E9%80%9A%E4%BF%A1gif.gif)]</a></p>
+<img src="http://cdn.yangchaofan.cn/Fragment通信gif.gif">
+
 <p><font size="4"><a target="_blank" rel="noopener" href="http://download.csdn.net/detail/chivalrousman/9545616">Fragment通信demo实例</a></font></p>
 <h1 id="service"><a href="#Service" class="headerlink" title="Service"></a>Service<a href="#service" class="header-anchor">#</a></h1><p><strong><font size="5"> Service 与Activity通信</font></strong> </p>
 <p><font size="4">主要是如何获得Service实例的问题<br><font size="4">总结来说两步： </font></font></p>
@@ -725,7 +735,11 @@
 <p><font size="4">事件(Event)：又可称为消息，本文中统一用事件表示。其实就是一个对象，可以是网络请求返回的字符串，也可以是某个开关状态等等。事件类型(EventType)指事件所属的 Class。<br>事件分为一般事件和 Sticky 事件，相对于一般事件，Sticky 事件不同之处在于，当事件发布后，再有订阅者开始订阅该类型事件，依然能收到该类型事件最近一个 Sticky 事件。</font></p>
 <p><font size="4">订阅者(Subscriber)：订阅某种事件类型的对象。当有发布者发布这类事件后，EventBus 会执行订阅者的 onEvent 函数，这个函数叫事件响应函数。订阅者通过 register 接口订阅某个事件类型，unregister 接口退订。订阅者存在优先级，优先级高的订阅者可以取消事件继续向优先级低的订阅者分发，默认所有订阅者优先级都为 0。 </font></p>
 <p><font size="4">发布者(Publisher)：发布某事件的对象，通过 post 接口发布事件。</font></p>
-<p><font size="4">本项目较为简单，总体设计和流程图：<br>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-hjeut613-1615037919707)(<a target="_blank" rel="noopener" href="https://github.com/greenrobot/EventBus/raw/master/EventBus-Publish-Subscribe.png)]">https://github.com/greenrobot/EventBus/raw/master/EventBus-Publish-Subscribe.png)]</a></font></p>
+<p><font size="4">本项目较为简单，总体设计和流程图：</font></p>
+<img src="http://cdn.yangchaofan.cn/BlogGifRes/20210306/qrFh6gW0eeyS.webp">
+
+
+
 <p><strong><font size="5">2)使用方式：</font></strong></p>
 <ul>
 <li>build.gradle 中加入依赖<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile &#39;org.greenrobot:eventbus:3.0.0&#39;</span><br></pre></td></tr></table></figure></li>
@@ -1011,6 +1025,24 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
           
 
           
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/blog/my-navi.html" title="my-collections" target="_blank">my-collections</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read" title="stack-overflow" target="_blank">stack-overflow</a>
+                  </li>
+                
+              </ul>
+            </div>
           
 
           

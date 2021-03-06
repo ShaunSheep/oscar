@@ -122,15 +122,31 @@
 <meta property="og:site_name" content="叶金诚的站点">
 <meta property="og:description" content="摘自本人16年的的博客《Google官方  详解  Android 性能优化【史诗巨著之内存篇】》 博客使用的图片链接服务已经挂掉了，等以后有时间补上。 为什么关注性能# 对于一款APP，用户首先关注的是 app的性能，而不是APP本身的属性功能，用户不关心你是否是搞社交，是否搞电商，是否是一款强大的美图滤镜app，用户首先关注的是 性能—-性能不好，用户会直接卸载，在应用市场给一个恶狠狠得差评，">
 <meta property="og:locale">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/2222.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/333.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/androidruntimeheap.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/空间预设大小.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/gc1.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/gc2.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/gc3.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/gc4.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/gc5.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/gc6.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/montior.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/montior2.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/heapviewer.gif">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/aee4a58d58a1f48cf83bee00191ac4dc.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/gc7.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/gc8.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/b8eeebf564c906276013a33b4db3a7a0.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/gc9.png">
 <meta property="article:published_time" content="2016-06-01T13:34:41.000Z">
-<meta property="article:modified_time" content="2021-03-06T14:06:48.323Z">
+<meta property="article:modified_time" content="2021-03-06T16:03:04.959Z">
 <meta property="article:author" content="叶金诚">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="Performance">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/aee4a58d58a1f48cf83bee00191ac4dc.png">
+<meta name="twitter:image" content="http://cdn.yangchaofan.cn/2222.png">
 
 
 
@@ -475,7 +491,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  9.6k
+                  8.9k
                 </span>
               
 
@@ -491,7 +507,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  40
+                  37
                 </span>
               
             </div>
@@ -563,10 +579,17 @@
 <p>举个简单的例子，内存就像你的卧室一样，当你在老家住着动辄几百平的村庄，舒服惯了，突然变卖家产一门心思想创业来到北京，家里的老本只够你住几平米的卫生间的时候，你就会注意到内存【房间】大小的重要性了。</p>
 <p>首先我们要知道内存是如何影响系统运行</p>
 <p>通常我们认为代码执行速度等同于物理硬件的执行速度，我们的代码指令都是通过使用内存来完成的。通过为实例对象，常量，变量分配内存，来完成操作，但是如何释放这些内存，通常我们并不清楚。</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-edGKKLu1-1615037605194)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/2222.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/2222.png)]</a></p>
+<img src="http://cdn.yangchaofan.cn/2222.png">
+
+
+
 <p>一旦分配出去的内存没有及时回收，会引造成系统卡顿，执行操作缓慢现象，这种现象称之为内存泄漏，Memory leak</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-jOOPaHuq-1615037605197)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/12a89c01adce51b97a72f7d025e9a47372b58006/333.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/12a89c01adce51b97a72f7d025e9a47372b58006/333.png)]</a></p>
-<h1 id="java-la-ji-hui-shou-ji-zhi-guan-fang-xiang-jie"><a href="#java垃圾回收机制官方详解" class="headerlink" title="java垃圾回收机制官方详解"></a>java垃圾回收机制官方详解<a href="#java-la-ji-hui-shou-ji-zhi-guan-fang-xiang-jie" class="header-anchor">#</a></h1><blockquote>
+<img src="http://cdn.yangchaofan.cn/333.png">
+
+
+
+
+<h1 id="java-la-ji-hui-shou-ji-zhi-guan-fang-xiang-jie"><a href="#Java垃圾回收机制官方详解" class="headerlink" title="Java垃圾回收机制官方详解"></a>Java垃圾回收机制官方详解<a href="#java-la-ji-hui-shou-ji-zhi-guan-fang-xiang-jie" class="header-anchor">#</a></h1><blockquote>
 <p>java中的JVM就是一个抽象的计算机，和实际的计算机一样，它具有指令集并使用不同的存储区域，JVM负责执行代码，管理数据，管理内存和寄存器。</p>
 </blockquote>
 <p>垃圾回收机制只做两件基本的事情：</p>
@@ -588,39 +611,69 @@
 <p><font color="#0000FF">那么问题来了，如何精确的进行垃圾回收呢？</font><br><font color="#0000FF">那么问题来了，如何精确的进行垃圾回收呢？</font><br><font color="#0000FF">那么问题来了，如何精确的进行垃圾回收呢？</font></p>
 <p>回答很明确，确保每一个对象都进行了有效的释放。对于不再需要的对象，不要引用他们，一旦在别的地方保持对这个对象的引用，垃圾回收机制 暂时不会回收该对象，则会导致严重得问题—-<font color="#FF00FF">系统可用内存越来越少，垃圾回收执行的频率越来越高，cpu全都被垃圾回收的操作占有了，系统性能自然而然就下降了！</font></p>
 <p>java8 已经删除了永生代内存，即一些常驻内存，不会回收的数据，而是改为使用本地内存来存储类的元数据，称之为元空间（Metaspace），不过貌似和Android开发没关系(-__-)。</p>
-<p>回顾完java垃圾回收，下面介绍<br>##Android 自己的回收机制-Runtime 回收机制<br>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-Jp7F1mU9-1615037605199)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/androidruntimeheap.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/androidruntimeheap.png)]</a></p>
+<p>回顾完java垃圾回收，下面介绍<br>##Android 自己的回收机制-Runtime 回收机制</p>
+<img src="http://cdn.yangchaofan.cn/androidruntimeheap.png">
+
+
+
 <p>经由为数据分配内存的类型，以及系统如何有效的利用gc回收内存，并为新的对象分配内存。</p>
 <p>所有要申请的内存都被划分到内存空间中，根据这些特点，哪些数据分配到哪些内存中，取决于Android的版本，</p>
 <p>最为重要的一点，Android系统为每个运行中的app分配了预设的内存通常为16m-32m之间，当分配的内存越多，系统内存不足时，系统就可能会执行内存清理，注意，是可能会执行，是否执行垃圾清理是由系统自己判断的。</p>
-<p>进行垃圾回收，以确保有足够的内存分配给其他的应用操作，不同的Android版本，会有不同的gc操作，例如在davailk中，gc代表终止程序操作，<br>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-KKwp7D47-1615037605206)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/%E7%A9%BA%E9%97%B4%E9%A2%84%E8%AE%BE%E5%A4%A7%E5%B0%8F.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/%E7%A9%BA%E9%97%B4%E9%A2%84%E8%AE%BE%E5%A4%A7%E5%B0%8F.png)]</a></p>
+<p>进行垃圾回收，以确保有足够的内存分配给其他的应用操作，不同的Android版本，会有不同的gc操作，例如在davailk中，gc代表终止程序操作，</p>
+<img src="http://cdn.yangchaofan.cn/空间预设大小.png">
+
+
+
 <p>##代码是如何影响程序执行的？</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-hGbslb9x-1615037605211)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc1.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc1.png)]</a></p>
+<img src="http://cdn.yangchaofan.cn/gc1.png">
+
 <p>上图是正常的界面刷新流程，</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-38RhVcBw-1615037605213)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc2.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc2.png)]</a></p>
+<img src="http://cdn.yangchaofan.cn/gc2.png">
+
+
+
 <p>上图，gc占据了一大块的时间，对于我们人类来说很短，但是对于系统来说很长了。</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-TrHiFJmM-1615037605216)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc3.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc3.png)]</a></p>
+<img src="http://cdn.yangchaofan.cn/gc3.png">
+
+
+
+
 <p>综合三张图分析：代码质量很差，使得系统为我们的app分配了过多内存，而且没有及时回收，系统需要更多的时间去执行gc回收，那么系统就没时间去保持界面的活跃，所以就造成了卡顿的现象。，</p>
 <blockquote>
 <p>在一个循环体中，重复得创建对象，就会造成内存污染，马上就会有很多gc<br>启动，由于这一额外的内存压力，内存泄漏仍然会产生，当可用内存降低到一定总量时，会强制系统gc执行，那循环体中的那部分操作会显示出卡顿的情况，甚至有可能在内存极限的时候，我们开发的应用会闪退。</p>
 </blockquote>
 <p>所以，唯一的解决办法是：减少代码申请的内存量，不使用的对象及时回收。</p>
-<h1 id="memory-monitor"><a href="#Memory-Monitor" class="headerlink" title="Memory Monitor"></a>Memory Monitor<a href="#memory-monitor" class="header-anchor">#</a></h1><p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-C3c0bqKO-1615037605219)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc4.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc4.png)]</a></p>
+<h1 id="memory-monitor"><a href="#Memory-Monitor" class="headerlink" title="Memory Monitor"></a>Memory Monitor<a href="#memory-monitor" class="header-anchor">#</a></h1><img src="http://cdn.yangchaofan.cn/gc4.png">
+
+
+
 <p>整个层叠图，代表还有多少内存可用<br>深蓝色区域：代表正在使用的内存大小<br>浅灰色区域：代表空闲未分配内存</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-4gf51Heh-1615037605223)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc5.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc5.png)]</a></p>
+<img src="http://cdn.yangchaofan.cn/gc5.png">
+
+
+
 <p>这个红色箭头所指的坡度表示急需大量的内存，内存分配也急剧的增加。<br>上图是一个内存管理良好的例子</p>
 <p>下图我们看一个内存糟糕的例子</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-ZVigsvZu-1615037605227)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc6.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc6.png)]</a></p>
+<img src="http://cdn.yangchaofan.cn/gc6.png">
+
+
+
 <blockquote>
 <p>分析</p>
 </blockquote>
 <p><font color="#fff22f22">这里有一部分代码占用了大量的内存，然后又一下子释放了内存，生成不断重复又窄又长的曲线，这就是程序在花大量的时间在进行垃圾清理，运行垃圾清理的时间越多，其他操作可用的时间就越少，比如跟网络交互数据，页面刷新，打电话，听歌等等，这样就造成了卡顿<font></font></font></p>
 <p>###<strong>使用Montior过程中遇到的 No Debugable Application的问题</strong></p>
-<p> [外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-Vka7aF2D-1615037605234)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/montior.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/montior.png)]</a></p>
+<img src="http://cdn.yangchaofan.cn/montior.png">
+
+
+
+
 <blockquote>
 <p>solution：Tools-Android-Android adb interact</p>
 <p>最初并不会见效，重启app即可，</p>
 </blockquote>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-gygcO5jn-1615037605250)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/montior2.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/montior2.png)]</a></p>
+<img src="http://cdn.yangchaofan.cn/montior2.png">
+
 <h1 id="nei-cun-xie-lou"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏<a href="#nei-cun-xie-lou" class="header-anchor">#</a></h1><hr>
 <p>在这里我才开始引入内存泄漏的原因【虽然文章前面已经提到，但是在这里才着重拿出来作为一节】</p>
 <p>网络上和一些书籍对内存泄漏解释是 应该回收的对象没有回收，有点不全面，我认为深一点来说，内存泄漏是针对系统而言的，内存泄漏指的是不能被使用的内存，但是垃圾回收器无法识别出来，对其进行回收，这些对象一直存在于堆中，并且持续占据着内存空间，无法被删除，随着不断泄漏，系统可用的内存就越来越小，意味着系统又需要花更多的时间 去进行内存清理操作，进行垃圾回收操作的次数越来越多，</p>
@@ -630,7 +683,10 @@
 <h1 id="heap-viewer"><a href="#Heap-Viewer" class="headerlink" title="Heap Viewer"></a>Heap Viewer<a href="#heap-viewer" class="header-anchor">#</a></h1><blockquote>
 <p>Heap viewer使用步骤，我录制了gift图，详情请看：</p>
 </blockquote>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-Fbh6ehyr-1615037605265)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/heapviewer.gif)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/heapviewer.gif)]</a></p>
+<img src="http://cdn.yangchaofan.cn/heapviewer.gif">
+
+
+
 <blockquote>
 <p> 了解Heap Viewer:<br> Heap Viewer可以有效的分析程序在堆中分配的数据类型及数量和 大小小</p>
 </blockquote>
@@ -638,10 +694,17 @@
 <blockquote>
 <p>  这里表示 byte数组和boolean数组的数量为177，占用了1.423M的内存</p>
 </blockquote>
-<p>#内存泄漏的情况<br>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-zARMpThX-1615037605276)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc7.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc7.png)]</a></p>
+<p>#内存泄漏的情况</p>
+<img src="http://cdn.yangchaofan.cn/gc7.png">
+
+
+
 <p>绿色箭头标出来的那部分 代码就是有问题的部分，原因在于，可以内存几乎为0，所有的内存已经被程序占用，首先记住，我们的代码有问题，造成了内存泄漏，并且，垃圾回收机制无法回收那部分内存空间</p>
 <p>下图为30s之后的内存回收情况</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-j6jrwdKa-1615037605279)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc8.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc8.png)]</a></p>
+<img src="http://cdn.yangchaofan.cn/gc8.png">
+
+
+
 <p>启动第二次gc，此时Android调整并提高应用的内存上限，这样做的同时，如果漏洞没有修复，表明内存泄漏仍然存在，那么还会有第三次，第四次同样的gc操作，直至系统无法调整提高给应用更高的内存上限，造成内存溢出，甚至可能死机，</p>
 <p>#Trace Viewer分配追踪器<br>  <img src="https://img-blog.csdnimg.cn/img_convert/b8eeebf564c906276013a33b4db3a7a0.png" alt="这里写图片描述"></p>
 <blockquote>
@@ -832,7 +895,10 @@ Lrucache就可以当作一种存储数据的结构，类似list，set，可以�
 </blockquote>
 <hr>
 <h1 id="you-qu-de-shi"><a href="#有趣的是" class="headerlink" title="有趣的是"></a>有趣的是<a href="#you-qu-de-shi" class="header-anchor">#</a></h1><p>当我通宵赶完这篇博客的时候，我的计算机也提醒我内存不足了 (●’◡’●)</p>
-<p>[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-W4c5wrNV-1615037605287)(<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc9.png)]">https://raw.githubusercontent.com/ShaunSheep/BlogGifRes/master/gc9.png)]</a></p>
+<img src="http://cdn.yangchaofan.cn/gc9.png">
+
+
+
 <h1 id="xie-ben-wen-suo-can-kao-de"><a href="#写本文所参考的：" class="headerlink" title="写本文所参考的："></a>写本文所参考的：<a href="#xie-ben-wen-suo-can-kao-de" class="header-anchor">#</a></h1><ol>
 <li><a target="_blank" rel="noopener" href="http://blog.csdn.net/testcs_dn/article/details/45719357">Markdown字体颜色写法</a></li>
 <li><a target="_blank" rel="noopener" href="https://classroom.udacity.com/courses/ud825/lessons">Google 官方 Android Performance 课程</a></li>
@@ -1098,6 +1164,24 @@ Lrucache就可以当作一种存储数据的结构，类似list，set，可以�
 
           
           
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="/blog/my-navi.html" title="my-collections" target="_blank">my-collections</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read" title="stack-overflow" target="_blank">stack-overflow</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
 
           
 
@@ -1114,7 +1198,7 @@ Lrucache就可以当作一种存储数据的结构，类似list，set，可以�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#wei-shi-me-guan-zhu-xing-neng"><span class="nav-number">1.</span> <span class="nav-text">为什么关注性能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ru-he-you-hua-app-de-xing-neng"><span class="nav-number">2.</span> <span class="nav-text">如何优化app的性能？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wei-shi-me-guan-zhu-nei-cun"><span class="nav-number">3.</span> <span class="nav-text">为什么关注内存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-la-ji-hui-shou-ji-zhi-guan-fang-xiang-jie"><span class="nav-number">4.</span> <span class="nav-text">java垃圾回收机制官方详解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#memory-monitor"><span class="nav-number">5.</span> <span class="nav-text">Memory Monitor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nei-cun-xie-lou"><span class="nav-number">6.</span> <span class="nav-text">内存泄漏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#heap-viewer"><span class="nav-number">7.</span> <span class="nav-text">Heap Viewer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gao-xiao-jia-zai-tu-pian-tu-pian"><span class="nav-number">8.</span> <span class="nav-text">高效加载图片图片</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#wei-shi-me-zhi-guan-zhu-tu-pian-jia-zai-er-bu-qu-chu-li-qi-ta-shu-ju-lai-jie-jue-nei-cun-bu-zu-de-wen-ti"><span class="nav-number">8.1.</span> <span class="nav-text">为什么只关注图片加载，而不去处理其他数据来解决内存不足的问题？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gao-xiao-de-jia-zai-da-tu"><span class="nav-number">9.</span> <span class="nav-text">高效的加载大图：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zhi-xu-san-bu"><span class="nav-number">9.1.</span> <span class="nav-text">只需三步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-du-qu-nei-cun-zhong-bitmap-de-chi-cun-he-lei-xing"><span class="nav-number">9.2.</span> <span class="nav-text">1. 读取内存中Bitmap的尺寸和类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-jia-zai-yi-zhang-xiao-tu-shi-de-xi-tong-fen-pei-jiao-shao-de-nei-cun-gei-ta"><span class="nav-number">9.3.</span> <span class="nav-text">2. 加载一张小图，使得系统分配较少的内存给它。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-jie-zhao-wei-wo-men-de-ui-zu-jian-imageview-she-zhi-yi-zhang-suo-lue-tu-ge"><span class="nav-number">9.4.</span> <span class="nav-text">3.接着为我们的UI组件ImageView设置一张缩略图咯：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shi-asynctask-jia-zai-bitmap"><span class="nav-number">10.</span> <span class="nav-text">使AsyncTask加载Bitmap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shi-yong-lrucache-huan-cun-tu-pian"><span class="nav-number">11.</span> <span class="nav-text">使用Lrucache缓存图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bu-chong-ui-zu-jian-bing-fa-xing-wen-ti"><span class="nav-number">12.</span> <span class="nav-text">补充-UI组件并发性问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#viewpager"><span class="nav-number">13.</span> <span class="nav-text">ViewPager</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#kan-shang-qu-yi-jing-da-gong-gao-cheng-liao-dan-shi-shi-zhen-de-ru-ci-ma"><span class="nav-number">13.1.</span> <span class="nav-text">看上去已经大功告成 了，但事实真的如此吗？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#recyclerview-gridview-listview"><span class="nav-number">14.</span> <span class="nav-text">RecyclerView，GridView，ListView</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bing-fa-wen-ti"><span class="nav-number">14.1.</span> <span class="nav-text">并发问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zai-gridview-jie-jue-bing-fa"><span class="nav-number">14.2.</span> <span class="nav-text">在GridView解决并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#view-holder-she-ji-mo-shi"><span class="nav-number">14.3.</span> <span class="nav-text">View Holder设计模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#you-qu-de-shi"><span class="nav-number">15.</span> <span class="nav-text">有趣的是</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xie-ben-wen-suo-can-kao-de"><span class="nav-number">16.</span> <span class="nav-text">写本文所参考的：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shuo-ming"><span class="nav-number">17.</span> <span class="nav-text">说明</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#wei-shi-me-guan-zhu-xing-neng"><span class="nav-number">1.</span> <span class="nav-text">为什么关注性能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ru-he-you-hua-app-de-xing-neng"><span class="nav-number">2.</span> <span class="nav-text">如何优化app的性能？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wei-shi-me-guan-zhu-nei-cun"><span class="nav-number">3.</span> <span class="nav-text">为什么关注内存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-la-ji-hui-shou-ji-zhi-guan-fang-xiang-jie"><span class="nav-number">4.</span> <span class="nav-text">Java垃圾回收机制官方详解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#memory-monitor"><span class="nav-number">5.</span> <span class="nav-text">Memory Monitor</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nei-cun-xie-lou"><span class="nav-number">6.</span> <span class="nav-text">内存泄漏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#heap-viewer"><span class="nav-number">7.</span> <span class="nav-text">Heap Viewer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gao-xiao-jia-zai-tu-pian-tu-pian"><span class="nav-number">8.</span> <span class="nav-text">高效加载图片图片</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#wei-shi-me-zhi-guan-zhu-tu-pian-jia-zai-er-bu-qu-chu-li-qi-ta-shu-ju-lai-jie-jue-nei-cun-bu-zu-de-wen-ti"><span class="nav-number">8.1.</span> <span class="nav-text">为什么只关注图片加载，而不去处理其他数据来解决内存不足的问题？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gao-xiao-de-jia-zai-da-tu"><span class="nav-number">9.</span> <span class="nav-text">高效的加载大图：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#zhi-xu-san-bu"><span class="nav-number">9.1.</span> <span class="nav-text">只需三步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-du-qu-nei-cun-zhong-bitmap-de-chi-cun-he-lei-xing"><span class="nav-number">9.2.</span> <span class="nav-text">1. 读取内存中Bitmap的尺寸和类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-jia-zai-yi-zhang-xiao-tu-shi-de-xi-tong-fen-pei-jiao-shao-de-nei-cun-gei-ta"><span class="nav-number">9.3.</span> <span class="nav-text">2. 加载一张小图，使得系统分配较少的内存给它。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-jie-zhao-wei-wo-men-de-ui-zu-jian-imageview-she-zhi-yi-zhang-suo-lue-tu-ge"><span class="nav-number">9.4.</span> <span class="nav-text">3.接着为我们的UI组件ImageView设置一张缩略图咯：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shi-asynctask-jia-zai-bitmap"><span class="nav-number">10.</span> <span class="nav-text">使AsyncTask加载Bitmap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shi-yong-lrucache-huan-cun-tu-pian"><span class="nav-number">11.</span> <span class="nav-text">使用Lrucache缓存图片</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bu-chong-ui-zu-jian-bing-fa-xing-wen-ti"><span class="nav-number">12.</span> <span class="nav-text">补充-UI组件并发性问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#viewpager"><span class="nav-number">13.</span> <span class="nav-text">ViewPager</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#kan-shang-qu-yi-jing-da-gong-gao-cheng-liao-dan-shi-shi-zhen-de-ru-ci-ma"><span class="nav-number">13.1.</span> <span class="nav-text">看上去已经大功告成 了，但事实真的如此吗？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#recyclerview-gridview-listview"><span class="nav-number">14.</span> <span class="nav-text">RecyclerView，GridView，ListView</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bing-fa-wen-ti"><span class="nav-number">14.1.</span> <span class="nav-text">并发问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zai-gridview-jie-jue-bing-fa"><span class="nav-number">14.2.</span> <span class="nav-text">在GridView解决并发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#view-holder-she-ji-mo-shi"><span class="nav-number">14.3.</span> <span class="nav-text">View Holder设计模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#you-qu-de-shi"><span class="nav-number">15.</span> <span class="nav-text">有趣的是</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xie-ben-wen-suo-can-kao-de"><span class="nav-number">16.</span> <span class="nav-text">写本文所参考的：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shuo-ming"><span class="nav-number">17.</span> <span class="nav-text">说明</span></a></li></ol></div>
             
 
           </div>
