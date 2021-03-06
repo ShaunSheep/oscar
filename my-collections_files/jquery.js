@@ -289,12 +289,12 @@
 			if (!this._supportFormData) {
 				this._form.attr("target", this._iframe.attr("name"));
 			}
-			this._input = $("<input type='file' name='" + this.options.inputName + "' id='" + new Date().getTime() + "'>")
+			this._input = $("<input type="file" name="" + this.options.inputName + "" id="" + new Date().getTime() + "">")
 				.change(function() {
 					that._loading.show();
 					that._form.find("input:not([name=" + that.options.inputName + "])").remove();
 					for (var key in that.options.formData) {
-						that._form.append("<input type='hidden' name='" + key + "' value='" + that.options.formData[key] + "'>");
+						that._form.append("<input type="hidden" name="" + key + "" value="" + that.options.formData[key] + "">");
 					}
 					that.options.prepare(that._input.val());
 					if (that._supportFormData) {
@@ -329,7 +329,7 @@
 				})
 				.appendTo(this._form);
 			if (this._stupidIE) {
-				this._label = $("<label for='" + this._input.attr("id") + "'></label>");
+				this._label = $("<label for="" + this._input.attr("id") + ""></label>");
 				this.$.after(this._label);
 				this._label.append(this.$);
 			} else {
@@ -345,7 +345,7 @@
 			} else if (this._iframe[0].contentDocument) {
 				response = this._iframe[0].contentDocument.document.body.innerHTML;
 			}
-			var reg = /<pre.+?>(.+)<\/pre>/ig;
+			var reg = /<pre.+?>(.+)<\ pre>/ig;
 			if (reg.test(response)) {
 				response = response.substring(response.indexOf(">") + 1);
 				response = response.substring(0, response.length - 6);
@@ -501,7 +501,7 @@
 			var offset = this.$.offset();
 			
 			// Create image container element
-			this._imageContainer = $("<div class='harame-slider-image-container'></div>")
+			this._imageContainer = $("<div class="harame-slider-image-container"></div>")
 				.css({
 					"width": this.$.width(),
 					"height": this.$.height(),
@@ -515,7 +515,7 @@
 				var anchor;
 				for (var i in this.options.images) {
 					var image = this.options.images[i];
-					anchor = $("<a href='" + image.link + "' target='_blank'></a>")
+					anchor = $("<a href="" + image.link + "" target="_blank"></a>")
 						.appendTo(this._imageContainer);
 					$("<img>")
 						.attr("src", image.url)
@@ -531,7 +531,7 @@
 			}
 			
 			// Create previous element
-			this._previous = $("<div class='harame-slider-previous'></div>")
+			this._previous = $("<div class="harame-slider-previous"></div>")
 				.click(function() {
 					that._slide(-1, true);
 				})
@@ -544,7 +544,7 @@
 			});
 			
 			// Create next element
-			this._next = $("<div class='harame-slider-next'></div>")
+			this._next = $("<div class="harame-slider-next"></div>")
 			.click(function() {
 				that._slide();
 			})
@@ -558,7 +558,7 @@
 			});
 			
 			// Create pagination element
-			this._pagination = $("<div class='harame-slider-pagination'></div>")
+			this._pagination = $("<div class="harame-slider-pagination"></div>")
 				.appendTo(this.$);
 			if (this.options.paginationClass) {
 				this._pagination.addClass(this.options.paginationClass);
@@ -570,7 +570,7 @@
 			if (this.options.images) {
 				var page;
 				for (var i in this.options.images) {
-					page = $("<div class='harame-slider-pagination-page'></div>")
+					page = $("<div class="harame-slider-pagination-page"></div>")
 						.appendTo(this._pagination);
 					if (i == 0) {
 						if (this.options.pageSelectedClass) {
@@ -615,4 +615,4 @@
 				.removeClass(this.options.pageSelectedClass);
 		}
 	});
-})(jQuery);
+})(jQuery);</\></pre.+?></form></iframe></div></div></div>
