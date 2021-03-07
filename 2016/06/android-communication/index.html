@@ -2,14 +2,31 @@
 
 
 
+  
 
-<html class="theme-next pisces" lang="zh-Hans">
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
 
+
+
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script async src="//cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  <link href="//cdn.jsdelivr.net/npm/pace-js@1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
 
 
 
@@ -36,69 +53,35 @@
 
 
 
+
+
   
   
   <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
+<link href="https://fonts.loli.net/css?family=EB+Garamond:400,400i,700,700i|Noto+Serif+SC:400,500,700&display=swap&subset=chinese-simplified" rel="stylesheet">
+
+
 
 
   
-  
-  
-  
 
-  
-    
-    
-  
+<link href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
-  
-    
-      
-    
-
-    
-  
-
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-      
-    
-
-    
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
 
 
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
 
 
-<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/blog/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
 
 
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/function%20small()%20%7B%20%5Bnative%20code%5D%20%7D?v=5.1.2">
-
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
 
 
 
@@ -109,6 +92,8 @@
 
 
 
+
+  <link rel="alternate" href="/blog/atom.xml" title="叶金诚的站点" type="application/atom+xml" />
 
 
 
@@ -140,11 +125,11 @@
   var CONFIG = {
     root: '',
     scheme: 'Pisces',
-    version: '5.1.2',
-    sidebar: {"position":"left","display":"always","offset":16,"offset_float":16,"b2t":false,"scrollpercent":true,"onmobile":false},
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
     fancybox: true,
     tabs: true,
-    motion: "",
+    motion: {"enable":true,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"perspectiveRightIn","post_body":"whirlIn","coll_header":"swoopIn","sidebar":"shrinkIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -167,6 +152,18 @@
 
 
 
+<!-- 设置文章需要密码访问 -->
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
   <title>《详解 Android 通信》 | 叶金诚的站点</title>
   
 
@@ -174,22 +171,22 @@
 
 
 
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?f6796a81afe3e2f22bc40222eb19971f";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
 
 
 
 
-<meta name="generator" content="Hexo 5.3.0"></head>
+  
+
+  
+      <!-- haoyuePlayer 播放器，移动端大小适配-->
+      <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+  
+
+</head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
 
   
   
@@ -198,6 +195,9 @@
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
+
+    <!--fork me from github-->
+    <a target="_blank" rel="noopener" href="https://github.com/ShaunSheep" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
@@ -212,7 +212,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">汇贤雅叙</p>
+        <h1 class="site-subtitle" itemprop="description">汇贤雅叙</h1>
       
   </div>
 
@@ -252,6 +252,26 @@
         </li>
       
         
+        <li class="menu-item menu-item-movies">
+          <a href="/blog/movies/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-film"></i> <br />
+            
+            电影
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-图书">
+          <a href="/blog/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            图书
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/blog/archives/" rel="section">
             
@@ -262,12 +282,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-tags">
-          <a href="/blog/tags/" rel="section">
+        <li class="menu-item menu-item-links">
+          <a href="/blog/my-collections.html" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
             
-            标签
+            友链
           </a>
         </li>
       
@@ -353,7 +373,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/avatar.jpg">
+      <meta itemprop="image" content="/blog/images/head.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -365,12 +385,16 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">《详解 Android 通信》</h1>
+          <h2 class="post-title" itemprop="name headline">《详解 Android 通信》</h2>
         
 
         <div class="post-meta">
           <span class="post-time">
-		        
+
+             
+
+             
+
             
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -447,46 +471,28 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2016/06/android-communication/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="/2016/06/android-communication/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
           
 
           
           
-             <span id="/blog/2016/06/android-communication/" class="leancloud_visitors" data-flag-title="《详解 Android 通信》">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
+
+          <!--
           
+          -->
 
           
-
-          
-            <div class="post-wordcount">
+            <span class="post-wordcount">
               
+                
+                  <span class="post-meta-divider">|</span>
                 
                 <span class="post-meta-item-icon">
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">字数统计&#58;</span>
+                  <span class="post-meta-item-text">字数&#58;</span>
                 
-                <span title="字数统计">
+                <span title="字数">
                   7.1k
                 </span>
               
@@ -500,16 +506,18 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                  <span class="post-meta-item-text">时长 &asymp;</span>
                 
-                <span title="阅读时长">
-                  29
+                <span title="时长">
+                  29 分钟
                 </span>
               
-            </div>
+            </span>
           
 
+          <!-- 隐藏文章内标题下，内容描述
           
+          -->
 
         </div>
       </header>
@@ -555,17 +563,17 @@
 <p>,<font size="4">首先都遵循，如何启动它们，就如何传递信息的原则： </font></p>
 <p><font size="5"><strong>1. Activity与Fragment</strong> </font></p>
 <p><font size="4">1. 通过构造函数传递 2.获取Fragment的实例对象</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;CustFragment 是自定义的fragment，参数列表也可以自己定义咯，</span><br><span class="line"> getSupportFragmentManager().beginTransaction()</span><br><span class="line">			 .add(new CustFragment(自定义的的参数列表),new String(&quot;参数&quot;))</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;------------------method two-----------------------</span><br><span class="line">  getSupportFragmentManager().findFragmentById(R.id.headlines_fragment);</span><br><span class="line">  &#x2F;&#x2F;------------------method three----------------------</span><br><span class="line">   getSupportFragmentManager().findFragmentByTag(&quot;HeadLines&quot;);</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;CustFragment 是自定义的fragment，参数列表也可以自己定义咯，</span><br><span class="line"> getSupportFragmentManager().beginTransaction()</span><br><span class="line">			 .add(new CustFragment(自定义的的参数列表),new String(&quot;参数&quot;))</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F;------------------method two-----------------------</span><br><span class="line">  getSupportFragmentManager().findFragmentById(R.id.headlines_fragment);</span><br><span class="line">  &#x2F;&#x2F;------------------method three----------------------</span><br><span class="line">   getSupportFragmentManager().findFragmentByTag(&quot;HeadLines&quot;);</span><br></pre></td></tr></table></figure></div>
 <blockquote>
 <p>聪明的读者可能会问Fragment如何与Activity通信类似的问题，这是个好问题，请注意我们的研究的原则是单一目标原则，在这节我研究的是Activity，你的疑惑在后面都会一一解答</p>
 </blockquote>
 <p><font size="5"><strong>2. Activity与Service</strong> </font></p>
 <p><font size="4">Activity启动Service的两种方式：</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;&#x2F;CustomService 是自定义Service，完成一些后台操作</span><br><span class="line"></span><br><span class="line">startService(new Intent(FirstActivity.this，CustomService.class));</span><br><span class="line"></span><br><span class="line">bindService(new Intent(FirstActivity.this，CustomService.class)), new ServiceConnection() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public void onServiceConnected(ComponentName name, IBinder service) &#123;</span><br><span class="line">		&#x2F;&#x2F;当前启动的service 一些数据就会回调回这里，我们在Activity中操作这些数据即可</span><br><span class="line">		get</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          @Override</span><br><span class="line">          public void onServiceDisconnected(ComponentName name) &#123;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,flags);</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;&#x2F;CustomService 是自定义Service，完成一些后台操作</span><br><span class="line"></span><br><span class="line">startService(new Intent(FirstActivity.this，CustomService.class));</span><br><span class="line"></span><br><span class="line">bindService(new Intent(FirstActivity.this，CustomService.class)), new ServiceConnection() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public void onServiceConnected(ComponentName name, IBinder service) &#123;</span><br><span class="line">		&#x2F;&#x2F;当前启动的service 一些数据就会回调回这里，我们在Activity中操作这些数据即可</span><br><span class="line">		get</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          @Override</span><br><span class="line">          public void onServiceDisconnected(ComponentName name) &#123;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,flags);</span><br></pre></td></tr></table></figure></div>
 <p><font size="4">从启动方式就可以看出，通过Bundle对象的形式存储，通过Intent传输，来完成Activity向Service传递数据的操作</font></p>
 <p><font size="5"><strong>3. Activity与BroadcastReceiver</strong></font></p>
 <p><font size="4">启动广播的形式也有两种: </font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;method one ！！！-----------------------------------------------</span><br><span class="line">registerReceiver(new BroadcastReceiver() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">              </span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,new IntentFilter(),&quot;&quot;,new Handler());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;method two ！！！-----------------------------------------------     </span><br><span class="line">registerReceiver(new BroadcastReceiver() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,new IntentFilter());</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;method one ！！！-----------------------------------------------</span><br><span class="line">registerReceiver(new BroadcastReceiver() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">              </span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,new IntentFilter(),&quot;&quot;,new Handler());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;method two ！！！-----------------------------------------------     </span><br><span class="line">registerReceiver(new BroadcastReceiver() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line">      &#125;,new IntentFilter());</span><br></pre></td></tr></table></figure></div>
 
 <blockquote>
 <p><font size="4">关于method one 的第三个参数Handler很多人会很费解</font></p>
@@ -583,10 +591,10 @@
 <p><font size="4">以上只是基础的传递数据的形式，大部分都是静态的，现在有一种需求，用户操作Activity，发出了某些指令，比如按下，滑动，触摸等操作，如何完成这些信息传递呢？这就要求同步了。</font></p>
 <p><font size="4">同步传递消息也很简单，就是调用系统写好的回调接口</font></p>
 <p><font size="4">首先我们要知道，用户 点击，触摸 这些行为 也属于 通信的范畴—点击和触摸属于 信息源；<br><font size="4">比如用户行为进行点击，那就实现 ：</font></font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">new Button(mCotext).setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">       @Override</span><br><span class="line">       public void onClick(View v) &#123;</span><br><span class="line">           new ImageView(mCotext).invalidate();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">new Button(mCotext).setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">       @Override</span><br><span class="line">       public void onClick(View v) &#123;</span><br><span class="line">           new ImageView(mCotext).invalidate();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure></div>
 <p><font size="4">通过此招提示指定的ImageView：嘿！老兄，你该刷新了</font></p>
 <p><font size="4">又或者 当用户 进行触摸操作，我们需要实现放大缩小平移指定的区域：</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">new RelativeLayout(mCotext).setOnTouchListener(new View.OnTouchListener() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public boolean onTouch(View v, MotionEvent event) &#123;</span><br><span class="line">              &#x2F;&#x2F;缩放</span><br><span class="line">              v.setScaleX(1f);</span><br><span class="line">              v.setScaleY(1f);</span><br><span class="line">              &#x2F;&#x2F;平移</span><br><span class="line">              v.setTranslationX(1f);</span><br><span class="line">              v.setTranslationY(1f); </span><br><span class="line">              v.setTranslationY(1f);</span><br><span class="line">              &#x2F;&#x2F;旋转</span><br><span class="line">              v.setRotation(2f);</span><br><span class="line">              v.setRotationX(2f);</span><br><span class="line">              v.setRotationY(2f);</span><br><span class="line"></span><br><span class="line">              v.invalidate();</span><br><span class="line">              return true;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">new RelativeLayout(mCotext).setOnTouchListener(new View.OnTouchListener() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public boolean onTouch(View v, MotionEvent event) &#123;</span><br><span class="line">              &#x2F;&#x2F;缩放</span><br><span class="line">              v.setScaleX(1f);</span><br><span class="line">              v.setScaleY(1f);</span><br><span class="line">              &#x2F;&#x2F;平移</span><br><span class="line">              v.setTranslationX(1f);</span><br><span class="line">              v.setTranslationY(1f); </span><br><span class="line">              v.setTranslationY(1f);</span><br><span class="line">              &#x2F;&#x2F;旋转</span><br><span class="line">              v.setRotation(2f);</span><br><span class="line">              v.setRotationX(2f);</span><br><span class="line">              v.setRotationY(2f);</span><br><span class="line"></span><br><span class="line">              v.invalidate();</span><br><span class="line">              return true;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure></div>
 <p><font size="4">嘿，你看，当用户进行触摸操作，我们可以通过回调onTouchListenter来完成“触摸”这一操作</font></p>
 <blockquote>
 <p><font size="4">关于View重绘机制以及优化刷新UI的细节，不属于本文讨论范围。</font></p>
@@ -599,18 +607,18 @@
 <p><font size="4">只需要记住三步：</font></p>
 <p><font size="4"><strong>1. <font size="4">定义一个接口：</font></strong></font></p>
 <p> 在让Fragment关联Activity之前，可以在Fragment中定义一个接口，然后让宿主Activity来实现这个接口。接着，在Fragment中捕获这个接口，并且在onAttach()中 捕获Activity实例 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;只需关注接口是如何定义的，以及onAttack中的实现</span><br><span class="line">public class HeadlinesFragment extends ListFragment &#123;</span><br><span class="line">	&#x2F;&#x2F;定义的接口引用</span><br><span class="line">    OnHeadlineSelectedListener mCallback;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 自定义回调接口，宿主Activity必须要实现它</span><br><span class="line">    public interface OnHeadlineSelectedListener &#123;</span><br><span class="line">        public void onArticleSelected(int position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onAttach(Activity activity) &#123;</span><br><span class="line">        super.onAttach(activity);</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F; 在这里只是为了确保Activity实现了我们定义的接口，如果没有实现，则抛出异常</span><br><span class="line">        try &#123;</span><br><span class="line">            mCallback &#x3D; (OnHeadlineSelectedListener) activity;</span><br><span class="line">        &#125; catch (ClassCastException e) &#123;</span><br><span class="line">            throw new ClassCastException(activity.toString()</span><br><span class="line">                    + &quot; must implement OnHeadlineSelectedListener&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;只需关注接口是如何定义的，以及onAttack中的实现</span><br><span class="line">public class HeadlinesFragment extends ListFragment &#123;</span><br><span class="line">	&#x2F;&#x2F;定义的接口引用</span><br><span class="line">    OnHeadlineSelectedListener mCallback;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 自定义回调接口，宿主Activity必须要实现它</span><br><span class="line">    public interface OnHeadlineSelectedListener &#123;</span><br><span class="line">        public void onArticleSelected(int position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onAttach(Activity activity) &#123;</span><br><span class="line">        super.onAttach(activity);</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F; 在这里只是为了确保Activity实现了我们定义的接口，如果没有实现，则抛出异常</span><br><span class="line">        try &#123;</span><br><span class="line">            mCallback &#x3D; (OnHeadlineSelectedListener) activity;</span><br><span class="line">        &#125; catch (ClassCastException e) &#123;</span><br><span class="line">            throw new ClassCastException(activity.toString()</span><br><span class="line">                    + &quot; must implement OnHeadlineSelectedListener&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <p><font size="4">一旦Activity通过OnHeadlineSelectedListener 的实例mCallBack回调 onArticleSelected（），Fragment就可以传递信息 给Activity了</font></p>
 <p><font size="4">例如 下面是 ListFragment的一个回调方法，当用户点击了list 中的item，这个Fragment就会通过回调接口向宿主Activity传递事件</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">   public void onListItemClick(ListView l, View v, int position, long id) &#123;</span><br><span class="line">       &#x2F;&#x2F; 向Activity传递事件信息</span><br><span class="line">       mCallback.onArticleSelected(position);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">   public void onListItemClick(ListView l, View v, int position, long id) &#123;</span><br><span class="line">       &#x2F;&#x2F; 向Activity传递事件信息</span><br><span class="line">       mCallback.onArticleSelected(position);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></div>
 <p><font size="4"><strong>2. 在宿主Activity实现这个接口</strong></font></p>
 <p><font size="4">怎么实现？很简单，参考下面代码：</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static class MainActivity extends Activity</span><br><span class="line">        implements HeadlinesFragment.OnHeadlineSelectedListener&#123;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    public void onArticleSelected(int position) &#123;</span><br><span class="line">        &#x2F;&#x2F; 用户从从 HeadlinesFragment选中了一个标题</span><br><span class="line">        &#x2F;&#x2F;响应用户的操作，做一些业务逻辑</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public static class MainActivity extends Activity</span><br><span class="line">        implements HeadlinesFragment.OnHeadlineSelectedListener&#123;</span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    public void onArticleSelected(int position) &#123;</span><br><span class="line">        &#x2F;&#x2F; 用户从从 HeadlinesFragment选中了一个标题</span><br><span class="line">        &#x2F;&#x2F;响应用户的操作，做一些业务逻辑</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <p><font size="4"><strong>3. 向其他Fragment传递信息 （完成通信）</strong></font></p>
 <p><font size="4">宿主Activity可以通过findFragmentById()向指定的Fragment传递信息，宿主Activity可以直接获取Fragment实例，回调Fragment的公有方法</font></p>
 <p><font size="4">例如：</font></p>
 <p><font size="4">宿主Activity 包含了一个Listfragment用来展示条目信息，当每个条目被点击的时候，我们希望ListFragment向另外一个DetailsFragment传递一个信息用来 展示不同的细节</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> public static class MainActivity extends Activity</span><br><span class="line">        implements HeadlinesFragment.OnHeadlineSelectedListener&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">     public void onArticleSelected(int position) &#123;</span><br><span class="line">        &#x2F;&#x2F; 用户在 HeadlinesFragment中选中了一个item </span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;在activity中添加新的fragment</span><br><span class="line">        ArticleFragment articleFrag &#x3D; (ArticleFragment)</span><br><span class="line">                getSupportFragmentManager().findFragmentById(R.id.article_fragment);</span><br><span class="line"></span><br><span class="line">        if (articleFrag !&#x3D; null) &#123;</span><br><span class="line">            &#x2F;&#x2F; If article 对象 可以复用, 我们就不需要创建两遍了</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 回调articleFrag 更新</span><br><span class="line">            articleFrag.updateArticleView(position);</span><br><span class="line"></span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            &#x2F;&#x2F; 创建 Fragment 并为其添加一个参数，用来指定应显示的文章</span><br><span class="line">            ArticleFragment newFragment &#x3D; new ArticleFragment();</span><br><span class="line">            Bundle args &#x3D; new Bundle();</span><br><span class="line">            args.putInt(ArticleFragment.ARG_POSITION, position);</span><br><span class="line">            newFragment.setArguments(args);</span><br><span class="line"></span><br><span class="line">            FragmentTransaction transaction &#x3D; getSupportFragmentManager().beginTransaction();</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 将 fragment_container View 时中的内容替换为此 Fragment ，</span><br><span class="line">            &#x2F;&#x2F; 然后将该事务添加到返回堆栈，以便用户可以向后回滚</span><br><span class="line">            transaction.replace(R.id.fragment_container, newFragment);</span><br><span class="line">            int setTransition&#x3D;TRANSIT_FRAGMENT_OPEN;</span><br><span class="line">            transaction.setTransition(setTransition);</span><br><span class="line">            transaction.addToBackStack(null);</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F; 执行事务</span><br><span class="line">            transaction.commit();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> public static class MainActivity extends Activity</span><br><span class="line">        implements HeadlinesFragment.OnHeadlineSelectedListener&#123;</span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">     public void onArticleSelected(int position) &#123;</span><br><span class="line">        &#x2F;&#x2F; 用户在 HeadlinesFragment中选中了一个item </span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;在activity中添加新的fragment</span><br><span class="line">        ArticleFragment articleFrag &#x3D; (ArticleFragment)</span><br><span class="line">                getSupportFragmentManager().findFragmentById(R.id.article_fragment);</span><br><span class="line"></span><br><span class="line">        if (articleFrag !&#x3D; null) &#123;</span><br><span class="line">            &#x2F;&#x2F; If article 对象 可以复用, 我们就不需要创建两遍了</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 回调articleFrag 更新</span><br><span class="line">            articleFrag.updateArticleView(position);</span><br><span class="line"></span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            &#x2F;&#x2F; 创建 Fragment 并为其添加一个参数，用来指定应显示的文章</span><br><span class="line">            ArticleFragment newFragment &#x3D; new ArticleFragment();</span><br><span class="line">            Bundle args &#x3D; new Bundle();</span><br><span class="line">            args.putInt(ArticleFragment.ARG_POSITION, position);</span><br><span class="line">            newFragment.setArguments(args);</span><br><span class="line"></span><br><span class="line">            FragmentTransaction transaction &#x3D; getSupportFragmentManager().beginTransaction();</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 将 fragment_container View 时中的内容替换为此 Fragment ，</span><br><span class="line">            &#x2F;&#x2F; 然后将该事务添加到返回堆栈，以便用户可以向后回滚</span><br><span class="line">            transaction.replace(R.id.fragment_container, newFragment);</span><br><span class="line">            int setTransition&#x3D;TRANSIT_FRAGMENT_OPEN;</span><br><span class="line">            transaction.setTransition(setTransition);</span><br><span class="line">            transaction.addToBackStack(null);</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F; 执行事务</span><br><span class="line">            transaction.commit();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <p><font size="4">下面我写了一个实例来供大家理解：</font></p>
 <p><font size="4">各个类的联系图：</font></p>
 <img src="http://cdn.yangchaofan.cn/通信fragment.jpg">
@@ -627,8 +635,8 @@
 <p><font size="4">主要是如何获得Service实例的问题<br><font size="4">总结来说两步： </font></font></p>
 <ol>
 <li> 在Service定义内部类，继承Binder，封装Service作为内部类的属性，并且在onBind方法中返回内部类的实例对象</li>
-<li> 在Activity中实现ServiceConnection ，获取到Binder对象，再通过Binder获取Service<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class LocalService extends Service &#123;</span><br><span class="line">    &#x2F;&#x2F; 传递给客户端的Binder</span><br><span class="line">    private final IBinder mBinder &#x3D; new LocalBinder();</span><br><span class="line">    &#x2F;&#x2F;构造Random对象</span><br><span class="line">    private final Random mGenerator &#x3D; new Random();</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 这个类提供给客户端  ，因为Service总是运行在同一个进程中的</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public class LocalBinder extends Binder &#123;</span><br><span class="line">        LocalService getService() &#123;</span><br><span class="line">            &#x2F;&#x2F; 当客户端回调的时候，返回LoacalService实例</span><br><span class="line">            return LocalService.this;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public IBinder onBind(Intent intent) &#123;</span><br><span class="line">        return mBinder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**交给客户端回调的方法 *&#x2F;</span><br><span class="line">    public int getRandomNumber() &#123;</span><br><span class="line">      return mGenerator.nextInt(100);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">public class BindingActivity extends Activity &#123;</span><br><span class="line">    LocalService mService;</span><br><span class="line">    boolean mBound &#x3D; false;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.main);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onStart() &#123;</span><br><span class="line">        super.onStart();</span><br><span class="line">        &#x2F;&#x2F; 绑定 LocalService</span><br><span class="line">        Intent intent &#x3D; new Intent(this, LocalService.class);</span><br><span class="line">        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onStop() &#123;</span><br><span class="line">        super.onStop();</span><br><span class="line">        &#x2F;&#x2F; 解绑 service</span><br><span class="line">        if (mBound) &#123;</span><br><span class="line">            unbindService(mConnection);</span><br><span class="line">            mBound &#x3D; false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**button已经通过 android:onClick (attribute) 设置此方法响应用户click*&#x2F;</span><br><span class="line">    public void onButtonClick(View v) &#123;</span><br><span class="line">        if (mBound) &#123;</span><br><span class="line">            &#x2F;&#x2F; 回调 LocalService的方法.</span><br><span class="line">            &#x2F;&#x2F;因为在主线程中刷新UI，可能会造成线程阻塞，这里只是为了测试</span><br><span class="line">            int num &#x3D; mService.getRandomNumber();</span><br><span class="line">            Toast.makeText(this, &quot;number: &quot; + num, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**定义通过bindService 回调的Binder *&#x2F;</span><br><span class="line">    private ServiceConnection mConnection &#x3D; new ServiceConnection() &#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onServiceConnected(ComponentName className,</span><br><span class="line">                IBinder service) &#123;</span><br><span class="line">           &#x2F;&#x2F;先通过Binder获得Service的内部类 LoacalBinder</span><br><span class="line">            LocalBinder binder &#x3D; (LocalBinder) service;</span><br><span class="line">             &#x2F;&#x2F; 现在可以获得service对象了</span><br><span class="line">            mService &#x3D; binder.getService();</span><br><span class="line">            mBound &#x3D; true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onServiceDisconnected(ComponentName arg0) &#123;</span><br><span class="line">            mBound &#x3D; false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li> 在Activity中实现ServiceConnection ，获取到Binder对象，再通过Binder获取Service<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class LocalService extends Service &#123;</span><br><span class="line">    &#x2F;&#x2F; 传递给客户端的Binder</span><br><span class="line">    private final IBinder mBinder &#x3D; new LocalBinder();</span><br><span class="line">    &#x2F;&#x2F;构造Random对象</span><br><span class="line">    private final Random mGenerator &#x3D; new Random();</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 这个类提供给客户端  ，因为Service总是运行在同一个进程中的</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public class LocalBinder extends Binder &#123;</span><br><span class="line">        LocalService getService() &#123;</span><br><span class="line">            &#x2F;&#x2F; 当客户端回调的时候，返回LoacalService实例</span><br><span class="line">            return LocalService.this;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public IBinder onBind(Intent intent) &#123;</span><br><span class="line">        return mBinder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**交给客户端回调的方法 *&#x2F;</span><br><span class="line">    public int getRandomNumber() &#123;</span><br><span class="line">      return mGenerator.nextInt(100);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">public class BindingActivity extends Activity &#123;</span><br><span class="line">    LocalService mService;</span><br><span class="line">    boolean mBound &#x3D; false;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.main);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onStart() &#123;</span><br><span class="line">        super.onStart();</span><br><span class="line">        &#x2F;&#x2F; 绑定 LocalService</span><br><span class="line">        Intent intent &#x3D; new Intent(this, LocalService.class);</span><br><span class="line">        bindService(intent, mConnection, Context.BIND_AUTO_CREATE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onStop() &#123;</span><br><span class="line">        super.onStop();</span><br><span class="line">        &#x2F;&#x2F; 解绑 service</span><br><span class="line">        if (mBound) &#123;</span><br><span class="line">            unbindService(mConnection);</span><br><span class="line">            mBound &#x3D; false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**button已经通过 android:onClick (attribute) 设置此方法响应用户click*&#x2F;</span><br><span class="line">    public void onButtonClick(View v) &#123;</span><br><span class="line">        if (mBound) &#123;</span><br><span class="line">            &#x2F;&#x2F; 回调 LocalService的方法.</span><br><span class="line">            &#x2F;&#x2F;因为在主线程中刷新UI，可能会造成线程阻塞，这里只是为了测试</span><br><span class="line">            int num &#x3D; mService.getRandomNumber();</span><br><span class="line">            Toast.makeText(this, &quot;number: &quot; + num, Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;**定义通过bindService 回调的Binder *&#x2F;</span><br><span class="line">    private ServiceConnection mConnection &#x3D; new ServiceConnection() &#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onServiceConnected(ComponentName className,</span><br><span class="line">                IBinder service) &#123;</span><br><span class="line">           &#x2F;&#x2F;先通过Binder获得Service的内部类 LoacalBinder</span><br><span class="line">            LocalBinder binder &#x3D; (LocalBinder) service;</span><br><span class="line">             &#x2F;&#x2F; 现在可以获得service对象了</span><br><span class="line">            mService &#x3D; binder.getService();</span><br><span class="line">            mBound &#x3D; true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onServiceDisconnected(ComponentName arg0) &#123;</span><br><span class="line">            mBound &#x3D; false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <font size="4">除了这种回调的方式外</font></li>
 </ol>
 <p><font size="4">还有一种方式 是在Service中 发送广播，</font></p>
@@ -662,10 +670,10 @@
 <li><font size="4">提供 onStartCommand() 的默认实现，可将 Intent 依次发送到工作队列和 onHandleIntent() 实现。<br>综上所述，您只需实现 onHandleIntent() 来完成客户端提供的工作即可。（不过，我们还需要为服务提供小型构造函数。）</font></li>
 </ul>
 <p><font size="4"> 以下是 IntentService 的实现示例：</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class HelloIntentService extends IntentService &#123;</span><br><span class="line"></span><br><span class="line">  &#x2F;**</span><br><span class="line">   * 必须有构造函数 必须调用父 IntentService(String)带有name的构造函数来执行工作线程</span><br><span class="line">   *&#x2F;</span><br><span class="line">  public HelloIntentService() &#123;</span><br><span class="line">      super(&quot;HelloIntentService&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &#x2F;**</span><br><span class="line">   * IntentService 调用默认的工作线程启动服务</span><br><span class="line">   * 当此方法结束，, IntentService 服务结束</span><br><span class="line">   *&#x2F;</span><br><span class="line">  @Override</span><br><span class="line">  protected void onHandleIntent(Intent intent) &#123;</span><br><span class="line">      &#x2F;&#x2F; 通常在这里会执行一些操作，比如下载文件</span><br><span class="line">      &#x2F;&#x2F;在这里只是sleep 5 s</span><br><span class="line">      long endTime &#x3D; System.currentTimeMillis() + 5*1000;</span><br><span class="line">      while (System.currentTimeMillis() &lt; endTime) &#123;</span><br><span class="line">          synchronized (this) &#123;</span><br><span class="line">              try &#123;</span><br><span class="line">                  wait(endTime - System.currentTimeMillis());</span><br><span class="line">              &#125; catch (Exception e) &#123;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class HelloIntentService extends IntentService &#123;</span><br><span class="line"></span><br><span class="line">  &#x2F;**</span><br><span class="line">   * 必须有构造函数 必须调用父 IntentService(String)带有name的构造函数来执行工作线程</span><br><span class="line">   *&#x2F;</span><br><span class="line">  public HelloIntentService() &#123;</span><br><span class="line">      super(&quot;HelloIntentService&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &#x2F;**</span><br><span class="line">   * IntentService 调用默认的工作线程启动服务</span><br><span class="line">   * 当此方法结束，, IntentService 服务结束</span><br><span class="line">   *&#x2F;</span><br><span class="line">  @Override</span><br><span class="line">  protected void onHandleIntent(Intent intent) &#123;</span><br><span class="line">      &#x2F;&#x2F; 通常在这里会执行一些操作，比如下载文件</span><br><span class="line">      &#x2F;&#x2F;在这里只是sleep 5 s</span><br><span class="line">      long endTime &#x3D; System.currentTimeMillis() + 5*1000;</span><br><span class="line">      while (System.currentTimeMillis() &lt; endTime) &#123;</span><br><span class="line">          synchronized (this) &#123;</span><br><span class="line">              try &#123;</span><br><span class="line">                  wait(endTime - System.currentTimeMillis());</span><br><span class="line">              &#125; catch (Exception e) &#123;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <p><font size="4">看吧，我们只需要一个构造函数和一个 onHandleIntent() 实现即可。</font></p>
 <p><font size="4">对于Service 当然也有基础一点的做法，来完成多线程的操作，只不过代码量更多了：</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">public class HelloService extends Service &#123;</span><br><span class="line">  private Looper mServiceLooper;</span><br><span class="line">  private ServiceHandler mServiceHandler;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; Handler 接收来自主线程的Message</span><br><span class="line">  private final class ServiceHandler extends Handler &#123;</span><br><span class="line">      public ServiceHandler(Looper looper) &#123;</span><br><span class="line">          super(looper);</span><br><span class="line">      &#125;</span><br><span class="line">      @Override</span><br><span class="line">      public void handleMessage(Message msg) &#123;</span><br><span class="line">         &#x2F;&#x2F;执行任务，比如下载什么的，这里只是 让线程sleep </span><br><span class="line">          long endTime &#x3D; System.currentTimeMillis() + 5*1000;</span><br><span class="line">          while (System.currentTimeMillis() &lt; endTime) &#123;</span><br><span class="line">              synchronized (this) &#123;</span><br><span class="line">                  try &#123;</span><br><span class="line">                      wait(endTime - System.currentTimeMillis());</span><br><span class="line">                  &#125; catch (Exception e) &#123;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          &#x2F;&#x2F; 手动停止服务，来处理下一个线程</span><br><span class="line">          stopSelf(msg.arg1);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public void onCreate() &#123;</span><br><span class="line">    &#x2F;&#x2F;启动线程.  注意我们在主线程中创建了一些子线程, 这些线程都没有加锁同步. 这些现场都是后台线程，所以不会阻塞UI线程</span><br><span class="line">    HandlerThread thread &#x3D; new HandlerThread(&quot;ServiceStartArguments&quot;,</span><br><span class="line">            Process.THREAD_PRIORITY_BACKGROUND);</span><br><span class="line">    thread.start();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Handler开始轮询遍历了</span><br><span class="line">    mServiceLooper &#x3D; thread.getLooper();</span><br><span class="line">    mServiceHandler &#x3D; new ServiceHandler(mServiceLooper);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public int onStartCommand(Intent intent, int flags, int startId) &#123;</span><br><span class="line">      Toast.makeText(this, &quot;service starting&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line"></span><br><span class="line">      &#x2F;&#x2F; 每一次请求，都会通过handler发送Message</span><br><span class="line">      &#x2F;&#x2F; startID只是为了让我们知道正在进行的是哪一个线程，以便于我们停止服务</span><br><span class="line">      Message msg &#x3D; mServiceHandler.obtainMessage();</span><br><span class="line">      msg.arg1 &#x3D; startId;</span><br><span class="line">      mServiceHandler.sendMessage(msg);</span><br><span class="line"></span><br><span class="line">      &#x2F;&#x2F; If we get killed, after returning from here, restart</span><br><span class="line">      return START_STICKY;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public IBinder onBind(Intent intent) &#123;</span><br><span class="line">      &#x2F;&#x2F; 不提供 binding, 所以返回空</span><br><span class="line">      return null;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public void onDestroy() &#123;</span><br><span class="line">    Toast.makeText(this, &quot;service done&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">public class HelloService extends Service &#123;</span><br><span class="line">  private Looper mServiceLooper;</span><br><span class="line">  private ServiceHandler mServiceHandler;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; Handler 接收来自主线程的Message</span><br><span class="line">  private final class ServiceHandler extends Handler &#123;</span><br><span class="line">      public ServiceHandler(Looper looper) &#123;</span><br><span class="line">          super(looper);</span><br><span class="line">      &#125;</span><br><span class="line">      @Override</span><br><span class="line">      public void handleMessage(Message msg) &#123;</span><br><span class="line">         &#x2F;&#x2F;执行任务，比如下载什么的，这里只是 让线程sleep </span><br><span class="line">          long endTime &#x3D; System.currentTimeMillis() + 5*1000;</span><br><span class="line">          while (System.currentTimeMillis() &lt; endTime) &#123;</span><br><span class="line">              synchronized (this) &#123;</span><br><span class="line">                  try &#123;</span><br><span class="line">                      wait(endTime - System.currentTimeMillis());</span><br><span class="line">                  &#125; catch (Exception e) &#123;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          &#x2F;&#x2F; 手动停止服务，来处理下一个线程</span><br><span class="line">          stopSelf(msg.arg1);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public void onCreate() &#123;</span><br><span class="line">    &#x2F;&#x2F;启动线程.  注意我们在主线程中创建了一些子线程, 这些线程都没有加锁同步. 这些现场都是后台线程，所以不会阻塞UI线程</span><br><span class="line">    HandlerThread thread &#x3D; new HandlerThread(&quot;ServiceStartArguments&quot;,</span><br><span class="line">            Process.THREAD_PRIORITY_BACKGROUND);</span><br><span class="line">    thread.start();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Handler开始轮询遍历了</span><br><span class="line">    mServiceLooper &#x3D; thread.getLooper();</span><br><span class="line">    mServiceHandler &#x3D; new ServiceHandler(mServiceLooper);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public int onStartCommand(Intent intent, int flags, int startId) &#123;</span><br><span class="line">      Toast.makeText(this, &quot;service starting&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line"></span><br><span class="line">      &#x2F;&#x2F; 每一次请求，都会通过handler发送Message</span><br><span class="line">      &#x2F;&#x2F; startID只是为了让我们知道正在进行的是哪一个线程，以便于我们停止服务</span><br><span class="line">      Message msg &#x3D; mServiceHandler.obtainMessage();</span><br><span class="line">      msg.arg1 &#x3D; startId;</span><br><span class="line">      mServiceHandler.sendMessage(msg);</span><br><span class="line"></span><br><span class="line">      &#x2F;&#x2F; If we get killed, after returning from here, restart</span><br><span class="line">      return START_STICKY;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public IBinder onBind(Intent intent) &#123;</span><br><span class="line">      &#x2F;&#x2F; 不提供 binding, 所以返回空</span><br><span class="line">      return null;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public void onDestroy() &#123;</span><br><span class="line">    Toast.makeText(this, &quot;service done&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <h1 id="duo-ge-app-jian-de-tong-xin"><a href="#多个App间的通信" class="headerlink" title="多个App间的通信"></a>多个App间的通信<a href="#duo-ge-app-jian-de-tong-xin" class="header-anchor">#</a></h1><p><font size="4">首先我们要知道以下两点：</font></p>
 <ol>
 <li><p>Android 应用一般具有若干个Activity。每个Activity显示一个用户界面，用户可通过该界面执行特定任务（比如，查看地图或拍照）。要将用户从一个Activity转至另一Activity，应用必须使用 Intent 定义做某事的“意向”。 当我们使用诸如 startActivity() 的方法将 Intent 传递至系统时，系统会使用 Intent 识别和启动相应的应用组件。使用意向甚至可以让我们的应用开始另一个应用中包含的Activity。</p>
@@ -677,51 +685,51 @@
 <p><font size="4"><strong>1) 构建隐式的意图</strong> </font></p>
 <p><font size="3">隐式意图不用声明要启动的组件类名称，而是声明操作，比如查看，编辑，发送，或者获取某项。</font></p>
 <p><font size="3"><font size="3">如果您我们的数据是Uri，可以这样构建Intent：</font></font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;当我们的应用通过startActivity()调用此Intent时，电话应用会发起向指定电话号码呼叫</span><br><span class="line">Uri number &#x3D; Uri.parse(&quot;tel:5551234&quot;);</span><br><span class="line">Intent callIntent &#x3D; new Intent(Intent.ACTION_DIAL, number);</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;当我们的应用通过startActivity()调用此Intent时，电话应用会发起向指定电话号码呼叫</span><br><span class="line">Uri number &#x3D; Uri.parse(&quot;tel:5551234&quot;);</span><br><span class="line">Intent callIntent &#x3D; new Intent(Intent.ACTION_DIAL, number);</span><br></pre></td></tr></table></figure></div>
 <p><font size="4">这里还有一些其他Intent的操作和Uri数据对:</font></p>
 <ul>
-<li><font size="3">查看地图：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 基于地址的地图位置</span><br><span class="line">Uri location &#x3D; Uri.parse(&quot;geo:0,0?q&#x3D;1600+Amphitheatre+Parkway,+Mountain+View,+California&quot;);</span><br><span class="line">&#x2F;&#x2F; 基于经纬度的地图位置</span><br><span class="line">&#x2F;&#x2F; Uri location &#x3D; Uri.parse(&quot;geo:37.422219,-122.08364?z&#x3D;14&quot;); &#x2F;&#x2F; z param is zoom level</span><br><span class="line">Intent mapIntent &#x3D; new Intent(Intent.ACTION_VIEW, location);</span><br></pre></td></tr></table></figure></font></li>
+<li><font size="3">查看地图：<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 基于地址的地图位置</span><br><span class="line">Uri location &#x3D; Uri.parse(&quot;geo:0,0?q&#x3D;1600+Amphitheatre+Parkway,+Mountain+View,+California&quot;);</span><br><span class="line">&#x2F;&#x2F; 基于经纬度的地图位置</span><br><span class="line">&#x2F;&#x2F; Uri location &#x3D; Uri.parse(&quot;geo:37.422219,-122.08364?z&#x3D;14&quot;); &#x2F;&#x2F; z param is zoom level</span><br><span class="line">Intent mapIntent &#x3D; new Intent(Intent.ACTION_VIEW, location);</span><br></pre></td></tr></table></figure></div></font></li>
 <li><font size="3">查看网页：</font></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Uri webpage &#x3D; Uri.parse(&quot;http:&#x2F;&#x2F;www.android.com&quot;);</span><br><span class="line">Intent webIntent &#x3D; new Intent(Intent.ACTION_VIEW, webpage);</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Uri webpage &#x3D; Uri.parse(&quot;http:&#x2F;&#x2F;www.android.com&quot;);</span><br><span class="line">Intent webIntent &#x3D; new Intent(Intent.ACTION_VIEW, webpage);</span><br></pre></td></tr></table></figure></div>
 <p>有的同学会问了，我从哪里可以知道，Intent可以传递的 Uri的类型，或者其他数据类型呢？<br>答：可以查阅<a target="_blank" rel="noopener" href="https://developer.android.com/reference/android/content/Intent.html#ACTION_VIEW">Google Intent的Api</a></p>
 <p><font size="4"><strong>2) 确认是否存在 接收意向的应用</strong> </font></p>
 <blockquote>
 <p>注意：如果调用了意向，但设备上没有可用于处理意向的应用，我们的应用将崩溃。 </p>
 </blockquote>
 <p>要确认是否存在可响应意向的可用Activity，请调用 queryIntentActivities() 来获取能够处理ntent 的Activity列表。 如果返回的 List 不为空，则可以安全地使用该意向。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PackageManager packageManager &#x3D; getPackageManager();</span><br><span class="line">List activities &#x3D; packageManager.queryIntentActivities(intent,</span><br><span class="line">        PackageManager.MATCH_DEFAULT_ONLY);</span><br><span class="line">boolean isIntentSafe &#x3D; activities.size() &gt; 0;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PackageManager packageManager &#x3D; getPackageManager();</span><br><span class="line">List activities &#x3D; packageManager.queryIntentActivities(intent,</span><br><span class="line">        PackageManager.MATCH_DEFAULT_ONLY);</span><br><span class="line">boolean isIntentSafe &#x3D; activities.size() &gt; 0;</span><br></pre></td></tr></table></figure></div>
 <p>如果 isIntentSafe 是 true，则至少有一个应用将响应该意向。 如果它是 false，则没有任何应用处理该意向。</p>
 <p><font size="4"><strong>3) 启动指定Activity</strong></font></p>
 <p> 当我指定意图后，通过startActivity(intent);就可以启动指定Activity<br>此处有一个Google官方的示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 构建Intent</span><br><span class="line">Uri location &#x3D; Uri.parse(&quot;geo:0,0?q&#x3D;1600+Amphitheatre+Parkway,+Mountain+View,+California&quot;);</span><br><span class="line">Intent mapIntent &#x3D; new Intent(Intent.ACTION_VIEW, location);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 确定意图可以被接收</span><br><span class="line">PackageManager packageManager &#x3D; getPackageManager();</span><br><span class="line">List&lt;ResolveInfo&gt; activities &#x3D; packageManager.queryIntentActivities(mapIntent, 0);</span><br><span class="line">boolean isIntentSafe &#x3D; activities.size() &gt; 0;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;启动指定应用</span><br><span class="line">if (isIntentSafe) &#123;</span><br><span class="line">    startActivity(mapIntent);</span><br><span class="line">&#125;</span><br><span class="line">显</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 构建Intent</span><br><span class="line">Uri location &#x3D; Uri.parse(&quot;geo:0,0?q&#x3D;1600+Amphitheatre+Parkway,+Mountain+View,+California&quot;);</span><br><span class="line">Intent mapIntent &#x3D; new Intent(Intent.ACTION_VIEW, location);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 确定意图可以被接收</span><br><span class="line">PackageManager packageManager &#x3D; getPackageManager();</span><br><span class="line">List&lt;ResolveInfo&gt; activities &#x3D; packageManager.queryIntentActivities(mapIntent, 0);</span><br><span class="line">boolean isIntentSafe &#x3D; activities.size() &gt; 0;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;启动指定应用</span><br><span class="line">if (isIntentSafe) &#123;</span><br><span class="line">    startActivity(mapIntent);</span><br><span class="line">&#125;</span><br><span class="line">显</span><br></pre></td></tr></table></figure></div>
 <p><font size="4"><strong>4) 显示应用选择器</strong></font></p>
 <p>比如我们要完成”分享操作“，用户可以使用多个App完成分享，我们应明确显示 选择器对话框，如图<a target="_blank" rel="noopener" href="https://developer.android.com/images/training/basics/intent-chooser.png">这里写链接内容</a></p>
 <p>要显示选择器，需要使用Intent的createChooser()方法 创建Intent，并将其传递至startActivity()</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Intent intent &#x3D; new Intent(Intent.ACTION_SEND);</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">String title &#x3D; getResources().getString(R.string.chooser_title);</span><br><span class="line">&#x2F;&#x2F; Create intent to show chooser</span><br><span class="line">Intent chooser &#x3D; Intent.createChooser(intent, title);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Verify the intent will resolve to at least one activity</span><br><span class="line">if (intent.resolveActivity(getPackageManager()) !&#x3D; null) &#123;</span><br><span class="line">    startActivity(chooser);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Intent intent &#x3D; new Intent(Intent.ACTION_SEND);</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">String title &#x3D; getResources().getString(R.string.chooser_title);</span><br><span class="line">&#x2F;&#x2F; Create intent to show chooser</span><br><span class="line">Intent chooser &#x3D; Intent.createChooser(intent, title);</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Verify the intent will resolve to at least one activity</span><br><span class="line">if (intent.resolveActivity(getPackageManager()) !&#x3D; null) &#123;</span><br><span class="line">    startActivity(chooser);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <p>这将显示一个对话框，其中有响应传递给 createChooser() 方法的意向的应用列表，并且将提供的文本用作 对话框标题</p>
 <p><strong><font size="4">2. 接收其他Activity返回的结果</font></strong></p>
 <p><font size="3">通过Intent.startActivityForResult()来完成。</font></p>
 <p> <font size="3">首先在启动另一个Activity时，我们需要指定request code以便返回结果时，我们可以正常处理它。</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">static final int PICK_CONTACT_REQUEST &#x3D; 1;  &#x2F;&#x2F; The request code</span><br><span class="line">...</span><br><span class="line">private void pickContact() &#123;</span><br><span class="line">    Intent pickContactIntent &#x3D; new Intent(Intent.ACTION_PICK, Uri.parse(&quot;content:&#x2F;&#x2F;contacts&quot;));</span><br><span class="line">    pickContactIntent.setType(Phone.CONTENT_TYPE); </span><br><span class="line">    startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">static final int PICK_CONTACT_REQUEST &#x3D; 1;  &#x2F;&#x2F; The request code</span><br><span class="line">...</span><br><span class="line">private void pickContact() &#123;</span><br><span class="line">    Intent pickContactIntent &#x3D; new Intent(Intent.ACTION_PICK, Uri.parse(&quot;content:&#x2F;&#x2F;contacts&quot;));</span><br><span class="line">    pickContactIntent.setType(Phone.CONTENT_TYPE); </span><br><span class="line">    startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <p><font size="3">当用户完成操作后，返回数据，系统会调用Activity的 onActivityResult()方法，</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">    &#x2F;&#x2F; 检查requestCode是否真确</span><br><span class="line">    if (requestCode &#x3D;&#x3D; PICK_CONTACT_REQUEST) &#123;</span><br><span class="line">        &#x2F;&#x2F; 确保请求时成功的</span><br><span class="line">        if (resultCode &#x3D;&#x3D; RESULT_OK) &#123;</span><br><span class="line">           &#x2F;&#x2F;完成我们的业务逻辑</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">    &#x2F;&#x2F; 检查requestCode是否真确</span><br><span class="line">    if (requestCode &#x3D;&#x3D; PICK_CONTACT_REQUEST) &#123;</span><br><span class="line">        &#x2F;&#x2F; 确保请求时成功的</span><br><span class="line">        if (resultCode &#x3D;&#x3D; RESULT_OK) &#123;</span><br><span class="line">           &#x2F;&#x2F;完成我们的业务逻辑</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <blockquote>
 <p>为了成功处理结果，我们必须了解Intent的格式，比如联系人返回的是带内容的URI，照相机返回的是Bitmap</p>
 </blockquote>
 <p><font size="3">如何根据返回的URI来读取数据，我们需要对ContentResolver 和 ContentProvider 有了解</font></p>
 <p><font size="3">下面就是一个三者结合的获取联系人的实例：</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">    &#x2F;&#x2F; 检查requestCode</span><br><span class="line">    if (requestCode &#x3D;&#x3D; PICK_CONTACT_REQUEST) &#123;</span><br><span class="line">        &#x2F;&#x2F; 确保请求成功</span><br><span class="line">        if (resultCode &#x3D;&#x3D; RESULT_OK) &#123;</span><br><span class="line">            &#x2F;&#x2F;获得选择的联系人的URI</span><br><span class="line">            Uri contactUri &#x3D; data.getData();</span><br><span class="line">            &#x2F;&#x2F; 我们只需要NUMBER这一列的信息，</span><br><span class="line">            String[] projection &#x3D; &#123;Phone.NUMBER&#125;;</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 显示根据NUMBER查询的结果</span><br><span class="line">            &#x2F;&#x2F; We don&#39;t need a selection or sort order (there&#39;s only one result for the given URI)</span><br><span class="line">            &#x2F;&#x2F; 在这里我们并没有对查询的结果进行排序，因为在主线程中进行这种数据库操作，有可能阻塞线程</span><br><span class="line">            &#x2F;&#x2F;优化方案是异步完成排序的操作，这里只是展示多个App间的通信</span><br><span class="line">            Cursor cursor &#x3D; getContentResolver()</span><br><span class="line">                    .query(contactUri, projection, null, null, null);</span><br><span class="line">            cursor.moveToFirst();</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;从NUMBER那一列当中取回phone NUMBER</span><br><span class="line">            int column &#x3D; cursor.getColumnIndex(Phone.NUMBER);</span><br><span class="line">            String number &#x3D; cursor.getString(column);</span><br><span class="line">			&#x2F;&#x2F;接下来就是要操作这些phone number了</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onActivityResult(int requestCode, int resultCode, Intent data) &#123;</span><br><span class="line">    &#x2F;&#x2F; 检查requestCode</span><br><span class="line">    if (requestCode &#x3D;&#x3D; PICK_CONTACT_REQUEST) &#123;</span><br><span class="line">        &#x2F;&#x2F; 确保请求成功</span><br><span class="line">        if (resultCode &#x3D;&#x3D; RESULT_OK) &#123;</span><br><span class="line">            &#x2F;&#x2F;获得选择的联系人的URI</span><br><span class="line">            Uri contactUri &#x3D; data.getData();</span><br><span class="line">            &#x2F;&#x2F; 我们只需要NUMBER这一列的信息，</span><br><span class="line">            String[] projection &#x3D; &#123;Phone.NUMBER&#125;;</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F; 显示根据NUMBER查询的结果</span><br><span class="line">            &#x2F;&#x2F; We don&#39;t need a selection or sort order (there&#39;s only one result for the given URI)</span><br><span class="line">            &#x2F;&#x2F; 在这里我们并没有对查询的结果进行排序，因为在主线程中进行这种数据库操作，有可能阻塞线程</span><br><span class="line">            &#x2F;&#x2F;优化方案是异步完成排序的操作，这里只是展示多个App间的通信</span><br><span class="line">            Cursor cursor &#x3D; getContentResolver()</span><br><span class="line">                    .query(contactUri, projection, null, null, null);</span><br><span class="line">            cursor.moveToFirst();</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;从NUMBER那一列当中取回phone NUMBER</span><br><span class="line">            int column &#x3D; cursor.getColumnIndex(Phone.NUMBER);</span><br><span class="line">            String number &#x3D; cursor.getString(column);</span><br><span class="line">			&#x2F;&#x2F;接下来就是要操作这些phone number了</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <p><strong><font size="4">3. 接收其他Activity返回的结果</font></strong></p>
 <p>要允许其他应用开始您的Activity，需要 <intent-filter> 在相应元素的宣示说明文件中添加一个 <activity> 元素。</activity></intent-filter></p>
 <p>例如，此处有一个在数据类型为文本或图像时处理 ACTION_SEND 意向的意向过滤器：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity android:name&#x3D;&quot;ShareActivity&quot;&gt;</span><br><span class="line">    &lt;intent-filter&gt;</span><br><span class="line">        &lt;action android:name&#x3D;&quot;android.intent.action.SEND&quot;&#x2F;&gt;</span><br><span class="line">        &lt;category android:name&#x3D;&quot;android.intent.category.DEFAULT&quot;&#x2F;&gt;</span><br><span class="line">        &lt;data android:mimeType&#x3D;&quot;text&#x2F;plain&quot;&#x2F;&gt;</span><br><span class="line">        &lt;data android:mimeType&#x3D;&quot;image&#x2F;*&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;intent-filter&gt;</span><br><span class="line">&lt;&#x2F;activity&gt;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity android:name&#x3D;&quot;ShareActivity&quot;&gt;</span><br><span class="line">    &lt;intent-filter&gt;</span><br><span class="line">        &lt;action android:name&#x3D;&quot;android.intent.action.SEND&quot;&#x2F;&gt;</span><br><span class="line">        &lt;category android:name&#x3D;&quot;android.intent.category.DEFAULT&quot;&#x2F;&gt;</span><br><span class="line">        &lt;data android:mimeType&#x3D;&quot;text&#x2F;plain&quot;&#x2F;&gt;</span><br><span class="line">        &lt;data android:mimeType&#x3D;&quot;image&#x2F;*&quot;&#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;intent-filter&gt;</span><br><span class="line">&lt;&#x2F;activity&gt;</span><br></pre></td></tr></table></figure></div>
 <p><action>定义操作，通常是系统定义的值之一，比如ACTION_SEND 或 ACTION_VIEW。<br><data>定义与Intent关联的数据，只需通过 android:mimeType 指定我们接收的数据类型，比如text/plain 或 image/jpeg。<br><category>所有的隐式Intent，都使用 CATEGORY_DEFAULT 进行定义</category></data></action></p>
 <p><strong><font size="4">4. 处理Activity中的Intent</font></strong></p>
 <p><font size="3">当Activity开始时，调用getIntent检索开始Activity的Intent，</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    super.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">    setContentView(R.layout.main);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Intent intent &#x3D; getIntent();</span><br><span class="line">    Uri data &#x3D; intent.getData();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 指出接收的数据类型</span><br><span class="line">    if (intent.getType().indexOf(&quot;image&#x2F;&quot;) !&#x3D; -1) &#123;</span><br><span class="line">        &#x2F;&#x2F; 处理带有图片的Intent</span><br><span class="line">    &#125; else if (intent.getType().equals(&quot;text&#x2F;plain&quot;)) &#123;</span><br><span class="line">        &#x2F;&#x2F; 处理带有文本的Intent</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    super.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">    setContentView(R.layout.main);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    Intent intent &#x3D; getIntent();</span><br><span class="line">    Uri data &#x3D; intent.getData();</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 指出接收的数据类型</span><br><span class="line">    if (intent.getType().indexOf(&quot;image&#x2F;&quot;) !&#x3D; -1) &#123;</span><br><span class="line">        &#x2F;&#x2F; 处理带有图片的Intent</span><br><span class="line">    &#125; else if (intent.getType().equals(&quot;text&#x2F;plain&quot;)) &#123;</span><br><span class="line">        &#x2F;&#x2F; 处理带有文本的Intent</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <p><strong><font size="4">5. 向指定Activity中返回数据</font></strong><br><font size="3">只需调用setResult指定结果代码和Intent</font></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent result &#x3D; new Intent(&quot;com.example.RESULT_ACTION&quot;, Uri.parse(&quot;content:&#x2F;&#x2F;result_uri&quot;);</span><br><span class="line">setResult(Activity.RESULT_OK, result);</span><br><span class="line">finish();</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent result &#x3D; new Intent(&quot;com.example.RESULT_ACTION&quot;, Uri.parse(&quot;content:&#x2F;&#x2F;result_uri&quot;);</span><br><span class="line">setResult(Activity.RESULT_OK, result);</span><br><span class="line">finish();</span><br></pre></td></tr></table></figure></div>
 <p><font size="3">记住必须为结果指定结果码，通常为 RESULT_OK 或 RESULT_CANCELED。</font></p>
 <p><font size="3">我们也可以在Intent中 用Bundle存储额外的信息</font></p>
 <p><font size="3">细心的同学可能发现一个问题： </font></p>
@@ -742,15 +750,15 @@
 
 <p><strong><font size="5">2)使用方式：</font></strong></p>
 <ul>
-<li>build.gradle 中加入依赖<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile &#39;org.greenrobot:eventbus:3.0.0&#39;</span><br></pre></td></tr></table></figure></li>
+<li>build.gradle 中加入依赖<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile &#39;org.greenrobot:eventbus:3.0.0&#39;</span><br></pre></td></tr></table></figure></div></li>
 <li>代码中指需三步 </li>
 </ul>
 <p><strong><font size="3">1.  定义事件：只需要是一个Java类</font></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  public class MessageEvent &#123;</span><br><span class="line">    public final String message;</span><br><span class="line"></span><br><span class="line">    public MessageEvent(String message) &#123;</span><br><span class="line">        this.message &#x3D; message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  public class MessageEvent &#123;</span><br><span class="line">    public final String message;</span><br><span class="line"></span><br><span class="line">    public MessageEvent(String message) &#123;</span><br><span class="line">        this.message &#x3D; message;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <p>   <strong><font size="3">2.  完成订阅者</font></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;MessageEvent被Eventbus post提交的时候 将会回调这个方法</span><br><span class="line">&#x2F;&#x2F;这种方式 提示我们可以直接定义自己的事件</span><br><span class="line">@Subscribe</span><br><span class="line">public void onMessageEvent(MessageEvent event)&#123;</span><br><span class="line">    Toast.makeText(getActivity(), event.message, Toast.LENGTH_SHORT).show();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 当一些其他事件post提交的时候，回调这个方法</span><br><span class="line">@Subscribe</span><br><span class="line">public void handleSomethingElse(SomeOtherEvent event)&#123;</span><br><span class="line">    doSomethingWith(event);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;MessageEvent被Eventbus post提交的时候 将会回调这个方法</span><br><span class="line">&#x2F;&#x2F;这种方式 提示我们可以直接定义自己的事件</span><br><span class="line">@Subscribe</span><br><span class="line">public void onMessageEvent(MessageEvent event)&#123;</span><br><span class="line">    Toast.makeText(getActivity(), event.message, Toast.LENGTH_SHORT).show();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 当一些其他事件post提交的时候，回调这个方法</span><br><span class="line">@Subscribe</span><br><span class="line">public void handleSomethingElse(SomeOtherEvent event)&#123;</span><br><span class="line">    doSomethingWith(event);</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
 <p>在Activity或者Fragment中绑定订阅者</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onStart() &#123;</span><br><span class="line">    super.onStart();</span><br><span class="line">    EventBus.getDefault().register(this);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onStop() &#123;</span><br><span class="line">   EventBus.getDefault().unregister(this);</span><br><span class="line">    super.onStop();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onStart() &#123;</span><br><span class="line">    super.onStart();</span><br><span class="line">    EventBus.getDefault().register(this);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onStop() &#123;</span><br><span class="line">   EventBus.getDefault().unregister(this);</span><br><span class="line">    super.onStop();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <p><strong><font size="3">3.  发布事件：</font></strong></p>
 <pre><code>​```
 EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
@@ -775,14 +783,120 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
 <li><a target="_blank" rel="noopener" href="http://greenrobot.org/eventbus/documentation/">EventBus官方文档</a></li>
 </ol>
 </font>
+
+        
+
       
     </div>
+
+      <!-- 相关文章推荐 -->
+     
+          
+
+  <div class="popular-posts-header">
+    <i class="fa fa-graduation-cap"></i>
+    相关文章
+  </div>
+
+ <details>
+   <summary>点击查看</summary>
+     <ul class="popular-posts">
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2021\02\mtk-log\" rel="bookmark">mtk-log</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2021\02\android-bugfree-three-lines\" rel="bookmark">BugFree三剑客异常、日志、工具</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2020\08\handler TOP 100 Questions\" rel="bookmark">AndroidHandler百问百答</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2016\06\performance-android\" rel="bookmark">Android性能优化【史诗巨著之内存篇】</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2016\04\Android-TOP-100-Program\" rel="bookmark">Android 百大框架排行榜</a></div>
+         
+       </li>
+     
+     </ul>
+ </details>
+
+
+
+     
+
     
     
     
 
+    <div>
+          
+            
+
+          
+    </div>
+
     
 
+    <div>
+      
+        <div>
+    
+        <div class="read-over">-------------------本文结束 <i class="fa fa-paw"></i> 感谢您的阅读-------------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+      <div>
+        <div class="share_reward">
+  <div>坚持原创技术分享，感谢您的支持和鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
     
 
     
@@ -791,9 +905,9 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
       
         <div class="post-tags">
           
-            <a href="/blog/tags/Android/" rel="tag"># Android</a>
+            <a href="/blog/tags/Android/" rel="tag"> <i class="fa fa-tag"></i> Android</a>
           
-            <a href="/blog/tags/Communication/" rel="tag"># Communication</a>
+            <a href="/blog/tags/Communication/" rel="tag"> <i class="fa fa-tag"></i> Communication</a>
           
         </div>
       
@@ -802,13 +916,16 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
       
         <div class="post-widgets">
         
-          <div class="wp_rating">
-            <div id="wpac-rating"></div>
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
           </div>
-        
-
-        
-
         
         </div>
       
@@ -818,8 +935,8 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2016/06/performance-android/" rel="next" title="Android性能优化【史诗巨著之内存篇】">
-                <i class="fa fa-chevron-left"></i> Android性能优化【史诗巨著之内存篇】
+              <a href="/blog/2016/06/five-sort-algorithm/" rel="prev" title="详解五大排序算法">
+                <i class="fa fa-chevron-left"></i> 详解五大排序算法
               </a>
             
           </div>
@@ -828,8 +945,8 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2016/06/five-sort-algorithm/" rel="prev" title="详解五大排序算法">
-                详解五大排序算法 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2016/06/performance-android/" rel="next" title="Android性能优化【史诗巨著之内存篇】">
+                Android性能优化【史诗巨著之内存篇】 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -850,40 +967,30 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
     <div class="post-spread">
       
         
-  <div class="bdsharebuttonbox">
-    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
-    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
-    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
-    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
-    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
-    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
-    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
-    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
-    <a href="#" class="bds_more" data-cmd="more"></a>
-    <a class="bds_count" data-cmd="count"></a>
-  </div>
   <script>
     window._bd_share_config = {
       "common": {
         "bdText": "",
-        "bdMini": "2",
+        "bdMini": "1",
         "bdMiniList": false,
         "bdPic": ""
-      },
-      "share": {
-        "bdSize": "16",
-        "bdStyle": "0"
       },
       "image": {
         "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
         "viewText": "分享到：",
         "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
       }
     }
   </script>
 
 <script>
-  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+//  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+//    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
 </script>
 
       
@@ -899,15 +1006,10 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
 
   
     <div class="comments" id="comments">
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a target="_blank" rel="noopener" href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
-        </noscript>
-      </div>
     </div>
-
   
+
+
 
 
 
@@ -924,6 +1026,8 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
     
     <div class="sidebar-inner">
 
@@ -944,9 +1048,11 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <a href="/">
               <img class="site-author-image" itemprop="image"
-                src="/blog/images/avatar.jpg"
+                src="/blog/images/head.png"
                 alt="" />
+              </a>
             
               <p class="site-author-name" itemprop="name"></p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -957,10 +1063,10 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
             
               <div class="site-state-item site-state-posts">
               
-                <a href="/blog/archives/%7C%7C%20archive">
+                <a href="/blog/archives/%20%7C%7C%20archive">
               
                   <span class="site-state-item-count">15</span>
-                  <span class="site-state-item-name">日志</span>
+                  <span class="site-state-item-name">文章</span>
                 </a>
               </div>
             
@@ -990,61 +1096,387 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
           </nav>
 
           
+            <div class="feed-link motion-element">
+              <a href="/blog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+              <!-- 为Hexo Next主题添加哈林摇特效  -->
+              <a title="收藏到书签，偶尔High一下^_^" rel="alternate" class="mw-harlem_shake_slow wobble shake" href="javascript:void(0)" onclick="javascript:(function go() {function c() {var e = document.createElement('link');e.setAttribute('type', 'text/css');e.setAttribute('rel', 'stylesheet');e.setAttribute('href', f);e.setAttribute('class', l);document.body.appendChild(e)}function h(){var e = document.getElementsByClassName(l);for(var t = 0; t< e.length; t++){document.body.removeChild(e[t])}}function p(){var e = document.createElement('div');e.setAttribute('class', a);document.body.appendChild(e);setTimeout(function(){document.body.removeChild(e)},100)}function d(e){return{height:e.offsetHeight,width:e.offsetWidth}}function v(i){var s = d(i);return s.height>e &amp;&amp;s.height<n &amp;&amp; s.width>t &amp;&amp;s.width<r}function m(e){var t=e;var n=0;while(!!t){n+=t.offsetTop;t=t.offsetParent}return n}function g(){var e=document.documentElement;if(!!window.innerWidth){return window.innerHeight}else if(e &amp;&amp; !isNaN(e.clientHeight)){return e.clientHeight}return 0}function y(){if(window.pageYOffset){return window.pageYOffset}return Math.max(document.documentElement.scrollTop,document.body.scrollTop)}function E(e){var t=m(e);return t>=w &amp;&amp; t<=b+w}var songs=['https://www.liaofuzhan.com/music/无尽光芒.mp3'];function S(){var e=document.getElementById('audio_element_id');if(e!=null){var index=parseInt(e.getAttribute('curSongIndex'));if(index>songs.length-2){index=0;}else{index++;}e.setAttribute('curSongIndex',index);N();}e.src=i;e.play()}function x(e){e.className+=' '+s+' '+o}function T(e){e.className+=' '+s+' '+u[Math.floor(Math.random()*u.length)]}function N(){var e=document.getElementsByClassName(s);var t=new RegExp('\\b'+s+'\\b');for(var n=0;n<e.length;){e[n].className=e[n].className.replace(t,'')}}function initAudioEle(){var e=document.getElementById('audio_element_id');if(e===null){e=document.createElement('audio');e.setAttribute('class',l);e.setAttribute('curSongIndex',0);e.id='audio_element_id';e.loop=false;e.bgcolor=0;e.addEventListener('canplay',function(){setTimeout(function(){x(k)},500);setTimeout(function(){N();p();for(var e=0;e<O.length;e++){T(O[e])}},15500)},true);e.addEventListener('ended',function(){N();h();go();},true);e.innerHTML='<p>If you are reading this,it is because your browser does not support the audio element. We recommend that you get a new browser.</p><p>';document.body.appendChild(e);}}initAudioEle();var e=30;var t=30;var n=350;var r=350;var curSongIndex=parseInt(document.getElementById('audio_element_id').getAttribute('curSongIndex'));var i=songs[curSongIndex];var s='mw-harlem_shake_me';var o='im_first';var u=['im_drunk','im_baked','im_trippin','im_blown'];var a='mw-strobe_light';var f='https://s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css';var l='mw_added_css';var b=g();var w=y();var C=document.getElementsByTagName('*');var k=null;for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){if(E(A)){k=A;break}}}if(A===null){console.warn('Could not find a node of the right size. Please try a different page.');return}c();S();var O=[];for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){O.push(A)}}})()"><i class="fa fa-music"></i> High~</a>
+
+            </div>
+          
 
           
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://github.com/ShaunSheep" target="_blank" title="GitHub">
+                    <a rel="external nofollow" href="https://github.com/ShaunSheep" target="_blank" title="GitHub">
                       
-                        <i class="fa fa-fw fa-globe"></i>GitHub</a>
+                        <i class="fa fa-fw fa-github"></i></a>
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="https://www.douban.com/people/jincheng-ycf/" target="_blank" title="豆瓣">
+                    <a rel="external nofollow" href="mailto:zuogewoniu@qq.com" target="_blank" title="E-Mail">
                       
-                        <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                        <i class="fa fa-fw fa-envelope"></i></a>
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="https://www.zhihu.com/people/OscarWildeHawking" target="_blank" title="知乎">
+                    <a rel="external nofollow" href="https://www.douban.com/people/jincheng-ycf/" target="_blank" title="豆瓣">
                       
-                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                        <i class="fa fa-fw fa-stack-overflow"></i></a>
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="http://yangchaofan.cn" target="_blank" title="首页">
+                    <a rel="external nofollow" href="https://www.zhihu.com/people/OscarWildeHawking" target="_blank" title="知乎">
                       
-                        <i class="fa fa-fw fa-globe"></i>首页</a>
+                        <i class="fa fa-fw fa-instagram"></i></a>
                   </span>
                 
             </div>
           
 
+            <!--
+            <div id="music163player">
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1336790004&auto=1&height=66"></iframe>
+            </div>
+            -->
+
           
           
 
           
           
-            <div class="links-of-blogroll motion-element links-of-blogroll-block">
-              <div class="links-of-blogroll-title">
-                <i class="fa  fa-fw fa-globe"></i>
-                Links
+
+          <!--近期文章版块 began-->
+          
+              <div class="links-of-blogroll motion-element links-of-blogroll-block">
+                <div class="links-of-blogroll-title">
+                  <i class="fa fa-history fa-" aria-hidden="true"></i>
+                  近期文章
+                </div>
+                <ul class="links-of-blogroll-list">
+                  
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/02/mtk-log/" title="mtk-log" target="_blank">mtk-log</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/02/android-bugfree-three-lines/" title="BugFree三剑客异常、日志、工具" target="_blank">BugFree三剑客异常、日志、工具</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/02/learn-relovation-notes/" title="《学习革命解读》心得" target="_blank">《学习革命解读》心得</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/02/super-learn-skills/" title="《高效学习方法全集》日记" target="_blank">《高效学习方法全集》日记</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/02/talk-about-learn-skills/" title="谈一谈学习法" target="_blank">谈一谈学习法</a>
+                    </li>
+                  
+                </ul>
               </div>
-              <ul class="links-of-blogroll-list">
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="/blog/my-collections.html" title="my-collections" target="_blank">my-collections</a>
-                  </li>
-                
-                  <li class="links-of-blogroll-item">
-                    <a href="https://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read" title="stack-overflow" target="_blank">stack-overflow</a>
-                  </li>
-                
-              </ul>
-            </div>
           
+          <!--近期文章版块 end-->
 
+          
+              <!-- canvas粒子时钟 -->
+              <!-- canvas粒子时钟 https://www.cnblogs.com/xiaohuochai/p/6368039.html
+  https://www.html5tricks.com/html5-canvas-dance-time.html
+ -->
+<div id="">
+  <canvas id="canvas" style="width:60%;">
+</div>
+<script async>
+(function(){
+  var WINDOW_WIDTH = 820;
+  		var WINDOW_HEIGHT = 250;
+  		var RADIUS = 7; //球半径
+  		var NUMBER_GAP = 10; //数字之间的间隙
+  		var u=0.65; //碰撞能量损耗系数
+  		var context; //Canvas绘制上下文
+  		var balls = []; //存储彩色的小球
+  		const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]; //彩色小球的颜色
+  		var currentNums = []; //屏幕显示的8个字符
+  		var digit =
+                  [
+                      [
+                          [0,0,1,1,1,0,0],
+                          [0,1,1,0,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,0,1,1,0],
+                          [0,0,1,1,1,0,0]
+                      ],//0
+                      [
+                          [0,0,0,1,1,0,0],
+                          [0,1,1,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [1,1,1,1,1,1,1]
+                      ],//1
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,1,1,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,1,1,1,1,1]
+                      ],//2
+                      [
+                          [1,1,1,1,1,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,1,0,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//3
+                      [
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,1,0],
+                          [0,0,1,1,1,1,0],
+                          [0,1,1,0,1,1,0],
+                          [1,1,0,0,1,1,0],
+                          [1,1,1,1,1,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,1,1]
+                      ],//4
+                      [
+                          [1,1,1,1,1,1,1],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,1,1,1,1,0],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//5
+                      [
+                          [0,0,0,0,1,1,0],
+                          [0,0,1,1,0,0,0],
+                          [0,1,1,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//6
+                      [
+                          [1,1,1,1,1,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0]
+                      ],//7
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//8
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,1,1,0,0,0,0]
+                      ],//9
+                      [
+                          [0,0,0,0],
+                          [0,0,0,0],
+                          [0,1,1,0],
+                          [0,1,1,0],
+                          [0,0,0,0],
+                          [0,0,0,0],
+                          [0,1,1,0],
+                          [0,1,1,0],
+                          [0,0,0,0],
+                          [0,0,0,0]
+                      ]//:
+                  ];
+
+  		function drawDatetime(cxt){
+  			var nums = [];
+
+  			context.fillStyle="#005eac"
+  			var date = new Date();
+  			var offsetX = 70, offsetY = 30;
+  			var hours = date.getHours();
+  			var num1 = Math.floor(hours/10);
+  			var num2 = hours%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+  			nums.push({num: 10}); //冒号
+  			var minutes = date.getMinutes();
+  			var num1 = Math.floor(minutes/10);
+  			var num2 = minutes%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+  			nums.push({num: 10}); //冒号
+  			var seconds = date.getSeconds();
+  			var num1 = Math.floor(seconds/10);
+  			var num2 = seconds%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+
+  			for(var x = 0;x<nums.length;x++){
+  				nums[x].offsetX = offsetX;
+  				offsetX = drawSingleNumber(offsetX,offsetY, nums[x].num,cxt);
+  				//两个数字连一块，应该间隔一些距离
+  				if(x<nums.length-1){
+  					if((nums[x].num!=10) &&(nums[x+1].num!=10)){
+  						offsetX+=NUMBER_GAP;
+  					}
+  				}
+  			}
+
+  			//说明这是初始化
+  			if(currentNums.length ==0){
+  				currentNums = nums;
+  			}else{
+  				//进行比较
+  				for(var index = 0;index<currentNums.length;index++){
+  					if(currentNums[index].num!=nums[index].num){
+  						//不一样时，添加彩色小球
+  						addBalls(nums[index]);
+  						currentNums[index].num=nums[index].num;
+  					}
+  				}
+  			}
+  			renderBalls(cxt);
+  			updateBalls();
+
+  			return date;
+  		}
+
+  		function addBalls (item) {
+  			var num = item.num;
+  			var numMatrix = digit[num];
+  			for(var y = 0;y<numMatrix.length;y++){
+  				for(var x = 0;x<numMatrix[y].length;x++){
+  					if(numMatrix[y][x]==1){
+  						var ball={
+  							offsetX:item.offsetX+RADIUS+RADIUS*2*x,
+  							offsetY:30+RADIUS+RADIUS*2*y,
+  							color:colors[Math.floor(Math.random()*colors.length)],
+  							g:1.5+Math.random(),
+  							vx:Math.pow(-1, Math.ceil(Math.random()*10))*4+Math.random(),
+  							vy:-5
+  						}
+  						balls.push(ball);
+  					}
+  				}
+  			}
+  		}
+
+  		function renderBalls(cxt){
+  			for(var index = 0;index<balls.length;index++){
+  				cxt.beginPath();
+  				cxt.fillStyle=balls[index].color;
+  				cxt.arc(balls[index].offsetX, balls[index].offsetY, RADIUS, 0, 2*Math.PI);
+  				cxt.fill();
+  			}
+  		}
+
+  		function updateBalls () {
+  			var i =0;
+  			for(var index = 0;index<balls.length;index++){
+  				var ball = balls[index];
+  				ball.offsetX += ball.vx;
+  				ball.offsetY += ball.vy;
+  				ball.vy+=ball.g;
+  				if(ball.offsetY > (WINDOW_HEIGHT-RADIUS)){
+  					ball.offsetY= WINDOW_HEIGHT-RADIUS;
+  					ball.vy=-ball.vy*u;
+  				}
+  				if(ball.offsetX>RADIUS&&ball.offsetX<(WINDOW_WIDTH-RADIUS)){
+
+  					balls[i]=balls[index];
+  					i++;
+  				}
+  			}
+  			//去除出边界的球
+  			for(;i<balls.length;i++){
+  				balls.pop();
+  			}
+  		}
+  		function drawSingleNumber(offsetX, offsetY, num, cxt){
+  			var numMatrix = digit[num];
+  			for(var y = 0;y<numMatrix.length;y++){
+  				for(var x = 0;x<numMatrix[y].length;x++){
+  					if(numMatrix[y][x]==1){
+  						cxt.beginPath();
+  						cxt.arc(offsetX+RADIUS+RADIUS*2*x,offsetY+RADIUS+RADIUS*2*y,RADIUS,0,2*Math.PI);
+  						cxt.fill();
+  					}
+  				}
+  			}
+  			cxt.beginPath();
+  			offsetX += numMatrix[0].length*RADIUS*2;
+  			return offsetX;
+  		}
+
+  		var canvas = document.getElementById("canvas");
+  		canvas.width=WINDOW_WIDTH;
+  		canvas.height=WINDOW_HEIGHT;
+  		context = canvas.getContext("2d");
+
+  		//记录当前绘制的时刻
+  		var currentDate = new Date();
+
+  		setInterval(function(){
+  			//清空整个Canvas，重新绘制内容
+  			context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  			drawDatetime(context);
+  		}, 50)
+})();
+</script>
+
+          
           
 
         </div>
@@ -1070,6 +1502,25 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
 
       
 
+      
+
+      <!-- 标签云 -->
+      <!--
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+      <h3 class="widget-title">Tag Cloud</h3>
+      <div id="myCanvasContainer" class="widget tagcloud">
+          <canvas width="250" height="250" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/" rel="tag">Android</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li></ul>
+          </canvas>
+      </div>
+      </div>
+      
+      -->
+      <!-- 标签云 -->
+
     </div>
   </aside>
 
@@ -1080,12 +1531,23 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
-    <i class="fa fa-"></i>
+       <i class="fa fa-heartbeat"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">叶金诚</span>
-
+  <!--
+    <span class="author" itemprop="copyrightHolder"> &nbsp;叶金诚</span>
+  -->
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">75.8k</span>
   
 </div>
 
@@ -1097,25 +1559,36 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
 
 
 
+
+
+
+
         
 <div class="busuanzi-count">
-<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <!--
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  -->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+   
 
   
-    <span class="site-uv">
-      <i class="fa fa-user">本站访客数 </i>
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-      人次
-    </span>
+  
+    
+      <span class="site-uv">
+        
+        我的第 <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 位朋友，
+      </span>
+    
+
+    
+      <span class="site-pv">
+        历经 <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次回眸才与你相遇
+        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      </span>
+    
   
 
-  
-    <span class="site-pv">
-      <i class="fa fa-eye">本站总访问量</i>
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-      次
-    </span>
-  
 </div>
 
 
@@ -1130,12 +1603,6 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
     </footer>
 
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-          <span id="scrollpercent"><span>0</span>%</span>
-        
-      </div>
     
 
     
@@ -1169,31 +1636,33 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
 
 
 
+  
+
 
 
   
   
-    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js"></script>
   
 
   
   
-    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.ui.min.js"></script>
   
 
   
@@ -1201,61 +1670,46 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
     <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
-
-  
-
-
-  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.2"></script>
-
-  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.2"></script>
-
-
-
   
   
-
-
-  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.2"></script>
-
-  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.2"></script>
-
-
-
-  
-  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.2"></script>
-<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.2"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.2"></script>
-
-
-
+    <script id="ribbon" type="text/javascript" size="60" alpha="0.1"  zIndex="-1" src="/blog/lib/canvas-ribbon/canvas-ribbon.js"></script>
   
 
 
   
 
-    
-      <script id="dsq-count-scr" src="https://jincheng.disqus.com/count.js" async></script>
-    
 
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://idolcoder.gitee.io/blog/2016/06/android-communication/';
-          this.page.identifier = '/2016/06/android-communication/';
-          this.page.title = '《详解 Android 通信》';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://jincheng.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
 
   
 
@@ -1269,6 +1723,13 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
 
 
   
+
+
+
+
+
+  
+
 
 
 
@@ -1609,143 +2070,408 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
   
 
   
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-  <script>AV.initialize("MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz", "pi8Pa2aH3XpcaovMyqIXVuOP");</script>
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/blog/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/blog/lib/needsharebutton/needsharebutton.js"></script>
+
   <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
 
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
+  
 
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+  
+  
 
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
 
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
+  
 
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
+  
 
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
 
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
+  <!-- Tidio 在线联系功能、鼠标点击特效、页面反馈...-->
+  
 
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+    <script async src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script async src="/js/cursor/explosion.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
   </script>
 
 
 
-  
 
-  
 
-  
-  
+
+  <script async language="javascript">
+
+    var div = document.createElement("div");
+    //插入到自定义的theme-info或者copyright之后
+    var copyright = document.querySelector(".theme-info2") || document.querySelector(".copyright");
+
+    function show_run_time(){
+        window.setTimeout("show_run_time()", 1000);
+      // BirthDay=new Date("08/07/2019 20:00:00");
+        BirthDay=new Date("08/07/2016 20:00:00");
+        today=new Date();
+        timeold=(today.getTime()-BirthDay.getTime());
+        sectimeold=timeold/1000
+        secondsold=Math.floor(sectimeold);
+        msPerDay=24*60*60*1000
+        e_daysold=timeold/msPerDay
+        daysold=Math.floor(e_daysold);
+        e_hrsold=(e_daysold-daysold)*24;
+        hrsold=setzero(Math.floor(e_hrsold));
+        e_minsold=(e_hrsold-hrsold)*60;
+        minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+        seconds=setzero(Math.floor((e_minsold-minsold)*60));
+
+        // 使用zh-Hans.yml的文字替换
+        div.innerHTML = "我已在此等候你 " + "<span style='color: #1890ff'> " + daysold + " </span> 天 <span style='color: #1890ff'>" + hrsold + " </span>时 <span style='color: #1890ff'>" + minsold + " </span>分 <span style='color: #1890ff'>" + seconds + " </span>秒 ";
+
+        document.querySelector(".footer-inner").insertBefore(div, copyright.nextSibling);
+
+    }
+    function setzero(i){
+        if (i<10)
+        {i="0" + i};
+        return i;
+    }
+
+    show_run_time();
+
+  </script>
+
+
+
+
+<!-- 旋转魔方 -->
+
+   
+      
+<style>
+  /*最外层容器样式*/
+  .wrap {
+    width: 0px;
+    height: 0px;
+    /*margin: 80px;*/
+    /*position: relative;*/
+    position: fixed;
+    bottom: 120px;
+    right: 80px;
+    z-index: 999;
+  }
+
+  /*包裹所有容器样式*/
+  .cube {
+    width: 0px;
+    height: 0px;
+    margin: 0 auto;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(-80deg);
+    animation: rotate linear 10s infinite;
+  }
+
+  @-webkit-keyframes rotate {
+    from {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+    to {
+      transform: rotateX(360deg) rotateY(360deg);
+    }
+  }
+
+  .cube div {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    opacity: 0.8;
+    transition: all .4s;
+  }
+
+  /*定义所有图片样式*/
+  .pic {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cube .out_front {
+    transform: rotateY(0deg) translateZ(25px);
+  }
+
+  .cube .out_back {
+    transform: translateZ(-25px) rotateY(180deg);
+  }
+
+  .cube .out_left {
+    transform: rotateY(-90deg) translateZ(25px);
+  }
+
+  .cube .out_right {
+    transform: rotateY(90deg) translateZ(25px);
+  }
+
+  .cube .out_top {
+    transform: rotateX(90deg) translateZ(25px);
+  }
+
+  .cube .out_bottom {
+    transform: rotateX(-90deg) translateZ(25px);
+  }
+
+  /*定义小正方体样式*/
+  .cube span {
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+  }
+
+  .cube .in_pic {
+    width: 25px;
+    height:25px;
+  }
+
+  .cube .in_front {
+    transform: rotateY(0deg) translateZ(12px);
+  }
+
+  .cube .in_back {
+    transform: translateZ(-12px) rotateY(180deg);
+  }
+
+  .cube .in_left {
+    transform: rotateY(-90deg) translateZ(12px);
+  }
+
+  .cube .in_right {
+    transform: rotateY(90deg) translateZ(12px);
+  }
+
+  .cube .in_top {
+    transform: rotateX(90deg) translateZ(12px);
+  }
+
+  .cube .in_bottom {
+    transform: rotateX(-90deg) translateZ(12px);
+  }
+
+  /*鼠标移入后样式*/
+  .cube:hover .out_front {
+    transform: rotateY(0deg) translateZ(50px);
+  }
+
+  .cube:hover .out_back {
+    transform: translateZ(-50px) rotateY(180deg);
+  }
+
+  .cube:hover .out_left {
+    transform: rotateY(-90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_right {
+    transform: rotateY(90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_top {
+    transform: rotateX(90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+  }
+</style>
+
+<div class="wrap">
+
+		<!--包裹所有元素的容器-->
+		<div class="cube">
+			<!--前面图片 -->
+			<div class="out_front">
+			  <a onclick="back2top()">
+				  <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+				</a>
+			</div>
+			<!--后面图片 -->
+			<div class="out_back">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--左面图片 -->
+			<div class="out_left">
+        <a onclick="back2top()">
+				  <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+				</a>
+			</div>
+			<!--右面图片 -->
+			<div class="out_right">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--上面图片 -->
+			<div class="out_top">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--下面图片 -->
+			<div class="out_bottom">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+
+			<!--小正方体 -->
+			<span class="in_front">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_back">
+			     <img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_left">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_right">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_top">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_bottom">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+		</div>
+
+</div>
+
+<script>
+  function back2top(){
+    $('html, body').animate({scrollTop: 0}, 500);
+  }
+</script>
+
+   
+
+
+<!-- Console 输出第三方个性化字体 -->
+
+  <script async type="text/javascript" src="/blog/figlet/fetch.min.js"></script>
+  <script type="text/javascript" src="/blog/figlet/figlet.js"></script>
   <script type="text/javascript">
-  wpac_init = window.wpac_init || [];
-  wpac_init.push({widget: 'Rating', id: ,
-    el: 'wpac-rating',
-    color: 'fc6423'
-  });
-  (function() {
-    if ('WIDGETPACK_LOADED' in window) return;
-    WIDGETPACK_LOADED = true;
-    var mc = document.createElement('script');
-    mc.type = 'text/javascript';
-    mc.async = true;
-    mc.src = '//embed.widgetpack.com/widget.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-  })();
+
+      figlet.defaults({fontPath: "/figlet/fonts"});
+      figlet("Welcome To Leaface", "Big Money-ne", function(err, text) {
+          if (err) {
+              console.log("something went wrong...");
+              console.dir(err);
+              return;
+          }
+          console.log(text);
+      });
   </script>
 
 
+  <!-- Console 输出自定义字体 -->
   
+    <script async type="text/javascript">
+        var text = "Welcome To Leaface";
+        var date = '2021-03-07';
+        console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
+        console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+        console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+        console.info('\n' + ' %c Leafae Wechat %c leaface ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+       // console.log("%c Time: " + date, "font-size:100px;white:"+fcolor+";border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);  background-image: linear-gradient(to right, orangered, orange, gold, lightgreen, cyan, dodgerblue, mediumpurple, hotpink, orangered);");
+       // console.log("%c .", "padding:300px 600px;line-height:10px;background:url(https://s2.ax1x.com/2019/10/17/KkoAJJ.md.png) no-repeat;");
+    </script>
   
 
 
+  <!-- 看板娘 -->
+  
+      <script async src="/live2d-widget/autoload.js"></script>
   
 
   
+
+  
+
+  <!-- 代码块复制功能 -->
+  <script async type="text/javascript" src="/js/src/clipboard.min.js"></script>
+  <script async type="text/javascript" src="/js/src/clipboard-use.js"></script>
+
+  <!--share.js-->
+  <link async rel="stylesheet" href="/sharejs/css/share.min.css">
+  <script async src="/sharejs/js/social-share.min.js"></script>
+
+  <!-- 模仿知乎卡片样式链接、崩溃欺骗特效 -->
+  <script async type="text/javascript" src="/js/src/linkcard.js"></script>
+
+  <!--崩溃欺骗 放在js文件最后-->
+  <!--
+  <script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+  -->
+
+ 
+    <script src="https://player.lmih.cn/player/js/player.js" id="myhk" key="158711254641" m="1"></script>
+ 
 
 </body>
 </html>
