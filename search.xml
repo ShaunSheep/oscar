@@ -97,6 +97,70 @@
 <td>Mpic</td>
 <td>图床发布工具，自动发布七牛</td>
 </tr>
+<tr>
+<td>Carouscl</td>
+<td><a href="https://getbootstrap.com/docs/4.0/components/carousel/">轮播图功能使用了Boostarp-Carouscl</a></td>
+</tr>
+<tr>
+<td>valine-admin</td>
+<td>评论云</td>
+</tr>
+<tr>
+<td>hexo-related-popular-posts</td>
+<td>文章推荐</td>
+</tr>
+<tr>
+<td>widgetpack</td>
+<td><a href="https://widgetpack.com/">文章评分</a></td>
+</tr>
+<tr>
+<td>firestore</td>
+<td><a href="https://www.liaofuzhan.com/posts/781439527.html">top排行</a></td>
+</tr>
+<tr>
+<td>hexo-generator-index</td>
+<td>分页</td>
+</tr>
+<tr>
+<td>hexo-generator-archive</td>
+<td>分页</td>
+</tr>
+<tr>
+<td>hexo-generator-category</td>
+<td>分页</td>
+</tr>
+<tr>
+<td>hexo-generator-tag</td>
+<td>分页</td>
+</tr>
+<tr>
+<td>hexo-wordcount</td>
+<td>字数与阅读时间</td>
+</tr>
+<tr>
+<td>gulp</td>
+<td>压缩代码</td>
+</tr>
+<tr>
+<td>hexo-theme-Wikitten</td>
+<td>文件树预览</td>
+</tr>
+<tr>
+<td>hexo-directory-category</td>
+<td>自定义分类页</td>
+</tr>
+<tr>
+<td>hexo-statistics-charts</td>
+<td>静态图表统计post、tags</td>
+</tr>
+<tr>
+<td>hexo-online-server</td>
+<td>在线编辑文章、页面、发布</td>
+</tr>
+<tr>
+<td>hexo-photoswipe</td>
+<td><a href="https://github.com/HarborZeng/hexo-photoswipe/blob/master/README_CN.md">滑动轮播点击图片展示器</a></td>
+</tr>
 </tbody></table>
 <h1 id="mo-ban-jia-gou"><a href="#模板架构" class="headerlink" title="模板架构"></a>模板架构<a href="#mo-ban-jia-gou" class="header-anchor">#</a></h1><table>
 <thead>
@@ -182,7 +246,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#103;&#105;&#116;&#x40;&#103;&#105;&#x74;&#x68;&#x75;&#x62;&#46;&#99;&#x6f;&#109;">&#103;&#105;&#116;&#x40;&#103;&#105;&#x74;&#x68;&#x75;&#x62;&#46;&#99;&#x6f;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#104;&#117;&#x62;&#46;&#99;&#111;&#109;">&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#104;&#117;&#x62;&#46;&#99;&#111;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -327,6 +391,7 @@
 <h2 id="next-ru-he-tian-jia-ping-lun-gong-neng"><a href="#next如何添加评论功能？" class="headerlink" title="next如何添加评论功能？"></a>next如何添加评论功能？<a href="#next-ru-he-tian-jia-ping-lun-gong-neng" class="header-anchor">#</a></h2><p>翻墙打开<a href="https://livere.com/">来比力官网</a>，注册填写域名，copy代码块中的data-uid</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JS"><figure class="iseeu highlight /js"><table><tr><td class="code"><pre><span class="line">&lt;!-- 来必力City版安装代码 --&gt;</span><br><span class="line">&lt;div id=<span class="string">&quot;lv-container&quot;</span> data-id=<span class="string">&quot;city&quot;</span> data-uid=<span class="string">&quot;这里是id&quot;</span>&gt;</span><br><span class="line">	&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">   (<span class="function"><span class="keyword">function</span>(<span class="params">d, s</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">var</span> j, e = d.getElementsByTagName(s)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (<span class="keyword">typeof</span> LivereTower === <span class="string">&#x27;function&#x27;</span>) &#123; <span class="keyword">return</span>; &#125;</span><br><span class="line"></span><br><span class="line">       j = d.createElement(s);</span><br><span class="line">       j.src = <span class="string">&#x27;https://cdn-city.livere.com/js/embed.dist.js&#x27;</span>;</span><br><span class="line">       j.async = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">       e.parentNode.insertBefore(j, e);</span><br><span class="line">   &#125;)(<span class="built_in">document</span>, <span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;noscript&gt; 为正常使用来必力评论功能请激活JavaScript&lt;/noscript&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;!-- City版安装代码已完成 --&gt;</span><br></pre></td></tr></table></figure></div>
 <p>配置完成后可以在评论<a href="https://livere.com/insight/communite">后台</a>管理评论内容。</p>
+<h2 id="next-ru-he-an-zhuang-valine"><a href="#next如何安装valine" class="headerlink" title="next如何安装valine"></a>next如何安装valine<a href="#next-ru-he-an-zhuang-valine" class="header-anchor">#</a></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><span class="line">npm install valine --save</span><br></pre></td></tr></table></figure></div>
 <h2 id="next-ru-he-tian-jia-zhi-ding-gong-neng"><a href="#next如何添加置顶功能？" class="headerlink" title="next如何添加置顶功能？"></a>next如何添加置顶功能？<a href="#next-ru-he-tian-jia-zhi-ding-gong-neng" class="header-anchor">#</a></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm uninstall hexo-generator-index --save</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-index-pin-top --save</span></span><br></pre></td></tr></table></figure></div>
 <p>文章插入top属性，top数值按大小倒序排序</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><span class="line">title: 置顶</span><br><span class="line">date: 2019-09-09 09:09:09</span><br><span class="line">top: true</span><br><span class="line">top: 1</span><br></pre></td></tr></table></figure></div>
