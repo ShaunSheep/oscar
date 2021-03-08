@@ -1908,7 +1908,7 @@ Lrucache就可以当作一种存储数据的结构，类似list，set，可以�
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitmint({
-            id: window.location.pathname, 
+            id: window.decodeURIComponent(window.location.pathname),
             owner: 'ShaunSheep',
             repo: 'yangchaofancn_image',
             
