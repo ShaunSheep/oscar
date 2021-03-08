@@ -246,7 +246,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#103;&#105;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#109;">&#103;&#105;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
