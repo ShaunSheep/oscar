@@ -108,7 +108,7 @@
 <meta property="og:description" content="波尔克（谐音“博儿客”） 介绍个人网站用了有四年了，期间一直都是用PHP+MySql的方式部署在阿里云，从备案域名折腾服务器，到调试各种插件，从制定学习计划，到学课程，又是边写文章边研究Markdown排版，种种事情花了很大功夫。今年1月份发生了一件事情——服务器到期，那会儿工作忙一直拖着续费的事情。阿里清空了磁盘，我也是事后才注意到通知短信，发现网站的文章数据全丢的那一刻，整个人浑身感觉都不好了">
 <meta property="og:locale">
 <meta property="article:published_time" content="2021-02-16T00:50:49.000Z">
-<meta property="article:modified_time" content="2021-03-08T16:32:39.603Z">
+<meta property="article:modified_time" content="2021-03-08T16:42:37.987Z">
 <meta property="article:author" content="叶金诚">
 <meta property="article:tag" content="杂谈">
 <meta name="twitter:card" content="summary">
@@ -448,16 +448,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2021/02/website_nickname/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2021/02/website_nickname/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -677,6 +667,10 @@
 <td>hexo-photoswipe</td>
 <td><a target="_blank" rel="noopener" href="https://github.com/HarborZeng/hexo-photoswipe/blob/master/README_CN.md">滑动轮播点击图片展示器</a></td>
 </tr>
+<tr>
+<td>giteement</td>
+<td>评论云</td>
+</tr>
 </tbody></table>
 <h1 id="mo-ban-jia-gou"><a href="#模板架构" class="headerlink" title="模板架构"></a>模板架构<a href="#mo-ban-jia-gou" class="header-anchor">#</a></h1><table>
 <thead>
@@ -762,7 +756,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#105;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#98;&#46;&#99;&#x6f;&#109;">&#x67;&#105;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#98;&#46;&#99;&#x6f;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -908,6 +902,8 @@
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JS"><figure class="iseeu highlight /js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 来必力City版安装代码 --&gt;</span><br><span class="line">&lt;div id=<span class="string">&quot;lv-container&quot;</span> data-id=<span class="string">&quot;city&quot;</span> data-uid=<span class="string">&quot;这里是id&quot;</span>&gt;</span><br><span class="line">	&lt;script type=<span class="string">&quot;text/javascript&quot;</span>&gt;</span><br><span class="line">   (<span class="function"><span class="keyword">function</span>(<span class="params">d, s</span>) </span>&#123;</span><br><span class="line">       <span class="keyword">var</span> j, e = d.getElementsByTagName(s)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">       <span class="keyword">if</span> (<span class="keyword">typeof</span> LivereTower === <span class="string">&#x27;function&#x27;</span>) &#123; <span class="keyword">return</span>; &#125;</span><br><span class="line"></span><br><span class="line">       j = d.createElement(s);</span><br><span class="line">       j.src = <span class="string">&#x27;https://cdn-city.livere.com/js/embed.dist.js&#x27;</span>;</span><br><span class="line">       j.async = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">       e.parentNode.insertBefore(j, e);</span><br><span class="line">   &#125;)(<span class="built_in">document</span>, <span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;noscript&gt; 为正常使用来必力评论功能请激活JavaScript&lt;/noscript&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;!-- City版安装代码已完成 --&gt;</span><br></pre></td></tr></table></figure></div>
 <p>配置完成后可以在评论<a target="_blank" rel="noopener" href="https://livere.com/insight/communite">后台</a>管理评论内容。</p>
 <h2 id="next-ru-he-an-zhuang-valine"><a href="#next如何安装valine" class="headerlink" title="next如何安装valine"></a>next如何安装valine<a href="#next-ru-he-an-zhuang-valine" class="header-anchor">#</a></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install valine --save</span><br></pre></td></tr></table></figure></div>
+<h2 id="next-pei-zhi-gitment"><a href="#next配置gitment" class="headerlink" title="next配置gitment"></a>next配置gitment<a href="#next-pei-zhi-gitment" class="header-anchor">#</a></h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d3ce2dd7900f?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation">Hexo 博客接入 Gitment 评论系统踩坑</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/imsun/gitment/issues/16#">认证重定向错误</a></p>
 <h2 id="next-ru-he-tian-jia-zhi-ding-gong-neng"><a href="#next如何添加置顶功能？" class="headerlink" title="next如何添加置顶功能？"></a>next如何添加置顶功能？<a href="#next-ru-he-tian-jia-zhi-ding-gong-neng" class="header-anchor">#</a></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm uninstall hexo-generator-index --save</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-index-pin-top --save</span></span><br></pre></td></tr></table></figure></div>
 <p>文章插入top属性，top数值按大小倒序排序</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 置顶</span><br><span class="line">date: 2019-09-09 09:09:09</span><br><span class="line">top: true</span><br><span class="line">top: 1</span><br></pre></td></tr></table></figure></div>
@@ -1161,13 +1157,10 @@ post_wordcount:
 
   
     <div class="comments" id="comments">
-      
-        <div onclick="showGitment()" id="gitment-display-button">显示 Gitment 评论</div>
-        <div id="gitment-container" style="display:none"></div>
-      
+      <div id="lv-container" data-id="city" data-uid="MTAyMC81Mjc2OC8yOTI0NQ"></div>
     </div>
 
-   
+  
 
 
 
@@ -1652,7 +1645,7 @@ post_wordcount:
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bo-er-ke"><span class="nav-number">1.</span> <span class="nav-text">波尔克</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jie-shao"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wang-zhan-jia-gou"><span class="nav-number">3.</span> <span class="nav-text">网站架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mo-ban-jia-gou"><span class="nav-number">4.</span> <span class="nav-text">模板架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#an-zhuang-jiao-cheng"><span class="nav-number">5.</span> <span class="nav-text">安装教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nodejs-an-zhuang-jiao-cheng"><span class="nav-number">5.1.</span> <span class="nav-text">nodejs安装教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ma-yun-pei-zhi-wang-zhan-jiao-cheng"><span class="nav-number">5.2.</span> <span class="nav-text">码云配置网站教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-shi-yong-jiao-cheng"><span class="nav-number">5.3.</span> <span class="nav-text">git使用教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-shi-yong-jiao-cheng"><span class="nav-number">5.4.</span> <span class="nav-text">hexo使用教程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo-chang-jian-zhi-ling"><span class="nav-number">6.</span> <span class="nav-text">hexo常见指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#markdwon-shi-yong-ji-qiao"><span class="nav-number">7.</span> <span class="nav-text">markdwon使用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#suo-fang-tu-pian-si-chong-chong-ji-qiao"><span class="nav-number">7.1.</span> <span class="nav-text">缩放图片四种种技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#she-zhi-zi-ti-yan-se"><span class="nav-number">7.2.</span> <span class="nav-text">设置字体颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shi-yong-shu-xue-gong-shi"><span class="nav-number">7.3.</span> <span class="nav-text">使用数学公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown-she-zhi-biao-ge-kuan-du"><span class="nav-number">7.4.</span> <span class="nav-text">markdown设置表格宽度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown-ru-he-huan-xing"><span class="nav-number">7.5.</span> <span class="nav-text">markdown如何换行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown-ru-he-kai-qi-shu-xue-gong-shi"><span class="nav-number">7.6.</span> <span class="nav-text">markdown如何开启数学公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown-she-zhi-zi-ti-yan-se"><span class="nav-number">7.7.</span> <span class="nav-text">markdown设置字体颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown-ru-he-deng-bi-suo-fang-tu-pian"><span class="nav-number">7.8.</span> <span class="nav-text">markdown如何等比缩放图片</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#chang-jian-wen-ti"><span class="nav-number">8.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi"><span class="nav-number">8.1.</span> <span class="nav-text">码云部署hexo站点 css样式不显示？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-ru-he-suo-fang-tu-pian"><span class="nav-number">8.2.</span> <span class="nav-text">hexo如何缩放图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-ru-he-an-zhuang-zhu-ti"><span class="nav-number">8.3.</span> <span class="nav-text">hexo如何安装主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-bu-xian-shi-er-ji-mu-lu"><span class="nav-number">8.4.</span> <span class="nav-text">hexo不显示二级目录？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-dian-ji-er-ji-mu-lu-bu-tiao-zhuan"><span class="nav-number">8.5.</span> <span class="nav-text">hexo点击二级目录不跳转?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-zi-dong-fa-bu-tu-pian-zhi-qi-niu-yun"><span class="nav-number">8.6.</span> <span class="nav-text">hexo自动发布图片至七牛云？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-ru-he-da-kai-bai-du-fen-xiang"><span class="nav-number">8.7.</span> <span class="nav-text">next如何打开百度分享？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-ru-he-tian-jia-sou-suo-gong-neng"><span class="nav-number">8.8.</span> <span class="nav-text">next如何添加搜索功能？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-ru-he-tian-jia-ping-lun-gong-neng"><span class="nav-number">8.9.</span> <span class="nav-text">next如何添加评论功能？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-ru-he-an-zhuang-valine"><span class="nav-number">8.10.</span> <span class="nav-text">next如何安装valine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-ru-he-tian-jia-zhi-ding-gong-neng"><span class="nav-number">8.11.</span> <span class="nav-text">next如何添加置顶功能？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-ru-he-tiao-zhuan-zhi-zhan-nei-xiang-dui-lu-jing"><span class="nav-number">8.12.</span> <span class="nav-text">next如何跳转至站内相对路径？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-ru-he-chuang-jian-mo-ban"><span class="nav-number">8.13.</span> <span class="nav-text">hexo如何创建模板？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-ru-he-chuang-jian-cao-gao"><span class="nav-number">8.14.</span> <span class="nav-text">hexo如何创建草稿？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-wen-zhang-zi-gua-ying-ping-mu-kuan-du"><span class="nav-number">8.15.</span> <span class="nav-text">next文章自适应屏幕宽度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-tian-jia-tou-xiang"><span class="nav-number">8.16.</span> <span class="nav-text">next添加头像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-tong-ji-zi-shu"><span class="nav-number">8.17.</span> <span class="nav-text">next统计字数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-bu-suan-zi-shi-xiao-wen-ti"><span class="nav-number">8.18.</span> <span class="nav-text">next不蒜子失效问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shi-yong-shuo-ming"><span class="nav-number">9.</span> <span class="nav-text">使用说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zhi-chi"><span class="nav-number">10.</span> <span class="nav-text">支持</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bo-er-ke"><span class="nav-number">1.</span> <span class="nav-text">波尔克</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jie-shao"><span class="nav-number">2.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wang-zhan-jia-gou"><span class="nav-number">3.</span> <span class="nav-text">网站架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mo-ban-jia-gou"><span class="nav-number">4.</span> <span class="nav-text">模板架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#an-zhuang-jiao-cheng"><span class="nav-number">5.</span> <span class="nav-text">安装教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nodejs-an-zhuang-jiao-cheng"><span class="nav-number">5.1.</span> <span class="nav-text">nodejs安装教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ma-yun-pei-zhi-wang-zhan-jiao-cheng"><span class="nav-number">5.2.</span> <span class="nav-text">码云配置网站教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-shi-yong-jiao-cheng"><span class="nav-number">5.3.</span> <span class="nav-text">git使用教程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-shi-yong-jiao-cheng"><span class="nav-number">5.4.</span> <span class="nav-text">hexo使用教程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo-chang-jian-zhi-ling"><span class="nav-number">6.</span> <span class="nav-text">hexo常见指令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#markdwon-shi-yong-ji-qiao"><span class="nav-number">7.</span> <span class="nav-text">markdwon使用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#suo-fang-tu-pian-si-chong-chong-ji-qiao"><span class="nav-number">7.1.</span> <span class="nav-text">缩放图片四种种技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#she-zhi-zi-ti-yan-se"><span class="nav-number">7.2.</span> <span class="nav-text">设置字体颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shi-yong-shu-xue-gong-shi"><span class="nav-number">7.3.</span> <span class="nav-text">使用数学公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown-she-zhi-biao-ge-kuan-du"><span class="nav-number">7.4.</span> <span class="nav-text">markdown设置表格宽度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown-ru-he-huan-xing"><span class="nav-number">7.5.</span> <span class="nav-text">markdown如何换行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown-ru-he-kai-qi-shu-xue-gong-shi"><span class="nav-number">7.6.</span> <span class="nav-text">markdown如何开启数学公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown-she-zhi-zi-ti-yan-se"><span class="nav-number">7.7.</span> <span class="nav-text">markdown设置字体颜色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdown-ru-he-deng-bi-suo-fang-tu-pian"><span class="nav-number">7.8.</span> <span class="nav-text">markdown如何等比缩放图片</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#chang-jian-wen-ti"><span class="nav-number">8.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi"><span class="nav-number">8.1.</span> <span class="nav-text">码云部署hexo站点 css样式不显示？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-ru-he-suo-fang-tu-pian"><span class="nav-number">8.2.</span> <span class="nav-text">hexo如何缩放图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-ru-he-an-zhuang-zhu-ti"><span class="nav-number">8.3.</span> <span class="nav-text">hexo如何安装主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-bu-xian-shi-er-ji-mu-lu"><span class="nav-number">8.4.</span> <span class="nav-text">hexo不显示二级目录？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-dian-ji-er-ji-mu-lu-bu-tiao-zhuan"><span class="nav-number">8.5.</span> <span class="nav-text">hexo点击二级目录不跳转?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-zi-dong-fa-bu-tu-pian-zhi-qi-niu-yun"><span class="nav-number">8.6.</span> <span class="nav-text">hexo自动发布图片至七牛云？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-ru-he-da-kai-bai-du-fen-xiang"><span class="nav-number">8.7.</span> <span class="nav-text">next如何打开百度分享？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-ru-he-tian-jia-sou-suo-gong-neng"><span class="nav-number">8.8.</span> <span class="nav-text">next如何添加搜索功能？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-ru-he-tian-jia-ping-lun-gong-neng"><span class="nav-number">8.9.</span> <span class="nav-text">next如何添加评论功能？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-ru-he-an-zhuang-valine"><span class="nav-number">8.10.</span> <span class="nav-text">next如何安装valine</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-pei-zhi-gitment"><span class="nav-number">8.11.</span> <span class="nav-text">next配置gitment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-ru-he-tian-jia-zhi-ding-gong-neng"><span class="nav-number">8.12.</span> <span class="nav-text">next如何添加置顶功能？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-ru-he-tiao-zhuan-zhi-zhan-nei-xiang-dui-lu-jing"><span class="nav-number">8.13.</span> <span class="nav-text">next如何跳转至站内相对路径？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-ru-he-chuang-jian-mo-ban"><span class="nav-number">8.14.</span> <span class="nav-text">hexo如何创建模板？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-ru-he-chuang-jian-cao-gao"><span class="nav-number">8.15.</span> <span class="nav-text">hexo如何创建草稿？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-wen-zhang-zi-gua-ying-ping-mu-kuan-du"><span class="nav-number">8.16.</span> <span class="nav-text">next文章自适应屏幕宽度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-tian-jia-tou-xiang"><span class="nav-number">8.17.</span> <span class="nav-text">next添加头像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-tong-ji-zi-shu"><span class="nav-number">8.18.</span> <span class="nav-text">next统计字数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next-bu-suan-zi-shi-xiao-wen-ti"><span class="nav-number">8.19.</span> <span class="nav-text">next不蒜子失效问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shi-yong-shuo-ming"><span class="nav-number">9.</span> <span class="nav-text">使用说明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#zhi-chi"><span class="nav-number">10.</span> <span class="nav-text">支持</span></a></li></ol></div>
             
 
           </div>
@@ -1707,7 +1700,7 @@ post_wordcount:
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">75.9k</span>
+    <span title="Site words total count">76k</span>
   
 </div>
 
@@ -1889,57 +1882,22 @@ post_wordcount:
 
 
   
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
 
 
 
 
 
-
-
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-      <style>
-        a.gitment-editor-footer-tip { display: none; }
-        .gitment-container.gitment-footer-container { display: none; }
-      </style>
-    
-
-    
-      <script type="text/javascript">
-      function renderGitment(){
-        var gitment = new Gitmint({
-            id: window.decodeURIComponent(window.location.pathname),
-            owner: 'ShaunSheep',
-            repo: 'yangchaofancn_image',
-            
-            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
-            
-            oauth: {
-            
-            
-                client_secret: 'a562e087b56bfc51a90991ac37c5fba83fb23b13',
-            
-                client_id: 'bf29ad23efaba4b19cb9# MUST HAVE, Github client id for the Gitment'
-            }});
-        gitment.render('gitment-container');
-      }
-
-      
-      function showGitment(){
-        document.getElementById("gitment-display-button").style.display = "none";
-        document.getElementById("gitment-container").style.display = "block";
-        renderGitment();
-      }
-      
-      </script>
-    
 
 
 

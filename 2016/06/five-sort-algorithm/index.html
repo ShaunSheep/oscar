@@ -462,16 +462,6 @@
 
           
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/blog/2016/06/five-sort-algorithm/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/blog/2016/06/five-sort-algorithm/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
           
 
           
@@ -1037,13 +1027,10 @@ NBA总决赛正在如火如荼的进行，老詹也正朝着他的第5个总亚�
 
   
     <div class="comments" id="comments">
-      
-        <div onclick="showGitment()" id="gitment-display-button">显示 Gitment 评论</div>
-        <div id="gitment-container" style="display:none"></div>
-      
+      <div id="lv-container" data-id="city" data-uid="MTAyMC81Mjc2OC8yOTI0NQ"></div>
     </div>
 
-   
+  
 
 
 
@@ -1583,7 +1570,7 @@ NBA总决赛正在如火如荼的进行，老詹也正朝着他的第5个总亚�
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">75.9k</span>
+    <span title="Site words total count">76k</span>
   
 </div>
 
@@ -1765,57 +1752,22 @@ NBA总决赛正在如火如荼的进行，老詹也正朝着他的第5个总亚�
 
 
   
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
 
 
 
 
 
-
-
-<!-- LOCAL: You can save these files to your site and update links -->
-    
-        
-        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
-        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
-    
-<!-- END LOCAL -->
-
-    
-      <style>
-        a.gitment-editor-footer-tip { display: none; }
-        .gitment-container.gitment-footer-container { display: none; }
-      </style>
-    
-
-    
-      <script type="text/javascript">
-      function renderGitment(){
-        var gitment = new Gitmint({
-            id: window.decodeURIComponent(window.location.pathname),
-            owner: 'ShaunSheep',
-            repo: 'yangchaofancn_image',
-            
-            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
-            
-            oauth: {
-            
-            
-                client_secret: 'a562e087b56bfc51a90991ac37c5fba83fb23b13',
-            
-                client_id: 'bf29ad23efaba4b19cb9# MUST HAVE, Github client id for the Gitment'
-            }});
-        gitment.render('gitment-container');
-      }
-
-      
-      function showGitment(){
-        document.getElementById("gitment-display-button").style.display = "none";
-        document.getElementById("gitment-container").style.display = "block";
-        renderGitment();
-      }
-      
-      </script>
-    
 
 
 
