@@ -250,7 +250,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#105;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#98;&#46;&#99;&#x6f;&#109;">&#x67;&#105;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#98;&#46;&#99;&#x6f;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#x69;&#116;&#x40;&#x67;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#109;">&#x67;&#x69;&#116;&#x40;&#x67;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -338,7 +338,9 @@
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">$\color&#123;red&#125;&#123;红色字&#125;$</span><br></pre></td></tr></table></figure>
 <p>效果：$\color{red}{红色字}$</p>
 <h2 id="markdown-ru-he-deng-bi-suo-fang-tu-pian"><a href="#markdown如何等比缩放图片" class="headerlink" title="markdown如何等比缩放图片"></a>markdown如何等比缩放图片<a href="#markdown-ru-he-deng-bi-suo-fang-tu-pian" class="header-anchor">#</a></h2><p>在img标签里面只设置宽，不设置高，图片就会等比例缩放。</p>
-<h1 id="chang-jian-wen-ti"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题<a href="#chang-jian-wen-ti" class="header-anchor">#</a></h1><h2 id="ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi"><a href="#码云部署hexo站点-css样式不显示？" class="headerlink" title="码云部署hexo站点 css样式不显示？"></a><strong>码云部署hexo站点 css样式不显示？</strong><a href="#ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi" class="header-anchor">#</a></h2><p>原因：仓库地址与个性地址url不一致<br>解决：修改_config.yml<br>    ​<code>xml     url: https://ipvb.gitee.io/blog     root: /blog     ​</code></p>
+<h1 id="chang-jian-wen-ti"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题<a href="#chang-jian-wen-ti" class="header-anchor">#</a></h1><h2 id="ru-he-da-jian-yi-ge-wiki-ye-mian"><a href="#如何搭建一个wiki页面" class="headerlink" title="如何搭建一个wiki页面"></a>如何搭建一个wiki页面<a href="#ru-he-da-jian-yi-ge-wiki-ye-mian" class="header-anchor">#</a></h2><p><a href="https://juemuren4449.com/archives/docsify-deploy-and-configuration">参考链接</a></p>
+<p><a href="https://www.jianshu.com/p/4883e95aa903">参考链接配置wiki主题</a></p>
+<h2 id="ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi"><a href="#码云部署hexo站点-css样式不显示？" class="headerlink" title="码云部署hexo站点 css样式不显示？"></a><strong>码云部署hexo站点 css样式不显示？</strong><a href="#ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi" class="header-anchor">#</a></h2><p>原因：仓库地址与个性地址url不一致<br>解决：修改_config.yml<br>    ​<code>xml     url: https://ipvb.gitee.io/blog     root: /blog     ​</code></p>
 <p>其他码云部署的问题参考<a href="https://gitee.com/help/articles/4136#article-header3">这里</a></p>
 <h2 id="hexo-ru-he-suo-fang-tu-pian"><a href="#hexo如何缩放图片" class="headerlink" title="hexo如何缩放图片"></a>hexo如何缩放图片<a href="#hexo-ru-he-suo-fang-tu-pian" class="header-anchor">#</a></h2><p><code>&lt;img src=&quot;&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;</code></p>
 <h2 id="hexo-ru-he-an-zhuang-zhu-ti"><a href="#hexo如何安装主题" class="headerlink" title="hexo如何安装主题"></a>hexo如何安装主题<a href="#hexo-ru-he-an-zhuang-zhu-ti" class="header-anchor">#</a></h2><ol>
