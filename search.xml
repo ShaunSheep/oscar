@@ -250,7 +250,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#x69;&#x74;&#64;&#x67;&#105;&#116;&#104;&#117;&#x62;&#46;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#64;&#x67;&#105;&#116;&#104;&#117;&#x62;&#46;&#x63;&#x6f;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;">&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -297,7 +297,8 @@
 <td>生成并本地预览</td>
 </tr>
 </tbody></table>
-<h1 id="markdwon-shi-yong-ji-qiao"><a href="#markdwon使用技巧" class="headerlink" title="markdwon使用技巧"></a>markdwon使用技巧<a href="#markdwon-shi-yong-ji-qiao" class="header-anchor">#</a></h1><h2 id="suo-fang-tu-pian-si-chong-chong-ji-qiao"><a href="#缩放图片四种种技巧" class="headerlink" title="缩放图片四种种技巧"></a>缩放图片四种种技巧<a href="#suo-fang-tu-pian-si-chong-chong-ji-qiao" class="header-anchor">#</a></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><span class="line">&lt;img src=&quot;&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;</span><br><span class="line">![test image size](url)&#123;:class=&quot;img-responsive&quot;&#125;</span><br><span class="line">![test image size](url)&#123;:height=&quot;50%&quot; width=&quot;50%&quot;&#125;</span><br><span class="line">![test image size](url)&#123;:height=&quot;100px&quot; width=&quot;400px&quot;&#125;</span><br></pre></td></tr></table></figure></div>
+<h1 id="markdwon-shi-yong-ji-qiao"><a href="#markdwon使用技巧" class="headerlink" title="markdwon使用技巧"></a>markdwon使用技巧<a href="#markdwon-shi-yong-ji-qiao" class="header-anchor">#</a></h1><p>更多markdwon技巧可以移步至我的<a href="https://idolcoder.gitee.io/quickshortkey/#/typora">Typora知识Wiki</a></p>
+<h2 id="suo-fang-tu-pian-si-chong-chong-ji-qiao"><a href="#缩放图片四种种技巧" class="headerlink" title="缩放图片四种种技巧"></a>缩放图片四种种技巧<a href="#suo-fang-tu-pian-si-chong-chong-ji-qiao" class="header-anchor">#</a></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><span class="line">&lt;img src=&quot;&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;</span><br><span class="line">![test image size](url)&#123;:class=&quot;img-responsive&quot;&#125;</span><br><span class="line">![test image size](url)&#123;:height=&quot;50%&quot; width=&quot;50%&quot;&#125;</span><br><span class="line">![test image size](url)&#123;:height=&quot;100px&quot; width=&quot;400px&quot;&#125;</span><br></pre></td></tr></table></figure></div>
 <h2 id="she-zhi-zi-ti-yan-se"><a href="#设置字体颜色" class="headerlink" title="设置字体颜色"></a>设置字体颜色<a href="#she-zhi-zi-ti-yan-se" class="header-anchor">#</a></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="HTML"><figure class="iseeu highlight /html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">style</span>=<span class="string">&quot;color:green&quot;</span>&gt;</span>**数学日记**<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 <h2 id="shi-yong-shu-xue-gong-shi"><a href="#使用数学公式" class="headerlink" title="使用数学公式"></a>使用数学公式<a href="#shi-yong-shu-xue-gong-shi" class="header-anchor">#</a></h2><table>
 <thead>
@@ -338,25 +339,11 @@
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">$\color&#123;red&#125;&#123;红色字&#125;$</span><br></pre></td></tr></table></figure>
 <p>效果：$\color{red}{红色字}$</p>
 <h2 id="markdown-ru-he-deng-bi-suo-fang-tu-pian"><a href="#markdown如何等比缩放图片" class="headerlink" title="markdown如何等比缩放图片"></a>markdown如何等比缩放图片<a href="#markdown-ru-he-deng-bi-suo-fang-tu-pian" class="header-anchor">#</a></h2><p>在img标签里面只设置宽，不设置高，图片就会等比例缩放。</p>
-<h1 id="chang-jian-wen-ti"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题<a href="#chang-jian-wen-ti" class="header-anchor">#</a></h1><h2 id="ru-he-da-jian-yi-ge-wiki-ye-mian"><a href="#如何搭建一个wiki页面" class="headerlink" title="如何搭建一个wiki页面"></a>如何搭建一个wiki页面<a href="#ru-he-da-jian-yi-ge-wiki-ye-mian" class="header-anchor">#</a></h2><p><a href="https://juemuren4449.com/archives/docsify-deploy-and-configuration">参考链接</a></p>
-<p><a href="https://www.jianshu.com/p/4883e95aa903">参考链接配置wiki主题</a></p>
-<h2 id="ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi"><a href="#码云部署hexo站点-css样式不显示？" class="headerlink" title="码云部署hexo站点 css样式不显示？"></a><strong>码云部署hexo站点 css样式不显示？</strong><a href="#ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi" class="header-anchor">#</a></h2><p>原因：仓库地址与个性地址url不一致<br>解决：修改_config.yml<br>    ​<code>xml     url: https://ipvb.gitee.io/blog     root: /blog     ​</code></p>
-<p>其他码云部署的问题参考<a href="https://gitee.com/help/articles/4136#article-header3">这里</a></p>
-<h2 id="hexo-ru-he-suo-fang-tu-pian"><a href="#hexo如何缩放图片" class="headerlink" title="hexo如何缩放图片"></a>hexo如何缩放图片<a href="#hexo-ru-he-suo-fang-tu-pian" class="header-anchor">#</a></h2><p><code>&lt;img src=&quot;&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;</code></p>
-<h2 id="hexo-ru-he-an-zhuang-zhu-ti"><a href="#hexo如何安装主题" class="headerlink" title="hexo如何安装主题"></a>hexo如何安装主题<a href="#hexo-ru-he-an-zhuang-zhu-ti" class="header-anchor">#</a></h2><ol>
-<li><p>找到合适的主题列表，推荐以下2个：</p>
-<p><a href="https://www.zhihu.com/question/24422335">有哪些好看的 Hexo 主题？</a></p>
-<p><a href="https://hexo.io/themes/">hexo.thems</a></p>
-</li>
-<li><p>安装主题至根目录，例如找到next主题，将其克隆岛根目录/thesms/next下</p>
- <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JS"><figure class="iseeu highlight /js"><table><tr><td class="code"><pre><span class="line">git clone https:<span class="comment">//github.com/iissnan/hexo-theme-next themes/next</span></span><br></pre></td></tr></table></figure></div></li>
-<li><p>阅读<a href="https://github.com/iissnan/hexo-theme-next">next文档</a></p>
-<ol>
-<li>引用主题：在config.yml中修改主题名称：<code>theme: next</code></li>
-<li>发布时遇到 bug<code>&#123;% extends '_layout.swig' %&#125;</code>；输入指令解决：<code>npm i hexo-renderer-swig</code></li>
-</ol>
-</li>
-</ol>
+<h1 id="chang-jian-wen-ti"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题<a href="#chang-jian-wen-ti" class="header-anchor">#</a></h1><h2 id="ru-he-da-jian-yi-ge-wiki-ye-mian"><a href="#如何搭建一个wiki页面" class="headerlink" title="如何搭建一个wiki页面"></a>如何搭建一个wiki页面<a href="#ru-he-da-jian-yi-ge-wiki-ye-mian" class="header-anchor">#</a></h2><p>参考我的<a href="https://idolcoder.gitee.io/quickshortkey/#/">如何做一篇wiki</a></p>
+<h2 id="ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi"><a href="#码云部署hexo站点-css样式不显示？" class="headerlink" title="码云部署hexo站点 css样式不显示？"></a><strong>码云部署hexo站点 css样式不显示？</strong><a href="#ma-yun-bu-shu-hexo-zhan-dian-css-yang-shi-bu-xian-shi" class="header-anchor">#</a></h2><p>原因：仓库地址与个性地址url不一致<br>解决：修改_config.yml<br>    <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line">    url: https://ipvb.gitee.io/blog</span><br><span class="line">    root: /blog</span><br><span class="line">    ​```</span><br><span class="line"></span><br><span class="line">其他码云部署的问题参考[这里](https://gitee.com/help/articles/4136#article-header3)</span><br><span class="line"></span><br><span class="line">## hexo如何缩放图片</span><br><span class="line"></span><br><span class="line">`<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&quot;</span> <span class="attr">width</span>=<span class="string">&quot;50%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;50%&quot;</span>&gt;</span>`</span><br><span class="line"></span><br><span class="line">## hexo如何安装主题</span><br><span class="line"></span><br><span class="line">1. 找到合适的主题列表，推荐以下2个：</span><br><span class="line"></span><br><span class="line">   [有哪些好看的 Hexo 主题？](https://www.zhihu.com/question/24422335)</span><br><span class="line"></span><br><span class="line">   [hexo.thems](https://hexo.io/themes/)</span><br><span class="line"></span><br><span class="line">2. 安装主题至根目录，例如找到next主题，将其克隆岛根目录/thesms/next下</span><br><span class="line"></span><br><span class="line">    ```js</span><br><span class="line">     git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></div><br>3. 阅读<a href="https://github.com/iissnan/hexo-theme-next">next文档</a></p>
+<pre><code>1. 引用主题：在config.yml中修改主题名称：`theme: next`
+2. 发布时遇到 bug`&#123;% extends '_layout.swig' %&#125;`；输入指令解决：`npm i hexo-renderer-swig`
+</code></pre>
 <h2 id="hexo-bu-xian-shi-er-ji-mu-lu"><a href="#hexo不显示二级目录？" class="headerlink" title="hexo不显示二级目录？"></a>hexo不显示二级目录？<a href="#hexo-bu-xian-shi-er-ji-mu-lu" class="header-anchor">#</a></h2><p>原因：hexo解析目录是按照1级，1级下面找2级，2级下面找3级的顺序查找目录的，如果只有2级，没有1级，是会显示错误的。</p>
 <p>解决：先写1级标题，再写2级标题，先写大标题，再写小标题。</p>
 <p>原因：markdown解析问题</p>
@@ -510,11 +497,28 @@ post_wordcount:
 
 <h1 id="2021"><a href="#2021" class="headerlink" title="2021"></a>2021<a href="#2021" class="header-anchor">#</a></h1><p>文章计划</p>
 <ul>
-<li><input checked disabled type="checkbox"> 《异常分析三剑客》</li>
-<li><input disabled type="checkbox"> 《Android相机全解》</li>
-<li><input disabled type="checkbox"> 《GIt：配置文件全解》</li>
-<li><input disabled type="checkbox"> 《ADB：开发及自测常用指令》</li>
-<li><input disabled type="checkbox"> 《Activity 启动模式快问秒答》，SingleTop的坑，SingleInstance的坑，20种flags全解析，FLAG_ACTIVITY_NEW_TASK结合FLAG_ACTIVITY_MULTIPLE_TASK使用的坑</li>
+<li><p><del>《异常分析三剑客》</del></p>
+</li>
+<li><p><input disabled type="checkbox">  博客《Android相机全解》</p>
+</li>
+<li><p><input disabled type="checkbox">  快捷键Wiki-《GIt全解——从配置文件到指令执行》</p>
+</li>
+<li><p><input disabled type="checkbox">  快捷键Wiki-《ADB：开发及自测常用指令》</p>
+</li>
+<li><p><input disabled type="checkbox">  编程WIki-计算机基础</p>
+</li>
+<li><p><input disabled type="checkbox">  编程WIki-编程基础-Android资深进阶指南</p>
+</li>
+<li><p><input disabled type="checkbox">  编程WIki-编程基础-C</p>
+</li>
+<li><p><input disabled type="checkbox">  编程Wiki-算法</p>
+</li>
+<li><p><input disabled type="checkbox">  《Activity 启动模式快问秒答》，SingleTop的坑，SingleInstance的坑，20种flags全解析，FLAG_ACTIVITY_NEW_TASK结合FLAG_ACTIVITY_MULTIPLE_TASK使用的坑</p>
+</li>
+</ul>
+<p>修改文章  </p>
+<ul>
+<li><input disabled type="checkbox"> ​《BugFree三剑客》更新所有Log文件的字段参数及含义，如trace.txt\blockcanary的log\mtk的log\lecanary的log\Hrof日志\Systrace日志\TraceView日志</li>
 </ul>
 <p>学习计划</p>
 <ul>
