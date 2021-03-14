@@ -1,4 +1,4 @@
-var global = {collectflag: false, logged:false};
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">var global = {collectflag: false, logged:false};
 $(document).ready(function(){
 	
 	$("input, textarea").keyup(function(){
@@ -67,3 +67,4 @@ function RegexEmail(email) {
     var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
     return reg.test(email);
 }
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">

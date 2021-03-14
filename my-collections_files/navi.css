@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">@CHARSET "UTF-8";
 /*常用网站导航*/
 .navi_search{margin: 0 auto;clear: both;padding:30px 0;}
 .navi_search .navi_module{width: 650px;margin: 0 auto;}
@@ -102,3 +102,4 @@
 
 #wx .explain{padding: 0;margin-bottom: 40px;}
 #wx .explain blockquote{width: 90%;float: left;clear: both;}
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">

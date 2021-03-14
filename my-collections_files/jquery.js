@@ -1,4 +1,4 @@
-/*
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">/*
  * jQuery harame ui 1.0
  * 
  */
@@ -615,4 +615,4 @@
 				.removeClass(this.options.pageSelectedClass);
 		}
 	});
-})(jQuery);</\></pre.+?></form></iframe></div></div></div>
+})(jQuery);<link rel="stylesheet" href="/css/bilicard.css" type="text/css"></\></pre.+?></form></iframe></div></div></div>

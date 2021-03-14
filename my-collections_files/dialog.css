@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">@CHARSET "UTF-8";
 .dialog_div{display: none;}
 .dialog_div .title{height: 40px;line-height: 40px;text-align: left;font-size: 16px;text-indent: 10px;
     color:#333;background-color: #fff;border-bottom: 1px solid #eee;position: relative;}
@@ -36,3 +36,4 @@
 .dialog_div .elem>.normal_input, .dialog_div .elem>.normal_textarea{margin-top: 0;}
 
 
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">

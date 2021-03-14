@@ -1,4 +1,4 @@
-@CHARSET "UTF-8";
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">@CHARSET "UTF-8";
 #newyear{
 	background-size: 2800px auto;
 	background-color: #ffdda7 !important ;}
@@ -16,3 +16,4 @@
 
 
 
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">

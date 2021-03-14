@@ -87,7 +87,7 @@
 
 
 
-  <meta name="keywords" content="Android,BugFree," />
+  <meta name="keywords" content="程序人生，杂谈," />
 
 
 
@@ -100,34 +100,18 @@
 
 
 
-<meta name="description" content="BugFree三剑客异常、日志、工具—Android开发排查问题小结前言程序员编写程序、调试代码的时候不可避免的会遇到各种问题，如页面显示不正确，如数据层数据组装操作未按照期望的业务逻辑执行。 造成这些问题的原因大多分为以下几种：有些是条件语句执行错误，有些是Java层的Exception如空指针、集合边界越界问题，有些是较难找到原因的OOM、ANR、Crash、系统SWT重启问题。面对扑面而来的">
+<meta name="description" content="为什么要花3年时间面试一个人？#背景#2018年笔者陪同公司部门老大负责技术面试，3个月时间，从收到简历到电话面试、现场面试，再算上Boss直聘打招呼数，总共有不下1000次。招聘过程可谓呕心沥血，效果却差强人意。 曾作为求职者，我面试拿offer总是能满载而归；如今作为一名招聘（临时）者，找到一个合适的候选者难如登天？ 在网上看求职攻略、招聘经验帖子时，我总在想一个问题，是什么因素阻碍了企业找到">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BugFree三剑客异常、日志、工具">
-<meta property="og:url" content="http://idolcoder.gitee.io/blog/2021/02/android-bugfree-three-lines/index.html">
+<meta property="og:title" content="为什么要花3年时间面试一个人？">
+<meta property="og:url" content="http://idolcoder.gitee.io/blog/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/index.html">
 <meta property="og:site_name" content="叶金诚的站点">
-<meta property="og:description" content="BugFree三剑客异常、日志、工具—Android开发排查问题小结前言程序员编写程序、调试代码的时候不可避免的会遇到各种问题，如页面显示不正确，如数据层数据组装操作未按照期望的业务逻辑执行。 造成这些问题的原因大多分为以下几种：有些是条件语句执行错误，有些是Java层的Exception如空指针、集合边界越界问题，有些是较难找到原因的OOM、ANR、Crash、系统SWT重启问题。面对扑面而来的">
+<meta property="og:description" content="为什么要花3年时间面试一个人？#背景#2018年笔者陪同公司部门老大负责技术面试，3个月时间，从收到简历到电话面试、现场面试，再算上Boss直聘打招呼数，总共有不下1000次。招聘过程可谓呕心沥血，效果却差强人意。 曾作为求职者，我面试拿offer总是能满载而归；如今作为一名招聘（临时）者，找到一个合适的候选者难如登天？ 在网上看求职攻略、招聘经验帖子时，我总在想一个问题，是什么因素阻碍了企业找到">
 <meta property="og:locale">
-<meta property="og:image" content="e:/学习资料/mtklog学习/kill.png">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/625153/201704/625153-20170420202014712-1062539791.jpg">
-<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/MTCwv77J4QE9.png">
-<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/iedG22YWjV1n.png">
-<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/382aVmPG0k6V.jpg?imageslim">
-<meta property="og:image" content="http://images2015.cnblogs.com/blog/625153/201704/625153-20170420202046243-314090766.jpg">
-<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/iITTadTui5mQ.png?imageslim">
-<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/JwYHHTncMMip.png?imageslim">
-<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/VkiuF6SpNL7b.png?imageslim">
-<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/FwcDyrQFhFAa.png?imageslim">
-<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/poTh8Et0Or0w.png?imageslim">
-<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/5M4Dwh0H2ugg.png?imageslim">
-<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/2H8AlTBdueFO.png?imageslim">
-<meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/Dl36A6cYlbzF.png?imageslim">
-<meta property="article:published_time" content="2021-02-27T00:13:12.000Z">
-<meta property="article:modified_time" content="2021-02-27T04:21:16.707Z">
+<meta property="article:published_time" content="2019-01-16T01:50:49.000Z">
+<meta property="article:modified_time" content="2021-03-14T09:21:52.838Z">
 <meta property="article:author" content="叶金诚">
-<meta property="article:tag" content="Android">
-<meta property="article:tag" content="BugFree">
+<meta property="article:tag" content="程序人生，杂谈">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="e:/学习资料/mtklog学习/kill.png">
 
 
 
@@ -157,7 +141,7 @@
 
 
 
-  <link rel="canonical" href="http://idolcoder.gitee.io/blog/2021/02/android-bugfree-three-lines/"/>
+  <link rel="canonical" href="http://idolcoder.gitee.io/blog/2019/01/why-dose-it-take-three-years-to-interview-a-guy？/"/>
 
 
 
@@ -175,7 +159,7 @@
     })();
 </script>
 
-  <title>BugFree三剑客异常、日志、工具 | 叶金诚的站点</title>
+  <title>为什么要花3年时间面试一个人？ | 叶金诚的站点</title>
   
 
 
@@ -379,7 +363,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://idolcoder.gitee.io/blog/blog/2021/02/android-bugfree-three-lines/">
+    <link itemprop="mainEntityOfPage" href="http://idolcoder.gitee.io/blog/blog/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -396,7 +380,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">BugFree三剑客异常、日志、工具</h2>
+          <h2 class="post-title" itemprop="name headline">为什么要花3年时间面试一个人？</h2>
         
 
         <div class="post-meta">
@@ -413,8 +397,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-02-27T08:13:12+08:00">
-                2021-02-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-16T09:50:49+08:00">
+                2019-01-16
               </time>
             
 
@@ -436,8 +420,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/blog/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index">
+                    <span itemprop="name">杂谈</span>
                   </a>
                 </span>
 
@@ -447,19 +431,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Android/BugFree/" itemprop="url" rel="index">
-                    <span itemprop="name">BugFree</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/Android/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
+                  <a href="/blog/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">日记</span>
                   </a>
                 </span>
 
@@ -493,7 +466,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  3.2k
+                  4.1k
                 </span>
               
 
@@ -509,7 +482,7 @@
                   <span class="post-meta-item-text">时长 &asymp;</span>
                 
                 <span title="时长">
-                  12 分钟
+                  14 分钟
                 </span>
               
             </span>
@@ -532,344 +505,222 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="bugfree-san-jian-ke-yi-chang-ri-zhi-gong-ju-android-kai-fa-pai-cha-wen-ti-xiao-jie"><a href="#BugFree三剑客异常、日志、工具—Android开发排查问题小结" class="headerlink" title="BugFree三剑客异常、日志、工具—Android开发排查问题小结"></a>BugFree三剑客异常、日志、工具—Android开发排查问题小结<a href="#bugfree-san-jian-ke-yi-chang-ri-zhi-gong-ju-android-kai-fa-pai-cha-wen-ti-xiao-jie" class="header-anchor">#</a></h1><h1 id="qian-yan"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#qian-yan" class="header-anchor">#</a></h1><p>程序员编写程序、调试代码的时候不可避免的会遇到各种问题，如页面显示不正确，如数据层数据组装操作未按照期望的业务逻辑执行。</p>
-<p>造成这些问题的原因大多分为以下几种：有些是条件语句执行错误，有些是Java层的Exception如空指针、集合边界越界问题，有些是较难找到原因的OOM、ANR、Crash、系统SWT重启问题。面对扑面而来的问题，程序员很容易束手无策。笔者结合自己的经验，总结了BugFree中必不可少的三剑客：异常、日志、工具，期望通过这3个“帮手”，帮助各位排查开发难题。</p>
-<a id="more"></a>
-
-<h1 id="can-kao-yue-du"><a href="#参考阅读" class="headerlink" title="参考阅读"></a>参考阅读<a href="#can-kao-yue-du" class="header-anchor">#</a></h1><p><a href="/ye-jincheng-website/blog/2021/02/mtk-log/index.html">Mtk Log使用指南</a></p>
-<h1 id="yi-chang"><a href="#异常" class="headerlink" title="异常"></a>异常<a href="#yi-chang" class="header-anchor">#</a></h1><h2 id="yi-chang-de-fen-lei"><a href="#异常的分类" class="headerlink" title="异常的分类"></a>异常的分类<a href="#yi-chang-de-fen-lei" class="header-anchor">#</a></h2><p>Android是一个庞大而复杂的系统，涉及多种语言，所以其异常也很复杂。根据android系统架构层次，我们也把android异常层次化，分为JE、NE、KE、EE、其他类别</p>
-<table>
-<thead>
-<tr>
-<th>w</th>
-<th>w</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>JE <br>(Java layer exception)</td>
-<td>一般是在应用层和框架层发生的异常，通常是由Java代码，XML代码引起的。比如各种RuntimeException, ANR（Application Not Responding）、SWT（Software Watchdog Timeout）等</td>
-</tr>
-<tr>
-<td>NE <br>(Native layer exception)</td>
-<td>发生在Linux用户空间的异常，通常是由C/C++代码和库文件引起的。比如内核发出的NE信号（SIGILL、 SIGABRT、 SIGBUS等）</td>
-</tr>
-<tr>
-<td>KE<br> (Kernel layer execption)</td>
-<td>通常指内核故障或内核错误，由于在内核模式下出错，这类异常是非常严重的，往往会导致重启、死机或无法开机等</td>
-</tr>
-<tr>
-<td>EE <br>(External (Modem) exception)</td>
-<td>从名字看就能猜到Modem这一部分是比较特殊的，独立的。Modem有自己的内存空间和代码，为手机通讯提供服务，一旦这一部分发生异常，需要MDlog，此log需用AEE-LogVie工具解析，解析是需要对应版本的数据文件</td>
-</tr>
-</tbody></table>
-<h1 id="ri-zhi"><a href="#日志" class="headerlink" title="日志"></a>日志<a href="#ri-zhi" class="header-anchor">#</a></h1><h2 id="yong-tu"><a href="#用途" class="headerlink" title="用途"></a>用途<a href="#yong-tu" class="header-anchor">#</a></h2><h3 id="sou-suo-guan-jian-yi-chang"><a href="#搜索关键异常" class="headerlink" title="搜索关键异常"></a><strong>搜索关键异常</strong><a href="#sou-suo-guan-jian-yi-chang" class="header-anchor">#</a></h3><p><strong>1.常见应用crash</strong></p>
-<p>（系统提示***已停止运行） 可以在main log中或crash_log中直接搜索“ fatal exception” ；也可以在event_log中搜索am_crash快速定位到问题</p>
-<table>
-<thead>
-<tr>
-<th>关键字</th>
-<th>原理</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>uncaughtException</td>
-<td>Android 顶级异常捕获</td>
-</tr>
-<tr>
-<td>Exception</td>
-<td>Java 异常基类</td>
-</tr>
-<tr>
-<td>NetworkOnMainThreadException</td>
-<td>网络异常</td>
-</tr>
-<tr>
-<td>ANR Warning</td>
-<td>ANR TAG</td>
-</tr>
-<tr>
-<td>Application Not Response</td>
-<td>ANR TAG</td>
-</tr>
-<tr>
-<td>FATAL</td>
-<td>异常 TAG</td>
-</tr>
-<tr>
-<td>ANRManager</td>
-<td>ANR TAG</td>
-</tr>
-<tr>
-<td>Log的TAG</td>
-<td>Log工具类的TAG</td>
-</tr>
-</tbody></table>
-<p><strong>2.应用闪退</strong></p>
-<p>应用闪退一般有如下三种原因：</p>
-<p>1).目前遇到最多的主要是因为low memory killer机制在内存达到一定阈值的时候会将大于对应adj进程给kill掉（这个一般在kernel log中搜索关键字“ low memory kill ”就可以确认哪些是因为lmk机制而被kill）;一般此情况下跟性能有关……。 </p>
-<p>2). 关联进程被kill导致;</p>
-<p><img src="E:\学习资料\mtklog学习\kill.png" alt="kill"></p>
-<p>一般在进行闪退分析时可以在events log中搜索关键字” am_kill “或者” in dying proc “等</p>
-<p>3).应用本身逻辑有执行finish动作而出现，比如点击锁屏通知进入某个对应界面而界面没有出现，这种情况需要分析对应的main_log、event_log；</p>
-<p>a：根据出现闪退时间点在event_log搜索am_resume_activity等am_*_activity相关判断这过程中应用是否有启动和退出的动作。 </p>
-<p>b: 在main_log或sys_log搜索“ACT-AM_”相关信息查看对应activy生命周期相关信息。</p>
-<p>其次就根据log跟踪对应代码流程……</p>
-<h3 id="sou-suo-oom"><a href="#搜索OOM" class="headerlink" title="搜索OOM"></a>搜索OOM<a href="#sou-suo-oom" class="header-anchor">#</a></h3><h4 id="oom-miao-shu"><a href="#OOM描述" class="headerlink" title="OOM描述"></a>OOM描述<a href="#oom-miao-shu" class="header-anchor">#</a></h4><p>Android应用内存管理机制是在Java内存管理机制基础上改进的，所以造成OOM的原因两者差不多，即所有对象都在堆上分配空间，堆是有大小限制的，当分配的对象不能被回收仍然占据堆空间，新分配的对象不能获取足够的堆空间时，就会OOM。为什么会这样呢？这就是GC不足的地方，GC只能回收自己记录（有向树）里面不可达的对象，对可达对象认为是有用的，不会被回收。但是可达对象并非一定是有用对象，他们可能是废弃对象（死对象、冗余对象、电灯泡，僵尸），但却无法被GC回收，占据着进程堆空间，下面是网上的一个对象实例化简图</p>
-<img src="http://images2015.cnblogs.com/blog/625153/201704/625153-20170420202014712-1062539791.jpg">
-
-
-
-<h4 id="oom-qing-jing"><a href="#OOM情景" class="headerlink" title="OOM情景"></a>OOM情景<a href="#oom-qing-jing" class="header-anchor">#</a></h4><p>资源对象没有回收，如cursor，bitmap等</p>
-<p>1通常关闭Cursor的方法：</p>
-<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Cursor cursor = mDownloadManager.query(<span class="keyword">new</span> Query());</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (cursor.moveToFirst()) &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> index = cursor.getColumnIndex(DownloadManager.COLUMN_ID);</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> downloadId = cursor.getLong(index);</span><br><span class="line"></span><br><span class="line">ids.add(downloadId);</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">while</span> (cursor.moveToNext());</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"></span><br><span class="line">cursor.close();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
-<p>另外，在adapter中使用cursor时，需在cursor改变的时候先关闭原来的cursor， 但通常我们都是用android提供的CursorAdapter，其changeCursor函数会将原来的Cursor释放掉，并替换为新的Cursor，所以你不用担心原来的Cursor没有被关闭。</p>
-<p>2 注册没有对应的去注册，如各种监听</p>
-<p>3 生命周期问题引起的无法回收，如果static、线程等</p>
-<p>4其他所有发生OOM情景最终都可以认为是对象没有被回收，如，cursor没有close()，bitmap没有recycle()，监听没有unregister…()等等都是因为对象没有被回收，GC认为这些对象是可达的、正在使用的，导致这些应该被回收的对象不能被回收，最终造成OOM。</p>
-<p>大多数的回收方法，如close()、recycle()、unregister…()，其实都是把不再使用的对象置为null，这样GC就能回收原来对象所占空间。所以在编程的时候，对全局变量，特别是容器之类的对象和status 修饰对象，要关注其生命周期，不再需要就及时置为null或调用相应的回收方法</p>
-<h4 id="oom-de-fen-xi-si-lu"><a href="#OOM的分析思路" class="headerlink" title="OOM的分析思路"></a>OOM的分析思路<a href="#oom-de-fen-xi-si-lu" class="header-anchor">#</a></h4><h5 id="gong-ju-zhun-bei"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备<a href="#gong-ju-zhun-bei" class="header-anchor">#</a></h5><p>1.log</p>
-<p>2.MAT</p>
-<p>3.Profiler</p>
-<p>4.hprof</p>
-<h5 id="fu-xian-chang-jing"><a href="#复现场景" class="headerlink" title="复现场景"></a>复现场景<a href="#fu-xian-chang-jing" class="header-anchor">#</a></h5><p>1.按log所显示的步骤，多次重复该步骤</p>
-<p>2.抓取hrof日志</p>
-<p>3.设定怀疑点</p>
-<p>4.打印该点的内存大小，如bitmap、集合、集合持有的对象</p>
-<h5 id="que-ren-huai-yi-dian"><a href="#确认怀疑点" class="headerlink" title="确认怀疑点"></a>确认怀疑点<a href="#que-ren-huai-yi-dian" class="header-anchor">#</a></h5><p>及时释放掉该对象</p>
-<h4 id="oom-fen-lei"><a href="#OOM分类" class="headerlink" title="OOM分类"></a>OOM分类<a href="#oom-fen-lei" class="header-anchor">#</a></h4><p>内存泄露</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="wei-shi-me-yao-hua-3-nian-shi-jian-mian-shi-yi-ge-ren"><a href="#为什么要花3年时间面试一个人？" class="headerlink" title="为什么要花3年时间面试一个人？"></a>为什么要花3年时间面试一个人？<a href="#wei-shi-me-yao-hua-3-nian-shi-jian-mian-shi-yi-ge-ren" class="header-anchor">#</a></h1><h1 id="bei-jing"><a href="#背景" class="headerlink" title="背景"></a>背景<a href="#bei-jing" class="header-anchor">#</a></h1><p>2018年笔者陪同公司部门老大负责技术面试，3个月时间，从收到简历到电话面试、现场面试，再算上Boss直聘打招呼数，总共有不下1000次。招聘过程可谓呕心沥血，效果却差强人意。</p>
+<p>曾作为求职者，我面试拿offer总是能满载而归；如今作为一名招聘（临时）者，找到一个合适的候选者难如登天？</p>
+<p>在网上看求职攻略、招聘经验帖子时，我总在想一个问题，是什么因素阻碍了企业找到靠谱的候选者？</p>
+<p>直到我看了这篇《怎样花两年时间去面试一个人 》。文章里提到了一个理论——“用两年面试一个候选者”<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[《怎样花两年时间去面试一个人 》](http://mindhacks.cn/2011/11/04/how-to-interview-a-person-for-two-years/)">[3]</span></a></sup>，起初我不太理解为什么要花这么久时间，最终换位站在求职者的角度，总算读明白了。</p>
+<p>当我作为求职者的时候，我会基于先前（求职）经验，摆上Blog、Github主页链接，附上自己的读书清单，这些行为无形中是向招聘者展示我过去1-3年时间做了什么真实产出，有哪些深刻收获。</p>
+<p>而当我作为招聘（临时）角色，我一没有招聘经验，二无法有效率的识别该候选者是否匹配公司的需求——归结到最后，是因为我缺乏作为技术招聘者的基本能力，导致了我招聘面试过程中束手束脚。</p>
+<h1 id="xian-zhuang"><a href="#现状" class="headerlink" title="现状"></a>现状<a href="#xian-zhuang" class="header-anchor">#</a></h1><p><strong>那么该如何作为一名合格的技术招聘者呢？</strong></p>
+<p>面试官和求职者看似是互相对立，见招拆招的关系，实际上也有一层未来同事身份。所以作为一名技术面试官，我们要在充分理解企业需求的前提下，对候选者进行收集、过滤、筛选、面试、决策等一系列行为。</p>
+<p><strong>问他又来了，如何理解企业岗位需求呢？</strong></p>
+<p>作为员工，直接跟技术部门领导、人力资源部门领导沟通，很容易得到一些标准的需求指标：胜任、稳定、可靠、专业能力过硬等等。</p>
+<p>等等，题目不是“为什么要花3年时间面试一个人”么，为什么要浪费篇幅讨论成为一个合格的技术招聘专家呢？</p>
+<p>因为用3年时间面试一个人是“果”，这里面的“因”是默认你已经是一个合格的技术招聘专家了。只有当我们成为一名成熟的技术招聘人员，我们才愿意花费大量时间去收集、筛选、过滤一名真正对企业有价值的候选者。</p>
+<p>假设我们从HR那里，从用人部门这里拿到了岗位说明，工作内容说明等，基于稳定性，能力等指标，我们要开始招聘了。那么第一个问题是，从哪里找到合适的候选者？</p>
+<p>在下文“软件高工们的招人妙诀”中，有很多创业公司CEO心酸的招聘经历，想必每一个技术招聘者都会面临这种困境：</p>
 <ul>
-<li>Context泄露</li>
-<li>Handler泄露</li>
-<li>Cache泄漏</li>
-<li>线程未释放导致的泄漏</li>
+<li>收不到合适的简历，Boos、拉钩、智联，要不就是简历太多筛选麻烦，要不就是简历不合格浪费时间，要不就是根本收不到简历——这种情况比较少，很多事招聘者自己的问题，主要原因在前两种——大海捞针难；</li>
+<li>有合适的简历，但人不愿意来：1.公司给的预算太少，给不了候选者满意薪水，跟市场薪水比没有竞争力；2.公司品牌、产品竞争力不吸引人，浪费大牛时间</li>
 </ul>
-<p>内存抖动</p>
+<p><strong>读完这些高工们的招人妙诀，我总结了一版通用的招聘流程：</strong></p>
+<ol>
+<li>编写岗位说明写明：除了明确的技术能力，还需要在说明底部要求候选者需要提供blog、github、stackoverflow主页链接（强烈推荐）；读书笔记（推荐）；工作笔记（一般）。</li>
+<li>能在简历上提供链接的，好了我们可以点进去看这个人最近3年在做什么，github提交记录，看了哪些书，写了哪些总结，解决了多少issues等等，这是一个人真实的产出，无法造假的东西。</li>
+<li>只要链接里的内容不算太差，都可以约一个电话面试简单聊聊，这种人进入二面技术面的几率大一些。</li>
+<li>进入二面，再围绕计算机基础（操作系统、设计模式、算法与数据结构、数据库、编程语言）、项目经验、BugFree、系统设计等多项能力综合考察。结合步骤2简历提供的要素，在每项能力、每个要素上打分，最终得到一个综合评价分。</li>
+<li>根据分数，将候选者划分为：强烈推荐-优秀-良好-一般-不推荐5个等级，跟结合用人部门、人力部门的评分，再谈是否发放offer以及薪水package等等。</li>
+</ol>
+<h1 id="chong-tu-he-tiao-zhan"><a href="#冲突和挑战" class="headerlink" title="冲突和挑战"></a>冲突和挑战<a href="#chong-tu-he-tiao-zhan" class="header-anchor">#</a></h1><p>作为招聘人员，必须面对的挑战是，根本无法通过公开渠收集简历，找到真正牛且适合公司的候选者；因为<a target="_blank" rel="noopener" href="http://www.joelonsoftware.com/articles/FindingGreatDevelopers.html">真正的牛人也许一辈子就投大概4次简历</a>；而市场上的“人才”大多不是什么人才，招到这些人轻则浪费时间，重则把公司搞挂（笔者上一家年利润过亿的公司就是如此）。</p>
+<p>看了网上许多帖子，结合自己的招聘经历来看，招聘过程会面临以下挑战：</p>
 <ul>
-<li>频繁创建对象</li>
+<li>简历履历造假，包括学历、公司经验、岗位内容等；</li>
+<li>技能造假，只会写if-else，就敢写精通某某语言；只听过GCRoot技术名词，就勇于展示自己熟悉JVM；</li>
+<li>IT教育机构给学员做的面试包装培训，派老师参加面试套公司的笔试题和面试题，让学员背题，面试题话术整得比部分面试官还专业；</li>
 </ul>
-<p>内存溢出</p>
+<p>…</p>
+<blockquote>
+<p>笔者并无疑讽刺、贬低IT培训机构出身的学员，只是将此类人将其当做一种招聘挑战</p>
+</blockquote>
+<p>在种种困难之下，招聘者想找到一个合适的候选者难上加难。因此成为合格的技术招聘专家迫在眉睫。</p>
+<p>为了寻求一种高效的招聘方法，我读了网上很多招聘求职帖子，刘未鹏老师《怎样花两年时间去面试一个人 》给我的启发最大。启发有两部分，文章观点总结、技术招聘方案</p>
+<p>我将其文章及该文章中参考索引的文章内容总结如下：</p>
 <ul>
-<li>可用内存不足</li>
-<li>瞬时申请内存超过了系统可分配内存</li>
-<li>大图、长图、宽图</li>
-<li>序列过多的图片</li>
+<li>找工作的首要原则是什么？答：弄清楚雇主的需求到底是什么</li>
+<li>从哪里发现雇主的需求？答：公司主页上的推荐书单，招聘网站，公开渠道广受好评的技术书单如《编程之美》、《成为xx技术专家之道》的书籍。</li>
+<li>公司如何对候选者进行一场长达3年的面试？答：提供Github链接、博客地址、StackOverflow地址、甚至是Leetcode个人主页、牛客网个人主页</li>
+<li>个人主页链接有哪些不可替代的优点？答：清晰、明确、完全可度量；不用担心伪造，有push review历史，交流记录，足够体现了求职者的可信、负责任程度</li>
+<li>公司为什么一定要列求职者书单计划？答：“书单计划”能很大程度上起到<strong>强鉴别器</strong>的作用，看了就是看了，必然能学到东西，没看就是没看。<strong>知道和不知道，区别是本质的</strong>。</li>
+<li>怎样识别人才？答：实战能力，协作沟通能力，学习能力，学习热情，稳定性测试，香蕉测试，专业测试<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[社会招聘，怎样测试稳定性]( https://mp.weixin.qq.com/s/ZyEWV1g_UzXODkViyFdNlw)     
+">[1]</span></a></sup></li>
 </ul>
-<h4 id="oom-you-hua-si-lu"><a href="#OOM优化思路" class="headerlink" title="OOM优化思路"></a>OOM优化思路<a href="#oom-you-hua-si-lu" class="header-anchor">#</a></h4><p>这些问题大多是比较难解的问题，大部分都是随机的，往往都是很难复现的，找出规律是很重要的！</p>
-<p>另外，内存泄露不容易发现，一些轻微的泄露，可能要使用一个月才能发现，所以对自己的模块，要自己去检查有没有OOM，可以下班时挂上monkey，有时候是能跑出来的</p>
-<p>从OOM联想到性能问题，性能问题很多是界面刷新、对象生命周期、冗余操作、不必要的线程等引起的……</p>
-<h3 id="sou-suo-swt"><a href="#搜索SWT" class="headerlink" title="搜索SWT"></a>搜索SWT<a href="#sou-suo-swt" class="header-anchor">#</a></h3><table>
-<thead>
-<tr>
-<th>序号</th>
-<th>步骤</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td><img src="http://cdn.yangchaofan.cn/blog/20210227/MTCwv77J4QE9.png"></td>
-</tr>
-<tr>
-<td></td>
-<td><img src="http://cdn.yangchaofan.cn/blog/20210227/iedG22YWjV1n.png"></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>具体信息主要查找log文件有sys_log和mtklog\aee_exp\db.fatal.00.SWT\db.fatal.00.SWT.dbg.DEC</p>
-<h3 id="sou-suo-si-ji"><a href="#搜索死机" class="headerlink" title="搜索死机"></a>搜索死机<a href="#sou-suo-si-ji" class="header-anchor">#</a></h3><p>这里说的死机就是冻屏，停留在一个界面没反应。死机问题很少遇到，且大多不是一个用层问题，下面简单说下可能造成死机的原因和分析需要信息</p>
-<h4 id="gong-ju-zhun-bei"><a href="#工具准备-1" class="headerlink" title="工具准备"></a>工具准备<a href="#gong-ju-zhun-bei" class="header-anchor">#</a></h4><p>MTK提供了多种抓取和查看LOG的工具, 如:mtklogger，GAT，Catcher，LogView，QAAT等，这些工具在文档《MediaTek_Logging_SOP》中都有描述</p>
-<p><img src="http://cdn.yangchaofan.cn/blog/20210227/382aVmPG0k6V.jpg?imageslim" alt="mark"></p>
-<h5 id="mtklogger"><a href="#Mtklogger" class="headerlink" title="Mtklogger*"></a>Mtklogger*<a href="#mtklogger" class="header-anchor">#</a></h5><p>Mtklogger是抓取log的apk，整合了ModemLog，MobileLog，NetworkLog and SystemLogger，在工程模式操作就可以打相关log了。</p>
-<h5 id="gat"><a href="#GAT" class="headerlink" title="GAT"></a><strong>GAT</strong><a href="#gat" class="header-anchor">#</a></h5><p>基于SDK调试开发的GUI工具，新增了Log Recoder，Debug Configuration Setting，DBpuller，adb command，Process Information view，Profiling Tools，LogView，Plug-in Script。是调试和抓log的神器，使用说明阅读文档《GAT_User_Guide(Customer).pdf》</p>
-<p>工具获取路径（以W1444版本为例）：</p>
-<p>私服SVN：\rd\MTK_TOOL\AndroidTool\W1444\W1444_full.zip\Debugging Tools (Binary)\GAT</p>
-<h5 id="catcher"><a href="#Catcher" class="headerlink" title="Catcher"></a><strong>Catcher</strong><a href="#catcher" class="header-anchor">#</a></h5><p>是抓取和解析ModemLog的PC端工具，我们经常使用来查看ModemLog，使用说明阅读文档《Catcher_User_Manual_for_Customer.pdf》</p>
-<p>工具获取路径：</p>
-<p>私服SVN：\rd\MTK_TOOL\AndroidTool\W1444\W1444_full.zip\Catcher</p>
-<h5 id="logview"><a href="#LogView" class="headerlink" title="LogView"></a><strong>LogView</strong><a href="#logview" class="header-anchor">#</a></h5><p>可以查看APlog，Taglog，MTKlog，但最常用的是用来查看NE时产生的AEE DB文件里的log，具体使用参考《GAT_User_Guide(Customer).pdf》</p>
-<p>工具获取路径：</p>
-<p>此工具已集成到GAT</p>
-<h5 id="qaat"><a href="#QAAT" class="headerlink" title="QAAT"></a><strong>QAAT</strong><a href="#qaat" class="header-anchor">#</a></h5><p>快速分析log的工具，涵盖错误类型较广，很多地方都可以用，其实他的原理就是过滤关键字，把各种类型的错误过滤出来，是一个分析LOG非常便捷的工具，具体使用参考《MediaTek_Logging_SOP.pdf》</p>
-<p><strong>死机可能原因：</strong></p>
+<h1 id="ruan-jian-gao-gong-men-zhao-ren-de-miao-jue"><a href="#软件高工们招人的妙诀" class="headerlink" title="软件高工们招人的妙诀"></a>软件高工们招人的妙诀<a href="#ruan-jian-gao-gong-men-zhao-ren-de-miao-jue" class="header-anchor">#</a></h1><p><strong>邹欣</strong>：“你的工作就是最好的面试”</p>
+<p><a target="_blank" rel="noopener" href="http://www.weibo.com/grapef"><strong>熊力</strong></a>：<a target="_blank" rel="noopener" href="http://www.weibo.com/1709648133/xoEQmBmDg">“我当年毕业的时候总结了一个公式：第一份工作的月薪=大学四年买过的技术书籍价格的总和。”</a></p>
+<p><strong>周源<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[创业公司怎么招人](https://www.zhihu.com/question/19551593)？
+">[2]</span></a></sup>：</strong></p>
+<blockquote>
+<p>其实从 08 年到现在，我一直想这事能不能有点窍门，或者是实用的方法，结论是几乎没有。我用过的大家都用的方法：</p>
+<ul>
+<li>在水木上发贴子（有点效果） </li>
+<li>在蓝色理想上发贴子（无效） </li>
+<li>在技术邮件组里发贴子（无效） </li>
+<li>买 51job/智联 最便宜的服务（有点效果） </li>
+<li>给所有可以想到的人打电话，请他们推荐（无效） </li>
+<li>给所有和你讨论过创业，喝过点小酒的人打电话（无效） </li>
+<li>约前同事私下谈（有效） </li>
+</ul>
+<p>我用过的大家可能没有用的方法：     </p>
+<ul>
+<li>上 twitter，看 XXX 的 follower，一个一个看，看他们的 twitter，博客，Google Reader 分享，想办法搞到邮件，联系，半夜电话骚扰。 </li>
+<li>上豆瓣，前端后端挑几本重量级的书，去找想看，看过，正在看这本书的人，一个一个看，看他们的活动，博客，Google Reader 分享，想办法搞到邮件，联系，半夜电话骚扰。 </li>
+<li>找同事，问他们都看什么技术博客，想办法搞到邮件，联系，半夜电话骚扰。 </li>
+</ul>
+</blockquote>
+<p><strong>刘未鹏</strong></p>
+<blockquote>
+<p>1.要求读过的书写读书报告。</p>
+<p>2.<strong>Social Coding</strong>。</p>
+<p>真实的项目，真实的流程，真实的人名，一切代码review, check-in, test, build, document, 甚至讨论，计划，brianstorming，流程，一切的一切，都是项目历史的一部分，都可以像棋局那样复盘。有经验的面试者只要稍稍扫两眼一个人的GitHub历史，挑出几个check-in历史看一看，便完全能够迅速判断这个人是否满足他的要求。不再需要费劲心机地去想题目，去观察，去揣测，去花费大量的时间的同时还只能采样到几个极为有限的点。</p>
+<p>不像象牙塔里面大作业，这里有源代码管理系统，自动化build，有check-in，有review，有分工，有合作，最重要的是——这是一个<a target="_blank" rel="noopener" href="http://wenku.baidu.com/view/ce92d9eef8c75fbfc77db28a.html">集市</a>，一个超出象牙塔的集市，牛人相互吸引，<strong>你可以在互联网上找到和自己拥有共同兴趣的一帮人，真正做起一点事情，而不是交差，不需要受限于几十个人的一个小班级。</strong><a target="_blank" rel="noopener" href="http://www.amazon.com/Here-Comes-Everybody-Organizing-Organizations/dp/1594201536"><strong>Here Comes Everybody</strong></a>。</p>
+<p>3.我们姑且把这个计划叫做“书单计划”，容易看到“书单计划”具备以下几个卓越的优点：</p>
 <ol>
-<li><p>输入系统或者输入驱动问题</p>
-</li>
-<li><p>系统逻辑问题或阻塞</p>
-</li>
-<li><p>Surfacefinger问题</p>
-</li>
-<li><p>显示系统或LCM驱动问题</p>
-</li>
+<li>清晰、明确。完全可度量。 </li>
+<li>防伪：读没读过，随便一问便知。而正因为应聘者也知道这事不像实习经验可以忽悠，所以也不敢乱往简历上捅词。 </li>
+<li>不在乎是否“泄题”：书单完全公开的，无所谓，本来就是要你去读的。想背题？背书吧。真能背下来说明认真看了。 </li>
+<li>管你用心不用心读，只要读了，读完了，就有区别。真正的好书，你想不被吸引都难。据我观察很多人就是不知道该去读什么书。 </li>
+<li>不存在“怎么做”的障碍：所有人都知道怎么读书——一页一页读。 </li>
+<li>不需要招聘者投入精力：书单在此，就这么简单，您看着办。 </li>
+<li>评估的负担很大程度转移到了应聘者的身上：是不是认真看完了，有没有心得体会，您自己掂量。没看完别来找我们。 </li>
 </ol>
-<p><strong>相关信息和抓log：</strong></p>
+</blockquote>
+<h1 id="da-han-tui-jian-de-shu-dan"><a href="#大厂推荐的书单" class="headerlink" title="大厂推荐的书单"></a>大厂推荐的书单<a href="#da-han-tui-jian-de-shu-dan" class="header-anchor">#</a></h1><h2 id="hua-wei-zhuan-jia-ji-gong-cheng-shi-ren-zheng-kao-shi-java-tui-jian-shu-dan"><a href="#华为专家级工程师认证考试（Java）推荐书单：" class="headerlink" title="华为专家级工程师认证考试（Java）推荐书单："></a><strong>华为专家级工程师认证考试（Java）推荐书单：</strong><a href="#hua-wei-zhuan-jia-ji-gong-cheng-shi-ren-zheng-kao-shi-java-tui-jian-shu-dan" class="header-anchor">#</a></h2><blockquote>
+<p>部分资料为华为企业内部文档，外部无法检索</p>
+</blockquote>
 <ol>
-<li><p>确认adb是否可用</p>
-</li>
-<li><p>抓取bugreport，adb bugreport &gt; d:/bugreport.txt</p>
-</li>
-<li><p>抓取dumpstate信息，adb shell dumpstate &gt; d:/dumpstate.txt</p>
-</li>
-<li><p>抓取CPU信息，adb shell top –t –m 5 &gt; d:/cpu.txt</p>
-</li>
-<li><p>确认是否可以拨打电话，adb shell am start –a android.intent.action.CALL tel:10086(看界面是否能够更新)</p>
-</li>
-<li><p>查看按键和触屏报点，adb shell getevent</p>
-</li>
-<li><p>抓取Surfacefinger进程信息，先adb shell ps –p找出pid，然后使用adb shell rtt –f bt –p pid &gt; rtt.txt</p>
-</li>
+<li>《软件架构设计》-温煜，掌握需求分析基本原理、过程、方法等内容，掌握UML、设计模式、架构方法</li>
+<li>《大话设计模式》-程杰</li>
+<li>《重构：改善既有代码的设计》，对于代码坏味道识别、分析、理解，基本重构原则，多种重构方法</li>
+<li>《Efficetive java》</li>
+<li>《Java2 核心技术》</li>
+<li>《Java语言通用编程规范》</li>
+<li>《Java语言安全编程规范》</li>
+<li>《Java安全编码标准》</li>
+<li>《Java问题调试与定位》，IDE的调试功能、调试工具全景图、熟练掌握应用</li>
+<li>《有效的单元测试》</li>
+<li>《单元测试之道》</li>
+<li>《API接口测试》</li>
+<li>《Gradle编译》</li>
+<li>《Jeckeins+Gerrit+Git》</li>
 </ol>
-<h3 id="sou-suo-chong-qi"><a href="#搜索重启" class="headerlink" title="搜索重启"></a>搜索重启<a href="#sou-suo-chong-qi" class="header-anchor">#</a></h3><p>从异常分类来看，重启异常大多数和NE、KE和硬件问题有关，JE方面引起重启死机大多是和系统进程有关，如system_process进程发生了Crash、SWT、JVM Error，AP应用一般是不会引起重启死机的，但偶尔也会</p>
-<p>72平台上，发送短信内容为‘==’时会重启</p>
-<img src="http://images2015.cnblogs.com/blog/625153/201704/625153-20170420202046243-314090766.jpg">
-
-
-
-<p>虽然是Mms引起的，但最终也是System_process挂掉了，导致重启</p>
-<p>重启异常分析步骤（JE）：</p>
+<h2 id="a-li-yun-tui-jian-bi-du-shu-dan"><a href="#阿里云推荐必读书单" class="headerlink" title="阿里云推荐必读书单"></a><strong>阿里云推荐必读书单</strong><a href="#a-li-yun-tui-jian-bi-du-shu-dan" class="header-anchor">#</a></h2><p>阿里云藏经阁也列举了求职者必看书单，可以移步至<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ebook/ranking?spm=a2c6h.20345107.J_8234604580.7.214717dbl72mBE">阿里云藏经阁</a></p>
+<h1 id="ruan-jian-gao-gong-tui-jian-de-shu-dan"><a href="#软件高工推荐的书单" class="headerlink" title="软件高工推荐的书单"></a>软件高工推荐的书单<a href="#ruan-jian-gao-gong-tui-jian-de-shu-dan" class="header-anchor">#</a></h1><h2 id="hong-qiang-ning-dou-ban-ji-zhu-zong-jian"><a href="#洪强宁（豆瓣技术总监）" class="headerlink" title="洪强宁（豆瓣技术总监）"></a><a target="_blank" rel="noopener" href="http://www.douban.com/people/hongqn/"><strong>洪强宁</strong></a><strong>（豆瓣技术总监）</strong><a href="#hong-qiang-ning-dou-ban-ji-zhu-zong-jian" class="header-anchor">#</a></h2><p>StackOverflow上有一个<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/1711/what-is-the-single-most-influential-book-every-programmer-should-read">程序员必读书单</a>帖子，这里仅列出top10，更多参考<a target="_blank" rel="noopener" href="http://book.douban.com/doulist/995723/">这里</a>。</p>
 <ol>
-<li><p>确认异常类型（用QAAT跑一下做初步判断，如果是NE、KE让驱动人员帮忙解决）</p>
+<li>Code Complete 2 </li>
+<li>The Mythical Man-Month （《人月神话》） </li>
+<li>Code: The Hidden Language of Computer Hardware and Software （《编码的奥秘》） </li>
+<li>TAOCP （不解释） </li>
+<li>The Pragmatic Programmer （《程序员修炼之道》） </li>
+<li>Design Patterns （《设计模式》） </li>
+<li>The Structure and Interpretation of Computer Programs （《计算机程序的构造和解释》） </li>
+<li>Refactoring （《重构》） </li>
+<li>The C Programming Language </li>
+<li>Introduction to Algorithms （《算法导论》） </li>
+</ol>
+<h2 id="feng-da-hui-ding-xiang-yuan-cto-bei-ta-ka-pei-chuang-shi-ren"><a href="#冯大辉（丁香园CTO，贝塔咖啡创始人）" class="headerlink" title="冯大辉（丁香园CTO，贝塔咖啡创始人）"></a><a target="_blank" rel="noopener" href="http://www.dbanotes.net/"><strong>冯大辉</strong></a><strong>（丁香园CTO，贝塔咖啡创始人）</strong><a href="#feng-da-hui-ding-xiang-yuan-cto-bei-ta-ka-pei-chuang-shi-ren" class="header-anchor">#</a></h2><ol>
+<li>软件随想录 </li>
+<li>黑客与画家 </li>
+<li>重来 </li>
+<li>UNIX编程艺术 </li>
+<li>编程人生 </li>
+</ol>
+<h2 id="yun-feng-zhong-guo-you-xi-bian-cheng-xian-xing-zhe-qian-wang-yi-you-xi-bu-men-zi-shen-cheng-xu-yuan-jian-yue-chuang-shi-ren"><a href="#云风（中国游戏编程先行者，前网易游戏部门资深程序员，简悦创始人）" class="headerlink" title="云风（中国游戏编程先行者，前网易游戏部门资深程序员，简悦创始人）"></a><a target="_blank" rel="noopener" href="http://blog.codingnow.com/"><strong>云风</strong></a><strong>（中国游戏编程先行者，前网易游戏部门资深程序员，简悦创始人）</strong><a href="#yun-feng-zhong-guo-you-xi-bian-cheng-xian-xing-zhe-qian-wang-yi-you-xi-bu-men-zi-shen-cheng-xu-yuan-jian-yue-chuang-shi-ren" class="header-anchor">#</a></h2><p>如果面试，我会挑以下的我自己读过的书，让人选择他也读过的部分，再了解他对这些书的理解。这些书其实本质上就是两类，对所面对的东西（程序语言也好，操作系统也好，底层设施也好）本身的理解程度。以及另一类：对设计思想和原则的理解：</p>
+<ol>
+<li>C++编程思想 </li>
+<li>Effective C++ </li>
+<li>深度探索C++对象模型 </li>
+<li>C++语言的设计和演化 </li>
+<li>C专家编程 </li>
+<li>C陷阱与缺陷 </li>
+<li>C语言接口与实现 </li>
+<li>Lua程序设计 </li>
+<li>Linkers and Loaders </li>
+<li>COM本质论 </li>
+<li>Windows核心编程 </li>
+<li>深入解析Windows操作系统 </li>
+<li>程序员修炼之道 </li>
+<li>代码大全 </li>
+<li>UNIX编程艺术 </li>
+<li>设计模式 </li>
+<li>代码优化：有效使用内存 </li>
+<li>深入理解计算机系统 </li>
+<li>深入理解LINUX内核 </li>
+<li>TCP/IP 详解 </li>
+</ol>
+<h2 id="liu-wei-peng-ren-wei-mian-shi-wei-ruan-qian-bi-xu-yao-du-de-shi-ben-shu"><a href="#刘未鹏认为面试微软前必须要读的十本书" class="headerlink" title="刘未鹏认为面试微软前必须要读的十本书"></a><strong>刘未鹏认为面试微软前必须要读的十本书</strong><a href="#liu-wei-peng-ren-wei-mian-shi-wei-ruan-qian-bi-xu-yao-du-de-shi-ben-shu" class="header-anchor">#</a></h2><ol>
+<li>Code: The Hidden Language of Computer Hardware and Software （《编码的奥秘》） </li>
+<li>Computer System: A Programmer’s Perspective （《深入理解计算机系统》） / Windows via C/C++ （《Windows核心编程》 / 《程序员的自我修养》 </li>
+<li>Code Complete 2（《代码大全》）/ The Pragmatic Programmer （《程序员修炼之道》，我也把这本书称为《代码小全》） </li>
+<li>Programming Pearls （《编程珠玑》） / Algorithms / Algorithm Design / 《编程之美》 </li>
+<li>The C Programming Language </li>
+<li>The C++ Programming Language / Programming: Principles and Practice Using C++ / Accelerated C++ </li>
+<li>The Structure and Interpretation of Computer Programs （《计算机程序的构造和解释》） </li>
+<li>Clean Code / Implementation Patterns </li>
+<li>Design Patterns （《设计模式》） / Agile Software Development, Principles, Patterns, and Practices </li>
+<li>Refactoring （《重构》） </li>
+</ol>
+<h2 id="zou-xin-msra-chuang-xin-gong-cheng-zhong-xin-shou-xi-yan-fa-jing-li"><a href="#邹欣（MSRA创新工程中心首席研发经理）" class="headerlink" title="邹欣（MSRA创新工程中心首席研发经理）"></a><a target="_blank" rel="noopener" href="http://weibo.com/sdxinz"><strong>邹欣</strong></a><strong>（MSRA创新工程中心首席研发经理）</strong><a href="#zou-xin-msra-chuang-xin-gong-cheng-zhong-xin-shou-xi-yan-fa-jing-li" class="header-anchor">#</a></h2><p>关于创新的书籍(<a target="_blank" rel="noopener" href="http://book.douban.com/doulist/1253169/">http://book.douban.com/doulist/1253169/</a>):</p>
+<ol>
+<li>The Myths of Innovation </li>
+<li>The Innovator’s Dilemma </li>
+<li>The Innovator’s Solution </li>
+<li>Crossing the Chasm </li>
+<li>Inside Intuit </li>
+<li>盛田昭夫 </li>
+<li>杰克·韦尔奇自传 </li>
+<li>梦断代码 </li>
+<li>Innovation </li>
+<li>浪潮之巅 </li>
+</ol>
+<h2 id="zhang-zheng-wei-ruan-ya-zhou-yan-jiu-yuan-fu-yuan-chang"><a href="#张峥（微软亚洲研究院副院长）" class="headerlink" title="张峥（微软亚洲研究院副院长）"></a><a target="_blank" rel="noopener" href="http://www.weibo.com/bambooman"><strong>张峥</strong></a><strong>（微软亚洲研究院副院长）</strong><a href="#zhang-zheng-wei-ruan-ya-zhou-yan-jiu-yuan-fu-yuan-chang" class="header-anchor">#</a></h2><ol>
+<li>Algorithms (by Sanjoy Dasgupta, Christos Papadimitriou and Umesh Vazirani) </li>
+<li>Data Structure and Algorithms </li>
+<li>The C Programming Language </li>
+<li>The Design of the UNIX Operating System </li>
+<li>Compilers （龙书） </li>
+<li>Computer Architecture: A Quantitative Approach </li>
+<li>Flow </li>
+<li>Outliers (why hard work and luck are both important) </li>
+</ol>
+<h2 id="zheng-yun-wo-wo-tuan-yan-fa-fu-zong-cai"><a href="#郑昀（窝窝团研发副总裁）" class="headerlink" title="郑昀（窝窝团研发副总裁）"></a><a target="_blank" rel="noopener" href="http://weibo.com/yunzheng"><strong>郑昀</strong></a><strong>（窝窝团研发副总裁）</strong><a href="#zheng-yun-wo-wo-tuan-yan-fa-fu-zong-cai" class="header-anchor">#</a></h2><ol>
+<li>工程师入门：<ol>
+<li>Code Complete 2 </li>
+<li>程序员修炼之道 </li>
+<li>深入理解计算机系统 </li>
+</ol>
 </li>
-<li><p>找到第一时间发生错误的地方，因为后面的错误多半是因为前面错误引起的，那就没有意义</p>
+<li>工程师升级：<ol>
+<li>设计模式 </li>
+<li>重构——改善既有代码的设计 </li>
+</ol>
 </li>
-<li><p>根据JE类型，结合对应工具分析LOG</p>
+<li>工程师转型：<ol>
+<li>快速软件开发——有效控制与完成进度计划 </li>
+<li>人月神话 </li>
+<li>IT项目管理那些事儿 </li>
+<li>软件随想录 </li>
+<li>最后期限 </li>
+<li>走出软件作坊 </li>
+<li>你的灯亮着吗?——发现问题的真正所在 </li>
+</ol>
 </li>
 </ol>
-<h3 id="sou-suo-anr"><a href="#搜索ANR" class="headerlink" title="搜索ANR"></a>搜索ANR<a href="#sou-suo-anr" class="header-anchor">#</a></h3><h4 id="anr-ding-yi"><a href="#ANR定义" class="headerlink" title="ANR定义"></a><strong>ANR定义</strong><a href="#anr-ding-yi" class="header-anchor">#</a></h4><p>Application Not Responding</p>
-<h4 id="anr-chong-lei"><a href="#ANR种类" class="headerlink" title="ANR种类"></a><strong>ANR种类</strong><a href="#anr-chong-lei" class="header-anchor">#</a></h4><p><strong>1). Key Dispatch Timeout (8s)</strong></p>
-<p>按键或触摸事件在特定时间内无响应（origin:5s）</p>
-<p>KEY_DISPATCHING_TIMEOUT = 8*1000</p>
-<p><strong>2) .Broadcast Timeout</strong></p>
-<p>BroadcastReceiver在特定时间内无法处理完成</p>
-<p>BROADCAST_FG_TIMEOUT: 10s</p>
-<p>BROADCAST_BG_TIMEOUT: 60s</p>
-<p>按键和广播事件时间内未响应，时间限定定义在<strong>ActivityManagerService.java</strong>类中</p>
-<p><strong>3).Service Timeout （20s）——-小概率类型</strong></p>
-<p>Service在特定的时间内无法处理完成</p>
-<p>service时间内未响应时间限定在<strong>ActiveServices.java</strong>类中</p>
-<p>SERVICE_TIMEOUT = 20*1000;</p>
-<h4 id="anr-yuan-yin"><a href="#ANR原因" class="headerlink" title="ANR原因"></a>ANR原因<a href="#anr-yuan-yin" class="header-anchor">#</a></h4><p>1）应用进程有一个主线程（main thread）和一个信息队列(main message queue) main thead == activity thread</p>
-<p>2）主线程负责处理像Draw、Listen、receive等UI事件</p>
-<p>3）主线程负责从消息队列中取出信息并分发它</p>
-<p>4）主线程在完成当前信息处理之前，不会再取信息队列中的信息</p>
-<p>5）如果主线程在处理当前信息时卡住，没有及时分发，ANR就会出现</p>
-<h4 id="anr-de-fen-xi-si-lu"><a href="#ANR的分析思路" class="headerlink" title="ANR的分析思路"></a>ANR的分析思路<a href="#anr-de-fen-xi-si-lu" class="header-anchor">#</a></h4><h5 id="gong-ju-zhun-bei"><a href="#工具准备-2" class="headerlink" title="工具准备"></a>工具准备<a href="#gong-ju-zhun-bei" class="header-anchor">#</a></h5><p>1 MTKlog，主要是其中的Aee_exp和MobileLog</p>
-<p>2Trace.txt文件（data/anr目录下）或者bugreport日志（使用adb bugreport &gt; bugreport.txt或者GAT工具输出）</p>
-<p>3BlockCanary，记录超时后的log</p>
-<p>4一般当出现异常（JE\SWT\NE\KE等）时，会在手机中的/data/aee_exp目录下保存异常的db。 对于异常的类型和具体信息，需要通过GAT工具解析db档案</p>
-<p>5.bugreport</p>
-<p>6.aee_exp</p>
-<h5 id="trace-fen-xi-liu-cheng"><a href="#Trace分析流程" class="headerlink" title="Trace分析流程"></a>Trace分析流程<a href="#trace-fen-xi-liu-cheng" class="header-anchor">#</a></h5><table>
-<thead>
-<tr>
-<th>序号</th>
-<th>步骤</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td><img src="http://cdn.yangchaofan.cn/blog/20210227/iITTadTui5mQ.png?imageslim" alt="mark"></td>
-</tr>
-<tr>
-<td></td>
-<td><img src="http://cdn.yangchaofan.cn/blog/20210227/JwYHHTncMMip.png?imageslim" alt="mark"></td>
-</tr>
-<tr>
-<td></td>
-<td><img src="http://cdn.yangchaofan.cn/blog/20210227/VkiuF6SpNL7b.png?imageslim" alt="mark"></td>
-</tr>
-<tr>
-<td></td>
-<td><img src="http://cdn.yangchaofan.cn/blog/20210227/FwcDyrQFhFAa.png?imageslim" alt="mark"></td>
-</tr>
-<tr>
-<td></td>
-<td><img src="http://cdn.yangchaofan.cn/blog/20210227/poTh8Et0Or0w.png?imageslim" alt="mark"></td>
-</tr>
-<tr>
-<td></td>
-<td><img src="http://cdn.yangchaofan.cn/blog/20210227/5M4Dwh0H2ugg.png?imageslim" alt="mark"></td>
-</tr>
-<tr>
-<td></td>
-<td><img src="http://cdn.yangchaofan.cn/blog/20210227/2H8AlTBdueFO.png?imageslim" alt="mark"></td>
-</tr>
-<tr>
-<td></td>
-<td><img src="http://cdn.yangchaofan.cn/blog/20210227/Dl36A6cYlbzF.png?imageslim" alt="mark"></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<h4 id="anr-jie-jue-fang-an"><a href="#ANR解决方案" class="headerlink" title="ANR解决方案"></a>ANR解决方案<a href="#anr-jie-jue-fang-an" class="header-anchor">#</a></h4><p>1)：UI线程尽量只做跟UI相关的工作</p>
-<p>2)：耗时的工作（比如数据库操作，I/O，连接网络或者别的有可能阻碍UI线程的操作）把它放入单独的线程处理</p>
-<p>3)：尽量用Handler来处理UIthread和别的thread之间的交互</p>
-<h4 id="anr-you-hua-si-lu"><a href="#ANR优化思路" class="headerlink" title="ANR优化思路"></a>ANR优化思路<a href="#anr-you-hua-si-lu" class="header-anchor">#</a></h4><p>优化UI线程的任务：</p>
-<p>1)：UI线程尽量只做跟UI相关的工作</p>
-<p>2)：耗时的工作（比如数据库操作，I/O，连接网络或者别的有可能阻碍UI线程的操作）把它放入单独的线程处理</p>
-<p>3)：尽量用Handler来处理UIthread和别的thread之间的交互</p>
-<p>UI线程的主要任务是：</p>
-<p>1).Activity:onCreate(), onResume(), onDestroy(), onKeyDown(), onClick()等</p>
-<p>2).AsyncTask: onPreExecute(), onProgressUpdate(), onPostExecute(), onCancel等</p>
-<p>3).Mainthread handler: handleMessage(), post*(runnable r)等</p>
-<h1 id="gong-ju"><a href="#工具" class="headerlink" title="工具"></a>工具<a href="#gong-ju" class="header-anchor">#</a></h1><table>
-<thead>
-<tr>
-<th>工具包名称</th>
-<th>用途</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>联发科MTK组件</td>
-<td>MTKLogger</td>
-</tr>
-<tr>
-<td></td>
-<td>GAT</td>
-</tr>
-<tr>
-<td></td>
-<td>LogView</td>
-</tr>
-<tr>
-<td></td>
-<td>QAAT</td>
-</tr>
-<tr>
-<td>BlockCanary</td>
-<td>开源框架，卡顿日志</td>
-</tr>
-<tr>
-<td>Android SDK</td>
-<td>ADB LogCat</td>
-</tr>
-<tr>
-<td></td>
-<td>MAT</td>
-</tr>
-<tr>
-<td>Android Studio</td>
-<td>Profile</td>
-</tr>
-<tr>
-<td></td>
-<td>TraceView</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="adb"><a href="#adb" class="headerlink" title="adb"></a>adb<a href="#adb" class="header-anchor">#</a></h2><ol>
-<li>adb logcat&gt;main.txt 重定向log</li>
-<li>adb logcat -b main -v time&gt;app.log 打印应用程序的log</li>
-<li>adb logcat -bradio -v time&gt; radio.log 打印射频相关的log，SIM STK 也会在里面，modem相关的ATcommand等。</li>
-<li>adb logcat -bevents -v time 打印系统事件的日志，比如触屏事件；</li>
-</ol>
-<link rel="stylesheet" href="/css/bilicard.css" type="text/css">
+<h1 id="can-kao"><a href="#参考" class="headerlink" title="参考"></a>参考<a href="#can-kao" class="header-anchor">#</a></h1><p><a target="_blank" rel="noopener" href="http://gigix.thoughtworkers.org/2011/6/8/show-me-your-blog">ThoughtWorks给我看你的博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://code.dblock.org/2011/07/14/github-is-your-new-resume.html">Github is Your New Resume</a></p>
+<p><a target="_blank" rel="noopener" href="http://mindhacks.cn/2009/02/15/why-you-should-start-blogging-now/">[BetterExplained]为什么你应该（从现在开始就）写博客</a> </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/oiio/article/details/6913156">为什么写技术博客对新人如此重要？</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.amazon.com/Smart-Gets-Things-Done-Technical/dp/1590598385/">《Smart and Gets Things Done》</a></p>
+<p>插件：<a href>Gtihub插件</a>-历史记录自动生成简历；StackOverflow历史记录生成简历</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/ZyEWV1g_UzXODkViyFdNlw">社会招聘，怎样测试稳定性</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/19551593">创业公司怎么招人</a>？<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="http://mindhacks.cn/2011/11/04/how-to-interview-a-person-for-two-years/">《怎样花两年时间去面试一个人 》</a><a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div><link rel="stylesheet" href="/css/bilicard.css" type="text/css">
 
         
 
@@ -892,35 +743,7 @@
        <li class="popular-posts-item">
          
          
-         <div class="popular-posts-title"><a href="\blog\2021\02\mtk-log\" rel="bookmark">mtk-log</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\blog\2020\08\handler TOP 100 Questions\" rel="bookmark">AndroidHandler百问百答</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\blog\2016\06\android-communication\" rel="bookmark">《详解 Android 通信》</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\blog\2016\06\performance-android\" rel="bookmark">Android性能优化【史诗巨著之内存篇】</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\blog\2016\04\Android-TOP-100-Program\" rel="bookmark">Android 百大框架排行榜</a></div>
+         <div class="popular-posts-title"><a href="\blog\2021\02\Is coder need more younger？\" rel="bookmark">程序员吃的是青春饭吗？</a></div>
          
        </li>
      
@@ -995,7 +818,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://idolcoder.gitee.io/blog/2021/02/android-bugfree-three-lines/" title="BugFree三剑客异常、日志、工具">http://idolcoder.gitee.io/blog/2021/02/android-bugfree-three-lines/</a>
+    <a href="http://idolcoder.gitee.io/blog/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/" title="为什么要花3年时间面试一个人？">http://idolcoder.gitee.io/blog/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1010,9 +833,7 @@
       
         <div class="post-tags">
           
-            <a href="/blog/tags/Android/" rel="tag"> <i class="fa fa-tag"></i> Android</a>
-          
-            <a href="/blog/tags/BugFree/" rel="tag"> <i class="fa fa-tag"></i> BugFree</a>
+            <a href="/blog/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag"> <i class="fa fa-tag"></i> 程序人生，杂谈</a>
           
         </div>
       
@@ -1040,8 +861,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2021/02/mtk-log/" rel="prev" title="mtk-log">
-                <i class="fa fa-chevron-left"></i> mtk-log
+              <a href="/blog/2020/08/handler%20TOP%20100%20Questions/" rel="prev" title="AndroidHandler百问百答">
+                <i class="fa fa-chevron-left"></i> AndroidHandler百问百答
               </a>
             
           </div>
@@ -1050,8 +871,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2021/02/learn-relovation-notes/" rel="next" title="《学习革命解读》心得">
-                《学习革命解读》心得 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2016/06/five-sort-algorithm/" rel="next" title="详解五大排序算法">
+                详解五大排序算法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1599,7 +1420,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bugfree-san-jian-ke-yi-chang-ri-zhi-gong-ju-android-kai-fa-pai-cha-wen-ti-xiao-jie"><span class="nav-number">1.</span> <span class="nav-text">BugFree三剑客异常、日志、工具—Android开发排查问题小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#qian-yan"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#can-kao-yue-du"><span class="nav-number">3.</span> <span class="nav-text">参考阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#yi-chang"><span class="nav-number">4.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#yi-chang-de-fen-lei"><span class="nav-number">4.1.</span> <span class="nav-text">异常的分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ri-zhi"><span class="nav-number">5.</span> <span class="nav-text">日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#yong-tu"><span class="nav-number">5.1.</span> <span class="nav-text">用途</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sou-suo-guan-jian-yi-chang"><span class="nav-number">5.1.1.</span> <span class="nav-text">搜索关键异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sou-suo-oom"><span class="nav-number">5.1.2.</span> <span class="nav-text">搜索OOM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#oom-miao-shu"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">OOM描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oom-qing-jing"><span class="nav-number">5.1.2.2.</span> <span class="nav-text">OOM情景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oom-de-fen-xi-si-lu"><span class="nav-number">5.1.2.3.</span> <span class="nav-text">OOM的分析思路</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gong-ju-zhun-bei"><span class="nav-number">5.1.2.3.1.</span> <span class="nav-text">工具准备</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#fu-xian-chang-jing"><span class="nav-number">5.1.2.3.2.</span> <span class="nav-text">复现场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#que-ren-huai-yi-dian"><span class="nav-number">5.1.2.3.3.</span> <span class="nav-text">确认怀疑点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oom-fen-lei"><span class="nav-number">5.1.2.4.</span> <span class="nav-text">OOM分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oom-you-hua-si-lu"><span class="nav-number">5.1.2.5.</span> <span class="nav-text">OOM优化思路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sou-suo-swt"><span class="nav-number">5.1.3.</span> <span class="nav-text">搜索SWT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sou-suo-si-ji"><span class="nav-number">5.1.4.</span> <span class="nav-text">搜索死机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gong-ju-zhun-bei"><span class="nav-number">5.1.4.1.</span> <span class="nav-text">工具准备</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mtklogger"><span class="nav-number">5.1.4.1.1.</span> <span class="nav-text">Mtklogger*</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gat"><span class="nav-number">5.1.4.1.2.</span> <span class="nav-text">GAT</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#catcher"><span class="nav-number">5.1.4.1.3.</span> <span class="nav-text">Catcher</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#logview"><span class="nav-number">5.1.4.1.4.</span> <span class="nav-text">LogView</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#qaat"><span class="nav-number">5.1.4.1.5.</span> <span class="nav-text">QAAT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sou-suo-chong-qi"><span class="nav-number">5.1.5.</span> <span class="nav-text">搜索重启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sou-suo-anr"><span class="nav-number">5.1.6.</span> <span class="nav-text">搜索ANR</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#anr-ding-yi"><span class="nav-number">5.1.6.1.</span> <span class="nav-text">ANR定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr-chong-lei"><span class="nav-number">5.1.6.2.</span> <span class="nav-text">ANR种类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr-yuan-yin"><span class="nav-number">5.1.6.3.</span> <span class="nav-text">ANR原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr-de-fen-xi-si-lu"><span class="nav-number">5.1.6.4.</span> <span class="nav-text">ANR的分析思路</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#gong-ju-zhun-bei"><span class="nav-number">5.1.6.4.1.</span> <span class="nav-text">工具准备</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#trace-fen-xi-liu-cheng"><span class="nav-number">5.1.6.4.2.</span> <span class="nav-text">Trace分析流程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr-jie-jue-fang-an"><span class="nav-number">5.1.6.5.</span> <span class="nav-text">ANR解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr-you-hua-si-lu"><span class="nav-number">5.1.6.6.</span> <span class="nav-text">ANR优化思路</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gong-ju"><span class="nav-number">6.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#adb"><span class="nav-number">6.1.</span> <span class="nav-text">adb</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#wei-shi-me-yao-hua-3-nian-shi-jian-mian-shi-yi-ge-ren"><span class="nav-number">1.</span> <span class="nav-text">为什么要花3年时间面试一个人？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bei-jing"><span class="nav-number">2.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xian-zhuang"><span class="nav-number">3.</span> <span class="nav-text">现状</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#chong-tu-he-tiao-zhan"><span class="nav-number">4.</span> <span class="nav-text">冲突和挑战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ruan-jian-gao-gong-men-zhao-ren-de-miao-jue"><span class="nav-number">5.</span> <span class="nav-text">软件高工们招人的妙诀</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#da-han-tui-jian-de-shu-dan"><span class="nav-number">6.</span> <span class="nav-text">大厂推荐的书单</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hua-wei-zhuan-jia-ji-gong-cheng-shi-ren-zheng-kao-shi-java-tui-jian-shu-dan"><span class="nav-number">6.1.</span> <span class="nav-text">华为专家级工程师认证考试（Java）推荐书单：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#a-li-yun-tui-jian-bi-du-shu-dan"><span class="nav-number">6.2.</span> <span class="nav-text">阿里云推荐必读书单</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ruan-jian-gao-gong-tui-jian-de-shu-dan"><span class="nav-number">7.</span> <span class="nav-text">软件高工推荐的书单</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hong-qiang-ning-dou-ban-ji-zhu-zong-jian"><span class="nav-number">7.1.</span> <span class="nav-text">洪强宁（豆瓣技术总监）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#feng-da-hui-ding-xiang-yuan-cto-bei-ta-ka-pei-chuang-shi-ren"><span class="nav-number">7.2.</span> <span class="nav-text">冯大辉（丁香园CTO，贝塔咖啡创始人）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yun-feng-zhong-guo-you-xi-bian-cheng-xian-xing-zhe-qian-wang-yi-you-xi-bu-men-zi-shen-cheng-xu-yuan-jian-yue-chuang-shi-ren"><span class="nav-number">7.3.</span> <span class="nav-text">云风（中国游戏编程先行者，前网易游戏部门资深程序员，简悦创始人）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#liu-wei-peng-ren-wei-mian-shi-wei-ruan-qian-bi-xu-yao-du-de-shi-ben-shu"><span class="nav-number">7.4.</span> <span class="nav-text">刘未鹏认为面试微软前必须要读的十本书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zou-xin-msra-chuang-xin-gong-cheng-zhong-xin-shou-xi-yan-fa-jing-li"><span class="nav-number">7.5.</span> <span class="nav-text">邹欣（MSRA创新工程中心首席研发经理）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zhang-zheng-wei-ruan-ya-zhou-yan-jiu-yuan-fu-yuan-chang"><span class="nav-number">7.6.</span> <span class="nav-text">张峥（微软亚洲研究院副院长）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zheng-yun-wo-wo-tuan-yan-fa-fu-zong-cai"><span class="nav-number">7.7.</span> <span class="nav-text">郑昀（窝窝团研发副总裁）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#can-kao"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
