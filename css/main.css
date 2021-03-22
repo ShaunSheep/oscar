@@ -2351,7 +2351,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #a142ff;
+  background: #40592d;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3632,7 +3632,7 @@ header.post-header {
   position: relative;
   height: 24px;
   width: 24px;
-  cursor: url("/images/pointer.cur"), auto;
+  cursor: url("http://cdn.yangchaofan.cn/BlogGifRes/20210322/jXa2I1K2HCIO.cur"), auto;
   background: url("/images/wechat.svg");
   background-size: 24px 24px;
 }
@@ -3865,10 +3865,13 @@ body {
   display: none;
 }
 * {
-  cursor: url("/images/default.cur"), auto;
+  cursor: url("http://cdn.yangchaofan.cn/BlogGifRes/20210322/Ktdi8ORPSLgx.cur"), auto;
+}
+:active {
+  cursor: url("http://cdn.yangchaofan.cn/BlogGifRes/20210322/jXa2I1K2HCIO.cur"), auto;
 }
 :link {
-  cursor: url("/images/pointer.cur"), auto;
+  cursor: url("http://cdn.yangchaofan.cn/BlogGifRes/20210322/jXa2I1K2HCIO.cur"), auto;
 }
 .post-widgets {
   margin-bottom: 45px;
