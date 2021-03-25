@@ -250,7 +250,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#111;&#x6d;">&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#111;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#x63;&#111;&#109;">&#x67;&#x69;&#x74;&#x40;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#x63;&#111;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -497,24 +497,17 @@ post_wordcount:
 
 <h1 id="2021"><a href="#2021" class="headerlink" title="2021"></a>2021<a href="#2021" class="header-anchor">#</a></h1><p>文章计划</p>
 <ul>
-<li><p><del>《异常分析三剑客》</del></p>
-</li>
-<li><p><input disabled type="checkbox">  博客《Android相机全解》</p>
-</li>
-<li><p><input disabled type="checkbox">  快捷键Wiki-《GIt全解——从配置文件到指令执行》</p>
-</li>
-<li><p><input disabled type="checkbox">  快捷键Wiki-《ADB：开发及自测常用指令》</p>
-</li>
-<li><p><input disabled type="checkbox">  编程WIki-计算机基础</p>
-</li>
-<li><p><input disabled type="checkbox">  编程WIki-编程基础-Android资深进阶指南</p>
-</li>
-<li><p><input disabled type="checkbox">  编程WIki-编程基础-C</p>
-</li>
-<li><p><input disabled type="checkbox">  编程Wiki-算法</p>
-</li>
-<li><p><input disabled type="checkbox">  《Activity 启动模式快问秒答》，SingleTop的坑，SingleInstance的坑，20种flags全解析，FLAG_ACTIVITY_NEW_TASK结合FLAG_ACTIVITY_MULTIPLE_TASK使用的坑</p>
-</li>
+<li><input disabled type="checkbox"> 《Android相机全解》</li>
+<li><input disabled type="checkbox"> 编程WIki-计算机基础</li>
+<li><input disabled type="checkbox"> 编程WIki-编程基础-C</li>
+<li><input disabled type="checkbox"> <a href="http://idolcoder.gitee.io/cs-programming-knowledge/#/newnotes/Java">编程WIki-编程基础-Java</a></li>
+<li><input disabled type="checkbox"> <a href="http://idolcoder.gitee.io/cs-programming-knowledge/#/newnotes/java/jvm">编程WIki-编程基础-JVM</a></li>
+<li><input disabled type="checkbox"> <a href="http://idolcoder.gitee.io/cs-programming-knowledge/#/newnotes/android">编程WIki-编程基础-Android资深进阶指南</a></li>
+<li><input disabled type="checkbox"> <a href="http://idolcoder.gitee.io/cs-programming-knowledge/#/newnotes/leetcode-solution">编程Wiki-算法-leetcode题解</a></li>
+<li><input checked disabled type="checkbox"> <a href="http://idolcoder.gitee.io/blog/2021/02/android-bugfree-three-lines/"><del>《异常分析三剑客》</del></a></li>
+<li><input checked disabled type="checkbox"> <a href="http://idolcoder.gitee.io/quickshortkey/#/git"><del>快捷键Wiki-《GIt全解——从配置文件到指令执行》</del></a></li>
+<li><input checked disabled type="checkbox"> <a href="http://idolcoder.gitee.io/quickshortkey/#/adb"><del>快捷键Wiki-《ADB：开发及自测常用指令》</del></a></li>
+<li><input disabled type="checkbox"> 《Activity 启动模式快问秒答》，SingleTop的坑，SingleInstance的坑，20种flags全解析，FLAG_ACTIVITY_NEW_TASK结合FLAG_ACTIVITY_MULTIPLE_TASK使用的坑</li>
 </ul>
 <p>修改文章  </p>
 <ul>
@@ -523,7 +516,7 @@ post_wordcount:
 <p>学习计划</p>
 <ul>
 <li><input disabled type="checkbox"> 《数学思想概论》5辑</li>
-<li><input disabled type="checkbox"> 《架构师修炼之道》</li>
+<li><input checked disabled type="checkbox"> 《架构师修炼之道》</li>
 <li><input disabled type="checkbox"> 《划归与归纳》</li>
 <li><input disabled type="checkbox"> 《结构思考力用思维导图》</li>
 <li><input disabled type="checkbox"> 《情报分析合集》</li>
