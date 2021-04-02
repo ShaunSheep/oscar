@@ -878,6 +878,17 @@
 
           
           
+             <span id="/blog/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/" class="leancloud_visitors" data-flag-title="为什么要花3年时间面试一个人？">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           <!--
           
@@ -1115,6 +1126,17 @@
           
 
           
+          
+             <span id="/blog/2016/06/five-sort-algorithm/" class="leancloud_visitors" data-flag-title="详解五大排序算法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
           
 
           <!--
@@ -1361,6 +1383,17 @@
           
 
           
+          
+             <span id="/blog/2016/06/android-communication/" class="leancloud_visitors" data-flag-title="《详解 Android 通信》">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
           
 
           <!--
@@ -1640,6 +1673,17 @@
 
           
           
+             <span id="/blog/2016/06/performance-android/" class="leancloud_visitors" data-flag-title="Android性能优化【史诗巨著之内存篇】">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
           <!--
           
@@ -1918,6 +1962,17 @@
           
 
           
+          
+             <span id="/blog/2016/04/Android-TOP-100-Program/" class="leancloud_visitors" data-flag-title="Android 百大框架排行榜">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
           
 
           <!--
@@ -3129,7 +3184,7 @@
 
 
 
-  
+    <script> function showTime(Counter){var entries=[];var $visitors=$('.leancloud_visitors');$visitors.each(function(){entries.push($(this).attr('id').trim());});Counter('get','/classes/Counter',{where:JSON.stringify({url:{'$in':entries}})}).done(function({results}){var COUNT_CONTAINER_REF='.leancloud-visitors-count';if(results.length===0){$visitors.find(COUNT_CONTAINER_REF).text(0);return;}for(var i=0;i<results.length;i++){var item=results[i];var url=item.url;var time=item.time;var element=document.getElementById(url);$(element).find(COUNT_CONTAINER_REF).text(time);}for(var i=0;i<entries.length;i++){var url=entries[i];var element=document.getElementById(url);var countSpan=$(element).find(COUNT_CONTAINER_REF);if(countSpan.text()==''){countSpan.text(0);}}}).fail(function({responseJSON}){console.log('LeanCloud Counter Error: '+responseJSON.code+' '+responseJSON.error);});}$(function(){$.get('https://app-router.leancloud.cn/2/route?appId='+'MFn6psRe8xtnq9sq6lv9MJks').done(function({api_server}){var Counter=function(method,url,data){return $.ajax({method:method,url:'https://'+api_server+'/1.1'+url,headers:{'X-LC-Id':'MFn6psRe8xtnq9sq6lv9MJks','X-LC-Key':'pi8Pa2aH3XpcaovMyqIXVuOP','Content-Type':'application/json',},data:data});}; if($('.post-title-link').length>=1){showTime(Counter);}});});</script>
 
   
 
