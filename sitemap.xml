@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://idolcoder.gitee.io/blog/2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</loc>
+    
+    <lastmod>2021-04-03</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://idolcoder.gitee.io/blog/2021/04/Career-stability-experience/</loc>
+    
+    <lastmod>2021-04-03</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://idolcoder.gitee.io/blog/2021/02/website_nickname/</loc>
     
     <lastmod>2021-04-02</lastmod>
@@ -110,13 +124,6 @@
     <loc>http://idolcoder.gitee.io/blog/about/index.html</loc>
     
     <lastmod>2021-02-17</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://idolcoder.gitee.io/blog/2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</loc>
-    
-    <lastmod>2021-02-16</lastmod>
     
   </url>
   
@@ -238,13 +245,6 @@
   
   <url>
     <loc>http://idolcoder.gitee.io/blog/categories/Android/</loc>
-    <lastmod>2021-04-03</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://idolcoder.gitee.io/blog/categories/%E6%A0%87%E7%AD%BE/</loc>
     <lastmod>2021-04-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

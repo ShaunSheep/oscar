@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://idolcoder.gitee.io/blog/blog//2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</loc>
+    <lastmod>2021-04-03</lastmod>
+  </url>
+  <url>
+    <loc>http://idolcoder.gitee.io/blog/blog//2021/04/Career-stability-experience/</loc>
+    <lastmod>2021-04-03</lastmod>
+  </url>
+  <url>
     <loc>http://idolcoder.gitee.io/blog/blog//2021/02/website_nickname/</loc>
     <lastmod>2021-04-02</lastmod>
   </url>
@@ -55,9 +63,5 @@
   <url>
     <loc>http://idolcoder.gitee.io/blog/blog//2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/</loc>
     <lastmod>2021-02-17</lastmod>
-  </url>
-  <url>
-    <loc>http://idolcoder.gitee.io/blog/blog//2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</loc>
-    <lastmod>2021-02-16</lastmod>
   </url>
 </urlset> 
