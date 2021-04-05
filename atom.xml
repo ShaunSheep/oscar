@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>叶金诚的站点</title>
+  
+  <subtitle>汇贤雅叙</subtitle>
+  <link href="http://idolcoder.gitee.io/blog/atom.xml" rel="self"/>
+  
+  <link href="http://idolcoder.gitee.io/blog/"/>
+  <updated>2021-04-03T18:33:54.840Z</updated>
+  <id>http://idolcoder.gitee.io/blog/</id>
+  
+  <author>
+    <name>叶金诚</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>职业稳定性杂谈</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/04/Career-stability-experience/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/04/Career-stability-experience/</id>
+    <published>2021-04-03T03:26:22.000Z</published>
+    <updated>2021-04-03T18:33:54.840Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&amp;lt;%- toc(page.content) %&amp;gt;&lt;/p&gt;
+&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;之前在知乎写过一篇回答，&lt;a href=&quot;https://www.zhihu.com/question/308110736/answer/628764663&quot;&gt;《为什么都在说 90 后的辞职率高？》&lt;/a&gt;，纯理性分析获得了300赞。今日在公众号上看到心理学家刘向明教授写的一篇名为&lt;a href=&quot;https://mp.weixin.qq.com/s/ZyEWV1g_UzXODkViyFdNlw&quot;&gt;《社会招聘，怎样测试稳定性？&lt;/a&gt;的文章，让我对职业稳定性有了更深的理解。&lt;/p&gt;
+&lt;p&gt;先看看我之前的回答，再来看我的新感悟吧。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="杂谈" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    <category term="日记" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+    <category term="程序人生，杂谈" scheme="http://idolcoder.gitee.io/blog/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mtk-log</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/02/mtk-log/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/02/mtk-log/</id>
+    <published>2021-02-27T01:13:12.000Z</published>
+    <updated>2021-04-02T12:50:08.517Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;MTK-log&quot;&gt;&lt;a href=&quot;#MTK-log&quot; class=&quot;headerlink&quot; title=&quot;MTK log&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://www.pianshen.com/article/4121163154/&quot;&gt;MTK log&lt;/a&gt;&lt;/h1&gt;&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;mtklog是由log生成工具MTKLogger生成的一系列问题追踪文件，其主要作用就是对系统或者应用产生的异常进行快速定位，从而解决问题。&lt;/p&gt;
+&lt;p&gt;log文件名称为：&lt;br&gt;crash_log ：崩溃日志，主要输出 程序崩溃造成的crash log&lt;br&gt;events_log：事件日志，主要输出记录各个activity周期及事件&lt;br&gt;kernel_log：底层驱动，按键，低内存相关log&lt;br&gt;sys_log：系统日志，Exception定位点&lt;br&gt;radio_log：输出通话，网络状态变化&lt;br&gt;main_log：详尽输出每一步的log&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/categories/Android/BugFree/"/>
+    
+    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    
+    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/tags/BugFree/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>BugFree三剑客异常、日志、工具</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/02/android-bugfree-three-lines/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/02/android-bugfree-three-lines/</id>
+    <published>2021-02-27T00:13:12.000Z</published>
+    <updated>2021-02-27T04:21:16.707Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;BugFree三剑客异常、日志、工具—Android开发排查问题小结&quot;&gt;&lt;a href=&quot;#BugFree三剑客异常、日志、工具—Android开发排查问题小结&quot; class=&quot;headerlink&quot; title=&quot;BugFree三剑客异常、日志、工具—Android开发排查问题小结&quot;&gt;&lt;/a&gt;BugFree三剑客异常、日志、工具—Android开发排查问题小结&lt;/h1&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;程序员编写程序、调试代码的时候不可避免的会遇到各种问题，如页面显示不正确，如数据层数据组装操作未按照期望的业务逻辑执行。&lt;/p&gt;
+&lt;p&gt;造成这些问题的原因大多分为以下几种：有些是条件语句执行错误，有些是Java层的Exception如空指针、集合边界越界问题，有些是较难找到原因的OOM、ANR、Crash、系统SWT重启问题。面对扑面而来的问题，程序员很容易束手无策。笔者结合自己的经验，总结了BugFree中必不可少的三剑客：异常、日志、工具，期望通过这3个“帮手”，帮助各位排查开发难题。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/categories/Android/BugFree/"/>
+    
+    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    
+    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/tags/BugFree/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《学习革命解读》心得</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/02/learn-relovation-notes/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/02/learn-relovation-notes/</id>
+    <published>2021-02-18T14:00:49.000Z</published>
+    <updated>2021-02-18T14:54:47.842Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;书籍&quot;&gt;&lt;a href=&quot;#书籍&quot; class=&quot;headerlink&quot; title=&quot;书籍&quot;&gt;&lt;/a&gt;书籍&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;详情&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;封面&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;http://cdn.yangchaofan.cn/q4YBAFxP4wGABmEDAADtx3MZXfQ102_b.jpg&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;作者&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;a href=&quot;https://book.douban.com/search/%E5%88%98%E8%A8%80&quot;&gt;刘言&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;出版社&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;青海人民出版社&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;介绍&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;书籍每一开分为左右两页，左侧为精华总结、心得、名人关于学习的见解，对人有启发；右侧是作者的解读，主要讲了：&lt;br&gt;实用的学习总论如正文的思考训练、数学学习方法；&lt;br&gt;走出学习的困境，消除错误学习观念、消除学习疲劳的方法，消除学习的三大障碍&lt;br&gt;快速学习法的20个事件，如控制大脑学习韵律节奏、通过五官影响学习感受&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;</summary>
+    
+    
+    
+    <category term="家庭教育" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
+    
+    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    
+    
+    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《高效学习方法全集》日记</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/02/super-learn-skills/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/02/super-learn-skills/</id>
+    <published>2021-02-17T07:26:29.000Z</published>
+    <updated>2021-02-17T07:52:02.425Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;高效学习方法全集高中版&quot;&gt;&lt;a href=&quot;#高效学习方法全集高中版&quot; class=&quot;headerlink&quot; title=&quot;高效学习方法全集高中版&quot;&gt;&lt;/a&gt;高效学习方法全集高中版&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;详情&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;封面&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;http://cdn.yangchaofan.cn/%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E9%AB%98%E4%B8%AD%E7%89%88.jpg&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;作者&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;新教育学习研究机构&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;出版社&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;湖北教育出版社&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;介绍&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;此书有许多状元的学习经验方法总结。譬如预习一节，关于预习的3个目的；譬如复习一节，黄金五分钟和睡前复习法，譬如如何做题一章有做题的禁忌、题目的选择、做题的时机、做题的思考、最后总结等&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;</summary>
+    
+    
+    
+    <category term="家庭教育" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
+    
+    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    
+    
+    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《如何高效学习》心得</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/02/study-more-efficiency/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/02/study-more-efficiency/</id>
+    <published>2021-02-17T04:37:23.000Z</published>
+    <updated>2021-04-02T12:51:32.440Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;如何高效学习&quot;&gt;&lt;a href=&quot;#如何高效学习&quot; class=&quot;headerlink&quot; title=&quot;如何高效学习&quot;&gt;&lt;/a&gt;如何高效学习&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;strong&gt;名称&lt;/strong&gt;&lt;/th&gt;
+&lt;th&gt;&lt;strong&gt;详情&lt;/strong&gt;&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;封面&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;http://cdn.yangchaofan.cn/s27172838.jpg&quot; width=25%&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;作者&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;[&lt;a href=&quot;https://book.douban.com/author/625722/&quot;&gt;加拿大] 斯科特·扬&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;出版社&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;机械工业出版社&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;介绍&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;“学习的最高原则：定义出学习的活动，并做到它们”&lt;br&gt;如何用整体学习法学会作者提倡的整体学习法？如何用比喻记住比喻技术——比喻法-光线摄入眼球，眼球对光的感觉，视网膜的感觉，大脑对光的感觉，大脑中的声音&lt;br&gt;&lt;img src=&quot;http://cdn.yangchaofan.cn/biyufa.png&quot; width=&quot;20%&quot;&gt;&lt;br&gt;当我的思维库里有如此多的思维技术，我该如何运用呢？&lt;br/&gt;学习理论和学习技术是整体性学习策略的重要组成部分，它俩同等重要，没有先后。&lt;br/&gt;我喜欢在这两个技术中融入自己的学习方法，如《学习革命的解读》、《超效学方法解码》、《高效学习方法全集》中的一些方法。&lt;br/&gt;将“学习理论”和“学习技术”应用实践到生活中去是非常必要的步骤，我喜欢做一些智力挑战、智力思维训练巩固我的整体性学习策略。&lt;br/&gt;我需要选择，选择将哪些技术当作我习惯技术——好比趁手的兵器。&lt;br/&gt;我需要问为什么，当前场景下为什么需要使用这种技术，而不用其他技术；&lt;br/&gt;我需要练习薄弱的思维，我思维弱项是处理抽象数据、数学公式等，那我就要着重训练内在化、随意信息的处理。&lt;br/&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;</summary>
+    
+    
+    
+    <category term="家庭教育" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
+    
+    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    
+    
+    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《超效学习方法解码》心得</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/</id>
+    <published>2021-02-17T03:37:23.000Z</published>
+    <updated>2021-02-17T07:41:30.517Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;《超效学习方法解码》&quot;&gt;&lt;a href=&quot;#《超效学习方法解码》&quot; class=&quot;headerlink&quot; title=&quot;《超效学习方法解码》&quot;&gt;&lt;/a&gt;《超效学习方法解码》&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;详情&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;封面&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;img src=&quot;http://cdn.yangchaofan.cn/gaoxiao%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95.jpg&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;作者&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;曹婷&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;出版社&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;星火教育研究院&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;介绍&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;分为学习基础篇、学习修炼篇、学习问题对症篇；学习对症篇主要解决语文、数学、英文、历史、政治的疑难杂症；学习修炼篇提供了预习、听课、复习、做题的基本思路，克服困难的方法；学习基础篇主要讲了时间管理、注意力管理、记忆力的小技巧。&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;</summary>
+    
+    
+    
+    <category term="家庭教育" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
+    
+    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    
+    
+    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>程序员吃的是青春饭吗？</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</id>
+    <published>2021-02-16T01:50:49.000Z</published>
+    <updated>2021-04-03T18:24:59.810Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;程序员吃的是青春饭吗？&quot;&gt;&lt;a href=&quot;#程序员吃的是青春饭吗？&quot; class=&quot;headerlink&quot; title=&quot;程序员吃的是青春饭吗？&quot;&gt;&lt;/a&gt;程序员吃的是青春饭吗？&lt;/h1&gt;&lt;p&gt;昨天在知乎上看到一个提问&lt;a href=&quot;https://www.zhihu.com/question/444102247&quot;&gt;“程序员为什么是吃青春饭，而不是像医生律师一样越老越值钱？”&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;翻了一百多个回答，大多答主都是顺着题主的逻辑假定答的&lt;/p&gt;
+&lt;p&gt;即许多人都是心中假设此前提成立：“程序员是吃青春饭”、“律师医生越老越值钱”&lt;/p&gt;
+&lt;p&gt;基于“程序员确实吃青春饭”很容易可以得到以下这些“由果倒因”“贩卖焦虑”的观点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;医生可以独立出售个人价值，程序员不行&lt;/li&gt;
+&lt;li&gt;医生知识更新慢，程序员知识更新快&lt;/li&gt;
+&lt;li&gt;医生是非劳动密集，程序员是劳动密集&lt;/li&gt;
+&lt;li&gt;医生卖的是个人服务，程序员卖的是coding能力&lt;/li&gt;
+&lt;li&gt;医生服务的是人，程序员服务的是计算机&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;可如果题主或答主们的前提假定是错的呢？&lt;/p&gt;
+&lt;p&gt;如果存在“程序员越老越值钱”的事实呢？</summary>
+    
+    
+    
+    <category term="杂谈" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    <category term="日记" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+    <category term="程序人生，杂谈" scheme="http://idolcoder.gitee.io/blog/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>波尔克</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/02/website_nickname/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/02/website_nickname/</id>
+    <published>2021-02-16T00:50:49.000Z</published>
+    <updated>2021-04-02T13:07:56.782Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;波尔克&quot;&gt;&lt;a href=&quot;#波尔克&quot; class=&quot;headerlink&quot; title=&quot;波尔克&quot;&gt;&lt;/a&gt;波尔克&lt;/h1&gt;&lt;p&gt;（谐音“博儿客”）&lt;/p&gt;
+&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;个人网站用了有四年了，期间一直都是用PHP+MySql的方式部署在阿里云，从备案域名折腾服务器，到调试各种插件，从制定学习计划，到学课程，又是边写文章边研究Markdown排版，种种事情花了很大功夫。今年1月份发生了一件事情——服务器到期，那会儿工作忙一直拖着续费的事情。阿里清空了磁盘，我也是事后才注意到通知短信，发现网站的文章数据全丢的那一刻，整个人浑身感觉都不好了。&lt;/p&gt;
+&lt;p&gt;痛定思痛，决定文章还是要继续写，写哪里呢CSDN、博客园、简书、掘金都只适合当存档的地方，毕竟没有个人网站用起来有感情。想起来之前工作的时候，为了写音视频直播学了Node，注意过Hexo框架，这个框架可以快速搭个人网站。哎哟不错哦，一拍大腿说干就干。谁让咱是行动派！&lt;/p&gt;
+&lt;p&gt;最终我花了一天时间，使用码云仓库+Hexo搭一个小型静态网站。优点是：免费，简单，便捷，最大优点是动静分离，静态资源放国内仓库，占磁盘空间的图片资源放CDN服务器，通过域名转发访问，加载效率杠杠滴。&lt;/p&gt;
+&lt;p&gt;这篇文章主要包含了个人网站的技术架构和常见问题。包括使用的oss管理平台、域名管理、评论管理、文章编辑与发布、网站编辑管理等功能的设计与实现。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="杂谈" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    <category term="日记" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+    <category term="杂谈" scheme="http://idolcoder.gitee.io/blog/tags/%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AndroidHandler百问百答</title>
+    <link href="http://idolcoder.gitee.io/blog/2020/08/handler%20TOP%20100%20Questions/"/>
+    <id>http://idolcoder.gitee.io/blog/2020/08/handler%20TOP%20100%20Questions/</id>
+    <published>2020-08-10T01:50:49.000Z</published>
+    <updated>2021-03-06T13:51:20.688Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;android-bai-wen-bai-da-na-xie-nia</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    
+    <category term="应用层" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BA%94%E7%94%A8%E5%B1%82/"/>
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    
+    <category term="Handler" scheme="http://idolcoder.gitee.io/blog/tags/Handler/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>为什么要花3年时间面试一个人？</title>
+    <link href="http://idolcoder.gitee.io/blog/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/"/>
+    <id>http://idolcoder.gitee.io/blog/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/</id>
+    <published>2019-01-16T01:50:49.000Z</published>
+    <updated>2021-03-14T09:21:52.838Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;wei-shi-me-yao-hua-3-nian-shi-jia</summary>
+      
+    
+    
+    
+    <category term="杂谈" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    <category term="日记" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+    <category term="程序人生，杂谈" scheme="http://idolcoder.gitee.io/blog/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>详解五大排序算法</title>
+    <link href="http://idolcoder.gitee.io/blog/2016/06/five-sort-algorithm/"/>
+    <id>http://idolcoder.gitee.io/blog/2016/06/five-sort-algorithm/</id>
+    <published>2016-06-16T14:16:54.000Z</published>
+    <updated>2021-03-06T15:51:37.992Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;摘自本人16年的博客&lt;a href=&quot;https://blog.csdn.n</summary>
+      
+    
+    
+    
+    <category term="计算机科学" scheme="http://idolcoder.gitee.io/blog/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+    
+    <category term="算法" scheme="http://idolcoder.gitee.io/blog/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="算法" scheme="http://idolcoder.gitee.io/blog/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《详解 Android 通信》</title>
+    <link href="http://idolcoder.gitee.io/blog/2016/06/android-communication/"/>
+    <id>http://idolcoder.gitee.io/blog/2016/06/android-communication/</id>
+    <published>2016-06-08T13:39:07.000Z</published>
+    <updated>2021-03-06T15:56:53.066Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;摘自本人16年的的博客&lt;a href=&quot;https://blog.csdn.</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    
+    <category term="应用层" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BA%94%E7%94%A8%E5%B1%82/"/>
+    
+    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    
+    <category term="Communication" scheme="http://idolcoder.gitee.io/blog/tags/Communication/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android性能优化【史诗巨著之内存篇】</title>
+    <link href="http://idolcoder.gitee.io/blog/2016/06/performance-android/"/>
+    <id>http://idolcoder.gitee.io/blog/2016/06/performance-android/</id>
+    <published>2016-06-01T13:34:41.000Z</published>
+    <updated>2021-03-14T05:50:49.396Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;摘自本人16年的的博客&lt;a href=&quot;http://blog.csdn.n</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="应用层" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BA%94%E7%94%A8%E5%B1%82/"/>
+    
+    <category term="Performance" scheme="http://idolcoder.gitee.io/blog/categories/Android/Performance/"/>
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    
+    <category term="Performance" scheme="http://idolcoder.gitee.io/blog/tags/Performance/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android 百大框架排行榜</title>
+    <link href="http://idolcoder.gitee.io/blog/2016/04/Android-TOP-100-Program/"/>
+    <id>http://idolcoder.gitee.io/blog/2016/04/Android-TOP-100-Program/</id>
+    <published>2016-04-10T03:50:49.000Z</published>
+    <updated>2021-02-27T05:35:40.760Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;blockquote&gt;
+&lt;p&gt;说明：无聊之时作的一篇笔记式文章，&lt;/p&gt;
+&lt;p&gt;</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    
+    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2015-2021学习计划</title>
+    <link href="http://idolcoder.gitee.io/blog/2015/08/learing-plan/"/>
+    <id>http://idolcoder.gitee.io/blog/2015/08/learing-plan/</id>
+    <published>2015-08-17T15:13:12.000Z</published>
+    <updated>2021-03-25T14:11:33.090Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;2015-2021学习计划及小结&quot;&gt;&lt;a href=&quot;#2015-2021学习计划及小结&quot; class=&quot;headerlink&quot; title=&quot;2015-2021学习计划及小结&quot;&gt;&lt;/a&gt;2015-2021学习计划及小结&lt;/h1&gt;&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;这里存放2015年-2021年的学习内容，包括已经学习的，正在学习的，&lt;/p&gt;
+&lt;p&gt;内容为：音频课程、视频课程、电子书、实体书、专栏课程、认证课程等。&lt;/p&gt;
+&lt;p&gt;内容来源自kindle、知乎、极客学院、慕课网、阿里云大学、光环国际、黑马培训、拉钩培训、三节课培训等&lt;/p&gt;
+&lt;p&gt;个人网站到期，很多资料未及时存档，只能根据自己的历史笔记一点点更新了。&lt;/p&gt;
+&lt;p&gt;每一条内容为：完成状态+任务名称+任务完成详情&lt;/p&gt;
+&lt;p&gt;已完成的任务显示如下，完成态+任务名称+删除线+点击跳转至文章总结或项目总结&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; &lt;del&gt;&lt;a href=&quot;&quot;&gt;任务名称&lt;/a&gt;&lt;/del&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;未完成的任务显示为，未完成态+任务名称&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; 任务名称&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="规划" scheme="http://idolcoder.gitee.io/blog/categories/%E8%A7%84%E5%88%92/"/>
+    
+    <category term="个人教育" scheme="http://idolcoder.gitee.io/blog/categories/%E8%A7%84%E5%88%92/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/"/>
+    
+    
+    <category term="个人教育" scheme="http://idolcoder.gitee.io/blog/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/"/>
+    
+  </entry>
+  
+</feed>
