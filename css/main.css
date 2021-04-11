@@ -2351,7 +2351,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #8edb11;
+  background: #fff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3488,6 +3488,7 @@ header.post-header {
   background: rgba(255,255,255,0.8);
   box-shadow: initial;
   border-radius: initial;
+  opacity: 0;
 }
 .sidebar-inner.affix {
   position: fixed;
