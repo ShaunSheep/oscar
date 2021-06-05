@@ -250,7 +250,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#103;&#x69;&#116;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#x62;&#46;&#x63;&#111;&#x6d;">&#103;&#x69;&#116;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#x62;&#46;&#x63;&#111;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#103;&#x69;&#116;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#99;&#x6f;&#x6d;">&#103;&#x69;&#116;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#99;&#x6f;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -599,10 +599,542 @@ post_wordcount:
       </tags>
   </entry>
   <entry>
+    <title>Android Crash揭秘与实践</title>
+    <url>/blog//2021/05/android-crash-who-kill-you/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><p>AndroidCrash基础知识</p>
+<p><strong>研究的对象</strong>是<font color="blue">APP进程</font></p>
+<p><strong>研究的问题</strong>主体是 <font color="blue">APP为什么会Crash</font></p>
+<p><strong>研究的路线</strong>是：从APP进程被Crash的第一行代码开始溯源，<code>Java-&gt;JVM-&gt;Android平台-&gt;Android系统-&gt;Devices</code>，直至我们最后能看懂的地方。</p>
+<p><strong>研究的工具</strong>是：</p>
+<ol>
+<li>Source Insight 4.0</li>
+<li>UML</li>
+<li>Logcat</li>
+<li>Logger</li>
+<li>MtkLog</li>
+<li>SysTrace</li>
+<li>TraceView</li>
+<li>Profiler</li>
+<li>Leakcanary</li>
+<li>Blockcanary</li>
+<li>Buggly</li>
+<li>友盟</li>
+<li>自建APM</li>
+</ol>
+<p><strong>研究的参考资料</strong>是：</p>
+<ol>
+<li>Java JRE SRC</li>
+<li>Android Framwork SRC</li>
+<li>工具对应的文档</li>
+</ol>
+<p>主要介绍两个方面：</p>
+<ol>
+<li>Java(JVM)级别的Crash现象以及原理</li>
+<li>AppCrash容灾方案1.0</li>
+<li>异常捕获原理及最佳实践</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="code"><pre><span class="line">graph LR</span><br><span class="line">Head(Crash知识分享大纲)--&gt;preKno</span><br><span class="line">preKno(前置知识)--&gt;Crash(Crash)</span><br><span class="line">Crash--&gt;c1(定义)</span><br><span class="line">Crash--&gt;c2(分类)</span><br><span class="line">preKno--&gt;Exception(异常)</span><br><span class="line">Exception--&gt;e1(定义)</span><br><span class="line">Exception--&gt;e2(分类)</span><br><span class="line">Head--&gt;code(原理分析)</span><br><span class="line">code--&gt;co1(Java)--&gt;co11(JavaThrowable)</span><br><span class="line">co1--&gt;co12(JavaException)</span><br><span class="line">code--&gt;co2(JVM)--&gt;co22(方法加载原理)</span><br><span class="line">co2--&gt;co23(类加载原理)</span><br><span class="line">co2--&gt;co24(JVM异常原理)</span><br><span class="line">Head--&gt;CrashDemo(CrashDemo案例)</span><br><span class="line">CrashDemo--&gt;cr1(主线程异常)</span><br><span class="line">CrashDemo--&gt;cr2(子线程异常)</span><br><span class="line">CrashDemo--&gt;cr3(未捕获异常处理器)</span><br><span class="line">CrashDemo--&gt;cr4(默认未捕获异常处理器)</span><br><span class="line">CrashDemo--&gt;cr6(演示APP停止运行Dialog)</span><br><span class="line">CrashDemo--&gt;cr7(演示APP黑屏闪退且无Dialog)</span><br><span class="line">CrashDemo--&gt;cr5(try-catch-exception机器码)</span><br><span class="line">Head--&gt;CrashProject(Crash工程化实践)</span><br><span class="line">CrashProject--&gt;cp1(线下工具)</span><br><span class="line">CrashProject--&gt;cp2(线上工具)</span><br><span class="line">CrashProject--&gt;cp3(编码实践)</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h1 id="crash知识分享第一期"><a href="#Crash知识分享第一期" class="headerlink" title="Crash知识分享第一期"></a>Crash知识分享第一期<a href="#crash知识分享第一期" class="header-anchor">#</a></h1><h1 id="3个现象"><a href="#3个现象" class="headerlink" title="3个现象"></a>3个现象<a href="#3个现象" class="header-anchor">#</a></h1><blockquote>
+<p> <strong>有这么3种现象</strong>(不算ANR)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>现象名称</th>
+<th></th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>App已停止运行</td>
+<td><img src="http://cdn.yangchaofan.cn//typora/image-20210423143651100.png" alt="image-20210423143651100"></td>
+<td>RuntimeException<br>OutOfMemoryError</td>
+</tr>
+<tr>
+<td>App闪退</td>
+<td>黑屏并回到Launcher首页</td>
+<td>StackOverflowError<br></td>
+</tr>
+<tr>
+<td>App屡次停止运行</td>
+<td><img src="http://cdn.yangchaofan.cn//typora/image-20210423143600543.png" alt="image-20210423143600543"></td>
+<td>多次异常</td>
+</tr>
+<tr>
+<td>（补充）App没有响应</td>
+<td><img src="http://cdn.yangchaofan.cn/typora/image-20210426163446282.png" alt="image-20210426163446282" style="zoom:80%;"></td>
+<td>参考唐将《ANR知识分享》</td>
+</tr>
+</tbody></table>
+<p>Demo</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210426190621477.png" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图1-Demo展示
+      </div>
+</center>
+
+
+
+
+<blockquote>
+<p>根据Crash源头不同,Crash级别可以分为以下4类</p>
+</blockquote>
+<ol>
+<li>JVM：Throwable类问题</li>
+<li>OS平台：内存、文件流、中断等</li>
+<li>硬件设备：路由器、宽带、设备重启、摄像头、内存卡、磁盘等</li>
+<li>物理环境：水、温度等</li>
+</ol>
+<h1 id="java级别crash原理"><a href="#Java级别Crash原理" class="headerlink" title="Java级别Crash原理"></a>Java级别Crash原理<a href="#java级别crash原理" class="header-anchor">#</a></h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义<a href="#定义" class="header-anchor">#</a></h2><p><strong>什么是Java级别的Crash？</strong></p>
+<ol>
+<li><code>JavaAPP</code>或<code>AndroidAPP</code>运行过程中，发生了<code>Throwable</code>类问题,被JVM识别捕获</li>
+<li><code>JVM</code>主动操作导致程序退出，而非Android平台OS、硬件设备、物理环境导致程序退出</li>
+</ol>
+<p><strong>关于Java级别Crash主要研究哪些问题？</strong></p>
+<blockquote>
+<p>研究对象：Java最小任务单位Thread</p>
+<p>研究场景：JavaAPP程序、AndroidAPP程序</p>
+<p>场景区别：Java虚拟机、Android虚拟机</p>
+<p>研究问题：</p>
+<ol>
+<li>Crash杀死了谁？连带杀死了谁？-Thread\ThreadGroup\Process</li>
+<li>谁Crash了谁？谁杀死了APP？- Runtime</li>
+<li>停止运行Dialog是谁调用弹出的？-</li>
+<li>Exception抛出流程?-Exception对象是x创建的，第一个抛出者是xx</li>
+<li>Logcat打印流程?-每一行ExceptionLog是xx、xx打印的</li>
+</ol>
+</blockquote>
+<h2 id="研究对象thread"><a href="#研究对象Thread" class="headerlink" title="研究对象Thread"></a>研究对象Thread<a href="#研究对象thread" class="header-anchor">#</a></h2><blockquote>
+<p>主要回答一个问题：Crash杀死的是谁？——运行APP的最小单位是Thread（Process），所以杀死的是当前Thread</p>
+</blockquote>
+<h3 id="thread基础知识"><a href="#Thread基础知识" class="headerlink" title="Thread基础知识"></a>Thread基础知识<a href="#thread基础知识" class="header-anchor">#</a></h3><h4 id="thread4"><a href="#Thread-4" class="headerlink" title="Thread[4]"></a>Thread<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Java Platform SE 8](file:///E:/developedoc/jdk-8u281-docs-all/docs/api/index.html)">[4]</span></a></sup><a href="#thread4" class="header-anchor">#</a></h4><blockquote>
+<p>代码位置：jdk\src\java\lang\Thread.java</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"> 	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 将未捕获的异常分派给处理程序。这个方法只打算由JVM调用。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dispatchUncaughtException</span><span class="params">(Throwable e)</span> </span>&#123;</span><br><span class="line">        getUncaughtExceptionHandler().uncaughtException(<span class="keyword">this</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line">	<span class="comment">/* 这个线程所在的组 */</span></span><br><span class="line">    <span class="keyword">private</span> ThreadGroup group;</span><br><span class="line">	 <span class="comment">// 默认null 除非显示设置</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> UncaughtExceptionHandler uncaughtExceptionHandler;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回当此线程由于未捕获异常而突然终止时调用的处理程序。</span></span><br><span class="line"><span class="comment">     * 如果该线程没有显式设置未捕获的异常处理程序，则返回该线程的ThreadGroup对象，</span></span><br><span class="line"><span class="comment">     * 除非该线程已经终止，在这种情 况下返回null。为这个线程返回未捕获的异常处理程序</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> UncaughtExceptionHandler <span class="title">getUncaughtExceptionHandler</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> uncaughtExceptionHandler != <span class="keyword">null</span> ?</span><br><span class="line">            uncaughtExceptionHandler : group;</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Thread内部接口</span></span><br><span class="line"><span class="comment">     * 用于在线程由于未捕获异常而突然终止时调用的处理程序。</span></span><br><span class="line"><span class="comment">     * 当一个线程由于未捕获的异常而即将终止时，Java虚拟机将使用getUncaughtExceptionHandler查询该线程的</span></span><br><span class="line"><span class="comment">     * UncaughtExceptionHandler，并调用该处理程序的uncaughtException方法，将线程和异常作为参数传递。</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * 如果一个线程没有显式设置它的UncaughtExceptionHandler，那么它的ThreadGroup对象就充当它的UncaughtExceptionHand</span></span><br><span class="line"><span class="comment">     * 如果ThreadGroup对象对处理异常没有特殊要求，它可以将调用转发给getDefaultUncaughtExceptionHandler默认未捕获的异常处理程序</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@FunctionalInterface</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 方法在给定线程由于给定未捕获异常而终止时调用。 Java虚拟机将忽略此方法引发的任何异常。</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(Thread t, Throwable e)</span></span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+<p>JVM执行Thread对象时，处理异常流程为:</p>
+<ol>
+<li>JVM在执行当前<code>Thread</code>对象时遇到了异常并进行抛出，如果JVM发现开发者并未对该异常进行捕获，则JVM会调用<code>Thread</code>的<code>dispatchUncaughtException</code>方法将Exception对象传递给<code>Thread</code>持有的<code>UncaughtExceptionHandler </code></li>
+<li>如果<code>Thread</code>持有的<code>UncaughtExceptionHandler</code> 不为空，则交由<code>Thread</code>对象持有的UncaughtExceptionHandler 对象处理；</li>
+<li>如果<code>Thread</code>持有的<code>UncaughtExceptionHandler </code>为空，则交给<code>ThreadGroup</code>来处理<code>Thread</code>所抛出<code>Exception</code>对象</li>
+</ol>
+<h4 id="threadgroup4"><a href="#ThreadGroup-4" class="headerlink" title="ThreadGroup[4]"></a>ThreadGroup<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Java Platform SE 8](file:///E:/developedoc/jdk-8u281-docs-all/docs/api/index.html)">[4]</span></a></sup><a href="#threadgroup4" class="header-anchor">#</a></h4><blockquote>
+<p>代码位置：jdk\src\java\lang\ThreadGroup.java</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadGroup</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">     <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * ThreadGroup.java</span></span><br><span class="line"><span class="comment">     * 当此线程组中的线程因未捕获异常而停止，且该线程没有特定的Thread.UncaughtExceptionHandler设置时，由Java虚拟机调用。。</span></span><br><span class="line"><span class="comment">     * ThreadGroup的uncaughtException方法执行如下操作:</span></span><br><span class="line"><span class="comment">     * 如果这个线程组有一个父线程组，该父线程组的uncaughtException方法将被调用，并带有相同的两个参数。</span></span><br><span class="line"><span class="comment">     * 否则，这个方法会检查是否安装了一个默认的未捕获异常处理程序，如果安装了，它的uncaughtException方法会被调用，并带有相同的两个参数。</span></span><br><span class="line"><span class="comment">     * 否则，此方法将确定Throwable参数是否为ThreadDeath的实例。如果是这样，也没有做什么特别的事情。否则，包含线程名称的消息(从线程的getName方法返回)和堆栈回溯(使用Throwable的printStackTrace方法)将打印到标准错误流。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(Thread t, Throwable e)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">            parent.uncaughtException(t, e);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Thread.UncaughtExceptionHandler ueh =</span><br><span class="line">                Thread.getDefaultUncaughtExceptionHandler();</span><br><span class="line">            <span class="keyword">if</span> (ueh != <span class="keyword">null</span>) &#123;</span><br><span class="line">                ueh.uncaughtException(t, e);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!(e <span class="keyword">instanceof</span> ThreadDeath)) &#123;</span><br><span class="line">                System.err.print(<span class="string">&quot;Exception in thread \&quot;&quot;</span></span><br><span class="line">                                 + t.getName() + <span class="string">&quot;\&quot; &quot;</span>);</span><br><span class="line">                e.printStackTrace(System.err);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p><code>ThreadGroup</code>处理<code>uncaughtException</code>的流程很简洁</p>
+<ol>
+<li>默认情况，先将Exception对象交给<code>父ThreadGroup</code>处理</li>
+<li>判断Thread是否持有<code>defaultUncaughtExceptionHandler</code>默认异常处理器</li>
+<li>如果有默认异常处理器，则交由其处理</li>
+<li>如果没有异常处理器，则将错误信息输出到<code>System.err</code></li>
+</ol>
+<blockquote>
+<p>总结一下Exception处理顺序，假设某个Thread抛出Exception</p>
+<p>消费Exception的顺序为</p>
+<ol>
+<li>Thread<ol>
+<li><code>UncaughtExceptionHandler</code> </li>
+</ol>
+</li>
+<li>ThreadGroup<ol>
+<li>ParentThread<ol>
+<li><code>DefaultUncaughtExceptionHandler</code></li>
+<li><code>UncaughtExceptionHandler</code> </li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h3 id="主线程"><a href="#主线程" class="headerlink" title="主线程"></a>主线程<a href="#主线程" class="header-anchor">#</a></h3><h4 id="javaapp"><a href="#JavaAPP" class="headerlink" title="JavaAPP"></a>JavaAPP<a href="#javaapp" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrashTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        testMainTrheadCrash();</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试主线程异常Crash</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testMainTrheadCrash</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread.currentThread().setName(<span class="string">&quot;iron man is on the main thread&quot;</span>);</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">int</span> b = a / <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></div>
+<p>异常堆栈</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">Exception in thread <span class="string">&quot;iron man is on the main thread&quot;</span> java.lang.ArithmeticException: / by zero</span><br><span class="line">        at CrashTest.testMainTrheadCrash(CrashTest.java:<span class="number">29</span>)</span><br><span class="line">        at CrashTest.main(CrashTest.java:<span class="number">4</span>)</span><br></pre></td></tr></table></figure></div>
+<p>可以看到线程名是主线程<code>main</code></p>
+<h4 id="androidapp"><a href="#AndroidAPP" class="headerlink" title="AndroidAPP"></a>AndroidAPP<a href="#androidapp" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * main thread throws exceptions</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> view</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createExceptionInMainThread</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">       Thread.currentThread().setName(<span class="string">&quot;iron man is on the android main thread&quot;</span>);</span><br><span class="line">       <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">       <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">int</span> c = a / b;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></div>
+<p>异常堆栈</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="number">2021</span>-<span class="number">04</span>-<span class="number">25</span> <span class="number">14</span>:<span class="number">33</span>:<span class="number">38.372</span> <span class="number">4707</span>-<span class="number">4707</span>/com.work.demotest E/AndroidRuntime: FATAL EXCEPTION: iron man is on the android main thread</span><br><span class="line">    Process: com.work.demotest, PID: <span class="number">4707</span></span><br><span class="line">    java.lang.IllegalStateException: Could not execute method <span class="keyword">for</span> android:onClick</span><br><span class="line">        at android.view.View$DeclaredOnClickListener.onClick(View.java:<span class="number">4726</span>)</span><br><span class="line">        at android.view.View.performClick(View.java:<span class="number">5638</span>)</span><br><span class="line">        at android.view.View$PerformClick.run(View.java:<span class="number">22430</span>)</span><br><span class="line">        at android.os.Handler.handleCallback(Handler.java:<span class="number">751</span>)</span><br><span class="line">        at android.os.Handler.dispatchMessage(Handler.java:<span class="number">95</span>)</span><br><span class="line">        at android.os.Looper.loop(Looper.java:<span class="number">154</span>)</span><br><span class="line">        at android.app.ActivityThread.main(ActivityThread.java:<span class="number">6198</span>)</span><br><span class="line">        at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">        at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:<span class="number">891</span>)</span><br><span class="line">        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:<span class="number">781</span>)</span><br><span class="line">     Caused by: java.lang.reflect.InvocationTargetException</span><br><span class="line">        at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">        at android.view.View$DeclaredOnClickListener.onClick(View.java:<span class="number">4721</span>)</span><br><span class="line">        at android.view.View.performClick(View.java:<span class="number">5638</span>) </span><br><span class="line">        at android.view.View$PerformClick.run(View.java:<span class="number">22430</span>) </span><br><span class="line">        at android.os.Handler.handleCallback(Handler.java:<span class="number">751</span>) </span><br><span class="line">        at android.os.Handler.dispatchMessage(Handler.java:<span class="number">95</span>) </span><br><span class="line">        at android.os.Looper.loop(Looper.java:<span class="number">154</span>) </span><br><span class="line">        at android.app.ActivityThread.main(ActivityThread.java:<span class="number">6198</span>) </span><br><span class="line">        at java.lang.reflect.Method.invoke(Native Method) </span><br><span class="line">        at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:<span class="number">891</span>) </span><br><span class="line">        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:<span class="number">781</span>) </span><br><span class="line">     Caused by: java.lang.ArithmeticException: divide by zero</span><br><span class="line">        at com.work.demotest.TestExceptionActivity.createExceptionInMainThread(TestExceptionActivity.java:<span class="number">132</span>)</span><br><span class="line">        at java.lang.reflect.Method.invoke(Native Method) </span><br><span class="line">        at android.view.View$DeclaredOnClickListener.onClick(View.java:<span class="number">4721</span>) </span><br><span class="line">        at android.view.View.performClick(View.java:<span class="number">5638</span>) </span><br><span class="line">        at android.view.View$PerformClick.run(View.java:<span class="number">22430</span>) </span><br><span class="line">        at android.os.Handler.handleCallback(Handler.java:<span class="number">751</span>) </span><br><span class="line">        at android.os.Handler.dispatchMessage(Handler.java:<span class="number">95</span>) </span><br><span class="line">        at android.os.Looper.loop(Looper.java:<span class="number">154</span>) </span><br><span class="line">        at android.app.ActivityThread.main(ActivityThread.java:<span class="number">6198</span>) </span><br><span class="line">        at java.lang.reflect.Method.invoke(Native Method) </span><br><span class="line">        at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:<span class="number">891</span>) </span><br><span class="line">        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:<span class="number">781</span>) </span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+<h3 id="子线程"><a href="#子线程" class="headerlink" title="子线程"></a>子线程<a href="#子线程" class="header-anchor">#</a></h3><h4 id="javaapp"><a href="#JavaAPP-1" class="headerlink" title="JavaAPP"></a>JavaAPP<a href="#javaapp" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 测试子线程异常</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testChildThreadCrash</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       Thread childTrhead = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">               <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">               <span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">               <span class="keyword">int</span> b = a / <span class="number">0</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       childTrhead.setName(<span class="string">&quot;iron man is on the child thread&quot;</span>);</span><br><span class="line">       childTrhead.start();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></div>
+<p>异常堆栈</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">Exception in thread <span class="string">&quot;iron man is on the child thread&quot;</span> java.lang.ArithmeticException: / by zero</span><br><span class="line">        at CrashTest$<span class="number">1.</span>run(CrashTest.java:<span class="number">16</span>)</span><br><span class="line">        at java.lang.Thread.run(Thread.java:<span class="number">745</span>)</span><br></pre></td></tr></table></figure></div>
+<h4 id="androidapp"><a href="#AndroidAPP-1" class="headerlink" title="AndroidAPP"></a>AndroidAPP<a href="#androidapp" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * main thread  dose not catch sub thread exception</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> view</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createExceptionInThread</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">                <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">int</span> c = a / b;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        Log.d(<span class="string">&quot;createExceptionInThread&quot;</span>,<span class="string">&quot;main thread is catch sub thread exception&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>异常堆栈</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="number">2021</span>-<span class="number">04</span>-<span class="number">25</span> <span class="number">14</span>:<span class="number">35</span>:<span class="number">25.580</span> <span class="number">4775</span>-<span class="number">4811</span>/com.work.demotest E/AndroidRuntime: FATAL EXCEPTION: iron man is on the android chilid thread</span><br><span class="line">    Process: com.work.demotest, PID: <span class="number">4775</span></span><br><span class="line">    java.lang.ArithmeticException: divide by zero</span><br><span class="line">        at com.work.demotest.TestExceptionActivity$<span class="number">1.</span>run(TestExceptionActivity.java:<span class="number">113</span>)</span><br><span class="line">        at java.lang.Thread.run(Thread.java:<span class="number">761</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<blockquote>
+<p>JavaAPP与AndroidAPP默认异常堆栈区别</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令行默认异常堆栈</th>
+<th>JavaAPP</th>
+<th>AndroidAPP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Process</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>Thread</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>Exception</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Android主线程与子线程异常堆栈区别</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Android异常堆栈</th>
+<th>Process</th>
+<th>Thread</th>
+<th>view</th>
+<th>ActivityThread</th>
+<th>ZygoteInit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ChildThread</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:negative_squared_cross_mark:</td>
+</tr>
+<tr>
+<td>MainThread</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>疑问：Android主线程异常，为什么抛出如此多的信息？为什么有这种区别？</p>
+</blockquote>
+<p>答：因为AndroidAPP的主线程所做的任务位于<code>ActivityThread.main</code>中，在<code>main</code>方法中做了比子线程更多的任务。</p>
+<h2 id="研究对象runtimeltspan-classhinttop-hinterror-hintmedium-hintrounded-hintbounce-aria-label-runtimejava"><a href="#研究对象Runtime-lt-span-class-”hint–top-hint–error-hint–medium-hint–rounded-hint–bounce”-aria-label-”-Runtime-java" class="headerlink" title="研究对象Runtime&lt;span class=”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=” Runtime.java"></a>研究对象Runtime<sup id="fnref:3"><a href="#fn:3" rel="footnote">&lt;span class=”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=”<a href="http://www.coderead.cn/jre/8/java/lang/Runtime.java"> Runtime.java</a></a></sup><a href="#研究对象runtimeltspan-classhinttop-hinterror-hintmedium-hintrounded-hintbounce-aria-label-runtimejava" class="header-anchor">#</a></h2><p>“&gt;[3]</p>
+<blockquote>
+<p>主要回答一个问题，谁杀死了APP？</p>
+</blockquote>
+<h3 id="javaruntime"><a href="#JavaRuntime" class="headerlink" title="JavaRuntime"></a>JavaRuntime<a href="#javaruntime" class="header-anchor">#</a></h3><blockquote>
+<p>代码位置：jre/java/lang/Runtime </p>
+<p>调用者：暂时理解为虚拟机(没有查到准确的触发者)</p>
+<p>代码用途：杀死JavaAPP、运行JavaAPP</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 每个Java应用程序都有一个Runtime类实例，</span></span><br><span class="line"><span class="comment">* 该类允许应用程序与应用程序运行的环境交互。当前运行时可以从getRuntime方法获得。</span></span><br><span class="line"><span class="comment">* 应用程序不能创建自己的此类实例。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Runtime</span> </span>&#123;  </span><br><span class="line">	...</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exit</span><span class="params">(<span class="keyword">int</span> status)</span> </span>&#123;</span><br><span class="line">        SecurityManager security = System.getSecurityManager();</span><br><span class="line">        <span class="keyword">if</span> (security != <span class="keyword">null</span>) &#123;</span><br><span class="line">            security.checkExit(status);</span><br><span class="line">        &#125;</span><br><span class="line">        Shutdown.exit(status);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h3 id="androidruntimeltspan-classhinttop-hinterror-hintmedium-hintrounded-hintbounce-aria-label-runtimeinitjava-androidxrefcom"><a href="#AndroidRuntime-lt-span-class-”hint–top-hint–error-hint–medium-hint–rounded-hint–bounce”-aria-label-”-RuntimeInit-java-androidxref-com" class="headerlink" title="AndroidRuntime&lt;span class=”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=” RuntimeInit.java (androidxref.com)"></a>AndroidRuntime<sup id="fnref:2"><a href="#fn:2" rel="footnote">&lt;span class=”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=”<a href="http://androidxref.com/8.1.0_r33/xref/frameworks/base/core/java/com/android/internal/os/RuntimeInit.java"> RuntimeInit.java (androidxref.com)</a></a></sup><a href="#androidruntimeltspan-classhinttop-hinterror-hintmedium-hintrounded-hintbounce-aria-label-runtimeinitjava-androidxrefcom" class="header-anchor">#</a></h3><p>“&gt;[2]</p>
+<blockquote>
+<p>代码位置: /frameworks/base/core/java/com/android/internal/os/RuntimeInit.java</p>
+<p>调用者：暂时理解为虚拟机(没有查到准确的触发者)</p>
+<p>代码用途：运行AndroidAPP、杀死AndroidAPP、打印AndroidAPP运行过程的Log</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运行时初始化的主入口点。不供公共访问。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RuntimeInit</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * main方法入口</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] argv)</span> </span>&#123;</span><br><span class="line">		commonInit();</span><br><span class="line">        nativeFinishInit();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">commonInit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 设置虚拟机中的线程未捕获异常处理程序。APP可以替换默认的未捕获异常处</span></span><br><span class="line"><span class="comment">     * 理器，但不能替换预处理处理器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    LoggingHandler loggingHandler = <span class="keyword">new</span> LoggingHandler();</span><br><span class="line">    Thread.setUncaughtExceptionPreHandler(loggingHandler);</span><br><span class="line">    Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">new</span> KillApplicationHandler(loggingHandler));</span><br><span class="line"></span><br><span class="line">    initialized = <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * RuntimeInit内部类</span></span><br><span class="line"><span class="comment">     * 处理未捕获异常导致的应用程序死亡 framework负责为主线程捕获这些信息</span></span><br><span class="line"><span class="comment">     * 因此这应该只对应用程序创建的线程有影响。</span></span><br><span class="line"><span class="comment">     * 在此方法运行之前，loginghandler将已经有日志细节。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">KillApplicationHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(Thread t, Throwable e)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 如果已经报告Crash，避免死循环</span></span><br><span class="line">                <span class="keyword">if</span> (mCrashing)</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                mCrashing = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 尝试结束Profiling，如果Profiling正在运行，且我们杀死了正在Profiling的进程，内存中的缓冲区将会丢失</span></span><br><span class="line">                <span class="comment">// 请尝试停止Profiling，用来刷新buffer缓冲区。</span></span><br><span class="line">                <span class="comment">// 这样做可以提升方法追踪（method trace）结果，对调试Crash很有用</span></span><br><span class="line">                <span class="keyword">if</span> (ActivityThread.currentActivityThread() != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    ActivityThread.currentActivityThread().stopProfiling();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 打开崩溃对话框，直到它消失</span></span><br><span class="line">                ActivityManager.getService().handleApplicationCrash(mApplicationObject,</span><br><span class="line">                        <span class="keyword">new</span> ApplicationErrorReport.ParcelableCrashInfo(e));</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable t2) &#123;</span><br><span class="line">                <span class="keyword">if</span> (t2 <span class="keyword">instanceof</span> DeadObjectException) &#123;</span><br><span class="line">                    <span class="comment">// 系统进程已死，忽略执行</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        Clog_e(TAG, <span class="string">&quot;Error reporting crash&quot;</span>, t2);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Throwable t3) &#123;</span><br><span class="line">                        <span class="comment">// Clog_e() 也存在异常哦</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                <span class="comment">// 保障这个过程能执行</span></span><br><span class="line">                Process.killProcess(Process.myPid());</span><br><span class="line">                System.exit(<span class="number">10</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>总结下AppRuntime处理流程</p>
+<ol>
+<li><code>main</code>调用了<code>commonInit</code></li>
+<li><code>commonInit</code>中设置了<code>setUncaughtExceptionPreHandler</code>、<code>setDefaultUncaughtExceptionHandler</code><ol>
+<li>未捕获异常处理器<code>setUncaughtExceptionPreHandler</code>设置了<code>LoggingHandler</code></li>
+<li>默认未捕获异常处理器<code>setDefaultUncaughtExceptionHandler</code>设置了<code>KillApplicationHandler</code></li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>观察步骤2-b 这也就是为什么在App中设置默认异常捕获器可以防止APP闪退的原因</p>
+</blockquote>
+<p>Runtime研究的启示有以下几点：</p>
+<ol>
+<li>无论是JavaAPP或是AndroidAPP，只要为Thread设置了未捕获异常处理器，就可以降低Crash的几率</li>
+<li>在未捕获异常处理器中可以做很多任务：异常信息持久化，上报日志，单个线程设置处理器，APP容灾处理</li>
+<li>主线程的默认未捕获异常处理器是<code>KillApplicationHandler</code>，默认会杀死当前进程</li>
+</ol>
+<p>如果我们追溯代码，可以看到停止运行的弹出框的数据格式为<code>ApplicationErrorReport#CrashInfo</code></p>
+<blockquote>
+<p>代码位置:frameworks/base/core/java/android/app/ApplicationErrorReport.java</p>
+<p>代码用途：创建Crash数据对象，保存命令行打印的错误信息</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>内部类名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CrashInfo</td>
+<td>描述Crash信息</td>
+</tr>
+<tr>
+<td>AnrInfo</td>
+<td>描述ANR信息</td>
+</tr>
+<tr>
+<td>BatteryInfo</td>
+<td>描述电池信息</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p> 代码位置ActivityManagerService</p>
+<p>代码用途：调出AppErrors的方法停止运行弹出框Dialog</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ActivityManagerService</span> <span class="keyword">extends</span> <span class="title">IActivityManager</span>.<span class="title">Stub</span></span>&#123;</span><br><span class="line">	<span class="keyword">final</span> AppErrors mAppErrors; </span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">crashApplication</span><span class="params">(<span class="keyword">int</span> uid, <span class="keyword">int</span> initialPid, String packageName, <span class="keyword">int</span> userId,</span></span></span><br><span class="line"><span class="function"><span class="params">            String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(<span class="keyword">this</span>) &#123;</span><br><span class="line">            mAppErrors.scheduleAppCrashLocked(uid, initialPid, packageName, userId, message);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></div>
+<blockquote>
+<p>代码位置AppErrors</p>
+<p>代码用途：Dialog工具类，如创建停止运行弹出框Dialog</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppErrors</span> </span>&#123;</span><br><span class="line">    handleShowAppErrorUi()&#123;</span><br><span class="line">        proc.crashDialog = <span class="keyword">new</span> AppErrorDialog(mContext, mService, data);</span><br><span class="line">        ...</span><br><span class="line">        data.proc.crashDialog.show();</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 显示“unexpected error” dialog</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">crashApplication</span><span class="params">(ProcessRecord r, ApplicationErrorReport.CrashInfo crashInfo)</span> </span>&#123;</span><br><span class="line">         ...</span><br><span class="line">     &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 显示&quot;anr&quot; dialog</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">appNotResponding</span><span class="params">(ProcessRecord app, ActivityRecord activity,</span></span></span><br><span class="line"><span class="function"><span class="params">            ActivityRecord parent, <span class="keyword">boolean</span> aboveSystem, <span class="keyword">final</span> String annotation)</span></span>&#123;</span><br><span class="line">           ...</span><br><span class="line">           <span class="comment">// 0 == show dialog, 1 = keep waiting, -1 = kill process immediately</span></span><br><span class="line">           <span class="keyword">int</span> res = mService.mController.appNotResponding(</span><br><span class="line">                        app.processName, app.pid, info.toString());</span><br><span class="line">           ...</span><br><span class="line">            <span class="comment">// 设置APP anr状态吗，锁住errorReportReceiver</span></span><br><span class="line">            makeAppNotRespondingLocked(app,</span><br><span class="line">                    activity != <span class="keyword">null</span> ? activity.shortComponentName : <span class="keyword">null</span>,</span><br><span class="line">                    annotation != <span class="keyword">null</span> ? <span class="string">&quot;ANR &quot;</span> + annotation : <span class="string">&quot;ANR&quot;</span>,</span><br><span class="line">                    info.toString());</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<blockquote>
+<p>代码位置AppErrorDialog</p>
+<p>代码用途：弹出框Dialog</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">AppErrorDialog</span> <span class="keyword">extends</span> <span class="title">BaseErrorDialog</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>&#123;</span><br><span class="line">     <span class="comment">// 消息事件 &#x27;what&#x27; codes</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FORCE_QUIT = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FORCE_QUIT_AND_REPORT = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> RESTART = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MUTE = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TIMEOUT = <span class="number">6</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CANCEL = <span class="number">7</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h3 id="java未捕获异常处理器"><a href="#Java未捕获异常处理器" class="headerlink" title="Java未捕获异常处理器"></a>Java未捕获异常处理器<a href="#java未捕获异常处理器" class="header-anchor">#</a></h3><p><code>CrashTest</code>测试类，类中定义了内部类<code>ExceptionHandler</code></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrashTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">final</span> String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// testChildThreadCrash();</span></span><br><span class="line">        testMainTrheadCrash();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">/** </span></span><br><span class="line"><span class="comment">     * 内部类形式的处理器</span></span><br><span class="line"><span class="comment">     * 线程未捕获异常处理器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionHandler</span> <span class="keyword">implements</span> <span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(<span class="keyword">final</span> Thread t, <span class="keyword">final</span> Throwable e)</span> </span>&#123;</span><br><span class="line">            System.out.printf(t.getName()+<span class="string">&quot;,captured a exception \n&quot;</span>);</span><br><span class="line">            System.out.printf(<span class="string">&quot;thread error msg is&quot;</span>+e.toString());</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="主线程"><a href="#主线程-1" class="headerlink" title="主线程"></a>主线程<a href="#主线程" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试主线程异常Crash</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testMainTrheadCrash</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Thread.currentThread().setName(<span class="string">&quot;iron man is on the main thread&quot;</span>);</span><br><span class="line">    ExceptionHandler cExceptionHandler = <span class="keyword">new</span> ExceptionHandler();</span><br><span class="line">    Thread.currentThread().setUncaughtExceptionHandler(cExceptionHandler);</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> b = a / <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>异常日志</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">iron man is on the main thread,captured a exception</span><br><span class="line">thread error msg isjava.lang.ArithmeticException: / by zero</span><br></pre></td></tr></table></figure></div>
+<h4 id="子线程"><a href="#子线程-1" class="headerlink" title="子线程"></a>子线程<a href="#子线程" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 测试子线程异常</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testChildThreadCrash</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">final</span> Thread childTrhead = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">          <span class="meta">@Override</span></span><br><span class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">              <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">              <span class="keyword">final</span> <span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">              <span class="keyword">final</span> <span class="keyword">int</span> b = a / <span class="number">0</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      childTrhead.setName(<span class="string">&quot;iron man is on the child thread&quot;</span>);</span><br><span class="line">      ExceptionHandler cExceptionHandler = <span class="keyword">new</span> ExceptionHandler();</span><br><span class="line">      childTrhead.setUncaughtExceptionHandler(cExceptionHandler);</span><br><span class="line">      childTrhead.start();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></div>
+<p>异常日志</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">iron man is on the child thread,captured a exception</span><br><span class="line">thread error msg isjava.lang.ArithmeticException: / by zero</span><br></pre></td></tr></table></figure></div>
+<h3 id="android未捕获异常处理器"><a href="#Android未捕获异常处理器" class="headerlink" title="Android未捕获异常处理器"></a>Android未捕获异常处理器<a href="#android未捕获异常处理器" class="header-anchor">#</a></h3><h4 id="主线程"><a href="#主线程-2" class="headerlink" title="主线程"></a>主线程<a href="#主线程" class="header-anchor">#</a></h4><p>定义<code>Application</code></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">     android:name=&quot;.collections.App&quot;</span><br><span class="line">   	&gt;</span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<p><code>App</code>中定义未捕获异常处理器，未开启默认未捕获异常处理</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 线程未捕获异常处理器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(<span class="keyword">final</span> Thread t, <span class="keyword">final</span> Throwable e)</span> </span>&#123;</span><br><span class="line">            Log.d(<span class="string">&quot;uncaughtException&quot;</span>,t.getName()+<span class="string">&quot;,captured a exception&quot;</span>);</span><br><span class="line">            Log.d(<span class="string">&quot;uncaughtException&quot;</span>,<span class="string">&quot;thread error msg is&quot;</span>+e.toString());</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        Thread.currentThread().setName(<span class="string">&quot;android app &quot;</span>);</span><br><span class="line">        Thread.currentThread().setUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line">        <span class="comment">//        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());</span></span><br><span class="line"><span class="comment">//        Thread.setDefaultUncaughtExceptionHandler(null);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<blockquote>
+<p>问题：setUncaughtExceptionHandler是否能高枕无忧？保证不Crash？</p>
+</blockquote>
+<p>答：<font color="white">不能</font></p>
+<h4 id="测试主线程运行时异常"><a href="#测试主线程运行时异常" class="headerlink" title="测试主线程运行时异常"></a>测试主线程运行时异常<a href="#测试主线程运行时异常" class="header-anchor">#</a></h4><blockquote>
+<p>依然用Thread#子线程#AndroidAPP的代码演示</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * main thread throws exceptions</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> view</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createExceptionInMainThread</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">    Thread.currentThread().setName(<span class="string">&quot;iron man is on the android main thread&quot;</span>);</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> c = a / b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>日志堆栈</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="number">2021</span>-<span class="number">04</span>-<span class="number">26</span> <span class="number">10</span>:<span class="number">36</span>:<span class="number">24.678</span> <span class="number">7136</span>-<span class="number">7136</span>/com.work.demotest D/ExceptionHandler: uncaughtExceptioniron man is on the android main threadhas captured a exception</span><br><span class="line"><span class="number">2021</span>-<span class="number">04</span>-<span class="number">26</span> <span class="number">10</span>:<span class="number">36</span>:<span class="number">24.678</span> <span class="number">7136</span>-<span class="number">7136</span>/com.work.demotest D/ExceptionHandler: uncaughtException has capture thread error ,msg isjava.lang.IllegalStateException: Could not execute method <span class="keyword">for</span> android:onClick</span><br><span class="line"><span class="number">2021</span>-<span class="number">04</span>-<span class="number">26</span> <span class="number">10</span>:<span class="number">36</span>:<span class="number">24.733</span> <span class="number">7166</span>-<span class="number">7166</span>/? D/ExceptionHandler: NoneUeCrashActivity onCreate</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>可以看到主线程的<code>Exception</code>被<code>未捕获异常处理器</code>处理了，并且跳转到了默认页面<code>NoneUeCrashActivity</code>，无异常堆栈。</p>
+<h4 id="测试子线程运行时异常"><a href="#测试子线程运行时异常" class="headerlink" title="测试子线程运行时异常"></a>测试子线程运行时异常<a href="#测试子线程运行时异常" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * main thread  dose not catch sub thread exception</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> view</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createExceptionInThread</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         Thread thread =  <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">              <span class="meta">@Override</span></span><br><span class="line">              <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                  <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">                  <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">                  <span class="keyword">int</span> c = a / b;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">          thread.setName(<span class="string">&quot;iron man is on the android chilid thread&quot;</span>);</span><br><span class="line">          thread.start();</span><br><span class="line">      &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">          Log.d(<span class="string">&quot;createExceptionInThread&quot;</span>, <span class="string">&quot;main thread is catch sub thread exception&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>日志堆栈</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="number">2021</span>-<span class="number">04</span>-<span class="number">26</span> <span class="number">10</span>:<span class="number">39</span>:<span class="number">37.421</span> <span class="number">7409</span>-<span class="number">7439</span>/com.work.demotest E/AndroidRuntime: FATAL EXCEPTION: iron man is on the android chilid thread</span><br><span class="line">    Process: com.work.demotest, PID: <span class="number">7409</span></span><br><span class="line">    java.lang.ArithmeticException: divide by zero</span><br><span class="line">        at com.work.demotest.TestExceptionActivity$<span class="number">1.</span>run(TestExceptionActivity.java:<span class="number">120</span>)</span><br><span class="line">        at java.lang.Thread.run(Thread.java:<span class="number">761</span>)</span><br></pre></td></tr></table></figure></div>
+<p>可以看到异常堆栈，并且弹出了停止运行弹窗。</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210426104141555.png" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图2-APP停止运行
+      </div>
+</center>
+
+
+
+
+
+
+
+<p>通过设置主、子线程的<code>setDefaultUncaughtExceptionHandler</code>和<code>setUncaughtExceptionHandler</code>，记录是否显示停止运行Dialog的结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>是否显示<code>停止运行Dialog</code></th>
+<th>主线程运行时异常</th>
+<th>子线程运行时异常</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主线程设置setUncaughtExceptionHandler</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>主线程设置setDefaultUncaughtExceptionHandler</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:negative_squared_cross_mark:</td>
+</tr>
+<tr>
+<td>子线程设置setUncaughtExceptionHandler</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:negative_squared_cross_mark:</td>
+</tr>
+<tr>
+<td>子线程设置setDefaultUncaughtExceptionHandler</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:negative_squared_cross_mark:</td>
+</tr>
+</tbody></table>
+<p>可以发现：</p>
+<ol>
+<li>主线程仅设置setUncaughtExceptionHandler，如果主线程抛出异常，则不会闪退，也不会弹出Dialog；<strong>如果子线程抛出异常，则App会闪退弹出Dialog;</strong></li>
+<li>主线程设置setDefaultUncaughtExceptionHandler，如果子线程抛出异常，则App不会闪退，也不会显示Dialog</li>
+<li>子线程设置setUncaughtExceptionHandler或子线程设置setDefaultUncaughtExceptionHandler都不会闪退，也不会弹出Dialog</li>
+</ol>
+<blockquote>
+<p>问题：Thread.setDefaultUncaughtExceptionHandler能解决什么问题？</p>
+</blockquote>
+<p>答：</p>
+<p><font color="white">RuntimeInit中为APP设置的俩异未捕获常处理器Thread.setUncaughtExceptionPreHandler(loggingHandler);<br>Thread.setDefaultUncaughtExceptionHandler(new KillApplicationHandler(loggingHandler));</font></p>
+<h4 id="未捕获异常处理器最佳实践"><a href="#未捕获异常处理器最佳实践" class="headerlink" title="未捕获异常处理器最佳实践"></a>未捕获异常处理器最佳实践<a href="#未捕获异常处理器最佳实践" class="header-anchor">#</a></h4><h5 id="制定容灾策略"><a href="#制定容灾策略" class="headerlink" title="制定容灾策略"></a>制定容灾策略<a href="#制定容灾策略" class="header-anchor">#</a></h5><ol>
+<li><p>在当前页面对MVVM、MVP或MVC各个层级做以下操作：退出、恢复、重试、缓存</p>
+</li>
+<li><p>跳转到业务首页，如登录流程某一步异常跳转到登录首页、视频通话页异常跳转到聊天详情页</p>
+</li>
+<li><p>显示错误页或错误弹窗，如遇到OOM，Dialog显示<code>内存不足,请优化内存后再试</code>、遇到StackOverFlow,Dialog显示<code>程序异常，进入克服中心反馈</code></p>
+</li>
+<li><p>保存错误数据，定时上报服务器</p>
+<p>…</p>
+</li>
+</ol>
+<h5 id="主线程和子线程作区分"><a href="#主线程和子线程作区分" class="headerlink" title="主线程和子线程作区分"></a>主线程和子线程作区分<a href="#主线程和子线程作区分" class="header-anchor">#</a></h5><ol>
+<li>子线程设置未捕获异常处理器，执行自己的容灾恢复逻辑</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 线程未捕获异常处理器</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">ChildExceptionHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">       <span class="meta">@Override</span></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(<span class="keyword">final</span> Thread t, <span class="keyword">final</span> Throwable e)</span> </span>&#123;</span><br><span class="line">           Log.d(<span class="string">&quot;ChildExceptionHandler&quot;</span>, <span class="string">&quot;uncaughtException &quot;</span> + t.getName() + <span class="string">&quot; has captured a exception&quot;</span>);</span><br><span class="line">           Log.d(<span class="string">&quot;ChildExceptionHandler&quot;</span>, <span class="string">&quot;uncaughtException has capture thread error ,msg is &quot;</span> + e.toString());</span><br><span class="line">           startCrashPage();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startCrashPage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">       intent.setAction(<span class="string">&quot;com.crash.demo.crash&quot;</span>);</span><br><span class="line">       intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">       startActivity(intent);</span><br><span class="line">       android.os.Process.killProcess(android.os.Process.myPid());</span><br><span class="line">       System.exit(<span class="number">0</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 测试子线程设置未捕获异常处理器</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">runtimeNoneUE</span><span class="params">(View view)</span></span>&#123;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           Thread thread =  <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">               <span class="meta">@Override</span></span><br><span class="line">               <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                   <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">                   <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">                   <span class="keyword">int</span> c = a / b;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;);</span><br><span class="line">           thread.setUncaughtExceptionHandler(<span class="keyword">new</span> ChildExceptionHandler());</span><br><span class="line">           thread.setName(<span class="string">&quot;iron man is on the android chilid thread&quot;</span>);</span><br><span class="line">           thread.start();</span><br><span class="line">       &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           Log.d(<span class="string">&quot;createExceptionInThread&quot;</span>, <span class="string">&quot;main thread is catch sub thread exception&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<ol start="2">
+<li><code>App</code>中主线程设置未捕获异常处理器，覆盖默认未捕获异常处理</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">Thread.currentThread().setName(<span class="string">&quot;android app &quot;</span>);</span><br><span class="line"><span class="comment">// 未捕获异常处理器</span></span><br><span class="line">Thread.currentThread().setUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line"><span class="comment">// 默认未捕获处理器赋值</span></span><br><span class="line">Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line"><span class="comment">// 或 默认未捕获处理器赋值为null</span></span><br><span class="line">Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">null</span>);</span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="crash容灾10"><a href="#Crash容灾1-0" class="headerlink" title="Crash容灾1.0"></a>Crash容灾1.0<a href="#crash容灾10" class="header-anchor">#</a></h4><table>
+<thead>
+<tr>
+<th>常见做法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://github.com/android-notes/Cockroach">开源库CockRoach</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/xuuhaoo/DefenseCrash">开源库DefenseCrashApplication</a></td>
+</tr>
+<tr>
+<td>方法块进行try catch finally、throws 、throw new</td>
+</tr>
+<tr>
+<td>对UI主线程设置未捕获异常处理器、默认未捕获异常处理器</td>
+</tr>
+<tr>
+<td>对子线程设置未捕获异常处理器、默认未捕获异常处理器</td>
+</tr>
+</tbody></table>
+<h2 id="研究对象虚拟机"><a href="#研究对象虚拟机" class="headerlink" title="研究对象虚拟机"></a>研究对象虚拟机<a href="#研究对象虚拟机" class="header-anchor">#</a></h2><blockquote>
+<p>主要回答一个问题：谁调用App的main方法，并持有当前App主线程对象？</p>
+<p>Java主线程是的任务入口是Java类#main</p>
+<p>Anroidd主线程的任务入口是ActivityThread#main</p>
+<p>AndroidJVM类似，仅以JavaJVM举例</p>
+</blockquote>
+<h3 id="javajvm"><a href="#JavaJVM" class="headerlink" title="JavaJVM"></a>JavaJVM<a href="#javajvm" class="header-anchor">#</a></h3><p>编写一段try-catch代码，如下</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionCode</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> result = <span class="number">3</span>/<span class="number">0</span>;</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception exception)&#123;</span><br><span class="line">            System.out.print(<span class="string">&quot;exception&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">            System.out.print(<span class="string">&quot;finally&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>编译为class文件</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">javac ExceptionCode.class</span><br></pre></td></tr></table></figure></div>
+<p>编译为字节码文件</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">javap -c ExceptionCode.class</span><br></pre></td></tr></table></figure></div>
+<p>查看字节码文件</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="POWERSHELL"><figure class="iseeu highlight /powershell"><table><tr><td class="code"><pre><span class="line">Compiled from <span class="string">&quot;ExceptionCode.java&quot;</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ExceptionCode</span></span> &#123;</span><br><span class="line">  public ExceptionCode();</span><br><span class="line">    Code:</span><br><span class="line">       <span class="number">0</span>: aload_0</span><br><span class="line">       <span class="number">1</span>: invokespecial <span class="comment">#1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span></span><br><span class="line">       <span class="number">4</span>: <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">  public <span class="keyword">static</span> void main(java.lang.String[]);</span><br><span class="line">    Code:</span><br><span class="line">       <span class="number">0</span>: iconst_3</span><br><span class="line">       <span class="number">1</span>: iconst_0</span><br><span class="line">       <span class="number">2</span>: idiv</span><br><span class="line">       <span class="number">3</span>: istore_1</span><br><span class="line">       <span class="number">4</span>: getstatic     <span class="comment">#2                  // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">       <span class="number">7</span>: ldc           <span class="comment">#3                  // String finally</span></span><br><span class="line">       <span class="number">9</span>: invokevirtual <span class="comment">#4                  // Method java/io/PrintStream.print:(Ljava/lang/String;)V</span></span><br><span class="line">      <span class="number">12</span>: goto          <span class="number">46</span></span><br><span class="line">      <span class="number">15</span>: astore_1</span><br><span class="line">      <span class="number">16</span>: getstatic     <span class="comment">#2                  // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">      <span class="number">19</span>: ldc           <span class="comment">#6                  // String exception</span></span><br><span class="line">      <span class="number">21</span>: invokevirtual <span class="comment">#4                  // Method java/io/PrintStream.print:(Ljava/lang/String;)V</span></span><br><span class="line">      <span class="number">24</span>: getstatic     <span class="comment">#2                  // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">      <span class="number">27</span>: ldc           <span class="comment">#3                  // String finally</span></span><br><span class="line">      <span class="number">29</span>: invokevirtual <span class="comment">#4                  // Method java/io/PrintStream.print:(Ljava/lang/String;)V</span></span><br><span class="line">      <span class="number">32</span>: goto          <span class="number">46</span></span><br><span class="line">      <span class="number">35</span>: astore_2</span><br><span class="line">      <span class="number">36</span>: getstatic     <span class="comment">#2                  // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">      <span class="number">39</span>: ldc           <span class="comment">#3                  // String finally</span></span><br><span class="line">      <span class="number">41</span>: invokevirtual <span class="comment">#4                  // Method java/io/PrintStream.print:(Ljava/lang/String;)V</span></span><br><span class="line">      <span class="number">44</span>: aload_2</span><br><span class="line">      <span class="number">45</span>: athrow</span><br><span class="line">      <span class="number">46</span>: <span class="keyword">return</span></span><br><span class="line">    Exception table:</span><br><span class="line">       from    to  target <span class="built_in">type</span></span><br><span class="line">           <span class="number">0</span>     <span class="number">4</span>    <span class="number">15</span>   <span class="class"><span class="keyword">Class</span> <span class="title">java</span>/<span class="title">lang</span>/<span class="title">Exception</span></span></span><br><span class="line"><span class="class">           0     4    35   <span class="title">any</span></span></span><br><span class="line"><span class="class">          15    24    35   <span class="title">any</span></span></span><br><span class="line"><span class="class">&#125;</span></span><br></pre></td></tr></table></figure></div>
+
+
+<h3 id="exception-table-异常表"><a href="#Exception-Table-异常表" class="headerlink" title="Exception Table 异常表"></a>Exception Table 异常表<a href="#exception-table-异常表" class="header-anchor">#</a></h3><p>异常表中包含了一个或多个异常处理者(Exception Handler)的信息，这些信息包含如下</p>
+<ul>
+<li>from 可能发生异常的起始点</li>
+<li>to 可能发生异常的结束点</li>
+<li>target 上述from和to之前发生异常后的异常处理者的位置</li>
+<li>type 异常处理者处理的异常的类信息,包括具体的包名类名</li>
+</ul>
+<p>这张表足够回答许多常见异常捕获类的问题，不要急，这些问题将在《Crash知识分享第二期》展开讨论。</p>
+<p>在这一步我们仅需要知道，在编译阶段结束的时候，finally里面的部分会被复制两份至<code>try语句的结尾</code>和<code>catch语句的结尾</code>.</p>
+<p>异常表定义了main方法拥有3种执行分支</p>
+<ul>
+<li>0-4之间，发生了指定类型为Exception的异常，则会跳转到语句15<ul>
+<li>接下来15-24之间，会执行打印<code>字符串Exception</code>、<code>字符串finally</code>的机器码</li>
+</ul>
+</li>
+<li>0-4之间，无法伦发生什么异常，都会跳转到语句15<ul>
+<li>接下来15-24之间，会执行打印<code>字符串Exception</code>、<code>字符串finally</code>的机器码</li>
+</ul>
+</li>
+<li>15-24之间，无论发生什么异常，都会跳转到语句35<ul>
+<li>接下来24-29之间，会执行打印<code>字符串finally</code>的机器码</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>那么异常表用在什么时候呢<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label=" [详解JVM如何处理异常 - 技术小黑屋 (droidyue.com)](https://droidyue.com/blog/2018/10/21/how-jvm-handle-exceptions/)
+">[1]</span></a></sup> </p>
+</blockquote>
+<p>答案是异常发生的时候，当一个异常发生时</p>
+<p>1.JVM会在当前出现异常的方法中，查找异常表，是否有合适的处理者来处理</p>
+<p>2.如果当前方法异常表不为空，并且异常符合处理者的from和to节点，并且type也匹配，则JVM调用位于target的调用者来处理。</p>
+<p>3.如果上一条未找到合理的处理者，则继续查找异常表中的剩余条目</p>
+<p>4.如果当前方法的异常表无法处理，则向上查找（弹栈处理）刚刚调用该方法的调用处，并重复上面的操作。</p>
+<p><strong><u>5.如果所有的栈帧被弹出，仍然没有处理，则抛给当前的Thread，Thread则会终止。</u></strong></p>
+<p><strong><u>6.如果当前Thread为最后一个非守护线程，且未处理异常，则会导致JVM终止运行。</u></strong></p>
+<p>以上就是JVM处理异常的一些机制。</p>
+<h2 id="java级别crash小结"><a href="#Java级别Crash小结" class="headerlink" title="Java级别Crash小结"></a>Java级别Crash小结<a href="#java级别crash小结" class="header-anchor">#</a></h2><p>从Java级别Crash这一章的内容，我们了解到以下两点：</p>
+<p><strong>Crash原理</strong></p>
+<p>JVM在执行机器码生成的方法表时，如果发现了Exception，会按照机器码既定的语句执行，此时有两种情况</p>
+<ol>
+<li>开发者编写了捕获语句：catch、finally</li>
+<li>无捕获语句处理，则继续throws，直至抛给JVM堆中的Thread对象</li>
+<li>此时如果Thread为子线程，则会判断是否设置了未捕获异常处理器<ol>
+<li>若设置了处理器，则进入处理器处理，不会退出程序</li>
+<li>若没有设置处理器，Android平台会进入KillApplicationHandler的逻辑，该逻辑有以下几种<ol>
+<li>弹出“App已停止运行”的Dialog</li>
+<li>弹出“App频繁停止运行”的Dialog</li>
+<li>直接退出程序</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><strong>Crash容灾方案</strong>（初版）</p>
+<ol>
+<li>制定容灾策略</li>
+<li>主线程和子线程作区分处理</li>
+</ol>
+<p>遗留了一些问题</p>
+<ul>
+<li>e.printStackTrace()的开销有多大？</li>
+<li>JVM创建Exception的开销有多少？</li>
+<li>catch的最佳实践</li>
+<li>finally一定会执行吗？</li>
+</ul>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://droidyue.com/blog/2018/10/21/how-jvm-handle-exceptions/">详解JVM如何处理异常 - 技术小黑屋 (droidyue.com)</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://androidxref.com/8.1.0_r33/xref/frameworks/base/core/java/com/android/internal/os/RuntimeInit.java"> RuntimeInit.java (androidxref.com)</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://www.coderead.cn/jre/8/java/lang/Runtime.java"> Runtime.java</a><a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">[Java Platform SE 8](file:///E:/developedoc/jdk-8u281-docs-all/docs/api/index.html)<a href="#fnref:4" rev="footnote"> ↩</a></span></li></ol></div></div><link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      <categories>
+        <category>Android</category>
+        <category>BugFree</category>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>BugFree</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>职业稳定性杂谈</title>
     <url>/blog//2021/04/Career-stability-experience/</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>&lt;%- toc(page.content) %&gt;</p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><p>之前在知乎写过一篇回答，<a href="https://www.zhihu.com/question/308110736/answer/628764663">《为什么都在说 90 后的辞职率高？》</a>，纯理性分析获得了300赞。今日在公众号上看到心理学家刘向明教授写的一篇名为<a href="https://mp.weixin.qq.com/s/ZyEWV1g_UzXODkViyFdNlw">《社会招聘，怎样测试稳定性？</a>的文章，让我对职业稳定性有了更深的理解。</p>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><p>之前在知乎写过一篇回答，<a href="https://www.zhihu.com/question/308110736/answer/628764663">《为什么都在说 90 后的辞职率高？》</a>，纯理性分析获得了300赞。今日在公众号上看到心理学家刘向明教授写的一篇名为<a href="https://mp.weixin.qq.com/s/ZyEWV1g_UzXODkViyFdNlw">《社会招聘，怎样测试稳定性？</a>的文章，让我对职业稳定性有了更深的理解。</p>
 <p>先看看我之前的回答，再来看我的新感悟吧。</p>
 <a id="more"></a>
 
@@ -1448,6 +1980,247 @@ post_wordcount:
       <tags>
         <tag>Android</tag>
         <tag>BugFree</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android骨架屏详解</title>
+    <url>/blog//2021/02/Client-Skeleton-Screen/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="android骨架屏详解"><a href="#Android骨架屏详解" class="headerlink" title="Android骨架屏详解"></a>Android骨架屏详解<a href="#android骨架屏详解" class="header-anchor">#</a></h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><blockquote>
+<p>本文是AndroidUI加载优化系列的文章</p>
+</blockquote>
+<p>作为客户端开发者，一定对形如菊花的loading进度条组件非常熟悉。简单来说，菊花图及菊花图衍生出来的加载动画是作为提升UI加载性能的解决方案之一，深受开发者和设计师喜爱。</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/菊花图.jpg" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图1-菊花图
+      </div>
+</center>
+
+
+
+<p>本文要介绍的骨架屏则被当今主流大厂前端视为菊花图升级版方案，用骨架屏代替菊花图的实践，愈发在Web和App开发中得到运用。</p>
+<p>本文主要基于UI加载优化的角度回答以下问题</p>
+<ul>
+<li>骨架屏是什么</li>
+<li>骨架屏能解决什么问题</li>
+<li>骨架屏实现原理</li>
+<li>骨架屏的技术选型</li>
+<li>骨架屏有哪些最佳实践</li>
+</ul>
+<h1 id="骨架屏介绍"><a href="#骨架屏介绍" class="headerlink" title="骨架屏介绍"></a>骨架屏介绍<a href="#骨架屏介绍" class="header-anchor">#</a></h1><p>提起骨架屏，必须要提到骨架屏（Skeleton Screen）一词的发明者——<a href="https://www.lukew.com/about/">Luke Wroblewski</a> ，Google产品总监，早在2013年他首次提出了骨架屏的概念，并将这一概念运用到他的产品Polar App中，</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/68747470733a2f2f692e6c6f6c692e6e65742f323031382f30352f30342f356165626463316237396331632e706e67" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图2-骨架屏发明者
+      </div>
+</center>
+Luke Wroblewski认为骨架屏应该有以下几个元素：
+
+<ul>
+<li>页面的空白版本，包含文本或元素的基本轮廓</li>
+<li>空白版本用于传递正在渐进加载的信息</li>
+</ul>
+<blockquote>
+<p>典型的骨架屏布局参考</p>
+</blockquote>
+<h2 id="facebook"><a href="#Facebook" class="headerlink" title="Facebook"></a>Facebook<a href="#facebook" class="header-anchor">#</a></h2><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210508102104630.png" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图3-Facebook骨架屏首页实践
+      </div>
+</center>
+
+<h2 id="饿了么"><a href="#饿了么" class="headerlink" title="饿了么"></a>饿了么<a href="#饿了么" class="header-anchor">#</a></h2><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210508102442399.png" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图4-饿了么骨架屏首页实践
+      </div>
+</center>
+
+<h2 id="京东plus"><a href="#京东Plus" class="headerlink" title="京东Plus"></a>京东Plus<a href="#京东plus" class="header-anchor">#</a></h2><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/京东plus骨架屏.gif" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图5-京东plus骨架屏
+      </div>
+</center>
+
+<h2 id="马蜂窝"><a href="#马蜂窝" class="headerlink" title="马蜂窝"></a>马蜂窝<a href="#马蜂窝" class="header-anchor">#</a></h2><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/af670ce6fa0b9b2a70fcbb779d10e7a3758.jpg" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图6-马蜂窝骨架屏实践
+      </div>
+</center>
+## 其他
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/68747470733a2f2f692e6c6f6c692e6e65742f323031382f30352f30342f356165626463333634313861622e706e67" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图7-其他采用骨架屏大厂
+      </div>
+</center>
+
+
+
+<h1 id="骨架屏场景"><a href="#骨架屏场景" class="headerlink" title="骨架屏场景"></a>骨架屏场景<a href="#骨架屏场景" class="header-anchor">#</a></h1><p><strong>为什么需要骨架屏？</strong></p>
+<ul>
+<li><p>用户所需</p>
+<p>在最开始关于 MIT 2014 年的研究<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Akamai](http://www.akamai.com/html/about/press/releases/2009/press_091409.html) 
+">[1]</span></a></sup>中已有提到，用户大概会在 200ms 内获取到界面的具体关注点，在数据获取或页面加载完成之前，给用户首先展现骨架屏，骨架屏的样式、布局和真实数据渲染的页面保持一致，这样用户在骨架屏中获取到关注点，并能够预知页面什么地方将要展示文字什么地方展示图片，这样也就能够将关注焦点移到感兴趣的位置。当真实数据获取后，用真实数据渲染的页面替换骨架屏，如果整个过程在 1s 以内，用户几乎感知不到数据的加载过程和最终渲染的页面替换骨架屏，而在用户的感知上，出现骨架屏那一刻数据已经获取到了，而后只是数据渐进式的渲染出来。这样用户感知页面加载更快了。</p>
+</li>
+<li><p>客户端框架的性能约束</p>
+<p>前端： <a href="https://link.zhihu.com/?target=https://github.com/facebook/react">React</a>、<a href="https://link.zhihu.com/?target=https://github.com/vuejs/vue">Vue</a>、<a href="https://link.zhihu.com/?target=https://github.com/angular/angular">Angular</a> 已经占据了主导地位，市面上大多数前端应用也都是基于这三个框架或库完成，这三个框架有一个共同的特点，都是 JS 驱动，在 JS 代码解析完成之前，页面不会展示任何内容，也就是所谓的白屏。用户是极其不喜欢看到白屏的，什么都没有展示，用户很有可能怀疑网络或者应用出了什么问题。 拿 Vue 来说，在应用启动时，Vue 会对组件中的 data 和 computed 中状态值通过 <code>Object.defineProperty</code> 方法转化成 set、get 访问属性，以便对数据变化进行监听。而这一过程都是在启动应用时完成的，这也势必导致页面启动阶段比非 JS 驱动（比如 jQuery 应用）的页面要慢一些。</p>
+<p>移动端：Android和IOS仍然占据统治地位，Android通常由xml-&gt;View对象-&gt;SurfaceFinger的形式将布局显示到屏幕上,IOS也类似有一个创建对象-&gt;设置数据-&gt;显示到屏幕的过程。这些过程都是在页面启动的过程完成的。如何通过降低页面启动时间，留存用户迫在眉睫。</p>
+</li>
+</ul>
+<h1 id="骨架屏通用方案"><a href="#骨架屏通用方案" class="headerlink" title="骨架屏通用方案"></a>骨架屏通用方案<a href="#骨架屏通用方案" class="header-anchor">#</a></h1><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UI 骨架屏图</td>
+<td>粗暴实现，实现速度块</td>
+<td>需要UI设计师介入<br>不支持自动生成<br>需求变更维护成本大</td>
+</tr>
+<tr>
+<td>手写骨架屏</td>
+<td>为目标页定制骨架屏</td>
+<td>定制实现工作量较大<br>不支持自动生成<br>需求变更维护成本大</td>
+</tr>
+<tr>
+<td>自动生成静态骨架屏</td>
+<td>自动为每个页面生成，自动插入到目标页面</td>
+<td>脚本维护成本较大<br>生成的是静态页</td>
+</tr>
+<tr>
+<td>自动生成动态骨架屏</td>
+<td>自动为每个页面生成骨架屏代码，自动插入到目标页面</td>
+<td>不支持开发环境<br>仅支持线上URL生成骨架屏<br>存在重定向的页面，自动生成的页面效果较差<br></td>
+</tr>
+</tbody></table>
+<h1 id="骨架屏最佳实践"><a href="#骨架屏最佳实践" class="headerlink" title="骨架屏最佳实践"></a>骨架屏最佳实践<a href="#骨架屏最佳实践" class="header-anchor">#</a></h1><h2 id="饿了么前端最佳实践"><a href="#饿了么前端最佳实践" class="headerlink" title="饿了么前端最佳实践"></a>饿了么前端最佳实践<a href="#饿了么前端最佳实践" class="header-anchor">#</a></h2><p>饿了么前端实现骨架屏经过了2个阶段<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[一种自动化生成骨架屏的方案/jocs.github.io · GitHub](https://github.com/Jocs/jocs.github.io/issues/22)
+">[2]</span></a></sup></p>
+<table>
+<thead>
+<tr>
+<th>实现方式</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>手写实现，为每个页面复刻真实样式</td>
+<td>简单</td>
+<td>需求变更不仅需要修改业务代码，同时也需要修改骨架屏的样式和布局；<br>机械重复的工作量较大，手写实现维护成本较大</td>
+</tr>
+<tr>
+<td><a href="https://link.zhihu.com/?target=https://www.npmjs.com/package/page-skeleton-webpack-plugin">page-skeleton-webpack-plugin</a></td>
+<td>自动生成，自动维护</td>
+<td>饿了么自研，且需要腾出人力来维护插件</td>
+</tr>
+</tbody></table>
+<h2 id="苹果公司最佳实践"><a href="#苹果公司最佳实践" class="headerlink" title="苹果公司最佳实践"></a>苹果公司最佳实践<a href="#苹果公司最佳实践" class="header-anchor">#</a></h2><p>苹果公司也将骨架屏的概念写入到<a href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/LaunchImages.html">iOS Human Interface Guidelines</a> 手册中，使用了新的<code>launch images</code>概念代替了骨架屏的说法</p>
+<h2 id="马蜂窝电商前端最佳实践"><a href="#马蜂窝电商前端最佳实践" class="headerlink" title="马蜂窝电商前端最佳实践"></a>马蜂窝电商前端最佳实践<a href="#马蜂窝电商前端最佳实践" class="header-anchor">#</a></h2><p>基于对现有方案的借鉴，我们<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[一种对开发更友好的前端骨架屏自动生成方案 - 马蜂窝技术](https://www.cnblogs.com/mfwtech/p/11474796.html)">[3]</span></a></sup>想到了在配置文件中指定要生成骨架屏的页面 URL 和文件输出的目录，运行时读取配置文件中的配置项，通过 Puppeteer 打开指定的页面并注入 evalDom.js 的方法。因为此 JS 是在 Puppeteer 里面执行的，所以可以获取到当前页面完整的 DOM 结构，这给我们留下了非常大的发挥空间。</p>
+<p>最初我们是从获取到的 DOM 结构中的 body 标签出发，递归去处理页面上的所有节点，处理完成后用生成的 DIV 替换原有元素的位置。第一版方案中通过 getBoundingClientRect 和 getComputedStyle 的方法来获取元素所有计算属性和相对于视口的宽高和位置，然后结合元素本身的样式属性递归渲染，保留页面原始 DOM 嵌套层次。</p>
+<p>但由于能够决定元素位置的属性实在太多，如 position，z-index、width、height、top、display、box-sizing、flex 等都需要考虑，导致无法聚焦对页面 DOM 结构处理的逻辑，而且这些属性在处理完成后还需要加到最终生成骨架屏节点的 style 上，这样骨架屏文件可能比原来完整的页面结构还大，这肯定不是我们希望的。</p>
+<p>优化后的方案是用 getBoundingClientRect 和 getComputedStyle 获取元素相关属性，然后直接通过绝对定位的方式来生成最终的骨架屏节点。这样在页面上最终需要的属性主要是 position、z-index、top、left、width、height、background、border-radius。除了无法保证页面原始的 DOM 结构，其它需求基本都可以满足，也更加聚焦于节点的处理。</p>
+<p>主要实现流程如下图：</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://oscimg.oschina.net/oscnet/1e467b28d6da470ee50d3b2d70dd575d216.jpg" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图8-马蜂窝电商骨架屏
+      </div>
+</center>
+
+
+<h1 id="骨架屏开源库"><a href="#骨架屏开源库" class="headerlink" title="骨架屏开源库"></a>骨架屏开源库<a href="#骨架屏开源库" class="header-anchor">#</a></h1><h2 id="android"><a href="#Android" class="headerlink" title="Android"></a>Android<a href="#android" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://github.com/ethanhua/Skeleton">Skeleton</a></td>
+<td><img src="http://cdn.yangchaofan.cn/typora/13855150-1db5fa2839c21b19" alt="img"></td>
+</tr>
+<tr>
+<td>spruce-android</td>
+<td><img src="http://cdn.yangchaofan.cn/typora/13855150-cdb8c851a4900d8f" alt="img"></td>
+</tr>
+<tr>
+<td>ShimmerRecyclerView</td>
+<td><img src="http://cdn.yangchaofan.cn/typora/13855150-c41106e6d45e5c03" alt="img"></td>
+</tr>
+</tbody></table>
+<h2 id="web"><a href="#Web" class="headerlink" title="Web"></a>Web<a href="#web" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://github.com/famanoder/dps">dps(draw-page-structure)</a></td>
+<td><img src="http://cdn.yangchaofan.cn/typora/%E4%BA%AC%E4%B8%9Cplus%E9%AA%A8%E6%9E%B6%E5%B1%8F.gif"></td>
+</tr>
+<tr>
+<td><a href="https://www.npmjs.com/package/page-skeleton-webpack-plugin">page-skeleton-webpack-plugin</a></td>
+<td><img src="http://cdn.yangchaofan.cn/typora/68747470733a2f2f692e6c6f6c692e6e65742f323031382f30352f30342f356165626463383165656530662e706e67" alt="5aebdc81eee0f"></td>
+</tr>
+</tbody></table>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考<a href="#参考" class="header-anchor">#</a></h1><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://www.akamai.com/html/about/press/releases/2009/press_091409.html">Akamai</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://github.com/Jocs/jocs.github.io/issues/22">一种自动化生成骨架屏的方案/jocs.github.io · GitHub</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://www.cnblogs.com/mfwtech/p/11474796.html">一种对开发更友好的前端骨架屏自动生成方案 - 马蜂窝技术</a><a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div><link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      <categories>
+        <category>Android</category>
+        <category>性能优化</category>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>Android性能优化</tag>
+        <tag>AndroidUI优化</tag>
       </tags>
   </entry>
   <entry>
@@ -2808,6 +3581,607 @@ Handler(Looper looper, Callback callback, boolean async)
       </tags>
   </entry>
   <entry>
+    <title>Android 热补丁技术详解大全</title>
+    <url>/blog//2019/06/android-hotfix/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="热修复详解与实战"><a href="#热修复详解与实战" class="headerlink" title="热修复详解与实战"></a>热修复详解与实战<a href="#热修复详解与实战" class="header-anchor">#</a></h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><p>随着Google推出Android平台之后，AndroidAPP数量激增，带来的安全类技术需求增长，热修复就是安全类技术的典型产物。2016年起热修复、插件化、动态化技术如雨后春笋般爆发，三者技术上存在一定交集，但热修复更聚焦线上BUG的无感知修复。本文参考了一系列技术文章、书籍、开源框架、商业产品。主要讨论了热修复的以下几点内容：</p>
+<ul>
+<li>热修复的发展历史</li>
+<li>热修复的定义</li>
+<li>热修复的用途</li>
+<li>热修复的实现思路-分类介绍</li>
+<li>热修复的实现思路选型</li>
+<li>热修复的技术方案-分类介绍</li>
+<li>热修复的技术方案选型</li>
+</ul>
+<p>本文适合以下目的的读者：</p>
+<ul>
+<li>了解热修复概念术语</li>
+<li>了解热修复的用途</li>
+<li>了解为新项目集成热修复功能的成本</li>
+<li>现有热修复技术方案的选型对比</li>
+</ul>
+<h1 id="热修复的定义"><a href="#热修复的定义" class="headerlink" title="热修复的定义"></a>热修复的定义<a href="#热修复的定义" class="header-anchor">#</a></h1><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210603141931831.png" width="80%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图1-正常开发流程
+      </div>
+</center>
+
+
+
+<p>正常发版流程是开发者打包4.0版本APK，运营人员将最新APK推送到各大手机应用市场、用户手机通知栏，引导用户下载安装最新版的APK。一般而言用户就能正常体验App的新功能了。一旦出现异常情况，用户在使用新版App的过程中，遇到了bug，如App闪退、App页面显示错误等情况，可能会给用户造成困惑。为了解决用户的困惑，开发者需要紧急修复该bug，并重新走发版流程，引导用户重新下载、安装4.1版本APK。</p>
+<p>好消息是一个bug被开发者消灭了；坏消息是用户在漫长的等待过程中，卸载了App，公司最终因为这个bug损失了一批用户。这种负面情况，在按用户流量给企业估值的做法造成毁灭性的打击，这个经济成本是大多数公司无法承担的。</p>
+<p>因此，即时、快速、无感的修复线上bug，成为了安全类技术的热门话题。</p>
+<p>关于热修复的定义，笔者参考阿里发布的《深入探索Android热修复技术原理》<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="深入探索Android热修复技术原理
+">[1]</span></a></sup>一文:</p>
+<blockquote>
+<p>App直接从云端下拉补丁直接应用生效，重构了传统的App发版流程。</p>
+</blockquote>
+<p>关于热补丁的另外一种解释可以参考</p>
+<blockquote>
+<p>冷补丁与热补丁最大的区别是对业务的影响大小，冷补丁需要复位，热补丁不需要。系统在内存中开辟了补丁区，热补丁是通过INS PATCH复合命令被直接放到补丁区，被激活运行的，不需要复位。虽然热补丁方便，但是当热补丁无法解决遇到的问题时（例如不是简单的改写函数就可以的，需要改写全局变量，内存中的代码段也重新改换，代码重新汇编），就需要冷补丁来解决。冷补丁会重新更换内存中的全局变量、代码段、补丁区，而这些又不能简单的改写就运行，必须通过复位来解决。</p>
+</blockquote>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210603143552021.png" width="80%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图2-集成热补丁技术后的发版流程
+      </div>
+</center>
+
+<p>可以看到在遇到bug后，开发人员可以通过修复，并且打出补丁，通知App自动拉取的方式省去了提示用户去应用市场下载，点击通知栏从服务器下载最新APK等“烦人”的做法。让一个Bug对企业的负面影响降到最低。</p>
+<p>作为企业技术决策人员，决策一个项目是否应该采取热修复技术，取决于企业是否需要以下几项热修复天然的优势：</p>
+<ul>
+<li>无需推送应用市场、无需等待应用市场审核</li>
+<li>无需提示用户下载最新APK</li>
+<li>实时无感修复</li>
+<li>用户感知小，线上响应快，企业损失最低</li>
+</ul>
+<p>修复Bug、修复bug、修复bug，重要的话说三遍，热修复技术最重要的用途就是无感修复bug。</p>
+<h1 id="热修复的实现思路"><a href="#热修复的实现思路" class="headerlink" title="热修复的实现思路"></a>热修复的实现思路<a href="#热修复的实现思路" class="header-anchor">#</a></h1><h2 id="思路概览"><a href="#思路概览" class="headerlink" title="思路概览"></a>思路概览<a href="#思路概览" class="header-anchor">#</a></h2><p>用户在操作一款App的过程中，能够体验到的内容如图所示，在不讨论Hybrid技术、Web开发技术的前提下，我们先承认一个简单的事实：安卓操作系统加载了APP安装包下的某些文件，换句话说APK的主要组成部分，支撑了App页面的显示和加载。用户在使用App过程中遇到了bug，是由于Apk中的某些内容遇到了预期之外的情况导致。作为开发者，修复这种预期之外的情况，就是通过修复Apk中的主要内容</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3076306344,2932143550&fm=26&gp=0.jpg" width="30%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图3-某电商App首页
+      </div>
+</center>
+
+
+
+<p>一个APK的组成部分如下</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>assets</td>
+<td>静态资源目录，如zip资源、网页资源</td>
+</tr>
+<tr>
+<td>com/google</td>
+<td>特殊包名，存储一些三方依赖的文件如AIDL、cpp源码</td>
+</tr>
+<tr>
+<td>lib</td>
+<td>子目录armeabi存放的是一些so文件</td>
+</tr>
+<tr>
+<td>META-INF</td>
+<td>存放的是签名信息；编译生成一个apk包时，会对所有要打包的文件做一个校验计算，并把计算结果放在META-INF目录下</td>
+</tr>
+<tr>
+<td>res</td>
+<td>静态资源图片、动画、字符串、主题、颜色等</td>
+</tr>
+<tr>
+<td>resources.arsc</td>
+<td>编译后的二进制资源文件的索引（apk文件的资源表索引）</td>
+</tr>
+<tr>
+<td>AndroidManifest.xml</td>
+<td>它描述了应用的名字、版本、权限、引用的库文件等等信息，用于告诉安卓系统、手机应用市场App的信息</td>
+</tr>
+<tr>
+<td>classes.dex</td>
+<td>java文件经jdk编译成.class文件后，由dex编译成.dex文件</td>
+</tr>
+</tbody></table>
+<p>用户看到一个bug，通常都是由上述某一部分导致的，因此，我们需要通过技术手段替换某些异常的文件，如资源文件、classes.dex文件、AndroidManifest.xml文件等等。</p>
+<p>在得到一个简单的修复方向后，接下来的问题就“容易”许多了：</p>
+<ul>
+<li>替换谁-找出异常的文件</li>
+<li>如何替换-下发到用户手机App</li>
+</ul>
+<p>笔者结合市面上所有的技术方案，将热修复技术分为三个大类：代码修复、资源修复、SO修复</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210603134359487.png" width="80%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图4-热修复技术方案
+      </div>
+</center>
+
+<h2 id="代码修复"><a href="#代码修复" class="headerlink" title="代码修复"></a>代码修复<a href="#代码修复" class="header-anchor">#</a></h2><p>代码修复涉及到4类技术：NativeHook、Java multidex、Java Hook、Dex替换</p>
+<h3 id="nativehook"><a href="#NativeHook" class="headerlink" title="NativeHook"></a>NativeHook<a href="#nativehook" class="header-anchor">#</a></h3><blockquote>
+<p>NativeHook参考阅读</p>
+<ul>
+<li><p><a href="https://gtoad.github.io/2018/07/06/Android-Native-Hook-Practice/">Android Native Hook工具实践</a></p>
+</li>
+<li><p><a href="https://gtoad.github.io/2018/07/05/Android-Native-Hook/">Android Native Hook技术路线概述</a></p>
+</li>
+<li><p><a href="https://zhuanlan.zhihu.com/p/132699875">Android Native Hook技术你知道多少？</a></p>
+</li>
+<li><p><a href="https://github.com/iqiyi/xHook">xHook</a></p>
+</li>
+</ul>
+</blockquote>
+<p>NativeHook技术可以简单理解为替换虚拟机中的变量和操作,APK中的文件被安卓系统的虚拟机加载执行，我们可以通过NativeHook技术实时修改虚拟机运行中的变量和操作，从而达到修复Bug的目的。</p>
+<p>该方案的缺点是兼容各个安卓版本、各个手机厂商的虚拟机底层实现。</p>
+<h3 id="java-multidex"><a href="#Java-multidex" class="headerlink" title="Java multidex"></a>Java multidex<a href="#java-multidex" class="header-anchor">#</a></h3><blockquote>
+<p>Java  multidex参考阅读</p>
+<ul>
+<li><p><a href="https://developer.android.google.cn/studio/build/multidex#mdex-gradle">为方法数超过 64K 的应用启用 MultiDex Android 开发者)</a></p>
+</li>
+<li><p><a href="https://mp.weixin.qq.com/s?__biz=MzI1MTA1MzM2Nw==&mid=400118620&idx=1&sn=b4fdd5055731290eef12ad0d17f39d4a">QQ空间安卓App热补丁动态修复技术介绍</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/sbsujjbcy/article/details/50812674">Android 热修复Nuwa的原理及Gradle插件源码解析</a></p>
+</li>
+<li><p><a href="https://github.com/jasonross/Nuwa">Nuwa源码</a></p>
+</li>
+<li><p><a href="https://github.com/dodola/HotFix">HotFix源码</a></p>
+</li>
+<li><p><a href="https://github.com/bunnyblue/DroidFix">DroidFix源码</a></p>
+</li>
+</ul>
+</blockquote>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://images2018.cnblogs.com/blog/823551/201803/823551-20180311132727379-906293657.jpg" width="80%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图5-QQ空间终端开发团队-dex插桩方案
+      </div>
+</center>
+
+<p>Java multidex技术简单理解是修改了类加载器加载dex文件的顺序，主要原理是</p>
+<ul>
+<li><p>Hook了ClassLoader.pathList.dexElements[]。因为ClassLoader的findClass是通过遍历dexElements[]中的dex来寻找类的。当然为了支持4.x的机型，需要打包的时候进行插桩。</p>
+</li>
+<li><p>越靠前的Dex优先被系统使用，基于类级别的修复</p>
+</li>
+</ul>
+<p>该方案缺点如下：</p>
+<ul>
+<li>下次启动才生效</li>
+<li>消耗性能，即Dalvik平台存在插桩导致的性能损耗，Art平台由于地址偏移问题导致补丁包可能过大的问题</li>
+<li>虚拟机在安装期间为类打上CLASS_ISPREVERIFIED标志是为了提高性能的，我们强制防止类被打上标志是否会影响性能？但是在大项目中拆分dex的问题已经比较严重，很多类都没有被打上这个标志。</li>
+</ul>
+<h3 id="java-hook"><a href="#Java-Hook" class="headerlink" title="Java Hook"></a>Java Hook<a href="#java-hook" class="header-anchor">#</a></h3><blockquote>
+<p>Java Hook参考阅读</p>
+<ul>
+<li>美团技术文章：<a href="https://tech.meituan.com/android_robust.html">https://tech.meituan.com/android_robust.html</a></li>
+<li>美团技术文章：<a href="https://tech.meituan.com/android_autopatch.html">https://tech.meituan.com/android_autopatch.html</a></li>
+<li>Robust源码：<a href="https://github.com/Meituan-Dianping/Robust">https://github.com/Meituan-Dianping/Robust</a></li>
+<li><a href="https://blog.csdn.net/qq_30207527/article/details/85169582">Java： Hook技术</a></li>
+<li><a href="https://jeanboy.blog.csdn.net/article/details/108314751">Hook 技术初探</a></li>
+</ul>
+</blockquote>
+<p>Java Hook技术主要使用了反射和动态代理的Java API，修改类、方法的实现。类A、方法A指向了一个错误的实现类、实现方法等，通过JavaHook改变类A、方法A的指向，指向一个新的正常的类、方法等。</p>
+<p>该方案缺点如下：</p>
+<ul>
+<li>代码是侵入式的，需要在原有的类中加入调整指向相关的代码、调整业务逻辑的代码</li>
+<li>不支持so和资源的替换</li>
+<li>显著增大apk体积，1个函数增加17.47个字节，10万个函数会增加1.67M<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Android热更新方案Robust](https://tech.meituan.com/2016/09/14/android-robust.html)">[2]</span></a></sup></li>
+</ul>
+<h3 id="dex替换"><a href="#Dex替换" class="headerlink" title="Dex替换"></a>Dex替换<a href="#dex替换" class="header-anchor">#</a></h3><blockquote>
+<p>Dex替换参考阅读</p>
+<ul>
+<li><a href="https://developer.android.google.cn/topic/security/dex?hl=zh_cn">直接从 APK 运行嵌入式 DEX 代码</a></li>
+<li><a href="https://github.com/Tencent/tinker/wiki"> Tencent/tinker Wiki </a></li>
+<li><a href="https://github.com/WeMobileDev/article/blob/master/%E5%BE%AE%E4%BF%A1Android%E7%83%AD%E8%A1%A5%E4%B8%81%E5%AE%9E%E8%B7%B5%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.md">article/微信Android热补丁实践演进之路.</a></li>
+<li><a href="https://medium.com/google-developers/instant-run-how-does-it-work-294a1633367f#.c088qhdxu">Instant Run英文原文</a> </li>
+</ul>
+</blockquote>
+<p>Dex替换技术顾名思义，替换的是APK目录下的classes.dex文件，替换方式有全量替换和差量替换，全量替换是全量替换APK中的dex文件；差量替换是指仅替换dex文件中不一样的内容。实现该方案难度较大，建议使用Tinker实现代码修复的功能。服务端做dex差量，将差量包下发到客户端，在ART模式的机型上本地跟原apk中的classes.dex做merge，merge成为一个新的merge.dex后将merge.dex插入pathClassLoader的dexElement，原理类同Q-Zone，为了实现差量包的最小化，Tinker自研了DexDiff/DexMerge算法。Tinker还支持资源和So包的更新，So补丁包使用BsDiff来生成，资源补丁包直接使用文件md5对比来生成，针对资源比较大的（默认大于100KB属于大文件）会使用BsDiff来对文件生成差量补丁。</p>
+<p>该方案缺点如下：</p>
+<ul>
+<li>替换的是APK包的dex文件，需要下一次加载APK才能生效</li>
+<li>dex替换操作消耗虚拟机内存，如果遇到OOM有可能合并失败</li>
+<li>如果App本身可用内存过低，会导致App被系统杀死</li>
+</ul>
+<h3 id="综合方案"><a href="#综合方案" class="headerlink" title="综合方案"></a>综合方案<a href="#综合方案" class="header-anchor">#</a></h3><p>Sophix综合了上述的方案优缺点，最终采用从虚拟机层面修改底层的ArtMethod数据结构和排列，实现了代码修复。</p>
+<p>该方案的缺点如下：</p>
+<ul>
+<li>原有类结构发生变化，不适用修复</li>
+<li>反射调用的非静态方法，不适用修复</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考<a href="#参考" class="header-anchor">#</a></h1><h2 id="dex分包"><a href="#Dex分包" class="headerlink" title="Dex分包"></a>Dex分包<a href="#dex分包" class="header-anchor">#</a></h2><p>动态加载Dex技术</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Google dex分包工具multidex</td>
+<td></td>
+</tr>
+<tr>
+<td>美团</td>
+<td></td>
+</tr>
+<tr>
+<td>Androiddex分包方案</td>
+<td></td>
+</tr>
+<tr>
+<td>cutom class loading in dalvik</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="插件化"><a href="#插件化" class="headerlink" title="插件化"></a>插件化<a href="#插件化" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th><strong>VirtualAPK</strong></th>
+<th><strong>DroidPlugin</strong></th>
+<th><strong>Small</strong></th>
+<th>atlas</th>
+<th><strong>DynamicAPK</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>作者</td>
+<td>滴滴</td>
+<td>360</td>
+<td>wequick</td>
+<td>阿里</td>
+<td>携程</td>
+</tr>
+<tr>
+<td>支持四大组件</td>
+<td>全支持</td>
+<td>全支持</td>
+<td>只支持Activity</td>
+<td></td>
+<td>只支持Activity</td>
+</tr>
+<tr>
+<td>组件无需在宿主manifest中预注册</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td>插件可以依赖宿主</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持PendingIntent</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Android特性支持</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>兼容性适配</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>插件构建</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="热补丁"><a href="#热补丁" class="headerlink" title="热补丁"></a>热补丁<a href="#热补丁" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th></th>
+<th><a href="https://github.com/Tencent/tinker">Tinker</a></th>
+<th>QZone</th>
+<th>AndFix（Sophix）</th>
+<th><a href="https://github.com/wequick/Small">Small</a></th>
+<th><a href="https://github.com/Meituan-Dianping/Robust">Robust</a></th>
+<th><a href="https://links.jianshu.com/go?to=https://github.com/jasonross/Nuwa">Nuwa</a></th>
+<th>Amigo</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类替换</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td></td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>So替换</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td></td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>资源替换</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td></td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>全平台支持</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td></td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>即时生效</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td></td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+<tr>
+<td>性能损耗</td>
+<td>较小</td>
+<td>较大</td>
+<td>较小</td>
+<td></td>
+<td>较小</td>
+<td>较大</td>
+<td></td>
+</tr>
+<tr>
+<td>补丁包大小</td>
+<td>较小</td>
+<td>较大</td>
+<td>一般</td>
+<td></td>
+<td>一般</td>
+<td>较大</td>
+<td>大</td>
+</tr>
+<tr>
+<td>开发透明</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td></td>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>复杂度</td>
+<td>较低</td>
+<td>较低</td>
+<td>复杂</td>
+<td></td>
+<td>复杂</td>
+<td>较低</td>
+<td>较低</td>
+</tr>
+<tr>
+<td>gradle支持</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td></td>
+<td>no</td>
+<td></td>
+<td>yes</td>
+</tr>
+<tr>
+<td>打包方式</td>
+<td>依赖侵入式打包</td>
+<td>依赖侵入式打包</td>
+<td>无侵入式打包</td>
+<td>依赖侵入式打包</td>
+<td>依赖侵入式打包</td>
+<td>依赖侵入式打包</td>
+<td>依赖侵入式打包</td>
+</tr>
+<tr>
+<td>Rom体积</td>
+<td>较大</td>
+<td>较小</td>
+<td>较小</td>
+<td></td>
+<td>较小</td>
+<td>较小</td>
+<td>较小</td>
+</tr>
+<tr>
+<td>成功率</td>
+<td>较高</td>
+<td>较高</td>
+<td>一般</td>
+<td></td>
+<td>最高-99%</td>
+<td>较高</td>
+<td>较高</td>
+</tr>
+<tr>
+<td>监控能力</td>
+<td>提供分发控制及监控</td>
+<td>no</td>
+<td>提供分发控制及监控</td>
+<td>no</td>
+<td>no</td>
+<td>no</td>
+<td>提供分发控制及控制</td>
+</tr>
+<tr>
+<td>开发者</td>
+<td>腾讯团队</td>
+<td>腾讯团队</td>
+<td>阿里团队</td>
+<td>个人</td>
+<td>美团团队</td>
+<td>大众点评团队</td>
+<td>饿了么团队</td>
+</tr>
+<tr>
+<td>是否开源</td>
+<td>是，有商业版本</td>
+<td>否</td>
+<td>是，有商业版本<a href="https://links.jianshu.com/go?to=http://baichuan.taobao.com/product/hotfix.htm?spm=a3c0d.7662652.1998907869.2.309abe485ZwUCh">HotFix</a>和<a href="https://links.jianshu.com/go?to=https://help.aliyun.com/product/51340.html?spm=a2c4g.11186623.6.540.61a72ef2DAZ30l">Sophix</a></td>
+<td>是</td>
+<td>是</td>
+<td><a href="https://github.com/jasonross/Nuwa">是</a></td>
+<td>是</td>
+</tr>
+<tr>
+<td>是否收费</td>
+<td>收费（基础版免费，但有限制）</td>
+<td>否</td>
+<td><strong>Sophix</strong>收费（设有免费阈值5万台）</td>
+<td>否</td>
+<td>否</td>
+<td>免费</td>
+<td>否</td>
+</tr>
+<tr>
+<td>最近维护时间</td>
+<td>2021年4月</td>
+<td>否</td>
+<td>2016年</td>
+<td>2018年</td>
+<td>2020年</td>
+<td>2015年</td>
+<td>2016年</td>
+</tr>
+</tbody></table>
+<h2 id="热补丁原理"><a href="#热补丁原理" class="headerlink" title="热补丁原理"></a>热补丁原理<a href="#热补丁原理" class="header-anchor">#</a></h2><p> <img src="http://cdn.yangchaofan.cn/typora/image-20210603134359487.png" alt="image-20210603134359487"></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章<a href="#参考文章" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>内容大纲</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://github.com/topics/hotfix?l=java">Github Hotfix</a></td>
+<td>Github全栈Hotfix标签项目</td>
+</tr>
+<tr>
+<td><a href="https://mp.weixin.qq.com/s?__biz=MzI1MTA1MzM2Nw==&mid=400118620&idx=1&sn=b4fdd5055731290eef12ad0d17f39d4a">QQ空间安卓App热补丁动态修复技术介绍</a></td>
+<td>1.基于的是android dex分包方案<br>2.用的是在字节码插入代码,而不是源代码插入</td>
+</tr>
+<tr>
+<td><a href="https://www.cnblogs.com/popfisher/p/8543973.html">Android热修复技术原理详解（最新最全版本）</a></td>
+<td>1.什么是热修复？<br>2.热修复框架分类 <br>3.技术原理及特点<br> 4.Tinker框架解析 <br>5.各框架对比图 <br>6.总结</td>
+</tr>
+<tr>
+<td>阿里《深入探索Android热修复技术原理》</td>
+<td>阿里出版很详细</td>
+</tr>
+<tr>
+<td><a href="https://tech.meituan.com/2016/09/14/android-robust.html">Android热更新方案Robust</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://mp.weixin.qq.com/s/GuzbU1M1LY1VKmN7PyVbHQ">蘑菇街Android热修复探索之路</a></td>
+<td>基于 Instant Run Hot Swap</td>
+</tr>
+<tr>
+<td><a href="https://link.zhihu.com/?target=https://medium.com/google-developers/instant-run-how-does-it-work-294a1633367f%23.c088qhdxu">Instant Run英文原文（需要科学上网）</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://link.zhihu.com/?target=https://github.com/meili/Aceso">Aceso：美丽说蘑菇街开源的 Android 热修复方案</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://blog.csdn.net/sbsujjbcy/article/details/50812674">Android 热修复Nuwa的原理及Gradle插件源码解析</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/WeMobileDev/article/blob/master/%E5%BE%AE%E4%BF%A1Android%E7%83%AD%E8%A1%A5%E4%B8%81%E5%AE%9E%E8%B7%B5%E6%BC%94%E8%BF%9B%E4%B9%8B%E8%B7%AF.md#rd">微信Android热补丁实践演进之路</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://www.jianshu.com/p/6ae1e09ebbf5">Android热修复技术，你会怎么选？</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://mp.weixin.qq.com/s/uY5N_PSny7_CHOgUA99UjA?spm=a2c4g.11186623.2.2.bdc0788fH6VckR">Android热修复技术选型——三大流派解析 (qq.com)</a></td>
+<td><strong>插件化</strong>：一个程序划分为不同的部分，以插件的形式加载到应用中去，<br>本质上它使用的技术还是热修复技术，只是加入了更多工程实践，<br>让它支持大规模的代码更新以及资源和SO包的更新。 <br><strong>热修复</strong>：当线上应用出现紧急BUG，为了避免重新发版，<br>并且保证修复的及时性而进行的一项在线推送补丁的修复方案。。</td>
+</tr>
+</tbody></table>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">深入探索Android热修复技术原理<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://tech.meituan.com/2016/09/14/android-robust.html">Android热更新方案Robust</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      <categories>
+        <category>Android</category>
+        <category>面试</category>
+        <category>项目架构</category>
+      </categories>
+      <tags>
+        <tag>Android架构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>为什么要花3年时间面试一个人？</title>
     <url>/blog//2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="为什么要花3年时间面试一个人"><a href="#为什么要花3年时间面试一个人？" class="headerlink" title="为什么要花3年时间面试一个人？"></a>为什么要花3年时间面试一个人？<a href="#为什么要花3年时间面试一个人" class="header-anchor">#</a></h1><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景<a href="#背景" class="header-anchor">#</a></h1><p>2018年笔者陪同公司部门老大负责技术面试，3个月时间，从收到简历到电话面试、现场面试，再算上Boss直聘打招呼数，总共有不下1000次。招聘过程可谓呕心沥血，效果却差强人意。</p>
@@ -3388,7 +4762,7 @@ NBA总决赛正在如火如荼的进行，老詹也正朝着他的第5个总亚�
       </tags>
   </entry>
   <entry>
-    <title>《详解 Android 通信》</title>
+    <title>详解 Android 通信</title>
     <url>/blog//2016/06/android-communication/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>摘自本人16年的的博客<a href="https://blog.csdn.net/chivalrousman/article/details/51623122">《详解 Android 通信》</a></p>
 <h1 id="什么是通信"><a href="#什么是通信？" class="headerlink" title="什么是通信？"></a>什么是通信？<a href="#什么是通信" class="header-anchor">#</a></h1><p><font size="4"> 通信 ，顾名思义，指的就是信息的传递或者交换</font></p>
@@ -3644,8 +5018,8 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
       <categories>
         <category>Android</category>
         <category>面试</category>
-        <category>应用层</category>
         <category>项目架构</category>
+        <category>应用层</category>
       </categories>
       <tags>
         <tag>Android</tag>

@@ -1,0 +1,2808 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script async src="//cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  <link href="//cdn.jsdelivr.net/npm/pace-js@1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+<link href="https://fonts.loli.net/css?family=EB+Garamond:400,400i,700,700i|Noto+Serif+SC:400,500,700&display=swap&subset=chinese-simplified" rel="stylesheet">
+
+
+
+
+  
+
+<link href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android,BugFree," />
+
+
+
+
+
+  <link rel="alternate" href="/blog/atom.xml" title="叶金诚的站点" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言#AndroidCrash基础知识 研究的对象是APP进程 研究的问题主体是 APP为什么会Crash 研究的路线是：从APP进程被Crash的第一行代码开始溯源，Java-&gt;JVM-&gt;Android平台-&gt;Android系统-&gt;Devices，直至我们最后能看懂的地方。 研究的工具是：  Source Insight 4.0 UML Logcat Logger Mtk">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Crash揭秘与实践">
+<meta property="og:url" content="http://idolcoder.gitee.io/blog/2021/05/android-crash-who-kill-you/index.html">
+<meta property="og:site_name" content="叶金诚的站点">
+<meta property="og:description" content="前言#AndroidCrash基础知识 研究的对象是APP进程 研究的问题主体是 APP为什么会Crash 研究的路线是：从APP进程被Crash的第一行代码开始溯源，Java-&gt;JVM-&gt;Android平台-&gt;Android系统-&gt;Devices，直至我们最后能看懂的地方。 研究的工具是：  Source Insight 4.0 UML Logcat Logger Mtk">
+<meta property="og:locale">
+<meta property="og:image" content="http://cdn.yangchaofan.cn//typora/image-20210423143651100.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn//typora/image-20210423143600543.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/image-20210426163446282.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/image-20210426190621477.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/image-20210426104141555.png">
+<meta property="article:published_time" content="2021-05-01T03:15:44.000Z">
+<meta property="article:modified_time" content="2021-05-17T03:41:40.265Z">
+<meta property="article:author" content="叶金诚">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="BugFree">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.yangchaofan.cn//typora/image-20210423143651100.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"perspectiveRightIn","post_body":"fadeIn","coll_header":"swoopIn","sidebar":"shrinkIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://idolcoder.gitee.io/blog/2021/05/android-crash-who-kill-you/"/>
+
+
+
+
+
+<!-- 设置文章需要密码访问 -->
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <title>Android Crash揭秘与实践 | 叶金诚的站点</title>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  
+	<!-- leafacePlayer -->
+	
+      <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+      <meta name="baidu-site-verification" content="code-lde50FghqK" />
+
+	
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <!--fork me from github-->
+    <a target="_blank" rel="noopener" href="https://github.com/ShaunSheep" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">叶金诚的站点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">汇贤雅叙</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/blog/movies/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-film"></i> <br />
+            
+            电影
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-图书">
+          <a href="/blog/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            图书
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/blog/links/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idolcoder.gitee.io/blog/blog/2021/05/android-crash-who-kill-you/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Android Crash揭秘与实践</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+             
+
+             
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-01T11:15:44+08:00">
+                2021-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Android/BugFree/" itemprop="url" rel="index">
+                    <span itemprop="name">BugFree</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Android/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/blog/2021/05/android-crash-who-kill-you/" class="leancloud_visitors" data-flag-title="Android Crash揭秘与实践">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          <!--
+          
+          -->
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数&#58;</span>
+                
+                <span title="字数">
+                  6.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">时长 &asymp;</span>
+                
+                <span title="时长">
+                  28 分钟
+                </span>
+              
+            </span>
+          
+
+          <!-- 隐藏文章内标题下，内容描述
+          
+          -->
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><p>AndroidCrash基础知识</p>
+<p><strong>研究的对象</strong>是<font color="blue">APP进程</font></p>
+<p><strong>研究的问题</strong>主体是 <font color="blue">APP为什么会Crash</font></p>
+<p><strong>研究的路线</strong>是：从APP进程被Crash的第一行代码开始溯源，<code>Java-&gt;JVM-&gt;Android平台-&gt;Android系统-&gt;Devices</code>，直至我们最后能看懂的地方。</p>
+<p><strong>研究的工具</strong>是：</p>
+<ol>
+<li>Source Insight 4.0</li>
+<li>UML</li>
+<li>Logcat</li>
+<li>Logger</li>
+<li>MtkLog</li>
+<li>SysTrace</li>
+<li>TraceView</li>
+<li>Profiler</li>
+<li>Leakcanary</li>
+<li>Blockcanary</li>
+<li>Buggly</li>
+<li>友盟</li>
+<li>自建APM</li>
+</ol>
+<p><strong>研究的参考资料</strong>是：</p>
+<ol>
+<li>Java JRE SRC</li>
+<li>Android Framwork SRC</li>
+<li>工具对应的文档</li>
+</ol>
+<p>主要介绍两个方面：</p>
+<ol>
+<li>Java(JVM)级别的Crash现象以及原理</li>
+<li>AppCrash容灾方案1.0</li>
+<li>异常捕获原理及最佳实践</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">Head(Crash知识分享大纲)--&gt;preKno</span><br><span class="line">preKno(前置知识)--&gt;Crash(Crash)</span><br><span class="line">Crash--&gt;c1(定义)</span><br><span class="line">Crash--&gt;c2(分类)</span><br><span class="line">preKno--&gt;Exception(异常)</span><br><span class="line">Exception--&gt;e1(定义)</span><br><span class="line">Exception--&gt;e2(分类)</span><br><span class="line">Head--&gt;code(原理分析)</span><br><span class="line">code--&gt;co1(Java)--&gt;co11(JavaThrowable)</span><br><span class="line">co1--&gt;co12(JavaException)</span><br><span class="line">code--&gt;co2(JVM)--&gt;co22(方法加载原理)</span><br><span class="line">co2--&gt;co23(类加载原理)</span><br><span class="line">co2--&gt;co24(JVM异常原理)</span><br><span class="line">Head--&gt;CrashDemo(CrashDemo案例)</span><br><span class="line">CrashDemo--&gt;cr1(主线程异常)</span><br><span class="line">CrashDemo--&gt;cr2(子线程异常)</span><br><span class="line">CrashDemo--&gt;cr3(未捕获异常处理器)</span><br><span class="line">CrashDemo--&gt;cr4(默认未捕获异常处理器)</span><br><span class="line">CrashDemo--&gt;cr6(演示APP停止运行Dialog)</span><br><span class="line">CrashDemo--&gt;cr7(演示APP黑屏闪退且无Dialog)</span><br><span class="line">CrashDemo--&gt;cr5(try-catch-exception机器码)</span><br><span class="line">Head--&gt;CrashProject(Crash工程化实践)</span><br><span class="line">CrashProject--&gt;cp1(线下工具)</span><br><span class="line">CrashProject--&gt;cp2(线上工具)</span><br><span class="line">CrashProject--&gt;cp3(编码实践)</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h1 id="crash知识分享第一期"><a href="#Crash知识分享第一期" class="headerlink" title="Crash知识分享第一期"></a>Crash知识分享第一期<a href="#crash知识分享第一期" class="header-anchor">#</a></h1><h1 id="3个现象"><a href="#3个现象" class="headerlink" title="3个现象"></a>3个现象<a href="#3个现象" class="header-anchor">#</a></h1><blockquote>
+<p> <strong>有这么3种现象</strong>(不算ANR)</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>现象名称</th>
+<th></th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>App已停止运行</td>
+<td><img src="http://cdn.yangchaofan.cn//typora/image-20210423143651100.png" alt="image-20210423143651100"></td>
+<td>RuntimeException<br>OutOfMemoryError</td>
+</tr>
+<tr>
+<td>App闪退</td>
+<td>黑屏并回到Launcher首页</td>
+<td>StackOverflowError<br></td>
+</tr>
+<tr>
+<td>App屡次停止运行</td>
+<td><img src="http://cdn.yangchaofan.cn//typora/image-20210423143600543.png" alt="image-20210423143600543"></td>
+<td>多次异常</td>
+</tr>
+<tr>
+<td>（补充）App没有响应</td>
+<td><img src="http://cdn.yangchaofan.cn/typora/image-20210426163446282.png" alt="image-20210426163446282" style="zoom:80%;"></td>
+<td>参考唐将《ANR知识分享》</td>
+</tr>
+</tbody></table>
+<p>Demo</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210426190621477.png" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图1-Demo展示
+      </div>
+</center>
+
+
+
+
+<blockquote>
+<p>根据Crash源头不同,Crash级别可以分为以下4类</p>
+</blockquote>
+<ol>
+<li>JVM：Throwable类问题</li>
+<li>OS平台：内存、文件流、中断等</li>
+<li>硬件设备：路由器、宽带、设备重启、摄像头、内存卡、磁盘等</li>
+<li>物理环境：水、温度等</li>
+</ol>
+<h1 id="java级别crash原理"><a href="#Java级别Crash原理" class="headerlink" title="Java级别Crash原理"></a>Java级别Crash原理<a href="#java级别crash原理" class="header-anchor">#</a></h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义<a href="#定义" class="header-anchor">#</a></h2><p><strong>什么是Java级别的Crash？</strong></p>
+<ol>
+<li><code>JavaAPP</code>或<code>AndroidAPP</code>运行过程中，发生了<code>Throwable</code>类问题,被JVM识别捕获</li>
+<li><code>JVM</code>主动操作导致程序退出，而非Android平台OS、硬件设备、物理环境导致程序退出</li>
+</ol>
+<p><strong>关于Java级别Crash主要研究哪些问题？</strong></p>
+<blockquote>
+<p>研究对象：Java最小任务单位Thread</p>
+<p>研究场景：JavaAPP程序、AndroidAPP程序</p>
+<p>场景区别：Java虚拟机、Android虚拟机</p>
+<p>研究问题：</p>
+<ol>
+<li>Crash杀死了谁？连带杀死了谁？-Thread\ThreadGroup\Process</li>
+<li>谁Crash了谁？谁杀死了APP？- Runtime</li>
+<li>停止运行Dialog是谁调用弹出的？-</li>
+<li>Exception抛出流程?-Exception对象是x创建的，第一个抛出者是xx</li>
+<li>Logcat打印流程?-每一行ExceptionLog是xx、xx打印的</li>
+</ol>
+</blockquote>
+<h2 id="研究对象thread"><a href="#研究对象Thread" class="headerlink" title="研究对象Thread"></a>研究对象Thread<a href="#研究对象thread" class="header-anchor">#</a></h2><blockquote>
+<p>主要回答一个问题：Crash杀死的是谁？——运行APP的最小单位是Thread（Process），所以杀死的是当前Thread</p>
+</blockquote>
+<h3 id="thread基础知识"><a href="#Thread基础知识" class="headerlink" title="Thread基础知识"></a>Thread基础知识<a href="#thread基础知识" class="header-anchor">#</a></h3><h4 id="thread4"><a href="#Thread-4" class="headerlink" title="Thread[4]"></a>Thread<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Java Platform SE 8](file:///E:/developedoc/jdk-8u281-docs-all/docs/api/index.html)">[4]</span></a></sup><a href="#thread4" class="header-anchor">#</a></h4><blockquote>
+<p>代码位置：jdk\src\java\lang\Thread.java</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> 	<span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 将未捕获的异常分派给处理程序。这个方法只打算由JVM调用。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">dispatchUncaughtException</span><span class="params">(Throwable e)</span> </span>&#123;</span><br><span class="line">        getUncaughtExceptionHandler().uncaughtException(<span class="keyword">this</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line">	<span class="comment">/* 这个线程所在的组 */</span></span><br><span class="line">    <span class="keyword">private</span> ThreadGroup group;</span><br><span class="line">	 <span class="comment">// 默认null 除非显示设置</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> UncaughtExceptionHandler uncaughtExceptionHandler;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 返回当此线程由于未捕获异常而突然终止时调用的处理程序。</span></span><br><span class="line"><span class="comment">     * 如果该线程没有显式设置未捕获的异常处理程序，则返回该线程的ThreadGroup对象，</span></span><br><span class="line"><span class="comment">     * 除非该线程已经终止，在这种情 况下返回null。为这个线程返回未捕获的异常处理程序</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> UncaughtExceptionHandler <span class="title">getUncaughtExceptionHandler</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> uncaughtExceptionHandler != <span class="keyword">null</span> ?</span><br><span class="line">            uncaughtExceptionHandler : group;</span><br><span class="line">    &#125;</span><br><span class="line">...</span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * Thread内部接口</span></span><br><span class="line"><span class="comment">     * 用于在线程由于未捕获异常而突然终止时调用的处理程序。</span></span><br><span class="line"><span class="comment">     * 当一个线程由于未捕获的异常而即将终止时，Java虚拟机将使用getUncaughtExceptionHandler查询该线程的</span></span><br><span class="line"><span class="comment">     * UncaughtExceptionHandler，并调用该处理程序的uncaughtException方法，将线程和异常作为参数传递。</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * 如果一个线程没有显式设置它的UncaughtExceptionHandler，那么它的ThreadGroup对象就充当它的UncaughtExceptionHand</span></span><br><span class="line"><span class="comment">     * 如果ThreadGroup对象对处理异常没有特殊要求，它可以将调用转发给getDefaultUncaughtExceptionHandler默认未捕获的异常处理程序</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@FunctionalInterface</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 方法在给定线程由于给定未捕获异常而终止时调用。 Java虚拟机将忽略此方法引发的任何异常。</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(Thread t, Throwable e)</span></span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+<p>JVM执行Thread对象时，处理异常流程为:</p>
+<ol>
+<li>JVM在执行当前<code>Thread</code>对象时遇到了异常并进行抛出，如果JVM发现开发者并未对该异常进行捕获，则JVM会调用<code>Thread</code>的<code>dispatchUncaughtException</code>方法将Exception对象传递给<code>Thread</code>持有的<code>UncaughtExceptionHandler </code></li>
+<li>如果<code>Thread</code>持有的<code>UncaughtExceptionHandler</code> 不为空，则交由<code>Thread</code>对象持有的UncaughtExceptionHandler 对象处理；</li>
+<li>如果<code>Thread</code>持有的<code>UncaughtExceptionHandler </code>为空，则交给<code>ThreadGroup</code>来处理<code>Thread</code>所抛出<code>Exception</code>对象</li>
+</ol>
+<h4 id="threadgroup4"><a href="#ThreadGroup-4" class="headerlink" title="ThreadGroup[4]"></a>ThreadGroup<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Java Platform SE 8](file:///E:/developedoc/jdk-8u281-docs-all/docs/api/index.html)">[4]</span></a></sup><a href="#threadgroup4" class="header-anchor">#</a></h4><blockquote>
+<p>代码位置：jdk\src\java\lang\ThreadGroup.java</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThreadGroup</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">     <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * ThreadGroup.java</span></span><br><span class="line"><span class="comment">     * 当此线程组中的线程因未捕获异常而停止，且该线程没有特定的Thread.UncaughtExceptionHandler设置时，由Java虚拟机调用。。</span></span><br><span class="line"><span class="comment">     * ThreadGroup的uncaughtException方法执行如下操作:</span></span><br><span class="line"><span class="comment">     * 如果这个线程组有一个父线程组，该父线程组的uncaughtException方法将被调用，并带有相同的两个参数。</span></span><br><span class="line"><span class="comment">     * 否则，这个方法会检查是否安装了一个默认的未捕获异常处理程序，如果安装了，它的uncaughtException方法会被调用，并带有相同的两个参数。</span></span><br><span class="line"><span class="comment">     * 否则，此方法将确定Throwable参数是否为ThreadDeath的实例。如果是这样，也没有做什么特别的事情。否则，包含线程名称的消息(从线程的getName方法返回)和堆栈回溯(使用Throwable的printStackTrace方法)将打印到标准错误流。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(Thread t, Throwable e)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</span><br><span class="line">            parent.uncaughtException(t, e);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            Thread.UncaughtExceptionHandler ueh =</span><br><span class="line">                Thread.getDefaultUncaughtExceptionHandler();</span><br><span class="line">            <span class="keyword">if</span> (ueh != <span class="keyword">null</span>) &#123;</span><br><span class="line">                ueh.uncaughtException(t, e);</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!(e <span class="keyword">instanceof</span> ThreadDeath)) &#123;</span><br><span class="line">                System.err.print(<span class="string">&quot;Exception in thread \&quot;&quot;</span></span><br><span class="line">                                 + t.getName() + <span class="string">&quot;\&quot; &quot;</span>);</span><br><span class="line">                e.printStackTrace(System.err);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p><code>ThreadGroup</code>处理<code>uncaughtException</code>的流程很简洁</p>
+<ol>
+<li>默认情况，先将Exception对象交给<code>父ThreadGroup</code>处理</li>
+<li>判断Thread是否持有<code>defaultUncaughtExceptionHandler</code>默认异常处理器</li>
+<li>如果有默认异常处理器，则交由其处理</li>
+<li>如果没有异常处理器，则将错误信息输出到<code>System.err</code></li>
+</ol>
+<blockquote>
+<p>总结一下Exception处理顺序，假设某个Thread抛出Exception</p>
+<p>消费Exception的顺序为</p>
+<ol>
+<li>Thread<ol>
+<li><code>UncaughtExceptionHandler</code> </li>
+</ol>
+</li>
+<li>ThreadGroup<ol>
+<li>ParentThread<ol>
+<li><code>DefaultUncaughtExceptionHandler</code></li>
+<li><code>UncaughtExceptionHandler</code> </li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</blockquote>
+<h3 id="主线程"><a href="#主线程" class="headerlink" title="主线程"></a>主线程<a href="#主线程" class="header-anchor">#</a></h3><h4 id="javaapp"><a href="#JavaAPP" class="headerlink" title="JavaAPP"></a>JavaAPP<a href="#javaapp" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrashTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        testMainTrheadCrash();</span><br><span class="line">    &#125;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 测试主线程异常Crash</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testMainTrheadCrash</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread.currentThread().setName(<span class="string">&quot;iron man is on the main thread&quot;</span>);</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">int</span> b = a / <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></div>
+<p>异常堆栈</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">&quot;iron man is on the main thread&quot;</span> java.lang.ArithmeticException: / by zero</span><br><span class="line">        at CrashTest.testMainTrheadCrash(CrashTest.java:<span class="number">29</span>)</span><br><span class="line">        at CrashTest.main(CrashTest.java:<span class="number">4</span>)</span><br></pre></td></tr></table></figure></div>
+<p>可以看到线程名是主线程<code>main</code></p>
+<h4 id="androidapp"><a href="#AndroidAPP" class="headerlink" title="AndroidAPP"></a>AndroidAPP<a href="#androidapp" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * main thread throws exceptions</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> view</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createExceptionInMainThread</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">       Thread.currentThread().setName(<span class="string">&quot;iron man is on the android main thread&quot;</span>);</span><br><span class="line">       <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">       <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">int</span> c = a / b;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></div>
+<p>异常堆栈</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2021</span>-<span class="number">04</span>-<span class="number">25</span> <span class="number">14</span>:<span class="number">33</span>:<span class="number">38.372</span> <span class="number">4707</span>-<span class="number">4707</span>/com.work.demotest E/AndroidRuntime: FATAL EXCEPTION: iron man is on the android main thread</span><br><span class="line">    Process: com.work.demotest, PID: <span class="number">4707</span></span><br><span class="line">    java.lang.IllegalStateException: Could not execute method <span class="keyword">for</span> android:onClick</span><br><span class="line">        at android.view.View$DeclaredOnClickListener.onClick(View.java:<span class="number">4726</span>)</span><br><span class="line">        at android.view.View.performClick(View.java:<span class="number">5638</span>)</span><br><span class="line">        at android.view.View$PerformClick.run(View.java:<span class="number">22430</span>)</span><br><span class="line">        at android.os.Handler.handleCallback(Handler.java:<span class="number">751</span>)</span><br><span class="line">        at android.os.Handler.dispatchMessage(Handler.java:<span class="number">95</span>)</span><br><span class="line">        at android.os.Looper.loop(Looper.java:<span class="number">154</span>)</span><br><span class="line">        at android.app.ActivityThread.main(ActivityThread.java:<span class="number">6198</span>)</span><br><span class="line">        at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">        at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:<span class="number">891</span>)</span><br><span class="line">        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:<span class="number">781</span>)</span><br><span class="line">     Caused by: java.lang.reflect.InvocationTargetException</span><br><span class="line">        at java.lang.reflect.Method.invoke(Native Method)</span><br><span class="line">        at android.view.View$DeclaredOnClickListener.onClick(View.java:<span class="number">4721</span>)</span><br><span class="line">        at android.view.View.performClick(View.java:<span class="number">5638</span>) </span><br><span class="line">        at android.view.View$PerformClick.run(View.java:<span class="number">22430</span>) </span><br><span class="line">        at android.os.Handler.handleCallback(Handler.java:<span class="number">751</span>) </span><br><span class="line">        at android.os.Handler.dispatchMessage(Handler.java:<span class="number">95</span>) </span><br><span class="line">        at android.os.Looper.loop(Looper.java:<span class="number">154</span>) </span><br><span class="line">        at android.app.ActivityThread.main(ActivityThread.java:<span class="number">6198</span>) </span><br><span class="line">        at java.lang.reflect.Method.invoke(Native Method) </span><br><span class="line">        at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:<span class="number">891</span>) </span><br><span class="line">        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:<span class="number">781</span>) </span><br><span class="line">     Caused by: java.lang.ArithmeticException: divide by zero</span><br><span class="line">        at com.work.demotest.TestExceptionActivity.createExceptionInMainThread(TestExceptionActivity.java:<span class="number">132</span>)</span><br><span class="line">        at java.lang.reflect.Method.invoke(Native Method) </span><br><span class="line">        at android.view.View$DeclaredOnClickListener.onClick(View.java:<span class="number">4721</span>) </span><br><span class="line">        at android.view.View.performClick(View.java:<span class="number">5638</span>) </span><br><span class="line">        at android.view.View$PerformClick.run(View.java:<span class="number">22430</span>) </span><br><span class="line">        at android.os.Handler.handleCallback(Handler.java:<span class="number">751</span>) </span><br><span class="line">        at android.os.Handler.dispatchMessage(Handler.java:<span class="number">95</span>) </span><br><span class="line">        at android.os.Looper.loop(Looper.java:<span class="number">154</span>) </span><br><span class="line">        at android.app.ActivityThread.main(ActivityThread.java:<span class="number">6198</span>) </span><br><span class="line">        at java.lang.reflect.Method.invoke(Native Method) </span><br><span class="line">        at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:<span class="number">891</span>) </span><br><span class="line">        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:<span class="number">781</span>) </span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+<h3 id="子线程"><a href="#子线程" class="headerlink" title="子线程"></a>子线程<a href="#子线程" class="header-anchor">#</a></h3><h4 id="javaapp"><a href="#JavaAPP-1" class="headerlink" title="JavaAPP"></a>JavaAPP<a href="#javaapp" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 测试子线程异常</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testChildThreadCrash</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       Thread childTrhead = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">               <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">               <span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">               <span class="keyword">int</span> b = a / <span class="number">0</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">       childTrhead.setName(<span class="string">&quot;iron man is on the child thread&quot;</span>);</span><br><span class="line">       childTrhead.start();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></div>
+<p>异常堆栈</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread <span class="string">&quot;iron man is on the child thread&quot;</span> java.lang.ArithmeticException: / by zero</span><br><span class="line">        at CrashTest$<span class="number">1.</span>run(CrashTest.java:<span class="number">16</span>)</span><br><span class="line">        at java.lang.Thread.run(Thread.java:<span class="number">745</span>)</span><br></pre></td></tr></table></figure></div>
+<h4 id="androidapp"><a href="#AndroidAPP-1" class="headerlink" title="AndroidAPP"></a>AndroidAPP<a href="#androidapp" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * main thread  dose not catch sub thread exception</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> view</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createExceptionInThread</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">                <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">int</span> c = a / b;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;<span class="keyword">catch</span> (Exception e)&#123;</span><br><span class="line">        Log.d(<span class="string">&quot;createExceptionInThread&quot;</span>,<span class="string">&quot;main thread is catch sub thread exception&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>异常堆栈</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2021</span>-<span class="number">04</span>-<span class="number">25</span> <span class="number">14</span>:<span class="number">35</span>:<span class="number">25.580</span> <span class="number">4775</span>-<span class="number">4811</span>/com.work.demotest E/AndroidRuntime: FATAL EXCEPTION: iron man is on the android chilid thread</span><br><span class="line">    Process: com.work.demotest, PID: <span class="number">4775</span></span><br><span class="line">    java.lang.ArithmeticException: divide by zero</span><br><span class="line">        at com.work.demotest.TestExceptionActivity$<span class="number">1.</span>run(TestExceptionActivity.java:<span class="number">113</span>)</span><br><span class="line">        at java.lang.Thread.run(Thread.java:<span class="number">761</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<blockquote>
+<p>JavaAPP与AndroidAPP默认异常堆栈区别</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>命令行默认异常堆栈</th>
+<th>JavaAPP</th>
+<th>AndroidAPP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Process</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>Thread</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>Exception</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Android主线程与子线程异常堆栈区别</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Android异常堆栈</th>
+<th>Process</th>
+<th>Thread</th>
+<th>view</th>
+<th>ActivityThread</th>
+<th>ZygoteInit</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ChildThread</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:negative_squared_cross_mark:</td>
+</tr>
+<tr>
+<td>MainThread</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+<td>:heavy_check_mark:</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>疑问：Android主线程异常，为什么抛出如此多的信息？为什么有这种区别？</p>
+</blockquote>
+<p>答：因为AndroidAPP的主线程所做的任务位于<code>ActivityThread.main</code>中，在<code>main</code>方法中做了比子线程更多的任务。</p>
+<h2 id="研究对象runtimeltspan-classhinttop-hinterror-hintmedium-hintrounded-hintbounce-aria-label-runtimejava"><a href="#研究对象Runtime-lt-span-class-”hint–top-hint–error-hint–medium-hint–rounded-hint–bounce”-aria-label-”-Runtime-java" class="headerlink" title="研究对象Runtime&lt;span class=”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=” Runtime.java"></a>研究对象Runtime<sup id="fnref:3"><a href="#fn:3" rel="footnote">&lt;span class=”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=”<a target="_blank" rel="noopener" href="http://www.coderead.cn/jre/8/java/lang/Runtime.java"> Runtime.java</a></a></sup><a href="#研究对象runtimeltspan-classhinttop-hinterror-hintmedium-hintrounded-hintbounce-aria-label-runtimejava" class="header-anchor">#</a></h2><p>“&gt;[3]</p>
+<blockquote>
+<p>主要回答一个问题，谁杀死了APP？</p>
+</blockquote>
+<h3 id="javaruntime"><a href="#JavaRuntime" class="headerlink" title="JavaRuntime"></a>JavaRuntime<a href="#javaruntime" class="header-anchor">#</a></h3><blockquote>
+<p>代码位置：jre/java/lang/Runtime </p>
+<p>调用者：暂时理解为虚拟机(没有查到准确的触发者)</p>
+<p>代码用途：杀死JavaAPP、运行JavaAPP</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 每个Java应用程序都有一个Runtime类实例，</span></span><br><span class="line"><span class="comment">* 该类允许应用程序与应用程序运行的环境交互。当前运行时可以从getRuntime方法获得。</span></span><br><span class="line"><span class="comment">* 应用程序不能创建自己的此类实例。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Runtime</span> </span>&#123;  </span><br><span class="line">	...</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">exit</span><span class="params">(<span class="keyword">int</span> status)</span> </span>&#123;</span><br><span class="line">        SecurityManager security = System.getSecurityManager();</span><br><span class="line">        <span class="keyword">if</span> (security != <span class="keyword">null</span>) &#123;</span><br><span class="line">            security.checkExit(status);</span><br><span class="line">        &#125;</span><br><span class="line">        Shutdown.exit(status);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h3 id="androidruntimeltspan-classhinttop-hinterror-hintmedium-hintrounded-hintbounce-aria-label-runtimeinitjava-androidxrefcom"><a href="#AndroidRuntime-lt-span-class-”hint–top-hint–error-hint–medium-hint–rounded-hint–bounce”-aria-label-”-RuntimeInit-java-androidxref-com" class="headerlink" title="AndroidRuntime&lt;span class=”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=” RuntimeInit.java (androidxref.com)"></a>AndroidRuntime<sup id="fnref:2"><a href="#fn:2" rel="footnote">&lt;span class=”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=”<a target="_blank" rel="noopener" href="http://androidxref.com/8.1.0_r33/xref/frameworks/base/core/java/com/android/internal/os/RuntimeInit.java"> RuntimeInit.java (androidxref.com)</a></a></sup><a href="#androidruntimeltspan-classhinttop-hinterror-hintmedium-hintrounded-hintbounce-aria-label-runtimeinitjava-androidxrefcom" class="header-anchor">#</a></h3><p>“&gt;[2]</p>
+<blockquote>
+<p>代码位置: /frameworks/base/core/java/com/android/internal/os/RuntimeInit.java</p>
+<p>调用者：暂时理解为虚拟机(没有查到准确的触发者)</p>
+<p>代码用途：运行AndroidAPP、杀死AndroidAPP、打印AndroidAPP运行过程的Log</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运行时初始化的主入口点。不供公共访问。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RuntimeInit</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * main方法入口</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"> 	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] argv)</span> </span>&#123;</span><br><span class="line">		commonInit();</span><br><span class="line">        nativeFinishInit();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">commonInit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 设置虚拟机中的线程未捕获异常处理程序。APP可以替换默认的未捕获异常处</span></span><br><span class="line"><span class="comment">     * 理器，但不能替换预处理处理器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    LoggingHandler loggingHandler = <span class="keyword">new</span> LoggingHandler();</span><br><span class="line">    Thread.setUncaughtExceptionPreHandler(loggingHandler);</span><br><span class="line">    Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">new</span> KillApplicationHandler(loggingHandler));</span><br><span class="line"></span><br><span class="line">    initialized = <span class="keyword">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * RuntimeInit内部类</span></span><br><span class="line"><span class="comment">     * 处理未捕获异常导致的应用程序死亡 framework负责为主线程捕获这些信息</span></span><br><span class="line"><span class="comment">     * 因此这应该只对应用程序创建的线程有影响。</span></span><br><span class="line"><span class="comment">     * 在此方法运行之前，loginghandler将已经有日志细节。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">KillApplicationHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(Thread t, Throwable e)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 如果已经报告Crash，避免死循环</span></span><br><span class="line">                <span class="keyword">if</span> (mCrashing)</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                mCrashing = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 尝试结束Profiling，如果Profiling正在运行，且我们杀死了正在Profiling的进程，内存中的缓冲区将会丢失</span></span><br><span class="line">                <span class="comment">// 请尝试停止Profiling，用来刷新buffer缓冲区。</span></span><br><span class="line">                <span class="comment">// 这样做可以提升方法追踪（method trace）结果，对调试Crash很有用</span></span><br><span class="line">                <span class="keyword">if</span> (ActivityThread.currentActivityThread() != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    ActivityThread.currentActivityThread().stopProfiling();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 打开崩溃对话框，直到它消失</span></span><br><span class="line">                ActivityManager.getService().handleApplicationCrash(mApplicationObject,</span><br><span class="line">                        <span class="keyword">new</span> ApplicationErrorReport.ParcelableCrashInfo(e));</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable t2) &#123;</span><br><span class="line">                <span class="keyword">if</span> (t2 <span class="keyword">instanceof</span> DeadObjectException) &#123;</span><br><span class="line">                    <span class="comment">// 系统进程已死，忽略执行</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        Clog_e(TAG, <span class="string">&quot;Error reporting crash&quot;</span>, t2);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Throwable t3) &#123;</span><br><span class="line">                        <span class="comment">// Clog_e() 也存在异常哦</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                <span class="comment">// 保障这个过程能执行</span></span><br><span class="line">                Process.killProcess(Process.myPid());</span><br><span class="line">                System.exit(<span class="number">10</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>总结下AppRuntime处理流程</p>
+<ol>
+<li><code>main</code>调用了<code>commonInit</code></li>
+<li><code>commonInit</code>中设置了<code>setUncaughtExceptionPreHandler</code>、<code>setDefaultUncaughtExceptionHandler</code><ol>
+<li>未捕获异常处理器<code>setUncaughtExceptionPreHandler</code>设置了<code>LoggingHandler</code></li>
+<li>默认未捕获异常处理器<code>setDefaultUncaughtExceptionHandler</code>设置了<code>KillApplicationHandler</code></li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>观察步骤2-b 这也就是为什么在App中设置默认异常捕获器可以防止APP闪退的原因</p>
+</blockquote>
+<p>Runtime研究的启示有以下几点：</p>
+<ol>
+<li>无论是JavaAPP或是AndroidAPP，只要为Thread设置了未捕获异常处理器，就可以降低Crash的几率</li>
+<li>在未捕获异常处理器中可以做很多任务：异常信息持久化，上报日志，单个线程设置处理器，APP容灾处理</li>
+<li>主线程的默认未捕获异常处理器是<code>KillApplicationHandler</code>，默认会杀死当前进程</li>
+</ol>
+<p>如果我们追溯代码，可以看到停止运行的弹出框的数据格式为<code>ApplicationErrorReport#CrashInfo</code></p>
+<blockquote>
+<p>代码位置:frameworks/base/core/java/android/app/ApplicationErrorReport.java</p>
+<p>代码用途：创建Crash数据对象，保存命令行打印的错误信息</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>内部类名称</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CrashInfo</td>
+<td>描述Crash信息</td>
+</tr>
+<tr>
+<td>AnrInfo</td>
+<td>描述ANR信息</td>
+</tr>
+<tr>
+<td>BatteryInfo</td>
+<td>描述电池信息</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p> 代码位置ActivityManagerService</p>
+<p>代码用途：调出AppErrors的方法停止运行弹出框Dialog</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ActivityManagerService</span> <span class="keyword">extends</span> <span class="title">IActivityManager</span>.<span class="title">Stub</span></span>&#123;</span><br><span class="line">	<span class="keyword">final</span> AppErrors mAppErrors; </span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">crashApplication</span><span class="params">(<span class="keyword">int</span> uid, <span class="keyword">int</span> initialPid, String packageName, <span class="keyword">int</span> userId,</span></span></span><br><span class="line"><span class="function"><span class="params">            String message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span>(<span class="keyword">this</span>) &#123;</span><br><span class="line">            mAppErrors.scheduleAppCrashLocked(uid, initialPid, packageName, userId, message);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></div>
+<blockquote>
+<p>代码位置AppErrors</p>
+<p>代码用途：Dialog工具类，如创建停止运行弹出框Dialog</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppErrors</span> </span>&#123;</span><br><span class="line">    handleShowAppErrorUi()&#123;</span><br><span class="line">        proc.crashDialog = <span class="keyword">new</span> AppErrorDialog(mContext, mService, data);</span><br><span class="line">        ...</span><br><span class="line">        data.proc.crashDialog.show();</span><br><span class="line">    &#125;   </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 显示“unexpected error” dialog</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">crashApplication</span><span class="params">(ProcessRecord r, ApplicationErrorReport.CrashInfo crashInfo)</span> </span>&#123;</span><br><span class="line">         ...</span><br><span class="line">     &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 显示&quot;anr&quot; dialog</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">appNotResponding</span><span class="params">(ProcessRecord app, ActivityRecord activity,</span></span></span><br><span class="line"><span class="function"><span class="params">            ActivityRecord parent, <span class="keyword">boolean</span> aboveSystem, <span class="keyword">final</span> String annotation)</span></span>&#123;</span><br><span class="line">           ...</span><br><span class="line">           <span class="comment">// 0 == show dialog, 1 = keep waiting, -1 = kill process immediately</span></span><br><span class="line">           <span class="keyword">int</span> res = mService.mController.appNotResponding(</span><br><span class="line">                        app.processName, app.pid, info.toString());</span><br><span class="line">           ...</span><br><span class="line">            <span class="comment">// 设置APP anr状态吗，锁住errorReportReceiver</span></span><br><span class="line">            makeAppNotRespondingLocked(app,</span><br><span class="line">                    activity != <span class="keyword">null</span> ? activity.shortComponentName : <span class="keyword">null</span>,</span><br><span class="line">                    annotation != <span class="keyword">null</span> ? <span class="string">&quot;ANR &quot;</span> + annotation : <span class="string">&quot;ANR&quot;</span>,</span><br><span class="line">                    info.toString());</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<blockquote>
+<p>代码位置AppErrorDialog</p>
+<p>代码用途：弹出框Dialog</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">AppErrorDialog</span> <span class="keyword">extends</span> <span class="title">BaseErrorDialog</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>&#123;</span><br><span class="line">     <span class="comment">// 消息事件 &#x27;what&#x27; codes</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FORCE_QUIT = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> FORCE_QUIT_AND_REPORT = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> RESTART = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MUTE = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TIMEOUT = <span class="number">6</span>;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> CANCEL = <span class="number">7</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h3 id="java未捕获异常处理器"><a href="#Java未捕获异常处理器" class="headerlink" title="Java未捕获异常处理器"></a>Java未捕获异常处理器<a href="#java未捕获异常处理器" class="header-anchor">#</a></h3><p><code>CrashTest</code>测试类，类中定义了内部类<code>ExceptionHandler</code></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrashTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">final</span> String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// testChildThreadCrash();</span></span><br><span class="line">        testMainTrheadCrash();</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">/** </span></span><br><span class="line"><span class="comment">     * 内部类形式的处理器</span></span><br><span class="line"><span class="comment">     * 线程未捕获异常处理器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionHandler</span> <span class="keyword">implements</span> <span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(<span class="keyword">final</span> Thread t, <span class="keyword">final</span> Throwable e)</span> </span>&#123;</span><br><span class="line">            System.out.printf(t.getName()+<span class="string">&quot;,captured a exception \n&quot;</span>);</span><br><span class="line">            System.out.printf(<span class="string">&quot;thread error msg is&quot;</span>+e.toString());</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="主线程"><a href="#主线程-1" class="headerlink" title="主线程"></a>主线程<a href="#主线程" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试主线程异常Crash</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testMainTrheadCrash</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Thread.currentThread().setName(<span class="string">&quot;iron man is on the main thread&quot;</span>);</span><br><span class="line">    ExceptionHandler cExceptionHandler = <span class="keyword">new</span> ExceptionHandler();</span><br><span class="line">    Thread.currentThread().setUncaughtExceptionHandler(cExceptionHandler);</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">int</span> b = a / <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>异常日志</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iron man is on the main thread,captured a exception</span><br><span class="line">thread error msg isjava.lang.ArithmeticException: / by zero</span><br></pre></td></tr></table></figure></div>
+<h4 id="子线程"><a href="#子线程-1" class="headerlink" title="子线程"></a>子线程<a href="#子线程" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 测试子线程异常</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testChildThreadCrash</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">final</span> Thread childTrhead = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">          <span class="meta">@Override</span></span><br><span class="line">          <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">              <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">              <span class="keyword">final</span> <span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line">              <span class="keyword">final</span> <span class="keyword">int</span> b = a / <span class="number">0</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      childTrhead.setName(<span class="string">&quot;iron man is on the child thread&quot;</span>);</span><br><span class="line">      ExceptionHandler cExceptionHandler = <span class="keyword">new</span> ExceptionHandler();</span><br><span class="line">      childTrhead.setUncaughtExceptionHandler(cExceptionHandler);</span><br><span class="line">      childTrhead.start();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></div>
+<p>异常日志</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iron man is on the child thread,captured a exception</span><br><span class="line">thread error msg isjava.lang.ArithmeticException: / by zero</span><br></pre></td></tr></table></figure></div>
+<h3 id="android未捕获异常处理器"><a href="#Android未捕获异常处理器" class="headerlink" title="Android未捕获异常处理器"></a>Android未捕获异常处理器<a href="#android未捕获异常处理器" class="header-anchor">#</a></h3><h4 id="主线程"><a href="#主线程-2" class="headerlink" title="主线程"></a>主线程<a href="#主线程" class="header-anchor">#</a></h4><p>定义<code>Application</code></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">     android:name=&quot;.collections.App&quot;</span><br><span class="line">   	&gt;</span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+<p><code>App</code>中定义未捕获异常处理器，未开启默认未捕获异常处理</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 线程未捕获异常处理器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(<span class="keyword">final</span> Thread t, <span class="keyword">final</span> Throwable e)</span> </span>&#123;</span><br><span class="line">            Log.d(<span class="string">&quot;uncaughtException&quot;</span>,t.getName()+<span class="string">&quot;,captured a exception&quot;</span>);</span><br><span class="line">            Log.d(<span class="string">&quot;uncaughtException&quot;</span>,<span class="string">&quot;thread error msg is&quot;</span>+e.toString());</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        Thread.currentThread().setName(<span class="string">&quot;android app &quot;</span>);</span><br><span class="line">        Thread.currentThread().setUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line">        <span class="comment">//        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler());</span></span><br><span class="line"><span class="comment">//        Thread.setDefaultUncaughtExceptionHandler(null);</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<blockquote>
+<p>问题：setUncaughtExceptionHandler是否能高枕无忧？保证不Crash？</p>
+</blockquote>
+<p>答：<font color="white">不能</font></p>
+<h4 id="测试主线程运行时异常"><a href="#测试主线程运行时异常" class="headerlink" title="测试主线程运行时异常"></a>测试主线程运行时异常<a href="#测试主线程运行时异常" class="header-anchor">#</a></h4><blockquote>
+<p>依然用Thread#子线程#AndroidAPP的代码演示</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * main thread throws exceptions</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> view</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createExceptionInMainThread</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">    Thread.currentThread().setName(<span class="string">&quot;iron man is on the android main thread&quot;</span>);</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> c = a / b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>日志堆栈</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2021</span>-<span class="number">04</span>-<span class="number">26</span> <span class="number">10</span>:<span class="number">36</span>:<span class="number">24.678</span> <span class="number">7136</span>-<span class="number">7136</span>/com.work.demotest D/ExceptionHandler: uncaughtExceptioniron man is on the android main threadhas captured a exception</span><br><span class="line"><span class="number">2021</span>-<span class="number">04</span>-<span class="number">26</span> <span class="number">10</span>:<span class="number">36</span>:<span class="number">24.678</span> <span class="number">7136</span>-<span class="number">7136</span>/com.work.demotest D/ExceptionHandler: uncaughtException has capture thread error ,msg isjava.lang.IllegalStateException: Could not execute method <span class="keyword">for</span> android:onClick</span><br><span class="line"><span class="number">2021</span>-<span class="number">04</span>-<span class="number">26</span> <span class="number">10</span>:<span class="number">36</span>:<span class="number">24.733</span> <span class="number">7166</span>-<span class="number">7166</span>/? D/ExceptionHandler: NoneUeCrashActivity onCreate</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>可以看到主线程的<code>Exception</code>被<code>未捕获异常处理器</code>处理了，并且跳转到了默认页面<code>NoneUeCrashActivity</code>，无异常堆栈。</p>
+<h4 id="测试子线程运行时异常"><a href="#测试子线程运行时异常" class="headerlink" title="测试子线程运行时异常"></a>测试子线程运行时异常<a href="#测试子线程运行时异常" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * main thread  dose not catch sub thread exception</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> view</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createExceptionInThread</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">         Thread thread =  <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">              <span class="meta">@Override</span></span><br><span class="line">              <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                  <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">                  <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">                  <span class="keyword">int</span> c = a / b;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">          thread.setName(<span class="string">&quot;iron man is on the android chilid thread&quot;</span>);</span><br><span class="line">          thread.start();</span><br><span class="line">      &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">          Log.d(<span class="string">&quot;createExceptionInThread&quot;</span>, <span class="string">&quot;main thread is catch sub thread exception&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>日志堆栈</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2021</span>-<span class="number">04</span>-<span class="number">26</span> <span class="number">10</span>:<span class="number">39</span>:<span class="number">37.421</span> <span class="number">7409</span>-<span class="number">7439</span>/com.work.demotest E/AndroidRuntime: FATAL EXCEPTION: iron man is on the android chilid thread</span><br><span class="line">    Process: com.work.demotest, PID: <span class="number">7409</span></span><br><span class="line">    java.lang.ArithmeticException: divide by zero</span><br><span class="line">        at com.work.demotest.TestExceptionActivity$<span class="number">1.</span>run(TestExceptionActivity.java:<span class="number">120</span>)</span><br><span class="line">        at java.lang.Thread.run(Thread.java:<span class="number">761</span>)</span><br></pre></td></tr></table></figure></div>
+<p>可以看到异常堆栈，并且弹出了停止运行弹窗。</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210426104141555.png" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图2-APP停止运行
+      </div>
+</center>
+
+
+
+
+
+
+
+<p>通过设置主、子线程的<code>setDefaultUncaughtExceptionHandler</code>和<code>setUncaughtExceptionHandler</code>，记录是否显示停止运行Dialog的结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>是否显示<code>停止运行Dialog</code></th>
+<th>主线程运行时异常</th>
+<th>子线程运行时异常</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>主线程设置setUncaughtExceptionHandler</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>主线程设置setDefaultUncaughtExceptionHandler</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:negative_squared_cross_mark:</td>
+</tr>
+<tr>
+<td>子线程设置setUncaughtExceptionHandler</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:negative_squared_cross_mark:</td>
+</tr>
+<tr>
+<td>子线程设置setDefaultUncaughtExceptionHandler</td>
+<td>:negative_squared_cross_mark:</td>
+<td>:negative_squared_cross_mark:</td>
+</tr>
+</tbody></table>
+<p>可以发现：</p>
+<ol>
+<li>主线程仅设置setUncaughtExceptionHandler，如果主线程抛出异常，则不会闪退，也不会弹出Dialog；<strong>如果子线程抛出异常，则App会闪退弹出Dialog;</strong></li>
+<li>主线程设置setDefaultUncaughtExceptionHandler，如果子线程抛出异常，则App不会闪退，也不会显示Dialog</li>
+<li>子线程设置setUncaughtExceptionHandler或子线程设置setDefaultUncaughtExceptionHandler都不会闪退，也不会弹出Dialog</li>
+</ol>
+<blockquote>
+<p>问题：Thread.setDefaultUncaughtExceptionHandler能解决什么问题？</p>
+</blockquote>
+<p>答：</p>
+<p><font color="white">RuntimeInit中为APP设置的俩异未捕获常处理器Thread.setUncaughtExceptionPreHandler(loggingHandler);<br>Thread.setDefaultUncaughtExceptionHandler(new KillApplicationHandler(loggingHandler));</font></p>
+<h4 id="未捕获异常处理器最佳实践"><a href="#未捕获异常处理器最佳实践" class="headerlink" title="未捕获异常处理器最佳实践"></a>未捕获异常处理器最佳实践<a href="#未捕获异常处理器最佳实践" class="header-anchor">#</a></h4><h5 id="制定容灾策略"><a href="#制定容灾策略" class="headerlink" title="制定容灾策略"></a>制定容灾策略<a href="#制定容灾策略" class="header-anchor">#</a></h5><ol>
+<li><p>在当前页面对MVVM、MVP或MVC各个层级做以下操作：退出、恢复、重试、缓存</p>
+</li>
+<li><p>跳转到业务首页，如登录流程某一步异常跳转到登录首页、视频通话页异常跳转到聊天详情页</p>
+</li>
+<li><p>显示错误页或错误弹窗，如遇到OOM，Dialog显示<code>内存不足,请优化内存后再试</code>、遇到StackOverFlow,Dialog显示<code>程序异常，进入克服中心反馈</code></p>
+</li>
+<li><p>保存错误数据，定时上报服务器</p>
+<p>…</p>
+</li>
+</ol>
+<h5 id="主线程和子线程作区分"><a href="#主线程和子线程作区分" class="headerlink" title="主线程和子线程作区分"></a>主线程和子线程作区分<a href="#主线程和子线程作区分" class="header-anchor">#</a></h5><ol>
+<li>子线程设置未捕获异常处理器，执行自己的容灾恢复逻辑</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 线程未捕获异常处理器</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">ChildExceptionHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">       <span class="meta">@Override</span></span><br><span class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(<span class="keyword">final</span> Thread t, <span class="keyword">final</span> Throwable e)</span> </span>&#123;</span><br><span class="line">           Log.d(<span class="string">&quot;ChildExceptionHandler&quot;</span>, <span class="string">&quot;uncaughtException &quot;</span> + t.getName() + <span class="string">&quot; has captured a exception&quot;</span>);</span><br><span class="line">           Log.d(<span class="string">&quot;ChildExceptionHandler&quot;</span>, <span class="string">&quot;uncaughtException has capture thread error ,msg is &quot;</span> + e.toString());</span><br><span class="line">           startCrashPage();</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startCrashPage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">       intent.setAction(<span class="string">&quot;com.crash.demo.crash&quot;</span>);</span><br><span class="line">       intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">       startActivity(intent);</span><br><span class="line">       android.os.Process.killProcess(android.os.Process.myPid());</span><br><span class="line">       System.exit(<span class="number">0</span>);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 测试子线程设置未捕获异常处理器</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">runtimeNoneUE</span><span class="params">(View view)</span></span>&#123;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           Thread thread =  <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">               <span class="meta">@Override</span></span><br><span class="line">               <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                   <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">                   <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">                   <span class="keyword">int</span> c = a / b;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;);</span><br><span class="line">           thread.setUncaughtExceptionHandler(<span class="keyword">new</span> ChildExceptionHandler());</span><br><span class="line">           thread.setName(<span class="string">&quot;iron man is on the android chilid thread&quot;</span>);</span><br><span class="line">           thread.start();</span><br><span class="line">       &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           Log.d(<span class="string">&quot;createExceptionInThread&quot;</span>, <span class="string">&quot;main thread is catch sub thread exception&quot;</span>);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<ol start="2">
+<li><code>App</code>中主线程设置未捕获异常处理器，覆盖默认未捕获异常处理</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Thread.currentThread().setName(<span class="string">&quot;android app &quot;</span>);</span><br><span class="line"><span class="comment">// 未捕获异常处理器</span></span><br><span class="line">Thread.currentThread().setUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line"><span class="comment">// 默认未捕获处理器赋值</span></span><br><span class="line">Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line"><span class="comment">// 或 默认未捕获处理器赋值为null</span></span><br><span class="line">Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">null</span>);</span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="crash容灾10"><a href="#Crash容灾1-0" class="headerlink" title="Crash容灾1.0"></a>Crash容灾1.0<a href="#crash容灾10" class="header-anchor">#</a></h4><table>
+<thead>
+<tr>
+<th>常见做法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/android-notes/Cockroach">开源库CockRoach</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://github.com/xuuhaoo/DefenseCrash">开源库DefenseCrashApplication</a></td>
+</tr>
+<tr>
+<td>方法块进行try catch finally、throws 、throw new</td>
+</tr>
+<tr>
+<td>对UI主线程设置未捕获异常处理器、默认未捕获异常处理器</td>
+</tr>
+<tr>
+<td>对子线程设置未捕获异常处理器、默认未捕获异常处理器</td>
+</tr>
+</tbody></table>
+<h2 id="研究对象虚拟机"><a href="#研究对象虚拟机" class="headerlink" title="研究对象虚拟机"></a>研究对象虚拟机<a href="#研究对象虚拟机" class="header-anchor">#</a></h2><blockquote>
+<p>主要回答一个问题：谁调用App的main方法，并持有当前App主线程对象？</p>
+<p>Java主线程是的任务入口是Java类#main</p>
+<p>Anroidd主线程的任务入口是ActivityThread#main</p>
+<p>AndroidJVM类似，仅以JavaJVM举例</p>
+</blockquote>
+<h3 id="javajvm"><a href="#JavaJVM" class="headerlink" title="JavaJVM"></a>JavaJVM<a href="#javajvm" class="header-anchor">#</a></h3><p>编写一段try-catch代码，如下</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionCode</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            <span class="keyword">int</span> result = <span class="number">3</span>/<span class="number">0</span>;</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception exception)&#123;</span><br><span class="line">            System.out.print(<span class="string">&quot;exception&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">            System.out.print(<span class="string">&quot;finally&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>编译为class文件</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac ExceptionCode.class</span><br></pre></td></tr></table></figure></div>
+<p>编译为字节码文件</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javap -c ExceptionCode.class</span><br></pre></td></tr></table></figure></div>
+<p>查看字节码文件</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="POWERSHELL"><figure class="iseeu highlight /powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">Compiled from <span class="string">&quot;ExceptionCode.java&quot;</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ExceptionCode</span></span> &#123;</span><br><span class="line">  public ExceptionCode();</span><br><span class="line">    Code:</span><br><span class="line">       <span class="number">0</span>: aload_0</span><br><span class="line">       <span class="number">1</span>: invokespecial <span class="comment">#1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span></span><br><span class="line">       <span class="number">4</span>: <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">  public <span class="keyword">static</span> void main(java.lang.String[]);</span><br><span class="line">    Code:</span><br><span class="line">       <span class="number">0</span>: iconst_3</span><br><span class="line">       <span class="number">1</span>: iconst_0</span><br><span class="line">       <span class="number">2</span>: idiv</span><br><span class="line">       <span class="number">3</span>: istore_1</span><br><span class="line">       <span class="number">4</span>: getstatic     <span class="comment">#2                  // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">       <span class="number">7</span>: ldc           <span class="comment">#3                  // String finally</span></span><br><span class="line">       <span class="number">9</span>: invokevirtual <span class="comment">#4                  // Method java/io/PrintStream.print:(Ljava/lang/String;)V</span></span><br><span class="line">      <span class="number">12</span>: goto          <span class="number">46</span></span><br><span class="line">      <span class="number">15</span>: astore_1</span><br><span class="line">      <span class="number">16</span>: getstatic     <span class="comment">#2                  // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">      <span class="number">19</span>: ldc           <span class="comment">#6                  // String exception</span></span><br><span class="line">      <span class="number">21</span>: invokevirtual <span class="comment">#4                  // Method java/io/PrintStream.print:(Ljava/lang/String;)V</span></span><br><span class="line">      <span class="number">24</span>: getstatic     <span class="comment">#2                  // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">      <span class="number">27</span>: ldc           <span class="comment">#3                  // String finally</span></span><br><span class="line">      <span class="number">29</span>: invokevirtual <span class="comment">#4                  // Method java/io/PrintStream.print:(Ljava/lang/String;)V</span></span><br><span class="line">      <span class="number">32</span>: goto          <span class="number">46</span></span><br><span class="line">      <span class="number">35</span>: astore_2</span><br><span class="line">      <span class="number">36</span>: getstatic     <span class="comment">#2                  // Field java/lang/System.out:Ljava/io/PrintStream;</span></span><br><span class="line">      <span class="number">39</span>: ldc           <span class="comment">#3                  // String finally</span></span><br><span class="line">      <span class="number">41</span>: invokevirtual <span class="comment">#4                  // Method java/io/PrintStream.print:(Ljava/lang/String;)V</span></span><br><span class="line">      <span class="number">44</span>: aload_2</span><br><span class="line">      <span class="number">45</span>: athrow</span><br><span class="line">      <span class="number">46</span>: <span class="keyword">return</span></span><br><span class="line">    Exception table:</span><br><span class="line">       from    to  target <span class="built_in">type</span></span><br><span class="line">           <span class="number">0</span>     <span class="number">4</span>    <span class="number">15</span>   <span class="class"><span class="keyword">Class</span> <span class="title">java</span>/<span class="title">lang</span>/<span class="title">Exception</span></span></span><br><span class="line"><span class="class">           0     4    35   <span class="title">any</span></span></span><br><span class="line"><span class="class">          15    24    35   <span class="title">any</span></span></span><br><span class="line"><span class="class">&#125;</span></span><br></pre></td></tr></table></figure></div>
+
+
+<h3 id="exception-table-异常表"><a href="#Exception-Table-异常表" class="headerlink" title="Exception Table 异常表"></a>Exception Table 异常表<a href="#exception-table-异常表" class="header-anchor">#</a></h3><p>异常表中包含了一个或多个异常处理者(Exception Handler)的信息，这些信息包含如下</p>
+<ul>
+<li>from 可能发生异常的起始点</li>
+<li>to 可能发生异常的结束点</li>
+<li>target 上述from和to之前发生异常后的异常处理者的位置</li>
+<li>type 异常处理者处理的异常的类信息,包括具体的包名类名</li>
+</ul>
+<p>这张表足够回答许多常见异常捕获类的问题，不要急，这些问题将在《Crash知识分享第二期》展开讨论。</p>
+<p>在这一步我们仅需要知道，在编译阶段结束的时候，finally里面的部分会被复制两份至<code>try语句的结尾</code>和<code>catch语句的结尾</code>.</p>
+<p>异常表定义了main方法拥有3种执行分支</p>
+<ul>
+<li>0-4之间，发生了指定类型为Exception的异常，则会跳转到语句15<ul>
+<li>接下来15-24之间，会执行打印<code>字符串Exception</code>、<code>字符串finally</code>的机器码</li>
+</ul>
+</li>
+<li>0-4之间，无法伦发生什么异常，都会跳转到语句15<ul>
+<li>接下来15-24之间，会执行打印<code>字符串Exception</code>、<code>字符串finally</code>的机器码</li>
+</ul>
+</li>
+<li>15-24之间，无论发生什么异常，都会跳转到语句35<ul>
+<li>接下来24-29之间，会执行打印<code>字符串finally</code>的机器码</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>那么异常表用在什么时候呢<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label=" [详解JVM如何处理异常 - 技术小黑屋 (droidyue.com)](https://droidyue.com/blog/2018/10/21/how-jvm-handle-exceptions/)
+">[1]</span></a></sup> </p>
+</blockquote>
+<p>答案是异常发生的时候，当一个异常发生时</p>
+<p>1.JVM会在当前出现异常的方法中，查找异常表，是否有合适的处理者来处理</p>
+<p>2.如果当前方法异常表不为空，并且异常符合处理者的from和to节点，并且type也匹配，则JVM调用位于target的调用者来处理。</p>
+<p>3.如果上一条未找到合理的处理者，则继续查找异常表中的剩余条目</p>
+<p>4.如果当前方法的异常表无法处理，则向上查找（弹栈处理）刚刚调用该方法的调用处，并重复上面的操作。</p>
+<p><strong><u>5.如果所有的栈帧被弹出，仍然没有处理，则抛给当前的Thread，Thread则会终止。</u></strong></p>
+<p><strong><u>6.如果当前Thread为最后一个非守护线程，且未处理异常，则会导致JVM终止运行。</u></strong></p>
+<p>以上就是JVM处理异常的一些机制。</p>
+<h2 id="java级别crash小结"><a href="#Java级别Crash小结" class="headerlink" title="Java级别Crash小结"></a>Java级别Crash小结<a href="#java级别crash小结" class="header-anchor">#</a></h2><p>从Java级别Crash这一章的内容，我们了解到以下两点：</p>
+<p><strong>Crash原理</strong></p>
+<p>JVM在执行机器码生成的方法表时，如果发现了Exception，会按照机器码既定的语句执行，此时有两种情况</p>
+<ol>
+<li>开发者编写了捕获语句：catch、finally</li>
+<li>无捕获语句处理，则继续throws，直至抛给JVM堆中的Thread对象</li>
+<li>此时如果Thread为子线程，则会判断是否设置了未捕获异常处理器<ol>
+<li>若设置了处理器，则进入处理器处理，不会退出程序</li>
+<li>若没有设置处理器，Android平台会进入KillApplicationHandler的逻辑，该逻辑有以下几种<ol>
+<li>弹出“App已停止运行”的Dialog</li>
+<li>弹出“App频繁停止运行”的Dialog</li>
+<li>直接退出程序</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><strong>Crash容灾方案</strong>（初版）</p>
+<ol>
+<li>制定容灾策略</li>
+<li>主线程和子线程作区分处理</li>
+</ol>
+<p>遗留了一些问题</p>
+<ul>
+<li>e.printStackTrace()的开销有多大？</li>
+<li>JVM创建Exception的开销有多少？</li>
+<li>catch的最佳实践</li>
+<li>finally一定会执行吗？</li>
+</ul>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="https://droidyue.com/blog/2018/10/21/how-jvm-handle-exceptions/">详解JVM如何处理异常 - 技术小黑屋 (droidyue.com)</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="http://androidxref.com/8.1.0_r33/xref/frameworks/base/core/java/com/android/internal/os/RuntimeInit.java"> RuntimeInit.java (androidxref.com)</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="http://www.coderead.cn/jre/8/java/lang/Runtime.java"> Runtime.java</a><a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">[Java Platform SE 8](file:///E:/developedoc/jdk-8u281-docs-all/docs/api/index.html)<a href="#fnref:4" rev="footnote"> ↩</a></span></li></ol></div></div><link rel="stylesheet" href="/css/bilicard.css" type="text/css">
+
+        
+
+      
+    </div>
+
+      <!-- 相关文章推荐 -->
+     
+          
+
+  <div class="popular-posts-header">
+    <i class="fa fa-graduation-cap"></i>
+    相关文章
+  </div>
+
+ <details>
+   <summary>点击查看</summary>
+     <ul class="popular-posts">
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2021\02\mtk-log\" rel="bookmark">mtk-log</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2021\02\android-bugfree-three-lines\" rel="bookmark">BugFree三剑客异常、日志、工具</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2021\02\Client-Skeleton-Screen\" rel="bookmark">Android骨架屏详解</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2020\08\handler TOP 100 Questions\" rel="bookmark">AndroidHandler百问百答</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2016\06\android-communication\" rel="bookmark">详解 Android 通信</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2016\06\performance-android\" rel="bookmark">Android性能优化【史诗巨著之内存篇】</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2016\04\Android-TOP-100-Program\" rel="bookmark">Android 百大框架排行榜</a></div>
+         
+       </li>
+     
+     </ul>
+ </details>
+
+
+
+     
+
+    
+    
+    
+
+    <div>
+          
+            
+
+          
+    </div>
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div class="read-over">-------------------本文结束 <i class="fa fa-paw"></i> 感谢您的阅读-------------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+      <div>
+        <div class="share_reward">
+  <div>坚持原创技术分享，感谢您的支持和鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://cdn.yangchaofan.cn/BlogGifRes/20210313/s7mteFUqc8pH.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://cdn.yangchaofan.cn/BlogGifRes/20210313/oQnokBcx6RUO.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    叶金诚
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://idolcoder.gitee.io/blog/2021/05/android-crash-who-kill-you/" title="Android Crash揭秘与实践">http://idolcoder.gitee.io/blog/2021/05/android-crash-who-kill-you/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" target="_blank">Creative Commons BY-NC-ND 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/Android/" rel="tag"> <i class="fa fa-tag"></i> Android</a>
+          
+            <a href="/blog/tags/BugFree/" rel="tag"> <i class="fa fa-tag"></i> BugFree</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2021/04/Career-stability-experience/" rel="next" title="职业稳定性杂谈">
+                职业稳定性杂谈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+//  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+//    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC81Mjc2OC8yOTI0NQ"></div>
+    </div>
+
+  
+
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/">
+              <img class="site-author-image" itemprop="image"
+                src="/blog/images/head.png"
+                alt="" />
+              </a>
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/blog/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/blog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+              <!-- 为Hexo Next主题添加哈林摇特效  -->
+              <a title="收藏到书签，偶尔High一下^_^" rel="alternate" class="mw-harlem_shake_slow wobble shake" href="javascript:void(0)" onclick="javascript:(function go() {function c() {var e = document.createElement('link');e.setAttribute('type', 'text/css');e.setAttribute('rel', 'stylesheet');e.setAttribute('href', f);e.setAttribute('class', l);document.body.appendChild(e)}function h(){var e = document.getElementsByClassName(l);for(var t = 0; t< e.length; t++){document.body.removeChild(e[t])}}function p(){var e = document.createElement('div');e.setAttribute('class', a);document.body.appendChild(e);setTimeout(function(){document.body.removeChild(e)},100)}function d(e){return{height:e.offsetHeight,width:e.offsetWidth}}function v(i){var s = d(i);return s.height>e &amp;&amp;s.height<n &amp;&amp; s.width>t &amp;&amp;s.width<r}function m(e){var t=e;var n=0;while(!!t){n+=t.offsetTop;t=t.offsetParent}return n}function g(){var e=document.documentElement;if(!!window.innerWidth){return window.innerHeight}else if(e &amp;&amp; !isNaN(e.clientHeight)){return e.clientHeight}return 0}function y(){if(window.pageYOffset){return window.pageYOffset}return Math.max(document.documentElement.scrollTop,document.body.scrollTop)}function E(e){var t=m(e);return t>=w &amp;&amp; t<=b+w}var songs=['https://www.liaofuzhan.com/music/无尽光芒.mp3'];function S(){var e=document.getElementById('audio_element_id');if(e!=null){var index=parseInt(e.getAttribute('curSongIndex'));if(index>songs.length-2){index=0;}else{index++;}e.setAttribute('curSongIndex',index);N();}e.src=i;e.play()}function x(e){e.className+=' '+s+' '+o}function T(e){e.className+=' '+s+' '+u[Math.floor(Math.random()*u.length)]}function N(){var e=document.getElementsByClassName(s);var t=new RegExp('\\b'+s+'\\b');for(var n=0;n<e.length;){e[n].className=e[n].className.replace(t,'')}}function initAudioEle(){var e=document.getElementById('audio_element_id');if(e===null){e=document.createElement('audio');e.setAttribute('class',l);e.setAttribute('curSongIndex',0);e.id='audio_element_id';e.loop=false;e.bgcolor=0;e.addEventListener('canplay',function(){setTimeout(function(){x(k)},500);setTimeout(function(){N();p();for(var e=0;e<O.length;e++){T(O[e])}},15500)},true);e.addEventListener('ended',function(){N();h();go();},true);e.innerHTML='<p>If you are reading this,it is because your browser does not support the audio element. We recommend that you get a new browser.</p><p>';document.body.appendChild(e);}}initAudioEle();var e=30;var t=30;var n=350;var r=350;var curSongIndex=parseInt(document.getElementById('audio_element_id').getAttribute('curSongIndex'));var i=songs[curSongIndex];var s='mw-harlem_shake_me';var o='im_first';var u=['im_drunk','im_baked','im_trippin','im_blown'];var a='mw-strobe_light';var f='https://s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css';var l='mw_added_css';var b=g();var w=y();var C=document.getElementsByTagName('*');var k=null;for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){if(E(A)){k=A;break}}}if(A===null){console.warn('Could not find a node of the right size. Please try a different page.');return}c();S();var O=[];for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){O.push(A)}}})()"><i class="fa fa-music"></i> High~</a>
+
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/ShaunSheep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:zuogewoniu@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://www.douban.com/people/jincheng-ycf/" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://www.zhihu.com/people/OscarWildeHawking" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-instagram"></i></a>
+                  </span>
+                
+            </div>
+          
+
+            <!--
+            <div id="music163player">
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1336790004&auto=1&height=66"></iframe>
+            </div>
+            -->
+
+          
+          
+
+          
+          
+
+          <!--近期文章版块 began-->
+          
+              <div class="links-of-blogroll motion-element links-of-blogroll-block">
+                <div class="links-of-blogroll-title">
+                  <i class="fa fa-history fa-" aria-hidden="true"></i>
+                  近期文章
+                </div>
+                <ul class="links-of-blogroll-list">
+                  
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/05/android-crash-who-kill-you/" title="Android Crash揭秘与实践" target="_blank">Android Crash揭秘与实践</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/04/Career-stability-experience/" title="职业稳定性杂谈" target="_blank">职业稳定性杂谈</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/02/mtk-log/" title="mtk-log" target="_blank">mtk-log</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/02/android-bugfree-three-lines/" title="BugFree三剑客异常、日志、工具" target="_blank">BugFree三剑客异常、日志、工具</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/02/Client-Skeleton-Screen/" title="Android骨架屏详解" target="_blank">Android骨架屏详解</a>
+                    </li>
+                  
+                </ul>
+              </div>
+          
+          <!--近期文章版块 end-->
+
+          
+              <!-- canvas粒子时钟 -->
+              <!-- canvas粒子时钟 https://www.cnblogs.com/xiaohuochai/p/6368039.html
+  https://www.html5tricks.com/html5-canvas-dance-time.html
+ -->
+<div id="">
+  <canvas id="canvas" style="width:60%;">
+</div>
+<script async>
+(function(){
+  var WINDOW_WIDTH = 820;
+  		var WINDOW_HEIGHT = 250;
+  		var RADIUS = 7; //球半径
+  		var NUMBER_GAP = 10; //数字之间的间隙
+  		var u=0.65; //碰撞能量损耗系数
+  		var context; //Canvas绘制上下文
+  		var balls = []; //存储彩色的小球
+  		const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]; //彩色小球的颜色
+  		var currentNums = []; //屏幕显示的8个字符
+  		var digit =
+                  [
+                      [
+                          [0,0,1,1,1,0,0],
+                          [0,1,1,0,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,0,1,1,0],
+                          [0,0,1,1,1,0,0]
+                      ],//0
+                      [
+                          [0,0,0,1,1,0,0],
+                          [0,1,1,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [1,1,1,1,1,1,1]
+                      ],//1
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,1,1,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,1,1,1,1,1]
+                      ],//2
+                      [
+                          [1,1,1,1,1,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,1,0,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//3
+                      [
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,1,0],
+                          [0,0,1,1,1,1,0],
+                          [0,1,1,0,1,1,0],
+                          [1,1,0,0,1,1,0],
+                          [1,1,1,1,1,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,1,1]
+                      ],//4
+                      [
+                          [1,1,1,1,1,1,1],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,1,1,1,1,0],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//5
+                      [
+                          [0,0,0,0,1,1,0],
+                          [0,0,1,1,0,0,0],
+                          [0,1,1,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//6
+                      [
+                          [1,1,1,1,1,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0]
+                      ],//7
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//8
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,1,1,0,0,0,0]
+                      ],//9
+                      [
+                          [0,0,0,0],
+                          [0,0,0,0],
+                          [0,1,1,0],
+                          [0,1,1,0],
+                          [0,0,0,0],
+                          [0,0,0,0],
+                          [0,1,1,0],
+                          [0,1,1,0],
+                          [0,0,0,0],
+                          [0,0,0,0]
+                      ]//:
+                  ];
+
+  		function drawDatetime(cxt){
+  			var nums = [];
+
+  			context.fillStyle="#005eac"
+  			var date = new Date();
+  			var offsetX = 70, offsetY = 30;
+  			var hours = date.getHours();
+  			var num1 = Math.floor(hours/10);
+  			var num2 = hours%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+  			nums.push({num: 10}); //冒号
+  			var minutes = date.getMinutes();
+  			var num1 = Math.floor(minutes/10);
+  			var num2 = minutes%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+  			nums.push({num: 10}); //冒号
+  			var seconds = date.getSeconds();
+  			var num1 = Math.floor(seconds/10);
+  			var num2 = seconds%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+
+  			for(var x = 0;x<nums.length;x++){
+  				nums[x].offsetX = offsetX;
+  				offsetX = drawSingleNumber(offsetX,offsetY, nums[x].num,cxt);
+  				//两个数字连一块，应该间隔一些距离
+  				if(x<nums.length-1){
+  					if((nums[x].num!=10) &&(nums[x+1].num!=10)){
+  						offsetX+=NUMBER_GAP;
+  					}
+  				}
+  			}
+
+  			//说明这是初始化
+  			if(currentNums.length ==0){
+  				currentNums = nums;
+  			}else{
+  				//进行比较
+  				for(var index = 0;index<currentNums.length;index++){
+  					if(currentNums[index].num!=nums[index].num){
+  						//不一样时，添加彩色小球
+  						addBalls(nums[index]);
+  						currentNums[index].num=nums[index].num;
+  					}
+  				}
+  			}
+  			renderBalls(cxt);
+  			updateBalls();
+
+  			return date;
+  		}
+
+  		function addBalls (item) {
+  			var num = item.num;
+  			var numMatrix = digit[num];
+  			for(var y = 0;y<numMatrix.length;y++){
+  				for(var x = 0;x<numMatrix[y].length;x++){
+  					if(numMatrix[y][x]==1){
+  						var ball={
+  							offsetX:item.offsetX+RADIUS+RADIUS*2*x,
+  							offsetY:30+RADIUS+RADIUS*2*y,
+  							color:colors[Math.floor(Math.random()*colors.length)],
+  							g:1.5+Math.random(),
+  							vx:Math.pow(-1, Math.ceil(Math.random()*10))*4+Math.random(),
+  							vy:-5
+  						}
+  						balls.push(ball);
+  					}
+  				}
+  			}
+  		}
+
+  		function renderBalls(cxt){
+  			for(var index = 0;index<balls.length;index++){
+  				cxt.beginPath();
+  				cxt.fillStyle=balls[index].color;
+  				cxt.arc(balls[index].offsetX, balls[index].offsetY, RADIUS, 0, 2*Math.PI);
+  				cxt.fill();
+  			}
+  		}
+
+  		function updateBalls () {
+  			var i =0;
+  			for(var index = 0;index<balls.length;index++){
+  				var ball = balls[index];
+  				ball.offsetX += ball.vx;
+  				ball.offsetY += ball.vy;
+  				ball.vy+=ball.g;
+  				if(ball.offsetY > (WINDOW_HEIGHT-RADIUS)){
+  					ball.offsetY= WINDOW_HEIGHT-RADIUS;
+  					ball.vy=-ball.vy*u;
+  				}
+  				if(ball.offsetX>RADIUS&&ball.offsetX<(WINDOW_WIDTH-RADIUS)){
+
+  					balls[i]=balls[index];
+  					i++;
+  				}
+  			}
+  			//去除出边界的球
+  			for(;i<balls.length;i++){
+  				balls.pop();
+  			}
+  		}
+  		function drawSingleNumber(offsetX, offsetY, num, cxt){
+  			var numMatrix = digit[num];
+  			for(var y = 0;y<numMatrix.length;y++){
+  				for(var x = 0;x<numMatrix[y].length;x++){
+  					if(numMatrix[y][x]==1){
+  						cxt.beginPath();
+  						cxt.arc(offsetX+RADIUS+RADIUS*2*x,offsetY+RADIUS+RADIUS*2*y,RADIUS,0,2*Math.PI);
+  						cxt.fill();
+  					}
+  				}
+  			}
+  			cxt.beginPath();
+  			offsetX += numMatrix[0].length*RADIUS*2;
+  			return offsetX;
+  		}
+
+  		var canvas = document.getElementById("canvas");
+  		canvas.width=WINDOW_WIDTH;
+  		canvas.height=WINDOW_HEIGHT;
+  		context = canvas.getContext("2d");
+
+  		//记录当前绘制的时刻
+  		var currentDate = new Date();
+
+  		setInterval(function(){
+  			//清空整个Canvas，重新绘制内容
+  			context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  			drawDatetime(context);
+  		}, 50)
+})();
+</script>
+
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#crash%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB%E7%AC%AC%E4%B8%80%E6%9C%9F"><span class="nav-number">2.</span> <span class="nav-text">Crash知识分享第一期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3%E4%B8%AA%E7%8E%B0%E8%B1%A1"><span class="nav-number">3.</span> <span class="nav-text">3个现象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java%E7%BA%A7%E5%88%ABcrash%E5%8E%9F%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">Java级别Crash原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E5%AF%B9%E8%B1%A1thread"><span class="nav-number">4.2.</span> <span class="nav-text">研究对象Thread</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#thread%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">4.2.1.</span> <span class="nav-text">Thread基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#thread4"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">Thread[4]</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#threadgroup4"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">ThreadGroup[4]</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E7%BA%BF%E7%A8%8B"><span class="nav-number">4.2.2.</span> <span class="nav-text">主线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#javaapp"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">JavaAPP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#androidapp"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">AndroidAPP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E7%BA%BF%E7%A8%8B"><span class="nav-number">4.2.3.</span> <span class="nav-text">子线程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#javaapp"><span class="nav-number">4.2.3.1.</span> <span class="nav-text">JavaAPP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#androidapp"><span class="nav-number">4.2.3.2.</span> <span class="nav-text">AndroidAPP</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E5%AF%B9%E8%B1%A1runtimeltspan-classhinttop-hinterror-hintmedium-hintrounded-hintbounce-aria-label-runtimejava"><span class="nav-number">4.3.</span> <span class="nav-text">研究对象Runtime&lt;span class&#x3D;”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label&#x3D;” Runtime.java</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#javaruntime"><span class="nav-number">4.3.1.</span> <span class="nav-text">JavaRuntime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#androidruntimeltspan-classhinttop-hinterror-hintmedium-hintrounded-hintbounce-aria-label-runtimeinitjava-androidxrefcom"><span class="nav-number">4.3.2.</span> <span class="nav-text">AndroidRuntime&lt;span class&#x3D;”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label&#x3D;” RuntimeInit.java (androidxref.com)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java%E6%9C%AA%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">4.3.3.</span> <span class="nav-text">Java未捕获异常处理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E7%BA%BF%E7%A8%8B"><span class="nav-number">4.3.3.1.</span> <span class="nav-text">主线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E7%BA%BF%E7%A8%8B"><span class="nav-number">4.3.3.2.</span> <span class="nav-text">子线程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#android%E6%9C%AA%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="nav-number">4.3.4.</span> <span class="nav-text">Android未捕获异常处理器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E7%BA%BF%E7%A8%8B"><span class="nav-number">4.3.4.1.</span> <span class="nav-text">主线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E4%B8%BB%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E6%97%B6%E5%BC%82%E5%B8%B8"><span class="nav-number">4.3.4.2.</span> <span class="nav-text">测试主线程运行时异常</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E5%AD%90%E7%BA%BF%E7%A8%8B%E8%BF%90%E8%A1%8C%E6%97%B6%E5%BC%82%E5%B8%B8"><span class="nav-number">4.3.4.3.</span> <span class="nav-text">测试子线程运行时异常</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AA%E6%8D%95%E8%8E%B7%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">4.3.4.4.</span> <span class="nav-text">未捕获异常处理器最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%B6%E5%AE%9A%E5%AE%B9%E7%81%BE%E7%AD%96%E7%95%A5"><span class="nav-number">4.3.4.4.1.</span> <span class="nav-text">制定容灾策略</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%BB%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%AD%90%E7%BA%BF%E7%A8%8B%E4%BD%9C%E5%8C%BA%E5%88%86"><span class="nav-number">4.3.4.4.2.</span> <span class="nav-text">主线程和子线程作区分</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#crash%E5%AE%B9%E7%81%BE10"><span class="nav-number">4.3.4.5.</span> <span class="nav-text">Crash容灾1.0</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A0%94%E7%A9%B6%E5%AF%B9%E8%B1%A1%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">4.4.</span> <span class="nav-text">研究对象虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#javajvm"><span class="nav-number">4.4.1.</span> <span class="nav-text">JavaJVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exception-table-%E5%BC%82%E5%B8%B8%E8%A1%A8"><span class="nav-number">4.4.2.</span> <span class="nav-text">Exception Table 异常表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java%E7%BA%A7%E5%88%ABcrash%E5%B0%8F%E7%BB%93"><span class="nav-number">4.5.</span> <span class="nav-text">Java级别Crash小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+      
+
+      <!-- 标签云 -->
+      <!--
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+      <h3 class="widget-title">Tag Cloud</h3>
+      <div id="myCanvasContainer" class="widget tagcloud">
+          <canvas width="250" height="250" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/" rel="tag">Android</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android%E6%9E%B6%E6%9E%84/" rel="tag">Android架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li></ul>
+          </canvas>
+      </div>
+      </div>
+      
+      -->
+      <!-- 标签云 -->
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+       <i class="fa fa-heartbeat"></i>
+  </span>
+  <!--
+    <span class="author" itemprop="copyrightHolder"> &nbsp;叶金诚</span>
+  -->
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">94.7k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+
+        
+<div class="busuanzi-count">
+  <!--
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  -->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+   
+
+  
+  
+    
+      <span class="site-uv">
+        
+        我的第 <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 位朋友，
+      </span>
+    
+
+    
+      <span class="site-pv">
+        历经 <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次回眸才与你相遇
+        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      </span>
+    
+  
+
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="60" alpha="0.1"  zIndex="-1" src="/blog/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/blog/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+    <script>  function addCount(Counter){var $visitors=$('.leancloud_visitors');var url=$visitors.attr('id').trim();var title=$visitors.attr('data-flag-title').trim();Counter('get','/classes/Counter',{where:JSON.stringify({url})}).done(function({results}){if(results.length>0){var counter=results[0]; var $element=$(document.getElementById(url));$element.find('.leancloud-visitors-count').text(counter.time+1);Counter('put','/classes/Counter/'+counter.objectId,JSON.stringify({time:{'__op':'Increment','amount':1}})) .fail(function({responseJSON}){console.log('Failed to save Visitor num, with error message: '+responseJSON.error);})}else{ Counter('post','/classes/Counter',JSON.stringify({title:title,url:url,time:1})).done(function(){var $element=$(document.getElementById(url));$element.find('.leancloud-visitors-count').text(1);}).fail(function(){console.log('Failed to create');});}}).fail(function({responseJSON}){console.log('LeanCloud Counter Error: '+responseJSON.code+' '+responseJSON.error);});}$(function(){$.get('https://app-router.leancloud.cn/2/route?appId='+'MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz').done(function({api_server}){var Counter=function(method,url,data){return $.ajax({method:method,url:'https://'+api_server+'/1.1'+url,headers:{'X-LC-Id':'MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz','X-LC-Key':'pi8Pa2aH3XpcaovMyqIXVuOP','Content-Type':'application/json',},data:data});};  const localhost=/http:\/\/(localhost|127.0.0.1|0.0.0.0)/;if(localhost.test(document.URL))return;addCount(Counter);});});</script>
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/blog/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/blog/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+
+  <!-- Tidio 在线联系功能、鼠标点击特效、页面反馈...-->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+
+
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+    <script async src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script async src="/js/cursor/explosion.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+  <script async language="javascript">
+
+    var div = document.createElement("div");
+    //插入到自定义的theme-info或者copyright之后
+    var copyright = document.querySelector(".theme-info2") || document.querySelector(".copyright");
+
+    function show_run_time(){
+        window.setTimeout("show_run_time()", 1000);
+      // BirthDay=new Date("08/07/2019 20:00:00");
+        BirthDay=new Date("08/07/2016 20:00:00");
+        today=new Date();
+        timeold=(today.getTime()-BirthDay.getTime());
+        sectimeold=timeold/1000
+        secondsold=Math.floor(sectimeold);
+        msPerDay=24*60*60*1000
+        e_daysold=timeold/msPerDay
+        daysold=Math.floor(e_daysold);
+        e_hrsold=(e_daysold-daysold)*24;
+        hrsold=setzero(Math.floor(e_hrsold));
+        e_minsold=(e_hrsold-hrsold)*60;
+        minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+        seconds=setzero(Math.floor((e_minsold-minsold)*60));
+
+        // 使用zh-Hans.yml的文字替换
+        div.innerHTML = "我已在此等候你 " + "<span style='color: #1890ff'> " + daysold + " </span> 天 <span style='color: #1890ff'>" + hrsold + " </span>时 <span style='color: #1890ff'>" + minsold + " </span>分 <span style='color: #1890ff'>" + seconds + " </span>秒 ";
+
+        document.querySelector(".footer-inner").insertBefore(div, copyright.nextSibling);
+
+    }
+    function setzero(i){
+        if (i<10)
+        {i="0" + i};
+        return i;
+    }
+
+    show_run_time();
+
+  </script>
+
+
+
+
+<!-- 旋转魔方 -->
+
+   
+      
+<style>
+  /*最外层容器样式*/
+  .wrap {
+    width: 0px;
+    height: 0px;
+    /*margin: 80px;*/
+    /*position: relative;*/
+	     /*显示位置*/
+    position: fixed;
+    bottom: 120px;
+    right: 240px;
+    z-index: 999;
+  }
+
+  /*包裹所有容器样式*/
+  .cube {
+    width: 0px;
+    height: 0px;
+    margin: 0 auto;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(-80deg);
+    animation: rotate linear 10s infinite;
+  }
+
+  @-webkit-keyframes rotate {
+    from {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+    to {
+      transform: rotateX(360deg) rotateY(360deg);
+    }
+  }
+
+  .cube div {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    opacity: 0.8;
+    transition: all .4s;
+  }
+
+  /*定义所有图片样式*/
+  .pic {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cube .out_front {
+    transform: rotateY(0deg) translateZ(25px);
+  }
+
+  .cube .out_back {
+    transform: translateZ(-25px) rotateY(180deg);
+  }
+
+  .cube .out_left {
+    transform: rotateY(-90deg) translateZ(25px);
+  }
+
+  .cube .out_right {
+    transform: rotateY(90deg) translateZ(25px);
+  }
+
+  .cube .out_top {
+    transform: rotateX(90deg) translateZ(25px);
+  }
+
+  .cube .out_bottom {
+    transform: rotateX(-90deg) translateZ(25px);
+  }
+
+  /*定义小正方体样式*/
+  .cube span {
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+  }
+
+  .cube .in_pic {
+    width: 25px;
+    height:25px;
+  }
+
+  .cube .in_front {
+    transform: rotateY(0deg) translateZ(12px);
+  }
+
+  .cube .in_back {
+    transform: translateZ(-12px) rotateY(180deg);
+  }
+
+  .cube .in_left {
+    transform: rotateY(-90deg) translateZ(12px);
+  }
+
+  .cube .in_right {
+    transform: rotateY(90deg) translateZ(12px);
+  }
+
+  .cube .in_top {
+    transform: rotateX(90deg) translateZ(12px);
+  }
+
+  .cube .in_bottom {
+    transform: rotateX(-90deg) translateZ(12px);
+  }
+
+  /*鼠标移入后样式*/
+  .cube:hover .out_front {
+    transform: rotateY(0deg) translateZ(50px);
+  }
+
+  .cube:hover .out_back {
+    transform: translateZ(-50px) rotateY(180deg);
+  }
+
+  .cube:hover .out_left {
+    transform: rotateY(-90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_right {
+    transform: rotateY(90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_top {
+    transform: rotateX(90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+  }
+</style>
+
+<div class="wrap">
+
+		<!--包裹所有元素的容器-->
+		<div class="cube">
+			<!--前面图片 -->
+			<div class="out_front">
+			  <a onclick="back2top()">
+				  <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+				</a>
+			</div>
+			<!--后面图片 -->
+			<div class="out_back">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--左面图片 -->
+			<div class="out_left">
+        <a onclick="back2top()">
+				  <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+				</a>
+			</div>
+			<!--右面图片 -->
+			<div class="out_right">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--上面图片 -->
+			<div class="out_top">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--下面图片 -->
+			<div class="out_bottom">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+
+			<!--小正方体 -->
+			<span class="in_front">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_back">
+			     <img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_left">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_right">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_top">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_bottom">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+		</div>
+
+</div>
+
+<script>
+  function back2top(){
+    $('html, body').animate({scrollTop: 0}, 500);
+  }
+</script>
+
+   
+
+
+<!-- Console 输出第三方个性化字体 -->
+
+  <script async type="text/javascript" src="/blog/figlet/fetch.min.js"></script>
+  <script type="text/javascript" src="/blog/figlet/figlet.js"></script>
+  <script type="text/javascript">
+
+      figlet.defaults({fontPath: "/figlet/fonts"});
+      figlet("Welcome To Leaface", "Big Money-ne", function(err, text) {
+          if (err) {
+              console.log("something went wrong...");
+              console.dir(err);
+              return;
+          }
+          console.log(text);
+      });
+  </script>
+
+
+  <!-- Console 输出自定义字体 -->
+  
+    <script async type="text/javascript">
+        var text = "Welcome To Leaface";
+        var date = '2021-06-05';
+        console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
+        console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+        console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+        console.info('\n' + ' %c Leafae Wechat %c leaface ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+       // console.log("%c Time: " + date, "font-size:100px;white:"+fcolor+";border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);  background-image: linear-gradient(to right, orangered, orange, gold, lightgreen, cyan, dodgerblue, mediumpurple, hotpink, orangered);");
+       // console.log("%c .", "padding:300px 600px;line-height:10px;background:url(https://s2.ax1x.com/2019/10/17/KkoAJJ.md.png) no-repeat;");
+    </script>
+  
+
+
+  <!-- 看板娘 -->
+  
+      <script async src="/live2d-widget/autoload.js"></script>
+  
+	<!-- leafacePlayer -->
+	
+	<script id="lfz" src="http://player.liaofuzhan.com/player/player.js" key=1368557075310858241></script>
+	
+
+  
+
+  
+
+  <!-- 代码块复制功能 -->
+  <script async type="text/javascript" src="/js/src/clipboard.min.js"></script>
+  <script async type="text/javascript" src="/js/src/clipboard-use.js"></script>
+ 
+
+  <!--share.js-->
+  <link async rel="stylesheet" href="/sharejs/css/share.min.css">
+  <script async src="/sharejs/js/social-share.min.js"></script>
+
+  <!-- 模仿知乎卡片样式链接、崩溃欺骗特效 -->
+  <script async type="text/javascript" src="/js/src/linkcard.js"></script>
+
+  <!--崩溃欺骗 放在js文件最后-->
+  <!--
+  <script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+  -->
+
+ 
+
+<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

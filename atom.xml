@@ -6,7 +6,7 @@
   <link href="http://idolcoder.gitee.io/blog/atom.xml" rel="self"/>
   
   <link href="http://idolcoder.gitee.io/blog/"/>
-  <updated>2021-04-03T18:33:54.840Z</updated>
+  <updated>2021-05-17T03:41:40.265Z</updated>
   <id>http://idolcoder.gitee.io/blog/</id>
   
   <author>
@@ -17,15 +17,42 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Android Crash揭秘与实践</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/05/android-crash-who-kill-you/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/05/android-crash-who-kill-you/</id>
+    <published>2021-05-01T03:15:44.000Z</published>
+    <updated>2021-05-17T03:41:40.265Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerli</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/categories/Android/BugFree/"/>
+    
+    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    
+    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/tags/BugFree/"/>
+    
+  </entry>
+  
+  <entry>
     <title>职业稳定性杂谈</title>
     <link href="http://idolcoder.gitee.io/blog/2021/04/Career-stability-experience/"/>
     <id>http://idolcoder.gitee.io/blog/2021/04/Career-stability-experience/</id>
     <published>2021-04-03T03:26:22.000Z</published>
-    <updated>2021-04-03T18:33:54.840Z</updated>
+    <updated>2021-04-17T14:22:56.433Z</updated>
     
     
-    <summary type="html">&lt;p&gt;&amp;lt;%- toc(page.content) %&amp;gt;&lt;/p&gt;
-&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;之前在知乎写过一篇回答，&lt;a href=&quot;https://www.zhihu.com/question/308110736/answer/628764663&quot;&gt;《为什么都在说 90 后的辞职率高？》&lt;/a&gt;，纯理性分析获得了300赞。今日在公众号上看到心理学家刘向明教授写的一篇名为&lt;a href=&quot;https://mp.weixin.qq.com/s/ZyEWV1g_UzXODkViyFdNlw&quot;&gt;《社会招聘，怎样测试稳定性？&lt;/a&gt;的文章，让我对职业稳定性有了更深的理解。&lt;/p&gt;
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;之前在知乎写过一篇回答，&lt;a href=&quot;https://www.zhihu.com/question/308110736/answer/628764663&quot;&gt;《为什么都在说 90 后的辞职率高？》&lt;/a&gt;，纯理性分析获得了300赞。今日在公众号上看到心理学家刘向明教授写的一篇名为&lt;a href=&quot;https://mp.weixin.qq.com/s/ZyEWV1g_UzXODkViyFdNlw&quot;&gt;《社会招聘，怎样测试稳定性？&lt;/a&gt;的文章，让我对职业稳定性有了更深的理解。&lt;/p&gt;
 &lt;p&gt;先看看我之前的回答，再来看我的新感悟吧。&lt;/p&gt;</summary>
     
     
@@ -88,6 +115,36 @@
     <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
     
     <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/tags/BugFree/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android骨架屏详解</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/02/Client-Skeleton-Screen/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/02/Client-Skeleton-Screen/</id>
+    <published>2021-02-27T00:13:12.000Z</published>
+    <updated>2021-06-05T00:48:32.131Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;android骨架屏详解&quot;&gt;&lt;a href=&quot;#Android骨架</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="性能优化" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    
+    <category term="Android性能优化" scheme="http://idolcoder.gitee.io/blog/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+    <category term="AndroidUI优化" scheme="http://idolcoder.gitee.io/blog/tags/AndroidUI%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
@@ -354,6 +411,32 @@
   </entry>
   
   <entry>
+    <title>Android 热补丁技术详解大全</title>
+    <link href="http://idolcoder.gitee.io/blog/2019/06/android-hotfix/"/>
+    <id>http://idolcoder.gitee.io/blog/2019/06/android-hotfix/</id>
+    <published>2019-06-08T13:39:07.000Z</published>
+    <updated>2021-06-05T01:05:04.940Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;热修复详解与实战&quot;&gt;&lt;a href=&quot;#热修复详解与实战&quot; cla</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    
+    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    
+    <category term="Android架构" scheme="http://idolcoder.gitee.io/blog/tags/Android%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>为什么要花3年时间面试一个人？</title>
     <link href="http://idolcoder.gitee.io/blog/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/"/>
     <id>http://idolcoder.gitee.io/blog/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/</id>
@@ -402,11 +485,11 @@
   </entry>
   
   <entry>
-    <title>《详解 Android 通信》</title>
+    <title>详解 Android 通信</title>
     <link href="http://idolcoder.gitee.io/blog/2016/06/android-communication/"/>
     <id>http://idolcoder.gitee.io/blog/2016/06/android-communication/</id>
     <published>2016-06-08T13:39:07.000Z</published>
-    <updated>2021-03-06T15:56:53.066Z</updated>
+    <updated>2021-06-05T01:10:55.217Z</updated>
     
     
       
@@ -420,9 +503,9 @@
     
     <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
     
-    <category term="应用层" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BA%94%E7%94%A8%E5%B1%82/"/>
-    
     <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="应用层" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BA%94%E7%94%A8%E5%B1%82/"/>
     
     
     <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>

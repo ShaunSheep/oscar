@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://idolcoder.gitee.io/blog/blog//2016/06/android-communication/</loc>
+    <lastmod>2021-06-05</lastmod>
+  </url>
+  <url>
+    <loc>http://idolcoder.gitee.io/blog/blog//2019/06/android-hotfix/</loc>
+    <lastmod>2021-06-05</lastmod>
+  </url>
+  <url>
+    <loc>http://idolcoder.gitee.io/blog/blog//2021/02/Client-Skeleton-Screen/</loc>
+    <lastmod>2021-06-05</lastmod>
+  </url>
+  <url>
+    <loc>http://idolcoder.gitee.io/blog/blog//2021/05/android-crash-who-kill-you/</loc>
+    <lastmod>2021-05-17</lastmod>
+  </url>
+  <url>
+    <loc>http://idolcoder.gitee.io/blog/blog//2021/04/Career-stability-experience/</loc>
+    <lastmod>2021-04-17</lastmod>
+  </url>
+  <url>
     <loc>http://idolcoder.gitee.io/blog/blog//2016/06/five-sort-algorithm/</loc>
     <lastmod>2021-04-11</lastmod>
   </url>
   <url>
     <loc>http://idolcoder.gitee.io/blog/blog//2021/02/learn-relovation-notes/</loc>
     <lastmod>2021-04-10</lastmod>
-  </url>
-  <url>
-    <loc>http://idolcoder.gitee.io/blog/blog//2021/04/Career-stability-experience/</loc>
-    <lastmod>2021-04-03</lastmod>
   </url>
   <url>
     <loc>http://idolcoder.gitee.io/blog/blog//2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</loc>
@@ -39,10 +55,6 @@
   <url>
     <loc>http://idolcoder.gitee.io/blog/blog//2016/06/performance-android/</loc>
     <lastmod>2021-03-14</lastmod>
-  </url>
-  <url>
-    <loc>http://idolcoder.gitee.io/blog/blog//2016/06/android-communication/</loc>
-    <lastmod>2021-03-06</lastmod>
   </url>
   <url>
     <loc>http://idolcoder.gitee.io/blog/blog//2020/08/handler%20TOP%20100%20Questions/</loc>
