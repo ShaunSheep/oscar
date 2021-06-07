@@ -599,6 +599,232 @@ post_wordcount:
       </tags>
   </entry>
   <entry>
+    <title>Android Crash实践策略最全面思考</title>
+    <url>/blog//2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="android-crash实践策略最全面思考"><a href="#Android-Crash实践策略最全面思考" class="headerlink" title="Android Crash实践策略最全面思考"></a>Android Crash实践策略最全面思考<a href="#android-crash实践策略最全面思考" class="header-anchor">#</a></h1><h1 id="crash稳定性定义"><a href="#Crash稳定性定义" class="headerlink" title="Crash稳定性定义"></a>Crash稳定性定义<a href="#crash稳定性定义" class="header-anchor">#</a></h1><p>App 在运行过程中发生Crash 现象,通常表现为两种:1.退出当前回到手机主页面；2.显示App已停止运行的弹出框。</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn//typora/image-20210423143651100.png" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图 -1 App停止运行的弹出框
+      </div>
+</center>
+
+
+
+<p>在工程实践中，为了监控App在海量用户手机中的运行情况，我们需要建立一些监控指标来衡量App的监控状态是否正常，Crash率大小就是其中较为关键的指标之一。<br>Crash率有很多计算方式，通常分为以下几种：</p>
+<p>宏观上的Crash率计算方式为Crash率=Crash次数/单位时间;</p>
+<p>微观上分为启动Crash率、UV Crash率、PV Crash率：</p>
+<ul>
+<li><p>启动Crash率：Crash次数/单位时间启动次数</p>
+</li>
+<li><p>UV Crash率：Crash UV /单位时间已登录 UV</p>
+</li>
+<li><p>PV Crash率：Crash PV/单位时间已登录PV</p>
+</li>
+<li><p>重复Crash率：重复Crash的原因的发生次数/单位时间Crash总次数</p>
+</li>
+</ul>
+<h1 id="降低crash率的意义"><a href="#降低Crash率的意义" class="headerlink" title="降低Crash率的意义"></a>降低Crash率的意义<a href="#降低crash率的意义" class="header-anchor">#</a></h1><p>通常App Crash的产生，就意味着较差的服务质量，会降低客户对该App的信任，进而影响后续对该公司产品的使用。公司失去客户的信任，直接的影响就是流失客户，更为严重的影响是营收下滑。因此作为开发人员，监控、预防、分析、降低线上Crash率，是迫在眉睫且必须要做的优化工作。</p>
+<p>在业内，衡量一款App的运行状态是否健康，通常会使用Crash率是否低于1%来判断；如果一款APpCrash率低于1%，通常会被当做健康的产品；一款Crash率高于5%的App，则会被认为服务质量较差，会流失大量潜在用户。<br>App在线上发布后，后台健康到的AppCrash率如果持续在1-3%则可称为稳定的Crash率；如果某一时刻Crash率大于5%，则应该提前预警给市场人员、运营人员、开发人员，市场分析Crash率上升导致的影响，提前做好公关通知；运营人员可以根据容灾策略，关闭Crash率高的业务入口，降低产品不可用的范围，保持其他模块可用；开发人员可以根据线上日志，及时修复异常代码，发布修复补丁，让模块尽快正常运行。</p>
+<h1 id="crash处理策略"><a href="#Crash处理策略" class="headerlink" title="Crash处理策略"></a>Crash处理策略<a href="#crash处理策略" class="header-anchor">#</a></h1><p>App作为企业直接面向消费者的产品，一旦发生Crash现象，将会给企业造成巨大的损失，为了降低损失，将Crash带来的损失降到最低，客户端工程实践中，往往会采取许多策略降低Crash率。实践通常分为以下4个环节：设置指标、线上监控、线上容灾、线下预防四个环节。</p>
+<h2 id="设置指标"><a href="#设置指标" class="headerlink" title="设置指标"></a>设置指标<a href="#设置指标" class="header-anchor">#</a></h2><p>为了描述Crash现象，除去前文已经描述过的Crash率，我们在工程实践中还会监控以下指标<br>Crash率    Crash率、UV Crash率、PV Crash率等<br>用户信息    用户详情：手机号、性别、年龄、国家地区、累计消费金额等<br>会员级别：普通、青铜、黄金、钻石VIP等<br>手机信息    ROM厂商版本、AndroidOS版本、CPU型号、屏幕厂商、屏幕分辨率、磁盘型号、运行时参数如运行时Activity栈情况、App可用内存、磁盘内存、CPU执行情况等<br>地理信息    国家地区、语言<br>Crash信息    App线上版本号、应用市场渠道号、异常堆栈、同类型异常发生总次数、异常总次数、UV数、PV数、已登录用户数</p>
+<h2 id="线上监控"><a href="#线上监控" class="headerlink" title="线上监控"></a>线上监控<a href="#线上监控" class="header-anchor">#</a></h2><p>作为开发者，如何在App发布出去之后，监控到用户手机中App的Crash数据，可采取的方案有：</p>
+<p>1.企业采购外部资源APM厂商如友盟、Buggly，集成第三方异常采集SDK；</p>
+<p>2.基于数据安全合规 ，企业研发APM平台，采集AppCrash信息。</p>
+<p>方案1已经运用于目前App，各大主流App皆集成了友盟采集SDK、Buggly采集SDK，开发者可以登录<a href="https://mobile.umeng.com/platform/apps/list%E6%9F%A5%E7%9C%8B%E5%90%84App%E5%90%84%E7%89%88%E6%9C%AC%E7%9A%84Crash%E7%8E%87%E3%80%82">https://mobile.umeng.com/platform/apps/list查看各App各版本的Crash率。</a><br>方案2企业研发APM平台，作为客户端，有以下策略抓取Crash信息上报至服务器：1.Java未捕获异常处理器和默认未捕获异常处理器；2Java异常捕获try-catch-finnally流程；3基于Linux Crash信号列表捕获NativeCrash信息。策略1和2作为App开发常见的两种策略，为本节主要内容，读者如果对Native Crash捕获上报感兴趣，可以联系笔者补充。<br>首先介绍第一个策略Java未捕获异常处理和默认未捕获异常处理器。<br>Java JDK提供了Thread. UncaughtExceptionHandler来捕获App进程所有未处理的异常，并处理该异常。一段典型的未捕获异常处理如下代码所示：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">    android:name=&quot;.App&quot;</span><br><span class="line">    android:label=&quot;@string/app_name&quot;</span><br><span class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>应用启动时指定了一个名为App的默认Application ，在Application中为App主线程绑定未捕获异常处理器和默认未捕获异常处理器,Application代码如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 线程未捕获异常处理器</span></span><br><span class="line"><span class="comment">          */</span></span><br><span class="line">        <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(<span class="keyword">final</span> Thread t, <span class="keyword">final</span> Throwable e)</span> </span>&#123;</span><br><span class="line">            Log.d(<span class="string">&quot;ExceptionHandler&quot;</span>, <span class="string">&quot;uncaughtException &quot;</span> + t.getName() + <span class="string">&quot; has captured a exception&quot;</span>);</span><br><span class="line">            Log.d(<span class="string">&quot;ExceptionHandler&quot;</span>, <span class="string">&quot;uncaughtException has capture thread error ,msg is &quot;</span> + e.toString());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        Thread.currentThread().setName(<span class="string">&quot;主线程 &quot;</span>);</span><br><span class="line">        Thread.currentThread().setUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line">        Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>App启动会创建Application实例，该实例持有一个静态内部类ExceptionHandler异常未捕获处理器。<br> .    在Application初始化过程中，为App的主线程设置了Thread昵称、Thread的未捕获异常处理器、默认未捕获异常处理器。<br> .    当App发生了未捕获异常，即某一段代码未进行try-catch的时刻，代码会执行到ExceptionHandler#uncaughtException里。<br> .    ExceptionHandler# uncaughtException中处理App运行过程中所抛出的未捕获异常，方便开发者做容灾处理，demo演示了打印了Thread信息、Throwable异常信息操作</li>
+</ol>
+<p>关于Java未捕获异常处理器、默认未捕获异常处理器的执行原理可以参考安卓源码，代码位置如下: /frameworks/base/core/java/com/android/internal/os/RuntimeInit.java</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运行时初始化的主入口点。不供公共访问。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RuntimeInit</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * main方法入口</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] argv)</span> </span>&#123;</span><br><span class="line">        commonInit();</span><br><span class="line">        nativeFinishInit();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">commonInit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 设置虚拟机中的线程未捕获异常处理程序。APP可以替换默认的未捕获异常处</span></span><br><span class="line"><span class="comment">     * 理器，但不能替换预处理处理器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    LoggingHandler loggingHandler = <span class="keyword">new</span> LoggingHandler();</span><br><span class="line">    Thread.setUncaughtExceptionPreHandler(loggingHandler);</span><br><span class="line">    Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">new</span> KillApplicationHandler(loggingHandler));</span><br><span class="line"></span><br><span class="line">    initialized = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * RuntimeInit内部类</span></span><br><span class="line"><span class="comment">     * 处理未捕获异常导致的应用程序死亡 framework负责为主线程捕获这些信息</span></span><br><span class="line"><span class="comment">     * 因此这应该只对应用程序创建的线程有影响。</span></span><br><span class="line"><span class="comment">     * 在此方法运行之前，loginghandler将已经有日志细节。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">KillApplicationHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(Thread t, Throwable e)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 如果已经报告Crash，避免死循环</span></span><br><span class="line">                <span class="keyword">if</span> (mCrashing)</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                mCrashing = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 尝试结束Profiling，如果Profiling正在运行，且我们杀死了正在Profiling的进程，内存中的缓冲区将会丢失</span></span><br><span class="line">                <span class="comment">// 请尝试停止Profiling，用来刷新buffer缓冲区。</span></span><br><span class="line">                <span class="comment">// 这样做可以提升方法追踪（method trace）结果，对调试Crash很有用</span></span><br><span class="line">                <span class="keyword">if</span> (ActivityThread.currentActivityThread() != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    ActivityThread.currentActivityThread().stopProfiling();</span><br><span class="line">                &#125;</span><br><span class="line">            </span><br><span class="line">                <span class="comment">// 打开崩溃对话框，直到它消失</span></span><br><span class="line">                ActivityManager.getService().handleApplicationCrash(mApplicationObject,</span><br><span class="line">                        <span class="keyword">new</span> ApplicationErrorReport.ParcelableCrashInfo(e));</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable t2) &#123;</span><br><span class="line">                <span class="keyword">if</span> (t2 <span class="keyword">instanceof</span> DeadObjectException) &#123;</span><br><span class="line">                    <span class="comment">// 系统进程已死，忽略执行</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        Clog_e(TAG, <span class="string">&quot;Error reporting crash&quot;</span>, t2);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Throwable t3) &#123;</span><br><span class="line">                        <span class="comment">// Clog_e() 也存在异常哦</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                <span class="comment">// 保障这个过程能执行</span></span><br><span class="line">                Process.killProcess(Process.myPid());</span><br><span class="line">                System.exit(<span class="number">10</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>总结下AppRuntime处理流程</p>
+<ol>
+<li>Main方法作为入口调用了commonInit方法<br> .    commonInit中设置了setUncaughtExceptionPreHandler、setDefaultUncaughtExceptionHandler未捕获异常处理器</li>
+<li>setUncaughtExceptionPreHandler设置了LoggingHandler<br> .    默认未捕获异常处理器setDefaultUncaughtExceptionHandler设置了KillApplicationHandler</li>
+</ol>
+<p>观察步骤2-2 这也就是为什么在App中设置默认异常捕获器可以防止APP闪退的原因</p>
+<p>安卓Runtime源码研究的启示有以下几点：</p>
+<ol>
+<li>无论是JavaAPP或是AndroidAPP，只要为Thread设置了未捕获异常处理器，就可以降低Crash的几率</li>
+<li>在主线程未捕获异常处理器中可以做很多任务：App异常信息持久化，上报日志， APP容灾处理如页面跳转、页面重新加载、App重启等</li>
+<li>主线程的默认未捕获异常处理器是KillApplicationHandler，默认会杀死当前进程</li>
+<li>子线程也可以设置未捕获异常处理器，用于处理子页面的异常情况，做一些针对业务子页面的容灾操作</li>
+</ol>
+<p>工程化实践中，通常在UncaughtExceptionHandler实现类的uncaughtException中做以下工作：</p>
+<ol>
+<li>应用容灾：为A业务模块指定默认跳转页面；为App指定异常情况默认跳转页面<br> .    缓存当前线程执行的任务，如接口请求、数据读写、文件下载，用来下一次恢复该任务<br> .    异常信息存储，异常信息不经筛选、过滤、合并，会给本地磁盘、远程服务器造成负担，所以我们会对异常信息优化处理，包括读取已有的异常信息、更新异常信息、序列化到本地、存储至磁盘、去重后上报至远程服务器；<br> .    异常信息上报，通常会将优化过的异常日志按一定策略上报至服务器：<br> .    定时上报：用户在点击一键反馈的按钮时，自动上报异常日志；每天首次启动App时进行上报；<br> .    定策略上报：App当日Crash累计次数大于i次，则触发上报机制；<br> .    上报去重：对于已经上报过的异常信息、且异常次数、异常详情等维度相同，则不进行上报，减轻服务器压力、减轻本地磁盘存储压力。</li>
+</ol>
+<h2 id="线上容灾"><a href="#线上容灾" class="headerlink" title="线上容灾"></a>线上容灾<a href="#线上容灾" class="header-anchor">#</a></h2><p>当运营人员、市场人员或开发人员在后台看到线上App产生大量Crash现象时，可以采取以下实践：</p>
+<ol>
+<li>退出进程：杀死App进程，造成App退出回到首页的假象，避免弹出停止运行弹出框，影响用户体验，让用户误以为手机使用不当退出了App。</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">android.os.Process.killProcess(android.os.Process.myPid());</span><br><span class="line"></span><br><span class="line">System.exit(<span class="number">0</span>);</span><br></pre></td></tr></table></figure></div>
+<ol start="2">
+<li><p>跳转至业务首页或App首页：在A业务模块执行异步任务发生异常时，有两种选择，一是跳转到主线程处理器uncaughtException中指定的全局默认页面；二可以让App跳转页面至A业务模块的首页， 这个首页在A业务模块的子线程的uncaughtException设置。</p>
+</li>
+<li><p>主线程uncaughtException设置全局默认页，当App遇到未捕获异常，自动跳转至声明隐式启动Action为com.crash.demo.crash的页面<br>a)</p>
+</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 线程未捕获异常处理器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(<span class="keyword">final</span> Thread t, <span class="keyword">final</span> Throwable e)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            startCrashPage();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        Thread.currentThread().setName(<span class="string">&quot;主线程 &quot;</span>);</span><br><span class="line">        Thread.currentThread().setUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line">    Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startCrashPage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">        intent.setAction(<span class="string">&quot;com.crash.demo.crash&quot;</span>);</span><br><span class="line">        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">        startActivity(intent);</span><br><span class="line">        android.os.Process.killProcess(android.os.Process.myPid());</span><br><span class="line">        System.exit(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+<p>b)    A业务模块的子线程,设置与App不同的未捕获异常处理器，绑定A业务自己的异常跳转页面，当App在A业务模块执行子线程任务时，遇到未捕获异常，自动跳转至声明隐式启动Action为com.crash.demo.crash2的页面，而非主线程制定的com.crash.demo.crash1页面</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试子线程设置未捕获异常处理器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">runtimeNoneUE</span><span class="params">(View view)</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Thread thread =  <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">                <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">int</span> c = a / b;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        thread.setUncaughtExceptionHandler(<span class="keyword">new</span> ChildExceptionHandler());</span><br><span class="line">        thread.setName(<span class="string">&quot;iron man is on the android chilid thread&quot;</span>);</span><br><span class="line">        thread.start();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        Log.d(<span class="string">&quot;createExceptionInThread&quot;</span>, <span class="string">&quot;main thread is catch sub thread exception&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 线程未捕获异常处理器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">ChildExceptionHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(<span class="keyword">final</span> Thread t, <span class="keyword">final</span> Throwable e)</span> </span>&#123;</span><br><span class="line">        Log.d(<span class="string">&quot;ChildExceptionHandler&quot;</span>, <span class="string">&quot;uncaughtException &quot;</span> + t.getName() + <span class="string">&quot; has captured a exception&quot;</span>);</span><br><span class="line">        Log.d(<span class="string">&quot;ChildExceptionHandler&quot;</span>, <span class="string">&quot;uncaughtException has capture thread error ,msg is &quot;</span> + e.toString());</span><br><span class="line">        startCrashPage();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startCrashPage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">    intent.setAction(<span class="string">&quot;com.crash.demo.crash2&quot;</span>);</span><br><span class="line">    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">    startActivity(intent);</span><br><span class="line">    android.os.Process.killProcess(android.os.Process.myPid());</span><br><span class="line">    System.exit(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<ol start="4">
+<li><p>关闭入口：在后台关闭App中异常模块的入口，避免阻断异常流量的产生，为开发分析、定位赢得时间；提前在App中给予用户公告提示，将品牌负面影响降到最低。</p>
+</li>
+<li><p>改变入口： 在后台配置App中A业务的入口，如正常情况下，A业务模块跳转至App原生页面ProductListActivity；发生异常后，通过后台配置，A业务模块跳转至H5页面，通过WebviewActivity,加载H5版本的商品列表页，既能保证A业务正常运行，也同时给修复原生页面Bug赢得时间。</p>
+</li>
+<li><p>回退版本：在App多次异常，导致用户无法正常使用App功能，运营人员应该发布一个回退指令，将App和后台服务全部回退到上一个稳定版本</p>
+</li>
+<li><p>线上热修复：在开发人员收到异常日志后，分析、定位、复现出异常现象，并通过编码方式解决了该异常，则应使用热更新的方式动态发布一个Patch补丁，在App运行过程中动态下载该补丁，并加载到运行时的环境中，或者冷启动重新初始化APp，在用户下一次使用App时，将该异常模块变为可用状态。</p>
+</li>
+<li><p>线上发布版本：开发人员重新发布APK，运营人员全量推送新版本，强制用户升级。如果子页面为H5页面，在线上重新部署网页即可。</p>
+</li>
+</ol>
+<h2 id="线下预防"><a href="#线下预防" class="headerlink" title="线下预防"></a>线下预防<a href="#线下预防" class="header-anchor">#</a></h2><p>线下预防是指开发人员在开发过程中，应该通过开发流程规范避免代码产生异常。通常的开发流程规范包括：</p>
+<ol>
+<li>模块功能设计</li>
+<li>自测用例编写</li>
+<li>开发过程中常见Crash CheckList表格检查，参考3.2常见Crash检查</li>
+<li>开发工具扫描：CheckStyle、FindBugs、AlibabaCheckStyle参考工具#代码扫描</li>
+<li>业务Log埋点</li>
+<li>业务代码Try-catch-finally处理</li>
+<li>常见异常情况处理：</li>
+<li>第三方API异常捕获；</li>
+<li>系统资源异常情况处理：低内存、低磁盘容量、低电量、弱网、无网、CPU可用资源过低</li>
+</ol>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具<a href="#工具" class="header-anchor">#</a></h1><h2 id="代码扫描"><a href="#代码扫描" class="headerlink" title="代码扫描"></a>代码扫描<a href="#代码扫描" class="header-anchor">#</a></h2><p>安卓开发常见的代码扫描工具有：Alibaba- p3c、checkstyle、Lint</p>
+<h2 id="测试检查"><a href="#测试检查" class="headerlink" title="测试检查"></a>测试检查<a href="#测试检查" class="header-anchor">#</a></h2><p>安卓开发常见的测试工具及文档如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>名称</strong></th>
+<th><strong>文档地址</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Profile</strong></td>
+<td><a href="https://developer.android.google.cn/studio/profile/android-profiler?hl=zh_cn">https://developer.android.google.cn/studio/profile/android-profiler?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>Mat</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>TraceView</strong></td>
+<td><a href="https://developer.android.google.cn/studio/profile/traceview?hl=zh_cn">https://developer.android.google.cn/studio/profile/traceview?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>Logcat</strong></td>
+<td><a href="https://developer.android.google.cn/studio/command-line/logcat?hl=zh_cn">https://developer.android.google.cn/studio/command-line/logcat?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>UI Automator</strong></td>
+<td><a href="https://developer.android.google.cn/training/testing/ui-automator?hl=zh_cn">https://developer.android.google.cn/training/testing/ui-automator?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>Espresso</strong></td>
+<td><a href="https://developer.android.google.cn/training/testing/espresso?hl=zh_cn">https://developer.android.google.cn/training/testing/espresso?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>JUnit4</strong></td>
+<td><a href="https://developer.android.google.cn/training/testing/junit-rules?hl=zh_cn">https://developer.android.google.cn/training/testing/junit-rules?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>AndroidJUnitRunner</strong></td>
+<td><a href="https://developer.android.google.cn/training/testing/junit-runner?hl=zh_cn">https://developer.android.google.cn/training/testing/junit-runner?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>Monkey</strong></td>
+<td><a href="https://developer.android.google.cn/studio/test/monkey?hl=zh_cn">https://developer.android.google.cn/studio/test/monkey?hl=zh_cn</a></td>
+</tr>
+</tbody></table>
+<h2 id="api"><a href="#API" class="headerlink" title="API"></a>API<a href="#api" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th><strong>API资源</strong></th>
+<th>描述</th>
+<th><strong>地址</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Threadset#UncaughtExceptionHandler</strong></td>
+<td>未捕获异常处理器</td>
+<td>JDK源码</td>
+</tr>
+<tr>
+<td><strong>Thread#setDefaultUncaughtExceptionHandler</strong></td>
+<td>默认未捕获异常处理器</td>
+<td>JDK源码</td>
+</tr>
+<tr>
+<td><strong>Cockroach</strong></td>
+<td>降低Android非必要crash</td>
+<td><a href="https://github.com/android-notes/Cockroach">https://github.com/android-notes/Cockroach</a></td>
+</tr>
+<tr>
+<td><strong>DefenseCrash</strong></td>
+<td>防止程序运行时<code>Crash</code>的库</td>
+<td><a href="https://github.com/xuuhaoo/DefenseCrash">https://github.com/xuuhaoo/DefenseCrash</a></td>
+</tr>
+</tbody></table>
+<h2 id="热补丁"><a href="#热补丁" class="headerlink" title="热补丁"></a>热补丁<a href="#热补丁" class="header-anchor">#</a></h2><blockquote>
+<p>热补丁技术实践 常见的分为三级</p>
+<ol>
+<li><p>代码修复级别：有编译插桩、分包拆包、dex替换</p>
+</li>
+<li><p>资源修复：全量替换、差量替换</p>
+</li>
+<li><p>So修复：接口替换、插桩实现</p>
+</li>
+</ol>
+<p>可以参考我的这篇文章<a href="http://idolcoder.gitee.io/blog//2019/06/android-hotfix/">Android 热补丁技术详解大全</a></p>
+</blockquote>
+<p> 热补丁方案因技术实现不同导致有很多种实现 ，常见的热补丁方案如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>热补丁名称</strong></th>
+<th><strong>地址</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Tinker</strong></td>
+<td><a href="https://github.com/Tencent/tinker">https://github.com/Tencent/tinker</a></td>
+</tr>
+<tr>
+<td><strong>AndFix</strong></td>
+<td><a href="https://github.com/alibaba/AndFix">https://github.com/alibaba/AndFix</a></td>
+</tr>
+<tr>
+<td><strong>Nuwa</strong></td>
+<td><a href="https://github.com/jasonross/Nuwa">https://github.com/jasonross/Nuwa</a></td>
+</tr>
+<tr>
+<td><strong>Amigo</strong></td>
+<td><a href="https://github.com/eleme/Amigo">https://github.com/eleme/Amigo</a></td>
+</tr>
+</tbody></table>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      <categories>
+        <category>Android</category>
+        <category>BugFree</category>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>BugFree</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Android Crash揭秘与实践</title>
     <url>/blog//2021/05/android-crash-who-kill-you/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><p>AndroidCrash基础知识</p>
@@ -3306,6 +3532,601 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
       </tags>
   </entry>
   <entry>
+    <title>Android插件化技术选型</title>
+    <url>/blog//2021/01/Android-plug-in-technology-selection/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="插件化"><a href="#插件化" class="headerlink" title="插件化"></a>插件化<a href="#插件化" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th><a href="https://github.com/didi/VirtualAPK">VirtualAPK</a></th>
+<th><strong><a href="https://github.com/DroidPluginTeam/DroidPlugin">DroidPlugin</a></strong></th>
+<th><strong><a href="https://github.com/wequick/Small">Small</a></strong></th>
+<th><a href="https://github.com/alibaba/atlas">Atlas</a></th>
+<th><a href="https://github.com/CtripMobile/DynamicAPK">DynamicAPK</a></th>
+<th><a href="https://github.com/Qihoo360/RePlugin">RePlugin</a></th>
+<th><a href="https://github.com/singwhatiwanna/dynamic-load-apk">dynamic-load-apk</a></th>
+<th><a href="https://github.com/houkx/android-pluginmgr">PluginManager</a></th>
+<th><a href="https://github.com/mmin18/AndroidDynamicLoader"> AndroidDynamicLoader</a></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>作者</td>
+<td>滴滴</td>
+<td>奇虎360</td>
+<td>wequick</td>
+<td>阿里</td>
+<td>携程</td>
+<td>奇虎360</td>
+<td>任玉刚</td>
+<td>个人开发者</td>
+<td>个人开发者</td>
+</tr>
+<tr>
+<td>支持四大组件</td>
+<td>全支持</td>
+<td>全支持</td>
+<td>只支持Activity</td>
+<td></td>
+<td>只支持Activity</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>组件无需在宿主manifest中预注册</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td></td>
+<td>no</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>插件可以依赖宿主</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持PendingIntent</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Android特性支持</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>兼容性适配</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>插件构建</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>开发者</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="插件化参考文章"><a href="#插件化参考文章" class="headerlink" title="插件化参考文章"></a>插件化参考文章<a href="#插件化参考文章" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>大纲</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="http://mobilists.eleme.io/2016/03/28/%E9%A5%BF%E4%BA%86%E4%B9%88%E6%8F%92%E4%BB%B6%E5%8C%96%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5%EF%BC%88%E4%B8%80%EF%BC%89/">饿了么Android插件化开发实践（一）</a></td>
+<td>模块架构；Plugin Dev 规划；技术选型</td>
+</tr>
+<tr>
+<td><a href="https://p.codekk.com/?s=%E6%8F%92%E4%BB%B6%E5%8C%96">博客集合-插件化集合</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://www.trinea.cn/android/android-plugin/"><strong>Android 插件化 动态升级</strong>(trinea.cn)</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/search?o=desc&q=%E6%8F%92%E4%BB%B6%E5%8C%96&s=stars&type=Repositories">Search · 插件化 · GitHub</a></td>
+<td>github上插件化项目降序排序</td>
+</tr>
+</tbody></table>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      <categories>
+        <category>Android</category>
+        <category>项目架构</category>
+        <category>开源框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>开源框架</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android组件化实践指南</title>
+    <url>/blog//2021/01/Android-component-Practice-Guide/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化<a href="#组件化" class="header-anchor">#</a></h2><p>组件化技术实现了在Debug调试阶段，每个功能模块可以独立变成APP调试，但在打包编译阶段，其最终还是将所有模块打包成一个APK。</p>
+<blockquote>
+<p><strong>插件化</strong>：也叫动态加载技术，分宿主APK和插件APK，宿主APK可以理解为就是安装到手机的主APK（诸如手机淘宝），各个功能模块抽取变成插件APK（诸如饿了么，淘票票），这些插件APK可以随着宿主APK一起编译打包安装到手机上，也可以变成远程APK放在服务器，按需下载安装，实现功能的动态配置。从广义上理解，可以把Android系统当成一个宿主APK，各个安装到手机上的软件当成插件APK，从而组成一个插件化系统。<br><strong>组件化</strong>：组件化技术实现了在Debug调试阶段，每个功能模块可以独立变成APP调试，但在打包编译阶段，其最终还是将所有模块打包成一个APK。<br><strong>热修复</strong>：热修复技术有助于我们在用户无感知的时候修复APK，悄无声息的将Bug修复掉，我们希望热修复它是不新增资源文件，四大组件等操作，只是单纯的解决代码逻辑上的Bug，可以简单理解插件化技术是热修复的高级版</p>
+</blockquote>
+<p>下表格摘自<a href="https://github.com/luckybilly/AndroidComponentizeLibs"> 多个维度对比一些有代表性的开源android组件化开发方案</a></p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th><a href="https://github.com/luckybilly/CC">CC</a></th>
+<th><a href="https://github.com/luojilab/DDComponentForAndroid">得到DDComponentForAndroid</a></th>
+<th><a href="https://github.com/SpinyTech/ModularizationArchitecture">ModularizationArchitecture</a></th>
+<th><a href="https://github.com/alibaba/Arouter">阿里Arouter</a><br>(网上很多组件化方案的路由引擎，如<a href="https://github.com/guiying712/AndroidModulePattern">AndroidModulePattern</a>)</th>
+<th>聚美组件化方案<br>（基于<a href="https://github.com/JumeiRdGroup/Router">聚美Router</a>）</th>
+<th><a href="https://github.com/mzule/ActivityRouter">ActivityRouter</a></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>开源时间</td>
+<td>2017-11</td>
+<td>2017-9</td>
+<td>2017-1</td>
+<td>2016-12</td>
+<td>2016-9</td>
+<td>2016-4</td>
+</tr>
+<tr>
+<td>介绍文章</td>
+<td><a href="https://github.com/luckybilly/CC/wiki">wiki</a></td>
+<td><a href="https://www.jianshu.com/p/1b1d77f58e84">Android彻底组件化方案实践</a></td>
+<td><a href="http://blog.spinytech.com/2016/12/28/android_modularization/">Android架构思考(模块化、多进程)</a></td>
+<td><a href="https://yq.aliyun.com/articles/71687?spm=5176.100240.searchblog.7.8os9Go">开源最佳实践：Android平台页面路由框架Arouter</a></td>
+<td><a href="https://juejin.im/post/5a4b4425518825128654eef4">聚美组件化实践之路</a></td>
+<td><a href="https://joyrun.github.io/2016/08/01/ActivityRouter/">ActivityRouter路由框架：通过注解实现URL打开Activity</a></td>
+</tr>
+<tr>
+<td>通信机制</td>
+<td>组件总线</td>
+<td>路由 + 接口下沉</td>
+<td>组件总线</td>
+<td>路由 + 接口下沉</td>
+<td>路由 + 接口下沉</td>
+<td>路由 + 静态方法</td>
+</tr>
+<tr>
+<td>activity跳转</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>是否支持降级处理</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>activity变量自动注入</td>
+<td>❌</td>
+<td>1. 通过apt生成自动注入代码<br>2. 在onCreate中调用<code>AutowiredService.Factory.getInstance().create().autowire(this);</code>或者继承BaseActivity</td>
+<td>❌</td>
+<td>1. 通过apt生成解析参数的代码<br>2. 在onCreate方法中调用<code>ARouter.getInstance().inject(this);</code>实现自动注入</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>startActivityForResult</td>
+<td>支持Activity/Fragment,但不建议使用<br>建议使用统一的组件调用方式</td>
+<td>仅支持Activity</td>
+<td>仅支持Activity</td>
+<td>仅支持Activity</td>
+<td>支持Activity/Fragment</td>
+<td>仅支持Activity</td>
+</tr>
+<tr>
+<td>调用方式(页面跳转)</td>
+<td>同步直接返回结果或异步回调结果:<br><code>CCResult result = CC.obtainBuilder(&quot;ComponentA&quot;).build().call();</code><br>或<br><code>String callId = CC.obtainBuilder(&quot;ComponentA&quot;).build().callAsync(new IComponentCallback()&#123;...&#125;);</code></td>
+<td>onActivityResult返回结果:<br><code>UIRouter.getInstance().openUri(getActivity(), url, bundle);</code></td>
+<td>RouterResponse response = LocalRouter.getInstance(MaApplication.getMaApplication())<br>.route(MainActivity.this, RouterRequest.obtain(MainActivity.this)<br>            .domain(“com.spinytech.maindemo:music”)<br>            .provider(“music”)<br>            .action(“shutdown”));<br>String temp = response.getData();</td>
+<td>onActivityResult返回结果:<br><code>ARouter.getInstance().build(&quot;/test/activity&quot;).navigation();</code></td>
+<td>onActivityResult返回结果:<br><code>Router.create(url).open(context);</code></td>
+<td>onActivityResult返回结果:<br><code>Routers.open(context, url);</code></td>
+</tr>
+<tr>
+<td>调用方式(调用服务)</td>
+<td>与页面跳转相同</td>
+<td><code>Router.getInstance().getService(ReadBookService.class.getSimpleName())</code></td>
+<td>与页面跳转相同</td>
+<td><code>ARouter.getInstance().navigation(HelloService.class).sayHello();</code></td>
+<td><code>PipeManager.get(LoginPipe.class).logout();</code></td>
+<td>与页面跳转相同</td>
+</tr>
+<tr>
+<td>组件向外提供服务</td>
+<td>与页面跳转一致，在IComponent中实现</td>
+<td>接口下沉到base中，组件中实现接口并在IApplicationLike中添加代码注册到Router中</td>
+<td>与页面跳转一致，实现一个对应的Action并在其所属的Provider中注册即可</td>
+<td>接口继承IProvider并下沉到base中，组件中实现接口并通过注解来暴露服务</td>
+<td>接口下沉到base中，组件中实现接口并在ApplicationDelegate中向接口管理类注册<code>PipeManager.register(CorePipe.class, new CorePipeImpl());</code></td>
+<td>在静态方法上加注解来暴露服务，但不支持返回值，且参数固定位(context, bundle)</td>
+</tr>
+<tr>
+<td>Fragment组件化支持</td>
+<td>在IComponent中实现，并支持后续Fragment内部功能调用</td>
+<td>调用服务的方式实现，未支持后续Fragment内部的功能调用</td>
+<td>不支持</td>
+<td>调用服务的方式实现，未支持后续Fragment内部的功能调用</td>
+<td>调用服务的方式实现，未支持后续Fragment内部的功能调用</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>组件自动注册方案</td>
+<td>TrasnformAPI + ASM扫描组件类(IComponent接口实现类)并注册到ComponentMananger中，无需手动维护组件列表</td>
+<td>apt生成各module的路由表<br>TrasnformAPI + javassist将IApplicationLike的注册代码生成到自定义application.onCreate方法中，无需手动维护组件列表</td>
+<td>未实现自动注册，<br>1. Action列表在其所属的Provider中注册<br>2. Provider在其所属的ApplicationLogic中注册<br>3. ApplicationLogic在主app的Application中注册</td>
+<td>新版本(1.3.0)开始支持通过插件完成路由注册<br>1. apt生成各module的路由表<br>2. TrasnformAPI + ASM扫描路由表并注册到LogisticsCenter中，无需手动维护组件列表</td>
+<td>1. apt生成各module的路由表pkg.RouterRuleCreator类<br>2. 在ComponentPackages中定义所有RouterRuleCreator的包名<br>3.在BaseApplication中反射所有的包名找到所有路由表RouterRuleCreator<br>4. 需要手动维护ComponentPackages类中的包名列表</td>
+<td>1. apt生成各module的路由表<br>2. apt在application的module通过Modules注解生成RouterInit进行注册<br>3. 需要手动维护Modules注解中的组件列表</td>
+</tr>
+<tr>
+<td>组件单独运行的方式</td>
+<td>切换library/application方式编译，提供2种方式：<br>1. module/build.gradle中切换<code>ext.runAsApp=trueOrFalse</code><br>2. 在local.properties中切换<code>moduleName=trueOrFalse</code>（推荐使用的方式，不会提交到代码仓库中）</td>
+<td>切换library/application方式编译，在module/gradle.properties中切换<code>isRunAlone=trueOrFalse</code></td>
+<td>切换library/application方式编译，框架本身没有提供切换方式，开发者自行解决</td>
+<td>切换library/application方式编译，框架本身没有提供切换方式，开发者自行解决</td>
+<td>组件module始终以library方式编译，额外提供app壳子，可以按需将多个组件依赖进来一起打包。<br>好处是所有组件调试时包名相同，能满足分享及地图等第三方SDK对包名的要求</td>
+<td>切换library/application方式编译，框架本身没有提供切换方式，开发者自行解决</td>
+</tr>
+<tr>
+<td>跨app组件调用支持</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>跨app调用开关及权限设置</td>
+<td>✅</td>
+<td>/</td>
+<td>❌</td>
+<td>/</td>
+<td>/</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>组件app运行时调用其它组件</td>
+<td>组件同时安装在设备上即可，实际开发中一般是当前正在开发的组件和主app中的组件互相调用.<br>通过广播 + Service + LocalSocket实现，没有UrlScheme调用时弹出的选择框</td>
+<td>将需要调用的组件一起打包才能调用</td>
+<td>组件同时安装在设备上即可，实际开发中一般是当前正在开发的组件和主app中的组件互相调用.<br>通过AIDL实现</td>
+<td>一起打包或者通过urlScheme来统一转发</td>
+<td>将需要调用的组件一起打包才能调用</td>
+<td>UrlScheme原生支持跨app调用,组件同时安装在设备上即可<br>通过中介Activity转发:RouterActivity</td>
+</tr>
+<tr>
+<td>组件依赖隔离</td>
+<td>无需依赖、完全隔离</td>
+<td>通过插件实现只在打apk包时才添加依赖，编码期间不能直接调用其它组件的代码，想知道如何实现可以戳<a href="https://github.com/luojilab/DDComponentForAndroid/blob/master/build-gradle/src/main/groovy/com.dd.buildgradle/ComBuild.groovy#L118:18">这里</a></td>
+<td>无需依赖、完全隔离</td>
+<td>未隔离</td>
+<td>未隔离</td>
+<td>无需依赖、完全隔离</td>
+</tr>
+<tr>
+<td>AOP支持</td>
+<td>拦截器 + 组件内部Action进行AOP</td>
+<td>❌</td>
+<td>组件内部Action进行AOP</td>
+<td>拦截器AOP</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>拦截器</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>组件调用的超时设置</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>组件调用的取消</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>动态注册/注销组件</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>特点</td>
+<td>1. 可以跨app调用，初期改造时即可单独编译组件运行<br>2. 提供统一的组件调用及实现方式（不管是否跨app调用、页面跳转、服务调用、同步/异步调用）<br>3. 组件自动注册，无需维护<br>4. 提供了ActionProcessor按需加载的支持</td>
+<td>1. 编码期间组件依赖通过插件进行隔离，避免直接调用其它组件的代码<br>2. 提供了兼容ARouter的方案<br>3. 组件自动注册，无需维护</td>
+<td>1. 可以跨app、app内跨进程调用<br>2. 组件运行在各自进程中，单独运行与联合打包切换时需要修改进程名称<br>3. 组件需指定同步实现还是异步实现，调用组件时统一拿到RouterResponse作为返回值，可以自行决定同步还是异步方式调用RouterResponse.getData()来获取结果，但异步获取时需要自己维护线程</td>
+<td>1. 阿里出品，使用者众多，QQ群里交流比较活跃<br>2. 支持分级按需加载 <br>3. 是一个路由框架，并不是完整的组件化方案，可作为组件化架构的通信引擎</td>
+<td>组件module可以始终以library方式编译，由统一的app壳子来安装调试，不需要切换library/application编译方式、避免了第三方SDK需要指定包名的问题、自定义权限重复导致安装冲突的问题、误操作导致apk upload到maven仓库的问题等</td>
+<td>1. 业内最早的组件化支持库<br>2. 通过注解静态方法的方式暴露服务</td>
+</tr>
+<tr>
+<td>组件定义代码侵入性</td>
+<td>新增IComponent接口的实现类来定义组件，侵入性低</td>
+<td>注解定义路由及参数自动注入，侵入性高</td>
+<td>新增接口实现类，侵入性低</td>
+<td>注解定义路由及参数自动注入，侵入性高</td>
+<td>注解定义路由，侵入性高</td>
+<td>注解定义路由，侵入性高</td>
+</tr>
+<tr>
+<td>组件调用代码侵入性</td>
+<td>高</td>
+<td>高</td>
+<td>高</td>
+<td>高</td>
+<td>高</td>
+<td>高</td>
+</tr>
+<tr>
+<td>混淆配置</td>
+<td>无</td>
+<td>所有下沉接口、框架中相关接口的实现类等</td>
+<td><code>-dontwarn com.spinytech.**</code></td>
+<td>框架中的所有类及框架相关接口的实现类</td>
+<td>所有RouterRuleCreator类</td>
+<td>框架中的所有类</td>
+</tr>
+<tr>
+<td>老项目改造成本评估</td>
+<td>低</td>
+<td>一般</td>
+<td>高</td>
+<td>一般</td>
+<td>高</td>
+<td>低</td>
+</tr>
+<tr>
+<td>方案使用的学习成本评估</td>
+<td>低</td>
+<td>一般</td>
+<td>高</td>
+<td>一般</td>
+<td>一般</td>
+<td>一般</td>
+</tr>
+<tr>
+<td>后续维护成本评估</td>
+<td>低</td>
+<td>一般</td>
+<td>高</td>
+<td>低</td>
+<td>一般</td>
+<td>一般</td>
+</tr>
+<tr>
+<td>QQ群</td>
+<td>686844583</td>
+<td>693097923</td>
+<td>无</td>
+<td>592278657 / 336755078</td>
+<td>108895031</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<h2 id="组件化参考文章"><a href="#组件化参考文章" class="headerlink" title="组件化参考文章"></a>组件化参考文章<a href="#组件化参考文章" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>大纲</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a href="https://zhuanlan.zhihu.com/p/25420181">安居客 Android 项目架构演进 - 知乎 (zhihu.com)</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://www.trinea.cn/android/didi-internationalization-android-evolution/">滴滴国际化项目 Android 端演进 (trinea.cn)</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/luckybilly/CC">CC: 业界首个支持渐进式组件化改造的Android组件化开源框架，支持跨进程调用</a></td>
+<td>组件化改造的Android组件化开源框架<a href="https://github.com/luckybilly/CC/wiki">wiki</a><br><a href="https://github.com/luckybilly/CC/wiki/CC%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5(1)%EF%BC%9A%E5%AE%9E%E7%8E%B0%E7%99%BB%E5%BD%95%E6%88%90%E5%8A%9F%E5%86%8D%E8%BF%9B%E5%85%A5%E7%9B%AE%E6%A0%87%E7%95%8C%E9%9D%A2%E5%8A%9F%E8%83%BD">CC框架实践(1)：实现登录成功再进入目标界面功能</a><br><a href="https://github.com/luckybilly/CC/wiki/CC%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5(2)%EF%BC%9AFragment%E5%92%8CView%E7%9A%84%E7%BB%84%E4%BB%B6%E5%8C%96">CC框架实践(2)：Fragment和View的组件化</a><br><a href="https://github.com/luckybilly/CC/wiki/CC%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5(3):-%E8%AE%A9jsBridge%E6%9B%B4%E4%BC%98%E9%9B%85">CC框架实践(3): 让jsBridge更优雅</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/luojilab/DDComponentForAndroid">得到DDComponentForAndroid</a></td>
+<td><a href="https://www.jianshu.com/p/1b1d77f58e84">Android彻底组件化方案实践</a><br>组件化设计思路 <a href="https://mp.weixin.qq.com/s/RAOjrpie214w0byRndczmg">浅谈Android组件化</a><br>原理解释文章<a href="http://www.jianshu.com/p/1b1d77f58e84">Android彻底组件化方案实践</a><br>demo解读文章<a href="http://www.jianshu.com/p/59822a7b2fad">Android彻底组件化demo发布</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/SpinyTech/ModularizationArchitecture">ModularizationArchitecture</a></td>
+<td><a href="http://blog.spinytech.com/2016/12/28/android_modularization/">Android架构思考(模块化、多进程)</a><br><a href="http://blog.spinytech.com/2017/02/01/ma_get_start_cn/">ModularizationArchitecture 使用教程</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/alibaba/ARouter">阿里ARouter</a></td>
+<td><a href="https://yq.aliyun.com/articles/71687?spm=5176.100240.searchblog.7.8os9Go">开源最佳实践：Android平台页面路由框架Arouter</a></td>
+</tr>
+<tr>
+<td>聚美组件化方案<a href="https://github.com/yjfnypeu/AndroidComponent">Demo</a><br>(基于<a href="https://github.com/JumeiRdGroup/Router">聚美Router</a>)</td>
+<td><a href="https://juejin.im/post/5a4b4425518825128654eef4">聚美组件化实践之路</a><br><a href="https://juejin.im/post/5a37771f6fb9a0450e7636e0">Router:一款单品、组件化、插件化全支持的路由框架</a></td>
+</tr>
+<tr>
+<td><a href="https://github.com/mzule/ActivityRouter">ActivityRouter</a></td>
+<td><a href="https://joyrun.github.io/2016/08/01/ActivityRouter/">ActivityRouter路由框架：通过注解实现URL打开Activity</a><br><a href="https://mzule.github.io/2016/04/11/%E9%80%9A%E8%BF%87URL%E6%89%93%E5%BC%80Activity/">通过 URL 打开 Activity</a></td>
+</tr>
+<tr>
+<td>美柚路由方案<a href="https://github.com/gybin02/RouterKit">RouterKit</a></td>
+<td>这个方案的特别之处在于其组件自动注册的方案：通过apt生成每个module的路由表，然后<a href="https://github.com/gybin02/RouterKit/blob/master/app/build.gradle#L60:1">复制到app的assets目录</a>，运行的时候遍历asset目录，<a href="https://github.com/gybin02/RouterKit/blob/master/jet_router/src/main/java/com/meiyou/router/Router.java#L322:17">反射对应的activity</a></td>
+</tr>
+<tr>
+<td>组件总线方案<a href="https://github.com/cangwang/ModuleBus">ModuleBus</a></td>
+<td>组件化开发跨module交互方式—ModuleBus交互</td>
+</tr>
+</tbody></table>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      <categories>
+        <category>Android</category>
+        <category>项目架构</category>
+        <category>开源框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>开源框架</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android大厂架构设计最佳实践</title>
+    <url>/blog//2021/01/android-structure-best-practice/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="android架构设计最佳实践"><a href="#Android架构设计最佳实践" class="headerlink" title="Android架构设计最佳实践"></a>Android架构设计最佳实践<a href="#android架构设计最佳实践" class="header-anchor">#</a></h1><h1 id="移动端架构理念"><a href="#移动端架构理念" class="headerlink" title="移动端架构理念"></a>移动端架构理念<a href="#移动端架构理念" class="header-anchor">#</a></h1><h2 id="clean-architecture"><a href="#Clean-Architecture" class="headerlink" title="Clean Architecture"></a>Clean Architecture<a href="#clean-architecture" class="header-anchor">#</a></h2><ul>
+<li><a href="https://medium.com/ribot-labs/android-application-architecture-8b6e34acda65#.b29vhtdm2">Android Application Architecture</a> (<a href="http://www.jianshu.com/p/8ca27934c6e6">中文翻译</a>)</li>
+<li><a href="http://fernandocejas.com/2015/07/18/architecting-android-the-evolution/">Architecting Android…The evolution</a></li>
+<li><a href="https://github.com/android10/Android-CleanArchitecture">Android-CleanArchitecture Code</a></li>
+</ul>
+<h2 id="mvvm-amp-mvp-amp-mvc"><a href="#MVVM-amp-MVP-amp-MVC" class="headerlink" title="MVVM &amp; MVP &amp; MVC"></a>MVVM &amp; MVP &amp; MVC<a href="#mvvm-amp-mvp-amp-mvc" class="header-anchor">#</a></h2><ul>
+<li><a href="http://antonioleiva.com/mvp-android/">MVP for Android: how to organize the presentation layer</a></li>
+<li><a href="http://tech.vg.no/2015/07/17/android-databinding-goodbye-presenter-hello-viewmodel/">ANDROID DATABINDING: GOODBYE PRESENTER, HELLO VIEWMODEL</a></li>
+<li><a href="http://www.codeproject.com/Articles/166952/MVVM-in-Android">http://www.codeproject.com/Articles/166952/MVVM-in-Android</a></li>
+<li><a href="http://www.liuguangli.win/archives/299">Android应用开发架构概述</a></li>
+<li><a href="https://github.com/googlesamples/android-architecture">Google官方架构Samples</a></li>
+</ul>
+<h2 id="flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux<a href="#flux" class="header-anchor">#</a></h2><ul>
+<li><a href="https://armueller.github.io/android/2015/03/29/flux-and-android.html">flux and android</a></li>
+<li><a href="https://medium.com/swlh/rxflux-android-architecture-94f77c857aa2#.sfjwchwok">rxflux android architecture</a></li>
+<li><a href="https://medium.com/swlh/why-rxflux-5b687f062709#.ltlnlr4cl">why rxflux</a></li>
+<li><a href="https://github.com/lgvalle/android-flux-todo-app">android flux todo app</a>(<a href="http://www.devtf.cn/?p=1028">中文翻译</a>)</li>
+</ul>
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它<a href="#其它" class="header-anchor">#</a></h2><ul>
+<li><a href="https://github.com/Juude/Awesome-Android-Architecture/blob/master/Library.md">Artchitecture Library</a></li>
+<li><a href="https://plus.google.com/+AndroidDevelopers/posts/3C4GPowmWLb">Design for Offline: Android App Architecture Best Practices</a></li>
+<li><a href="http://blog.joanzapata.com/robust-architecture-for-an-android-app/">Robust and readable architecture for an Android App</a></li>
+<li><a href="https://events.google.com/io2015/schedule?sid=358c9f91-b6d4-e411-b87f-00155d5066d7#day1/358c9f91-b6d4-e411-b87f-00155d5066d7">Android application architecture</a></li>
+</ul>
+<h1 id="著名公司架构"><a href="#著名公司架构" class="headerlink" title="著名公司架构"></a>著名公司架构<a href="#著名公司架构" class="header-anchor">#</a></h1><h2 id="谷歌"><a href="#谷歌" class="headerlink" title="谷歌"></a>谷歌<a href="#谷歌" class="header-anchor">#</a></h2><ul>
+<li><a href="https://developer.android.google.cn/jetpack/guide?hl=zh-cn#common-principles">应用架构指南</a></li>
+<li><a href="https://github.com/googlesamples/android-architecture-components">Android 架构组件示例</a></li>
+<li><a href="https://github.com/googlesamples/android-architecture">Android 架构蓝图</a></li>
+</ul>
+<h2 id="安居客"><a href="#安居客" class="headerlink" title="安居客"></a>安居客<a href="#安居客" class="header-anchor">#</a></h2><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/25420181">安居客Android项目架构演进</a></li>
+</ul>
+<h2 id="滴滴"><a href="#滴滴" class="headerlink" title="滴滴"></a>滴滴<a href="#滴滴" class="header-anchor">#</a></h2><ul>
+<li><a href="http://www.trinea.cn/android/didi-internationalization-android-evolution/">滴滴国际化项目 Android 端演进</a></li>
+</ul>
+<h2 id="携程"><a href="#携程" class="headerlink" title="携程"></a>携程<a href="#携程" class="header-anchor">#</a></h2><ul>
+<li><a href="http://www.infoq.com/cn/presentations/ctrip-mobile-architecture-evolution">携程Mobile架构演化(视频)</a></li>
+<li><a href="http://www.infoq.com/cn/articles/ctrip-android-dynamic-loading">携程Android App插件化和动态加载实践</a></li>
+</ul>
+<h2 id="阿里"><a href="#阿里" class="headerlink" title="阿里"></a>阿里<a href="#阿里" class="header-anchor">#</a></h2><ul>
+<li><a href="http://www.infoq.com/cn/interviews/tj-taobao-client-arch">陶钧谈淘宝客户端应用框架实践</a></li>
+<li><a href="http://www.infoq.com/cn/articles/alibaba-mobile-infrastructure">QCon旧金山演讲总结：阿里无线技术架构演进</a></li>
+<li><a href="http://www.infoq.com/cn/news/2014/12/taobao-app-evolution">手机淘宝构架演化实践</a></li>
+<li><a href="http://www.open-open.com/lib/view/open1436316754208.html">手机淘宝Android客户端架构</a></li>
+<li><a href="http://club.alibabatech.org/resource_detail.htm?topicId=124">漫谈移动应用架构设计</a></li>
+<li><a href="http://club.alibabatech.org/resource_detail.htm?topicId=130">大规模团队的Android开发</a></li>
+<li><a href="http://club.alibabatech.org/resource_detail.htm?topicId=155">支付宝钱包客户端技术架构</a></li>
+</ul>
+<h2 id="百度"><a href="#百度" class="headerlink" title="百度"></a>百度<a href="#百度" class="header-anchor">#</a></h2><ul>
+<li><a href="http://www.infoq.com/cn/presentations/mobile-baidu-android-platform-solutions">手机百度Android平台平台化解决方案</a></li>
+</ul>
+<h2 id="腾讯"><a href="#腾讯" class="headerlink" title="腾讯"></a>腾讯<a href="#腾讯" class="header-anchor">#</a></h2><ul>
+<li><a href="http://www.infoq.com/cn/presentations/evolution-of-android-qq-music-architecture">涅盘新生—Android QQ音乐架构演进</a></li>
+<li><a href="http://www.infoq.com/cn/articles/wechat-android-app-architecture">微信Android客户端架构演进之路</a></li>
+</ul>
+<h2 id="饿了么"><a href="#饿了么" class="headerlink" title="饿了么"></a>饿了么<a href="#饿了么" class="header-anchor">#</a></h2><ul>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzAxNDUwMzU3Mw==&mid=401044540&idx=1&sn=24b7d8fb655ae6dd5d989d0cb3c08e90&scene=2&srcid=0106EtxRjD2jHxzomxVPTwY3&from=timeline&isappinstalled=0&uin=NzgwODIwNDgw&key=&devicetype=webwx&version=70000001&lang=zh_CN&pass_ticket=46hW44w3Hxd7VY9rutz7mgLu1JGe2T1AAKNQpxNoYOSGi8NpmNYr+AZj+iXtRX2F">饿了么移动APP的架构演进</a></li>
+</ul>
+<h1 id="著名个人架构"><a href="#著名个人架构" class="headerlink" title="著名个人架构"></a>著名个人架构<a href="#著名个人架构" class="header-anchor">#</a></h1><p>Fly架构系列的作者</p>
+<ul>
+<li><a href="https://menxindiaolong.blog.csdn.net/article/details/88937994">开发杂谈：Android移动应用架构发展简史</a></li>
+<li><a href="https://github.com/mxdldev/android-mvp-mvvm-flytour">Fly系列：5.1.0为插件化+MVP+Java版本；4.2.0为组件化+MVVM+Rxjava+Retrofit+DataBinding网络优化版；2.0.0为组件化+MVP版本</a></li>
+</ul>
+<p><a href="https://www.tianmaying.com/user/zhbzhbzhbz">周鸿博</a> </p>
+<ul>
+<li><p><a href="https://www.tianmaying.com/tutorial/AndroidMVC">Android App的设计架构：MVC,MVP,MVVM与架构经验谈</a></p>
+<p>包含架构目的、MVC架构实现、MVP架构实现、AOP设计、经验</p>
+</li>
+</ul>
+<h1 id><a href="#" class="headerlink" title></a><a href="#" class="header-anchor">#</a></h1><link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      <categories>
+        <category>Android</category>
+        <category>项目架构</category>
+        <category>开源框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>开源框架</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AndroidHandler百问百答</title>
     <url>/blog//2020/08/handler%20TOP%20100%20Questions/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="android百问百答-那些年被问过的handler原理"><a href="#Android百问百答-《那些年被问过的Handler原理》" class="headerlink" title="Android百问百答-《那些年被问过的Handler原理》"></a>Android百问百答-《那些年被问过的Handler原理》<a href="#android百问百答-那些年被问过的handler原理" class="header-anchor">#</a></h1><p>文章迁移自<a href="https://blog.csdn.net/chivalrousman/article/details/108014580">我的csdn博客</a></p>
@@ -3622,10 +4443,6 @@ Handler(Looper looper, Callback callback, boolean async)
 <blockquote>
 <p>App直接从云端下拉补丁直接应用生效，重构了传统的App发版流程。</p>
 </blockquote>
-<p>关于热补丁的另外一种解释可以参考</p>
-<blockquote>
-<p>冷补丁与热补丁最大的区别是对业务的影响大小，冷补丁需要复位，热补丁不需要。系统在内存中开辟了补丁区，热补丁是通过INS PATCH复合命令被直接放到补丁区，被激活运行的，不需要复位。虽然热补丁方便，但是当热补丁无法解决遇到的问题时（例如不是简单的改写函数就可以的，需要改写全局变量，内存中的代码段也重新改换，代码重新汇编），就需要冷补丁来解决。冷补丁会重新更换内存中的全局变量、代码段、补丁区，而这些又不能简单的改写就运行，必须通过复位来解决。</p>
-</blockquote>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210603143552021.png" width="80%" alt>
@@ -3647,7 +4464,7 @@ Handler(Looper looper, Callback callback, boolean async)
 <li>用户感知小，线上响应快，企业损失最低</li>
 </ul>
 <p>修复Bug、修复bug、修复bug，重要的话说三遍，热修复技术最重要的用途就是无感修复bug。</p>
-<h1 id="热修复的实现思路"><a href="#热修复的实现思路" class="headerlink" title="热修复的实现思路"></a>热修复的实现思路<a href="#热修复的实现思路" class="header-anchor">#</a></h1><h2 id="思路概览"><a href="#思路概览" class="headerlink" title="思路概览"></a>思路概览<a href="#思路概览" class="header-anchor">#</a></h2><p>用户在操作一款App的过程中，能够体验到的内容如图所示，在不讨论Hybrid技术、Web开发技术的前提下，我们先承认一个简单的事实：安卓操作系统加载了APP安装包下的某些文件，换句话说APK的主要组成部分，支撑了App页面的显示和加载。用户在使用App过程中遇到了bug，是由于Apk中的某些内容遇到了预期之外的情况导致。作为开发者，修复这种预期之外的情况，就是通过修复Apk中的主要内容</p>
+<h1 id="热修复的实现思路"><a href="#热修复的实现思路" class="headerlink" title="热修复的实现思路"></a>热修复的实现思路<a href="#热修复的实现思路" class="header-anchor">#</a></h1><h2 id="思路概览"><a href="#思路概览" class="headerlink" title="思路概览"></a>思路概览<a href="#思路概览" class="header-anchor">#</a></h2><p>用户在操作一款App的过程中，能够体验到的内容如图所示，在不讨论Hybrid技术、Web开发技术的前提下，我们先承认一个简单的事实：安卓操作系统加载了APP安装包下的某些文件，换句话说APK的主要组成部分，支撑了App页面的显示和加载。用户在使用App过程中遇到了bug，是由于Apk中的某些内容遇到了预期之外的情况导致。作为开发者，若想修复这种预期之外的情况，就应该修复Apk中的主要内容来达到目的。</p>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3076306344,2932143550&fm=26&gp=0.jpg" width="30%" alt>
@@ -3661,8 +4478,7 @@ Handler(Looper looper, Callback callback, boolean async)
 </center>
 
 
-
-<p>一个APK的组成部分如下</p>
+<p><strong>一个APK的组成部分如下</strong></p>
 <table>
 <thead>
 <tr>
@@ -3819,6 +4635,47 @@ Handler(Looper looper, Callback callback, boolean async)
 <li>原有类结构发生变化，不适用修复</li>
 <li>反射调用的非静态方法，不适用修复</li>
 </ul>
+<h2 id="资源修复"><a href="#资源修复" class="headerlink" title="资源修复"></a>资源修复<a href="#资源修复" class="header-anchor">#</a></h2><blockquote>
+<p>笔者最大的疑问：下载全量包、差量包的方式完成替换，与下载APK，并重新安装APK的做法有什么区别？</p>
+<ul>
+<li>APK安装过程是什么？</li>
+</ul>
+</blockquote>
+<h3 id="全量包"><a href="#全量包" class="headerlink" title="全量包"></a>全量包<a href="#全量包" class="header-anchor">#</a></h3><blockquote>
+<p>Amigo参考阅读</p>
+<p>[Amigo 源码解读 - Eleme Mobilists](<a href="http://mobilists.eleme.io/2016/09/01/Amigo">http://mobilists.eleme.io/2016/09/01/Amigo</a> 源码解读/)</p>
+</blockquote>
+<p>Amigo支持全量替换和拆分包替换，也支持即时生效和二次启动生效。</p>
+<p>立即生效方式：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">Amigo.work(context, apkFile);</span><br></pre></td></tr></table></figure></div>
+<p>稍后生效方式：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">Amigo.workLater(context, apkFile, callback);</span><br></pre></td></tr></table></figure></div>
+<p>该方案缺点如下：</p>
+<ul>
+<li><p>不支持和Instant Run同时使用（或者使用<code>autoDisableInInstantRunMode</code>来自动停止使用amigo）</p>
+</li>
+<li><p>patch包中使用provider的方式发生了变化</p>
+<ul>
+<li><p>修改声明方式，authorities须以”<strong>${youPackageName}.provider</strong>“开头</p>
+<p>&lt;provider</p>
+<pre><code>android:name=&quot;me.ele.demo.provider.StudentProvider&quot;
+android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&gt;
+</code></pre>
+</li>
+<li><p>修改调用方式</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. app进程内使用时，无需做任何修改</span></span><br><span class="line">Cursor cursor = getContentResolver().query(Uri.parse(<span class="string">&quot;content://&quot;</span> + getPackageName() + <span class="string">&quot;.provider.student?id=0&quot;</span>), <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line"><span class="comment">// 2. 其他进程中的使用时，需要修改uri为以下形式, 其中targetPackageName为你的App的包名</span></span><br><span class="line">Cursor cursor = getContentResolver().query(Uri.parse(<span class="string">&quot;content://&quot;</span> + targetPackageName + <span class="string">&quot;.provider/student?id=0&quot;</span>), <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+</li>
+<li><p><code>notification</code> &amp; <code>widget</code>中<code>RemoteViews</code>的自定义布局不支持修改,只支持内容修复</p>
+<ul>
+<li>任何使用在<code>RemoteViews</code>里面的资源id都需要进行这样的包装 <code>java RCompat.getHostIdentifier(Context context, int id)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="差量包"><a href="#差量包" class="headerlink" title="差量包"></a>差量包<a href="#差量包" class="header-anchor">#</a></h3><p>Tinker</p>
+<p>sophix</p>
+<h2 id="so修复"><a href="#SO修复" class="headerlink" title="SO修复"></a>SO修复<a href="#so修复" class="header-anchor">#</a></h2><h3 id="接口实现"><a href="#接口实现" class="headerlink" title="接口实现"></a>接口实现<a href="#接口实现" class="header-anchor">#</a></h3><p>Tinker</p>
+<h3 id="插桩实现"><a href="#插桩实现" class="headerlink" title="插桩实现"></a>插桩实现<a href="#插桩实现" class="header-anchor">#</a></h3><p>Amigo\sophix</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考<a href="#参考" class="header-anchor">#</a></h1><h2 id="dex分包"><a href="#Dex分包" class="headerlink" title="Dex分包"></a>Dex分包<a href="#dex分包" class="header-anchor">#</a></h2><p>动态加载Dex技术</p>
 <table>
 <thead>
@@ -3844,82 +4701,6 @@ Handler(Looper looper, Callback callback, boolean async)
 <td></td>
 </tr>
 </tbody></table>
-<h2 id="插件化"><a href="#插件化" class="headerlink" title="插件化"></a>插件化<a href="#插件化" class="header-anchor">#</a></h2><table>
-<thead>
-<tr>
-<th>特性</th>
-<th><strong>VirtualAPK</strong></th>
-<th><strong>DroidPlugin</strong></th>
-<th><strong>Small</strong></th>
-<th>atlas</th>
-<th><strong>DynamicAPK</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>作者</td>
-<td>滴滴</td>
-<td>360</td>
-<td>wequick</td>
-<td>阿里</td>
-<td>携程</td>
-</tr>
-<tr>
-<td>支持四大组件</td>
-<td>全支持</td>
-<td>全支持</td>
-<td>只支持Activity</td>
-<td></td>
-<td>只支持Activity</td>
-</tr>
-<tr>
-<td>组件无需在宿主manifest中预注册</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td>插件可以依赖宿主</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>支持PendingIntent</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Android特性支持</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>兼容性适配</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>插件构建</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
 <h2 id="热补丁"><a href="#热补丁" class="headerlink" title="热补丁"></a>热补丁<a href="#热补丁" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
@@ -3930,7 +4711,7 @@ Handler(Looper looper, Callback callback, boolean async)
 <th><a href="https://github.com/wequick/Small">Small</a></th>
 <th><a href="https://github.com/Meituan-Dianping/Robust">Robust</a></th>
 <th><a href="https://links.jianshu.com/go?to=https://github.com/jasonross/Nuwa">Nuwa</a></th>
-<th>Amigo</th>
+<th><a href="https://github.com/eleme/Amigo">Amigo</a></th>
 </tr>
 </thead>
 <tbody><tr>
@@ -3981,7 +4762,7 @@ Handler(Looper looper, Callback callback, boolean async)
 <td></td>
 <td>yes</td>
 <td>no</td>
-<td>no</td>
+<td>可选（可即时、可冷启动）</td>
 </tr>
 <tr>
 <td>性能损耗</td>
@@ -4001,7 +4782,7 @@ Handler(Looper looper, Callback callback, boolean async)
 <td></td>
 <td>一般</td>
 <td>较大</td>
-<td>大</td>
+<td>很大</td>
 </tr>
 <tr>
 <td>开发透明</td>
@@ -4061,7 +4842,7 @@ Handler(Looper looper, Callback callback, boolean async)
 <td></td>
 <td>最高-99%</td>
 <td>较高</td>
-<td>较高</td>
+<td>最高-100%</td>
 </tr>
 <tr>
 <td>监控能力</td>
@@ -4111,11 +4892,11 @@ Handler(Looper looper, Callback callback, boolean async)
 <td>2018年</td>
 <td>2020年</td>
 <td>2015年</td>
-<td>2016年</td>
+<td>2017年(被阿里收购不再维护)</td>
 </tr>
 </tbody></table>
 <h2 id="热补丁原理"><a href="#热补丁原理" class="headerlink" title="热补丁原理"></a>热补丁原理<a href="#热补丁原理" class="header-anchor">#</a></h2><p> <img src="http://cdn.yangchaofan.cn/typora/image-20210603134359487.png" alt="image-20210603134359487"></p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章<a href="#参考文章" class="header-anchor">#</a></h2><table>
+<h2 id="热补丁参考文章"><a href="#热补丁参考文章" class="headerlink" title="热补丁参考文章"></a>热补丁参考文章<a href="#热补丁参考文章" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th>名称</th>
@@ -4137,6 +4918,10 @@ Handler(Looper looper, Callback callback, boolean async)
 <tr>
 <td>阿里《深入探索Android热修复技术原理》</td>
 <td>阿里出版很详细</td>
+</tr>
+<tr>
+<td><a href="http://mobilists.eleme.io/2016/09/01/Amigo%20%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">Amigo源码解读</a></td>
+<td>饿了么官方出品</td>
 </tr>
 <tr>
 <td><a href="https://tech.meituan.com/2016/09/14/android-robust.html">Android热更新方案Robust</a></td>
@@ -4169,6 +4954,10 @@ Handler(Looper looper, Callback callback, boolean async)
 <tr>
 <td><a href="https://mp.weixin.qq.com/s/uY5N_PSny7_CHOgUA99UjA?spm=a2c4g.11186623.2.2.bdc0788fH6VckR">Android热修复技术选型——三大流派解析 (qq.com)</a></td>
 <td><strong>插件化</strong>：一个程序划分为不同的部分，以插件的形式加载到应用中去，<br>本质上它使用的技术还是热修复技术，只是加入了更多工程实践，<br>让它支持大规模的代码更新以及资源和SO包的更新。 <br><strong>热修复</strong>：当线上应用出现紧急BUG，为了避免重新发版，<br>并且保证修复的及时性而进行的一项在线推送补丁的修复方案。。</td>
+</tr>
+<tr>
+<td><a href="https://www.cnblogs.com/bugly/p/5740807.html">Android Patch 方案与持续交付</a></td>
+<td>腾旭buggly对tinker的支持，后台管理服务</td>
 </tr>
 </tbody></table>
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">深入探索Android热修复技术原理<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://tech.meituan.com/2016/09/14/android-robust.html">Android热更新方案Robust</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>

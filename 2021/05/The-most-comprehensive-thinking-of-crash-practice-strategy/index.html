@@ -1,0 +1,2518 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script async src="//cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  <link href="//cdn.jsdelivr.net/npm/pace-js@1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+<link href="https://fonts.loli.net/css?family=EB+Garamond:400,400i,700,700i|Noto+Serif+SC:400,500,700&display=swap&subset=chinese-simplified" rel="stylesheet">
+
+
+
+
+  
+
+<link href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android,BugFree," />
+
+
+
+
+
+  <link rel="alternate" href="/blog/atom.xml" title="叶金诚的站点" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Android Crash实践策略最全面思考#Crash稳定性定义#App 在运行过程中发生Crash 现象,通常表现为两种:1.退出当前回到手机主页面；2.显示App已停止运行的弹出框。                       图 -1 App停止运行的弹出框            在工程实践中，为了监控App在海量用户手机中的运行情况，我们需要建立一些监控指标来衡量App的监控状态是否正常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Crash实践策略最全面思考">
+<meta property="og:url" content="http://idolcoder.gitee.io/blog/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/index.html">
+<meta property="og:site_name" content="叶金诚的站点">
+<meta property="og:description" content="Android Crash实践策略最全面思考#Crash稳定性定义#App 在运行过程中发生Crash 现象,通常表现为两种:1.退出当前回到手机主页面；2.显示App已停止运行的弹出框。                       图 -1 App停止运行的弹出框            在工程实践中，为了监控App在海量用户手机中的运行情况，我们需要建立一些监控指标来衡量App的监控状态是否正常">
+<meta property="og:locale">
+<meta property="og:image" content="http://cdn.yangchaofan.cn//typora/image-20210423143651100.png">
+<meta property="article:published_time" content="2021-05-01T07:15:44.000Z">
+<meta property="article:modified_time" content="2021-06-07T13:13:10.658Z">
+<meta property="article:author" content="叶金诚">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="BugFree">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.yangchaofan.cn//typora/image-20210423143651100.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"perspectiveRightIn","post_body":"fadeIn","coll_header":"swoopIn","sidebar":"shrinkIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://idolcoder.gitee.io/blog/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/"/>
+
+
+
+
+
+<!-- 设置文章需要密码访问 -->
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <title>Android Crash实践策略最全面思考 | 叶金诚的站点</title>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  
+	<!-- leafacePlayer -->
+	
+      <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+      <meta name="baidu-site-verification" content="code-lde50FghqK" />
+
+	
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <!--fork me from github-->
+    <a target="_blank" rel="noopener" href="https://github.com/ShaunSheep" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">叶金诚的站点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">汇贤雅叙</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/blog/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/blog/movies/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-film"></i> <br />
+            
+            电影
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-图书">
+          <a href="/blog/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            图书
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/blog/links/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://idolcoder.gitee.io/blog/blog/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Android Crash实践策略最全面思考</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+             
+
+             
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-05-01T15:15:44+08:00">
+                2021-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Android/BugFree/" itemprop="url" rel="index">
+                    <span itemprop="name">BugFree</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/Android/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/blog/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/" class="leancloud_visitors" data-flag-title="Android Crash实践策略最全面思考">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          <!--
+          
+          -->
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数&#58;</span>
+                
+                <span title="字数">
+                  4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">时长 &asymp;</span>
+                
+                <span title="时长">
+                  15 分钟
+                </span>
+              
+            </span>
+          
+
+          <!-- 隐藏文章内标题下，内容描述
+          
+          -->
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="android-crash实践策略最全面思考"><a href="#Android-Crash实践策略最全面思考" class="headerlink" title="Android Crash实践策略最全面思考"></a>Android Crash实践策略最全面思考<a href="#android-crash实践策略最全面思考" class="header-anchor">#</a></h1><h1 id="crash稳定性定义"><a href="#Crash稳定性定义" class="headerlink" title="Crash稳定性定义"></a>Crash稳定性定义<a href="#crash稳定性定义" class="header-anchor">#</a></h1><p>App 在运行过程中发生Crash 现象,通常表现为两种:1.退出当前回到手机主页面；2.显示App已停止运行的弹出框。</p>
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn//typora/image-20210423143651100.png" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图 -1 App停止运行的弹出框
+      </div>
+</center>
+
+
+
+<p>在工程实践中，为了监控App在海量用户手机中的运行情况，我们需要建立一些监控指标来衡量App的监控状态是否正常，Crash率大小就是其中较为关键的指标之一。<br>Crash率有很多计算方式，通常分为以下几种：</p>
+<p>宏观上的Crash率计算方式为Crash率=Crash次数/单位时间;</p>
+<p>微观上分为启动Crash率、UV Crash率、PV Crash率：</p>
+<ul>
+<li><p>启动Crash率：Crash次数/单位时间启动次数</p>
+</li>
+<li><p>UV Crash率：Crash UV /单位时间已登录 UV</p>
+</li>
+<li><p>PV Crash率：Crash PV/单位时间已登录PV</p>
+</li>
+<li><p>重复Crash率：重复Crash的原因的发生次数/单位时间Crash总次数</p>
+</li>
+</ul>
+<h1 id="降低crash率的意义"><a href="#降低Crash率的意义" class="headerlink" title="降低Crash率的意义"></a>降低Crash率的意义<a href="#降低crash率的意义" class="header-anchor">#</a></h1><p>通常App Crash的产生，就意味着较差的服务质量，会降低客户对该App的信任，进而影响后续对该公司产品的使用。公司失去客户的信任，直接的影响就是流失客户，更为严重的影响是营收下滑。因此作为开发人员，监控、预防、分析、降低线上Crash率，是迫在眉睫且必须要做的优化工作。</p>
+<p>在业内，衡量一款App的运行状态是否健康，通常会使用Crash率是否低于1%来判断；如果一款APpCrash率低于1%，通常会被当做健康的产品；一款Crash率高于5%的App，则会被认为服务质量较差，会流失大量潜在用户。<br>App在线上发布后，后台健康到的AppCrash率如果持续在1-3%则可称为稳定的Crash率；如果某一时刻Crash率大于5%，则应该提前预警给市场人员、运营人员、开发人员，市场分析Crash率上升导致的影响，提前做好公关通知；运营人员可以根据容灾策略，关闭Crash率高的业务入口，降低产品不可用的范围，保持其他模块可用；开发人员可以根据线上日志，及时修复异常代码，发布修复补丁，让模块尽快正常运行。</p>
+<h1 id="crash处理策略"><a href="#Crash处理策略" class="headerlink" title="Crash处理策略"></a>Crash处理策略<a href="#crash处理策略" class="header-anchor">#</a></h1><p>App作为企业直接面向消费者的产品，一旦发生Crash现象，将会给企业造成巨大的损失，为了降低损失，将Crash带来的损失降到最低，客户端工程实践中，往往会采取许多策略降低Crash率。实践通常分为以下4个环节：设置指标、线上监控、线上容灾、线下预防四个环节。</p>
+<h2 id="设置指标"><a href="#设置指标" class="headerlink" title="设置指标"></a>设置指标<a href="#设置指标" class="header-anchor">#</a></h2><p>为了描述Crash现象，除去前文已经描述过的Crash率，我们在工程实践中还会监控以下指标<br>Crash率    Crash率、UV Crash率、PV Crash率等<br>用户信息    用户详情：手机号、性别、年龄、国家地区、累计消费金额等<br>会员级别：普通、青铜、黄金、钻石VIP等<br>手机信息    ROM厂商版本、AndroidOS版本、CPU型号、屏幕厂商、屏幕分辨率、磁盘型号、运行时参数如运行时Activity栈情况、App可用内存、磁盘内存、CPU执行情况等<br>地理信息    国家地区、语言<br>Crash信息    App线上版本号、应用市场渠道号、异常堆栈、同类型异常发生总次数、异常总次数、UV数、PV数、已登录用户数</p>
+<h2 id="线上监控"><a href="#线上监控" class="headerlink" title="线上监控"></a>线上监控<a href="#线上监控" class="header-anchor">#</a></h2><p>作为开发者，如何在App发布出去之后，监控到用户手机中App的Crash数据，可采取的方案有：</p>
+<p>1.企业采购外部资源APM厂商如友盟、Buggly，集成第三方异常采集SDK；</p>
+<p>2.基于数据安全合规 ，企业研发APM平台，采集AppCrash信息。</p>
+<p>方案1已经运用于目前App，各大主流App皆集成了友盟采集SDK、Buggly采集SDK，开发者可以登录<a target="_blank" rel="noopener" href="https://mobile.umeng.com/platform/apps/list%E6%9F%A5%E7%9C%8B%E5%90%84App%E5%90%84%E7%89%88%E6%9C%AC%E7%9A%84Crash%E7%8E%87%E3%80%82">https://mobile.umeng.com/platform/apps/list查看各App各版本的Crash率。</a><br>方案2企业研发APM平台，作为客户端，有以下策略抓取Crash信息上报至服务器：1.Java未捕获异常处理器和默认未捕获异常处理器；2Java异常捕获try-catch-finnally流程；3基于Linux Crash信号列表捕获NativeCrash信息。策略1和2作为App开发常见的两种策略，为本节主要内容，读者如果对Native Crash捕获上报感兴趣，可以联系笔者补充。<br>首先介绍第一个策略Java未捕获异常处理和默认未捕获异常处理器。<br>Java JDK提供了Thread. UncaughtExceptionHandler来捕获App进程所有未处理的异常，并处理该异常。一段典型的未捕获异常处理如下代码所示：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">    android:name=&quot;.App&quot;</span><br><span class="line">    android:label=&quot;@string/app_name&quot;</span><br><span class="line"><span class="tag">&lt;/<span class="name">application</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>应用启动时指定了一个名为App的默认Application ，在Application中为App主线程绑定未捕获异常处理器和默认未捕获异常处理器,Application代码如下：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 线程未捕获异常处理器</span></span><br><span class="line"><span class="comment">          */</span></span><br><span class="line">        <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(<span class="keyword">final</span> Thread t, <span class="keyword">final</span> Throwable e)</span> </span>&#123;</span><br><span class="line">            Log.d(<span class="string">&quot;ExceptionHandler&quot;</span>, <span class="string">&quot;uncaughtException &quot;</span> + t.getName() + <span class="string">&quot; has captured a exception&quot;</span>);</span><br><span class="line">            Log.d(<span class="string">&quot;ExceptionHandler&quot;</span>, <span class="string">&quot;uncaughtException has capture thread error ,msg is &quot;</span> + e.toString());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        Thread.currentThread().setName(<span class="string">&quot;主线程 &quot;</span>);</span><br><span class="line">        Thread.currentThread().setUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line">        Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>App启动会创建Application实例，该实例持有一个静态内部类ExceptionHandler异常未捕获处理器。<br> .    在Application初始化过程中，为App的主线程设置了Thread昵称、Thread的未捕获异常处理器、默认未捕获异常处理器。<br> .    当App发生了未捕获异常，即某一段代码未进行try-catch的时刻，代码会执行到ExceptionHandler#uncaughtException里。<br> .    ExceptionHandler# uncaughtException中处理App运行过程中所抛出的未捕获异常，方便开发者做容灾处理，demo演示了打印了Thread信息、Throwable异常信息操作</li>
+</ol>
+<p>关于Java未捕获异常处理器、默认未捕获异常处理器的执行原理可以参考安卓源码，代码位置如下: /frameworks/base/core/java/com/android/internal/os/RuntimeInit.java</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 运行时初始化的主入口点。不供公共访问。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RuntimeInit</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * main方法入口</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] argv)</span> </span>&#123;</span><br><span class="line">        commonInit();</span><br><span class="line">        nativeFinishInit();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">commonInit</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * 设置虚拟机中的线程未捕获异常处理程序。APP可以替换默认的未捕获异常处</span></span><br><span class="line"><span class="comment">     * 理器，但不能替换预处理处理器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    LoggingHandler loggingHandler = <span class="keyword">new</span> LoggingHandler();</span><br><span class="line">    Thread.setUncaughtExceptionPreHandler(loggingHandler);</span><br><span class="line">    Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">new</span> KillApplicationHandler(loggingHandler));</span><br><span class="line"></span><br><span class="line">    initialized = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * RuntimeInit内部类</span></span><br><span class="line"><span class="comment">     * 处理未捕获异常导致的应用程序死亡 framework负责为主线程捕获这些信息</span></span><br><span class="line"><span class="comment">     * 因此这应该只对应用程序创建的线程有影响。</span></span><br><span class="line"><span class="comment">     * 在此方法运行之前，loginghandler将已经有日志细节。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">KillApplicationHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(Thread t, Throwable e)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 如果已经报告Crash，避免死循环</span></span><br><span class="line">                <span class="keyword">if</span> (mCrashing)</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                mCrashing = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 尝试结束Profiling，如果Profiling正在运行，且我们杀死了正在Profiling的进程，内存中的缓冲区将会丢失</span></span><br><span class="line">                <span class="comment">// 请尝试停止Profiling，用来刷新buffer缓冲区。</span></span><br><span class="line">                <span class="comment">// 这样做可以提升方法追踪（method trace）结果，对调试Crash很有用</span></span><br><span class="line">                <span class="keyword">if</span> (ActivityThread.currentActivityThread() != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    ActivityThread.currentActivityThread().stopProfiling();</span><br><span class="line">                &#125;</span><br><span class="line">            </span><br><span class="line">                <span class="comment">// 打开崩溃对话框，直到它消失</span></span><br><span class="line">                ActivityManager.getService().handleApplicationCrash(mApplicationObject,</span><br><span class="line">                        <span class="keyword">new</span> ApplicationErrorReport.ParcelableCrashInfo(e));</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Throwable t2) &#123;</span><br><span class="line">                <span class="keyword">if</span> (t2 <span class="keyword">instanceof</span> DeadObjectException) &#123;</span><br><span class="line">                    <span class="comment">// 系统进程已死，忽略执行</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        Clog_e(TAG, <span class="string">&quot;Error reporting crash&quot;</span>, t2);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (Throwable t3) &#123;</span><br><span class="line">                        <span class="comment">// Clog_e() 也存在异常哦</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                <span class="comment">// 保障这个过程能执行</span></span><br><span class="line">                Process.killProcess(Process.myPid());</span><br><span class="line">                System.exit(<span class="number">10</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>总结下AppRuntime处理流程</p>
+<ol>
+<li>Main方法作为入口调用了commonInit方法<br> .    commonInit中设置了setUncaughtExceptionPreHandler、setDefaultUncaughtExceptionHandler未捕获异常处理器</li>
+<li>setUncaughtExceptionPreHandler设置了LoggingHandler<br> .    默认未捕获异常处理器setDefaultUncaughtExceptionHandler设置了KillApplicationHandler</li>
+</ol>
+<p>观察步骤2-2 这也就是为什么在App中设置默认异常捕获器可以防止APP闪退的原因</p>
+<p>安卓Runtime源码研究的启示有以下几点：</p>
+<ol>
+<li>无论是JavaAPP或是AndroidAPP，只要为Thread设置了未捕获异常处理器，就可以降低Crash的几率</li>
+<li>在主线程未捕获异常处理器中可以做很多任务：App异常信息持久化，上报日志， APP容灾处理如页面跳转、页面重新加载、App重启等</li>
+<li>主线程的默认未捕获异常处理器是KillApplicationHandler，默认会杀死当前进程</li>
+<li>子线程也可以设置未捕获异常处理器，用于处理子页面的异常情况，做一些针对业务子页面的容灾操作</li>
+</ol>
+<p>工程化实践中，通常在UncaughtExceptionHandler实现类的uncaughtException中做以下工作：</p>
+<ol>
+<li>应用容灾：为A业务模块指定默认跳转页面；为App指定异常情况默认跳转页面<br> .    缓存当前线程执行的任务，如接口请求、数据读写、文件下载，用来下一次恢复该任务<br> .    异常信息存储，异常信息不经筛选、过滤、合并，会给本地磁盘、远程服务器造成负担，所以我们会对异常信息优化处理，包括读取已有的异常信息、更新异常信息、序列化到本地、存储至磁盘、去重后上报至远程服务器；<br> .    异常信息上报，通常会将优化过的异常日志按一定策略上报至服务器：<br> .    定时上报：用户在点击一键反馈的按钮时，自动上报异常日志；每天首次启动App时进行上报；<br> .    定策略上报：App当日Crash累计次数大于i次，则触发上报机制；<br> .    上报去重：对于已经上报过的异常信息、且异常次数、异常详情等维度相同，则不进行上报，减轻服务器压力、减轻本地磁盘存储压力。</li>
+</ol>
+<h2 id="线上容灾"><a href="#线上容灾" class="headerlink" title="线上容灾"></a>线上容灾<a href="#线上容灾" class="header-anchor">#</a></h2><p>当运营人员、市场人员或开发人员在后台看到线上App产生大量Crash现象时，可以采取以下实践：</p>
+<ol>
+<li>退出进程：杀死App进程，造成App退出回到首页的假象，避免弹出停止运行弹出框，影响用户体验，让用户误以为手机使用不当退出了App。</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">android.os.Process.killProcess(android.os.Process.myPid());</span><br><span class="line"></span><br><span class="line">System.exit(<span class="number">0</span>);</span><br></pre></td></tr></table></figure></div>
+<ol start="2">
+<li><p>跳转至业务首页或App首页：在A业务模块执行异步任务发生异常时，有两种选择，一是跳转到主线程处理器uncaughtException中指定的全局默认页面；二可以让App跳转页面至A业务模块的首页， 这个首页在A业务模块的子线程的uncaughtException设置。</p>
+</li>
+<li><p>主线程uncaughtException设置全局默认页，当App遇到未捕获异常，自动跳转至声明隐式启动Action为com.crash.demo.crash的页面<br>a)</p>
+</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 线程未捕获异常处理器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExceptionHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(<span class="keyword">final</span> Thread t, <span class="keyword">final</span> Throwable e)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">            startCrashPage();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        Thread.currentThread().setName(<span class="string">&quot;主线程 &quot;</span>);</span><br><span class="line">        Thread.currentThread().setUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line">    Thread.setDefaultUncaughtExceptionHandler(<span class="keyword">new</span> ExceptionHandler());</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startCrashPage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">        intent.setAction(<span class="string">&quot;com.crash.demo.crash&quot;</span>);</span><br><span class="line">        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">        startActivity(intent);</span><br><span class="line">        android.os.Process.killProcess(android.os.Process.myPid());</span><br><span class="line">        System.exit(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+<p>b)    A业务模块的子线程,设置与App不同的未捕获异常处理器，绑定A业务自己的异常跳转页面，当App在A业务模块执行子线程任务时，遇到未捕获异常，自动跳转至声明隐式启动Action为com.crash.demo.crash2的页面，而非主线程制定的com.crash.demo.crash1页面</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 测试子线程设置未捕获异常处理器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">runtimeNoneUE</span><span class="params">(View view)</span></span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        Thread thread =  <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">                <span class="keyword">int</span> b = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">int</span> c = a / b;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        thread.setUncaughtExceptionHandler(<span class="keyword">new</span> ChildExceptionHandler());</span><br><span class="line">        thread.setName(<span class="string">&quot;iron man is on the android chilid thread&quot;</span>);</span><br><span class="line">        thread.start();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">        Log.d(<span class="string">&quot;createExceptionInThread&quot;</span>, <span class="string">&quot;main thread is catch sub thread exception&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 线程未捕获异常处理器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">ChildExceptionHandler</span> <span class="keyword">implements</span> <span class="title">Thread</span>.<span class="title">UncaughtExceptionHandler</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uncaughtException</span><span class="params">(<span class="keyword">final</span> Thread t, <span class="keyword">final</span> Throwable e)</span> </span>&#123;</span><br><span class="line">        Log.d(<span class="string">&quot;ChildExceptionHandler&quot;</span>, <span class="string">&quot;uncaughtException &quot;</span> + t.getName() + <span class="string">&quot; has captured a exception&quot;</span>);</span><br><span class="line">        Log.d(<span class="string">&quot;ChildExceptionHandler&quot;</span>, <span class="string">&quot;uncaughtException has capture thread error ,msg is &quot;</span> + e.toString());</span><br><span class="line">        startCrashPage();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startCrashPage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">    intent.setAction(<span class="string">&quot;com.crash.demo.crash2&quot;</span>);</span><br><span class="line">    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">    startActivity(intent);</span><br><span class="line">    android.os.Process.killProcess(android.os.Process.myPid());</span><br><span class="line">    System.exit(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<ol start="4">
+<li><p>关闭入口：在后台关闭App中异常模块的入口，避免阻断异常流量的产生，为开发分析、定位赢得时间；提前在App中给予用户公告提示，将品牌负面影响降到最低。</p>
+</li>
+<li><p>改变入口： 在后台配置App中A业务的入口，如正常情况下，A业务模块跳转至App原生页面ProductListActivity；发生异常后，通过后台配置，A业务模块跳转至H5页面，通过WebviewActivity,加载H5版本的商品列表页，既能保证A业务正常运行，也同时给修复原生页面Bug赢得时间。</p>
+</li>
+<li><p>回退版本：在App多次异常，导致用户无法正常使用App功能，运营人员应该发布一个回退指令，将App和后台服务全部回退到上一个稳定版本</p>
+</li>
+<li><p>线上热修复：在开发人员收到异常日志后，分析、定位、复现出异常现象，并通过编码方式解决了该异常，则应使用热更新的方式动态发布一个Patch补丁，在App运行过程中动态下载该补丁，并加载到运行时的环境中，或者冷启动重新初始化APp，在用户下一次使用App时，将该异常模块变为可用状态。</p>
+</li>
+<li><p>线上发布版本：开发人员重新发布APK，运营人员全量推送新版本，强制用户升级。如果子页面为H5页面，在线上重新部署网页即可。</p>
+</li>
+</ol>
+<h2 id="线下预防"><a href="#线下预防" class="headerlink" title="线下预防"></a>线下预防<a href="#线下预防" class="header-anchor">#</a></h2><p>线下预防是指开发人员在开发过程中，应该通过开发流程规范避免代码产生异常。通常的开发流程规范包括：</p>
+<ol>
+<li>模块功能设计</li>
+<li>自测用例编写</li>
+<li>开发过程中常见Crash CheckList表格检查，参考3.2常见Crash检查</li>
+<li>开发工具扫描：CheckStyle、FindBugs、AlibabaCheckStyle参考工具#代码扫描</li>
+<li>业务Log埋点</li>
+<li>业务代码Try-catch-finally处理</li>
+<li>常见异常情况处理：</li>
+<li>第三方API异常捕获；</li>
+<li>系统资源异常情况处理：低内存、低磁盘容量、低电量、弱网、无网、CPU可用资源过低</li>
+</ol>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具<a href="#工具" class="header-anchor">#</a></h1><h2 id="代码扫描"><a href="#代码扫描" class="headerlink" title="代码扫描"></a>代码扫描<a href="#代码扫描" class="header-anchor">#</a></h2><p>安卓开发常见的代码扫描工具有：Alibaba- p3c、checkstyle、Lint</p>
+<h2 id="测试检查"><a href="#测试检查" class="headerlink" title="测试检查"></a>测试检查<a href="#测试检查" class="header-anchor">#</a></h2><p>安卓开发常见的测试工具及文档如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>名称</strong></th>
+<th><strong>文档地址</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Profile</strong></td>
+<td><a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio/profile/android-profiler?hl=zh_cn">https://developer.android.google.cn/studio/profile/android-profiler?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>Mat</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>TraceView</strong></td>
+<td><a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio/profile/traceview?hl=zh_cn">https://developer.android.google.cn/studio/profile/traceview?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>Logcat</strong></td>
+<td><a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio/command-line/logcat?hl=zh_cn">https://developer.android.google.cn/studio/command-line/logcat?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>UI Automator</strong></td>
+<td><a target="_blank" rel="noopener" href="https://developer.android.google.cn/training/testing/ui-automator?hl=zh_cn">https://developer.android.google.cn/training/testing/ui-automator?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>Espresso</strong></td>
+<td><a target="_blank" rel="noopener" href="https://developer.android.google.cn/training/testing/espresso?hl=zh_cn">https://developer.android.google.cn/training/testing/espresso?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>JUnit4</strong></td>
+<td><a target="_blank" rel="noopener" href="https://developer.android.google.cn/training/testing/junit-rules?hl=zh_cn">https://developer.android.google.cn/training/testing/junit-rules?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>AndroidJUnitRunner</strong></td>
+<td><a target="_blank" rel="noopener" href="https://developer.android.google.cn/training/testing/junit-runner?hl=zh_cn">https://developer.android.google.cn/training/testing/junit-runner?hl=zh_cn</a></td>
+</tr>
+<tr>
+<td><strong>Monkey</strong></td>
+<td><a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio/test/monkey?hl=zh_cn">https://developer.android.google.cn/studio/test/monkey?hl=zh_cn</a></td>
+</tr>
+</tbody></table>
+<h2 id="api"><a href="#API" class="headerlink" title="API"></a>API<a href="#api" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th><strong>API资源</strong></th>
+<th>描述</th>
+<th><strong>地址</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Threadset#UncaughtExceptionHandler</strong></td>
+<td>未捕获异常处理器</td>
+<td>JDK源码</td>
+</tr>
+<tr>
+<td><strong>Thread#setDefaultUncaughtExceptionHandler</strong></td>
+<td>默认未捕获异常处理器</td>
+<td>JDK源码</td>
+</tr>
+<tr>
+<td><strong>Cockroach</strong></td>
+<td>降低Android非必要crash</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/android-notes/Cockroach">https://github.com/android-notes/Cockroach</a></td>
+</tr>
+<tr>
+<td><strong>DefenseCrash</strong></td>
+<td>防止程序运行时<code>Crash</code>的库</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/xuuhaoo/DefenseCrash">https://github.com/xuuhaoo/DefenseCrash</a></td>
+</tr>
+</tbody></table>
+<h2 id="热补丁"><a href="#热补丁" class="headerlink" title="热补丁"></a>热补丁<a href="#热补丁" class="header-anchor">#</a></h2><blockquote>
+<p>热补丁技术实践 常见的分为三级</p>
+<ol>
+<li><p>代码修复级别：有编译插桩、分包拆包、dex替换</p>
+</li>
+<li><p>资源修复：全量替换、差量替换</p>
+</li>
+<li><p>So修复：接口替换、插桩实现</p>
+</li>
+</ol>
+<p>可以参考我的这篇文章<a href="http://idolcoder.gitee.io/blog//2019/06/android-hotfix/">Android 热补丁技术详解大全</a></p>
+</blockquote>
+<p> 热补丁方案因技术实现不同导致有很多种实现 ，常见的热补丁方案如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>热补丁名称</strong></th>
+<th><strong>地址</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Tinker</strong></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/Tencent/tinker">https://github.com/Tencent/tinker</a></td>
+</tr>
+<tr>
+<td><strong>AndFix</strong></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/alibaba/AndFix">https://github.com/alibaba/AndFix</a></td>
+</tr>
+<tr>
+<td><strong>Nuwa</strong></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/jasonross/Nuwa">https://github.com/jasonross/Nuwa</a></td>
+</tr>
+<tr>
+<td><strong>Amigo</strong></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/eleme/Amigo">https://github.com/eleme/Amigo</a></td>
+</tr>
+</tbody></table>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">
+
+        
+
+      
+    </div>
+
+      <!-- 相关文章推荐 -->
+     
+          
+
+  <div class="popular-posts-header">
+    <i class="fa fa-graduation-cap"></i>
+    相关文章
+  </div>
+
+ <details>
+   <summary>点击查看</summary>
+     <ul class="popular-posts">
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2021\05\android-crash-who-kill-you\" rel="bookmark">Android Crash揭秘与实践</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2021\02\mtk-log\" rel="bookmark">mtk-log</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2021\02\android-bugfree-three-lines\" rel="bookmark">BugFree三剑客异常、日志、工具</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2021\02\Client-Skeleton-Screen\" rel="bookmark">Android骨架屏详解</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2021\01\Android-plug-in-technology-selection\" rel="bookmark">Android插件化技术选型</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2021\01\Android-component-Practice-Guide\" rel="bookmark">Android组件化实践指南</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2021\01\android-structure-best-practice\" rel="bookmark">Android大厂架构设计最佳实践</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2020\08\handler TOP 100 Questions\" rel="bookmark">AndroidHandler百问百答</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2016\06\android-communication\" rel="bookmark">详解 Android 通信</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\blog\2016\06\performance-android\" rel="bookmark">Android性能优化【史诗巨著之内存篇】</a></div>
+         
+       </li>
+     
+     </ul>
+ </details>
+
+
+
+     
+
+    
+    
+    
+
+    <div>
+          
+            
+
+          
+    </div>
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div class="read-over">-------------------本文结束 <i class="fa fa-paw"></i> 感谢您的阅读-------------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+      <div>
+        <div class="share_reward">
+  <div>坚持原创技术分享，感谢您的支持和鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://cdn.yangchaofan.cn/BlogGifRes/20210313/s7mteFUqc8pH.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://cdn.yangchaofan.cn/BlogGifRes/20210313/oQnokBcx6RUO.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    叶金诚
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://idolcoder.gitee.io/blog/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/" title="Android Crash实践策略最全面思考">http://idolcoder.gitee.io/blog/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" target="_blank">Creative Commons BY-NC-ND 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog/tags/Android/" rel="tag"> <i class="fa fa-tag"></i> Android</a>
+          
+            <a href="/blog/tags/BugFree/" rel="tag"> <i class="fa fa-tag"></i> BugFree</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2021/05/android-crash-who-kill-you/" rel="next" title="Android Crash揭秘与实践">
+                Android Crash揭秘与实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+//  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+//    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC81Mjc2OC8yOTI0NQ"></div>
+    </div>
+
+  
+
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/">
+              <img class="site-author-image" itemprop="image"
+                src="/blog/images/head.png"
+                alt="" />
+              </a>
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/blog/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/blog/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/blog/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+              <!-- 为Hexo Next主题添加哈林摇特效  -->
+              <a title="收藏到书签，偶尔High一下^_^" rel="alternate" class="mw-harlem_shake_slow wobble shake" href="javascript:void(0)" onclick="javascript:(function go() {function c() {var e = document.createElement('link');e.setAttribute('type', 'text/css');e.setAttribute('rel', 'stylesheet');e.setAttribute('href', f);e.setAttribute('class', l);document.body.appendChild(e)}function h(){var e = document.getElementsByClassName(l);for(var t = 0; t< e.length; t++){document.body.removeChild(e[t])}}function p(){var e = document.createElement('div');e.setAttribute('class', a);document.body.appendChild(e);setTimeout(function(){document.body.removeChild(e)},100)}function d(e){return{height:e.offsetHeight,width:e.offsetWidth}}function v(i){var s = d(i);return s.height>e &amp;&amp;s.height<n &amp;&amp; s.width>t &amp;&amp;s.width<r}function m(e){var t=e;var n=0;while(!!t){n+=t.offsetTop;t=t.offsetParent}return n}function g(){var e=document.documentElement;if(!!window.innerWidth){return window.innerHeight}else if(e &amp;&amp; !isNaN(e.clientHeight)){return e.clientHeight}return 0}function y(){if(window.pageYOffset){return window.pageYOffset}return Math.max(document.documentElement.scrollTop,document.body.scrollTop)}function E(e){var t=m(e);return t>=w &amp;&amp; t<=b+w}var songs=['https://www.liaofuzhan.com/music/无尽光芒.mp3'];function S(){var e=document.getElementById('audio_element_id');if(e!=null){var index=parseInt(e.getAttribute('curSongIndex'));if(index>songs.length-2){index=0;}else{index++;}e.setAttribute('curSongIndex',index);N();}e.src=i;e.play()}function x(e){e.className+=' '+s+' '+o}function T(e){e.className+=' '+s+' '+u[Math.floor(Math.random()*u.length)]}function N(){var e=document.getElementsByClassName(s);var t=new RegExp('\\b'+s+'\\b');for(var n=0;n<e.length;){e[n].className=e[n].className.replace(t,'')}}function initAudioEle(){var e=document.getElementById('audio_element_id');if(e===null){e=document.createElement('audio');e.setAttribute('class',l);e.setAttribute('curSongIndex',0);e.id='audio_element_id';e.loop=false;e.bgcolor=0;e.addEventListener('canplay',function(){setTimeout(function(){x(k)},500);setTimeout(function(){N();p();for(var e=0;e<O.length;e++){T(O[e])}},15500)},true);e.addEventListener('ended',function(){N();h();go();},true);e.innerHTML='<p>If you are reading this,it is because your browser does not support the audio element. We recommend that you get a new browser.</p><p>';document.body.appendChild(e);}}initAudioEle();var e=30;var t=30;var n=350;var r=350;var curSongIndex=parseInt(document.getElementById('audio_element_id').getAttribute('curSongIndex'));var i=songs[curSongIndex];var s='mw-harlem_shake_me';var o='im_first';var u=['im_drunk','im_baked','im_trippin','im_blown'];var a='mw-strobe_light';var f='https://s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css';var l='mw_added_css';var b=g();var w=y();var C=document.getElementsByTagName('*');var k=null;for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){if(E(A)){k=A;break}}}if(A===null){console.warn('Could not find a node of the right size. Please try a different page.');return}c();S();var O=[];for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){O.push(A)}}})()"><i class="fa fa-music"></i> High~</a>
+
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/ShaunSheep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:zuogewoniu@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://www.douban.com/people/jincheng-ycf/" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://www.zhihu.com/people/OscarWildeHawking" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-instagram"></i></a>
+                  </span>
+                
+            </div>
+          
+
+            <!--
+            <div id="music163player">
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1336790004&auto=1&height=66"></iframe>
+            </div>
+            -->
+
+          
+          
+
+          
+          
+
+          <!--近期文章版块 began-->
+          
+              <div class="links-of-blogroll motion-element links-of-blogroll-block">
+                <div class="links-of-blogroll-title">
+                  <i class="fa fa-history fa-" aria-hidden="true"></i>
+                  近期文章
+                </div>
+                <ul class="links-of-blogroll-list">
+                  
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/" title="Android Crash实践策略最全面思考" target="_blank">Android Crash实践策略最全面思考</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/05/android-crash-who-kill-you/" title="Android Crash揭秘与实践" target="_blank">Android Crash揭秘与实践</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/04/Career-stability-experience/" title="职业稳定性杂谈" target="_blank">职业稳定性杂谈</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/02/mtk-log/" title="mtk-log" target="_blank">mtk-log</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/02/android-bugfree-three-lines/" title="BugFree三剑客异常、日志、工具" target="_blank">BugFree三剑客异常、日志、工具</a>
+                    </li>
+                  
+                </ul>
+              </div>
+          
+          <!--近期文章版块 end-->
+
+          
+              <!-- canvas粒子时钟 -->
+              <!-- canvas粒子时钟 https://www.cnblogs.com/xiaohuochai/p/6368039.html
+  https://www.html5tricks.com/html5-canvas-dance-time.html
+ -->
+<div id="">
+  <canvas id="canvas" style="width:60%;">
+</div>
+<script async>
+(function(){
+  var WINDOW_WIDTH = 820;
+  		var WINDOW_HEIGHT = 250;
+  		var RADIUS = 7; //球半径
+  		var NUMBER_GAP = 10; //数字之间的间隙
+  		var u=0.65; //碰撞能量损耗系数
+  		var context; //Canvas绘制上下文
+  		var balls = []; //存储彩色的小球
+  		const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]; //彩色小球的颜色
+  		var currentNums = []; //屏幕显示的8个字符
+  		var digit =
+                  [
+                      [
+                          [0,0,1,1,1,0,0],
+                          [0,1,1,0,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,0,1,1,0],
+                          [0,0,1,1,1,0,0]
+                      ],//0
+                      [
+                          [0,0,0,1,1,0,0],
+                          [0,1,1,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [1,1,1,1,1,1,1]
+                      ],//1
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,1,1,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,1,1,1,1,1]
+                      ],//2
+                      [
+                          [1,1,1,1,1,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,1,0,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//3
+                      [
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,1,0],
+                          [0,0,1,1,1,1,0],
+                          [0,1,1,0,1,1,0],
+                          [1,1,0,0,1,1,0],
+                          [1,1,1,1,1,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,1,1]
+                      ],//4
+                      [
+                          [1,1,1,1,1,1,1],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,1,1,1,1,0],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//5
+                      [
+                          [0,0,0,0,1,1,0],
+                          [0,0,1,1,0,0,0],
+                          [0,1,1,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//6
+                      [
+                          [1,1,1,1,1,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0]
+                      ],//7
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//8
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,1,1,0,0,0,0]
+                      ],//9
+                      [
+                          [0,0,0,0],
+                          [0,0,0,0],
+                          [0,1,1,0],
+                          [0,1,1,0],
+                          [0,0,0,0],
+                          [0,0,0,0],
+                          [0,1,1,0],
+                          [0,1,1,0],
+                          [0,0,0,0],
+                          [0,0,0,0]
+                      ]//:
+                  ];
+
+  		function drawDatetime(cxt){
+  			var nums = [];
+
+  			context.fillStyle="#005eac"
+  			var date = new Date();
+  			var offsetX = 70, offsetY = 30;
+  			var hours = date.getHours();
+  			var num1 = Math.floor(hours/10);
+  			var num2 = hours%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+  			nums.push({num: 10}); //冒号
+  			var minutes = date.getMinutes();
+  			var num1 = Math.floor(minutes/10);
+  			var num2 = minutes%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+  			nums.push({num: 10}); //冒号
+  			var seconds = date.getSeconds();
+  			var num1 = Math.floor(seconds/10);
+  			var num2 = seconds%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+
+  			for(var x = 0;x<nums.length;x++){
+  				nums[x].offsetX = offsetX;
+  				offsetX = drawSingleNumber(offsetX,offsetY, nums[x].num,cxt);
+  				//两个数字连一块，应该间隔一些距离
+  				if(x<nums.length-1){
+  					if((nums[x].num!=10) &&(nums[x+1].num!=10)){
+  						offsetX+=NUMBER_GAP;
+  					}
+  				}
+  			}
+
+  			//说明这是初始化
+  			if(currentNums.length ==0){
+  				currentNums = nums;
+  			}else{
+  				//进行比较
+  				for(var index = 0;index<currentNums.length;index++){
+  					if(currentNums[index].num!=nums[index].num){
+  						//不一样时，添加彩色小球
+  						addBalls(nums[index]);
+  						currentNums[index].num=nums[index].num;
+  					}
+  				}
+  			}
+  			renderBalls(cxt);
+  			updateBalls();
+
+  			return date;
+  		}
+
+  		function addBalls (item) {
+  			var num = item.num;
+  			var numMatrix = digit[num];
+  			for(var y = 0;y<numMatrix.length;y++){
+  				for(var x = 0;x<numMatrix[y].length;x++){
+  					if(numMatrix[y][x]==1){
+  						var ball={
+  							offsetX:item.offsetX+RADIUS+RADIUS*2*x,
+  							offsetY:30+RADIUS+RADIUS*2*y,
+  							color:colors[Math.floor(Math.random()*colors.length)],
+  							g:1.5+Math.random(),
+  							vx:Math.pow(-1, Math.ceil(Math.random()*10))*4+Math.random(),
+  							vy:-5
+  						}
+  						balls.push(ball);
+  					}
+  				}
+  			}
+  		}
+
+  		function renderBalls(cxt){
+  			for(var index = 0;index<balls.length;index++){
+  				cxt.beginPath();
+  				cxt.fillStyle=balls[index].color;
+  				cxt.arc(balls[index].offsetX, balls[index].offsetY, RADIUS, 0, 2*Math.PI);
+  				cxt.fill();
+  			}
+  		}
+
+  		function updateBalls () {
+  			var i =0;
+  			for(var index = 0;index<balls.length;index++){
+  				var ball = balls[index];
+  				ball.offsetX += ball.vx;
+  				ball.offsetY += ball.vy;
+  				ball.vy+=ball.g;
+  				if(ball.offsetY > (WINDOW_HEIGHT-RADIUS)){
+  					ball.offsetY= WINDOW_HEIGHT-RADIUS;
+  					ball.vy=-ball.vy*u;
+  				}
+  				if(ball.offsetX>RADIUS&&ball.offsetX<(WINDOW_WIDTH-RADIUS)){
+
+  					balls[i]=balls[index];
+  					i++;
+  				}
+  			}
+  			//去除出边界的球
+  			for(;i<balls.length;i++){
+  				balls.pop();
+  			}
+  		}
+  		function drawSingleNumber(offsetX, offsetY, num, cxt){
+  			var numMatrix = digit[num];
+  			for(var y = 0;y<numMatrix.length;y++){
+  				for(var x = 0;x<numMatrix[y].length;x++){
+  					if(numMatrix[y][x]==1){
+  						cxt.beginPath();
+  						cxt.arc(offsetX+RADIUS+RADIUS*2*x,offsetY+RADIUS+RADIUS*2*y,RADIUS,0,2*Math.PI);
+  						cxt.fill();
+  					}
+  				}
+  			}
+  			cxt.beginPath();
+  			offsetX += numMatrix[0].length*RADIUS*2;
+  			return offsetX;
+  		}
+
+  		var canvas = document.getElementById("canvas");
+  		canvas.width=WINDOW_WIDTH;
+  		canvas.height=WINDOW_HEIGHT;
+  		context = canvas.getContext("2d");
+
+  		//记录当前绘制的时刻
+  		var currentDate = new Date();
+
+  		setInterval(function(){
+  			//清空整个Canvas，重新绘制内容
+  			context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  			drawDatetime(context);
+  		}, 50)
+})();
+</script>
+
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#android-crash%E5%AE%9E%E8%B7%B5%E7%AD%96%E7%95%A5%E6%9C%80%E5%85%A8%E9%9D%A2%E6%80%9D%E8%80%83"><span class="nav-number">1.</span> <span class="nav-text">Android Crash实践策略最全面思考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#crash%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%AE%9A%E4%B9%89"><span class="nav-number">2.</span> <span class="nav-text">Crash稳定性定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%8D%E4%BD%8Ecrash%E7%8E%87%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-number">3.</span> <span class="nav-text">降低Crash率的意义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#crash%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5"><span class="nav-number">4.</span> <span class="nav-text">Crash处理策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%8C%87%E6%A0%87"><span class="nav-number">4.1.</span> <span class="nav-text">设置指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8A%E7%9B%91%E6%8E%A7"><span class="nav-number">4.2.</span> <span class="nav-text">线上监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8A%E5%AE%B9%E7%81%BE"><span class="nav-number">4.3.</span> <span class="nav-text">线上容灾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8B%E9%A2%84%E9%98%B2"><span class="nav-number">4.4.</span> <span class="nav-text">线下预防</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">5.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%89%AB%E6%8F%8F"><span class="nav-number">5.1.</span> <span class="nav-text">代码扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%A3%80%E6%9F%A5"><span class="nav-number">5.2.</span> <span class="nav-text">测试检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#api"><span class="nav-number">5.3.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E8%A1%A5%E4%B8%81"><span class="nav-number">5.4.</span> <span class="nav-text">热补丁</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+      
+
+      <!-- 标签云 -->
+      <!--
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+      <h3 class="widget-title">Tag Cloud</h3>
+      <div id="myCanvasContainer" class="widget tagcloud">
+          <canvas width="250" height="250" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/" rel="tag">Android</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android%E6%9E%B6%E6%9E%84/" rel="tag">Android架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li></ul>
+          </canvas>
+      </div>
+      </div>
+      
+      -->
+      <!-- 标签云 -->
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+       <i class="fa fa-heartbeat"></i>
+  </span>
+  <!--
+    <span class="author" itemprop="copyrightHolder"> &nbsp;叶金诚</span>
+  -->
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">102.4k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+
+        
+<div class="busuanzi-count">
+  <!--
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  -->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+   
+
+  
+  
+    
+      <span class="site-uv">
+        
+        我的第 <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 位朋友，
+      </span>
+    
+
+    
+      <span class="site-pv">
+        历经 <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次回眸才与你相遇
+        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      </span>
+    
+  
+
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="60" alpha="0.1"  zIndex="-1" src="/blog/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/blog/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+    <script>  function addCount(Counter){var $visitors=$('.leancloud_visitors');var url=$visitors.attr('id').trim();var title=$visitors.attr('data-flag-title').trim();Counter('get','/classes/Counter',{where:JSON.stringify({url})}).done(function({results}){if(results.length>0){var counter=results[0]; var $element=$(document.getElementById(url));$element.find('.leancloud-visitors-count').text(counter.time+1);Counter('put','/classes/Counter/'+counter.objectId,JSON.stringify({time:{'__op':'Increment','amount':1}})) .fail(function({responseJSON}){console.log('Failed to save Visitor num, with error message: '+responseJSON.error);})}else{ Counter('post','/classes/Counter',JSON.stringify({title:title,url:url,time:1})).done(function(){var $element=$(document.getElementById(url));$element.find('.leancloud-visitors-count').text(1);}).fail(function(){console.log('Failed to create');});}}).fail(function({responseJSON}){console.log('LeanCloud Counter Error: '+responseJSON.code+' '+responseJSON.error);});}$(function(){$.get('https://app-router.leancloud.cn/2/route?appId='+'MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz').done(function({api_server}){var Counter=function(method,url,data){return $.ajax({method:method,url:'https://'+api_server+'/1.1'+url,headers:{'X-LC-Id':'MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz','X-LC-Key':'pi8Pa2aH3XpcaovMyqIXVuOP','Content-Type':'application/json',},data:data});};  const localhost=/http:\/\/(localhost|127.0.0.1|0.0.0.0)/;if(localhost.test(document.URL))return;addCount(Counter);});});</script>
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/blog/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/blog/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+
+  <!-- Tidio 在线联系功能、鼠标点击特效、页面反馈...-->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+
+
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+    <script async src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script async src="/js/cursor/explosion.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+  <script async language="javascript">
+
+    var div = document.createElement("div");
+    //插入到自定义的theme-info或者copyright之后
+    var copyright = document.querySelector(".theme-info2") || document.querySelector(".copyright");
+
+    function show_run_time(){
+        window.setTimeout("show_run_time()", 1000);
+      // BirthDay=new Date("08/07/2019 20:00:00");
+        BirthDay=new Date("08/07/2016 20:00:00");
+        today=new Date();
+        timeold=(today.getTime()-BirthDay.getTime());
+        sectimeold=timeold/1000
+        secondsold=Math.floor(sectimeold);
+        msPerDay=24*60*60*1000
+        e_daysold=timeold/msPerDay
+        daysold=Math.floor(e_daysold);
+        e_hrsold=(e_daysold-daysold)*24;
+        hrsold=setzero(Math.floor(e_hrsold));
+        e_minsold=(e_hrsold-hrsold)*60;
+        minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+        seconds=setzero(Math.floor((e_minsold-minsold)*60));
+
+        // 使用zh-Hans.yml的文字替换
+        div.innerHTML = "我已在此等候你 " + "<span style='color: #1890ff'> " + daysold + " </span> 天 <span style='color: #1890ff'>" + hrsold + " </span>时 <span style='color: #1890ff'>" + minsold + " </span>分 <span style='color: #1890ff'>" + seconds + " </span>秒 ";
+
+        document.querySelector(".footer-inner").insertBefore(div, copyright.nextSibling);
+
+    }
+    function setzero(i){
+        if (i<10)
+        {i="0" + i};
+        return i;
+    }
+
+    show_run_time();
+
+  </script>
+
+
+
+
+<!-- 旋转魔方 -->
+
+   
+      
+<style>
+  /*最外层容器样式*/
+  .wrap {
+    width: 0px;
+    height: 0px;
+    /*margin: 80px;*/
+    /*position: relative;*/
+	     /*显示位置*/
+    position: fixed;
+    bottom: 120px;
+    right: 240px;
+    z-index: 999;
+  }
+
+  /*包裹所有容器样式*/
+  .cube {
+    width: 0px;
+    height: 0px;
+    margin: 0 auto;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(-80deg);
+    animation: rotate linear 10s infinite;
+  }
+
+  @-webkit-keyframes rotate {
+    from {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+    to {
+      transform: rotateX(360deg) rotateY(360deg);
+    }
+  }
+
+  .cube div {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    opacity: 0.8;
+    transition: all .4s;
+  }
+
+  /*定义所有图片样式*/
+  .pic {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cube .out_front {
+    transform: rotateY(0deg) translateZ(25px);
+  }
+
+  .cube .out_back {
+    transform: translateZ(-25px) rotateY(180deg);
+  }
+
+  .cube .out_left {
+    transform: rotateY(-90deg) translateZ(25px);
+  }
+
+  .cube .out_right {
+    transform: rotateY(90deg) translateZ(25px);
+  }
+
+  .cube .out_top {
+    transform: rotateX(90deg) translateZ(25px);
+  }
+
+  .cube .out_bottom {
+    transform: rotateX(-90deg) translateZ(25px);
+  }
+
+  /*定义小正方体样式*/
+  .cube span {
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+  }
+
+  .cube .in_pic {
+    width: 25px;
+    height:25px;
+  }
+
+  .cube .in_front {
+    transform: rotateY(0deg) translateZ(12px);
+  }
+
+  .cube .in_back {
+    transform: translateZ(-12px) rotateY(180deg);
+  }
+
+  .cube .in_left {
+    transform: rotateY(-90deg) translateZ(12px);
+  }
+
+  .cube .in_right {
+    transform: rotateY(90deg) translateZ(12px);
+  }
+
+  .cube .in_top {
+    transform: rotateX(90deg) translateZ(12px);
+  }
+
+  .cube .in_bottom {
+    transform: rotateX(-90deg) translateZ(12px);
+  }
+
+  /*鼠标移入后样式*/
+  .cube:hover .out_front {
+    transform: rotateY(0deg) translateZ(50px);
+  }
+
+  .cube:hover .out_back {
+    transform: translateZ(-50px) rotateY(180deg);
+  }
+
+  .cube:hover .out_left {
+    transform: rotateY(-90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_right {
+    transform: rotateY(90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_top {
+    transform: rotateX(90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+  }
+</style>
+
+<div class="wrap">
+
+		<!--包裹所有元素的容器-->
+		<div class="cube">
+			<!--前面图片 -->
+			<div class="out_front">
+			  <a onclick="back2top()">
+				  <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+				</a>
+			</div>
+			<!--后面图片 -->
+			<div class="out_back">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--左面图片 -->
+			<div class="out_left">
+        <a onclick="back2top()">
+				  <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+				</a>
+			</div>
+			<!--右面图片 -->
+			<div class="out_right">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--上面图片 -->
+			<div class="out_top">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--下面图片 -->
+			<div class="out_bottom">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+
+			<!--小正方体 -->
+			<span class="in_front">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_back">
+			     <img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_left">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_right">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_top">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_bottom">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+		</div>
+
+</div>
+
+<script>
+  function back2top(){
+    $('html, body').animate({scrollTop: 0}, 500);
+  }
+</script>
+
+   
+
+
+<!-- Console 输出第三方个性化字体 -->
+
+  <script async type="text/javascript" src="/blog/figlet/fetch.min.js"></script>
+  <script type="text/javascript" src="/blog/figlet/figlet.js"></script>
+  <script type="text/javascript">
+
+      figlet.defaults({fontPath: "/figlet/fonts"});
+      figlet("Welcome To Leaface", "Big Money-ne", function(err, text) {
+          if (err) {
+              console.log("something went wrong...");
+              console.dir(err);
+              return;
+          }
+          console.log(text);
+      });
+  </script>
+
+
+  <!-- Console 输出自定义字体 -->
+  
+    <script async type="text/javascript">
+        var text = "Welcome To Leaface";
+        var date = '2021-06-07';
+        console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
+        console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+        console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+        console.info('\n' + ' %c Leafae Wechat %c leaface ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+       // console.log("%c Time: " + date, "font-size:100px;white:"+fcolor+";border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);  background-image: linear-gradient(to right, orangered, orange, gold, lightgreen, cyan, dodgerblue, mediumpurple, hotpink, orangered);");
+       // console.log("%c .", "padding:300px 600px;line-height:10px;background:url(https://s2.ax1x.com/2019/10/17/KkoAJJ.md.png) no-repeat;");
+    </script>
+  
+
+
+  <!-- 看板娘 -->
+  
+      <script async src="/live2d-widget/autoload.js"></script>
+  
+	<!-- leafacePlayer -->
+	
+	<script id="lfz" src="http://player.liaofuzhan.com/player/player.js" key=1368557075310858241></script>
+	
+
+  
+
+  
+
+  <!-- 代码块复制功能 -->
+  <script async type="text/javascript" src="/js/src/clipboard.min.js"></script>
+  <script async type="text/javascript" src="/js/src/clipboard-use.js"></script>
+ 
+
+  <!--share.js-->
+  <link async rel="stylesheet" href="/sharejs/css/share.min.css">
+  <script async src="/sharejs/js/social-share.min.js"></script>
+
+  <!-- 模仿知乎卡片样式链接、崩溃欺骗特效 -->
+  <script async type="text/javascript" src="/js/src/linkcard.js"></script>
+
+  <!--崩溃欺骗 放在js文件最后-->
+  <!--
+  <script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+  -->
+
+ 
+
+<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>

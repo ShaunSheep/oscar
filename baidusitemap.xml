@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://idolcoder.gitee.io/blog/blog//2016/06/android-communication/</loc>
-    <lastmod>2021-06-05</lastmod>
+    <loc>http://idolcoder.gitee.io/blog/blog//2021/02/Client-Skeleton-Screen/</loc>
+    <lastmod>2021-06-07</lastmod>
+  </url>
+  <url>
+    <loc>http://idolcoder.gitee.io/blog/blog//2021/01/Android-component-Practice-Guide/</loc>
+    <lastmod>2021-06-07</lastmod>
+  </url>
+  <url>
+    <loc>http://idolcoder.gitee.io/blog/blog//2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/</loc>
+    <lastmod>2021-06-07</lastmod>
+  </url>
+  <url>
+    <loc>http://idolcoder.gitee.io/blog/blog//2021/01/Android-plug-in-technology-selection/</loc>
+    <lastmod>2021-06-07</lastmod>
+  </url>
+  <url>
+    <loc>http://idolcoder.gitee.io/blog/blog//2021/01/android-structure-best-practice/</loc>
+    <lastmod>2021-06-07</lastmod>
   </url>
   <url>
     <loc>http://idolcoder.gitee.io/blog/blog//2019/06/android-hotfix/</loc>
-    <lastmod>2021-06-05</lastmod>
+    <lastmod>2021-06-07</lastmod>
   </url>
   <url>
-    <loc>http://idolcoder.gitee.io/blog/blog//2021/02/Client-Skeleton-Screen/</loc>
+    <loc>http://idolcoder.gitee.io/blog/blog//2016/06/android-communication/</loc>
     <lastmod>2021-06-05</lastmod>
   </url>
   <url>

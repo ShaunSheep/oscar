@@ -6,7 +6,7 @@
   <link href="http://idolcoder.gitee.io/blog/atom.xml" rel="self"/>
   
   <link href="http://idolcoder.gitee.io/blog/"/>
-  <updated>2021-05-17T03:41:40.265Z</updated>
+  <updated>2021-06-07T13:13:10.658Z</updated>
   <id>http://idolcoder.gitee.io/blog/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android Crash实践策略最全面思考</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/</id>
+    <published>2021-05-01T07:15:44.000Z</published>
+    <updated>2021-06-07T13:13:10.658Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;android-crash实践策略最全面思考&quot;&gt;&lt;a href=&quot;</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/categories/Android/BugFree/"/>
+    
+    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    
+    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/tags/BugFree/"/>
+    
+  </entry>
   
   <entry>
     <title>Android Crash揭秘与实践</title>
@@ -123,7 +151,7 @@
     <link href="http://idolcoder.gitee.io/blog/2021/02/Client-Skeleton-Screen/"/>
     <id>http://idolcoder.gitee.io/blog/2021/02/Client-Skeleton-Screen/</id>
     <published>2021-02-27T00:13:12.000Z</published>
-    <updated>2021-06-05T00:48:32.131Z</updated>
+    <updated>2021-06-07T13:29:48.897Z</updated>
     
     
       
@@ -383,6 +411,90 @@
   </entry>
   
   <entry>
+    <title>Android插件化技术选型</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/01/Android-plug-in-technology-selection/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/01/Android-plug-in-technology-selection/</id>
+    <published>2021-01-27T12:33:07.000Z</published>
+    <updated>2021-06-07T12:39:13.697Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h2 id=&quot;插件化&quot;&gt;&lt;a href=&quot;#插件化&quot; class=&quot;header</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    
+    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android组件化实践指南</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/01/Android-component-Practice-Guide/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/01/Android-component-Practice-Guide/</id>
+    <published>2021-01-17T12:31:06.000Z</published>
+    <updated>2021-06-07T13:15:49.110Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h2 id=&quot;组件化&quot;&gt;&lt;a href=&quot;#组件化&quot; class=&quot;header</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    
+    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android大厂架构设计最佳实践</title>
+    <link href="http://idolcoder.gitee.io/blog/2021/01/android-structure-best-practice/"/>
+    <id>http://idolcoder.gitee.io/blog/2021/01/android-structure-best-practice/</id>
+    <published>2021-01-07T12:28:33.000Z</published>
+    <updated>2021-06-07T12:30:18.736Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;android架构设计最佳实践&quot;&gt;&lt;a href=&quot;#Androi</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    
+    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>AndroidHandler百问百答</title>
     <link href="http://idolcoder.gitee.io/blog/2020/08/handler%20TOP%20100%20Questions/"/>
     <id>http://idolcoder.gitee.io/blog/2020/08/handler%20TOP%20100%20Questions/</id>
@@ -415,7 +527,7 @@
     <link href="http://idolcoder.gitee.io/blog/2019/06/android-hotfix/"/>
     <id>http://idolcoder.gitee.io/blog/2019/06/android-hotfix/</id>
     <published>2019-06-08T13:39:07.000Z</published>
-    <updated>2021-06-05T01:05:04.940Z</updated>
+    <updated>2021-06-07T12:26:02.596Z</updated>
     
     
       
@@ -511,97 +623,6 @@
     <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
     
     <category term="Communication" scheme="http://idolcoder.gitee.io/blog/tags/Communication/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android性能优化【史诗巨著之内存篇】</title>
-    <link href="http://idolcoder.gitee.io/blog/2016/06/performance-android/"/>
-    <id>http://idolcoder.gitee.io/blog/2016/06/performance-android/</id>
-    <published>2016-06-01T13:34:41.000Z</published>
-    <updated>2021-03-14T05:50:49.396Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;摘自本人16年的的博客&lt;a href=&quot;http://blog.csdn.n</summary>
-      
-    
-    
-    
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
-    
-    <category term="应用层" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BA%94%E7%94%A8%E5%B1%82/"/>
-    
-    <category term="Performance" scheme="http://idolcoder.gitee.io/blog/categories/Android/Performance/"/>
-    
-    
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
-    
-    <category term="Performance" scheme="http://idolcoder.gitee.io/blog/tags/Performance/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android 百大框架排行榜</title>
-    <link href="http://idolcoder.gitee.io/blog/2016/04/Android-TOP-100-Program/"/>
-    <id>http://idolcoder.gitee.io/blog/2016/04/Android-TOP-100-Program/</id>
-    <published>2016-04-10T03:50:49.000Z</published>
-    <updated>2021-02-27T05:35:40.760Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;blockquote&gt;
-&lt;p&gt;说明：无聊之时作的一篇笔记式文章，&lt;/p&gt;
-&lt;p&gt;</summary>
-      
-    
-    
-    
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
-    
-    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
-    
-    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
-    
-    
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
-    
-    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2015-2021学习计划</title>
-    <link href="http://idolcoder.gitee.io/blog/2015/08/learing-plan/"/>
-    <id>http://idolcoder.gitee.io/blog/2015/08/learing-plan/</id>
-    <published>2015-08-17T15:13:12.000Z</published>
-    <updated>2021-03-25T14:11:33.090Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;2015-2021学习计划及小结&quot;&gt;&lt;a href=&quot;#2015-2021学习计划及小结&quot; class=&quot;headerlink&quot; title=&quot;2015-2021学习计划及小结&quot;&gt;&lt;/a&gt;2015-2021学习计划及小结&lt;/h1&gt;&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h1&gt;&lt;p&gt;这里存放2015年-2021年的学习内容，包括已经学习的，正在学习的，&lt;/p&gt;
-&lt;p&gt;内容为：音频课程、视频课程、电子书、实体书、专栏课程、认证课程等。&lt;/p&gt;
-&lt;p&gt;内容来源自kindle、知乎、极客学院、慕课网、阿里云大学、光环国际、黑马培训、拉钩培训、三节课培训等&lt;/p&gt;
-&lt;p&gt;个人网站到期，很多资料未及时存档，只能根据自己的历史笔记一点点更新了。&lt;/p&gt;
-&lt;p&gt;每一条内容为：完成状态+任务名称+任务完成详情&lt;/p&gt;
-&lt;p&gt;已完成的任务显示如下，完成态+任务名称+删除线+点击跳转至文章总结或项目总结&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input checked=&quot;&quot; disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; &lt;del&gt;&lt;a href=&quot;&quot;&gt;任务名称&lt;/a&gt;&lt;/del&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;未完成的任务显示为，未完成态+任务名称&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;input disabled=&quot;&quot; type=&quot;checkbox&quot;&gt; 任务名称&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="规划" scheme="http://idolcoder.gitee.io/blog/categories/%E8%A7%84%E5%88%92/"/>
-    
-    <category term="个人教育" scheme="http://idolcoder.gitee.io/blog/categories/%E8%A7%84%E5%88%92/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/"/>
-    
-    
-    <category term="个人教育" scheme="http://idolcoder.gitee.io/blog/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/"/>
     
   </entry>
   

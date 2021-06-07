@@ -115,7 +115,7 @@
 <meta property="og:image" content="https://images2018.cnblogs.com/blog/823551/201803/823551-20180311132727379-906293657.jpg">
 <meta property="og:image" content="http://cdn.yangchaofan.cn/typora/image-20210603134359487.png">
 <meta property="article:published_time" content="2019-06-08T13:39:07.000Z">
-<meta property="article:modified_time" content="2021-06-05T01:05:04.940Z">
+<meta property="article:modified_time" content="2021-06-07T12:26:02.596Z">
 <meta property="article:author" content="叶金诚">
 <meta property="article:tag" content="Android架构">
 <meta name="twitter:card" content="summary">
@@ -498,7 +498,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  3.6k
+                  3.7k
                 </span>
               
 
@@ -514,7 +514,7 @@
                   <span class="post-meta-item-text">时长 &asymp;</span>
                 
                 <span title="时长">
-                  12 分钟
+                  13 分钟
                 </span>
               
             </span>
@@ -576,10 +576,6 @@
 <blockquote>
 <p>App直接从云端下拉补丁直接应用生效，重构了传统的App发版流程。</p>
 </blockquote>
-<p>关于热补丁的另外一种解释可以参考</p>
-<blockquote>
-<p>冷补丁与热补丁最大的区别是对业务的影响大小，冷补丁需要复位，热补丁不需要。系统在内存中开辟了补丁区，热补丁是通过INS PATCH复合命令被直接放到补丁区，被激活运行的，不需要复位。虽然热补丁方便，但是当热补丁无法解决遇到的问题时（例如不是简单的改写函数就可以的，需要改写全局变量，内存中的代码段也重新改换，代码重新汇编），就需要冷补丁来解决。冷补丁会重新更换内存中的全局变量、代码段、补丁区，而这些又不能简单的改写就运行，必须通过复位来解决。</p>
-</blockquote>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210603143552021.png" width="80%" alt>
@@ -601,7 +597,7 @@
 <li>用户感知小，线上响应快，企业损失最低</li>
 </ul>
 <p>修复Bug、修复bug、修复bug，重要的话说三遍，热修复技术最重要的用途就是无感修复bug。</p>
-<h1 id="热修复的实现思路"><a href="#热修复的实现思路" class="headerlink" title="热修复的实现思路"></a>热修复的实现思路<a href="#热修复的实现思路" class="header-anchor">#</a></h1><h2 id="思路概览"><a href="#思路概览" class="headerlink" title="思路概览"></a>思路概览<a href="#思路概览" class="header-anchor">#</a></h2><p>用户在操作一款App的过程中，能够体验到的内容如图所示，在不讨论Hybrid技术、Web开发技术的前提下，我们先承认一个简单的事实：安卓操作系统加载了APP安装包下的某些文件，换句话说APK的主要组成部分，支撑了App页面的显示和加载。用户在使用App过程中遇到了bug，是由于Apk中的某些内容遇到了预期之外的情况导致。作为开发者，修复这种预期之外的情况，就是通过修复Apk中的主要内容</p>
+<h1 id="热修复的实现思路"><a href="#热修复的实现思路" class="headerlink" title="热修复的实现思路"></a>热修复的实现思路<a href="#热修复的实现思路" class="header-anchor">#</a></h1><h2 id="思路概览"><a href="#思路概览" class="headerlink" title="思路概览"></a>思路概览<a href="#思路概览" class="header-anchor">#</a></h2><p>用户在操作一款App的过程中，能够体验到的内容如图所示，在不讨论Hybrid技术、Web开发技术的前提下，我们先承认一个简单的事实：安卓操作系统加载了APP安装包下的某些文件，换句话说APK的主要组成部分，支撑了App页面的显示和加载。用户在使用App过程中遇到了bug，是由于Apk中的某些内容遇到了预期之外的情况导致。作为开发者，若想修复这种预期之外的情况，就应该修复Apk中的主要内容来达到目的。</p>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3076306344,2932143550&fm=26&gp=0.jpg" width="30%" alt>
@@ -615,8 +611,7 @@
 </center>
 
 
-
-<p>一个APK的组成部分如下</p>
+<p><strong>一个APK的组成部分如下</strong></p>
 <table>
 <thead>
 <tr>
@@ -773,6 +768,47 @@
 <li>原有类结构发生变化，不适用修复</li>
 <li>反射调用的非静态方法，不适用修复</li>
 </ul>
+<h2 id="资源修复"><a href="#资源修复" class="headerlink" title="资源修复"></a>资源修复<a href="#资源修复" class="header-anchor">#</a></h2><blockquote>
+<p>笔者最大的疑问：下载全量包、差量包的方式完成替换，与下载APK，并重新安装APK的做法有什么区别？</p>
+<ul>
+<li>APK安装过程是什么？</li>
+</ul>
+</blockquote>
+<h3 id="全量包"><a href="#全量包" class="headerlink" title="全量包"></a>全量包<a href="#全量包" class="header-anchor">#</a></h3><blockquote>
+<p>Amigo参考阅读</p>
+<p>[Amigo 源码解读 - Eleme Mobilists](<a target="_blank" rel="noopener" href="http://mobilists.eleme.io/2016/09/01/Amigo">http://mobilists.eleme.io/2016/09/01/Amigo</a> 源码解读/)</p>
+</blockquote>
+<p>Amigo支持全量替换和拆分包替换，也支持即时生效和二次启动生效。</p>
+<p>立即生效方式：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Amigo.work(context, apkFile);</span><br></pre></td></tr></table></figure></div>
+<p>稍后生效方式：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Amigo.workLater(context, apkFile, callback);</span><br></pre></td></tr></table></figure></div>
+<p>该方案缺点如下：</p>
+<ul>
+<li><p>不支持和Instant Run同时使用（或者使用<code>autoDisableInInstantRunMode</code>来自动停止使用amigo）</p>
+</li>
+<li><p>patch包中使用provider的方式发生了变化</p>
+<ul>
+<li><p>修改声明方式，authorities须以”<strong>${youPackageName}.provider</strong>“开头</p>
+<p>&lt;provider</p>
+<pre><code>android:name=&quot;me.ele.demo.provider.StudentProvider&quot;
+android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&gt;
+</code></pre>
+</li>
+<li><p>修改调用方式</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. app进程内使用时，无需做任何修改</span></span><br><span class="line">Cursor cursor = getContentResolver().query(Uri.parse(<span class="string">&quot;content://&quot;</span> + getPackageName() + <span class="string">&quot;.provider.student?id=0&quot;</span>), <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line"><span class="comment">// 2. 其他进程中的使用时，需要修改uri为以下形式, 其中targetPackageName为你的App的包名</span></span><br><span class="line">Cursor cursor = getContentResolver().query(Uri.parse(<span class="string">&quot;content://&quot;</span> + targetPackageName + <span class="string">&quot;.provider/student?id=0&quot;</span>), <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure></div></li>
+</ul>
+</li>
+<li><p><code>notification</code> &amp; <code>widget</code>中<code>RemoteViews</code>的自定义布局不支持修改,只支持内容修复</p>
+<ul>
+<li>任何使用在<code>RemoteViews</code>里面的资源id都需要进行这样的包装 <code>java RCompat.getHostIdentifier(Context context, int id)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="差量包"><a href="#差量包" class="headerlink" title="差量包"></a>差量包<a href="#差量包" class="header-anchor">#</a></h3><p>Tinker</p>
+<p>sophix</p>
+<h2 id="so修复"><a href="#SO修复" class="headerlink" title="SO修复"></a>SO修复<a href="#so修复" class="header-anchor">#</a></h2><h3 id="接口实现"><a href="#接口实现" class="headerlink" title="接口实现"></a>接口实现<a href="#接口实现" class="header-anchor">#</a></h3><p>Tinker</p>
+<h3 id="插桩实现"><a href="#插桩实现" class="headerlink" title="插桩实现"></a>插桩实现<a href="#插桩实现" class="header-anchor">#</a></h3><p>Amigo\sophix</p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考<a href="#参考" class="header-anchor">#</a></h1><h2 id="dex分包"><a href="#Dex分包" class="headerlink" title="Dex分包"></a>Dex分包<a href="#dex分包" class="header-anchor">#</a></h2><p>动态加载Dex技术</p>
 <table>
 <thead>
@@ -798,82 +834,6 @@
 <td></td>
 </tr>
 </tbody></table>
-<h2 id="插件化"><a href="#插件化" class="headerlink" title="插件化"></a>插件化<a href="#插件化" class="header-anchor">#</a></h2><table>
-<thead>
-<tr>
-<th>特性</th>
-<th><strong>VirtualAPK</strong></th>
-<th><strong>DroidPlugin</strong></th>
-<th><strong>Small</strong></th>
-<th>atlas</th>
-<th><strong>DynamicAPK</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>作者</td>
-<td>滴滴</td>
-<td>360</td>
-<td>wequick</td>
-<td>阿里</td>
-<td>携程</td>
-</tr>
-<tr>
-<td>支持四大组件</td>
-<td>全支持</td>
-<td>全支持</td>
-<td>只支持Activity</td>
-<td></td>
-<td>只支持Activity</td>
-</tr>
-<tr>
-<td>组件无需在宿主manifest中预注册</td>
-<td>yes</td>
-<td>yes</td>
-<td>yes</td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td>插件可以依赖宿主</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>支持PendingIntent</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Android特性支持</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>兼容性适配</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>插件构建</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
 <h2 id="热补丁"><a href="#热补丁" class="headerlink" title="热补丁"></a>热补丁<a href="#热补丁" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
@@ -884,7 +844,7 @@
 <th><a target="_blank" rel="noopener" href="https://github.com/wequick/Small">Small</a></th>
 <th><a target="_blank" rel="noopener" href="https://github.com/Meituan-Dianping/Robust">Robust</a></th>
 <th><a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://github.com/jasonross/Nuwa">Nuwa</a></th>
-<th>Amigo</th>
+<th><a target="_blank" rel="noopener" href="https://github.com/eleme/Amigo">Amigo</a></th>
 </tr>
 </thead>
 <tbody><tr>
@@ -935,7 +895,7 @@
 <td></td>
 <td>yes</td>
 <td>no</td>
-<td>no</td>
+<td>可选（可即时、可冷启动）</td>
 </tr>
 <tr>
 <td>性能损耗</td>
@@ -955,7 +915,7 @@
 <td></td>
 <td>一般</td>
 <td>较大</td>
-<td>大</td>
+<td>很大</td>
 </tr>
 <tr>
 <td>开发透明</td>
@@ -1015,7 +975,7 @@
 <td></td>
 <td>最高-99%</td>
 <td>较高</td>
-<td>较高</td>
+<td>最高-100%</td>
 </tr>
 <tr>
 <td>监控能力</td>
@@ -1065,11 +1025,11 @@
 <td>2018年</td>
 <td>2020年</td>
 <td>2015年</td>
-<td>2016年</td>
+<td>2017年(被阿里收购不再维护)</td>
 </tr>
 </tbody></table>
 <h2 id="热补丁原理"><a href="#热补丁原理" class="headerlink" title="热补丁原理"></a>热补丁原理<a href="#热补丁原理" class="header-anchor">#</a></h2><p> <img src="http://cdn.yangchaofan.cn/typora/image-20210603134359487.png" alt="image-20210603134359487"></p>
-<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章<a href="#参考文章" class="header-anchor">#</a></h2><table>
+<h2 id="热补丁参考文章"><a href="#热补丁参考文章" class="headerlink" title="热补丁参考文章"></a>热补丁参考文章<a href="#热补丁参考文章" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th>名称</th>
@@ -1091,6 +1051,10 @@
 <tr>
 <td>阿里《深入探索Android热修复技术原理》</td>
 <td>阿里出版很详细</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="http://mobilists.eleme.io/2016/09/01/Amigo%20%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB/">Amigo源码解读</a></td>
+<td>饿了么官方出品</td>
 </tr>
 <tr>
 <td><a target="_blank" rel="noopener" href="https://tech.meituan.com/2016/09/14/android-robust.html">Android热更新方案Robust</a></td>
@@ -1123,6 +1087,10 @@
 <tr>
 <td><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/uY5N_PSny7_CHOgUA99UjA?spm=a2c4g.11186623.2.2.bdc0788fH6VckR">Android热修复技术选型——三大流派解析 (qq.com)</a></td>
 <td><strong>插件化</strong>：一个程序划分为不同的部分，以插件的形式加载到应用中去，<br>本质上它使用的技术还是热修复技术，只是加入了更多工程实践，<br>让它支持大规模的代码更新以及资源和SO包的更新。 <br><strong>热修复</strong>：当线上应用出现紧急BUG，为了避免重新发版，<br>并且保证修复的及时性而进行的一项在线推送补丁的修复方案。。</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.cnblogs.com/bugly/p/5740807.html">Android Patch 方案与持续交付</a></td>
+<td>腾旭buggly对tinker的支持，后台管理服务</td>
 </tr>
 </tbody></table>
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">深入探索Android热修复技术原理<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="https://tech.meituan.com/2016/09/14/android-robust.html">Android热更新方案Robust</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><link rel="stylesheet" href="/css/bilicard.css" type="text/css">
@@ -1378,7 +1346,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -1473,6 +1441,10 @@
                   
                   
                     <li class='my-links-of-blogroll-li'>
+                      <a href="/blog/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/" title="Android Crash实践策略最全面思考" target="_blank">Android Crash实践策略最全面思考</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
                       <a href="/blog/2021/05/android-crash-who-kill-you/" title="Android Crash揭秘与实践" target="_blank">Android Crash揭秘与实践</a>
                     </li>
                   
@@ -1486,10 +1458,6 @@
                   
                     <li class='my-links-of-blogroll-li'>
                       <a href="/blog/2021/02/android-bugfree-three-lines/" title="BugFree三剑客异常、日志、工具" target="_blank">BugFree三剑客异常、日志、工具</a>
-                    </li>
-                  
-                    <li class='my-links-of-blogroll-li'>
-                      <a href="/blog/2021/02/Client-Skeleton-Screen/" title="Android骨架屏详解" target="_blank">Android骨架屏详解</a>
                     </li>
                   
                 </ul>
@@ -1805,7 +1773,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%AD%E4%BF%AE%E5%A4%8D%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%AE%9E%E6%88%98"><span class="nav-number">1.</span> <span class="nav-text">热修复详解与实战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">3.</span> <span class="nav-text">热修复的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="nav-number">4.</span> <span class="nav-text">热修复的实现思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%E6%A6%82%E8%A7%88"><span class="nav-number">4.1.</span> <span class="nav-text">思路概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E4%BF%AE%E5%A4%8D"><span class="nav-number">4.2.</span> <span class="nav-text">代码修复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nativehook"><span class="nav-number">4.2.1.</span> <span class="nav-text">NativeHook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java-multidex"><span class="nav-number">4.2.2.</span> <span class="nav-text">Java multidex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java-hook"><span class="nav-number">4.2.3.</span> <span class="nav-text">Java Hook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dex%E6%9B%BF%E6%8D%A2"><span class="nav-number">4.2.4.</span> <span class="nav-text">Dex替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%BC%E5%90%88%E6%96%B9%E6%A1%88"><span class="nav-number">4.2.5.</span> <span class="nav-text">综合方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dex%E5%88%86%E5%8C%85"><span class="nav-number">5.1.</span> <span class="nav-text">Dex分包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E5%8C%96"><span class="nav-number">5.2.</span> <span class="nav-text">插件化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E8%A1%A5%E4%B8%81"><span class="nav-number">5.3.</span> <span class="nav-text">热补丁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E8%A1%A5%E4%B8%81%E5%8E%9F%E7%90%86"><span class="nav-number">5.4.</span> <span class="nav-text">热补丁原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">5.5.</span> <span class="nav-text">参考文章</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%AD%E4%BF%AE%E5%A4%8D%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%AE%9E%E6%88%98"><span class="nav-number">1.</span> <span class="nav-text">热修复详解与实战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">3.</span> <span class="nav-text">热修复的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="nav-number">4.</span> <span class="nav-text">热修复的实现思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%E6%A6%82%E8%A7%88"><span class="nav-number">4.1.</span> <span class="nav-text">思路概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E4%BF%AE%E5%A4%8D"><span class="nav-number">4.2.</span> <span class="nav-text">代码修复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nativehook"><span class="nav-number">4.2.1.</span> <span class="nav-text">NativeHook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java-multidex"><span class="nav-number">4.2.2.</span> <span class="nav-text">Java multidex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java-hook"><span class="nav-number">4.2.3.</span> <span class="nav-text">Java Hook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dex%E6%9B%BF%E6%8D%A2"><span class="nav-number">4.2.4.</span> <span class="nav-text">Dex替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%BC%E5%90%88%E6%96%B9%E6%A1%88"><span class="nav-number">4.2.5.</span> <span class="nav-text">综合方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E4%BF%AE%E5%A4%8D"><span class="nav-number">4.3.</span> <span class="nav-text">资源修复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E9%87%8F%E5%8C%85"><span class="nav-number">4.3.1.</span> <span class="nav-text">全量包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%AE%E9%87%8F%E5%8C%85"><span class="nav-number">4.3.2.</span> <span class="nav-text">差量包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#so%E4%BF%AE%E5%A4%8D"><span class="nav-number">4.4.</span> <span class="nav-text">SO修复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.4.1.</span> <span class="nav-text">接口实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E6%A1%A9%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.4.2.</span> <span class="nav-text">插桩实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dex%E5%88%86%E5%8C%85"><span class="nav-number">5.1.</span> <span class="nav-text">Dex分包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E8%A1%A5%E4%B8%81"><span class="nav-number">5.2.</span> <span class="nav-text">热补丁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E8%A1%A5%E4%B8%81%E5%8E%9F%E7%90%86"><span class="nav-number">5.3.</span> <span class="nav-text">热补丁原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E8%A1%A5%E4%B8%81%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">5.4.</span> <span class="nav-text">热补丁参考文章</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1826,7 +1794,7 @@
       <h3 class="widget-title">Tag Cloud</h3>
       <div id="myCanvasContainer" class="widget tagcloud">
           <canvas width="250" height="250" id="resCanvas" style="width=100%">
-              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/" rel="tag">Android</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android%E6%9E%B6%E6%9E%84/" rel="tag">Android架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li></ul>
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android/" rel="tag">Android</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Android%E6%9E%B6%E6%9E%84/" rel="tag">Android架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li></ul>
           </canvas>
       </div>
       </div>
@@ -1860,7 +1828,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">94.7k</span>
+    <span title="Site words total count">102.4k</span>
   
 </div>
 
@@ -2770,7 +2738,7 @@
   
     <script async type="text/javascript">
         var text = "Welcome To Leaface";
-        var date = '2021-06-05';
+        var date = '2021-06-07';
         console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
         console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
         console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
