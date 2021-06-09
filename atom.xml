@@ -443,12 +443,12 @@
     <link href="http://idolcoder.gitee.io/blog/2021/01/Android-component-Practice-Guide/"/>
     <id>http://idolcoder.gitee.io/blog/2021/01/Android-component-Practice-Guide/</id>
     <published>2021-01-17T12:31:06.000Z</published>
-    <updated>2021-06-07T13:15:49.110Z</updated>
+    <updated>2021-06-09T13:25:58.601Z</updated>
     
     
       
       
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h2 id=&quot;组件化&quot;&gt;&lt;a href=&quot;#组件化&quot; class=&quot;header</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;组件化基本概念&quot;&gt;&lt;a href=&quot;#组件化基本概念&quot; class</summary>
       
     
     
@@ -463,6 +463,8 @@
     <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
     
     <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    <category term="技术选型" scheme="http://idolcoder.gitee.io/blog/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
     
   </entry>
   
@@ -527,7 +529,7 @@
     <link href="http://idolcoder.gitee.io/blog/2019/06/android-hotfix/"/>
     <id>http://idolcoder.gitee.io/blog/2019/06/android-hotfix/</id>
     <published>2019-06-08T13:39:07.000Z</published>
-    <updated>2021-06-07T12:26:02.596Z</updated>
+    <updated>2021-06-09T13:27:45.478Z</updated>
     
     
       
@@ -544,7 +546,9 @@
     <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
     
     
-    <category term="Android架构" scheme="http://idolcoder.gitee.io/blog/tags/Android%E6%9E%B6%E6%9E%84/"/>
+    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    <category term="技术选型" scheme="http://idolcoder.gitee.io/blog/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
     
   </entry>
   
