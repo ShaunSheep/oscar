@@ -443,7 +443,7 @@
     <link href="http://idolcoder.gitee.io/blog/2021/01/Android-component-Practice-Guide/"/>
     <id>http://idolcoder.gitee.io/blog/2021/01/Android-component-Practice-Guide/</id>
     <published>2021-01-17T12:31:06.000Z</published>
-    <updated>2021-06-09T13:25:58.601Z</updated>
+    <updated>2021-06-10T15:11:10.345Z</updated>
     
     
       
@@ -473,7 +473,7 @@
     <link href="http://idolcoder.gitee.io/blog/2021/01/android-structure-best-practice/"/>
     <id>http://idolcoder.gitee.io/blog/2021/01/android-structure-best-practice/</id>
     <published>2021-01-07T12:28:33.000Z</published>
-    <updated>2021-06-07T12:30:18.736Z</updated>
+    <updated>2021-06-10T15:29:03.737Z</updated>
     
     
       
@@ -493,6 +493,8 @@
     <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
     
     <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    <category term="技术选型" scheme="http://idolcoder.gitee.io/blog/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
     
   </entry>
   
@@ -577,6 +579,33 @@
   </entry>
   
   <entry>
+    <title>架构选型之MVC、MVP、MVVM</title>
+    <link href="http://idolcoder.gitee.io/blog/2018/02/MVC-MVP-MVVM%20-of%20-architecture%20-selection/"/>
+    <id>http://idolcoder.gitee.io/blog/2018/02/MVC-MVP-MVVM%20-of%20-architecture%20-selection/</id>
+    <published>2018-02-10T14:50:37.000Z</published>
+    <updated>2021-06-10T15:31:33.954Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;blockquote&gt;
+&lt;p&gt;文章是转的，网上看过的唯二的我读过关于“MVC、M</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    
+    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    
+    <category term="技术选型" scheme="http://idolcoder.gitee.io/blog/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    
+  </entry>
+  
+  <entry>
     <title>详解五大排序算法</title>
     <link href="http://idolcoder.gitee.io/blog/2016/06/five-sort-algorithm/"/>
     <id>http://idolcoder.gitee.io/blog/2016/06/five-sort-algorithm/</id>
@@ -597,36 +626,6 @@
     
     
     <category term="算法" scheme="http://idolcoder.gitee.io/blog/tags/%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>详解 Android 通信</title>
-    <link href="http://idolcoder.gitee.io/blog/2016/06/android-communication/"/>
-    <id>http://idolcoder.gitee.io/blog/2016/06/android-communication/</id>
-    <published>2016-06-08T13:39:07.000Z</published>
-    <updated>2021-06-05T01:10:55.217Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;摘自本人16年的的博客&lt;a href=&quot;https://blog.csdn.</summary>
-      
-    
-    
-    
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
-    
-    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
-    
-    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
-    
-    <category term="应用层" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BA%94%E7%94%A8%E5%B1%82/"/>
-    
-    
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
-    
-    <category term="Communication" scheme="http://idolcoder.gitee.io/blog/tags/Communication/"/>
     
   </entry>
   
