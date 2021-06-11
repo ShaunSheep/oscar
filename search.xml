@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>波尔克</title>
-    <url>/blog//2021/02/website_nickname/</url>
+    <url>//2021/02/website_nickname/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="波尔克"><a href="#波尔克" class="headerlink" title="波尔克"></a>波尔克<a href="#波尔克" class="header-anchor">#</a></h1><p>（谐音“博儿客”）</p>
 <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍<a href="#介绍" class="header-anchor">#</a></h1><p>个人网站用了有四年了，期间一直都是用PHP+MySql的方式部署在阿里云，从备案域名折腾服务器，到调试各种插件，从制定学习计划，到学课程，又是边写文章边研究Markdown排版，种种事情花了很大功夫。今年1月份发生了一件事情——服务器到期，那会儿工作忙一直拖着续费的事情。阿里清空了磁盘，我也是事后才注意到通知短信，发现网站的文章数据全丢的那一刻，整个人浑身感觉都不好了。</p>
 <p>痛定思痛，决定文章还是要继续写，写哪里呢CSDN、博客园、简书、掘金都只适合当存档的地方，毕竟没有个人网站用起来有感情。想起来之前工作的时候，为了写音视频直播学了Node，注意过Hexo框架，这个框架可以快速搭个人网站。哎哟不错哦，一拍大腿说干就干。谁让咱是行动派！</p>
@@ -250,7 +250,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#103;&#x69;&#116;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#99;&#x6f;&#x6d;">&#103;&#x69;&#116;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#99;&#x6f;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#x6f;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -477,7 +477,7 @@ post_wordcount:
   </entry>
   <entry>
     <title>2015-2021学习计划</title>
-    <url>/blog//2015/08/learing-plan/</url>
+    <url>//2015/08/learing-plan/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="2015-2021学习计划及小结"><a href="#2015-2021学习计划及小结" class="headerlink" title="2015-2021学习计划及小结"></a>2015-2021学习计划及小结<a href="#2015-2021学习计划及小结" class="header-anchor">#</a></h1><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述<a href="#概述" class="header-anchor">#</a></h1><p>这里存放2015年-2021年的学习内容，包括已经学习的，正在学习的，</p>
 <p>内容为：音频课程、视频课程、电子书、实体书、专栏课程、认证课程等。</p>
 <p>内容来源自kindle、知乎、极客学院、慕课网、阿里云大学、光环国际、黑马培训、拉钩培训、三节课培训等</p>
@@ -600,7 +600,7 @@ post_wordcount:
   </entry>
   <entry>
     <title>Android Crash实践策略最全面思考</title>
-    <url>/blog//2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/</url>
+    <url>//2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="android-crash实践策略最全面思考"><a href="#Android-Crash实践策略最全面思考" class="headerlink" title="Android Crash实践策略最全面思考"></a>Android Crash实践策略最全面思考<a href="#android-crash实践策略最全面思考" class="header-anchor">#</a></h1><h1 id="crash稳定性定义"><a href="#Crash稳定性定义" class="headerlink" title="Crash稳定性定义"></a>Crash稳定性定义<a href="#crash稳定性定义" class="header-anchor">#</a></h1><p>App 在运行过程中发生Crash 现象,通常表现为两种:1.退出当前回到手机主页面；2.显示App已停止运行的弹出框。</p>
 <center>
     <img style="border-radius: 0.3125em;
@@ -826,7 +826,7 @@ post_wordcount:
   </entry>
   <entry>
     <title>Android Crash揭秘与实践</title>
-    <url>/blog//2021/05/android-crash-who-kill-you/</url>
+    <url>//2021/05/android-crash-who-kill-you/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><p>AndroidCrash基础知识</p>
 <p><strong>研究的对象</strong>是<font color="blue">APP进程</font></p>
 <p><strong>研究的问题</strong>主体是 <font color="blue">APP为什么会Crash</font></p>
@@ -1359,7 +1359,7 @@ post_wordcount:
   </entry>
   <entry>
     <title>职业稳定性杂谈</title>
-    <url>/blog//2021/04/Career-stability-experience/</url>
+    <url>//2021/04/Career-stability-experience/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><p>之前在知乎写过一篇回答，<a href="https://www.zhihu.com/question/308110736/answer/628764663">《为什么都在说 90 后的辞职率高？》</a>，纯理性分析获得了300赞。今日在公众号上看到心理学家刘向明教授写的一篇名为<a href="https://mp.weixin.qq.com/s/ZyEWV1g_UzXODkViyFdNlw">《社会招聘，怎样测试稳定性？</a>的文章，让我对职业稳定性有了更深的理解。</p>
 <p>先看看我之前的回答，再来看我的新感悟吧。</p>
 <a id="more"></a>
@@ -1559,7 +1559,7 @@ post_wordcount:
   </entry>
   <entry>
     <title>mtk-log</title>
-    <url>/blog//2021/02/mtk-log/</url>
+    <url>//2021/02/mtk-log/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="mtk-log"><a href="#MTK-log" class="headerlink" title="MTK log"></a><a href="https://www.pianshen.com/article/4121163154/">MTK log</a><a href="#mtk-log" class="header-anchor">#</a></h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍<a href="#介绍" class="header-anchor">#</a></h2><p>mtklog是由log生成工具MTKLogger生成的一系列问题追踪文件，其主要作用就是对系统或者应用产生的异常进行快速定位，从而解决问题。</p>
 <p>log文件名称为：<br>crash_log ：崩溃日志，主要输出 程序崩溃造成的crash log<br>events_log：事件日志，主要输出记录各个activity周期及事件<br>kernel_log：底层驱动，按键，低内存相关log<br>sys_log：系统日志，Exception定位点<br>radio_log：输出通话，网络状态变化<br>main_log：详尽输出每一步的log</p>
 <a id="more"></a>
@@ -1859,7 +1859,7 @@ post_wordcount:
   </entry>
   <entry>
     <title>BugFree三剑客异常、日志、工具</title>
-    <url>/blog//2021/02/android-bugfree-three-lines/</url>
+    <url>//2021/02/android-bugfree-three-lines/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="bugfree三剑客异常-日志-工具android开发排查问题小结"><a href="#BugFree三剑客异常、日志、工具—Android开发排查问题小结" class="headerlink" title="BugFree三剑客异常、日志、工具—Android开发排查问题小结"></a>BugFree三剑客异常、日志、工具—Android开发排查问题小结<a href="#bugfree三剑客异常-日志-工具android开发排查问题小结" class="header-anchor">#</a></h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><p>程序员编写程序、调试代码的时候不可避免的会遇到各种问题，如页面显示不正确，如数据层数据组装操作未按照期望的业务逻辑执行。</p>
 <p>造成这些问题的原因大多分为以下几种：有些是条件语句执行错误，有些是Java层的Exception如空指针、集合边界越界问题，有些是较难找到原因的OOM、ANR、Crash、系统SWT重启问题。面对扑面而来的问题，程序员很容易束手无策。笔者结合自己的经验，总结了BugFree中必不可少的三剑客：异常、日志、工具，期望通过这3个“帮手”，帮助各位排查开发难题。</p>
 <a id="more"></a>
@@ -2210,7 +2210,7 @@ post_wordcount:
   </entry>
   <entry>
     <title>Android骨架屏详解</title>
-    <url>/blog//2021/02/Client-Skeleton-Screen/</url>
+    <url>//2021/02/Client-Skeleton-Screen/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="android骨架屏详解"><a href="#Android骨架屏详解" class="headerlink" title="Android骨架屏详解"></a>Android骨架屏详解<a href="#android骨架屏详解" class="header-anchor">#</a></h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><blockquote>
 <p>本文是AndroidUI加载优化系列的文章</p>
 </blockquote>
@@ -2451,7 +2451,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
   </entry>
   <entry>
     <title>《学习革命解读》心得</title>
-    <url>/blog//2021/02/learn-relovation-notes/</url>
+    <url>//2021/02/learn-relovation-notes/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍<a href="#书籍" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
@@ -2715,7 +2715,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
   </entry>
   <entry>
     <title>《高效学习方法全集》日记</title>
-    <url>/blog//2021/02/super-learn-skills/</url>
+    <url>//2021/02/super-learn-skills/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="高效学习方法全集高中版"><a href="#高效学习方法全集高中版" class="headerlink" title="高效学习方法全集高中版"></a>高效学习方法全集高中版<a href="#高效学习方法全集高中版" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
@@ -2812,7 +2812,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
   </entry>
   <entry>
     <title>《如何高效学习》心得</title>
-    <url>/blog//2021/02/study-more-efficiency/</url>
+    <url>//2021/02/study-more-efficiency/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="如何高效学习"><a href="#如何高效学习" class="headerlink" title="如何高效学习"></a>如何高效学习<a href="#如何高效学习" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
@@ -3374,7 +3374,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
   </entry>
   <entry>
     <title>《超效学习方法解码》心得</title>
-    <url>/blog//2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/</url>
+    <url>//2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="超效学习方法解码"><a href="#《超效学习方法解码》" class="headerlink" title="《超效学习方法解码》"></a>《超效学习方法解码》<a href="#超效学习方法解码" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
@@ -3490,7 +3490,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
   </entry>
   <entry>
     <title>程序员吃的是青春饭吗？</title>
-    <url>/blog//2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</url>
+    <url>//2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="程序员吃的是青春饭吗"><a href="#程序员吃的是青春饭吗？" class="headerlink" title="程序员吃的是青春饭吗？"></a>程序员吃的是青春饭吗？<a href="#程序员吃的是青春饭吗" class="header-anchor">#</a></h1><p>昨天在知乎上看到一个提问<a href="https://www.zhihu.com/question/444102247">“程序员为什么是吃青春饭，而不是像医生律师一样越老越值钱？”</a></p>
 <p>翻了一百多个回答，大多答主都是顺着题主的逻辑假定答的</p>
 <p>即许多人都是心中假设此前提成立：“程序员是吃青春饭”、“律师医生越老越值钱”</p>
@@ -3533,7 +3533,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
   </entry>
   <entry>
     <title>Android插件化技术选型</title>
-    <url>/blog//2021/01/Android-plug-in-technology-selection/</url>
+    <url>//2021/01/Android-plug-in-technology-selection/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h2 id="插件化"><a href="#插件化" class="headerlink" title="插件化"></a>插件化<a href="#插件化" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
@@ -3695,7 +3695,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
   </entry>
   <entry>
     <title>Android组件化实践指南</title>
-    <url>/blog//2021/01/Android-component-Practice-Guide/</url>
+    <url>//2021/01/Android-component-Practice-Guide/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="组件化基本概念"><a href="#组件化基本概念" class="headerlink" title="组件化基本概念"></a>组件化基本概念<a href="#组件化基本概念" class="header-anchor">#</a></h1><p>典型的安卓工程目录结构如下，我们将根据图例介绍基本的概念术语，下文不再重复解释概念术语的含义。</p>
 <center>
     <img style="border-radius: 0.3125em;
@@ -4307,7 +4307,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
   </entry>
   <entry>
     <title>Android大厂架构设计最佳实践</title>
-    <url>/blog//2021/01/android-structure-best-practice/</url>
+    <url>//2021/01/android-structure-best-practice/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="android架构设计最佳实践"><a href="#Android架构设计最佳实践" class="headerlink" title="Android架构设计最佳实践"></a>Android架构设计最佳实践<a href="#android架构设计最佳实践" class="header-anchor">#</a></h1><h1 id="移动端架构理念"><a href="#移动端架构理念" class="headerlink" title="移动端架构理念"></a>移动端架构理念<a href="#移动端架构理念" class="header-anchor">#</a></h1><h2 id="clean-architecture"><a href="#Clean-Architecture" class="headerlink" title="Clean Architecture"></a>Clean Architecture<a href="#clean-architecture" class="header-anchor">#</a></h2><ul>
 <li><a href="https://medium.com/ribot-labs/android-application-architecture-8b6e34acda65#.b29vhtdm2">Android Application Architecture</a> (<a href="http://www.jianshu.com/p/8ca27934c6e6">中文翻译</a>)</li>
 <li><a href="http://fernandocejas.com/2015/07/18/architecting-android-the-evolution/">Architecting Android…The evolution</a></li>
@@ -4396,7 +4396,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
   </entry>
   <entry>
     <title>AndroidHandler百问百答</title>
-    <url>/blog//2020/08/handler%20TOP%20100%20Questions/</url>
+    <url>//2020/08/handler%20TOP%20100%20Questions/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="android百问百答-那些年被问过的handler原理"><a href="#Android百问百答-《那些年被问过的Handler原理》" class="headerlink" title="Android百问百答-《那些年被问过的Handler原理》"></a>Android百问百答-《那些年被问过的Handler原理》<a href="#android百问百答-那些年被问过的handler原理" class="header-anchor">#</a></h1><p>文章迁移自<a href="https://blog.csdn.net/chivalrousman/article/details/108014580">我的csdn博客</a></p>
 <p>关于Handler，安卓面试最热门的知识点之一。本篇文章将围绕3点展开：</p>
 <p>可以提问哪些Questions？</p>
@@ -4671,7 +4671,7 @@ Handler(Looper looper, Callback callback, boolean async)
   </entry>
   <entry>
     <title>Android 热补丁技术详解大全</title>
-    <url>/blog//2019/06/android-hotfix/</url>
+    <url>//2019/06/android-hotfix/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="热修复详解与实战"><a href="#热修复详解与实战" class="headerlink" title="热修复详解与实战"></a>热修复详解与实战<a href="#热修复详解与实战" class="header-anchor">#</a></h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><p>随着Google推出Android平台之后，AndroidAPP数量激增，带来的安全类技术需求增长，热修复就是安全类技术的典型产物。2016年起热修复、插件化、动态化技术如雨后春笋般爆发，三者技术上存在一定交集，但热修复更聚焦线上BUG的无感知修复。本文参考了一系列技术文章、书籍、开源框架、商业产品。主要讨论了热修复的以下几点内容：</p>
 <ul>
 <li>热修复的发展历史</li>
@@ -5231,8 +5231,8 @@ android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&g
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">深入探索Android热修复技术原理<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://tech.meituan.com/2016/09/14/android-robust.html">Android热更新方案Robust</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div><link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
       <categories>
         <category>Android</category>
-        <category>面试</category>
         <category>项目架构</category>
+        <category>面试</category>
       </categories>
       <tags>
         <tag>开源框架</tag>
@@ -5241,7 +5241,7 @@ android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&g
   </entry>
   <entry>
     <title>为什么要花3年时间面试一个人？</title>
-    <url>/blog//2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/</url>
+    <url>//2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="为什么要花3年时间面试一个人"><a href="#为什么要花3年时间面试一个人？" class="headerlink" title="为什么要花3年时间面试一个人？"></a>为什么要花3年时间面试一个人？<a href="#为什么要花3年时间面试一个人" class="header-anchor">#</a></h1><h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景<a href="#背景" class="header-anchor">#</a></h1><p>2018年笔者陪同公司部门老大负责技术面试，3个月时间，从收到简历到电话面试、现场面试，再算上Boss直聘打招呼数，总共有不下1000次。招聘过程可谓呕心沥血，效果却差强人意。</p>
 <p>曾作为求职者，我面试拿offer总是能满载而归；如今作为一名招聘（临时）者，找到一个合适的候选者难如登天？</p>
 <p>在网上看求职攻略、招聘经验帖子时，我总在想一个问题，是什么因素阻碍了企业找到靠谱的候选者？</p>
@@ -5468,7 +5468,7 @@ android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&g
   </entry>
   <entry>
     <title>架构选型之MVC、MVP、MVVM</title>
-    <url>/blog//2018/02/MVC-MVP-MVVM%20-of%20-architecture%20-selection/</url>
+    <url>//2018/02/MVC-MVP-MVVM%20-of%20-architecture%20-selection/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
 <p>文章是转的，网上看过的唯二的我读过关于“MVC、MVP、MVVM”最精准到位的文章。两篇文章最出彩的地方是从UI到数据流向，详细且细致的揭示了三者的区别。</p>
 </blockquote>
@@ -5602,7 +5602,7 @@ android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&g
   </entry>
   <entry>
     <title>详解五大排序算法</title>
-    <url>/blog//2016/06/five-sort-algorithm/</url>
+    <url>//2016/06/five-sort-algorithm/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>摘自本人16年的博客<a href="https://blog.csdn.net/chivalrousman/article/details/51585639">《详解五大排序算法》</a></p>
 <h1 id="为什么要学习排序"><a href="#为什么要学习排序" class="headerlink" title="为什么要学习排序"></a>为什么要学习排序<a href="#为什么要学习排序" class="header-anchor">#</a></h1><hr>
 <font size="4">
@@ -5955,7 +5955,7 @@ NBA总决赛正在如火如荼的进行，老詹也正朝着他的第5个总亚�
   </entry>
   <entry>
     <title>详解 Android 通信</title>
-    <url>/blog//2016/06/android-communication/</url>
+    <url>//2016/06/android-communication/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>摘自本人16年的的博客<a href="https://blog.csdn.net/chivalrousman/article/details/51623122">《详解 Android 通信》</a></p>
 <h1 id="什么是通信"><a href="#什么是通信？" class="headerlink" title="什么是通信？"></a>什么是通信？<a href="#什么是通信" class="header-anchor">#</a></h1><p><font size="4"> 通信 ，顾名思义，指的就是信息的传递或者交换</font></p>
 <h1 id="看完本文能收获什么"><a href="#看完本文能收获什么？" class="headerlink" title="看完本文能收获什么？"></a>看完本文能收获什么？<a href="#看完本文能收获什么" class="header-anchor">#</a></h1><p><font size="3">按目录索引，你可以学习到<br>    1. 组件间的通信，Activity，fragment，Service， Provider，Receiver<br>    2. 进程间的通信，AIDL<br>    3. 线程间的通信，Handler，AnsycTask，IntentService<br>    4. 多个App间的通信<br>    5. 使用大型开源框架完成组件通信，EventBus，otto<br>    6. 网络通信基础篇：Google 课程–AnsycTask+HttpClient<br>    7. 网络通信提高篇：开源框架Ansyc-Httpclient，okttp，Retrofit</font></p>
@@ -6209,8 +6209,8 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"></font>]]></content>
       <categories>
         <category>Android</category>
-        <category>面试</category>
         <category>项目架构</category>
+        <category>面试</category>
         <category>应用层</category>
       </categories>
       <tags>
@@ -6220,7 +6220,7 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
   </entry>
   <entry>
     <title>Android性能优化【史诗巨著之内存篇】</title>
-    <url>/blog//2016/06/performance-android/</url>
+    <url>//2016/06/performance-android/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>摘自本人16年的的博客<a href="http://blog.csdn.net/chivalrousman/article/details/51553114#t16">《Google官方  详解  Android 性能优化【史诗巨著之内存篇】》</a></p>
 <p>博客使用的图片链接服务已经挂掉了，等以后有时间补上。</p>
 <h1 id="为什么关注性能"><a href="#为什么关注性能" class="headerlink" title="为什么关注性能"></a>为什么关注性能<a href="#为什么关注性能" class="header-anchor">#</a></h1><hr>
@@ -6613,7 +6613,7 @@ EventBus.getDefault().post(new MessageEvent(&quot;Hello everyone!&quot;));
   </entry>
   <entry>
     <title>Android 百大框架排行榜</title>
-    <url>/blog//2016/04/Android-TOP-100-Program/</url>
+    <url>//2016/04/Android-TOP-100-Program/</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><blockquote>
 <p>说明：无聊之时作的一篇笔记式文章，</p>
 <p>精力有限，很多错误之处，受时间与能力限制，没能及时修改，隐隐懊悔，<br>受读者启发，遂将此文公之于众，旨在号召大家共同编辑、共同参与，让此排行榜帮助更多的Android开发者。</p>

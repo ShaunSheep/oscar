@@ -3,11 +3,11 @@
   <title>叶金诚的站点</title>
   
   <subtitle>汇贤雅叙</subtitle>
-  <link href="http://idolcoder.gitee.io/blog/atom.xml" rel="self"/>
+  <link href="http://www.yangchaofan.cn/atom.xml" rel="self"/>
   
-  <link href="http://idolcoder.gitee.io/blog/"/>
+  <link href="http://www.yangchaofan.cn/"/>
   <updated>2021-06-07T13:13:10.658Z</updated>
-  <id>http://idolcoder.gitee.io/blog/</id>
+  <id>http://www.yangchaofan.cn/</id>
   
   <author>
     <name>叶金诚</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Android Crash实践策略最全面思考</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/</id>
+    <link href="http://www.yangchaofan.cn/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/"/>
+    <id>http://www.yangchaofan.cn/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/</id>
     <published>2021-05-01T07:15:44.000Z</published>
     <updated>2021-06-07T13:13:10.658Z</updated>
     
@@ -31,23 +31,23 @@
     
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
     
-    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/categories/Android/BugFree/"/>
+    <category term="BugFree" scheme="http://www.yangchaofan.cn/categories/Android/BugFree/"/>
     
-    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
-    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/tags/BugFree/"/>
+    <category term="BugFree" scheme="http://www.yangchaofan.cn/tags/BugFree/"/>
     
   </entry>
   
   <entry>
     <title>Android Crash揭秘与实践</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/05/android-crash-who-kill-you/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/05/android-crash-who-kill-you/</id>
+    <link href="http://www.yangchaofan.cn/2021/05/android-crash-who-kill-you/"/>
+    <id>http://www.yangchaofan.cn/2021/05/android-crash-who-kill-you/</id>
     <published>2021-05-01T03:15:44.000Z</published>
     <updated>2021-05-17T03:41:40.265Z</updated>
     
@@ -59,23 +59,23 @@
     
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
     
-    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/categories/Android/BugFree/"/>
+    <category term="BugFree" scheme="http://www.yangchaofan.cn/categories/Android/BugFree/"/>
     
-    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
-    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/tags/BugFree/"/>
+    <category term="BugFree" scheme="http://www.yangchaofan.cn/tags/BugFree/"/>
     
   </entry>
   
   <entry>
     <title>职业稳定性杂谈</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/04/Career-stability-experience/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/04/Career-stability-experience/</id>
+    <link href="http://www.yangchaofan.cn/2021/04/Career-stability-experience/"/>
+    <id>http://www.yangchaofan.cn/2021/04/Career-stability-experience/</id>
     <published>2021-04-03T03:26:22.000Z</published>
     <updated>2021-04-17T14:22:56.433Z</updated>
     
@@ -85,19 +85,19 @@
     
     
     
-    <category term="杂谈" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/"/>
+    <category term="杂谈" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/"/>
     
-    <category term="日记" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
+    <category term="日记" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
     
     
-    <category term="程序人生，杂谈" scheme="http://idolcoder.gitee.io/blog/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/"/>
+    <category term="程序人生，杂谈" scheme="http://www.yangchaofan.cn/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
   <entry>
     <title>mtk-log</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/02/mtk-log/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/02/mtk-log/</id>
+    <link href="http://www.yangchaofan.cn/2021/02/mtk-log/"/>
+    <id>http://www.yangchaofan.cn/2021/02/mtk-log/</id>
     <published>2021-02-27T01:13:12.000Z</published>
     <updated>2021-04-02T12:50:08.517Z</updated>
     
@@ -107,23 +107,23 @@
     
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
     
-    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/categories/Android/BugFree/"/>
+    <category term="BugFree" scheme="http://www.yangchaofan.cn/categories/Android/BugFree/"/>
     
-    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
-    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/tags/BugFree/"/>
+    <category term="BugFree" scheme="http://www.yangchaofan.cn/tags/BugFree/"/>
     
   </entry>
   
   <entry>
     <title>BugFree三剑客异常、日志、工具</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/02/android-bugfree-three-lines/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/02/android-bugfree-three-lines/</id>
+    <link href="http://www.yangchaofan.cn/2021/02/android-bugfree-three-lines/"/>
+    <id>http://www.yangchaofan.cn/2021/02/android-bugfree-three-lines/</id>
     <published>2021-02-27T00:13:12.000Z</published>
     <updated>2021-02-27T04:21:16.707Z</updated>
     
@@ -133,23 +133,23 @@
     
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
     
-    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/categories/Android/BugFree/"/>
+    <category term="BugFree" scheme="http://www.yangchaofan.cn/categories/Android/BugFree/"/>
     
-    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
-    <category term="BugFree" scheme="http://idolcoder.gitee.io/blog/tags/BugFree/"/>
+    <category term="BugFree" scheme="http://www.yangchaofan.cn/tags/BugFree/"/>
     
   </entry>
   
   <entry>
     <title>Android骨架屏详解</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/02/Client-Skeleton-Screen/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/02/Client-Skeleton-Screen/</id>
+    <link href="http://www.yangchaofan.cn/2021/02/Client-Skeleton-Screen/"/>
+    <id>http://www.yangchaofan.cn/2021/02/Client-Skeleton-Screen/</id>
     <published>2021-02-27T00:13:12.000Z</published>
     <updated>2021-06-07T13:29:48.897Z</updated>
     
@@ -161,25 +161,25 @@
     
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
     
-    <category term="性能优化" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    <category term="性能优化" scheme="http://www.yangchaofan.cn/categories/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
-    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
-    <category term="Android性能优化" scheme="http://idolcoder.gitee.io/blog/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    <category term="Android性能优化" scheme="http://www.yangchaofan.cn/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
-    <category term="AndroidUI优化" scheme="http://idolcoder.gitee.io/blog/tags/AndroidUI%E4%BC%98%E5%8C%96/"/>
+    <category term="AndroidUI优化" scheme="http://www.yangchaofan.cn/tags/AndroidUI%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>《学习革命解读》心得</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/02/learn-relovation-notes/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/02/learn-relovation-notes/</id>
+    <link href="http://www.yangchaofan.cn/2021/02/learn-relovation-notes/"/>
+    <id>http://www.yangchaofan.cn/2021/02/learn-relovation-notes/</id>
     <published>2021-02-18T14:00:49.000Z</published>
     <updated>2021-04-10T16:05:48.945Z</updated>
     
@@ -211,19 +211,19 @@
     
     
     
-    <category term="家庭教育" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
+    <category term="家庭教育" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
     
-    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    <category term="学习方法" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
     
     
-    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    <category term="学习方法" scheme="http://www.yangchaofan.cn/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>《高效学习方法全集》日记</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/02/super-learn-skills/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/02/super-learn-skills/</id>
+    <link href="http://www.yangchaofan.cn/2021/02/super-learn-skills/"/>
+    <id>http://www.yangchaofan.cn/2021/02/super-learn-skills/</id>
     <published>2021-02-17T07:26:29.000Z</published>
     <updated>2021-02-17T07:52:02.425Z</updated>
     
@@ -255,19 +255,19 @@
     
     
     
-    <category term="家庭教育" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
+    <category term="家庭教育" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
     
-    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    <category term="学习方法" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
     
     
-    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    <category term="学习方法" scheme="http://www.yangchaofan.cn/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>《如何高效学习》心得</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/02/study-more-efficiency/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/02/study-more-efficiency/</id>
+    <link href="http://www.yangchaofan.cn/2021/02/study-more-efficiency/"/>
+    <id>http://www.yangchaofan.cn/2021/02/study-more-efficiency/</id>
     <published>2021-02-17T04:37:23.000Z</published>
     <updated>2021-04-02T12:51:32.440Z</updated>
     
@@ -299,19 +299,19 @@
     
     
     
-    <category term="家庭教育" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
+    <category term="家庭教育" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
     
-    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    <category term="学习方法" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
     
     
-    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    <category term="学习方法" scheme="http://www.yangchaofan.cn/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>《超效学习方法解码》心得</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/</id>
+    <link href="http://www.yangchaofan.cn/2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/"/>
+    <id>http://www.yangchaofan.cn/2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/</id>
     <published>2021-02-17T03:37:23.000Z</published>
     <updated>2021-02-17T07:41:30.517Z</updated>
     
@@ -343,19 +343,19 @@
     
     
     
-    <category term="家庭教育" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
+    <category term="家庭教育" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
     
-    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    <category term="学习方法" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
     
     
-    <category term="学习方法" scheme="http://idolcoder.gitee.io/blog/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
+    <category term="学习方法" scheme="http://www.yangchaofan.cn/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>程序员吃的是青春饭吗？</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</id>
+    <link href="http://www.yangchaofan.cn/2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/"/>
+    <id>http://www.yangchaofan.cn/2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</id>
     <published>2021-02-16T01:50:49.000Z</published>
     <updated>2021-04-03T18:24:59.810Z</updated>
     
@@ -376,19 +376,19 @@
     
     
     
-    <category term="杂谈" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/"/>
+    <category term="杂谈" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/"/>
     
-    <category term="日记" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
+    <category term="日记" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
     
     
-    <category term="程序人生，杂谈" scheme="http://idolcoder.gitee.io/blog/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/"/>
+    <category term="程序人生，杂谈" scheme="http://www.yangchaofan.cn/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
   <entry>
     <title>波尔克</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/02/website_nickname/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/02/website_nickname/</id>
+    <link href="http://www.yangchaofan.cn/2021/02/website_nickname/"/>
+    <id>http://www.yangchaofan.cn/2021/02/website_nickname/</id>
     <published>2021-02-16T00:50:49.000Z</published>
     <updated>2021-04-02T13:07:56.782Z</updated>
     
@@ -401,19 +401,19 @@
     
     
     
-    <category term="杂谈" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/"/>
+    <category term="杂谈" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/"/>
     
-    <category term="日记" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
+    <category term="日记" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
     
     
-    <category term="杂谈" scheme="http://idolcoder.gitee.io/blog/tags/%E6%9D%82%E8%B0%88/"/>
+    <category term="杂谈" scheme="http://www.yangchaofan.cn/tags/%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
   <entry>
     <title>Android插件化技术选型</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/01/Android-plug-in-technology-selection/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/01/Android-plug-in-technology-selection/</id>
+    <link href="http://www.yangchaofan.cn/2021/01/Android-plug-in-technology-selection/"/>
+    <id>http://www.yangchaofan.cn/2021/01/Android-plug-in-technology-selection/</id>
     <published>2021-01-27T12:33:07.000Z</published>
     <updated>2021-06-07T12:39:13.697Z</updated>
     
@@ -425,23 +425,23 @@
     
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
     
-    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
     
-    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
-    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
   <entry>
     <title>Android组件化实践指南</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/01/Android-component-Practice-Guide/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/01/Android-component-Practice-Guide/</id>
+    <link href="http://www.yangchaofan.cn/2021/01/Android-component-Practice-Guide/"/>
+    <id>http://www.yangchaofan.cn/2021/01/Android-component-Practice-Guide/</id>
     <published>2021-01-17T12:31:06.000Z</published>
     <updated>2021-06-10T15:11:10.345Z</updated>
     
@@ -453,25 +453,25 @@
     
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
     
-    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
     
-    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
-    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
     
-    <category term="技术选型" scheme="http://idolcoder.gitee.io/blog/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
     
   </entry>
   
   <entry>
     <title>Android大厂架构设计最佳实践</title>
-    <link href="http://idolcoder.gitee.io/blog/2021/01/android-structure-best-practice/"/>
-    <id>http://idolcoder.gitee.io/blog/2021/01/android-structure-best-practice/</id>
+    <link href="http://www.yangchaofan.cn/2021/01/android-structure-best-practice/"/>
+    <id>http://www.yangchaofan.cn/2021/01/android-structure-best-practice/</id>
     <published>2021-01-07T12:28:33.000Z</published>
     <updated>2021-06-10T15:29:03.737Z</updated>
     
@@ -483,25 +483,25 @@
     
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
     
-    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
     
-    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
-    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
     
-    <category term="技术选型" scheme="http://idolcoder.gitee.io/blog/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
     
   </entry>
   
   <entry>
     <title>AndroidHandler百问百答</title>
-    <link href="http://idolcoder.gitee.io/blog/2020/08/handler%20TOP%20100%20Questions/"/>
-    <id>http://idolcoder.gitee.io/blog/2020/08/handler%20TOP%20100%20Questions/</id>
+    <link href="http://www.yangchaofan.cn/2020/08/handler%20TOP%20100%20Questions/"/>
+    <id>http://www.yangchaofan.cn/2020/08/handler%20TOP%20100%20Questions/</id>
     <published>2020-08-10T01:50:49.000Z</published>
     <updated>2021-03-06T13:51:20.688Z</updated>
     
@@ -513,23 +513,23 @@
     
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
     
-    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
     
-    <category term="应用层" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E5%BA%94%E7%94%A8%E5%B1%82/"/>
+    <category term="应用层" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BA%94%E7%94%A8%E5%B1%82/"/>
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
-    <category term="Handler" scheme="http://idolcoder.gitee.io/blog/tags/Handler/"/>
+    <category term="Handler" scheme="http://www.yangchaofan.cn/tags/Handler/"/>
     
   </entry>
   
   <entry>
     <title>Android 热补丁技术详解大全</title>
-    <link href="http://idolcoder.gitee.io/blog/2019/06/android-hotfix/"/>
-    <id>http://idolcoder.gitee.io/blog/2019/06/android-hotfix/</id>
+    <link href="http://www.yangchaofan.cn/2019/06/android-hotfix/"/>
+    <id>http://www.yangchaofan.cn/2019/06/android-hotfix/</id>
     <published>2019-06-08T13:39:07.000Z</published>
     <updated>2021-06-09T13:27:45.478Z</updated>
     
@@ -541,23 +541,23 @@
     
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
     
-    <category term="面试" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
     
-    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
     
     
-    <category term="开源框架" scheme="http://idolcoder.gitee.io/blog/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
     
-    <category term="技术选型" scheme="http://idolcoder.gitee.io/blog/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
     
   </entry>
   
   <entry>
     <title>为什么要花3年时间面试一个人？</title>
-    <link href="http://idolcoder.gitee.io/blog/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/"/>
-    <id>http://idolcoder.gitee.io/blog/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/</id>
+    <link href="http://www.yangchaofan.cn/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/"/>
+    <id>http://www.yangchaofan.cn/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/</id>
     <published>2019-01-16T01:50:49.000Z</published>
     <updated>2021-03-14T09:21:52.838Z</updated>
     
@@ -569,19 +569,19 @@
     
     
     
-    <category term="杂谈" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/"/>
+    <category term="杂谈" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/"/>
     
-    <category term="日记" scheme="http://idolcoder.gitee.io/blog/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
+    <category term="日记" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
     
     
-    <category term="程序人生，杂谈" scheme="http://idolcoder.gitee.io/blog/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/"/>
+    <category term="程序人生，杂谈" scheme="http://www.yangchaofan.cn/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
   <entry>
     <title>架构选型之MVC、MVP、MVVM</title>
-    <link href="http://idolcoder.gitee.io/blog/2018/02/MVC-MVP-MVVM%20-of%20-architecture%20-selection/"/>
-    <id>http://idolcoder.gitee.io/blog/2018/02/MVC-MVP-MVVM%20-of%20-architecture%20-selection/</id>
+    <link href="http://www.yangchaofan.cn/2018/02/MVC-MVP-MVVM%20-of%20-architecture%20-selection/"/>
+    <id>http://www.yangchaofan.cn/2018/02/MVC-MVP-MVVM%20-of%20-architecture%20-selection/</id>
     <published>2018-02-10T14:50:37.000Z</published>
     <updated>2021-06-10T15:31:33.954Z</updated>
     
@@ -594,21 +594,21 @@
     
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/categories/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
     
-    <category term="项目架构" scheme="http://idolcoder.gitee.io/blog/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
     
     
-    <category term="Android" scheme="http://idolcoder.gitee.io/blog/tags/Android/"/>
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
-    <category term="技术选型" scheme="http://idolcoder.gitee.io/blog/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
     
   </entry>
   
   <entry>
     <title>详解五大排序算法</title>
-    <link href="http://idolcoder.gitee.io/blog/2016/06/five-sort-algorithm/"/>
-    <id>http://idolcoder.gitee.io/blog/2016/06/five-sort-algorithm/</id>
+    <link href="http://www.yangchaofan.cn/2016/06/five-sort-algorithm/"/>
+    <id>http://www.yangchaofan.cn/2016/06/five-sort-algorithm/</id>
     <published>2016-06-16T14:16:54.000Z</published>
     <updated>2021-04-11T02:38:51.711Z</updated>
     
@@ -620,12 +620,12 @@
     
     
     
-    <category term="计算机科学" scheme="http://idolcoder.gitee.io/blog/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+    <category term="计算机科学" scheme="http://www.yangchaofan.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
     
-    <category term="算法" scheme="http://idolcoder.gitee.io/blog/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E7%AE%97%E6%B3%95/"/>
+    <category term="算法" scheme="http://www.yangchaofan.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="算法" scheme="http://idolcoder.gitee.io/blog/tags/%E7%AE%97%E6%B3%95/"/>
+    <category term="算法" scheme="http://www.yangchaofan.cn/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
