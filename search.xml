@@ -250,7 +250,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#x6f;&#109;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#103;&#x69;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;">&#103;&#x69;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -297,7 +297,7 @@
 <td>生成并本地预览</td>
 </tr>
 </tbody></table>
-<h1 id="markdwon使用技巧"><a href="#markdwon使用技巧" class="headerlink" title="markdwon使用技巧"></a>markdwon使用技巧<a href="#markdwon使用技巧" class="header-anchor">#</a></h1><p>更多markdwon技巧可以移步至我的<a href="https://idolcoder.gitee.io/quickshortkey/#/typora">Typora知识Wiki</a></p>
+<h1 id="markdwon使用技巧"><a href="#markdwon使用技巧" class="headerlink" title="markdwon使用技巧"></a>markdwon使用技巧<a href="#markdwon使用技巧" class="header-anchor">#</a></h1><p>更多markdwon技巧可以移步至我的<a href="https://shaunsheep.github.io/quickshortkey/#/typora">Typora知识Wiki</a></p>
 <h2 id="缩放图片四种种技巧"><a href="#缩放图片四种种技巧" class="headerlink" title="缩放图片四种种技巧"></a>缩放图片四种种技巧<a href="#缩放图片四种种技巧" class="header-anchor">#</a></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="code"><pre><span class="line">&lt;img src=&quot;&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;</span><br><span class="line">![test image size](url)&#123;:class=&quot;img-responsive&quot;&#125;</span><br><span class="line">![test image size](url)&#123;:height=&quot;50%&quot; width=&quot;50%&quot;&#125;</span><br><span class="line">![test image size](url)&#123;:height=&quot;100px&quot; width=&quot;400px&quot;&#125;</span><br></pre></td></tr></table></figure></div>
 <h2 id="设置字体颜色"><a href="#设置字体颜色" class="headerlink" title="设置字体颜色"></a>设置字体颜色<a href="#设置字体颜色" class="header-anchor">#</a></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="HTML"><figure class="iseeu highlight /html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">style</span>=<span class="string">&quot;color:green&quot;</span>&gt;</span>**数学日记**<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
 <h2 id="使用数学公式"><a href="#使用数学公式" class="headerlink" title="使用数学公式"></a>使用数学公式<a href="#使用数学公式" class="header-anchor">#</a></h2><table>
@@ -339,7 +339,7 @@
 <figure class="highlight"><table><tr><td class="code"><pre><span class="line">$\color&#123;red&#125;&#123;红色字&#125;$</span><br></pre></td></tr></table></figure>
 <p>效果：$\color{red}{红色字}$</p>
 <h2 id="markdown如何等比缩放图片"><a href="#markdown如何等比缩放图片" class="headerlink" title="markdown如何等比缩放图片"></a>markdown如何等比缩放图片<a href="#markdown如何等比缩放图片" class="header-anchor">#</a></h2><p>在img标签里面只设置宽，不设置高，图片就会等比例缩放。</p>
-<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题<a href="#常见问题" class="header-anchor">#</a></h1><h2 id="如何搭建一个wiki页面"><a href="#如何搭建一个wiki页面" class="headerlink" title="如何搭建一个wiki页面"></a>如何搭建一个wiki页面<a href="#如何搭建一个wiki页面" class="header-anchor">#</a></h2><p>参考我的<a href="https://idolcoder.gitee.io/quickshortkey/#/">如何做一篇wiki</a></p>
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题<a href="#常见问题" class="header-anchor">#</a></h1><h2 id="如何搭建一个wiki页面"><a href="#如何搭建一个wiki页面" class="headerlink" title="如何搭建一个wiki页面"></a>如何搭建一个wiki页面<a href="#如何搭建一个wiki页面" class="header-anchor">#</a></h2><p>参考我的<a href="https://shaunsheep.github.io/quickshortkey/#/">如何做一篇wiki</a></p>
 <h2 id="码云部署hexo站点-css样式不显示"><a href="#码云部署hexo站点-css样式不显示？" class="headerlink" title="码云部署hexo站点 css样式不显示？"></a><strong>码云部署hexo站点 css样式不显示？</strong><a href="#码云部署hexo站点-css样式不显示" class="header-anchor">#</a></h2><p>原因：仓库地址与个性地址url不一致<br>解决：修改_config.yml<br>    <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="XML"><figure class="iseeu highlight /xml"><table><tr><td class="code"><pre><span class="line">    url: https://ipvb.gitee.io/blog</span><br><span class="line">    root: /blog</span><br><span class="line">    ​```</span><br><span class="line"></span><br><span class="line">其他码云部署的问题参考[这里](https://gitee.com/help/articles/4136#article-header3)</span><br><span class="line"></span><br><span class="line">## hexo如何缩放图片</span><br><span class="line"></span><br><span class="line">`<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&quot;</span> <span class="attr">width</span>=<span class="string">&quot;50%&quot;</span> <span class="attr">height</span>=<span class="string">&quot;50%&quot;</span>&gt;</span>`</span><br><span class="line"></span><br><span class="line">## hexo如何安装主题</span><br><span class="line"></span><br><span class="line">1. 找到合适的主题列表，推荐以下2个：</span><br><span class="line"></span><br><span class="line">   [有哪些好看的 Hexo 主题？](https://www.zhihu.com/question/24422335)</span><br><span class="line"></span><br><span class="line">   [hexo.thems](https://hexo.io/themes/)</span><br><span class="line"></span><br><span class="line">2. 安装主题至根目录，例如找到next主题，将其克隆岛根目录/thesms/next下</span><br><span class="line"></span><br><span class="line">    ```js</span><br><span class="line">     git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure></div><br>3. 阅读<a href="https://github.com/iissnan/hexo-theme-next">next文档</a></p>
 <pre><code>1. 引用主题：在config.yml中修改主题名称：`theme: next`
 2. 发布时遇到 bug`&#123;% extends '_layout.swig' %&#125;`；输入指令解决：`npm i hexo-renderer-swig`
@@ -500,13 +500,13 @@ post_wordcount:
 <li><input disabled type="checkbox"> 《Android相机全解》</li>
 <li><input disabled type="checkbox"> 编程WIki-计算机基础</li>
 <li><input disabled type="checkbox"> 编程WIki-编程基础-C</li>
-<li><input disabled type="checkbox"> <a href="http://idolcoder.gitee.io/cs-programming-knowledge/#/newnotes/Java">编程WIki-编程基础-Java</a></li>
-<li><input disabled type="checkbox"> <a href="http://idolcoder.gitee.io/cs-programming-knowledge/#/newnotes/java/jvm">编程WIki-编程基础-JVM</a></li>
-<li><input disabled type="checkbox"> <a href="http://idolcoder.gitee.io/cs-programming-knowledge/#/newnotes/android">编程WIki-编程基础-Android资深进阶指南</a></li>
-<li><input disabled type="checkbox"> <a href="http://idolcoder.gitee.io/cs-programming-knowledge/#/newnotes/leetcode-solution">编程Wiki-算法-leetcode题解</a></li>
-<li><input checked disabled type="checkbox"> <a href="http://idolcoder.gitee.io/blog/2021/02/android-bugfree-three-lines/"><del>《异常分析三剑客》</del></a></li>
-<li><input checked disabled type="checkbox"> <a href="http://idolcoder.gitee.io/quickshortkey/#/git"><del>快捷键Wiki-《GIt全解——从配置文件到指令执行》</del></a></li>
-<li><input checked disabled type="checkbox"> <a href="http://idolcoder.gitee.io/quickshortkey/#/adb"><del>快捷键Wiki-《ADB：开发及自测常用指令》</del></a></li>
+<li><input disabled type="checkbox"> <a href="https://shaunsheep.github.io/cs-wiki/#/newnotes/Java">编程WIki-编程基础-Java</a></li>
+<li><input disabled type="checkbox"> <a href="https://shaunsheep.github.io/cs-wiki/#/newnotes/java/jvm">编程WIki-编程基础-JVM</a></li>
+<li><input disabled type="checkbox"> <a href="https://shaunsheep.github.io/cs-wiki/#/newnotes/android">编程WIki-编程基础-Android资深进阶指南</a></li>
+<li><input disabled type="checkbox"> <a href="https://shaunsheep.github.io/cs-wiki/#/newnotes/leetcode-solution">编程Wiki-算法-leetcode题解</a></li>
+<li><input checked disabled type="checkbox"> <a href="http://www.yangchaofan.cn/2021/02/android-bugfree-three-lines/"><del>《异常分析三剑客》</del></a></li>
+<li><input checked disabled type="checkbox"> <a href="https://shaunsheep.github.io/quickshortkey//#/git"><del>快捷键Wiki-《GIt全解——从配置文件到指令执行》</del></a></li>
+<li><input checked disabled type="checkbox"> <a href="https://shaunsheep.github.io/quickshortkey/#/adb"><del>快捷键Wiki-《ADB：开发及自测常用指令》</del></a></li>
 <li><input disabled type="checkbox"> 《Activity 启动模式快问秒答》，SingleTop的坑，SingleInstance的坑，20种flags全解析，FLAG_ACTIVITY_NEW_TASK结合FLAG_ACTIVITY_MULTIPLE_TASK使用的坑</li>
 </ul>
 <p>修改文章  </p>
@@ -786,7 +786,7 @@ post_wordcount:
 <li><p>So修复：接口替换、插桩实现</p>
 </li>
 </ol>
-<p>可以参考我的这篇文章<a href="http://idolcoder.gitee.io/blog//2019/06/android-hotfix/">Android 热补丁技术详解大全</a></p>
+<p>可以参考我的这篇文章<a href="http://www.yangchaofan.cn//2019/06/android-hotfix/">Android 热补丁技术详解大全</a></p>
 </blockquote>
 <p> 热补丁方案因技术实现不同导致有很多种实现 ，常见的热补丁方案如下：</p>
 <table>
