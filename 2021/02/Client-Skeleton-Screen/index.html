@@ -546,7 +546,7 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="android骨架屏详解"><a href="#Android骨架屏详解" class="headerlink" title="Android骨架屏详解"></a>Android骨架屏详解<a href="#android骨架屏详解" class="header-anchor">#</a></h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><blockquote>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1><span id="android骨架屏详解">Android骨架屏详解</span><a href="#android骨架屏详解" class="header-anchor">#</a></h1><h1><span id="前言">前言</span><a href="#前言" class="header-anchor">#</a></h1><blockquote>
 <p>本文是AndroidUI加载优化系列的文章</p>
 </blockquote>
 <p>作为客户端开发者，一定对形如菊花的loading进度条组件非常熟悉。简单来说，菊花图及菊花图衍生出来的加载动画是作为提升UI加载性能的解决方案之一，深受开发者和设计师喜爱。</p>
@@ -573,7 +573,7 @@
 <li>骨架屏的技术选型</li>
 <li>骨架屏有哪些最佳实践</li>
 </ul>
-<h1 id="骨架屏介绍"><a href="#骨架屏介绍" class="headerlink" title="骨架屏介绍"></a>骨架屏介绍<a href="#骨架屏介绍" class="header-anchor">#</a></h1><p>提起骨架屏，必须要提到骨架屏（Skeleton Screen）一词的发明者——<a target="_blank" rel="noopener" href="https://www.lukew.com/about/">Luke Wroblewski</a> ，Google产品总监，早在2013年他首次提出了骨架屏的概念，并将这一概念运用到他的产品Polar App中，</p>
+<h1><span id="骨架屏介绍">骨架屏介绍</span><a href="#骨架屏介绍" class="header-anchor">#</a></h1><p>提起骨架屏，必须要提到骨架屏（Skeleton Screen）一词的发明者——<a target="_blank" rel="noopener" href="https://www.lukew.com/about/">Luke Wroblewski</a> ，Google产品总监，早在2013年他首次提出了骨架屏的概念，并将这一概念运用到他的产品Polar App中，</p>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/68747470733a2f2f692e6c6f6c692e6e65742f323031382f30352f30342f356165626463316237396331632e706e67" width="60%" alt>
@@ -594,7 +594,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
 <blockquote>
 <p>典型的骨架屏布局参考</p>
 </blockquote>
-<h2 id="facebook"><a href="#Facebook" class="headerlink" title="Facebook"></a>Facebook<a href="#facebook" class="header-anchor">#</a></h2><center>
+<h2><span id="facebook">Facebook</span><a href="#facebook" class="header-anchor">#</a></h2><center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210508102104630.png" width="60%" alt>
     <br>
@@ -606,7 +606,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
       </div>
 </center>
 
-<h2 id="饿了么"><a href="#饿了么" class="headerlink" title="饿了么"></a>饿了么<a href="#饿了么" class="header-anchor">#</a></h2><center>
+<h2><span id="饿了么">饿了么</span><a href="#饿了么" class="header-anchor">#</a></h2><center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210508102442399.png" width="60%" alt>
     <br>
@@ -618,7 +618,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
       </div>
 </center>
 
-<h2 id="京东plus"><a href="#京东Plus" class="headerlink" title="京东Plus"></a>京东Plus<a href="#京东plus" class="header-anchor">#</a></h2><center>
+<h2><span id="京东plus">京东Plus</span><a href="#京东plus" class="header-anchor">#</a></h2><center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/京东plus骨架屏.gif" width="60%" alt>
     <br>
@@ -630,7 +630,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
       </div>
 </center>
 
-<h2 id="马蜂窝"><a href="#马蜂窝" class="headerlink" title="马蜂窝"></a>马蜂窝<a href="#马蜂窝" class="header-anchor">#</a></h2><center>
+<h2><span id="马蜂窝">马蜂窝</span><a href="#马蜂窝" class="header-anchor">#</a></h2><center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/af670ce6fa0b9b2a70fcbb779d10e7a3758.jpg" width="60%" alt>
     <br>
@@ -656,7 +656,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
 
 
 
-<h1 id="骨架屏场景"><a href="#骨架屏场景" class="headerlink" title="骨架屏场景"></a>骨架屏场景<a href="#骨架屏场景" class="header-anchor">#</a></h1><p><strong>为什么需要骨架屏？</strong></p>
+<h1><span id="骨架屏场景">骨架屏场景</span><a href="#骨架屏场景" class="header-anchor">#</a></h1><p><strong>为什么需要骨架屏？</strong></p>
 <ul>
 <li><p>用户所需</p>
 <p>在最开始关于 MIT 2014 年的研究<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Akamai](http://www.akamai.com/html/about/press/releases/2009/press_091409.html) 
@@ -667,7 +667,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
 <p>移动端：Android和IOS仍然占据统治地位，Android通常由xml-&gt;View对象-&gt;SurfaceFinger的形式将布局显示到屏幕上,IOS也类似有一个创建对象-&gt;设置数据-&gt;显示到屏幕的过程。这些过程都是在页面启动的过程完成的。如何通过降低页面启动时间，留存用户迫在眉睫。</p>
 </li>
 </ul>
-<h1 id="骨架屏通用方案"><a href="#骨架屏通用方案" class="headerlink" title="骨架屏通用方案"></a>骨架屏通用方案<a href="#骨架屏通用方案" class="header-anchor">#</a></h1><table>
+<h1><span id="骨架屏通用方案">骨架屏通用方案</span><a href="#骨架屏通用方案" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
 <th>名称</th>
@@ -696,7 +696,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
 <td>不支持开发环境<br>仅支持线上URL生成骨架屏<br>存在重定向的页面，自动生成的页面效果较差<br></td>
 </tr>
 </tbody></table>
-<h1 id="骨架屏最佳实践"><a href="#骨架屏最佳实践" class="headerlink" title="骨架屏最佳实践"></a>骨架屏最佳实践<a href="#骨架屏最佳实践" class="header-anchor">#</a></h1><h2 id="饿了么前端最佳实践"><a href="#饿了么前端最佳实践" class="headerlink" title="饿了么前端最佳实践"></a>饿了么前端最佳实践<a href="#饿了么前端最佳实践" class="header-anchor">#</a></h2><p>饿了么前端实现骨架屏经过了2个阶段<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[一种自动化生成骨架屏的方案/jocs.github.io · GitHub](https://github.com/Jocs/jocs.github.io/issues/22)
+<h1><span id="骨架屏最佳实践">骨架屏最佳实践</span><a href="#骨架屏最佳实践" class="header-anchor">#</a></h1><h2><span id="饿了么前端最佳实践">饿了么前端最佳实践</span><a href="#饿了么前端最佳实践" class="header-anchor">#</a></h2><p>饿了么前端实现骨架屏经过了2个阶段<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[一种自动化生成骨架屏的方案/jocs.github.io · GitHub](https://github.com/Jocs/jocs.github.io/issues/22)
 ">[2]</span></a></sup></p>
 <table>
 <thead>
@@ -717,8 +717,8 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
 <td>饿了么自研，且需要腾出人力来维护插件</td>
 </tr>
 </tbody></table>
-<h2 id="苹果公司最佳实践"><a href="#苹果公司最佳实践" class="headerlink" title="苹果公司最佳实践"></a>苹果公司最佳实践<a href="#苹果公司最佳实践" class="header-anchor">#</a></h2><p>苹果公司也将骨架屏的概念写入到<a target="_blank" rel="noopener" href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/LaunchImages.html">iOS Human Interface Guidelines</a> 手册中，使用了新的<code>launch images</code>概念代替了骨架屏的说法</p>
-<h2 id="马蜂窝电商前端最佳实践"><a href="#马蜂窝电商前端最佳实践" class="headerlink" title="马蜂窝电商前端最佳实践"></a>马蜂窝电商前端最佳实践<a href="#马蜂窝电商前端最佳实践" class="header-anchor">#</a></h2><p>基于对现有方案的借鉴，我们<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[一种对开发更友好的前端骨架屏自动生成方案 - 马蜂窝技术](https://www.cnblogs.com/mfwtech/p/11474796.html)">[3]</span></a></sup>想到了在配置文件中指定要生成骨架屏的页面 URL 和文件输出的目录，运行时读取配置文件中的配置项，通过 Puppeteer 打开指定的页面并注入 evalDom.js 的方法。因为此 JS 是在 Puppeteer 里面执行的，所以可以获取到当前页面完整的 DOM 结构，这给我们留下了非常大的发挥空间。</p>
+<h2><span id="苹果公司最佳实践">苹果公司最佳实践</span><a href="#苹果公司最佳实践" class="header-anchor">#</a></h2><p>苹果公司也将骨架屏的概念写入到<a target="_blank" rel="noopener" href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/LaunchImages.html">iOS Human Interface Guidelines</a> 手册中，使用了新的<code>launch images</code>概念代替了骨架屏的说法</p>
+<h2><span id="马蜂窝电商前端最佳实践">马蜂窝电商前端最佳实践</span><a href="#马蜂窝电商前端最佳实践" class="header-anchor">#</a></h2><p>基于对现有方案的借鉴，我们<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[一种对开发更友好的前端骨架屏自动生成方案 - 马蜂窝技术](https://www.cnblogs.com/mfwtech/p/11474796.html)">[3]</span></a></sup>想到了在配置文件中指定要生成骨架屏的页面 URL 和文件输出的目录，运行时读取配置文件中的配置项，通过 Puppeteer 打开指定的页面并注入 evalDom.js 的方法。因为此 JS 是在 Puppeteer 里面执行的，所以可以获取到当前页面完整的 DOM 结构，这给我们留下了非常大的发挥空间。</p>
 <p>最初我们是从获取到的 DOM 结构中的 body 标签出发，递归去处理页面上的所有节点，处理完成后用生成的 DIV 替换原有元素的位置。第一版方案中通过 getBoundingClientRect 和 getComputedStyle 的方法来获取元素所有计算属性和相对于视口的宽高和位置，然后结合元素本身的样式属性递归渲染，保留页面原始 DOM 嵌套层次。</p>
 <p>但由于能够决定元素位置的属性实在太多，如 position，z-index、width、height、top、display、box-sizing、flex 等都需要考虑，导致无法聚焦对页面 DOM 结构处理的逻辑，而且这些属性在处理完成后还需要加到最终生成骨架屏节点的 style 上，这样骨架屏文件可能比原来完整的页面结构还大，这肯定不是我们希望的。</p>
 <p>优化后的方案是用 getBoundingClientRect 和 getComputedStyle 获取元素相关属性，然后直接通过绝对定位的方式来生成最终的骨架屏节点。这样在页面上最终需要的属性主要是 position、z-index、top、left、width、height、background、border-radius。除了无法保证页面原始的 DOM 结构，其它需求基本都可以满足，也更加聚焦于节点的处理。</p>
@@ -736,7 +736,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
 </center>
 
 
-<h1 id="骨架屏开源库"><a href="#骨架屏开源库" class="headerlink" title="骨架屏开源库"></a>骨架屏开源库<a href="#骨架屏开源库" class="header-anchor">#</a></h1><h2 id="android"><a href="#Android" class="headerlink" title="Android"></a>Android<a href="#android" class="header-anchor">#</a></h2><table>
+<h1><span id="骨架屏开源库">骨架屏开源库</span><a href="#骨架屏开源库" class="header-anchor">#</a></h1><h2><span id="android">Android</span><a href="#android" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th>名称</th>
@@ -756,7 +756,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
 <td><img src="http://cdn.yangchaofan.cn/typora/13855150-c41106e6d45e5c03" alt="img"></td>
 </tr>
 </tbody></table>
-<h2 id="web"><a href="#Web" class="headerlink" title="Web"></a>Web<a href="#web" class="header-anchor">#</a></h2><table>
+<h2><span id="web">Web</span><a href="#web" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th>名称</th>
@@ -772,7 +772,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
 <td><img src="http://cdn.yangchaofan.cn/typora/68747470733a2f2f692e6c6f6c692e6e65742f323031382f30352f30342f356165626463383165656530662e706e67" alt="5aebdc81eee0f"></td>
 </tr>
 </tbody></table>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考<a href="#参考" class="header-anchor">#</a></h1><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="http://www.akamai.com/html/about/press/releases/2009/press_091409.html">Akamai</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="https://github.com/Jocs/jocs.github.io/issues/22">一种自动化生成骨架屏的方案/jocs.github.io · GitHub</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mfwtech/p/11474796.html">一种对开发更友好的前端骨架屏自动生成方案 - 马蜂窝技术</a><a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div><link rel="stylesheet" href="/css/bilicard.css" type="text/css">
+<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="http://www.akamai.com/html/about/press/releases/2009/press_091409.html">Akamai</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="https://github.com/Jocs/jocs.github.io/issues/22">一种自动化生成骨架屏的方案/jocs.github.io · GitHub</a><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="https://www.cnblogs.com/mfwtech/p/11474796.html">一种对开发更友好的前端骨架屏自动生成方案 - 马蜂窝技术</a><a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div><link rel="stylesheet" href="/css/bilicard.css" type="text/css">
 
         
 
@@ -1112,7 +1112,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -1207,6 +1207,10 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
                   
                   
                     <li class='my-links-of-blogroll-li'>
+                      <a href="/2021/05/android-fat-aar-useage/" title="Android依赖库处理框架——Fataar" target="_blank">Android依赖库处理框架——Fataar</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
                       <a href="/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/" title="Android Crash实践策略最全面思考" target="_blank">Android Crash实践策略最全面思考</a>
                     </li>
                   
@@ -1220,10 +1224,6 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
                   
                     <li class='my-links-of-blogroll-li'>
                       <a href="/2021/02/mtk-log/" title="mtk-log" target="_blank">mtk-log</a>
-                    </li>
-                  
-                    <li class='my-links-of-blogroll-li'>
-                      <a href="/2021/02/android-bugfree-three-lines/" title="BugFree三剑客异常、日志、工具" target="_blank">BugFree三剑客异常、日志、工具</a>
                     </li>
                   
                 </ul>
@@ -1539,7 +1539,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#android%E9%AA%A8%E6%9E%B6%E5%B1%8F%E8%AF%A6%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">Android骨架屏详解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AA%A8%E6%9E%B6%E5%B1%8F%E4%BB%8B%E7%BB%8D"><span class="nav-number">3.</span> <span class="nav-text">骨架屏介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#facebook"><span class="nav-number">3.1.</span> <span class="nav-text">Facebook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A5%BF%E4%BA%86%E4%B9%88"><span class="nav-number">3.2.</span> <span class="nav-text">饿了么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%AC%E4%B8%9Cplus"><span class="nav-number">3.3.</span> <span class="nav-text">京东Plus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%AC%E8%9C%82%E7%AA%9D"><span class="nav-number">3.4.</span> <span class="nav-text">马蜂窝</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AA%A8%E6%9E%B6%E5%B1%8F%E5%9C%BA%E6%99%AF"><span class="nav-number">4.</span> <span class="nav-text">骨架屏场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AA%A8%E6%9E%B6%E5%B1%8F%E9%80%9A%E7%94%A8%E6%96%B9%E6%A1%88"><span class="nav-number">5.</span> <span class="nav-text">骨架屏通用方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AA%A8%E6%9E%B6%E5%B1%8F%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">6.</span> <span class="nav-text">骨架屏最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A5%BF%E4%BA%86%E4%B9%88%E5%89%8D%E7%AB%AF%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">6.1.</span> <span class="nav-text">饿了么前端最佳实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8B%B9%E6%9E%9C%E5%85%AC%E5%8F%B8%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">6.2.</span> <span class="nav-text">苹果公司最佳实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%AC%E8%9C%82%E7%AA%9D%E7%94%B5%E5%95%86%E5%89%8D%E7%AB%AF%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="nav-number">6.3.</span> <span class="nav-text">马蜂窝电商前端最佳实践</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%AA%A8%E6%9E%B6%E5%B1%8F%E5%BC%80%E6%BA%90%E5%BA%93"><span class="nav-number">7.</span> <span class="nav-text">骨架屏开源库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#android"><span class="nav-number">7.1.</span> <span class="nav-text">Android</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#web"><span class="nav-number">7.2.</span> <span class="nav-text">Web</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Android骨架屏详解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">骨架屏介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">Facebook</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">饿了么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">京东Plus</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.4.</span> <span class="nav-text">马蜂窝</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">骨架屏场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">骨架屏通用方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">骨架屏最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.1.</span> <span class="nav-text">饿了么前端最佳实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.2.</span> <span class="nav-text">苹果公司最佳实践</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.3.</span> <span class="nav-text">马蜂窝电商前端最佳实践</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">骨架屏开源库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.1.</span> <span class="nav-text">Android</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.2.</span> <span class="nav-text">Web</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
 
           </div>
@@ -1560,7 +1560,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
       <h3 class="widget-title">Tag Cloud</h3>
       <div id="myCanvasContainer" class="widget tagcloud">
           <canvas width="250" height="250" id="resCanvas" style="width=100%">
-              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li></ul>
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li></ul>
           </canvas>
       </div>
       </div>
@@ -1594,7 +1594,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">111k</span>
+    <span title="Site words total count">115.1k</span>
   
 </div>
 
@@ -2504,7 +2504,7 @@ Luke Wroblewski认为骨架屏应该有以下几个元素：
   
     <script async type="text/javascript">
         var text = "Welcome To Leaface";
-        var date = '2021-06-13';
+        var date = '2021-06-22';
         console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
         console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
         console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');

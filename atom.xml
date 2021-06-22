@@ -6,7 +6,7 @@
   <link href="http://www.yangchaofan.cn/atom.xml" rel="self"/>
   
   <link href="http://www.yangchaofan.cn/"/>
-  <updated>2021-06-11T16:12:48.528Z</updated>
+  <updated>2021-06-22T14:36:41.467Z</updated>
   <id>http://www.yangchaofan.cn/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android依赖库处理框架——Fataar</title>
+    <link href="http://www.yangchaofan.cn/2021/05/android-fat-aar-useage/"/>
+    <id>http://www.yangchaofan.cn/2021/05/android-fat-aar-useage/</id>
+    <published>2021-05-27T00:13:12.000Z</published>
+    <updated>2021-06-22T14:36:41.467Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/adwiv/android-fat-aar&quot;&gt;官方文档&lt;/a&gt;中是这样介绍fat-aar的：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Gradle script that allows you to merge and embed dependencies in generted aar file&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;fat-aar是一个允许你合并和嵌入依赖关系到生成的aar文件的gradle脚本。&lt;/p&gt;
+&lt;p&gt;从fat-aar的用途来讲，它的主要工作就是将project中内部所依赖的aar下载到本地，然后一起发布aar到maven库，外部项目依赖aar时不用去下载project内部依赖的aar&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>Android Crash实践策略最全面思考</title>
@@ -26,7 +56,7 @@
     
       
       
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;android-crash实践策略最全面思考&quot;&gt;&lt;a href=&quot;</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;android-crash实践策略最全面思考&quot;&gt;And</summary>
       
     
     
@@ -54,7 +84,7 @@
     
       
       
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerli</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;前言&quot;&gt;前言&lt;/span&gt;&lt;a href=&quot;#前言&quot; </summary>
       
     
     
@@ -156,7 +186,7 @@
     
       
       
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;android骨架屏详解&quot;&gt;&lt;a href=&quot;#Android骨架</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;android骨架屏详解&quot;&gt;Android骨架屏详解&lt;</summary>
       
     
     
@@ -420,7 +450,7 @@
     
       
       
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h2 id=&quot;插件化&quot;&gt;&lt;a href=&quot;#插件化&quot; class=&quot;header</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h2&gt;&lt;span id=&quot;插件化&quot;&gt;插件化&lt;/span&gt;&lt;a href=&quot;#插件</summary>
       
     
     
@@ -448,7 +478,7 @@
     
       
       
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;组件化基本概念&quot;&gt;&lt;a href=&quot;#组件化基本概念&quot; class</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;组件化基本概念&quot;&gt;组件化基本概念&lt;/span&gt;&lt;a h</summary>
       
     
     
@@ -473,12 +503,12 @@
     <link href="http://www.yangchaofan.cn/2021/01/android-structure-best-practice/"/>
     <id>http://www.yangchaofan.cn/2021/01/android-structure-best-practice/</id>
     <published>2021-01-07T12:28:33.000Z</published>
-    <updated>2021-06-10T15:29:03.737Z</updated>
+    <updated>2021-06-22T15:05:28.495Z</updated>
     
     
       
       
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;android架构设计最佳实践&quot;&gt;&lt;a href=&quot;#Androi</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;android架构设计最佳实践&quot;&gt;Android架构设</summary>
       
     
     
@@ -508,7 +538,7 @@
     
       
       
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;android百问百答-那些年被问过的handler原理&quot;&gt;&lt;a </summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;android百问百答-那些年被问过的handler原</summary>
       
     
     
@@ -536,7 +566,7 @@
     
       
       
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;热修复详解与实战&quot;&gt;&lt;a href=&quot;#热修复详解与实战&quot; cla</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;热修复详解与实战&quot;&gt;热修复详解与实战&lt;/span&gt;&lt;a</summary>
       
     
     
@@ -564,7 +594,7 @@
     
       
       
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;为什么要花3年时间面试一个人&quot;&gt;&lt;a href=&quot;#为什么要花3年</summary>
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;为什么要花3年时间面试一个人&quot;&gt;为什么要花3年时间面试</summary>
       
     
     
@@ -602,30 +632,6 @@
     <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
     <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>详解五大排序算法</title>
-    <link href="http://www.yangchaofan.cn/2016/06/five-sort-algorithm/"/>
-    <id>http://www.yangchaofan.cn/2016/06/five-sort-algorithm/</id>
-    <published>2016-06-16T14:16:54.000Z</published>
-    <updated>2021-04-11T02:38:51.711Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;摘自本人16年的博客&lt;a href=&quot;https://blog.csdn.n</summary>
-      
-    
-    
-    
-    <category term="计算机科学" scheme="http://www.yangchaofan.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
-    
-    <category term="算法" scheme="http://www.yangchaofan.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="算法" scheme="http://www.yangchaofan.cn/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   

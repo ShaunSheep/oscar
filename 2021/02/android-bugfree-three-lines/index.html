@@ -546,12 +546,12 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="bugfree三剑客异常-日志-工具android开发排查问题小结"><a href="#BugFree三剑客异常、日志、工具—Android开发排查问题小结" class="headerlink" title="BugFree三剑客异常、日志、工具—Android开发排查问题小结"></a>BugFree三剑客异常、日志、工具—Android开发排查问题小结<a href="#bugfree三剑客异常-日志-工具android开发排查问题小结" class="header-anchor">#</a></h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><p>程序员编写程序、调试代码的时候不可避免的会遇到各种问题，如页面显示不正确，如数据层数据组装操作未按照期望的业务逻辑执行。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1><span id="bugfree三剑客异常-日志-工具android开发排查问题小结">BugFree三剑客异常、日志、工具—Android开发排查问题小结</span><a href="#bugfree三剑客异常-日志-工具android开发排查问题小结" class="header-anchor">#</a></h1><h1><span id="前言">前言</span><a href="#前言" class="header-anchor">#</a></h1><p>程序员编写程序、调试代码的时候不可避免的会遇到各种问题，如页面显示不正确，如数据层数据组装操作未按照期望的业务逻辑执行。</p>
 <p>造成这些问题的原因大多分为以下几种：有些是条件语句执行错误，有些是Java层的Exception如空指针、集合边界越界问题，有些是较难找到原因的OOM、ANR、Crash、系统SWT重启问题。面对扑面而来的问题，程序员很容易束手无策。笔者结合自己的经验，总结了BugFree中必不可少的三剑客：异常、日志、工具，期望通过这3个“帮手”，帮助各位排查开发难题。</p>
 <a id="more"></a>
 
-<h1 id="参考阅读"><a href="#参考阅读" class="headerlink" title="参考阅读"></a>参考阅读<a href="#参考阅读" class="header-anchor">#</a></h1><p><a href="/ye-jincheng-website/blog/2021/02/mtk-log/index.html">Mtk Log使用指南</a></p>
-<h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常<a href="#异常" class="header-anchor">#</a></h1><h2 id="异常的分类"><a href="#异常的分类" class="headerlink" title="异常的分类"></a>异常的分类<a href="#异常的分类" class="header-anchor">#</a></h2><p>Android是一个庞大而复杂的系统，涉及多种语言，所以其异常也很复杂。根据android系统架构层次，我们也把android异常层次化，分为JE、NE、KE、EE、其他类别</p>
+<h1><span id="参考阅读">参考阅读</span><a href="#参考阅读" class="header-anchor">#</a></h1><p><a href="/ye-jincheng-website/blog/2021/02/mtk-log/index.html">Mtk Log使用指南</a></p>
+<h1><span id="异常">异常</span><a href="#异常" class="header-anchor">#</a></h1><h2><span id="异常的分类">异常的分类</span><a href="#异常的分类" class="header-anchor">#</a></h2><p>Android是一个庞大而复杂的系统，涉及多种语言，所以其异常也很复杂。根据android系统架构层次，我们也把android异常层次化，分为JE、NE、KE、EE、其他类别</p>
 <table>
 <thead>
 <tr>
@@ -576,7 +576,7 @@
 <td>从名字看就能猜到Modem这一部分是比较特殊的，独立的。Modem有自己的内存空间和代码，为手机通讯提供服务，一旦这一部分发生异常，需要MDlog，此log需用AEE-LogVie工具解析，解析是需要对应版本的数据文件</td>
 </tr>
 </tbody></table>
-<h1 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志<a href="#日志" class="header-anchor">#</a></h1><h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途<a href="#用途" class="header-anchor">#</a></h2><h3 id="搜索关键异常"><a href="#搜索关键异常" class="headerlink" title="搜索关键异常"></a><strong>搜索关键异常</strong><a href="#搜索关键异常" class="header-anchor">#</a></h3><p><strong>1.常见应用crash</strong></p>
+<h1><span id="日志">日志</span><a href="#日志" class="header-anchor">#</a></h1><h2><span id="用途">用途</span><a href="#用途" class="header-anchor">#</a></h2><h3><span id="搜索关键异常"><strong>搜索关键异常</strong></span><a href="#搜索关键异常" class="header-anchor">#</a></h3><p><strong>1.常见应用crash</strong></p>
 <p>（系统提示***已停止运行） 可以在main log中或crash_log中直接搜索“ fatal exception” ；也可以在event_log中搜索am_crash快速定位到问题</p>
 <table>
 <thead>
@@ -628,12 +628,12 @@
 <p>a：根据出现闪退时间点在event_log搜索am_resume_activity等am_*_activity相关判断这过程中应用是否有启动和退出的动作。 </p>
 <p>b: 在main_log或sys_log搜索“ACT-AM_”相关信息查看对应activy生命周期相关信息。</p>
 <p>其次就根据log跟踪对应代码流程……</p>
-<h3 id="搜索oom"><a href="#搜索OOM" class="headerlink" title="搜索OOM"></a>搜索OOM<a href="#搜索oom" class="header-anchor">#</a></h3><h4 id="oom描述"><a href="#OOM描述" class="headerlink" title="OOM描述"></a>OOM描述<a href="#oom描述" class="header-anchor">#</a></h4><p>Android应用内存管理机制是在Java内存管理机制基础上改进的，所以造成OOM的原因两者差不多，即所有对象都在堆上分配空间，堆是有大小限制的，当分配的对象不能被回收仍然占据堆空间，新分配的对象不能获取足够的堆空间时，就会OOM。为什么会这样呢？这就是GC不足的地方，GC只能回收自己记录（有向树）里面不可达的对象，对可达对象认为是有用的，不会被回收。但是可达对象并非一定是有用对象，他们可能是废弃对象（死对象、冗余对象、电灯泡，僵尸），但却无法被GC回收，占据着进程堆空间，下面是网上的一个对象实例化简图</p>
+<h3><span id="搜索oom">搜索OOM</span><a href="#搜索oom" class="header-anchor">#</a></h3><h4><span id="oom描述">OOM描述</span><a href="#oom描述" class="header-anchor">#</a></h4><p>Android应用内存管理机制是在Java内存管理机制基础上改进的，所以造成OOM的原因两者差不多，即所有对象都在堆上分配空间，堆是有大小限制的，当分配的对象不能被回收仍然占据堆空间，新分配的对象不能获取足够的堆空间时，就会OOM。为什么会这样呢？这就是GC不足的地方，GC只能回收自己记录（有向树）里面不可达的对象，对可达对象认为是有用的，不会被回收。但是可达对象并非一定是有用对象，他们可能是废弃对象（死对象、冗余对象、电灯泡，僵尸），但却无法被GC回收，占据着进程堆空间，下面是网上的一个对象实例化简图</p>
 <img src="http://images2015.cnblogs.com/blog/625153/201704/625153-20170420202014712-1062539791.jpg">
 
 
 
-<h4 id="oom情景"><a href="#OOM情景" class="headerlink" title="OOM情景"></a>OOM情景<a href="#oom情景" class="header-anchor">#</a></h4><p>资源对象没有回收，如cursor，bitmap等</p>
+<h4><span id="oom情景">OOM情景</span><a href="#oom情景" class="header-anchor">#</a></h4><p>资源对象没有回收，如cursor，bitmap等</p>
 <p>1通常关闭Cursor的方法：</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Cursor cursor = mDownloadManager.query(<span class="keyword">new</span> Query());</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (cursor.moveToFirst()) &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> index = cursor.getColumnIndex(DownloadManager.COLUMN_ID);</span><br><span class="line"></span><br><span class="line"><span class="keyword">long</span> downloadId = cursor.getLong(index);</span><br><span class="line"></span><br><span class="line">ids.add(downloadId);</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">while</span> (cursor.moveToNext());</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125; <span class="keyword">finally</span> &#123;</span><br><span class="line"></span><br><span class="line">cursor.close();</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
 <p>另外，在adapter中使用cursor时，需在cursor改变的时候先关闭原来的cursor， 但通常我们都是用android提供的CursorAdapter，其changeCursor函数会将原来的Cursor释放掉，并替换为新的Cursor，所以你不用担心原来的Cursor没有被关闭。</p>
@@ -641,16 +641,16 @@
 <p>3 生命周期问题引起的无法回收，如果static、线程等</p>
 <p>4其他所有发生OOM情景最终都可以认为是对象没有被回收，如，cursor没有close()，bitmap没有recycle()，监听没有unregister…()等等都是因为对象没有被回收，GC认为这些对象是可达的、正在使用的，导致这些应该被回收的对象不能被回收，最终造成OOM。</p>
 <p>大多数的回收方法，如close()、recycle()、unregister…()，其实都是把不再使用的对象置为null，这样GC就能回收原来对象所占空间。所以在编程的时候，对全局变量，特别是容器之类的对象和status 修饰对象，要关注其生命周期，不再需要就及时置为null或调用相应的回收方法</p>
-<h4 id="oom的分析思路"><a href="#OOM的分析思路" class="headerlink" title="OOM的分析思路"></a>OOM的分析思路<a href="#oom的分析思路" class="header-anchor">#</a></h4><h5 id="工具准备"><a href="#工具准备" class="headerlink" title="工具准备"></a>工具准备<a href="#工具准备" class="header-anchor">#</a></h5><p>1.log</p>
+<h4><span id="oom的分析思路">OOM的分析思路</span><a href="#oom的分析思路" class="header-anchor">#</a></h4><h5><span id="工具准备">工具准备</span><a href="#工具准备" class="header-anchor">#</a></h5><p>1.log</p>
 <p>2.MAT</p>
 <p>3.Profiler</p>
 <p>4.hprof</p>
-<h5 id="复现场景"><a href="#复现场景" class="headerlink" title="复现场景"></a>复现场景<a href="#复现场景" class="header-anchor">#</a></h5><p>1.按log所显示的步骤，多次重复该步骤</p>
+<h5><span id="复现场景">复现场景</span><a href="#复现场景" class="header-anchor">#</a></h5><p>1.按log所显示的步骤，多次重复该步骤</p>
 <p>2.抓取hrof日志</p>
 <p>3.设定怀疑点</p>
 <p>4.打印该点的内存大小，如bitmap、集合、集合持有的对象</p>
-<h5 id="确认怀疑点"><a href="#确认怀疑点" class="headerlink" title="确认怀疑点"></a>确认怀疑点<a href="#确认怀疑点" class="header-anchor">#</a></h5><p>及时释放掉该对象</p>
-<h4 id="oom分类"><a href="#OOM分类" class="headerlink" title="OOM分类"></a>OOM分类<a href="#oom分类" class="header-anchor">#</a></h4><p>内存泄露</p>
+<h5><span id="确认怀疑点">确认怀疑点</span><a href="#确认怀疑点" class="header-anchor">#</a></h5><p>及时释放掉该对象</p>
+<h4><span id="oom分类">OOM分类</span><a href="#oom分类" class="header-anchor">#</a></h4><p>内存泄露</p>
 <ul>
 <li>Context泄露</li>
 <li>Handler泄露</li>
@@ -668,10 +668,10 @@
 <li>大图、长图、宽图</li>
 <li>序列过多的图片</li>
 </ul>
-<h4 id="oom优化思路"><a href="#OOM优化思路" class="headerlink" title="OOM优化思路"></a>OOM优化思路<a href="#oom优化思路" class="header-anchor">#</a></h4><p>这些问题大多是比较难解的问题，大部分都是随机的，往往都是很难复现的，找出规律是很重要的！</p>
+<h4><span id="oom优化思路">OOM优化思路</span><a href="#oom优化思路" class="header-anchor">#</a></h4><p>这些问题大多是比较难解的问题，大部分都是随机的，往往都是很难复现的，找出规律是很重要的！</p>
 <p>另外，内存泄露不容易发现，一些轻微的泄露，可能要使用一个月才能发现，所以对自己的模块，要自己去检查有没有OOM，可以下班时挂上monkey，有时候是能跑出来的</p>
 <p>从OOM联想到性能问题，性能问题很多是界面刷新、对象生命周期、冗余操作、不必要的线程等引起的……</p>
-<h3 id="搜索swt"><a href="#搜索SWT" class="headerlink" title="搜索SWT"></a>搜索SWT<a href="#搜索swt" class="header-anchor">#</a></h3><table>
+<h3><span id="搜索swt">搜索SWT</span><a href="#搜索swt" class="header-anchor">#</a></h3><table>
 <thead>
 <tr>
 <th>序号</th>
@@ -692,20 +692,20 @@
 </tr>
 </tbody></table>
 <p>具体信息主要查找log文件有sys_log和mtklog\aee_exp\db.fatal.00.SWT\db.fatal.00.SWT.dbg.DEC</p>
-<h3 id="搜索死机"><a href="#搜索死机" class="headerlink" title="搜索死机"></a>搜索死机<a href="#搜索死机" class="header-anchor">#</a></h3><p>这里说的死机就是冻屏，停留在一个界面没反应。死机问题很少遇到，且大多不是一个用层问题，下面简单说下可能造成死机的原因和分析需要信息</p>
-<h4 id="工具准备"><a href="#工具准备-1" class="headerlink" title="工具准备"></a>工具准备<a href="#工具准备" class="header-anchor">#</a></h4><p>MTK提供了多种抓取和查看LOG的工具, 如:mtklogger，GAT，Catcher，LogView，QAAT等，这些工具在文档《MediaTek_Logging_SOP》中都有描述</p>
+<h3><span id="搜索死机">搜索死机</span><a href="#搜索死机" class="header-anchor">#</a></h3><p>这里说的死机就是冻屏，停留在一个界面没反应。死机问题很少遇到，且大多不是一个用层问题，下面简单说下可能造成死机的原因和分析需要信息</p>
+<h4><span id="工具准备">工具准备</span><a href="#工具准备" class="header-anchor">#</a></h4><p>MTK提供了多种抓取和查看LOG的工具, 如:mtklogger，GAT，Catcher，LogView，QAAT等，这些工具在文档《MediaTek_Logging_SOP》中都有描述</p>
 <p><img src="http://cdn.yangchaofan.cn/blog/20210227/382aVmPG0k6V.jpg?imageslim" alt="mark"></p>
-<h5 id="mtklogger"><a href="#Mtklogger" class="headerlink" title="Mtklogger*"></a>Mtklogger*<a href="#mtklogger" class="header-anchor">#</a></h5><p>Mtklogger是抓取log的apk，整合了ModemLog，MobileLog，NetworkLog and SystemLogger，在工程模式操作就可以打相关log了。</p>
-<h5 id="gat"><a href="#GAT" class="headerlink" title="GAT"></a><strong>GAT</strong><a href="#gat" class="header-anchor">#</a></h5><p>基于SDK调试开发的GUI工具，新增了Log Recoder，Debug Configuration Setting，DBpuller，adb command，Process Information view，Profiling Tools，LogView，Plug-in Script。是调试和抓log的神器，使用说明阅读文档《GAT_User_Guide(Customer).pdf》</p>
+<h5><span id="mtklogger">Mtklogger*</span><a href="#mtklogger" class="header-anchor">#</a></h5><p>Mtklogger是抓取log的apk，整合了ModemLog，MobileLog，NetworkLog and SystemLogger，在工程模式操作就可以打相关log了。</p>
+<h5><span id="gat"><strong>GAT</strong></span><a href="#gat" class="header-anchor">#</a></h5><p>基于SDK调试开发的GUI工具，新增了Log Recoder，Debug Configuration Setting，DBpuller，adb command，Process Information view，Profiling Tools，LogView，Plug-in Script。是调试和抓log的神器，使用说明阅读文档《GAT_User_Guide(Customer).pdf》</p>
 <p>工具获取路径（以W1444版本为例）：</p>
 <p>私服SVN：\rd\MTK_TOOL\AndroidTool\W1444\W1444_full.zip\Debugging Tools (Binary)\GAT</p>
-<h5 id="catcher"><a href="#Catcher" class="headerlink" title="Catcher"></a><strong>Catcher</strong><a href="#catcher" class="header-anchor">#</a></h5><p>是抓取和解析ModemLog的PC端工具，我们经常使用来查看ModemLog，使用说明阅读文档《Catcher_User_Manual_for_Customer.pdf》</p>
+<h5><span id="catcher"><strong>Catcher</strong></span><a href="#catcher" class="header-anchor">#</a></h5><p>是抓取和解析ModemLog的PC端工具，我们经常使用来查看ModemLog，使用说明阅读文档《Catcher_User_Manual_for_Customer.pdf》</p>
 <p>工具获取路径：</p>
 <p>私服SVN：\rd\MTK_TOOL\AndroidTool\W1444\W1444_full.zip\Catcher</p>
-<h5 id="logview"><a href="#LogView" class="headerlink" title="LogView"></a><strong>LogView</strong><a href="#logview" class="header-anchor">#</a></h5><p>可以查看APlog，Taglog，MTKlog，但最常用的是用来查看NE时产生的AEE DB文件里的log，具体使用参考《GAT_User_Guide(Customer).pdf》</p>
+<h5><span id="logview"><strong>LogView</strong></span><a href="#logview" class="header-anchor">#</a></h5><p>可以查看APlog，Taglog，MTKlog，但最常用的是用来查看NE时产生的AEE DB文件里的log，具体使用参考《GAT_User_Guide(Customer).pdf》</p>
 <p>工具获取路径：</p>
 <p>此工具已集成到GAT</p>
-<h5 id="qaat"><a href="#QAAT" class="headerlink" title="QAAT"></a><strong>QAAT</strong><a href="#qaat" class="header-anchor">#</a></h5><p>快速分析log的工具，涵盖错误类型较广，很多地方都可以用，其实他的原理就是过滤关键字，把各种类型的错误过滤出来，是一个分析LOG非常便捷的工具，具体使用参考《MediaTek_Logging_SOP.pdf》</p>
+<h5><span id="qaat"><strong>QAAT</strong></span><a href="#qaat" class="header-anchor">#</a></h5><p>快速分析log的工具，涵盖错误类型较广，很多地方都可以用，其实他的原理就是过滤关键字，把各种类型的错误过滤出来，是一个分析LOG非常便捷的工具，具体使用参考《MediaTek_Logging_SOP.pdf》</p>
 <p><strong>死机可能原因：</strong></p>
 <ol>
 <li><p>输入系统或者输入驱动问题</p>
@@ -734,7 +734,7 @@
 <li><p>抓取Surfacefinger进程信息，先adb shell ps –p找出pid，然后使用adb shell rtt –f bt –p pid &gt; rtt.txt</p>
 </li>
 </ol>
-<h3 id="搜索重启"><a href="#搜索重启" class="headerlink" title="搜索重启"></a>搜索重启<a href="#搜索重启" class="header-anchor">#</a></h3><p>从异常分类来看，重启异常大多数和NE、KE和硬件问题有关，JE方面引起重启死机大多是和系统进程有关，如system_process进程发生了Crash、SWT、JVM Error，AP应用一般是不会引起重启死机的，但偶尔也会</p>
+<h3><span id="搜索重启">搜索重启</span><a href="#搜索重启" class="header-anchor">#</a></h3><p>从异常分类来看，重启异常大多数和NE、KE和硬件问题有关，JE方面引起重启死机大多是和系统进程有关，如system_process进程发生了Crash、SWT、JVM Error，AP应用一般是不会引起重启死机的，但偶尔也会</p>
 <p>72平台上，发送短信内容为‘==’时会重启</p>
 <img src="http://images2015.cnblogs.com/blog/625153/201704/625153-20170420202046243-314090766.jpg">
 
@@ -750,8 +750,8 @@
 <li><p>根据JE类型，结合对应工具分析LOG</p>
 </li>
 </ol>
-<h3 id="搜索anr"><a href="#搜索ANR" class="headerlink" title="搜索ANR"></a>搜索ANR<a href="#搜索anr" class="header-anchor">#</a></h3><h4 id="anr定义"><a href="#ANR定义" class="headerlink" title="ANR定义"></a><strong>ANR定义</strong><a href="#anr定义" class="header-anchor">#</a></h4><p>Application Not Responding</p>
-<h4 id="anr种类"><a href="#ANR种类" class="headerlink" title="ANR种类"></a><strong>ANR种类</strong><a href="#anr种类" class="header-anchor">#</a></h4><p><strong>1). Key Dispatch Timeout (8s)</strong></p>
+<h3><span id="搜索anr">搜索ANR</span><a href="#搜索anr" class="header-anchor">#</a></h3><h4><span id="anr定义"><strong>ANR定义</strong></span><a href="#anr定义" class="header-anchor">#</a></h4><p>Application Not Responding</p>
+<h4><span id="anr种类"><strong>ANR种类</strong></span><a href="#anr种类" class="header-anchor">#</a></h4><p><strong>1). Key Dispatch Timeout (8s)</strong></p>
 <p>按键或触摸事件在特定时间内无响应（origin:5s）</p>
 <p>KEY_DISPATCHING_TIMEOUT = 8*1000</p>
 <p><strong>2) .Broadcast Timeout</strong></p>
@@ -763,18 +763,18 @@
 <p>Service在特定的时间内无法处理完成</p>
 <p>service时间内未响应时间限定在<strong>ActiveServices.java</strong>类中</p>
 <p>SERVICE_TIMEOUT = 20*1000;</p>
-<h4 id="anr原因"><a href="#ANR原因" class="headerlink" title="ANR原因"></a>ANR原因<a href="#anr原因" class="header-anchor">#</a></h4><p>1）应用进程有一个主线程（main thread）和一个信息队列(main message queue) main thead == activity thread</p>
+<h4><span id="anr原因">ANR原因</span><a href="#anr原因" class="header-anchor">#</a></h4><p>1）应用进程有一个主线程（main thread）和一个信息队列(main message queue) main thead == activity thread</p>
 <p>2）主线程负责处理像Draw、Listen、receive等UI事件</p>
 <p>3）主线程负责从消息队列中取出信息并分发它</p>
 <p>4）主线程在完成当前信息处理之前，不会再取信息队列中的信息</p>
 <p>5）如果主线程在处理当前信息时卡住，没有及时分发，ANR就会出现</p>
-<h4 id="anr的分析思路"><a href="#ANR的分析思路" class="headerlink" title="ANR的分析思路"></a>ANR的分析思路<a href="#anr的分析思路" class="header-anchor">#</a></h4><h5 id="工具准备"><a href="#工具准备-2" class="headerlink" title="工具准备"></a>工具准备<a href="#工具准备" class="header-anchor">#</a></h5><p>1 MTKlog，主要是其中的Aee_exp和MobileLog</p>
+<h4><span id="anr的分析思路">ANR的分析思路</span><a href="#anr的分析思路" class="header-anchor">#</a></h4><h5><span id="工具准备">工具准备</span><a href="#工具准备" class="header-anchor">#</a></h5><p>1 MTKlog，主要是其中的Aee_exp和MobileLog</p>
 <p>2Trace.txt文件（data/anr目录下）或者bugreport日志（使用adb bugreport &gt; bugreport.txt或者GAT工具输出）</p>
 <p>3BlockCanary，记录超时后的log</p>
 <p>4一般当出现异常（JE\SWT\NE\KE等）时，会在手机中的/data/aee_exp目录下保存异常的db。 对于异常的类型和具体信息，需要通过GAT工具解析db档案</p>
 <p>5.bugreport</p>
 <p>6.aee_exp</p>
-<h5 id="trace分析流程"><a href="#Trace分析流程" class="headerlink" title="Trace分析流程"></a>Trace分析流程<a href="#trace分析流程" class="header-anchor">#</a></h5><table>
+<h5><span id="trace分析流程">Trace分析流程</span><a href="#trace分析流程" class="header-anchor">#</a></h5><table>
 <thead>
 <tr>
 <th>序号</th>
@@ -818,10 +818,10 @@
 <td></td>
 </tr>
 </tbody></table>
-<h4 id="anr解决方案"><a href="#ANR解决方案" class="headerlink" title="ANR解决方案"></a>ANR解决方案<a href="#anr解决方案" class="header-anchor">#</a></h4><p>1)：UI线程尽量只做跟UI相关的工作</p>
+<h4><span id="anr解决方案">ANR解决方案</span><a href="#anr解决方案" class="header-anchor">#</a></h4><p>1)：UI线程尽量只做跟UI相关的工作</p>
 <p>2)：耗时的工作（比如数据库操作，I/O，连接网络或者别的有可能阻碍UI线程的操作）把它放入单独的线程处理</p>
 <p>3)：尽量用Handler来处理UIthread和别的thread之间的交互</p>
-<h4 id="anr优化思路"><a href="#ANR优化思路" class="headerlink" title="ANR优化思路"></a>ANR优化思路<a href="#anr优化思路" class="header-anchor">#</a></h4><p>优化UI线程的任务：</p>
+<h4><span id="anr优化思路">ANR优化思路</span><a href="#anr优化思路" class="header-anchor">#</a></h4><p>优化UI线程的任务：</p>
 <p>1)：UI线程尽量只做跟UI相关的工作</p>
 <p>2)：耗时的工作（比如数据库操作，I/O，连接网络或者别的有可能阻碍UI线程的操作）把它放入单独的线程处理</p>
 <p>3)：尽量用Handler来处理UIthread和别的thread之间的交互</p>
@@ -829,7 +829,7 @@
 <p>1).Activity:onCreate(), onResume(), onDestroy(), onKeyDown(), onClick()等</p>
 <p>2).AsyncTask: onPreExecute(), onProgressUpdate(), onPostExecute(), onCancel等</p>
 <p>3).Mainthread handler: handleMessage(), post*(runnable r)等</p>
-<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具<a href="#工具" class="header-anchor">#</a></h1><table>
+<h1><span id="工具">工具</span><a href="#工具" class="header-anchor">#</a></h1><table>
 <thead>
 <tr>
 <th>工具包名称</th>
@@ -877,7 +877,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<h2 id="adb"><a href="#adb" class="headerlink" title="adb"></a>adb<a href="#adb" class="header-anchor">#</a></h2><ol>
+<h2><span id="adb">adb</span><a href="#adb" class="header-anchor">#</a></h2><ol>
 <li>adb logcat&gt;main.txt 重定向log</li>
 <li>adb logcat -b main -v time&gt;app.log 打印应用程序的log</li>
 <li>adb logcat -bradio -v time&gt; radio.log 打印射频相关的log，SIM STK 也会在里面，modem相关的ATcommand等。</li>
@@ -1221,7 +1221,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -1316,6 +1316,10 @@
                   
                   
                     <li class='my-links-of-blogroll-li'>
+                      <a href="/2021/05/android-fat-aar-useage/" title="Android依赖库处理框架——Fataar" target="_blank">Android依赖库处理框架——Fataar</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
                       <a href="/2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/" title="Android Crash实践策略最全面思考" target="_blank">Android Crash实践策略最全面思考</a>
                     </li>
                   
@@ -1329,10 +1333,6 @@
                   
                     <li class='my-links-of-blogroll-li'>
                       <a href="/2021/02/mtk-log/" title="mtk-log" target="_blank">mtk-log</a>
-                    </li>
-                  
-                    <li class='my-links-of-blogroll-li'>
-                      <a href="/2021/02/android-bugfree-three-lines/" title="BugFree三剑客异常、日志、工具" target="_blank">BugFree三剑客异常、日志、工具</a>
                     </li>
                   
                 </ul>
@@ -1648,7 +1648,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bugfree%E4%B8%89%E5%89%91%E5%AE%A2%E5%BC%82%E5%B8%B8-%E6%97%A5%E5%BF%97-%E5%B7%A5%E5%85%B7android%E5%BC%80%E5%8F%91%E6%8E%92%E6%9F%A5%E9%97%AE%E9%A2%98%E5%B0%8F%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">BugFree三剑客异常、日志、工具—Android开发排查问题小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%98%85%E8%AF%BB"><span class="nav-number">3.</span> <span class="nav-text">参考阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8"><span class="nav-number">4.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB"><span class="nav-number">4.1.</span> <span class="nav-text">异常的分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%97%A5%E5%BF%97"><span class="nav-number">5.</span> <span class="nav-text">日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E9%80%94"><span class="nav-number">5.1.</span> <span class="nav-text">用途</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E5%85%B3%E9%94%AE%E5%BC%82%E5%B8%B8"><span class="nav-number">5.1.1.</span> <span class="nav-text">搜索关键异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2oom"><span class="nav-number">5.1.2.</span> <span class="nav-text">搜索OOM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#oom%E6%8F%8F%E8%BF%B0"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">OOM描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oom%E6%83%85%E6%99%AF"><span class="nav-number">5.1.2.2.</span> <span class="nav-text">OOM情景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oom%E7%9A%84%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF"><span class="nav-number">5.1.2.3.</span> <span class="nav-text">OOM的分析思路</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%87%86%E5%A4%87"><span class="nav-number">5.1.2.3.1.</span> <span class="nav-text">工具准备</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%8D%E7%8E%B0%E5%9C%BA%E6%99%AF"><span class="nav-number">5.1.2.3.2.</span> <span class="nav-text">复现场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A1%AE%E8%AE%A4%E6%80%80%E7%96%91%E7%82%B9"><span class="nav-number">5.1.2.3.3.</span> <span class="nav-text">确认怀疑点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oom%E5%88%86%E7%B1%BB"><span class="nav-number">5.1.2.4.</span> <span class="nav-text">OOM分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oom%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF"><span class="nav-number">5.1.2.5.</span> <span class="nav-text">OOM优化思路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2swt"><span class="nav-number">5.1.3.</span> <span class="nav-text">搜索SWT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E6%AD%BB%E6%9C%BA"><span class="nav-number">5.1.4.</span> <span class="nav-text">搜索死机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%87%86%E5%A4%87"><span class="nav-number">5.1.4.1.</span> <span class="nav-text">工具准备</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mtklogger"><span class="nav-number">5.1.4.1.1.</span> <span class="nav-text">Mtklogger*</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gat"><span class="nav-number">5.1.4.1.2.</span> <span class="nav-text">GAT</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#catcher"><span class="nav-number">5.1.4.1.3.</span> <span class="nav-text">Catcher</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#logview"><span class="nav-number">5.1.4.1.4.</span> <span class="nav-text">LogView</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#qaat"><span class="nav-number">5.1.4.1.5.</span> <span class="nav-text">QAAT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E9%87%8D%E5%90%AF"><span class="nav-number">5.1.5.</span> <span class="nav-text">搜索重启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2anr"><span class="nav-number">5.1.6.</span> <span class="nav-text">搜索ANR</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#anr%E5%AE%9A%E4%B9%89"><span class="nav-number">5.1.6.1.</span> <span class="nav-text">ANR定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr%E7%A7%8D%E7%B1%BB"><span class="nav-number">5.1.6.2.</span> <span class="nav-text">ANR种类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr%E5%8E%9F%E5%9B%A0"><span class="nav-number">5.1.6.3.</span> <span class="nav-text">ANR原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr%E7%9A%84%E5%88%86%E6%9E%90%E6%80%9D%E8%B7%AF"><span class="nav-number">5.1.6.4.</span> <span class="nav-text">ANR的分析思路</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%87%86%E5%A4%87"><span class="nav-number">5.1.6.4.1.</span> <span class="nav-text">工具准备</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#trace%E5%88%86%E6%9E%90%E6%B5%81%E7%A8%8B"><span class="nav-number">5.1.6.4.2.</span> <span class="nav-text">Trace分析流程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">5.1.6.5.</span> <span class="nav-text">ANR解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#anr%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF"><span class="nav-number">5.1.6.6.</span> <span class="nav-text">ANR优化思路</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">6.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#adb"><span class="nav-number">6.1.</span> <span class="nav-text">adb</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">BugFree三剑客异常、日志、工具—Android开发排查问题小结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">参考阅读</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">异常的分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">用途</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.1.</span> <span class="nav-text">搜索关键异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.2.</span> <span class="nav-text">搜索OOM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">5.1.2.1.</span> <span class="nav-text">OOM描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">5.1.2.2.</span> <span class="nav-text">OOM情景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">5.1.2.3.</span> <span class="nav-text">OOM的分析思路</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.1.2.3.1.</span> <span class="nav-text">工具准备</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.1.2.3.2.</span> <span class="nav-text">复现场景</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.1.2.3.3.</span> <span class="nav-text">确认怀疑点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">5.1.2.4.</span> <span class="nav-text">OOM分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">5.1.2.5.</span> <span class="nav-text">OOM优化思路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.3.</span> <span class="nav-text">搜索SWT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.4.</span> <span class="nav-text">搜索死机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">5.1.4.1.</span> <span class="nav-text">工具准备</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.1.4.1.1.</span> <span class="nav-text">Mtklogger*</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.1.4.1.2.</span> <span class="nav-text">GAT</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.1.4.1.3.</span> <span class="nav-text">Catcher</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.1.4.1.4.</span> <span class="nav-text">LogView</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.1.4.1.5.</span> <span class="nav-text">QAAT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.5.</span> <span class="nav-text">搜索重启</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">5.1.6.</span> <span class="nav-text">搜索ANR</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">5.1.6.1.</span> <span class="nav-text">ANR定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">5.1.6.2.</span> <span class="nav-text">ANR种类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">5.1.6.3.</span> <span class="nav-text">ANR原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">5.1.6.4.</span> <span class="nav-text">ANR的分析思路</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.1.6.4.1.</span> <span class="nav-text">工具准备</span></a></li><li class="nav-item nav-level-5"><a class="nav-link"><span class="nav-number">5.1.6.4.2.</span> <span class="nav-text">Trace分析流程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">5.1.6.5.</span> <span class="nav-text">ANR解决方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">5.1.6.6.</span> <span class="nav-text">ANR优化思路</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.1.</span> <span class="nav-text">adb</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1669,7 +1669,7 @@
       <h3 class="widget-title">Tag Cloud</h3>
       <div id="myCanvasContainer" class="widget tagcloud">
           <canvas width="250" height="250" id="resCanvas" style="width=100%">
-              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li></ul>
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li></ul>
           </canvas>
       </div>
       </div>
@@ -1703,7 +1703,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">111k</span>
+    <span title="Site words total count">115.1k</span>
   
 </div>
 
@@ -2613,7 +2613,7 @@
   
     <script async type="text/javascript">
         var text = "Welcome To Leaface";
-        var date = '2021-06-13';
+        var date = '2021-06-22';
         console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
         console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
         console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
