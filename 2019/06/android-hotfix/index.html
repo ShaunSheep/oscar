@@ -538,7 +538,7 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1><span id="热修复详解与实战">热修复详解与实战</span><a href="#热修复详解与实战" class="header-anchor">#</a></h1><h1><span id="前言">前言</span><a href="#前言" class="header-anchor">#</a></h1><p>随着Google推出Android平台之后，AndroidAPP数量激增，带来的安全类技术需求增长，热修复就是安全类技术的典型产物。2016年起热修复、插件化、动态化技术如雨后春笋般爆发，三者技术上存在一定交集，但热修复更聚焦线上BUG的无感知修复。本文参考了一系列技术文章、书籍、开源框架、商业产品。主要讨论了热修复的以下几点内容：</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="热修复详解与实战"><a href="#热修复详解与实战" class="headerlink" title="热修复详解与实战"></a>热修复详解与实战<a href="#热修复详解与实战" class="header-anchor">#</a></h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言<a href="#前言" class="header-anchor">#</a></h1><p>随着Google推出Android平台之后，AndroidAPP数量激增，带来的安全类技术需求增长，热修复就是安全类技术的典型产物。2016年起热修复、插件化、动态化技术如雨后春笋般爆发，三者技术上存在一定交集，但热修复更聚焦线上BUG的无感知修复。本文参考了一系列技术文章、书籍、开源框架、商业产品。主要讨论了热修复的以下几点内容：</p>
 <ul>
 <li>热修复的发展历史</li>
 <li>热修复的定义</li>
@@ -555,7 +555,7 @@
 <li>了解为新项目集成热修复功能的成本</li>
 <li>现有热修复技术方案的选型对比</li>
 </ul>
-<h1><span id="热修复的定义">热修复的定义</span><a href="#热修复的定义" class="header-anchor">#</a></h1><center>
+<h1 id="热修复的定义"><a href="#热修复的定义" class="headerlink" title="热修复的定义"></a>热修复的定义<a href="#热修复的定义" class="header-anchor">#</a></h1><center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/image-20210603141931831.png" width="80%" alt>
     <br>
@@ -598,7 +598,7 @@
 <li>用户感知小，线上响应快，企业损失最低</li>
 </ul>
 <p>修复Bug、修复bug、修复bug，重要的话说三遍，热修复技术最重要的用途就是无感修复bug。</p>
-<h1><span id="热修复的实现思路">热修复的实现思路</span><a href="#热修复的实现思路" class="header-anchor">#</a></h1><h2><span id="思路概览">思路概览</span><a href="#思路概览" class="header-anchor">#</a></h2><p>用户在操作一款App的过程中，能够体验到的内容如图所示，在不讨论Hybrid技术、Web开发技术的前提下，我们先承认一个简单的事实：安卓操作系统加载了APP安装包下的某些文件，换句话说APK的主要组成部分，支撑了App页面的显示和加载。用户在使用App过程中遇到了bug，是由于Apk中的某些内容遇到了预期之外的情况导致。作为开发者，若想修复这种预期之外的情况，就应该修复Apk中的主要内容来达到目的。</p>
+<h1 id="热修复的实现思路"><a href="#热修复的实现思路" class="headerlink" title="热修复的实现思路"></a>热修复的实现思路<a href="#热修复的实现思路" class="header-anchor">#</a></h1><h2 id="思路概览"><a href="#思路概览" class="headerlink" title="思路概览"></a>思路概览<a href="#思路概览" class="header-anchor">#</a></h2><p>用户在操作一款App的过程中，能够体验到的内容如图所示，在不讨论Hybrid技术、Web开发技术的前提下，我们先承认一个简单的事实：安卓操作系统加载了APP安装包下的某些文件，换句话说APK的主要组成部分，支撑了App页面的显示和加载。用户在使用App过程中遇到了bug，是由于Apk中的某些内容遇到了预期之外的情况导致。作为开发者，若想修复这种预期之外的情况，就应该修复Apk中的主要内容来达到目的。</p>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3076306344,2932143550&fm=26&gp=0.jpg" width="30%" alt>
@@ -672,8 +672,8 @@
       </div>
 </center>
 
-<h2><span id="代码修复">代码修复</span><a href="#代码修复" class="header-anchor">#</a></h2><p>代码修复涉及到4类技术：NativeHook、Java multidex、Java Hook、Dex替换</p>
-<h3><span id="nativehook">NativeHook</span><a href="#nativehook" class="header-anchor">#</a></h3><blockquote>
+<h2 id="代码修复"><a href="#代码修复" class="headerlink" title="代码修复"></a>代码修复<a href="#代码修复" class="header-anchor">#</a></h2><p>代码修复涉及到4类技术：NativeHook、Java multidex、Java Hook、Dex替换</p>
+<h3 id="nativehook"><a href="#NativeHook" class="headerlink" title="NativeHook"></a>NativeHook<a href="#nativehook" class="header-anchor">#</a></h3><blockquote>
 <p>NativeHook参考阅读</p>
 <ul>
 <li><p><a target="_blank" rel="noopener" href="https://gtoad.github.io/2018/07/06/Android-Native-Hook-Practice/">Android Native Hook工具实践</a></p>
@@ -688,7 +688,7 @@
 </blockquote>
 <p>NativeHook技术可以简单理解为替换虚拟机中的变量和操作,APK中的文件被安卓系统的虚拟机加载执行，我们可以通过NativeHook技术实时修改虚拟机运行中的变量和操作，从而达到修复Bug的目的。</p>
 <p>该方案的缺点是兼容各个安卓版本、各个手机厂商的虚拟机底层实现。</p>
-<h3><span id="java-multidex">Java multidex</span><a href="#java-multidex" class="header-anchor">#</a></h3><blockquote>
+<h3 id="java-multidex"><a href="#Java-multidex" class="headerlink" title="Java multidex"></a>Java multidex<a href="#java-multidex" class="header-anchor">#</a></h3><blockquote>
 <p>Java  multidex参考阅读</p>
 <ul>
 <li><p><a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio/build/multidex#mdex-gradle">为方法数超过 64K 的应用启用 MultiDex Android 开发者)</a></p>
@@ -730,7 +730,7 @@
 <li>消耗性能，即Dalvik平台存在插桩导致的性能损耗，Art平台由于地址偏移问题导致补丁包可能过大的问题</li>
 <li>虚拟机在安装期间为类打上CLASS_ISPREVERIFIED标志是为了提高性能的，我们强制防止类被打上标志是否会影响性能？但是在大项目中拆分dex的问题已经比较严重，很多类都没有被打上这个标志。</li>
 </ul>
-<h3><span id="java-hook">Java Hook</span><a href="#java-hook" class="header-anchor">#</a></h3><blockquote>
+<h3 id="java-hook"><a href="#Java-Hook" class="headerlink" title="Java Hook"></a>Java Hook<a href="#java-hook" class="header-anchor">#</a></h3><blockquote>
 <p>Java Hook参考阅读</p>
 <ul>
 <li>美团技术文章：<a target="_blank" rel="noopener" href="https://tech.meituan.com/android_robust.html">https://tech.meituan.com/android_robust.html</a></li>
@@ -747,7 +747,7 @@
 <li>不支持so和资源的替换</li>
 <li>显著增大apk体积，1个函数增加17.47个字节，10万个函数会增加1.67M<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Android热更新方案Robust](https://tech.meituan.com/2016/09/14/android-robust.html)">[2]</span></a></sup></li>
 </ul>
-<h3><span id="dex替换">Dex替换</span><a href="#dex替换" class="header-anchor">#</a></h3><blockquote>
+<h3 id="dex替换"><a href="#Dex替换" class="headerlink" title="Dex替换"></a>Dex替换<a href="#dex替换" class="header-anchor">#</a></h3><blockquote>
 <p>Dex替换参考阅读</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://developer.android.google.cn/topic/security/dex?hl=zh_cn">直接从 APK 运行嵌入式 DEX 代码</a></li>
@@ -763,19 +763,19 @@
 <li>dex替换操作消耗虚拟机内存，如果遇到OOM有可能合并失败</li>
 <li>如果App本身可用内存过低，会导致App被系统杀死</li>
 </ul>
-<h3><span id="综合方案">综合方案</span><a href="#综合方案" class="header-anchor">#</a></h3><p>Sophix综合了上述的方案优缺点，最终采用从虚拟机层面修改底层的ArtMethod数据结构和排列，实现了代码修复。</p>
+<h3 id="综合方案"><a href="#综合方案" class="headerlink" title="综合方案"></a>综合方案<a href="#综合方案" class="header-anchor">#</a></h3><p>Sophix综合了上述的方案优缺点，最终采用从虚拟机层面修改底层的ArtMethod数据结构和排列，实现了代码修复。</p>
 <p>该方案的缺点如下：</p>
 <ul>
 <li>原有类结构发生变化，不适用修复</li>
 <li>反射调用的非静态方法，不适用修复</li>
 </ul>
-<h2><span id="资源修复">资源修复</span><a href="#资源修复" class="header-anchor">#</a></h2><blockquote>
+<h2 id="资源修复"><a href="#资源修复" class="headerlink" title="资源修复"></a>资源修复<a href="#资源修复" class="header-anchor">#</a></h2><blockquote>
 <p>笔者最大的疑问：下载全量包、差量包的方式完成替换，与下载APK，并重新安装APK的做法有什么区别？</p>
 <ul>
 <li>APK安装过程是什么？</li>
 </ul>
 </blockquote>
-<h3><span id="全量包">全量包</span><a href="#全量包" class="header-anchor">#</a></h3><blockquote>
+<h3 id="全量包"><a href="#全量包" class="headerlink" title="全量包"></a>全量包<a href="#全量包" class="header-anchor">#</a></h3><blockquote>
 <p>Amigo参考阅读</p>
 <p>[Amigo 源码解读 - Eleme Mobilists](<a target="_blank" rel="noopener" href="http://mobilists.eleme.io/2016/09/01/Amigo">http://mobilists.eleme.io/2016/09/01/Amigo</a> 源码解读/)</p>
 </blockquote>
@@ -806,11 +806,11 @@ android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&g
 </ul>
 </li>
 </ul>
-<h3><span id="差量包">差量包</span><a href="#差量包" class="header-anchor">#</a></h3><p>Tinker</p>
+<h3 id="差量包"><a href="#差量包" class="headerlink" title="差量包"></a>差量包<a href="#差量包" class="header-anchor">#</a></h3><p>Tinker</p>
 <p>sophix</p>
-<h2><span id="so修复">SO修复</span><a href="#so修复" class="header-anchor">#</a></h2><h3><span id="接口实现">接口实现</span><a href="#接口实现" class="header-anchor">#</a></h3><p>Tinker</p>
-<h3><span id="插桩实现">插桩实现</span><a href="#插桩实现" class="header-anchor">#</a></h3><p>Amigo\sophix</p>
-<h1><span id="参考">参考</span><a href="#参考" class="header-anchor">#</a></h1><h2><span id="dex分包">Dex分包</span><a href="#dex分包" class="header-anchor">#</a></h2><p>动态加载Dex技术</p>
+<h2 id="so修复"><a href="#SO修复" class="headerlink" title="SO修复"></a>SO修复<a href="#so修复" class="header-anchor">#</a></h2><h3 id="接口实现"><a href="#接口实现" class="headerlink" title="接口实现"></a>接口实现<a href="#接口实现" class="header-anchor">#</a></h3><p>Tinker</p>
+<h3 id="插桩实现"><a href="#插桩实现" class="headerlink" title="插桩实现"></a>插桩实现<a href="#插桩实现" class="header-anchor">#</a></h3><p>Amigo\sophix</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考<a href="#参考" class="header-anchor">#</a></h1><h2 id="dex分包"><a href="#Dex分包" class="headerlink" title="Dex分包"></a>Dex分包<a href="#dex分包" class="header-anchor">#</a></h2><p>动态加载Dex技术</p>
 <table>
 <thead>
 <tr>
@@ -835,7 +835,7 @@ android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&g
 <td></td>
 </tr>
 </tbody></table>
-<h2><span id="热补丁">热补丁</span><a href="#热补丁" class="header-anchor">#</a></h2><table>
+<h2 id="热补丁"><a href="#热补丁" class="headerlink" title="热补丁"></a>热补丁<a href="#热补丁" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th></th>
@@ -1029,8 +1029,8 @@ android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&g
 <td>2017年(被阿里收购不再维护)</td>
 </tr>
 </tbody></table>
-<h2><span id="热补丁原理">热补丁原理</span><a href="#热补丁原理" class="header-anchor">#</a></h2><p> <img src="http://cdn.yangchaofan.cn/typora/image-20210603134359487.png" alt="image-20210603134359487"></p>
-<h2><span id="热补丁参考文章">热补丁参考文章</span><a href="#热补丁参考文章" class="header-anchor">#</a></h2><table>
+<h2 id="热补丁原理"><a href="#热补丁原理" class="headerlink" title="热补丁原理"></a>热补丁原理<a href="#热补丁原理" class="header-anchor">#</a></h2><p> <img src="http://cdn.yangchaofan.cn/typora/image-20210603134359487.png" alt="image-20210603134359487"></p>
+<h2 id="热补丁参考文章"><a href="#热补丁参考文章" class="headerlink" title="热补丁参考文章"></a>热补丁参考文章<a href="#热补丁参考文章" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th>名称</th>
@@ -1404,7 +1404,7 @@ android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&g
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -1426,7 +1426,7 @@ android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&g
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1831,7 +1831,7 @@ android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&g
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">热修复详解与实战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">热修复的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">热修复的实现思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">思路概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">代码修复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.1.</span> <span class="nav-text">NativeHook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.2.</span> <span class="nav-text">Java multidex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.3.</span> <span class="nav-text">Java Hook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.4.</span> <span class="nav-text">Dex替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.2.5.</span> <span class="nav-text">综合方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">资源修复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.1.</span> <span class="nav-text">全量包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.3.2.</span> <span class="nav-text">差量包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.4.</span> <span class="nav-text">SO修复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.4.1.</span> <span class="nav-text">接口实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">4.4.2.</span> <span class="nav-text">插桩实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">Dex分包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">热补丁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.3.</span> <span class="nav-text">热补丁原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.4.</span> <span class="nav-text">热补丁参考文章</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%AD%E4%BF%AE%E5%A4%8D%E8%AF%A6%E8%A7%A3%E4%B8%8E%E5%AE%9E%E6%88%98"><span class="nav-number">1.</span> <span class="nav-text">热修复详解与实战</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">3.</span> <span class="nav-text">热修复的定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%83%AD%E4%BF%AE%E5%A4%8D%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF"><span class="nav-number">4.</span> <span class="nav-text">热修复的实现思路</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF%E6%A6%82%E8%A7%88"><span class="nav-number">4.1.</span> <span class="nav-text">思路概览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E4%BF%AE%E5%A4%8D"><span class="nav-number">4.2.</span> <span class="nav-text">代码修复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nativehook"><span class="nav-number">4.2.1.</span> <span class="nav-text">NativeHook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java-multidex"><span class="nav-number">4.2.2.</span> <span class="nav-text">Java multidex</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java-hook"><span class="nav-number">4.2.3.</span> <span class="nav-text">Java Hook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dex%E6%9B%BF%E6%8D%A2"><span class="nav-number">4.2.4.</span> <span class="nav-text">Dex替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%BC%E5%90%88%E6%96%B9%E6%A1%88"><span class="nav-number">4.2.5.</span> <span class="nav-text">综合方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%84%E6%BA%90%E4%BF%AE%E5%A4%8D"><span class="nav-number">4.3.</span> <span class="nav-text">资源修复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A8%E9%87%8F%E5%8C%85"><span class="nav-number">4.3.1.</span> <span class="nav-text">全量包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%AE%E9%87%8F%E5%8C%85"><span class="nav-number">4.3.2.</span> <span class="nav-text">差量包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#so%E4%BF%AE%E5%A4%8D"><span class="nav-number">4.4.</span> <span class="nav-text">SO修复</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.4.1.</span> <span class="nav-text">接口实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E6%A1%A9%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.4.2.</span> <span class="nav-text">插桩实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dex%E5%88%86%E5%8C%85"><span class="nav-number">5.1.</span> <span class="nav-text">Dex分包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E8%A1%A5%E4%B8%81"><span class="nav-number">5.2.</span> <span class="nav-text">热补丁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E8%A1%A5%E4%B8%81%E5%8E%9F%E7%90%86"><span class="nav-number">5.3.</span> <span class="nav-text">热补丁原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E8%A1%A5%E4%B8%81%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="nav-number">5.4.</span> <span class="nav-text">热补丁参考文章</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1852,7 +1852,7 @@ android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&g
       <h3 class="widget-title">Tag Cloud</h3>
       <div id="myCanvasContainer" class="widget tagcloud">
           <canvas width="250" height="250" id="resCanvas" style="width=100%">
-              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li></ul>
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li></ul>
           </canvas>
       </div>
       </div>
@@ -1886,7 +1886,7 @@ android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&g
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">115.1k</span>
+    <span title="Site words total count">117.5k</span>
   
 </div>
 
@@ -2796,7 +2796,7 @@ android:authorities=&quot;$&#123;youPackageName&#125;.provider.student&quot; /&g
   
     <script async type="text/javascript">
         var text = "Welcome To Leaface";
-        var date = '2021-06-23';
+        var date = '2021-06-25';
         console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
         console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
         console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');

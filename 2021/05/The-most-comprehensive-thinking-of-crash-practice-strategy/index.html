@@ -533,7 +533,7 @@
       
 
       
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1><span id="android-crash实践策略最全面思考">Android Crash实践策略最全面思考</span><a href="#android-crash实践策略最全面思考" class="header-anchor">#</a></h1><h1><span id="crash稳定性定义">Crash稳定性定义</span><a href="#crash稳定性定义" class="header-anchor">#</a></h1><p>App 在运行过程中发生Crash 现象,通常表现为两种:1.退出当前回到手机主页面；2.显示App已停止运行的弹出框。</p>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="android-crash实践策略最全面思考"><a href="#Android-Crash实践策略最全面思考" class="headerlink" title="Android Crash实践策略最全面思考"></a>Android Crash实践策略最全面思考<a href="#android-crash实践策略最全面思考" class="header-anchor">#</a></h1><h1 id="crash稳定性定义"><a href="#Crash稳定性定义" class="headerlink" title="Crash稳定性定义"></a>Crash稳定性定义<a href="#crash稳定性定义" class="header-anchor">#</a></h1><p>App 在运行过程中发生Crash 现象,通常表现为两种:1.退出当前回到手机主页面；2.显示App已停止运行的弹出框。</p>
 <center>
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn//typora/image-20210423143651100.png" width="60%" alt>
@@ -561,11 +561,11 @@
 <li><p>重复Crash率：重复Crash的原因的发生次数/单位时间Crash总次数</p>
 </li>
 </ul>
-<h1><span id="降低crash率的意义">降低Crash率的意义</span><a href="#降低crash率的意义" class="header-anchor">#</a></h1><p>通常App Crash的产生，就意味着较差的服务质量，会降低客户对该App的信任，进而影响后续对该公司产品的使用。公司失去客户的信任，直接的影响就是流失客户，更为严重的影响是营收下滑。因此作为开发人员，监控、预防、分析、降低线上Crash率，是迫在眉睫且必须要做的优化工作。</p>
+<h1 id="降低crash率的意义"><a href="#降低Crash率的意义" class="headerlink" title="降低Crash率的意义"></a>降低Crash率的意义<a href="#降低crash率的意义" class="header-anchor">#</a></h1><p>通常App Crash的产生，就意味着较差的服务质量，会降低客户对该App的信任，进而影响后续对该公司产品的使用。公司失去客户的信任，直接的影响就是流失客户，更为严重的影响是营收下滑。因此作为开发人员，监控、预防、分析、降低线上Crash率，是迫在眉睫且必须要做的优化工作。</p>
 <p>在业内，衡量一款App的运行状态是否健康，通常会使用Crash率是否低于1%来判断；如果一款APpCrash率低于1%，通常会被当做健康的产品；一款Crash率高于5%的App，则会被认为服务质量较差，会流失大量潜在用户。<br>App在线上发布后，后台健康到的AppCrash率如果持续在1-3%则可称为稳定的Crash率；如果某一时刻Crash率大于5%，则应该提前预警给市场人员、运营人员、开发人员，市场分析Crash率上升导致的影响，提前做好公关通知；运营人员可以根据容灾策略，关闭Crash率高的业务入口，降低产品不可用的范围，保持其他模块可用；开发人员可以根据线上日志，及时修复异常代码，发布修复补丁，让模块尽快正常运行。</p>
-<h1><span id="crash处理策略">Crash处理策略</span><a href="#crash处理策略" class="header-anchor">#</a></h1><p>App作为企业直接面向消费者的产品，一旦发生Crash现象，将会给企业造成巨大的损失，为了降低损失，将Crash带来的损失降到最低，客户端工程实践中，往往会采取许多策略降低Crash率。实践通常分为以下4个环节：设置指标、线上监控、线上容灾、线下预防四个环节。</p>
-<h2><span id="设置指标">设置指标</span><a href="#设置指标" class="header-anchor">#</a></h2><p>为了描述Crash现象，除去前文已经描述过的Crash率，我们在工程实践中还会监控以下指标<br>Crash率    Crash率、UV Crash率、PV Crash率等<br>用户信息    用户详情：手机号、性别、年龄、国家地区、累计消费金额等<br>会员级别：普通、青铜、黄金、钻石VIP等<br>手机信息    ROM厂商版本、AndroidOS版本、CPU型号、屏幕厂商、屏幕分辨率、磁盘型号、运行时参数如运行时Activity栈情况、App可用内存、磁盘内存、CPU执行情况等<br>地理信息    国家地区、语言<br>Crash信息    App线上版本号、应用市场渠道号、异常堆栈、同类型异常发生总次数、异常总次数、UV数、PV数、已登录用户数</p>
-<h2><span id="线上监控">线上监控</span><a href="#线上监控" class="header-anchor">#</a></h2><p>作为开发者，如何在App发布出去之后，监控到用户手机中App的Crash数据，可采取的方案有：</p>
+<h1 id="crash处理策略"><a href="#Crash处理策略" class="headerlink" title="Crash处理策略"></a>Crash处理策略<a href="#crash处理策略" class="header-anchor">#</a></h1><p>App作为企业直接面向消费者的产品，一旦发生Crash现象，将会给企业造成巨大的损失，为了降低损失，将Crash带来的损失降到最低，客户端工程实践中，往往会采取许多策略降低Crash率。实践通常分为以下4个环节：设置指标、线上监控、线上容灾、线下预防四个环节。</p>
+<h2 id="设置指标"><a href="#设置指标" class="headerlink" title="设置指标"></a>设置指标<a href="#设置指标" class="header-anchor">#</a></h2><p>为了描述Crash现象，除去前文已经描述过的Crash率，我们在工程实践中还会监控以下指标<br>Crash率    Crash率、UV Crash率、PV Crash率等<br>用户信息    用户详情：手机号、性别、年龄、国家地区、累计消费金额等<br>会员级别：普通、青铜、黄金、钻石VIP等<br>手机信息    ROM厂商版本、AndroidOS版本、CPU型号、屏幕厂商、屏幕分辨率、磁盘型号、运行时参数如运行时Activity栈情况、App可用内存、磁盘内存、CPU执行情况等<br>地理信息    国家地区、语言<br>Crash信息    App线上版本号、应用市场渠道号、异常堆栈、同类型异常发生总次数、异常总次数、UV数、PV数、已登录用户数</p>
+<h2 id="线上监控"><a href="#线上监控" class="headerlink" title="线上监控"></a>线上监控<a href="#线上监控" class="header-anchor">#</a></h2><p>作为开发者，如何在App发布出去之后，监控到用户手机中App的Crash数据，可采取的方案有：</p>
 <p>1.企业采购外部资源APM厂商如友盟、Buggly，集成第三方异常采集SDK；</p>
 <p>2.基于数据安全合规 ，企业研发APM平台，采集AppCrash信息。</p>
 <p>方案1已经运用于目前App，各大主流App皆集成了友盟采集SDK、Buggly采集SDK，开发者可以登录<a target="_blank" rel="noopener" href="https://mobile.umeng.com/platform/apps/list%E6%9F%A5%E7%9C%8B%E5%90%84App%E5%90%84%E7%89%88%E6%9C%AC%E7%9A%84Crash%E7%8E%87%E3%80%82">https://mobile.umeng.com/platform/apps/list查看各App各版本的Crash率。</a><br>方案2企业研发APM平台，作为客户端，有以下策略抓取Crash信息上报至服务器：1.Java未捕获异常处理器和默认未捕获异常处理器；2Java异常捕获try-catch-finnally流程；3基于Linux Crash信号列表捕获NativeCrash信息。策略1和2作为App开发常见的两种策略，为本节主要内容，读者如果对Native Crash捕获上报感兴趣，可以联系笔者补充。<br>首先介绍第一个策略Java未捕获异常处理和默认未捕获异常处理器。<br>Java JDK提供了Thread. UncaughtExceptionHandler来捕获App进程所有未处理的异常，并处理该异常。一段典型的未捕获异常处理如下代码所示：</p>
@@ -595,7 +595,7 @@
 <ol>
 <li>应用容灾：为A业务模块指定默认跳转页面；为App指定异常情况默认跳转页面<br> .    缓存当前线程执行的任务，如接口请求、数据读写、文件下载，用来下一次恢复该任务<br> .    异常信息存储，异常信息不经筛选、过滤、合并，会给本地磁盘、远程服务器造成负担，所以我们会对异常信息优化处理，包括读取已有的异常信息、更新异常信息、序列化到本地、存储至磁盘、去重后上报至远程服务器；<br> .    异常信息上报，通常会将优化过的异常日志按一定策略上报至服务器：<br> .    定时上报：用户在点击一键反馈的按钮时，自动上报异常日志；每天首次启动App时进行上报；<br> .    定策略上报：App当日Crash累计次数大于i次，则触发上报机制；<br> .    上报去重：对于已经上报过的异常信息、且异常次数、异常详情等维度相同，则不进行上报，减轻服务器压力、减轻本地磁盘存储压力。</li>
 </ol>
-<h2><span id="线上容灾">线上容灾</span><a href="#线上容灾" class="header-anchor">#</a></h2><p>当运营人员、市场人员或开发人员在后台看到线上App产生大量Crash现象时，可以采取以下实践：</p>
+<h2 id="线上容灾"><a href="#线上容灾" class="headerlink" title="线上容灾"></a>线上容灾<a href="#线上容灾" class="header-anchor">#</a></h2><p>当运营人员、市场人员或开发人员在后台看到线上App产生大量Crash现象时，可以采取以下实践：</p>
 <ol>
 <li>退出进程：杀死App进程，造成App退出回到首页的假象，避免弹出停止运行弹出框，影响用户体验，让用户误以为手机使用不当退出了App。</li>
 </ol>
@@ -621,7 +621,7 @@
 <li><p>线上发布版本：开发人员重新发布APK，运营人员全量推送新版本，强制用户升级。如果子页面为H5页面，在线上重新部署网页即可。</p>
 </li>
 </ol>
-<h2><span id="线下预防">线下预防</span><a href="#线下预防" class="header-anchor">#</a></h2><p>线下预防是指开发人员在开发过程中，应该通过开发流程规范避免代码产生异常。通常的开发流程规范包括：</p>
+<h2 id="线下预防"><a href="#线下预防" class="headerlink" title="线下预防"></a>线下预防<a href="#线下预防" class="header-anchor">#</a></h2><p>线下预防是指开发人员在开发过程中，应该通过开发流程规范避免代码产生异常。通常的开发流程规范包括：</p>
 <ol>
 <li>模块功能设计</li>
 <li>自测用例编写</li>
@@ -633,8 +633,8 @@
 <li>第三方API异常捕获；</li>
 <li>系统资源异常情况处理：低内存、低磁盘容量、低电量、弱网、无网、CPU可用资源过低</li>
 </ol>
-<h1><span id="工具">工具</span><a href="#工具" class="header-anchor">#</a></h1><h2><span id="代码扫描">代码扫描</span><a href="#代码扫描" class="header-anchor">#</a></h2><p>安卓开发常见的代码扫描工具有：Alibaba- p3c、checkstyle、Lint</p>
-<h2><span id="测试检查">测试检查</span><a href="#测试检查" class="header-anchor">#</a></h2><p>安卓开发常见的测试工具及文档如下：</p>
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具<a href="#工具" class="header-anchor">#</a></h1><h2 id="代码扫描"><a href="#代码扫描" class="headerlink" title="代码扫描"></a>代码扫描<a href="#代码扫描" class="header-anchor">#</a></h2><p>安卓开发常见的代码扫描工具有：Alibaba- p3c、checkstyle、Lint</p>
+<h2 id="测试检查"><a href="#测试检查" class="headerlink" title="测试检查"></a>测试检查<a href="#测试检查" class="header-anchor">#</a></h2><p>安卓开发常见的测试工具及文档如下：</p>
 <table>
 <thead>
 <tr>
@@ -679,7 +679,7 @@
 <td><a target="_blank" rel="noopener" href="https://developer.android.google.cn/studio/test/monkey?hl=zh_cn">https://developer.android.google.cn/studio/test/monkey?hl=zh_cn</a></td>
 </tr>
 </tbody></table>
-<h2><span id="api">API</span><a href="#api" class="header-anchor">#</a></h2><table>
+<h2 id="api"><a href="#API" class="headerlink" title="API"></a>API<a href="#api" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th><strong>API资源</strong></th>
@@ -708,7 +708,7 @@
 <td><a target="_blank" rel="noopener" href="https://github.com/xuuhaoo/DefenseCrash">https://github.com/xuuhaoo/DefenseCrash</a></td>
 </tr>
 </tbody></table>
-<h2><span id="热补丁">热补丁</span><a href="#热补丁" class="header-anchor">#</a></h2><blockquote>
+<h2 id="热补丁"><a href="#热补丁" class="headerlink" title="热补丁"></a>热补丁<a href="#热补丁" class="header-anchor">#</a></h2><blockquote>
 <p>热补丁技术实践 常见的分为三级</p>
 <ol>
 <li><p>代码修复级别：有编译插桩、分包拆包、dex替换</p>
@@ -1083,7 +1083,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -1105,7 +1105,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1510,7 +1510,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Android Crash实践策略最全面思考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Crash稳定性定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">降低Crash率的意义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Crash处理策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">设置指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">线上监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">线上容灾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.4.</span> <span class="nav-text">线下预防</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">代码扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">测试检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.3.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.4.</span> <span class="nav-text">热补丁</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#android-crash%E5%AE%9E%E8%B7%B5%E7%AD%96%E7%95%A5%E6%9C%80%E5%85%A8%E9%9D%A2%E6%80%9D%E8%80%83"><span class="nav-number">1.</span> <span class="nav-text">Android Crash实践策略最全面思考</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#crash%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%AE%9A%E4%B9%89"><span class="nav-number">2.</span> <span class="nav-text">Crash稳定性定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%99%8D%E4%BD%8Ecrash%E7%8E%87%E7%9A%84%E6%84%8F%E4%B9%89"><span class="nav-number">3.</span> <span class="nav-text">降低Crash率的意义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#crash%E5%A4%84%E7%90%86%E7%AD%96%E7%95%A5"><span class="nav-number">4.</span> <span class="nav-text">Crash处理策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%8C%87%E6%A0%87"><span class="nav-number">4.1.</span> <span class="nav-text">设置指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8A%E7%9B%91%E6%8E%A7"><span class="nav-number">4.2.</span> <span class="nav-text">线上监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8A%E5%AE%B9%E7%81%BE"><span class="nav-number">4.3.</span> <span class="nav-text">线上容灾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E4%B8%8B%E9%A2%84%E9%98%B2"><span class="nav-number">4.4.</span> <span class="nav-text">线下预防</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7"><span class="nav-number">5.</span> <span class="nav-text">工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%89%AB%E6%8F%8F"><span class="nav-number">5.1.</span> <span class="nav-text">代码扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%A3%80%E6%9F%A5"><span class="nav-number">5.2.</span> <span class="nav-text">测试检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#api"><span class="nav-number">5.3.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%83%AD%E8%A1%A5%E4%B8%81"><span class="nav-number">5.4.</span> <span class="nav-text">热补丁</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1531,7 +1531,7 @@
       <h3 class="widget-title">Tag Cloud</h3>
       <div id="myCanvasContainer" class="widget tagcloud">
           <canvas width="250" height="250" id="resCanvas" style="width=100%">
-              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li></ul>
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li></ul>
           </canvas>
       </div>
       </div>
@@ -1565,7 +1565,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">115.1k</span>
+    <span title="Site words total count">117.5k</span>
   
 </div>
 
@@ -2475,7 +2475,7 @@
   
     <script async type="text/javascript">
         var text = "Welcome To Leaface";
-        var date = '2021-06-23';
+        var date = '2021-06-25';
         console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
         console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
         console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
