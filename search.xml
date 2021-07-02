@@ -250,7 +250,7 @@
 </tr>
 <tr>
 <td>_config.yml</td>
-<td>deploy:   type: git   repository: <a href="mailto:&#103;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#x2e;&#99;&#111;&#x6d;">&#103;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#x2e;&#99;&#111;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
+<td>deploy:   type: git   repository: <a href="mailto:&#x67;&#105;&#116;&#64;&#x67;&#105;&#116;&#x68;&#117;&#98;&#46;&#99;&#x6f;&#x6d;">&#x67;&#105;&#116;&#64;&#x67;&#105;&#116;&#x68;&#117;&#98;&#46;&#99;&#x6f;&#x6d;</a>:liuxianan/liuxianan.github.io.git   branch: master</td>
 </tr>
 <tr>
 <td>hexo clean</td>
@@ -596,6 +596,670 @@ post_wordcount:
       </categories>
       <tags>
         <tag>个人教育</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Android跨进程通信方案选型</title>
+    <url>//2021/07/android-ipc-best-practice/</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="跨进程通信方案"><a href="#跨进程通信方案" class="headerlink" title="跨进程通信方案"></a>跨进程通信方案<a href="#跨进程通信方案" class="header-anchor">#</a></h1><h1 id="原生方案"><a href="#原生方案" class="headerlink" title="原生方案"></a>原生方案<a href="#原生方案" class="header-anchor">#</a></h1><table>
+<thead>
+<tr>
+<th>对比项管道Pipe</th>
+<th>管道Pipe</th>
+<th>socket</th>
+<th>AIDL</th>
+<th>Messenger</th>
+<th>MemoryFIle</th>
+<th>signal</th>
+<th>FileObserver</th>
+<th>UrlScheme</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>wiki</td>
+<td><a href="https://docs.oracle.com/javase/7/docs/api/java/nio/channels/Pipe.html">Pipe</a><br><a href="https://developer.android.google.cn/reference/java/io/PipedWriter?hl=en">PipedWriter</a><br><a href="https://developer.android.google.cn/reference/java/io/PipedReader?hl=en">PipedReader</a></td>
+<td><a href="https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html">Socket </a><br><a href="https://docs.oracle.com/javase/7/docs/api/java/net/ServerSocket.html">ServerSocket</a></td>
+<td></td>
+<td></td>
+<td>匿名共享内存（Anonymous Shared Memory-Ashmem）</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持双向</td>
+<td>NO</td>
+<td>YES</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持本进程（多个线程）通信</td>
+<td>YES</td>
+<td>YES</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持启动者数量(类型)</td>
+<td>不限</td>
+<td>不限</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Activity\Service\BroadcastReceiver\ContentProvider</td>
+</tr>
+<tr>
+<td>支持传输数据类型</td>
+<td></td>
+<td></td>
+<td>基本数据类型、List、Map、String、、<a href="https://developer.android.google.cn/reference/android/os/Parcelable?hl=zh_cn">Parcelable</a></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持事件总线</td>
+<td></td>
+<td>YES</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持返回结果Callback</td>
+<td>NO</td>
+<td>YES</td>
+<td>YES</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>数据到达率高低</td>
+<td>YES</td>
+<td>YES</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>数据最大长度</td>
+<td>1024byte<br>管道流默认1024个字符</td>
+<td>65536</td>
+<td>同步调用为<code>1MB-8KB</code><sup id="fnref:5"><a href="#fn:5" rel="footnote">&lt;span class=”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=”<a href="http://androidxref.com/9.0.0_r3/xref/frameworks/native/libs/binder/ProcessState.cpp">Cross Reference: /frameworks/native/libs/binder/ProcessState.cpp (androidxref.com)</a></a></sup></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>“&gt;[5]<br>oneway调用为<code>(1MB-8kb)</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>数据传输速度</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>数据拷贝次数</td>
+<td></td>
+<td>2次<br>客户端拷贝一次，服务端拷贝一次</td>
+<td>1次，操作的都是Binder驱动的对象</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>优点</td>
+<td></td>
+<td>支持设置超时时间</td>
+<td>适合服务端被多个客户端访问，适合多线程访问服务端的场景</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>缺点</td>
+<td></td>
+<td>客户端和服务端需要各自维护一个子线程监听数据传输</td>
+<td>仅适合在不同App之间使用<br>发生异常不回返回调用者<br>必须使用Service，需要考虑兼容系统版本</td>
+<td></td>
+<td></td>
+<td>不能传递复杂消息，只能用来同步</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>本质</td>
+<td>IO流</td>
+<td>传输层网络协议</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>AIDL仅适合：不同App通过IPC访问服务、服务中需要多线程处理</li>
+<li>不跨App，建议使用Binder执行并发IPC</li>
+<li>不跨App,且不存在多线程并发，建议使用Messager<h1 id="开源方案"><a href="#开源方案" class="headerlink" title="开源方案"></a>开源方案<a href="#开源方案" class="header-anchor">#</a></h1></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th><a href="https://github.com/iqiyi/Andromeda/blob/master/CHINESE_README.md">Andromeda</a></th>
+<th><a href="https://github.com/Xiaofei-it/HermesEventBus/blob/master/README-zh-CN.md">Hermes\HermesEventBus</a></th>
+<th><a href="https://github.com/SpinyTech/ModularizationArchitecture">ModularizationArchitecture</a></th>
+<th><a href="https://github.com/luckybilly/CC/wiki">CC</a></th>
+<th>ActivityRouter</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>参考wiki</td>
+<td><a href="https://blog.csdn.net/u012165769/article/details/113006210">跨进程通信框架Andromeda解析架</a></td>
+<td></td>
+<td></td>
+<td><a href="https://qibilly.com/CC-website/#/">CC:业界首个支持渐进式组件化改造的Android组件化框架 </a></td>
+<td></td>
+</tr>
+<tr>
+<td>开源时间</td>
+<td>2018年1月</td>
+<td>2016年6月</td>
+<td>2017年1月</td>
+<td>2017年11月</td>
+<td></td>
+</tr>
+<tr>
+<td>支持双向</td>
+<td>YES</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持本进程通信</td>
+<td>YES</td>
+<td>YES</td>
+<td></td>
+<td>YES</td>
+<td></td>
+</tr>
+<tr>
+<td>支持启动者数量</td>
+<td>Fragment\Activity</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持事件总线</td>
+<td>YES</td>
+<td>YES</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>支持返回结果Callback</td>
+<td>YES</td>
+<td>NO</td>
+<td></td>
+<td>YES</td>
+<td></td>
+</tr>
+<tr>
+<td>数据到达率高低</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>数据最大长度</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>数据传输速度</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>数据拷贝次数</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>缺点</td>
+<td></td>
+<td>不支持oneway、in、out、inout</td>
+<td></td>
+<td>仅支持开发期间</td>
+<td></td>
+</tr>
+<tr>
+<td>本质</td>
+<td><strong>AIDL</strong></td>
+<td><strong>AIDL</strong></td>
+<td></td>
+<td><strong>AIDL</strong></td>
+<td></td>
+</tr>
+<tr>
+<td>开发者</td>
+<td>爱奇艺</td>
+<td>饿了么</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="原生方案"><a href="#原生方案-1" class="headerlink" title="原生方案"></a>原生方案<a href="#原生方案" class="header-anchor">#</a></h1><h2 id="pipe"><a href="#Pipe" class="headerlink" title="Pipe"></a>Pipe<a href="#pipe" class="header-anchor">#</a></h2><h3 id="文档地址"><a href="#文档地址" class="headerlink" title="文档地址"></a><a href="https://docs.oracle.com/javase/7/docs/api/java/nio/channels/Pipe.html">文档地址</a><a href="#文档地址" class="header-anchor">#</a></h3><h3 id="相关api"><a href="#相关API" class="headerlink" title="相关API"></a>相关API<a href="#相关api" class="header-anchor">#</a></h3><ul>
+<li><p><code>Pipe</code>类<code>open()</code>、<code>sink()</code>、<code>source()</code>;</p>
+</li>
+<li><p><code>CountDownLatch</code>类<code>countDown()</code>、<code>await()</code></p>
+</li>
+<li><p><code>ByteBuffer</code>类<code>allocate()</code>、f<code>lip()</code>、<code>clear()</code>、<code>array()</code></p>
+</li>
+</ul>
+<h3 id="demo设计"><a href="#Demo设计" class="headerlink" title="Demo设计"></a>Demo设计<a href="#demo设计" class="header-anchor">#</a></h3><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/Pipe.png" width="100%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图-跨进程通信调研-Pipe
+      </div>
+</center>
+
+
+<h3 id="demo代码"><a href="#Demo代码" class="headerlink" title="Demo代码"></a>Demo代码<a href="#demo代码" class="header-anchor">#</a></h3><h4 id="testjava"><a href="#Test-java" class="headerlink" title="Test.java"></a><strong>Test.java</strong><a href="#testjava" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.nio.ByteBuffer;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.Pipe;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PipeTest</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line">      Pipe pipe = Pipe.open();</span><br><span class="line">      Sender senderThread = <span class="keyword">new</span> Sender(pipe, countDownLatch);</span><br><span class="line">      Receiver receiverThread = <span class="keyword">new</span> Receiver(pipe, countDownLatch);</span><br><span class="line">      senderThread.start();</span><br><span class="line">      receiverThread.start();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">      <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="senderjava"><a href="#Sender-java" class="headerlink" title="Sender.java"></a><strong>Sender.java</strong><a href="#senderjava" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.nio.ByteBuffer;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.Pipe;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sender</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> Pipe pipe;</span><br><span class="line">  <span class="keyword">private</span> Pipe.SinkChannel sinkChannel;</span><br><span class="line">  <span class="keyword">private</span> CountDownLatch latch;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Sender</span><span class="params">(Pipe pipe, CountDownLatch latch)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.pipe = pipe;</span><br><span class="line">    <span class="keyword">this</span>.sinkChannel = pipe.sink();</span><br><span class="line">    <span class="keyword">this</span>.latch = latch;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// test input content</span></span><br><span class="line">    StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) &#123;</span><br><span class="line">      String outData = <span class="string">&quot;jack：&quot;</span> + (i + <span class="number">1</span>) + <span class="string">&quot; times good moring&quot;</span>;</span><br><span class="line">      stringBuffer.append(outData);</span><br><span class="line">    &#125;</span><br><span class="line">    ByteBuffer buffer = ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">    buffer.clear();</span><br><span class="line">    buffer.put(String.valueOf(stringBuffer).getBytes());</span><br><span class="line">    buffer.flip();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">while</span> (buffer.hasRemaining()) &#123;</span><br><span class="line">        sinkChannel.write(buffer);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">      <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;senderThread send content:&quot;</span> + stringBuffer.toString());</span><br><span class="line">      latch.countDown();</span><br><span class="line">      System.out.println(<span class="string">&quot;senderThread send finish:&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="receiverjava"><a href="#Receiver-java" class="headerlink" title="Receiver.java"></a><strong>Receiver.java</strong><a href="#receiverjava" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.nio.ByteBuffer;</span><br><span class="line"><span class="keyword">import</span> java.nio.channels.Pipe;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Receiver</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Pipe pipe;</span><br><span class="line">  <span class="keyword">private</span> Pipe.SourceChannel sourceChannel;</span><br><span class="line">  <span class="keyword">private</span> CountDownLatch latch;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Receiver</span><span class="params">(Pipe pipe, CountDownLatch latch)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.pipe = pipe;</span><br><span class="line">    <span class="keyword">this</span>.latch = latch;</span><br><span class="line">    <span class="keyword">this</span>.sourceChannel = pipe.source();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      latch.await();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">      <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">    ByteBuffer buffer = ByteBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">    <span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">    StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      len = sourceChannel.read(buffer);</span><br><span class="line">      buffer.flip();</span><br><span class="line">      String content = <span class="keyword">new</span> String(buffer.array(), <span class="number">0</span>, len);</span><br><span class="line">      stringBuffer.append(content);</span><br><span class="line">      buffer.clear();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Exception exception) &#123;</span><br><span class="line">      exception.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      System.out.println(<span class="string">&quot;ReceiverThread has receive content:&quot;</span> + stringBuffer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h2 id="pipereader-pipewriter"><a href="#PipeReader、PipeWriter" class="headerlink" title="PipeReader、PipeWriter"></a>PipeReader、PipeWriter<a href="#pipereader-pipewriter" class="header-anchor">#</a></h2><h3 id="文档地址"><a href="#文档地址-1" class="headerlink" title="文档地址"></a><a href="https://developer.android.google.cn/reference/java/io/PipedWriter?hl=en">文档地址</a><a href="#文档地址" class="header-anchor">#</a></h3><h3 id="相关api"><a href="#相关API-1" class="headerlink" title="相关API"></a>相关API<a href="#相关api" class="header-anchor">#</a></h3><ul>
+<li><code>PipedWriter</code>类<code>write()</code></li>
+<li><code>PipedReade</code>r类<code>PipedWriter(PipedWriter)</code>、<code>read(buffer)</code>、<code>connect()</code></li>
+<li><code>CountDownLatch</code>类<code>countDown()</code>、<code>await()</code></li>
+<li><code>CharBuffer</code>类<code>allocate()</code>、f<code>lip()</code>、<code>clear()</code>、<code>array()</code></li>
+</ul>
+<h3 id="demo设计"><a href="#Demo设计-1" class="headerlink" title="Demo设计"></a>Demo设计<a href="#demo设计" class="header-anchor">#</a></h3><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/跨进程通信调研-PipedWriter.png" width="100%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图-跨进程通信调研-PipedWriter
+      </div>
+</center>
+
+
+
+<h3 id="demo代码"><a href="#Demo代码-1" class="headerlink" title="Demo代码"></a>Demo代码<a href="#demo代码" class="header-anchor">#</a></h3><h4 id="testjava"><a href="#Test-java-1" class="headerlink" title="Test.java"></a><strong>Test.java</strong><a href="#testjava" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.PipedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.PipedWriter;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PipedReaderTest</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line">      PipedWriter pipedWriter = <span class="keyword">new</span> PipedWriter();</span><br><span class="line">      PipedReader pipedReader = <span class="keyword">new</span> PipedReader(pipedWriter);</span><br><span class="line">      Sender sender = <span class="keyword">new</span> Sender(pipedWriter,countDownLatch);</span><br><span class="line">      Receiver receiver = <span class="keyword">new</span> Receiver(pipedReader, pipedWriter,countDownLatch);</span><br><span class="line">      ExecutorService service = Executors.newCachedThreadPool();</span><br><span class="line">      service.execute(sender);</span><br><span class="line">      service.execute(receiver);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">      <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="senderjava"><a href="#Sender-java-1" class="headerlink" title="Sender.java"></a><strong>Sender.java</strong><a href="#senderjava" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.PipedWriter;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Sender</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">  PipedWriter pipedWriter;</span><br><span class="line">  CountDownLatch latch;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Sender</span><span class="params">(PipedWriter pipedWriter, CountDownLatch latch)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.pipedWriter = pipedWriter;</span><br><span class="line">    <span class="keyword">this</span>.latch = latch;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">      StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">char</span> a = <span class="string">&#x27;a&#x27;</span>; a &lt;= <span class="string">&#x27;z&#x27;</span>; a++) &#123;</span><br><span class="line">        stringBuffer.append(a);</span><br><span class="line">      &#125;</span><br><span class="line">      pipedWriter.write(stringBuffer.toString().toCharArray(), <span class="number">0</span>, stringBuffer.length());</span><br><span class="line">      System.out.println(<span class="string">&quot;sedner content :&quot;</span>+stringBuffer);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">      <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      latch.countDown();</span><br><span class="line">      System.out.println(<span class="string">&quot;sedner has finish&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h4 id="receiverjava"><a href="#Receiver-java-1" class="headerlink" title="Receiver.java"></a><strong>Receiver.java</strong><a href="#receiverjava" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.PipedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.PipedWriter;</span><br><span class="line"><span class="keyword">import</span> java.nio.ByteBuffer;</span><br><span class="line"><span class="keyword">import</span> java.nio.CharBuffer;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Receiver</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">private</span> PipedWriter pipedWriter;</span><br><span class="line">  <span class="keyword">private</span> PipedReader pipedReader;</span><br><span class="line">  <span class="keyword">private</span> CountDownLatch latch;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Receiver</span><span class="params">(PipedReader pipedReader, PipedWriter pipedWriter, CountDownLatch latch)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.pipedReader = pipedReader;</span><br><span class="line">    <span class="keyword">this</span>.pipedWriter = pipedWriter;</span><br><span class="line">    <span class="keyword">this</span>.latch = latch;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      latch.await();</span><br><span class="line">      StringBuffer stringBuffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">      CharBuffer buffer = CharBuffer.allocate(<span class="number">1024</span>);</span><br><span class="line">      <span class="keyword">int</span> len =  pipedReader.read(buffer);</span><br><span class="line">      buffer.flip();</span><br><span class="line">      String a = <span class="keyword">new</span> String(buffer.array(),<span class="number">0</span>,len);</span><br><span class="line">      stringBuffer.append(a);</span><br><span class="line">      buffer.clear();</span><br><span class="line">      System.out.println(<span class="string">&quot;receiver content:&quot;</span> + stringBuffer);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (IOException | InterruptedException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      System.out.print(<span class="string">&quot;receiver has finish&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket<a href="#socket" class="header-anchor">#</a></h2><h3 id="文档地址"><a href="#文档地址-2" class="headerlink" title="文档地址"></a><a href="https://docs.oracle.com/javase/7/docs/api/java/net/Socket.html">文档地址</a><a href="#文档地址" class="header-anchor">#</a></h3><h3 id="相关api"><a href="#相关API-2" class="headerlink" title="相关API"></a>相关API<a href="#相关api" class="header-anchor">#</a></h3><ul>
+<li><code>ServerSocket</code>类：<code>accept() </code></li>
+<li><code>Socket</code>类：<code>getInputStream()</code> 、<code>getOutputStream()</code></li>
+<li><code>PrintStream</code>类：<code>println()</code></li>
+<li><code>BufferedReader</code>类：<code>readLine()</code></li>
+<li><code>System</code>类：<code>System.in</code></li>
+<li>Collections</li>
+</ul>
+<h3 id="demo设计"><a href="#Demo设计-2" class="headerlink" title="Demo设计"></a>Demo设计<a href="#demo设计" class="header-anchor">#</a></h3><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/跨进程通信调研-Socket.png" width="100%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图-跨进程通信调研-Socket
+      </div>
+</center>
+
+
+
+<h3 id="demo代码"><a href="#Demo代码-2" class="headerlink" title="Demo代码"></a>Demo代码<a href="#demo代码" class="header-anchor">#</a></h3><h4 id="myseverjava"><a href="#MySever-java" class="headerlink" title="MySever.java"></a><strong>MySever.java</strong><a href="#myseverjava" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collections;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MySever</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Socket&gt; socketList = Collections.synchronizedList(<span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">10086</span>);</span><br><span class="line">            System.out.println(<span class="string">&quot;服务器启动&quot;</span>);</span><br><span class="line">            <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">                Socket s = serverSocket.accept();</span><br><span class="line">                System.out.println(<span class="string">&quot;识别到新用户进入:&quot;</span>);</span><br><span class="line">                count++;</span><br><span class="line">                socketList.add(s);</span><br><span class="line">                <span class="keyword">new</span> Thread(<span class="keyword">new</span> ServerThread(s)).start();</span><br><span class="line">                System.out.println(<span class="string">&quot;client enter chat home successful!&quot;</span>);</span><br><span class="line">                System.out.println(<span class="string">&quot;chat room has&quot;</span>+count+<span class="string">&quot; users&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="serverthreadjava"><a href="#ServerThread-java" class="headerlink" title="ServerThread.java"></a><strong>ServerThread.java</strong><a href="#serverthreadjava" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    Socket Socket;</span><br><span class="line">    BufferedReader br = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ServerThread</span><span class="params">(Socket socket)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.Socket = socket;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        String conent = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">while</span> ((conent = readFromClient()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span> (Socket s : MySever.socketList) &#123;</span><br><span class="line">                PrintStream printStream;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    printStream = <span class="keyword">new</span> PrintStream(s.getOutputStream());</span><br><span class="line">                    <span class="comment">// client message print</span></span><br><span class="line">                    System.out.println(<span class="string">&quot;server receive message:&quot;</span> + conent);</span><br><span class="line">                    InetAddress inetAddress = s.getInetAddress();</span><br><span class="line">                    StringBuffer stringReply = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">                    stringReply.append(<span class="string">&quot;&#123;&#x27;to_client&#x27;:&#123;&quot;</span>);</span><br><span class="line">                    stringReply.append(<span class="string">&quot;client_ip:&quot;</span> + inetAddress.getHostAddress() + <span class="string">&quot;,&quot;</span>);</span><br><span class="line">                    stringReply.append(<span class="string">&quot;server_message:&quot;</span> + <span class="string">&quot;服务器很好，勿念&quot;</span>);</span><br><span class="line">                    stringReply.append(<span class="string">&quot;&#125;&#125;&quot;</span>);</span><br><span class="line">                    <span class="comment">// response message to client</span></span><br><span class="line">                    printStream.println(<span class="string">&quot;server say:&quot;</span> + stringReply + <span class="string">&quot; ,by&quot;</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                    <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">readFromClient</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> br.readLine();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            MySever.socketList.remove(Socket);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="myclientjava"><a href="#MyClient-java" class="headerlink" title="MyClient.java"></a><strong>MyClient.java</strong><a href="#myclientjava" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintStream;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"><span class="keyword">import</span> java.net.UnknownHostException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyClient</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> UnknownHostException, IOException </span>&#123;</span><br><span class="line">        Socket socket = <span class="keyword">new</span> Socket(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">10086</span>);</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> ClientThread(socket)).start();</span><br><span class="line">        PrintStream printStream = <span class="keyword">new</span> PrintStream(socket.getOutputStream());</span><br><span class="line">        String line = <span class="keyword">null</span>;</span><br><span class="line">        BufferedReader bufferedReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">        <span class="keyword">while</span> ((line = bufferedReader.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">            printStream.println(line);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h4 id="clientthreadjava"><a href="#ClientThread-java" class="headerlink" title="ClientThread.java"></a><strong>ClientThread.java</strong><a href="#clientthreadjava" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClientThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    Socket socket;</span><br><span class="line">    BufferedReader bufferedReader = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ClientThread</span><span class="params">(Socket socket)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.socket = socket;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            bufferedReader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        String conent = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> ((conent = bufferedReader.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                System.out.println(conent);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            <span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h2 id="binder"><a href="#Binder" class="headerlink" title="Binder"></a>Binder<a href="#binder" class="header-anchor">#</a></h2><h3 id="文档地址"><a href="#文档地址-3" class="headerlink" title="文档地址"></a>文档地址<a href="#文档地址" class="header-anchor">#</a></h3><p><a href="http://androidxref.com/9.0.0_r3/xref/frameworks/native/libs/binder/">Cross Reference: /frameworks/native/libs/binder/ (androidxref.com)</a></p>
+<h3 id="binder三层架构ltspan-classhinttop-hinterror-hintmedium-hintrounded-hintbounce-aria-labelbinder系列2binder-driver再探-gityuan博客-袁辉辉的技术博客"><a href="#binder三层架构-lt-span-class-”hint–top-hint–error-hint–medium-hint–rounded-hint–bounce”-aria-label-”Binder系列2—Binder-Driver再探-Gityuan博客-袁辉辉的技术博客" class="headerlink" title="binder三层架构&lt;span class=”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=”Binder系列2—Binder Driver再探 - Gityuan博客 | 袁辉辉的技术博客"></a>binder三层架构<sup id="fnref:6"><a href="#fn:6" rel="footnote">&lt;span class=”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=”<a href="http://gityuan.com/2015/11/02/binder-driver-2/">Binder系列2—Binder Driver再探 - Gityuan博客 | 袁辉辉的技术博客</a></a></sup><a href="#binder三层架构ltspan-classhinttop-hinterror-hintmedium-hintrounded-hintbounce-aria-labelbinder系列2binder-driver再探-gityuan博客-袁辉辉的技术博客" class="header-anchor">#</a></h3><p>“&gt;[6]</p>
+<p><strong>从上至下应用层、IPC传输层、内核层</strong></p>
+<p><img src="http://cdn.yangchaofan.cn/typora/1456626-20200404220230905-809409852.png" alt="img"></p>
+<h3 id="binder通信架构"><a href="#Binder通信架构" class="headerlink" title="Binder通信架构"></a><strong>Binder通信架构</strong><a href="#binder通信架构" class="header-anchor">#</a></h3><p><strong>通信模型分为客户端和服务端，通过读取Driver驱动的数据完成通信</strong></p>
+<p><img src="http://cdn.yangchaofan.cn/typora/1456626-20200404220242351-486778367.png" alt="img"></p>
+<ul>
+<li>请求码：BC_开头，简称BC码，用于从IPC层传递到BinderDriver层</li>
+<li>响应码：BR_开头，简称BR码，用于从BinderDriver层传递数据到IPC层</li>
+</ul>
+<h3 id="binder内存机制mmap"><a href="#binder内存机制mmap" class="headerlink" title="binder内存机制mmap"></a>binder内存机制mmap<a href="#binder内存机制mmap" class="header-anchor">#</a></h3><p><img src="http://cdn.yangchaofan.cn/typora/1456626-20200404220311945-1045378127.png" alt="img"></p>
+<p>内存分为两个类型：<strong>虚拟地址和物理地址</strong></p>
+<ul>
+<li>虚拟地址分两个类型：用户空间和内核空间<ul>
+<li>虚拟地址是什么？</li>
+<li>用户空间是什么？</li>
+<li>内核空间是什么？</li>
+</ul>
+</li>
+<li>物理地址空间是指什么？存疑：CPU上具体的内存地址</li>
+</ul>
+<p>用户空间上的某块地址<code>vm_area_struct</code>,内核空间上的<code>vm_struct</code>都会映射到同一块物理内存空间地址上。这一块物理内存叫<code>mmap</code></p>
+<p>这块mmap内存有什么特征？</p>
+<ul>
+<li>客户端向服务端发送数据时，先从客户端所在的用户空间，把数据通过**<code>copy_from_user</code>**拷贝到内核空间</li>
+<li>服务端所在的用户空间与内核空间共享位于物理地址空间mmap空间处的同一份数据（该数据是位于mmap空间中，不代表等于mmp空间），服务端所在的用户空间读取该位置的数据时，不需要拷贝数据，而是直接得到物理地址空间的内存地址。</li>
+<li>因此数据传输只发生一次拷贝，也就是客户端用户空间的数据拷贝至内核空间。</li>
+<li>服务端进程直接读取物理地址空间的内存地址。</li>
+</ul>
+<p>数据流向图如下：</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/1456626-20200404220320001-442926291.png" alt="img"></p>
+<p>1。红色箭头，代表客户端地址空间将数据拷贝到内核地址空间</p>
+<p>2.。绿色虚线箭头，是双向的，代表内核地址空间与物理地址空间是双向访问的，</p>
+<p>3。绿色实现箭头，是双向的，代表服务端空间地址与内核空间地址是双向访问的，</p>
+<p>4。2和3表明一个事实，服务端可以直接访问内核空间、物理空间的地址，而不需要创建一份拷贝</p>
+<p>5。黑色箭头表明，服务端访问内核空间的地址时，需要将数据读取至缓存buffer中；写数据时，也需要将数据写至缓存buffer中</p>
+<h2 id="aidl"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL<a href="#aidl" class="header-anchor">#</a></h2><h3 id="文档地址"><a href="#文档地址-4" class="headerlink" title="文档地址"></a><a href="https://developer.android.google.cn/guide/components/aidl?hl=zh_cn">文档地址</a><a href="#文档地址" class="header-anchor">#</a></h3><h3 id="相关api"><a href="#相关API-3" class="headerlink" title="相关API"></a>相关API<a href="#相关api" class="header-anchor">#</a></h3><ul>
+<li><code>Service</code>类：<code>onBind() </code></li>
+<li><code>IRemoteService</code>类：<code>setUser()</code>、<code> isLogin()</code>、<code>asInterface()</code></li>
+<li><code>IRemoteService.Stub</code>类：<code>setUser()</code>、<code> isLogin()</code>、<code>asInterface()</code></li>
+<li><code>SharedPreferences</code>类：<code>putString</code>、<code>commit</code>、<code>apply</code>、<code>SharedPreferences.Editor</code></li>
+<li><code>ServiceConnection</code>类：<code>onServiceConnected()</code>、<code> onServiceDisconnected()</code></li>
+<li><code>Activity</code>类:<code>bindService()</code></li>
+<li>AIDL语法：in out inout oneway</li>
+</ul>
+<p>?&gt;in out inout区别？</p>
+<ul>
+<li><p>in 表示数据只能由客户端流向服务端</p>
+</li>
+<li><p>out 表示数据只能由服务端流向客户端</p>
+</li>
+<li><p>inout 则表示数据可在服务端与客户端之间双向流通。</p>
+<p>其中，数据流向是针对在客户端中的那个传入方法的对象而言的。</p>
+<p>in 为定向 tag 的话表现为服务端将会接收到一个那个对象的完整数据，但是客户端的那个对象不会因为服务端对传参的修改而发生变动；</p>
+<p>out 的话表现为服务端将会接收到那个对象的参数为空的对象，但是在服务端对接收到的空对象有任何修改之后客户端将会同步变动；</p>
+<p>inout 为定向 tag 的情况下，服务端将会接收到客户端传来对象的完整信息，并且客户端将会同步服务端对该对象的任何变动</p>
+<p>in参数使得实参顺利传到服务方，但服务方对实参的任何改变，不会反应回调用方。</p>
+<p>out参数使得实参不会真正传到服务方，只是传一个实参的初始值过去（这里实参只是作为返回值来使用的，这样除了return那里的返回值，还可以返回另外的东西），但服务方对实参的任何改变，在调用结束后会反应回调用方。</p>
+<p>inout参数则是上面二者的结合，实参会顺利传到服务方，且服务方对实参的任何改变，在调用结束后会反应回调用方。</p>
+<p>其实inout，都是相对于服务方。in参数使得实参传到了服务方，所以是in进入了服务方；out参数使得实参在调用结束后从服务方传回给调用方，所以是out从服务方出来。</p>
+</li>
+</ul>
+<h3 id="demo设计"><a href="#Demo设计-3" class="headerlink" title="Demo设计"></a>Demo设计<a href="#demo设计" class="header-anchor">#</a></h3><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/AIDLdemoUi.jpg" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图-AIDLDemoUI设计
+      </div>
+</center>
+
+
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" src="http://cdn.yangchaofan.cn/typora/AIDLdemo2.svg" width="60%" alt>
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">
+      图-AIDLDemo UML类图设计
+      </div>
+</center>
+
+
+<h3 id="demo代码-基本数据类型"><a href="#Demo代码-基本数据类型" class="headerlink" title="Demo代码-基本数据类型"></a>Demo代码-基本数据类型<a href="#demo代码-基本数据类型" class="header-anchor">#</a></h3><h4 id="iremoteserviceaidl"><a href="#IRemoteService-aidl" class="headerlink" title="IRemoteService.aidl"></a><strong>IRemoteService.aidl</strong><a href="#iremoteserviceaidl" class="header-anchor">#</a></h4><p>1.位于<code>src\main\aidl\com\shaunsheep\aidlclient\IRemoteService.aidl</code>下</p>
+<p>2.build/rebuild的时候会生成Java版本的IRemoteService接口,输出结果位于<code>build\generated\aidl_source_output_dir\debug\compileDebugAidl\out\com\shaunsheep\aidlclient\IRemoteService.java</code></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// IRemoteService.aidl</span></span><br><span class="line"><span class="keyword">package</span> com.shaunsheep.aidlclient;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Declare any non-default types here with import statements</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IRemoteService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Demonstrates some basic types that you can use as parameters</span></span><br><span class="line"><span class="comment">     * and return values in AIDL.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">basicTypes</span><span class="params">(<span class="keyword">int</span> anInt, <span class="keyword">long</span> aLong, <span class="keyword">boolean</span> aBoolean, <span class="keyword">float</span> aFloat,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">double</span> aDouble, String aString)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">setUser</span><span class="params">(String userName,String passWord)</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isLogin</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="服务端remoteservicejava"><a href="#服务端RemoteService-java" class="headerlink" title="服务端RemoteService.java"></a><strong>服务端RemoteService.java</strong><a href="#服务端remoteservicejava" class="header-anchor">#</a></h4><p>1.提供一个内部类IRemoteService.Stub mBinder</p>
+<p>2.让客户端App调用，会返回给客户端App这个mBinder对象，通过mBinder对象，客户端可以生成IRemoteService的实现类。有了这个实现类，客户端App就可以IPC通信，调用RemoteService下的mBinder方法，获取登录状态，设置登录信息</p>
+<p>3.让服务端App调用onServiceConnected，可以获取到mBinder，进而可以IPC通信，调用mBinder的方法，获取登录状态、设置登录信息</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shaunsheep.server;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.app.Service;</span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.content.Intent;</span><br><span class="line"><span class="keyword">import</span> android.content.SharedPreferences;</span><br><span class="line"><span class="keyword">import</span> android.os.IBinder;</span><br><span class="line"><span class="keyword">import</span> android.os.RemoteException;</span><br><span class="line"><span class="keyword">import</span> android.text.TextUtils;</span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.shaunsheep.aidlclient.IRemoteService;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RemoteService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SP_USERNAME_ = <span class="string">&quot;userName&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SP_PASSWORD_ = <span class="string">&quot;password&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SP_FILE_NAME = <span class="string">&quot;accountdb&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span>  SharedPreferences mPreferences;</span><br><span class="line">    <span class="keyword">private</span>  SharedPreferences.Editor mEdit;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RemoteService</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        mPreferences = getSharedPreferences(SP_FILE_NAME, Context.MODE_PRIVATE);</span><br><span class="line">        mEdit = mPreferences.edit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// return stub implementation</span></span><br><span class="line">        <span class="keyword">return</span> mBinder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> IRemoteService.Stub mBinder = <span class="keyword">new</span> IRemoteService.Stub() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">basicTypes</span><span class="params">(<span class="keyword">int</span> anInt, <span class="keyword">long</span> aLong, <span class="keyword">boolean</span> aBoolean, <span class="keyword">float</span> aFloat, <span class="keyword">double</span> aDouble, String aString)</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUser</span><span class="params">(String userName, String passWord)</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">            mEdit.putString(SP_USERNAME_,userName);</span><br><span class="line">            mEdit.putString(SP_PASSWORD_,passWord);</span><br><span class="line">            mEdit.commit();</span><br><span class="line">            Log.d(<span class="string">&quot;shaunsheep&quot;</span>,<span class="string">&quot;setUser!!!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isLogin</span><span class="params">()</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">            String userName = mPreferences.getString(SP_USERNAME_,<span class="string">&quot;&quot;</span>);</span><br><span class="line">            String password = mPreferences.getString(SP_PASSWORD_,<span class="string">&quot;&quot;</span>);</span><br><span class="line">            Log.d(<span class="string">&quot;shaunsheep&quot;</span>,<span class="string">&quot;isLogin!!!&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (TextUtils.isEmpty(userName) || TextUtils.isEmpty(password)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>记得在服务端清单文件注册该服务</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&lt;service</span><br><span class="line">            android:name=<span class="string">&quot;.RemoteService&quot;</span></span><br><span class="line">            android:enabled=<span class="string">&quot;true&quot;</span></span><br><span class="line">            android:exported=<span class="string">&quot;true&quot;</span>&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=<span class="string">&quot;com.shaunsheep.IRemoteService&quot;</span> /&gt;</span><br><span class="line">            &lt;/intent-filter&gt;</span><br><span class="line"> &lt;/service&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="服务端mainactivity"><a href="#服务端MainActivity" class="headerlink" title="服务端MainActivity"></a><strong>服务端MainActivity</strong><a href="#服务端mainactivity" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shaunsheep.server;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.content.ComponentName;</span><br><span class="line"><span class="keyword">import</span> android.content.Intent;</span><br><span class="line"><span class="keyword">import</span> android.content.ServiceConnection;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.os.IBinder;</span><br><span class="line"><span class="keyword">import</span> android.os.RemoteException;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.widget.TextView;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.shaunsheep.aidlclient.IRemoteService;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> IRemoteService.Stub mBinder;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取app的信息显示到server上</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> ServiceConnection serviceConnection = <span class="keyword">new</span> ServiceConnection() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceConnected</span><span class="params">(ComponentName name, IBinder service)</span> </span>&#123;</span><br><span class="line">            mBinder = (IRemoteService.Stub) service;</span><br><span class="line">            changeStatus();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceDisconnected</span><span class="params">(ComponentName name)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">private</span> TextView mTextView;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, RemoteService.class);</span><br><span class="line">        bindService(intent, serviceConnection, BIND_AUTO_CREATE);</span><br><span class="line">        mTextView = findViewById(R.id.tv_data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume();</span><br><span class="line">        changeStatus();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        unbindService(serviceConnection);</span><br><span class="line">        mBinder = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeStatus</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (mBinder == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (mBinder.isLogin()) &#123;</span><br><span class="line">                mTextView.setText(<span class="string">&quot;已登录&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                mTextView.setText(<span class="string">&quot;未登录&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">logout</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            mBinder.setUser(<span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">            changeStatus();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">login</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            mBinder.setUser(<span class="string">&quot;jack123&quot;</span>, <span class="string">&quot;123&quot;</span>);</span><br><span class="line">            changeStatus();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h4 id="客户端mainactivity"><a href="#客户端MainActivity" class="headerlink" title="客户端MainActivity"></a><strong>客户端MainActivity</strong><a href="#客户端mainactivity" class="header-anchor">#</a></h4><p>1.启动服务端App的<code>Service</code>，绑定<code>ServiceConnection</code>链接</p>
+<p>2.从<code>ServiceConnection</code>中拿到服务端<code>Service</code>的内部类<code>IBinder</code>子类</p>
+<p>3.通过<code>IRemoteService.Stub.asInterface(ibinder)</code>将<code>ibinder</code>子类转为<code>IRemoteService实现类</code></p>
+<p>4.在客户端App任何位置都可以通过操作<code>IRemoteService实现类</code>，来达到访问服务端App的效果</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shaunsheep.aidlclient;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.content.ComponentName;</span><br><span class="line"><span class="keyword">import</span> android.content.Intent;</span><br><span class="line"><span class="keyword">import</span> android.content.ServiceConnection;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.os.IBinder;</span><br><span class="line"><span class="keyword">import</span> android.os.RemoteException;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.widget.TextView;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> IRemoteService mRemoteService;</span><br><span class="line">    <span class="keyword">private</span> ServiceConnection mServerConnection = <span class="keyword">new</span> ServiceConnection() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceConnected</span><span class="params">(ComponentName name, IBinder service)</span> </span>&#123;</span><br><span class="line">            mRemoteService = IRemoteService.Stub.asInterface(service);</span><br><span class="line">            <span class="keyword">if</span> (mRemoteService != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">boolean</span> isLogin = mRemoteService.isLogin();</span><br><span class="line">                    changeLoginState(isLogin);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceDisconnected</span><span class="params">(ComponentName name)</span> </span>&#123;</span><br><span class="line">            mRemoteService = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">private</span> TextView mTvTest;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">        mTvTest = findViewById(R.id.tv_test);</span><br><span class="line"></span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(IRemoteService.class.getName());</span><br><span class="line">        intent.setPackage(<span class="string">&quot;com.shaunsheep.server&quot;</span>);</span><br><span class="line">        intent.setAction(<span class="string">&quot;com.shaunsheep.IRemoteService&quot;</span>);</span><br><span class="line">        bindService(intent, mServerConnection, BIND_AUTO_CREATE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">login</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mRemoteService != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                mRemoteService.setUser(<span class="string">&quot;shaunshepp&quot;</span>, <span class="string">&quot;123123&quot;</span>);</span><br><span class="line">                <span class="keyword">boolean</span> isLogin = mRemoteService.isLogin();</span><br><span class="line">                changeLoginState(isLogin);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">changeLoginState</span><span class="params">(<span class="keyword">boolean</span> isLogin)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (isLogin) &#123;</span><br><span class="line">            mTvTest.setText(<span class="string">&quot;已登录&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            mTvTest.setText(<span class="string">&quot;未登录&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (mRemoteService == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            changeLoginState(mRemoteService.isLogin());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        unbindService(mServerConnection);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">logout</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mRemoteService != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                mRemoteService.setUser(<span class="string">&quot;&quot;</span>, <span class="string">&quot;&quot;</span>);</span><br><span class="line">                <span class="keyword">boolean</span> isLogin = mRemoteService.isLogin();</span><br><span class="line">                changeLoginState(isLogin);</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h3 id="demo代码-自定义数据类型"><a href="#Demo代码-自定义数据类型" class="headerlink" title="Demo代码-自定义数据类型"></a>Demo代码-自定义数据类型<a href="#demo代码-自定义数据类型" class="header-anchor">#</a></h3><p>我们假设提供一个User对象，供客户端和服务端通信使用</p>
+<p>它有如下步骤；</p>
+<p>在服务端进行如下步骤：</p>
+<ol>
+<li>在src/main/aidl目录下创建User.java，继承Parcelable接口，实现必要的方法</li>
+<li>在src/main/aidl目录下创建User.aidl，声明User.java可以被引用</li>
+<li>在src/main/aidl/IRemoteService里import 导入User，提供User的设置和访问接口</li>
+</ol>
+<p>在客户端进行如下步骤：</p>
+<ol>
+<li>在src/main/aidl目录下创建User.java，继承Parcelable接口，实现必要的方法</li>
+<li>在src/main/aidl目录下创建User.aidl，声明User.java可以被引用</li>
+<li>在src/main/aidl/IRemoteService里import 导入User，提供User的设置和访问接口</li>
+</ol>
+<ul>
+<li><a href="https://www.race604.com/communicate-with-remote-service-3/">与Service实现双向通信（三） (race604.com)</a></li>
+</ul>
+<p>!&gt;注意事项</p>
+<p>1.客户端和服务端的aidl包名必须一致</p>
+<p>2.传输自定义数据类型的时候，注意in、out、inout的使用</p>
+<h4 id="iremoteservicejava"><a href="#IRemoteService-java" class="headerlink" title="IRemoteService.java"></a>IRemoteService.java<a href="#iremoteservicejava" class="header-anchor">#</a></h4><p>文件位置：</p>
+<p>服务端<code>app-server/src/main/aidl/com/shaunsheep/server/IRemoteService.aidl</code></p>
+<p>客户端<code>app/src/main/aidl/com/shaunsheep/server/IRemoteService.aidl</code></p>
+<p>!&gt;注意客户端和服务端包名、文件夹名皆需要一致</p>
+<p>比前一个demo相比，多了setUserObject接口和getUser接口</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// IRemoteService.aidl</span></span><br><span class="line"><span class="comment">// 客户端服务端包名一致</span></span><br><span class="line"><span class="keyword">package</span> com.shaunsheep.server;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Declare any non-default types here with import statements</span></span><br><span class="line"><span class="keyword">import</span> com.shaunsheep.server.User;</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IRemoteService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Demonstrates some basic types that you can use as parameters</span></span><br><span class="line"><span class="comment">     * and return values in AIDL.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">basicTypes</span><span class="params">(<span class="keyword">int</span> anInt, <span class="keyword">long</span> aLong, <span class="keyword">boolean</span> aBoolean, <span class="keyword">float</span> aFloat,</span></span></span><br><span class="line"><span class="function"><span class="params">              <span class="keyword">double</span> aDouble, String aString)</span></span>;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">setUser</span><span class="params">(String userName,String passWord)</span></span>;</span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">setUserObject</span><span class="params">(in User user)</span></span>;</span><br><span class="line">      <span class="function"><span class="keyword">boolean</span> <span class="title">isLogin</span><span class="params">()</span></span>;</span><br><span class="line">      <span class="function">User <span class="title">getUser</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h4 id="useraidl"><a href="#User-aidl" class="headerlink" title="User.aidl"></a>User.aidl<a href="#useraidl" class="header-anchor">#</a></h4><p>文件位置：</p>
+<p>服务端<code>app-server/src/main/aidl/com/shaunsheep/server/User.aidl</code></p>
+<p>客户端<code>app/src/main/aidl/com/shaunsheep/server/User.aidl</code></p>
+<p>!&gt;注意客户端和服务端包名、文件夹名皆需要一致</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// User.aidl</span></span><br><span class="line"><span class="keyword">package</span> com.shaunsheep.server;</span><br><span class="line"><span class="comment">// Declare any non-default types here with import statements</span></span><br><span class="line">parcelable User;</span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="userjava"><a href="#User-java" class="headerlink" title="User.java"></a>User.java<a href="#userjava" class="header-anchor">#</a></h4><p>文件位置：</p>
+<p>服务端<code>app-server/src/main/aidl/com/shaunsheep/server/User.java</code></p>
+<p>客户端<code>app/src/main/aidl/com/shaunsheep/server/User.java</code></p>
+<p>!&gt;注意客户端和服务端包名、文件夹名皆需要一致</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shaunsheep.server;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Parcel;</span><br><span class="line"><span class="keyword">import</span> android.os.Parcelable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">implements</span> <span class="title">Parcelable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> left;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> top;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> right;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> bottom;</span><br><span class="line">    <span class="keyword">public</span> String userName;</span><br><span class="line">    <span class="keyword">public</span> String passWord;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Parcelable.Creator&lt;User&gt; CREATOR = <span class="keyword">new</span> Parcelable.Creator&lt;User&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> User <span class="title">createFromParcel</span><span class="params">(Parcel in)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> User(in);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="keyword">public</span> User[] newArray(<span class="keyword">int</span> size) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> User[size];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">User</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">User</span><span class="params">(Parcel in)</span> </span>&#123;</span><br><span class="line">        readFromParcel(in);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeToParcel</span><span class="params">(Parcel out, <span class="keyword">int</span> flags)</span> </span>&#123;</span><br><span class="line">        out.writeInt(left);</span><br><span class="line">        out.writeInt(top);</span><br><span class="line">        out.writeInt(right);</span><br><span class="line">        out.writeInt(bottom);</span><br><span class="line">        out.writeString(userName);</span><br><span class="line">        out.writeString(passWord);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">readFromParcel</span><span class="params">(Parcel in)</span> </span>&#123;</span><br><span class="line">        left = in.readInt();</span><br><span class="line">        top = in.readInt();</span><br><span class="line">        right = in.readInt();</span><br><span class="line">        bottom = in.readInt();</span><br><span class="line">        userName = in.readString();</span><br><span class="line">        passWord = in.readString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">describeContents</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="服务端remoteservicejava"><a href="#服务端RemoteService-java-1" class="headerlink" title="服务端RemoteService.java"></a>服务端RemoteService.java<a href="#服务端remoteservicejava" class="header-anchor">#</a></h4><p>比上一个demo相比，内部类mBinder多了俩对外暴露的接口<code>setUserObject</code>、<code>getUser</code>，需要实现一下，供客户端和服务端调用</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shaunsheep.server;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.app.Service;</span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.content.Intent;</span><br><span class="line"><span class="keyword">import</span> android.content.SharedPreferences;</span><br><span class="line"><span class="keyword">import</span> android.os.IBinder;</span><br><span class="line"><span class="keyword">import</span> android.os.RemoteException;</span><br><span class="line"><span class="keyword">import</span> android.text.TextUtils;</span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RemoteService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SP_USERNAME_ = <span class="string">&quot;userName&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SP_PASSWORD_ = <span class="string">&quot;password&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SP_FILE_NAME = <span class="string">&quot;accountdb&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> SharedPreferences mPreferences;</span><br><span class="line">    <span class="keyword">private</span> SharedPreferences.Editor mEdit;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RemoteService</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">        mPreferences = getSharedPreferences(SP_FILE_NAME, Context.MODE_PRIVATE);</span><br><span class="line">        mEdit = mPreferences.edit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// return stub implementation</span></span><br><span class="line">        <span class="keyword">return</span> mBinder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> IRemoteService.Stub mBinder = <span class="keyword">new</span> IRemoteService.Stub() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">basicTypes</span><span class="params">(<span class="keyword">int</span> anInt, <span class="keyword">long</span> aLong, <span class="keyword">boolean</span> aBoolean, <span class="keyword">float</span> aFloat, <span class="keyword">double</span> aDouble, String aString)</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUser</span><span class="params">(String userName, String passWord)</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">            mEdit.putString(SP_USERNAME_, userName);</span><br><span class="line">            mEdit.putString(SP_PASSWORD_, passWord);</span><br><span class="line">            mEdit.commit();</span><br><span class="line">            Log.d(<span class="string">&quot;shaunsheep&quot;</span>, <span class="string">&quot;setUser!!!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isLogin</span><span class="params">()</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">            String userName = mPreferences.getString(SP_USERNAME_, <span class="string">&quot;&quot;</span>);</span><br><span class="line">            String password = mPreferences.getString(SP_PASSWORD_, <span class="string">&quot;&quot;</span>);</span><br><span class="line">            Log.d(<span class="string">&quot;shaunsheep&quot;</span>, <span class="string">&quot;isLogin!!!&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (TextUtils.isEmpty(userName) || TextUtils.isEmpty(password)) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserObject</span><span class="params">(User user)</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (user == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            mEdit.putString(SP_USERNAME_, user.userName);</span><br><span class="line">            mEdit.putString(SP_PASSWORD_, user.passWord);</span><br><span class="line">            mEdit.commit();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> User <span class="title">getUser</span><span class="params">()</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">            String userName = mPreferences.getString(SP_USERNAME_, <span class="string">&quot;&quot;</span>);</span><br><span class="line">            String password = mPreferences.getString(SP_PASSWORD_, <span class="string">&quot;&quot;</span>);</span><br><span class="line">            User user = <span class="keyword">new</span> User();</span><br><span class="line">            user.userName = userName;</span><br><span class="line">            user.passWord = password;</span><br><span class="line">            <span class="keyword">return</span> user;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h4 id="客户端mainactivity"><a href="#客户端MainActivity-1" class="headerlink" title="客户端MainActivity"></a>客户端MainActivity<a href="#客户端mainactivity" class="header-anchor">#</a></h4><p>调用获取服务端的getUser接口数据，显示到UI上；设置User对象，传递给服务端</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUser</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        User user = mRemoteService.getUser();</span><br><span class="line">        mTvUserData.setText(<span class="string">&quot;&#123;&quot;</span> + user.userName + <span class="string">&quot;:&quot;</span> + user.passWord + <span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserObject</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        User user = <span class="keyword">new</span> User();</span><br><span class="line">        user.passWord = <span class="string">&quot;jack&quot;</span>;</span><br><span class="line">        user.userName = <span class="string">&quot;jack&quot;</span>;</span><br><span class="line">        mRemoteService.setUserObject(user);</span><br><span class="line">        mTvUserData.setText(<span class="string">&quot;&#123;&quot;</span> + user.userName + <span class="string">&quot;:&quot;</span> + user.passWord + <span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h4 id="服务端mainactivity"><a href="#服务端MainActivity-1" class="headerlink" title="服务端MainActivity"></a>服务端MainActivity<a href="#服务端mainactivity" class="header-anchor">#</a></h4><p>新增俩UI控制接口<code>getUser</code>和<code>setUserObject</code>，一个是从服务端获取User对象，一个是设置User对象给服务端</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getUser</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          User user = mBinder.getUser();</span><br><span class="line">          mUserDataView.setText(<span class="string">&quot;&#123;&quot;</span>+user.userName+<span class="string">&quot;:&quot;</span>+user.passWord+<span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserObject</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">          User user = <span class="keyword">new</span> User();</span><br><span class="line">          user.passWord = <span class="string">&quot;shaunsheep&quot;</span>;</span><br><span class="line">          user.userName = <span class="string">&quot;shaunsheep&quot;</span>;</span><br><span class="line">          mBinder.setUserObject(user);</span><br><span class="line">          mUserDataView.setText(<span class="string">&quot;&#123;&quot;</span>+user.userName+<span class="string">&quot;:&quot;</span>+user.passWord+<span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">      &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">          e.printStackTrace();</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></div>
+
+
+<h3 id="demo代码-bundle数据类型"><a href="#Demo代码-Bundle数据类型" class="headerlink" title="Demo代码-Bundle数据类型"></a>Demo代码-Bundle数据类型<a href="#demo代码-bundle数据类型" class="header-anchor">#</a></h3><p>?&gt;必现问题-ClassNotFoundException 自定义类型找不到</p>
+<p>Caused by: android.os.BadParcelableException: ClassNotFoundException when unmarshalling: com.shaunsheep.server.User</p>
+<p>解决办法，在获取bundle的所有位置，包括客户端和服务端，都加入类加载器<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Android 接口定义语言 (AIDL)  | Android 开发者  | Android Developers (google.cn)](https://developer.android.google.cn/guide/components/aidl?hl=zh_cn#Bundles) <br>
+">[1]</span></a></sup></p>
+<h4 id="iremoteservicejava"><a href="#IRemoteService-java-1" class="headerlink" title="IRemoteService.java"></a>IRemoteService.java<a href="#iremoteservicejava" class="header-anchor">#</a></h4><p>文件位置：</p>
+<p>服务端<code>app-server/src/main/aidl/com/shaunsheep/server/IRemoteService.aidl</code></p>
+<p>客户端<code>app/src/main/aidl/com/shaunsheep/server/IRemoteService.aidl</code></p>
+<p>!&gt;注意客户端和服务端包名、文件夹名皆需要一致</p>
+<p>比前一个demo相比，多了bundle操作接口<code>setUserBundle</code>和<code> getUserBundle</code></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// IRemoteService.aidl</span></span><br><span class="line"><span class="keyword">package</span> com.shaunsheep.server;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Declare any non-default types here with import statements</span></span><br><span class="line"><span class="keyword">import</span> com.shaunsheep.server.User;</span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IRemoteService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Demonstrates some basic types that you can use as parameters</span></span><br><span class="line"><span class="comment">     * and return values in AIDL.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">basicTypes</span><span class="params">(<span class="keyword">int</span> anInt, <span class="keyword">long</span> aLong, <span class="keyword">boolean</span> aBoolean, <span class="keyword">float</span> aFloat,</span></span></span><br><span class="line"><span class="function"><span class="params">              <span class="keyword">double</span> aDouble, String aString)</span></span>;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">setUser</span><span class="params">(String userName,String passWord)</span></span>;</span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">setUserObject</span><span class="params">(in User user)</span></span>;</span><br><span class="line">      <span class="function"><span class="keyword">boolean</span> <span class="title">isLogin</span><span class="params">()</span></span>;</span><br><span class="line">      <span class="function">User <span class="title">getUser</span><span class="params">()</span></span>;</span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">setUserBundle</span><span class="params">(in Bundle bundle)</span></span>; <span class="comment">// new create</span></span><br><span class="line">      <span class="function">Bundle <span class="title">getUserBundle</span><span class="params">()</span></span>; <span class="comment">// new create</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h4 id="服务端remoteservicejava"><a href="#服务端RemoteService-java-2" class="headerlink" title="服务端RemoteService.java"></a>服务端RemoteService.java<a href="#服务端remoteservicejava" class="header-anchor">#</a></h4><p>!&gt;注意，一旦引入Bundle类，就需要为其设置类加载，set方法和get方法都需要设置：</p>
+<p><code> bundle.setClassLoader(getClass().getClassLoader());</code></p>
+<p>比上一个demo相比，内部类mBinder多了俩对外暴露的接口<code>setUserBundle</code>、<code>getUserBundle</code>，需要实现一下，供客户端和服务端调用</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shaunsheep.server;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.app.Service;</span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.content.Intent;</span><br><span class="line"><span class="keyword">import</span> android.content.SharedPreferences;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.os.IBinder;</span><br><span class="line"><span class="keyword">import</span> android.os.RemoteException;</span><br><span class="line"><span class="keyword">import</span> android.text.TextUtils;</span><br><span class="line"><span class="keyword">import</span> android.util.Log;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RemoteService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SP_USERNAME_ = <span class="string">&quot;userName&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SP_PASSWORD_ = <span class="string">&quot;password&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SP_FILE_NAME = <span class="string">&quot;accountdb&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> SharedPreferences mPreferences;</span><br><span class="line">    <span class="keyword">private</span> SharedPreferences.Editor mEdit;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">RemoteService</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">	...</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> IRemoteService.Stub mBinder = <span class="keyword">new</span> IRemoteService.Stub() &#123;</span><br><span class="line">        </span><br><span class="line">        ...</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Bundle <span class="title">getUserBundle</span><span class="params">()</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">            String userName = mPreferences.getString(SP_USERNAME_, <span class="string">&quot;&quot;</span>);</span><br><span class="line">            String password = mPreferences.getString(SP_PASSWORD_, <span class="string">&quot;&quot;</span>);</span><br><span class="line">            Bundle bundle = <span class="keyword">new</span> Bundle();</span><br><span class="line">            <span class="comment">// you must add</span></span><br><span class="line">            bundle.setClassLoader(getClass().getClassLoader());</span><br><span class="line"></span><br><span class="line">            User user = <span class="keyword">new</span> User();</span><br><span class="line">            user.userName = userName;</span><br><span class="line">            user.passWord = password;</span><br><span class="line">            bundle.putParcelable(<span class="string">&quot;user&quot;</span>, user);</span><br><span class="line">            <span class="keyword">return</span> bundle;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUserBundle</span><span class="params">(Bundle bundle)</span> <span class="keyword">throws</span> RemoteException </span>&#123;</span><br><span class="line">            <span class="comment">// you must add</span></span><br><span class="line">            bundle.setClassLoader(getClass().getClassLoader());</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (bundle == <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            User user = bundle.getParcelable(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">            mEdit.putString(SP_USERNAME_, user.userName);</span><br><span class="line">            mEdit.putString(SP_PASSWORD_, user.passWord);</span><br><span class="line">            mEdit.commit();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<h4 id="服务端mainactivity"><a href="#服务端MainActivity-2" class="headerlink" title="服务端MainActivity"></a>服务端MainActivity<a href="#服务端mainactivity" class="header-anchor">#</a></h4><p>新增俩UI控制接口<code>getBundle</code>、<code>setBundle</code>，一个是从Service中读取Bundle中的User对象，一个是设置Bundle里的User对象</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getBundle</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Bundle bundle = mBinder.getUserBundle();</span><br><span class="line">            User user = bundle.getParcelable(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">            mUserDataView.setText(<span class="string">&quot;&#123;&quot;</span> + user.userName + <span class="string">&quot;:&quot;</span> + user.passWord + <span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBundle</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        Bundle bundle = <span class="keyword">new</span> Bundle();</span><br><span class="line">        User user = <span class="keyword">new</span> User();</span><br><span class="line">        user.passWord = <span class="string">&quot;jack-bundle&quot;</span>;</span><br><span class="line">        user.userName = <span class="string">&quot;jack-bundle&quot;</span>;</span><br><span class="line">        bundle.putParcelable(<span class="string">&quot;user&quot;</span>, user);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            mBinder.setUserBundle(bundle);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+<h4 id="客户端mainactivity"><a href="#客户端MainActivity-2" class="headerlink" title="客户端MainActivity"></a>客户端MainActivity<a href="#客户端mainactivity" class="header-anchor">#</a></h4><p>!&gt;注意，客户端读取Bundle中的User对象，务必加上类加载器的声明</p>
+<p><code>undle.setClassLoader(getClass().getClassLoader());</code></p>
+<p>其他代码跟服务端MainActivity代码很类似</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getBundle</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           Bundle bundle = mRemoteService.getUserBundle();</span><br><span class="line">           <span class="comment">// you must add</span></span><br><span class="line">           bundle.setClassLoader(getClass().getClassLoader());</span><br><span class="line"></span><br><span class="line">           User user = bundle.getParcelable(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">           mTvUserData.setText(<span class="string">&quot;&#123;&quot;</span> + user.userName + <span class="string">&quot;:&quot;</span> + user.passWord + <span class="string">&quot;&#125;&quot;</span>);</span><br><span class="line">       &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setBundle</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">       Bundle bundle = <span class="keyword">new</span> Bundle();</span><br><span class="line">       User user = <span class="keyword">new</span> User();</span><br><span class="line">       user.passWord = <span class="string">&quot;jack-bundle&quot;</span>;</span><br><span class="line">       user.userName = <span class="string">&quot;jack-bundle&quot;</span>;</span><br><span class="line">       bundle.putParcelable(<span class="string">&quot;user&quot;</span>, user);</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           mRemoteService.setUserBundle(bundle);</span><br><span class="line">       &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h3 id="aidl的注意事项"><a href="#AIDL的注意事项" class="headerlink" title="AIDL的注意事项"></a>AIDL的注意事项<a href="#aidl的注意事项" class="header-anchor">#</a></h3><p>1.客户端和服务端的AIDL文件所在包包名必须相同<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[(41条消息) java.lang.SecurityException: Binder invocation to an incorrect interface报错问题_若然的专栏-CSDN博客](https://blog.csdn.net/tfslovexizi/article/details/50698663) <br>">[3]</span></a></sup></p>
+<p>2.自定义对象，在AIDL中引用，必须加import语句<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Android 接口定义语言 (AIDL)  | Android 开发者  | Android Developers (google.cn)](https://developer.android.google.cn/guide/components/aidl?hl=zh_cn#Bundles) <br>
+">[1]</span></a></sup></p>
+<p>3.ADIL文件中函数参数有自定义对象，必须加in、out、inout数据流向关键字<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Android 接口定义语言 (AIDL)  | Android 开发者  | Android Developers (google.cn)](https://developer.android.google.cn/guide/components/aidl?hl=zh_cn#Bundles) <br>
+">[1]</span></a></sup></p>
+<p>4.客户端与服务端的AIDL文件必须完全相同，一个关键字也不能有差异<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[(41条消息) Binder invocation to an incorrect interface 异常分析_wangqiubo2010的博客-CSDN博客](https://blog.csdn.net/wangqiubo2010/article/details/72368294) <br>
+">[2]</span></a></sup></p>
+<p>5.在实现自定义对象类的时候，变量序列化的顺序和反序列化的顺序必须完全一致</p>
+<p>6.AIDL内不支持方法重载（存疑）</p>
+<p>7.AIDL传输Bundle对象，必须在调用getBundle的位置指明类加载器<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Android 接口定义语言 (AIDL)  | Android 开发者  | Android Developers (google.cn)](https://developer.android.google.cn/guide/components/aidl?hl=zh_cn#Bundles) <br>
+">[1]</span></a></sup></p>
+<h3 id="aidl常见问题"><a href="#AIDL常见问题" class="headerlink" title="AIDL常见问题"></a>AIDL常见问题<a href="#aidl常见问题" class="header-anchor">#</a></h3><p>1.in、out、inout有什么联系和区别</p>
+<p>2.AIDL自定义对象的步骤，找不到该类如何解决？import</p>
+<p>3.AIDL使用Bundle的步骤，找不到Bundle中的类如何解决？设置类加载器<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Android 接口定义语言 (AIDL)  | Android 开发者  | Android Developers (google.cn)](https://developer.android.google.cn/guide/components/aidl?hl=zh_cn#Bundles) <br>
+">[1]</span></a></sup></p>
+<p>4.AIDL支持哪些数据类型</p>
+<p>5.服务端挂掉，客户端能访问成功吗</p>
+<p>6.客户端如何连接服务端？</p>
+<p>7.客户端如何断开连接服务端？</p>
+<p>8.序列化一个对象的步骤？</p>
+<p>9.序列化的两种方式对比？</p>
+<p>10.Bundle中为什么找不到自定义的User对象？-参考<a href="newnotes/java/jvm#%E4%B8%80%E4%B8%AA%E9%94%99%E8%AF%AFDemo%E4%BD%93%E4%BC%9A%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE">一个Integer找不到main方法错误体会双亲委派和类加载机制</a></p>
+<p>11.oneway有什么用？异步</p>
+<p>12.oneway异步会anr吗？</p>
+<p><strong>实战问题</strong></p>
+<p>假设有服务端A，客户端B、C、E…</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="CSHARP"><figure class="iseeu highlight /csharp"><table><tr><td class="code"><pre><span class="line">接口<span class="number">1</span> Iplayer1.aidl</span><br><span class="line"><span class="keyword">interface</span> <span class="title">IPlayer1</span> &#123;</span><br><span class="line">    <span class="function">oneway <span class="keyword">void</span> <span class="title">start</span>(<span class="params"></span>)</span>;<span class="comment">//异步，执行2秒</span></span><br><span class="line">    <span class="function">oneway <span class="keyword">void</span> <span class="title">stop</span>(<span class="params"></span>)</span>;<span class="comment">//异步，执行2秒</span></span><br><span class="line">&#125;</span><br><span class="line">接口<span class="number">2</span> Iplayer2.aidl</span><br><span class="line"><span class="keyword">interface</span> <span class="title">IPlayer2</span> &#123;</span><br><span class="line">    <span class="function">oneway <span class="keyword">void</span> <span class="title">start</span>(<span class="params"></span>)</span>;<span class="comment">//异步，执行2秒</span></span><br><span class="line">    <span class="function">oneway <span class="keyword">void</span> <span class="title">stop</span>(<span class="params"></span>)</span>;<span class="comment">//异步，执行2秒</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>13.多线程访问服务端的接口Iplayer1#start，1000个线程访问，start平均耗时2秒，有什么风险？<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[[023\]你真的懂AIDL的oneway嘛？ - 简书 (jianshu.com)](https://www.jianshu.com/p/0b22194b131c)
+">[4]</span></a></sup></p>
+<p>14.多线访问服务端的异步oneway接口Iplayer1#start,1000个线程访问，start平均耗时2秒，有什么风险？<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[[023\]你真的懂AIDL的oneway嘛？ - 简书 (jianshu.com)](https://www.jianshu.com/p/0b22194b131c)
+">[4]</span></a></sup></p>
+<p>15.多个客户端访问服务端的多个binder，如IPlayer1、IPlayer2</p>
+<p>服务端处理binder调用，是单线程还是多线的？多个客户端访问服务端的binder服务，会怎么样？</p>
+<ul>
+<li><p>客户端B、C、E..同时访问服务端Iplayer1#start接口，会同时执行吗？会咋样？</p>
+</li>
+<li><p>oneway的binder通信，服务端进程一次只有一个binder线程处理一个oneway的binder请求，其余请求会排队等待执行</p>
+</li>
+</ul>
+<p>16.多个客户端访问同一个binder驱动，如Iplayer1</p>
+<ul>
+<li>同一时刻客户端B访问服务端A的IPlayer1#start，进程C访问服务端A的IPlayer2#start，服务端A能否同时响应两次Binder调用并执行？答：能</li>
+<li>同一时刻客户端B访问服务端A的IPlayer1#start，客户端C访问服务端A的IPlayer1#stop，服务端A能否同时响应Iplayer1的两个不同方法调用？答：不能</li>
+</ul>
+<h1 id="线程通信方案"><a href="#线程通信方案" class="headerlink" title="线程通信方案"></a>线程通信方案<a href="#线程通信方案" class="header-anchor">#</a></h1><ul>
+<li><p>全局变量</p>
+</li>
+<li><p>Handler</p>
+</li>
+<li><p>Semaphore</p>
+</li>
+<li><p>countDownLatch</p>
+</li>
+<li><p>管道</p>
+</li>
+<li><p>ThreadLocal</p>
+</li>
+<li><p>EventBus</p>
+</li>
+</ul>
+<h4 id><a href="#" class="headerlink" title></a><a href="#" class="header-anchor">#</a></h4><h1 id="问题集合"><a href="#问题集合" class="headerlink" title="问题集合"></a>问题集合<a href="#问题集合" class="header-anchor">#</a></h1><h2 id="service-intent-must-be-explicit-intent"><a href="#Service-Intent-must-be-explicit-Intent" class="headerlink" title="Service Intent must be explicit: Intent"></a>Service Intent must be explicit: Intent<a href="#service-intent-must-be-explicit-intent" class="header-anchor">#</a></h2><ul>
+<li>使用隐式意图的话，加上包名信息即可；</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent();  </span><br><span class="line">intent.setAction(<span class="string">&quot;com.yulore.recognize.android&quot;</span>);  </span><br><span class="line">intent.setPackage(context.getPackageName());    <span class="comment">//兼容Android 5.0  </span></span><br><span class="line">context.startService(intent);  </span><br></pre></td></tr></table></figure></div>
+<ul>
+<li>显示意图</li>
+</ul>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(com.yulore.test.AppService.class);  </span><br><span class="line">context.startService(intent);  </span><br></pre></td></tr></table></figure></div>
+
+
+
+
+
+
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://developer.android.google.cn/guide/components/aidl?hl=zh_cn#Bundles">Android 接口定义语言 (AIDL)  | Android 开发者  | Android Developers (google.cn)</a> <br><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/wangqiubo2010/article/details/72368294">(41条消息) Binder invocation to an incorrect interface 异常分析_wangqiubo2010的博客-CSDN博客</a> <br><a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="https://blog.csdn.net/tfslovexizi/article/details/50698663">(41条消息) java.lang.SecurityException: Binder invocation to an incorrect interface报错问题_若然的专栏-CSDN博客</a> <br><a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">[<a href="https://www.jianshu.com/p/0b22194b131c">023]你真的懂AIDL的oneway嘛？ - 简书 (jianshu.com)</a><a href="#fnref:4" rev="footnote"> ↩</a></span></li><li id="fn:5"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">5.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://androidxref.com/9.0.0_r3/xref/frameworks/native/libs/binder/ProcessState.cpp">Cross Reference: /frameworks/native/libs/binder/ProcessState.cpp (androidxref.com)</a><a href="#fnref:5" rev="footnote"> ↩</a></span></li><li id="fn:6"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">6.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a href="http://gityuan.com/2015/11/02/binder-driver-2/">Binder系列2—Binder Driver再探 - Gityuan博客 | 袁辉辉的技术博客</a><a href="#fnref:6" rev="footnote"> ↩</a></span></li></ol></div></div><link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      <categories>
+        <category>Android</category>
+        <category>项目架构</category>
+        <category>开源框架</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>开源框架</tag>
+        <tag>技术选型</tag>
       </tags>
   </entry>
   <entry>

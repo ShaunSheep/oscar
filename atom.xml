@@ -6,7 +6,7 @@
   <link href="http://www.yangchaofan.cn/atom.xml" rel="self"/>
   
   <link href="http://www.yangchaofan.cn/"/>
-  <updated>2021-06-22T14:36:41.467Z</updated>
+  <updated>2021-07-02T14:07:58.779Z</updated>
   <id>http://www.yangchaofan.cn/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android跨进程通信方案选型</title>
+    <link href="http://www.yangchaofan.cn/2021/07/android-ipc-best-practice/"/>
+    <id>http://www.yangchaofan.cn/2021/07/android-ipc-best-practice/</id>
+    <published>2021-07-02T12:28:33.000Z</published>
+    <updated>2021-07-02T14:07:58.779Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;跨进程通信方案&quot;&gt;&lt;a href=&quot;#跨进程通信方案&quot; class</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>Android依赖库处理框架——Fataar</title>
@@ -605,33 +635,6 @@
     
     
     <category term="程序人生，杂谈" scheme="http://www.yangchaofan.cn/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>架构选型之MVC、MVP、MVVM</title>
-    <link href="http://www.yangchaofan.cn/2018/02/MVC-MVP-MVVM%20-of%20-architecture%20-selection/"/>
-    <id>http://www.yangchaofan.cn/2018/02/MVC-MVP-MVVM%20-of%20-architecture%20-selection/</id>
-    <published>2018-02-10T14:50:37.000Z</published>
-    <updated>2021-06-10T15:31:33.954Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;blockquote&gt;
-&lt;p&gt;文章是转的，网上看过的唯二的我读过关于“MVC、M</summary>
-      
-    
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
-    
-    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
-    
-    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
     
   </entry>
   
