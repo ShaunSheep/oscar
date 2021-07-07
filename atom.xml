@@ -587,6 +587,29 @@
   </entry>
   
   <entry>
+    <title>dp动态规划的抽象思考过程</title>
+    <link href="http://www.yangchaofan.cn/2020/06/the-abstract-thinking-process-of-dynamic-programming/"/>
+    <id>http://www.yangchaofan.cn/2020/06/the-abstract-thinking-process-of-dynamic-programming/</id>
+    <published>2020-06-17T12:48:39.000Z</published>
+    <updated>2021-07-07T12:54:54.700Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;动态规划&quot;&gt;&lt;a href=&quot;#动态规划&quot; class=&quot;headerlink&quot; title=&quot;动态规划&quot;&gt;&lt;/a&gt;动态规划&lt;/h1&gt;&lt;p&gt;本文主要讲了动态规划四要素，并且用一个数字三角形为例，介绍了两种动态规划抽象思考过程，如何根据输入的二维数组，抽象出矩阵坐标，介绍两种完全相反的实现方式——自底向上、自顶向下。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="计算机科学" scheme="http://www.yangchaofan.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+    
+    <category term="算法" scheme="http://www.yangchaofan.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="算法" scheme="http://www.yangchaofan.cn/tags/%E7%AE%97%E6%B3%95/"/>
+    
+    <category term="数据结构" scheme="http://www.yangchaofan.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Android 热补丁技术详解大全</title>
     <link href="http://www.yangchaofan.cn/2019/06/android-hotfix/"/>
     <id>http://www.yangchaofan.cn/2019/06/android-hotfix/</id>
@@ -611,30 +634,6 @@
     <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
     
     <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>为什么要花3年时间面试一个人？</title>
-    <link href="http://www.yangchaofan.cn/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/"/>
-    <id>http://www.yangchaofan.cn/2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/</id>
-    <published>2019-01-16T01:50:49.000Z</published>
-    <updated>2021-03-14T09:21:52.838Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;为什么要花3年时间面试一个人&quot;&gt;&lt;a href=&quot;#为什么要花3年</summary>
-      
-    
-    
-    
-    <category term="杂谈" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/"/>
-    
-    <category term="日记" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
-    
-    
-    <category term="程序人生，杂谈" scheme="http://www.yangchaofan.cn/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/"/>
     
   </entry>
   
