@@ -1,0 +1,2725 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script async src="//cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  <link href="//cdn.jsdelivr.net/npm/pace-js@1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+<link href="https://fonts.loli.net/css?family=EB+Garamond:400,400i,700,700i|Noto+Serif+SC:400,500,700&display=swap&subset=chinese-simplified" rel="stylesheet">
+
+
+
+
+  
+
+<link href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android,开源框架," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="叶金诚的站点" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Rxjava sample 项目介绍#引入依赖#基础依赖#依赖后可以使用rxjava操作符 12implementation &amp;#x27;io.reactivex.rxjava2:rxjava:2.2.2&amp;#x27;implementation &amp;#x27;io.reactivex.rxjava2:rxandroid:2.1.0&amp;#x27; 扩展依赖#网络库，可以返回Observable对象，方便">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RjxavaSample练习">
+<meta property="og:url" content="http://www.yangchaofan.cn/2022/01/Android-rxjava-Practice/index.html">
+<meta property="og:site_name" content="叶金诚的站点">
+<meta property="og:description" content="Rxjava sample 项目介绍#引入依赖#基础依赖#依赖后可以使用rxjava操作符 12implementation &amp;#x27;io.reactivex.rxjava2:rxjava:2.2.2&amp;#x27;implementation &amp;#x27;io.reactivex.rxjava2:rxandroid:2.1.0&amp;#x27; 扩展依赖#网络库，可以返回Observable对象，方便">
+<meta property="og:locale">
+<meta property="og:image" content="https://mcxiaoke.gitbooks.io/rxdocs/content/images/S.AsyncSubject.png">
+<meta property="og:image" content="https://mcxiaoke.gitbooks.io/rxdocs/content/images/S.PublishSubject.png">
+<meta property="og:image" content="https://mcxiaoke.gitbooks.io/rxdocs/content/images/S.BehaviorSubject.png">
+<meta property="og:image" content="https://mcxiaoke.gitbooks.io/rxdocs/content/images/S.ReplaySubject.png">
+<meta property="article:published_time" content="2022-01-06T14:33:57.000Z">
+<meta property="article:modified_time" content="2022-07-06T14:46:52.552Z">
+<meta property="article:author" content="叶金诚">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="开源框架">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mcxiaoke.gitbooks.io/rxdocs/content/images/S.AsyncSubject.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"perspectiveRightIn","post_body":"fadeIn","coll_header":"swoopIn","sidebar":"shrinkIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yangchaofan.cn/2022/01/Android-rxjava-Practice/"/>
+
+
+
+
+
+<!-- 设置文章需要密码访问 -->
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <title>RjxavaSample练习 | 叶金诚的站点</title>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  
+	<!-- leafacePlayer -->
+	
+      <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+      <meta name="baidu-site-verification" content="code-lde50FghqK" />
+
+	
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <!--fork me from github-->
+    <a target="_blank" rel="noopener" href="https://github.com/ShaunSheep" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">叶金诚的站点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">汇贤雅叙</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-film"></i> <br />
+            
+            电影
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-图书">
+          <a href="/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            图书
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2022/01/Android-rxjava-Practice/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">RjxavaSample练习</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+             
+
+             
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-06T22:33:57+08:00">
+                2022-01-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">开源框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2022/01/Android-rxjava-Practice/" class="leancloud_visitors" data-flag-title="RjxavaSample练习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          <!--
+          
+          -->
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数&#58;</span>
+                
+                <span title="字数">
+                  3.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">时长 &asymp;</span>
+                
+                <span title="时长">
+                  12 分钟
+                </span>
+              
+            </span>
+          
+
+          <!-- 隐藏文章内标题下，内容描述
+          
+          -->
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1><span id="rxjava-sample-项目介绍">Rxjava sample 项目介绍</span><a href="#rxjava-sample-项目介绍" class="header-anchor">#</a></h1><h2><span id="引入依赖">引入依赖</span><a href="#引入依赖" class="header-anchor">#</a></h2><h3><span id="基础依赖">基础依赖</span><a href="#基础依赖" class="header-anchor">#</a></h3><p>依赖后可以使用rxjava操作符</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="GROOVY"><figure class="iseeu highlight /groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;io.reactivex.rxjava2:rxjava:2.2.2&#x27;</span></span><br><span class="line">implementation <span class="string">&#x27;io.reactivex.rxjava2:rxandroid:2.1.0&#x27;</span></span><br></pre></td></tr></table></figure></div>
+<h3><span id="扩展依赖">扩展依赖</span><a href="#扩展依赖" class="header-anchor">#</a></h3><p>网络库，可以返回Observable对象，方便后续操作符操作</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="GROOVY"><figure class="iseeu highlight /groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;com.amitshekhar.android:rx2-android-networking:1.0.2&#x27;</span></span><br></pre></td></tr></table></figure></div>
+<p>生命周期库，使用后可以将rxjava与Adnroid组件生命周期关联</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="GROOVY"><figure class="iseeu highlight /groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;com.trello.rxlifecycle4:rxlifecycle:4.0.2&#x27;</span></span><br></pre></td></tr></table></figure></div>
+<p>UI布局组件，使用后按钮可以自适应布局，自动换行</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="GROOVY"><figure class="iseeu highlight /groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;com.google.android:flexbox:2.0.1&#x27;</span></span><br></pre></td></tr></table></figure></div>
+<h2><span id="项目结构">项目结构</span><a href="#项目结构" class="header-anchor">#</a></h2><p>此项目按目录分为如下多个package，每一个package表示rxjava一类用法，接下来我们一级一级目录来研究这些用法</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="POWERSHELL"><figure class="iseeu highlight /powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">├─java</span><br><span class="line">│  └─com</span><br><span class="line">│      └─shaunsheep</span><br><span class="line">│          └─rxjavasample</span><br><span class="line">│              ├─observable // 被观察者</span><br><span class="line">│              ├─operators</span><br><span class="line">│              │  ├─arithmetic // 数学运算符</span><br><span class="line">│              │  ├─combine // 结合</span><br><span class="line">│              │  ├─condition // 条件运算符</span><br><span class="line">│              │  ├─connect // 链接</span><br><span class="line">│              │  ├─create // 创建</span><br><span class="line">│              │  ├─<span class="keyword">filter</span>  // 过滤</span><br><span class="line">│              │  ├─model // 模型</span><br><span class="line">│              │  └─transform // 变换</span><br><span class="line">│              ├─scene   // 典型场景</span><br><span class="line">│              │  ├─bus  // 事件总线</span><br><span class="line">│              │  └─cache // 三级缓存</span><br><span class="line">│              │      ├─controller</span><br><span class="line">│              │      └─model</span><br><span class="line">│              └─schedulers // 调度器</span><br></pre></td></tr></table></figure></div>
+<h2><span id="observable">observable</span><a href="#observable" class="header-anchor">#</a></h2><p>此部分文件结构</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="POWERSHELL"><figure class="iseeu highlight /powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">|-- AsyncSubjectActivity.java // 四种Subject之一</span><br><span class="line">|-- BehaviorSubjectActivity.java  // 四种Subject之一</span><br><span class="line">|-- PublishSubjectActivity.java  // 四种Subject之一</span><br><span class="line">|-- ReplaySubjectActivity.java  // 四种Subject之一</span><br><span class="line">|-- CompletableActivity.java // Completable消息</span><br><span class="line">|-- FlowableActivity.java // Flowable背压</span><br><span class="line">|-- ObservableActivity.java // Observable基础用法</span><br><span class="line">-- SingleActivity.java // Single消息</span><br></pre></td></tr></table></figure></div>
+<h3><span id="observable">Observable</span><a href="#observable" class="header-anchor">#</a></h3><p><strong>观察者和被观察者</strong>：Observable指被观察者，Observer指观察者或订阅者</p>
+<p><strong>冷和热的概念：</strong>热是指Observable创建完就发射数据，观察者在之后才有可能订阅数据，有可能会错过一些数据；冷是指Observable会一直等待，等待有观察者订阅，才会发射数据，确保观察者能收到整个数据流。</p>
+<h3><span id="subject"><strong>Subject</strong></span><a href="#subject" class="header-anchor">#</a></h3><p>既是Observable、也是Observer。</p>
+<img width="640" height="281" src="https://mcxiaoke.gitbooks.io/rxdocs/content/images/S.AsyncSubject.png" alt="AsyncSubject">
+PublishSubject：只会把在订阅发生的时间点之后来自原始Observable的数据发射给观察者
+ <img width="640" height="281" src="https://mcxiaoke.gitbooks.io/rxdocs/content/images/S.PublishSubject.png" alt="PublishSubject">
+BehaviorSubject：观察者订阅BehaviorSubject时，它开始发射原始Observable最近发射的数据（如果此时还没有收到任何数据，它会发射一个默认值），然后继续发射其它任何来自原始Observable的数据
+ <img width="640" height="281" src="https://mcxiaoke.gitbooks.io/rxdocs/content/images/S.BehaviorSubject.png" alt="PublishSubject">
+ReplaySubject：ReplaySubject会发射所有来自原始Observable的数据给观察者，无论它们是何时订阅的。
+ <img width="640" height="281" src="https://mcxiaoke.gitbooks.io/rxdocs/content/images/S.ReplaySubject.png" alt="PublishSubject">
+
+
+
+<table>
+<thead>
+<tr>
+<th>Subject类型</th>
+<th>会损失已发的数据</th>
+<th>损失的特点</th>
+<th>先发射数据，后订阅<br>能否收到之前发射的所有数据</th>
+<th>必须onComplete<br>如果不执行onComplete<br>就收不到消息</th>
+<th>onComplete之后能否收到消息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AsyncSubject</td>
+<td>√</td>
+<td>只收到onComplete之前发射的最后一条数据；</td>
+<td>×</td>
+<td>√</td>
+<td>×</td>
+</tr>
+<tr>
+<td>BehaviorSubject</td>
+<td>√</td>
+<td>只收到订阅之前发射的最近一条数据，和订阅之后的所有数据；无法收到订阅之前所有的数据</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>PublishSubject</td>
+<td>√</td>
+<td>只能收到订阅之后发射的数据，无法收到订阅之前的数据</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td>ReplaySubject</td>
+<td>×</td>
+<td>-</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody></table>
+<h3><span id="completab"><strong>Completab</strong></span><a href="#completab" class="header-anchor">#</a></h3><p>不会发射任何消息，只发射完成或失败的结果。</p>
+<h3><span id="flowable"><strong>Flowable</strong></span><a href="#flowable" class="header-anchor">#</a></h3><p>一种特殊的Observable，支持5种背压策略</p>
+<p><strong>用途：</strong>处理上层线程发射数据流的速度远大于下层线程处理数据流的速度的情况</p>
+<p><strong>策略：</strong></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">BackpressureStrategy</span></span>&#123;</span><br><span class="line">        MISSING,    <span class="comment">//通过create创建的Flowable，需要下游指定背压策略</span></span><br><span class="line">        ERROR,      <span class="comment">//放入Flowable异步缓存池的数据超限，将抛出MissingBackpressureException</span></span><br><span class="line">        BUFFER,     <span class="comment">//异步缓存池无大小限制，可无限添加数据，不会抛出异常，但会OOM</span></span><br><span class="line">        DROP,       <span class="comment">//如果Flowable异步缓存池满了，将抛弃将要添加的数据</span></span><br><span class="line">        LATEST      <span class="comment">//如果Flowable异步缓存池满了，将抛弃将要添加的数据，但强制添加最后一条数据</span></span><br><span class="line">&#125;	</span><br></pre></td></tr></table></figure></div>
+<p>其他参考本项目其他笔记-rxjava使用总结</p>
+<h3><span id="single">Single</span><a href="#single" class="header-anchor">#</a></h3><p>一个特殊的Observable，只能调用onSuccess 或onError ，任何一个消息进入这俩方法之一，订阅关系就终止了</p>
+<h2><span id="operators">operators</span><a href="#operators" class="header-anchor">#</a></h2><p>Observer和Observable只是Rxjava的开始，它们只是观察者模式的基础扩展，目的是为了更好处理数据流。Rxjava强大的地方在于操作符，它拥有回调所有的效率优势，也解决了异步任务中嵌套回调的问题。</p>
+<p>此部分文件结构</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="POWERSHELL"><figure class="iseeu highlight /powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">|-- CompositeDisposableActivity.java // CompositeDisposable</span><br><span class="line">|-- OperatorsLauncherActivity.java // 操作符入口</span><br><span class="line">|-- SimpleOperationActivity.java // 入门示例</span><br><span class="line">|-- arithmetic // 算数操作符</span><br><span class="line">|   |-- ReduceActivity.java</span><br><span class="line">|-- combine // 组合操作符</span><br><span class="line">|   |-- ConcatActivity.java</span><br><span class="line">|   |-- MergeActivity.java</span><br><span class="line">|   |-- ZipActivity.java</span><br><span class="line">|-- condition // 条件运算操作符</span><br><span class="line">|   |-- TakeUtilActivity.java</span><br><span class="line">|   |-- TakeWhileActivity.java</span><br><span class="line">|-- connect // 链接操作符</span><br><span class="line">|   `-- ReplayActivity.java</span><br><span class="line">|-- create // 创建操作符</span><br><span class="line">|   |-- CreateActivity.java</span><br><span class="line">|   |-- DeferActivity.java</span><br><span class="line">|   |-- IntervalActivity.java</span><br><span class="line">|   |-- IntervalRangeActivity.java</span><br><span class="line">|   |-- JustActivity.java</span><br><span class="line">|   `-- TimerActivity.java</span><br><span class="line">|-- <span class="keyword">filter</span> // 过滤操作符</span><br><span class="line">|   |-- DebounceActivity.java</span><br><span class="line">|   |-- DelayActivity.java</span><br><span class="line">|   |-- DistinctActivity.java</span><br><span class="line">|   |-- FilterActivity.java</span><br><span class="line">|   |-- LastActivity.java</span><br><span class="line">|   |-- ScanActivity.java</span><br><span class="line">|   |-- SkipActivity.java</span><br><span class="line">|   |-- TakActivity.java</span><br><span class="line">|   `-- ThrottleActivity.java</span><br><span class="line">|-- model // 示例所需的实体类</span><br><span class="line">|   |-- NetworkUser.java</span><br><span class="line">|   `-- UserBean.java</span><br><span class="line">`-- transform // 转换操作符</span><br><span class="line">    |-- BufferActivity.java</span><br><span class="line">    |-- FlatMapActivity.java</span><br><span class="line">    |-- MapOperationActivity.java</span><br><span class="line">    `-- SwitchMapActivity.java</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>本项目介绍了哪些操作符？</p>
+<ol>
+<li>combine 组合类：Concat，Merge，Zip</li>
+<li>arithmetic 算数类：Reduce</li>
+<li>condition 布尔运算类：TakeUtil、TakeWhile</li>
+<li>filter 过滤类：Debounce，Throttle，Delay，Distinct，Filter，Last，Scan，Skip，Take</li>
+<li>transform 转换类：Buffer，Map，SwithMap，FlatMap,Scan，GroupBy</li>
+<li>creat 创建类：Create，Defer，Interval，Timer，Just，From</li>
+</ol>
+<p>下面是Rxjava常用的操作符列表：</p>
+<p>加粗的是此项目已实现的。</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/rxdocs/content/operators/Creating-Observables.html">创建操作</a> <strong>Create</strong>, <strong>Defer</strong>, Empty/Never/Throw, <strong>From</strong>, <strong>Interval</strong>, <strong>Just</strong>, <strong>Range</strong>, Repeat, Start, <strong>Timer</strong></li>
+<li><a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/rxdocs/content/operators/Transforming-Observables.html">变换操作</a> <strong>Buffer</strong>, <strong>FlatMap</strong>, <strong>GroupBy</strong>, <strong>Map</strong>,<strong>SwitchMap</strong>, <strong>Scan</strong>和Window</li>
+<li><a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/rxdocs/content/operators/Filtering-Observables.html">过滤操作</a> <strong>Debounce</strong>,<strong>Throttle</strong>, <strong>Distinct</strong>, ElementAt, <strong>Filter</strong>, <strong>First</strong>, IgnoreElements, <strong>Last</strong>, <strong>Sample</strong>, <strong>Skip</strong>, SkipLast, <strong>Take</strong>, <strong>TakeLast</strong></li>
+<li><a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/rxdocs/content/operators/Combining-Observables.html">组合操作</a> And/Then/When, <strong>CombineLatest</strong>, <strong>Join</strong>, <strong>Merge</strong>, <strong>StartWith</strong>, Switch, <strong>Zip</strong></li>
+<li><a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/rxdocs/content/operators/Error-Handling-Operators.html">错误处理</a> Catch和Retry</li>
+<li><a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/rxdocs/content/operators/Observable-Utility-Operators.html">辅助操作</a> <strong>Delay</strong>, <strong>Do</strong>, Materialize/Dematerialize, ObserveOn, Serialize, <strong>Subscribe</strong>, <strong>SubscribeOn</strong>, TimeInterval, <strong>Timeout</strong>, Timestamp, Using</li>
+<li><a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/rxdocs/content/operators/Conditional-and-Boolean-Operators.html">条件和布尔操作</a> All, Amb, Contains, DefaultIfEmpty, SequenceEqual, SkipUntil, SkipWhile, <strong>TakeUntil</strong>, <strong>TakeWhile</strong></li>
+<li><a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/rxdocs/content/operators/Mathematical-and-Aggregate-Operators.html">算术和集合操作</a> Average, <strong>Concat</strong>, Count, Max, Min, <strong>Reduce</strong>, Sum</li>
+<li><a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/rxdocs/content/operators/To.html">转换操作</a> To</li>
+<li><a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/rxdocs/content/operators/Connectable-Observable-Operators.html">连接操作</a> <strong>Connect</strong>, Publish, RefCount, <strong>Replay</strong></li>
+<li><a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/rxdocs/content/topics/Backpressure.html">反压操作</a>，用于增加特殊的流程控制策略的操作符 </li>
+</ol>
+<h3><span id="易混淆对比">易混淆对比</span><a href="#易混淆对比" class="header-anchor">#</a></h3><h4><span id="时间类"><strong>时间类</strong></span><a href="#时间类" class="header-anchor">#</a></h4><table>
+<thead>
+<tr>
+<th></th>
+<th>入参</th>
+<th>出参</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Timer</td>
+<td>long</td>
+<td>Observable</td>
+<td>创建一个延时发射的Observable</td>
+</tr>
+<tr>
+<td>Delay</td>
+<td>long</td>
+<td>Observable</td>
+<td>将emitter发射来的数据延迟指定时间再发射</td>
+</tr>
+<tr>
+<td>Defer</td>
+<td>Callable</td>
+<td>Observable</td>
+<td>延迟Observable的创建，被订阅才会进入Callable方法创建Observable</td>
+</tr>
+<tr>
+<td>IntervalRange</td>
+<td>start,count,initialDelay,period</td>
+<td>Observable</td>
+<td>创建一个按固定时间间隔、固定延时时间发射数据的Observable，它发射数据的规律是整数递增，有限个数</td>
+</tr>
+<tr>
+<td>Interval</td>
+<td>initialDelay，period</td>
+<td>Observable</td>
+<td>创建一个固定时间间隔、固定延时时间发射数据的Observable，它发射的规律是整数递增，无限个数</td>
+</tr>
+</tbody></table>
+<h4><span id="组合1类"><strong>组合1类</strong></span><a href="#组合1类" class="header-anchor">#</a></h4><table>
+<thead>
+<tr>
+<th></th>
+<th>入参</th>
+<th>出参</th>
+<th>异步发射数据流<br>Observer是否按发射顺序接收</th>
+<th>Observables长度不同<br>对Observer接收到的数量有影响</th>
+<th>影响是什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Zip</td>
+<td>多个Observable</td>
+<td>Observable<r></r></td>
+<td>√</td>
+<td>√</td>
+<td>收到数据流数量等于数量最少的Observable的数量</td>
+</tr>
+<tr>
+<td>Merge</td>
+<td>多个Observable</td>
+<td>Observable<r></r></td>
+<td>×</td>
+<td>×</td>
+<td>交错接收不同Observable发射来的数据</td>
+</tr>
+<tr>
+<td>Concat</td>
+<td>多个Observable</td>
+<td>Observable<r></r></td>
+<td>√</td>
+<td>×</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h4><span id="组合2类"><strong>组合2类</strong></span><a href="#组合2类" class="header-anchor">#</a></h4><table>
+<thead>
+<tr>
+<th></th>
+<th>入参</th>
+<th>子函数出参</th>
+<th>函数出参</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>reduce</td>
+<td>BiFunction&lt;T1, T2, R&gt;</td>
+<td>R</td>
+<td>Maybe<t></t></td>
+<td>reduce只会收到所有迭代项的最终处理结果<br>支持的观察者是MybeObserver，只有onSuccess\onError</td>
+</tr>
+<tr>
+<td>scan</td>
+<td>BiFunction&lt;T1, T2, R&gt;</td>
+<td>R</td>
+<td>Observable<t></t></td>
+<td>scan会收到迭代器每两项的处理结果<br>支持的观察者是Observer，有onNext\onError</td>
+</tr>
+</tbody></table>
+<p>组合1类与组合2类的区别</p>
+<ul>
+<li>1类是针对Observable或者数据流的</li>
+<li>2类只能针对数据流进行合并</li>
+</ul>
+<h4><span id="转换类"><strong>转换类</strong></span><a href="#转换类" class="header-anchor">#</a></h4><table>
+<thead>
+<tr>
+<th></th>
+<th>入参泛型</th>
+<th>出参</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Map</td>
+<td>? super T</td>
+<td>? extends R</td>
+<td>把对象A变为对象B</td>
+</tr>
+<tr>
+<td>FlatMap</td>
+<td>? super T</td>
+<td>? extends ObservableSource&lt;? extends R&gt;</td>
+<td>返回值为Observable</td>
+</tr>
+<tr>
+<td>SwithMap</td>
+<td>? super T,</td>
+<td>? extends ObservableSource&lt;? extends R&gt;</td>
+<td>当原始Observable发射新数据，<br>会停止在这个时间点之前正在处理的Observable</td>
+</tr>
+</tbody></table>
+<h4><span id="重名类"><strong>重名类</strong></span><a href="#重名类" class="header-anchor">#</a></h4><table>
+<thead>
+<tr>
+<th></th>
+<th>入参</th>
+<th>入参的出参</th>
+<th>出参</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Take</td>
+<td>long</td>
+<td>-</td>
+<td>Observable<t></t></td>
+<td>发射前N项</td>
+</tr>
+<tr>
+<td>Last</td>
+<td>long</td>
+<td>-</td>
+<td>Observable<t></t></td>
+<td>返回最后一项</td>
+</tr>
+<tr>
+<td>TakeLast</td>
+<td>long</td>
+<td>-</td>
+<td>Observable<t></t></td>
+<td>发射最后n项数据</td>
+</tr>
+<tr>
+<td>TakeWhile</td>
+<td>Predicate</td>
+<td>boolean</td>
+<td></td>
+<td>test方法return 为true的时候，将停止发射后面的数据</td>
+</tr>
+<tr>
+<td>TakeUntil</td>
+<td>ObservableSource</td>
+<td>-</td>
+<td>Observable<t></t></td>
+<td>当第二个Observable发射了一项数据或者终止时，丢弃原始Observable</td>
+</tr>
+</tbody></table>
+<h4><span id="过滤类"><strong>过滤类</strong></span><a href="#过滤类" class="header-anchor">#</a></h4><table>
+<thead>
+<tr>
+<th></th>
+<th>入参</th>
+<th>子函数出参</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Debounce</td>
+<td>long</td>
+<td>-</td>
+<td>消息A之候X秒内无新消息，则发射消息A</td>
+</tr>
+<tr>
+<td>Distinct</td>
+<td>-</td>
+<td>-</td>
+<td>去重，判等依据是hashcode、equals</td>
+</tr>
+<tr>
+<td>Filter</td>
+<td>Predicate</td>
+<td>boolean</td>
+<td>只发射test返回结果为true的数据流</td>
+</tr>
+<tr>
+<td>Skip</td>
+<td>long</td>
+<td>-</td>
+<td>跳过Observable发射的前N项数据</td>
+</tr>
+<tr>
+<td>Last</td>
+<td>long</td>
+<td>-</td>
+<td>返回最后一项</td>
+</tr>
+<tr>
+<td>Tak</td>
+<td>long</td>
+<td>-</td>
+<td>只发射前面的N项数据</td>
+</tr>
+<tr>
+<td>TakLast</td>
+<td>long</td>
+<td>-</td>
+<td>返回后n项数据</td>
+</tr>
+</tbody></table>
+<h4><span id="异常类"><strong>异常类</strong></span><a href="#异常类" class="header-anchor">#</a></h4><table>
+<thead>
+<tr>
+<th></th>
+<th>入参</th>
+<th>出参</th>
+<th>特性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onErrorReturn</td>
+<td>Function</td>
+<td>Observable</td>
+<td>中断数据流发射</td>
+</tr>
+<tr>
+<td>onErrorResumeNext</td>
+<td>备用Observable</td>
+<td>Observable</td>
+<td>中断数据流发射，使用备用Observable发射数据，emitter.onError传入的是Exceptio或Throwable对象，都会执行此方法<br></td>
+</tr>
+<tr>
+<td>onExceptionResumeNext</td>
+<td>备用Observable</td>
+<td>Observable</td>
+<td>中断数据流发射，如果onError传入的Exception，则使用备用Observable;<br>如果传入的是Throwable，则完全停止发射数据流，不使用备用Observable</td>
+</tr>
+</tbody></table>
+<h3><span id="易错对比">易错对比</span><a href="#易错对比" class="header-anchor">#</a></h3><p><strong>join</strong></p>
+<blockquote>
+<p>任何时候，只要在另一个Observable发射的数据定义的时间窗口内，这个Observable发射了一条数据，就结合两个Observable发射的数据。</p>
+</blockquote>
+<p><strong>难以理解的点：</strong>如何结合两个Observable发射的数据</p>
+<p>解答：排列组合的方式结合，比如Observable1 发射 1 2 3，Observable2 发射A，那么组合结果是 1A, 2A, 3A</p>
+<p><strong>难以理解的点：</strong>另一个Observable发射的数据定义的时间窗口内</p>
+<p><strong>解答：</strong>Observable2发射A并指定了A即将与Observable1 哪一个时间段内发射的数据进行排列组合</p>
+<p><strong>参考</strong></p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.introtorx.com/uat/content/v1.0.10621.0/17_SequencesOfCoincidence.html#Join">http://www.introtorx.com/uat/content/v1.0.10621.0/17_SequencesOfCoincidence.html#Join</a></p>
+<p>When left produces a value, a window is opened. That value is also then passed to the leftDurationSelector function. The result of this function is an IObservable. When that sequence produces a value or completes then the window for that value is closed. Note that it is irrelevant what the type of TLeftDuration is. This initially left me with the feeling that IObservable was all a bit over kill as you effectively just need some sort of event to say ‘Closed’. However by allowing you to use IObservable you can do some clever stuff as we will see later.</p>
+<p>So let us first imagine a scenario where we have the left sequence producing values twice as fast as the right sequence. Imagine that we also never close the windows. We could do this by always returning Observable.Never() from the leftDurationSelector function. This would result in the following pairs being produced.</p>
+<p>Left Sequence</p>
+<p>L 0-1-2-3-4-5-<br>Right Sequence</p>
+<p>R –A—B—C-<br>0, A<br>1, A<br>0, B<br>1, B<br>2, B<br>3, B<br>0, C<br>1, C<br>2, C<br>3, C<br>4, C<br>5, C<br>As you can see the left values are cached and replayed each time the right produces a value.<br>说白了join操作我们不能把两个Observable等价看待，join的效果类似于排列组合，把第一个数据源A作为基座窗口，他根据自己的节奏不断发射数据元素，第二个数据源B，每发射一个数据，我们都把它和第一个数据源A中已经发射的数据进行一对一匹配；</p>
+<p>举例来说，如果某一时刻B发射了一个数据“B”,此时A已经发射了0，1，2，3共四个数据，那么我们的合并操作就会把“B”依次与0,1,2,3配对，得到四组数据： 0, B 1, B 2, B 3, B</p>
+<p>是不是和简单？可惜我在在花费大量时间研究出join本质前，一直无法理解，希望本文能帮助到遇到同样问题的人；</p>
+<p>小结<br>所以join得本质就是这么简单，但是很遗憾在RxJava的各种介绍和Github上面对join都是一笔带过，并没有把他的概念讲清楚，如果读者在细致的学习RxJava时就会遇到很多问题</p>
+</blockquote>
+<p><strong>do</strong></p>
+<p>问：同一doXX是否可以调用多次</p>
+<p>答：可以多次，不会覆盖</p>
+<p>问：多个doXX方法谁先谁后？</p>
+<p>答：同步在一个线程的时候，提交顺序等于执行顺序；异步在多个线程的时候，取决于谁的Scheduler先执行，先执行的先进入对应的do方法；</p>
+<p>问：所有的doXX一定会被执行？</p>
+<p>答：不一定，downstream 进入某一个方法后，遇到Exception，下面的doXX是不会进行的</p>
+<p>问题：如何记住某些doXX的顺序？</p>
+<p>答：以subscribe的时间点位分割线</p>
+<p>在subscribe 前后提交的doOnTerminate 和 doAfterTerminate</p>
+<p>在subscribe 前后提交的doOnNext和 doAfterNext<br>doFinally 总是最后提交的,并且是一定提交的,无论是<code>data</code>,<code>error</code>,或者<code>dispose</code></p>
+<p><strong>to</strong></p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>函数</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>toMap</td>
+<td>Function&lt;T, R&gt;:T是入参，R是返回值<br>toMap的结果将R作为Map的key，将T作为Map的value</td>
+<td>取值方式是在观察者里的<code>Map&lt;R,T&gt;</code>,注意R是返回值key</td>
+</tr>
+<tr>
+<td>toList</td>
+<td>空</td>
+<td>取值方式直接在观察者里onSuccess里获取</td>
+</tr>
+<tr>
+<td>toFuture</td>
+<td></td>
+<td>取值方式用future.get</td>
+</tr>
+</tbody></table>
+<h3><span id="自定义"><strong>自定义</strong></span><a href="#自定义" class="header-anchor">#</a></h3><p>自定义操作符接口类：ObservableOperator</p>
+<p>自定义变换操作符接口类：ObservableTransformer</p>
+<h2><span id="参考文献">参考文献</span><a href="#参考文献" class="header-anchor">#</a></h2><p><a target="_blank" rel="noopener" href="https://mcxiaoke.gitbooks.io/rxdocs/content/">RreactiveX中文版</a>:介绍了Reactive的基本概念，rxjava对应的实现</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ReactiveX/rxjava/wiki">Rxjava官网</a>：wiki官网</p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">
+
+        
+
+      
+    </div>
+
+      <!-- 相关文章推荐 -->
+     
+          
+
+  <div class="popular-posts-header">
+    <i class="fa fa-graduation-cap"></i>
+    相关文章
+  </div>
+
+ <details>
+   <summary>点击查看</summary>
+     <ul class="popular-posts">
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\Android-plug-in-technology-selection\" rel="bookmark">Android插件化技术选型</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\Android-component-Practice-Guide\" rel="bookmark">Android组件化实践指南</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\android-structure-best-practice\" rel="bookmark">Android大厂架构设计最佳实践</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2016\04\Android-TOP-100-Program\" rel="bookmark">Android 百大框架排行榜</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\viewpager-viewpager2-usage\" rel="bookmark">viewpager与viewpager2实践总结</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\launchmode-activity-useage\" rel="bookmark">n条用例验证Activity4种启动模式的威力与坑</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\lifecycle-activity\" rel="bookmark">Activity各种条件下生命周期小结</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\throttle-debounce-vie-click\" rel="bookmark">Android/Java事件过滤方案小结</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\lifecycle-livedata-databind-viewmodel\" rel="bookmark">Android生命周期感知组件经验总结</a></div>
+         
+       </li>
+     
+     </ul>
+ </details>
+
+
+
+     
+
+    
+    
+    
+
+    <div>
+          
+            
+
+          
+    </div>
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div class="read-over">-------------------本文结束 <i class="fa fa-paw"></i> 感谢您的阅读-------------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+      <div>
+        <div class="share_reward">
+  <div>坚持原创技术分享，感谢您的支持和鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://cdn.yangchaofan.cn/BlogGifRes/20210313/s7mteFUqc8pH.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://cdn.yangchaofan.cn/BlogGifRes/20210313/oQnokBcx6RUO.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    叶金诚
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.yangchaofan.cn/2022/01/Android-rxjava-Practice/" title="RjxavaSample练习">http://www.yangchaofan.cn/2022/01/Android-rxjava-Practice/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" target="_blank">Creative Commons BY-NC-ND 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"> <i class="fa fa-tag"></i> Android</a>
+          
+            <a href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag"> <i class="fa fa-tag"></i> 开源框架</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/01/lifecycle-livedata-databind-viewmodel/" rel="prev" title="Android生命周期感知组件经验总结">
+                <i class="fa fa-chevron-left"></i> Android生命周期感知组件经验总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/07/programming-life-values/" rel="next" title="编程人生价值观">
+                编程人生价值观 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+//  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+//    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC81Mjc2OC8yOTI0NQ"></div>
+    </div>
+
+  
+
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/">
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.png"
+                alt="" />
+              </a>
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+              <!-- 为Hexo Next主题添加哈林摇特效  -->
+              <a title="收藏到书签，偶尔High一下^_^" rel="alternate" class="mw-harlem_shake_slow wobble shake" href="javascript:void(0)" onclick="javascript:(function go() {function c() {var e = document.createElement('link');e.setAttribute('type', 'text/css');e.setAttribute('rel', 'stylesheet');e.setAttribute('href', f);e.setAttribute('class', l);document.body.appendChild(e)}function h(){var e = document.getElementsByClassName(l);for(var t = 0; t< e.length; t++){document.body.removeChild(e[t])}}function p(){var e = document.createElement('div');e.setAttribute('class', a);document.body.appendChild(e);setTimeout(function(){document.body.removeChild(e)},100)}function d(e){return{height:e.offsetHeight,width:e.offsetWidth}}function v(i){var s = d(i);return s.height>e &amp;&amp;s.height<n &amp;&amp; s.width>t &amp;&amp;s.width<r}function m(e){var t=e;var n=0;while(!!t){n+=t.offsetTop;t=t.offsetParent}return n}function g(){var e=document.documentElement;if(!!window.innerWidth){return window.innerHeight}else if(e &amp;&amp; !isNaN(e.clientHeight)){return e.clientHeight}return 0}function y(){if(window.pageYOffset){return window.pageYOffset}return Math.max(document.documentElement.scrollTop,document.body.scrollTop)}function E(e){var t=m(e);return t>=w &amp;&amp; t<=b+w}var songs=['https://www.liaofuzhan.com/music/无尽光芒.mp3'];function S(){var e=document.getElementById('audio_element_id');if(e!=null){var index=parseInt(e.getAttribute('curSongIndex'));if(index>songs.length-2){index=0;}else{index++;}e.setAttribute('curSongIndex',index);N();}e.src=i;e.play()}function x(e){e.className+=' '+s+' '+o}function T(e){e.className+=' '+s+' '+u[Math.floor(Math.random()*u.length)]}function N(){var e=document.getElementsByClassName(s);var t=new RegExp('\\b'+s+'\\b');for(var n=0;n<e.length;){e[n].className=e[n].className.replace(t,'')}}function initAudioEle(){var e=document.getElementById('audio_element_id');if(e===null){e=document.createElement('audio');e.setAttribute('class',l);e.setAttribute('curSongIndex',0);e.id='audio_element_id';e.loop=false;e.bgcolor=0;e.addEventListener('canplay',function(){setTimeout(function(){x(k)},500);setTimeout(function(){N();p();for(var e=0;e<O.length;e++){T(O[e])}},15500)},true);e.addEventListener('ended',function(){N();h();go();},true);e.innerHTML='<p>If you are reading this,it is because your browser does not support the audio element. We recommend that you get a new browser.</p><p>';document.body.appendChild(e);}}initAudioEle();var e=30;var t=30;var n=350;var r=350;var curSongIndex=parseInt(document.getElementById('audio_element_id').getAttribute('curSongIndex'));var i=songs[curSongIndex];var s='mw-harlem_shake_me';var o='im_first';var u=['im_drunk','im_baked','im_trippin','im_blown'];var a='mw-strobe_light';var f='https://s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css';var l='mw_added_css';var b=g();var w=y();var C=document.getElementsByTagName('*');var k=null;for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){if(E(A)){k=A;break}}}if(A===null){console.warn('Could not find a node of the right size. Please try a different page.');return}c();S();var O=[];for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){O.push(A)}}})()"><i class="fa fa-music"></i> High~</a>
+
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/ShaunSheep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:zuogewoniu@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://www.douban.com/people/jincheng-ycf/" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://www.zhihu.com/people/OscarWildeHawking" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-instagram"></i></a>
+                  </span>
+                
+            </div>
+          
+
+            <!--
+            <div id="music163player">
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1336790004&auto=1&height=66"></iframe>
+            </div>
+            -->
+
+          
+          
+
+          
+          
+
+          <!--近期文章版块 began-->
+          
+              <div class="links-of-blogroll motion-element links-of-blogroll-block">
+                <div class="links-of-blogroll-title">
+                  <i class="fa fa-history fa-" aria-hidden="true"></i>
+                  近期文章
+                </div>
+                <ul class="links-of-blogroll-list">
+                  
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/viewpager-viewpager2-usage/" title="viewpager与viewpager2实践总结" target="_blank">viewpager与viewpager2实践总结</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/launchmode-activity-useage/" title="n条用例验证Activity4种启动模式的威力与坑" target="_blank">n条用例验证Activity4种启动模式的威力与坑</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/lifecycle-activity/" title="Activity各种条件下生命周期小结" target="_blank">Activity各种条件下生命周期小结</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/throttle-debounce-vie-click/" title="Android/Java事件过滤方案小结" target="_blank">Android/Java事件过滤方案小结</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/lifecycle-livedata-databind-viewmodel/" title="Android生命周期感知组件经验总结" target="_blank">Android生命周期感知组件经验总结</a>
+                    </li>
+                  
+                </ul>
+              </div>
+          
+          <!--近期文章版块 end-->
+
+          
+              <!-- canvas粒子时钟 -->
+              <!-- canvas粒子时钟 https://www.cnblogs.com/xiaohuochai/p/6368039.html
+  https://www.html5tricks.com/html5-canvas-dance-time.html
+ -->
+<div id="">
+  <canvas id="canvas" style="width:60%;">
+</div>
+<script async>
+(function(){
+  var WINDOW_WIDTH = 820;
+  		var WINDOW_HEIGHT = 250;
+  		var RADIUS = 7; //球半径
+  		var NUMBER_GAP = 10; //数字之间的间隙
+  		var u=0.65; //碰撞能量损耗系数
+  		var context; //Canvas绘制上下文
+  		var balls = []; //存储彩色的小球
+  		const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]; //彩色小球的颜色
+  		var currentNums = []; //屏幕显示的8个字符
+  		var digit =
+                  [
+                      [
+                          [0,0,1,1,1,0,0],
+                          [0,1,1,0,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,0,1,1,0],
+                          [0,0,1,1,1,0,0]
+                      ],//0
+                      [
+                          [0,0,0,1,1,0,0],
+                          [0,1,1,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [1,1,1,1,1,1,1]
+                      ],//1
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,1,1,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,1,1,1,1,1]
+                      ],//2
+                      [
+                          [1,1,1,1,1,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,1,0,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//3
+                      [
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,1,0],
+                          [0,0,1,1,1,1,0],
+                          [0,1,1,0,1,1,0],
+                          [1,1,0,0,1,1,0],
+                          [1,1,1,1,1,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,1,1]
+                      ],//4
+                      [
+                          [1,1,1,1,1,1,1],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,1,1,1,1,0],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//5
+                      [
+                          [0,0,0,0,1,1,0],
+                          [0,0,1,1,0,0,0],
+                          [0,1,1,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//6
+                      [
+                          [1,1,1,1,1,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0]
+                      ],//7
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//8
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,1,1,0,0,0,0]
+                      ],//9
+                      [
+                          [0,0,0,0],
+                          [0,0,0,0],
+                          [0,1,1,0],
+                          [0,1,1,0],
+                          [0,0,0,0],
+                          [0,0,0,0],
+                          [0,1,1,0],
+                          [0,1,1,0],
+                          [0,0,0,0],
+                          [0,0,0,0]
+                      ]//:
+                  ];
+
+  		function drawDatetime(cxt){
+  			var nums = [];
+
+  			context.fillStyle="#005eac"
+  			var date = new Date();
+  			var offsetX = 70, offsetY = 30;
+  			var hours = date.getHours();
+  			var num1 = Math.floor(hours/10);
+  			var num2 = hours%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+  			nums.push({num: 10}); //冒号
+  			var minutes = date.getMinutes();
+  			var num1 = Math.floor(minutes/10);
+  			var num2 = minutes%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+  			nums.push({num: 10}); //冒号
+  			var seconds = date.getSeconds();
+  			var num1 = Math.floor(seconds/10);
+  			var num2 = seconds%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+
+  			for(var x = 0;x<nums.length;x++){
+  				nums[x].offsetX = offsetX;
+  				offsetX = drawSingleNumber(offsetX,offsetY, nums[x].num,cxt);
+  				//两个数字连一块，应该间隔一些距离
+  				if(x<nums.length-1){
+  					if((nums[x].num!=10) &&(nums[x+1].num!=10)){
+  						offsetX+=NUMBER_GAP;
+  					}
+  				}
+  			}
+
+  			//说明这是初始化
+  			if(currentNums.length ==0){
+  				currentNums = nums;
+  			}else{
+  				//进行比较
+  				for(var index = 0;index<currentNums.length;index++){
+  					if(currentNums[index].num!=nums[index].num){
+  						//不一样时，添加彩色小球
+  						addBalls(nums[index]);
+  						currentNums[index].num=nums[index].num;
+  					}
+  				}
+  			}
+  			renderBalls(cxt);
+  			updateBalls();
+
+  			return date;
+  		}
+
+  		function addBalls (item) {
+  			var num = item.num;
+  			var numMatrix = digit[num];
+  			for(var y = 0;y<numMatrix.length;y++){
+  				for(var x = 0;x<numMatrix[y].length;x++){
+  					if(numMatrix[y][x]==1){
+  						var ball={
+  							offsetX:item.offsetX+RADIUS+RADIUS*2*x,
+  							offsetY:30+RADIUS+RADIUS*2*y,
+  							color:colors[Math.floor(Math.random()*colors.length)],
+  							g:1.5+Math.random(),
+  							vx:Math.pow(-1, Math.ceil(Math.random()*10))*4+Math.random(),
+  							vy:-5
+  						}
+  						balls.push(ball);
+  					}
+  				}
+  			}
+  		}
+
+  		function renderBalls(cxt){
+  			for(var index = 0;index<balls.length;index++){
+  				cxt.beginPath();
+  				cxt.fillStyle=balls[index].color;
+  				cxt.arc(balls[index].offsetX, balls[index].offsetY, RADIUS, 0, 2*Math.PI);
+  				cxt.fill();
+  			}
+  		}
+
+  		function updateBalls () {
+  			var i =0;
+  			for(var index = 0;index<balls.length;index++){
+  				var ball = balls[index];
+  				ball.offsetX += ball.vx;
+  				ball.offsetY += ball.vy;
+  				ball.vy+=ball.g;
+  				if(ball.offsetY > (WINDOW_HEIGHT-RADIUS)){
+  					ball.offsetY= WINDOW_HEIGHT-RADIUS;
+  					ball.vy=-ball.vy*u;
+  				}
+  				if(ball.offsetX>RADIUS&&ball.offsetX<(WINDOW_WIDTH-RADIUS)){
+
+  					balls[i]=balls[index];
+  					i++;
+  				}
+  			}
+  			//去除出边界的球
+  			for(;i<balls.length;i++){
+  				balls.pop();
+  			}
+  		}
+  		function drawSingleNumber(offsetX, offsetY, num, cxt){
+  			var numMatrix = digit[num];
+  			for(var y = 0;y<numMatrix.length;y++){
+  				for(var x = 0;x<numMatrix[y].length;x++){
+  					if(numMatrix[y][x]==1){
+  						cxt.beginPath();
+  						cxt.arc(offsetX+RADIUS+RADIUS*2*x,offsetY+RADIUS+RADIUS*2*y,RADIUS,0,2*Math.PI);
+  						cxt.fill();
+  					}
+  				}
+  			}
+  			cxt.beginPath();
+  			offsetX += numMatrix[0].length*RADIUS*2;
+  			return offsetX;
+  		}
+
+  		var canvas = document.getElementById("canvas");
+  		canvas.width=WINDOW_WIDTH;
+  		canvas.height=WINDOW_HEIGHT;
+  		context = canvas.getContext("2d");
+
+  		//记录当前绘制的时刻
+  		var currentDate = new Date();
+
+  		setInterval(function(){
+  			//清空整个Canvas，重新绘制内容
+  			context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  			drawDatetime(context);
+  		}, 50)
+})();
+</script>
+
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Rxjava sample 项目介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">引入依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.1.</span> <span class="nav-text">基础依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.2.</span> <span class="nav-text">扩展依赖</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">observable</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.1.</span> <span class="nav-text">Observable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.2.</span> <span class="nav-text">Subject</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.3.</span> <span class="nav-text">Completab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.4.</span> <span class="nav-text">Flowable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.5.</span> <span class="nav-text">Single</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">operators</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.4.1.</span> <span class="nav-text">易混淆对比</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">时间类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">组合1类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">组合2类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.4.1.4.</span> <span class="nav-text">转换类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.4.1.5.</span> <span class="nav-text">重名类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.4.1.6.</span> <span class="nav-text">过滤类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.4.1.7.</span> <span class="nav-text">异常类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.4.2.</span> <span class="nav-text">易错对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.4.3.</span> <span class="nav-text">自定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.5.</span> <span class="nav-text">参考文献</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+      
+
+      <!-- 标签云 -->
+      <!--
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+      <h3 class="widget-title">Tag Cloud</h3>
+      <div id="myCanvasContainer" class="widget tagcloud">
+          <canvas width="250" height="250" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/" rel="tag">项目架构</a><span class="tag-list-count">1</span></li></ul>
+          </canvas>
+      </div>
+      </div>
+      
+      -->
+      <!-- 标签云 -->
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+       <i class="fa fa-heartbeat"></i>
+  </span>
+  <!--
+    <span class="author" itemprop="copyrightHolder"> &nbsp;叶金诚</span>
+  -->
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">164k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+
+        
+<div class="busuanzi-count">
+  <!--
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  -->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+   
+
+  
+  
+    
+      <span class="site-uv">
+        
+        我的第 <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 位朋友，
+      </span>
+    
+
+    
+      <span class="site-pv">
+        历经 <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次回眸才与你相遇
+        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      </span>
+    
+  
+
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="60" alpha="0.1"  zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='https://www.yangchaofan.cn" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='https://www.yangchaofan.cn" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+    <script>  function addCount(Counter){var $visitors=$('.leancloud_visitors');var url=$visitors.attr('id').trim();var title=$visitors.attr('data-flag-title').trim();Counter('get','/classes/Counter',{where:JSON.stringify({url})}).done(function({results}){if(results.length>0){var counter=results[0]; var $element=$(document.getElementById(url));$element.find('.leancloud-visitors-count').text(counter.time+1);Counter('put','/classes/Counter/'+counter.objectId,JSON.stringify({time:{'__op':'Increment','amount':1}})) .fail(function({responseJSON}){console.log('Failed to save Visitor num, with error message: '+responseJSON.error);})}else{ Counter('post','/classes/Counter',JSON.stringify({title:title,url:url,time:1})).done(function(){var $element=$(document.getElementById(url));$element.find('.leancloud-visitors-count').text(1);}).fail(function(){console.log('Failed to create');});}}).fail(function({responseJSON}){console.log('LeanCloud Counter Error: '+responseJSON.code+' '+responseJSON.error);});}$(function(){$.get('https://app-router.leancloud.cn/2/route?appId='+'MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz').done(function({api_server}){var Counter=function(method,url,data){return $.ajax({method:method,url:'https://'+api_server+'/1.1'+url,headers:{'X-LC-Id':'MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz','X-LC-Key':'pi8Pa2aH3XpcaovMyqIXVuOP','Content-Type':'application/json',},data:data});};  const localhost=/http:\/\/(localhost|127.0.0.1|0.0.0.0)/;if(localhost.test(document.URL))return;addCount(Counter);});});</script>
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+
+  <!-- Tidio 在线联系功能、鼠标点击特效、页面反馈...-->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+
+
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+    <script async src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script async src="/js/cursor/explosion.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+  <script async language="javascript">
+
+    var div = document.createElement("div");
+    //插入到自定义的theme-info或者copyright之后
+    var copyright = document.querySelector(".theme-info2") || document.querySelector(".copyright");
+
+    function show_run_time(){
+        window.setTimeout("show_run_time()", 1000);
+      // BirthDay=new Date("08/07/2019 20:00:00");
+        BirthDay=new Date("08/07/2016 20:00:00");
+        today=new Date();
+        timeold=(today.getTime()-BirthDay.getTime());
+        sectimeold=timeold/1000
+        secondsold=Math.floor(sectimeold);
+        msPerDay=24*60*60*1000
+        e_daysold=timeold/msPerDay
+        daysold=Math.floor(e_daysold);
+        e_hrsold=(e_daysold-daysold)*24;
+        hrsold=setzero(Math.floor(e_hrsold));
+        e_minsold=(e_hrsold-hrsold)*60;
+        minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+        seconds=setzero(Math.floor((e_minsold-minsold)*60));
+
+        // 使用zh-Hans.yml的文字替换
+        div.innerHTML = "我已在此等候你 " + "<span style='color: #1890ff'> " + daysold + " </span> 天 <span style='color: #1890ff'>" + hrsold + " </span>时 <span style='color: #1890ff'>" + minsold + " </span>分 <span style='color: #1890ff'>" + seconds + " </span>秒 ";
+
+        document.querySelector(".footer-inner").insertBefore(div, copyright.nextSibling);
+
+    }
+    function setzero(i){
+        if (i<10)
+        {i="0" + i};
+        return i;
+    }
+
+    show_run_time();
+
+  </script>
+
+
+
+
+<!-- 旋转魔方 -->
+
+   
+      
+<style>
+  /*最外层容器样式*/
+  .wrap {
+    width: 0px;
+    height: 0px;
+    /*margin: 80px;*/
+    /*position: relative;*/
+	     /*显示位置*/
+    position: fixed;
+    bottom: 120px;
+    right: 240px;
+    z-index: 999;
+  }
+
+  /*包裹所有容器样式*/
+  .cube {
+    width: 0px;
+    height: 0px;
+    margin: 0 auto;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(-80deg);
+    animation: rotate linear 10s infinite;
+  }
+
+  @-webkit-keyframes rotate {
+    from {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+    to {
+      transform: rotateX(360deg) rotateY(360deg);
+    }
+  }
+
+  .cube div {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    opacity: 0.8;
+    transition: all .4s;
+  }
+
+  /*定义所有图片样式*/
+  .pic {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cube .out_front {
+    transform: rotateY(0deg) translateZ(25px);
+  }
+
+  .cube .out_back {
+    transform: translateZ(-25px) rotateY(180deg);
+  }
+
+  .cube .out_left {
+    transform: rotateY(-90deg) translateZ(25px);
+  }
+
+  .cube .out_right {
+    transform: rotateY(90deg) translateZ(25px);
+  }
+
+  .cube .out_top {
+    transform: rotateX(90deg) translateZ(25px);
+  }
+
+  .cube .out_bottom {
+    transform: rotateX(-90deg) translateZ(25px);
+  }
+
+  /*定义小正方体样式*/
+  .cube span {
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+  }
+
+  .cube .in_pic {
+    width: 25px;
+    height:25px;
+  }
+
+  .cube .in_front {
+    transform: rotateY(0deg) translateZ(12px);
+  }
+
+  .cube .in_back {
+    transform: translateZ(-12px) rotateY(180deg);
+  }
+
+  .cube .in_left {
+    transform: rotateY(-90deg) translateZ(12px);
+  }
+
+  .cube .in_right {
+    transform: rotateY(90deg) translateZ(12px);
+  }
+
+  .cube .in_top {
+    transform: rotateX(90deg) translateZ(12px);
+  }
+
+  .cube .in_bottom {
+    transform: rotateX(-90deg) translateZ(12px);
+  }
+
+  /*鼠标移入后样式*/
+  .cube:hover .out_front {
+    transform: rotateY(0deg) translateZ(50px);
+  }
+
+  .cube:hover .out_back {
+    transform: translateZ(-50px) rotateY(180deg);
+  }
+
+  .cube:hover .out_left {
+    transform: rotateY(-90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_right {
+    transform: rotateY(90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_top {
+    transform: rotateX(90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+  }
+</style>
+
+<div class="wrap">
+
+		<!--包裹所有元素的容器-->
+		<div class="cube">
+			<!--前面图片 -->
+			<div class="out_front">
+			  <a onclick="back2top()">
+				  <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+				</a>
+			</div>
+			<!--后面图片 -->
+			<div class="out_back">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--左面图片 -->
+			<div class="out_left">
+        <a onclick="back2top()">
+				  <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+				</a>
+			</div>
+			<!--右面图片 -->
+			<div class="out_right">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--上面图片 -->
+			<div class="out_top">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--下面图片 -->
+			<div class="out_bottom">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+
+			<!--小正方体 -->
+			<span class="in_front">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_back">
+			     <img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_left">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_right">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_top">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_bottom">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+		</div>
+
+</div>
+
+<script>
+  function back2top(){
+    $('html, body').animate({scrollTop: 0}, 500);
+  }
+</script>
+
+   
+
+
+<!-- Console 输出第三方个性化字体 -->
+
+  <script async type="text/javascript" src="/figlet/fetch.min.js"></script>
+  <script type="text/javascript" src="/figlet/figlet.js"></script>
+  <script type="text/javascript">
+
+      figlet.defaults({fontPath: "/figlet/fonts"});
+      figlet("Welcome To Leaface", "Big Money-ne", function(err, text) {
+          if (err) {
+              console.log("something went wrong...");
+              console.dir(err);
+              return;
+          }
+          console.log(text);
+      });
+  </script>
+
+
+  <!-- Console 输出自定义字体 -->
+  
+    <script async type="text/javascript">
+        var text = "Welcome To Leaface";
+        var date = '2022-07-06';
+        console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
+        console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+        console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+        console.info('\n' + ' %c Leafae Wechat %c leaface ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+       // console.log("%c Time: " + date, "font-size:100px;white:"+fcolor+";border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);  background-image: linear-gradient(to right, orangered, orange, gold, lightgreen, cyan, dodgerblue, mediumpurple, hotpink, orangered);");
+       // console.log("%c .", "padding:300px 600px;line-height:10px;background:url(https://s2.ax1x.com/2019/10/17/KkoAJJ.md.png) no-repeat;");
+    </script>
+  
+
+
+  <!-- 看板娘 -->
+  
+      <script async src="/live2d-widget/autoload.js"></script>
+  
+	<!-- leafacePlayer -->
+	
+	<script id="lfz" src="https://player.liaofuzhan.com/player/player.js" key=1368557075310858241></script>
+	
+
+  
+
+  
+
+  <!-- 代码块复制功能 -->
+  <script async type="text/javascript" src="/js/src/clipboard.min.js"></script>
+  <script async type="text/javascript" src="/js/src/clipboard-use.js"></script>
+ 
+
+  <!--share.js-->
+  <link async rel="stylesheet" href="/sharejs/css/share.min.css">
+  <script async src="/sharejs/js/social-share.min.js"></script>
+
+  <!-- 模仿知乎卡片样式链接、崩溃欺骗特效 -->
+  <script async type="text/javascript" src="/js/src/linkcard.js"></script>
+
+  <!--崩溃欺骗 放在js文件最后-->
+  <!--
+  <script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+  -->
+
+ 
+
+</body>
+</html>

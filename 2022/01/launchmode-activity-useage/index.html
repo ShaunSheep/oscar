@@ -1,0 +1,2620 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script async src="//cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  <link href="//cdn.jsdelivr.net/npm/pace-js@1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+<link href="https://fonts.loli.net/css?family=EB+Garamond:400,400i,700,700i|Noto+Serif+SC:400,500,700&display=swap&subset=chinese-simplified" rel="stylesheet">
+
+
+
+
+  
+
+<link href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="叶金诚的站点" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="启动模式的使用场景#标准模式#特性：  任何页面，如无必要，默认为标准模式，start启动一次创建一个新的Activity  适合场景：  任何页面  singleTop#特性：  如果该实例已有，且位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，不会重新创建 如果该实例已有，不位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，会重新创">
+<meta property="og:type" content="article">
+<meta property="og:title" content="n条用例验证Activity4种启动模式的威力与坑">
+<meta property="og:url" content="http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/index.html">
+<meta property="og:site_name" content="叶金诚的站点">
+<meta property="og:description" content="启动模式的使用场景#标准模式#特性：  任何页面，如无必要，默认为标准模式，start启动一次创建一个新的Activity  适合场景：  任何页面  singleTop#特性：  如果该实例已有，且位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，不会重新创建 如果该实例已有，不位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，会重新创">
+<meta property="og:locale">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/AMS%E4%BD%93%E7%B3%BB-%E5%A5%87%E6%80%AA%E7%9A%84%E7%8E%B0%E8%B1%A1.png">
+<meta property="article:published_time" content="2022-01-19T14:16:35.000Z">
+<meta property="article:modified_time" content="2022-07-06T14:25:13.848Z">
+<meta property="article:author" content="叶金诚">
+<meta property="article:tag" content="Android">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cdn.yangchaofan.cn/typora/AMS%E4%BD%93%E7%B3%BB-%E5%A5%87%E6%80%AA%E7%9A%84%E7%8E%B0%E8%B1%A1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"perspectiveRightIn","post_body":"fadeIn","coll_header":"swoopIn","sidebar":"shrinkIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/"/>
+
+
+
+
+
+<!-- 设置文章需要密码访问 -->
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <title>n条用例验证Activity4种启动模式的威力与坑 | 叶金诚的站点</title>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  
+	<!-- leafacePlayer -->
+	
+      <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+      <meta name="baidu-site-verification" content="code-lde50FghqK" />
+
+	
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <!--fork me from github-->
+    <a target="_blank" rel="noopener" href="https://github.com/ShaunSheep" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">叶金诚的站点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">汇贤雅叙</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-film"></i> <br />
+            
+            电影
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-图书">
+          <a href="/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            图书
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">n条用例验证Activity4种启动模式的威力与坑</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+             
+
+             
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-19T22:16:35+08:00">
+                2022-01-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2022/01/launchmode-activity-useage/" class="leancloud_visitors" data-flag-title="n条用例验证Activity4种启动模式的威力与坑">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          <!--
+          
+          -->
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数&#58;</span>
+                
+                <span title="字数">
+                  10.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">时长 &asymp;</span>
+                
+                <span title="时长">
+                  55 分钟
+                </span>
+              
+            </span>
+          
+
+          <!-- 隐藏文章内标题下，内容描述
+          
+          -->
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1><span id="启动模式的使用场景">启动模式的使用场景</span><a href="#启动模式的使用场景" class="header-anchor">#</a></h1><h2><span id="标准模式">标准模式</span><a href="#标准模式" class="header-anchor">#</a></h2><p>特性：</p>
+<ul>
+<li>任何页面，如无必要，默认为标准模式，start启动一次创建一个新的Activity</li>
+</ul>
+<p>适合场景：</p>
+<ul>
+<li>任何页面</li>
+</ul>
+<h2><span id="singletop">singleTop</span><a href="#singletop" class="header-anchor">#</a></h2><p>特性：</p>
+<ul>
+<li>如果该实例已有，且位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，不会重新创建</li>
+<li>如果该实例已有，不位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，会重新创建</li>
+</ul>
+<p>适合场景：</p>
+<ul>
+<li>消息推送： 在单聊页面点击消息通知重新进入一个新的单聊页面</li>
+<li>商品推荐：在A商品详情页面点击运营推荐进入一个新的B商品详情页面</li>
+</ul>
+<h2><span id="singletask">singleTask</span><a href="#singletask" class="header-anchor">#</a></h2><p>特性：</p>
+<ul>
+<li>如果该实例已经存在（存在于同一个TaskRecord的？还是存在于Stack中？）但该实例之上还有别的Activity，start启动一次，不会重新创建，会清除该实例之上的所有Activity（清除Stack中其上面的所有？还是TaskRecord内其上面的所有？）</li>
+</ul>
+<p>适合场景：</p>
+<ul>
+<li>应用中的主页</li>
+</ul>
+<h2><span id="singleinstance">singleInstance</span><a href="#singleinstance" class="header-anchor">#</a></h2><p>特性：</p>
+<ul>
+<li>创建一个新的栈结构，似的Activity存在于新的TaskRecord中</li>
+<li>如果ActivityA已经存在，通过start方式启动ActivityA，则不会重新创建ActivityA</li>
+</ul>
+<p>适合场景：</p>
+<ul>
+<li><p>适用于于App主业务分开的页面</p>
+</li>
+<li><p>大型App的设置页面</p>
+</li>
+<li><p>闹铃App，闹铃提醒页面与闹铃设置页面分离</p>
+</li>
+</ul>
+<h1><span id="观察task">观察Task</span><a href="#观察task" class="header-anchor">#</a></h1><ol>
+<li>标准Activity1 -&gt; 标准Activity2</li>
+<li>标准Activity1 -&gt; SingleTask 标记Activity2</li>
+<li>标准Activity1 -&gt; SingleTask +taskAffinity 标记的Activity2</li>
+<li>标准Activity1 -&gt; SingleTop 标记的Activity2</li>
+<li>标准Activity1 -&gt; SingleInstance 标记的Activity2</li>
+<li>标准Activity1 设置启动方式 Intent.FLAG_ACTIVITY_NEW_TASK-&gt; 标准Activity2 </li>
+<li>标准Activity1 设置启动方式 allowTaskReparenting  -&gt; 标准Activity2 </li>
+</ol>
+<h1><span id="task小知识">Task小知识</span><a href="#task小知识" class="header-anchor">#</a></h1><ul>
+<li>AMS 分配的taskid 是线性递增的，每次开启一个新的task ，taskid 永远都是 +1 的操作。</li>
+<li>singleTask也是可以做成singleInstance效果的，只要声明taskAffinity 就可以</li>
+<li>即一个 task 中的 Activities 是可以运行在不同的进程中的</li>
+<li>一个 Activity 运行时所归属的task，默认是启动它 的那个Activity 所在的 task</li>
+<li>Android 手机的任务列表就是根据不同 task 弹出的，我们可以根据任务管理器有几个 item 图标，来知道我们开启了几个 task</li>
+<li>如果 activity 组件没有声明 taskAffinity 的话，该 activity 的 taskAffinity 属性也是有默认值的。<ul>
+<li>如果 application 指定了 taskAffinity 值，默认值就是 application 指定的 taskAffinity 值；</li>
+<li>如果 application 未指定的话，默认值就是 manifest 中声明的包名（package 对应的字符串）。</li>
+</ul>
+</li>
+</ul>
+<h1><span id="研究手段">研究手段</span><a href="#研究手段" class="header-anchor">#</a></h1><ol>
+<li>adb命令查看Activity信息、Task信息、Stack信息，观察Activity顺序、Task顺序、Stack内Activity与Task的顺序</li>
+<li>设计app，至少包括4个Activity，为Activity设置一种启动模式，单独查看每一种启动模式对Activity展示的影响、Task顺序的影响，研究finsh与moveTaskToBack的对比</li>
+<li>总结启动模式的场景</li>
+</ol>
+<h1><span id="观察singletask">观察SingleTask</span><a href="#观察singletask" class="header-anchor">#</a></h1><p>现在我们手里有三个Activity，Activity1 、Activity2、Activity3，启动顺序如下：</p>
+<p>Activity1 -&gt; Activity2</p>
+<p>Activity2 -&gt; Activity3</p>
+<p>Activity1 、Activity2、Activity3分别进行三次配置，观察每一次的启动结果</p>
+<p><strong>配置1：</strong></p>
+<p>是标准启动模式</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">         android:name&#x3D;&quot;.MainActivity3&quot;</span><br><span class="line">         android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">     &lt;activity</span><br><span class="line">         android:name&#x3D;&quot;.MainActivity2&quot;</span><br><span class="line">         android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">     &lt;activity</span><br><span class="line">         android:name&#x3D;&quot;.MainActivity&quot;</span><br><span class="line">         android:exported&#x3D;&quot;true&quot;&gt;</span><br><span class="line">         &lt;intent-filter&gt;</span><br><span class="line">             &lt;action android:name&#x3D;&quot;android.intent.action.MAIN&quot; &#x2F;&gt;</span><br><span class="line">             &lt;category android:name&#x3D;&quot;android.intent.category.LAUNCHER&quot; &#x2F;&gt;</span><br><span class="line">         &lt;&#x2F;intent-filter&gt;</span><br><span class="line">     &lt;&#x2F;activity&gt;</span><br></pre></td></tr></table></figure></div>
+<p><strong>配置2：</strong></p>
+<p>仅配置启动模式</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">    android:name&#x3D;&quot;.MainActivity3&quot;</span><br><span class="line">    android:launchMode&#x3D;&quot;singleTask&quot;</span><br><span class="line">    android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">&lt;activity</span><br><span class="line">    android:name&#x3D;&quot;.MainActivity2&quot;</span><br><span class="line">    android:launchMode&#x3D;&quot;singleTask&quot;</span><br><span class="line">    android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">&lt;activity</span><br><span class="line">    android:name&#x3D;&quot;.MainActivity&quot;</span><br><span class="line">    android:launchMode&#x3D;&quot;singleTask&quot;</span><br><span class="line">    android:exported&#x3D;&quot;true&quot;&gt;</span><br><span class="line">    &lt;intent-filter&gt;</span><br><span class="line">        &lt;action android:name&#x3D;&quot;android.intent.action.MAIN&quot; &#x2F;&gt;</span><br><span class="line">        &lt;category android:name&#x3D;&quot;android.intent.category.LAUNCHER&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;intent-filter&gt;</span><br><span class="line">&lt;&#x2F;activity&gt;</span><br></pre></td></tr></table></figure></div>
+<p><strong>配置3：</strong></p>
+<p>启动模式+taskAffinity属性</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">        android:name&#x3D;&quot;.MainActivity3&quot;</span><br><span class="line">        android:launchMode&#x3D;&quot;singleTask&quot;</span><br><span class="line">        android:taskAffinity&#x3D;&quot;com.shaunsheep.ams.singletask.MainActivity3&quot;</span><br><span class="line">        android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">    &lt;activity</span><br><span class="line">        android:name&#x3D;&quot;.MainActivity2&quot;</span><br><span class="line">        android:taskAffinity&#x3D;&quot;com.shaunsheep.ams.singletask.MainActivity2&quot;</span><br><span class="line">        android:launchMode&#x3D;&quot;singleTask&quot;</span><br><span class="line">        android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">    &lt;activity</span><br><span class="line">        android:name&#x3D;&quot;.MainActivity&quot;</span><br><span class="line">        android:taskAffinity&#x3D;&quot;com.shaunsheep.ams.singletask.MainActivity&quot;</span><br><span class="line">        android:launchMode&#x3D;&quot;singleTask&quot;</span><br><span class="line">        android:exported&#x3D;&quot;true&quot;&gt;</span><br><span class="line">        &lt;intent-filter&gt;</span><br><span class="line">            &lt;action android:name&#x3D;&quot;android.intent.action.MAIN&quot; &#x2F;&gt;</span><br><span class="line">            &lt;category android:name&#x3D;&quot;android.intent.category.LAUNCHER&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;intent-filter&gt;</span><br><span class="line">    &lt;&#x2F;activity&gt;</span><br></pre></td></tr></table></figure></div>
+<p><strong>第一种配置</strong>Activity的launchMode为标准模式</p>
+<p>1个TaskRecord，TaskRecord持有3个ActivityRecord，TaskRecord的taskid为#78</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;d10ddfa #78 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;3&#125;</span><br><span class="line">    Run #4: ActivityRecord&#123;9c889db u0 com.shaunsheep.ams&#x2F;.MainActivity3 t78&#125;</span><br><span class="line">    Run #3: ActivityRecord&#123;8b97fc7 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t78&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;d3646df u0 com.shaunsheep.ams&#x2F;.MainActivity t78&#125;</span><br></pre></td></tr></table></figure></div>
+<p><strong>第二种配置</strong>Activity的launchMode为singleTask</p>
+<p>1个TaskRecord，TaskRecord持有3个ActivityRecord，TaskRecord的taskid为#77</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;f0344a5 #77 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;3&#125;</span><br><span class="line">    Run #4: ActivityRecord&#123;6df01e3 u0 com.shaunsheep.ams&#x2F;.MainActivity3 t77&#125;</span><br><span class="line">    Run #3: ActivityRecord&#123;b42be4f u0 com.shaunsheep.ams&#x2F;.MainActivity2 t77&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;333cc50 u0 com.shaunsheep.ams&#x2F;.MainActivity t77&#125;</span><br></pre></td></tr></table></figure></div>
+<p><strong>第三种配置</strong>Activity的launchMode为singleTask且配置了taskAffinity</p>
+<p>3个TaskRecord，每个TaskRecord持有一个ActivityRecord，每个TaskRecord持有一个新的taskid，共有三个taskid分别是#75 #72 #71</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;4b8cad3 #75 A&#x3D;com.shaunsheep.ams.singletask.MainActivity3 U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #4: ActivityRecord&#123;76a316b u0 com.shaunsheep.ams&#x2F;.MainActivity3 t75&#125;</span><br><span class="line">  TaskRecord&#123;3e7fa15 #72 A&#x3D;com.shaunsheep.ams.singletask.MainActivity2 U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #3: ActivityRecord&#123;f932d92 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t72&#125;</span><br><span class="line">  TaskRecord&#123;936112a #71 A&#x3D;com.shaunsheep.ams.singletask.MainActivity U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;88473fb u0 com.shaunsheep.ams&#x2F;.MainActivity t71&#125;</span><br></pre></td></tr></table></figure></div>
+<p>为了更清楚的演示Singletask的作用，<strong>引入第四种配置</strong>，与配置3、配置4比较</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">     android:name&#x3D;&quot;.MainActivity4&quot;</span><br><span class="line">     android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line"> &lt;activity</span><br><span class="line">     android:name&#x3D;&quot;.MainActivity3&quot;</span><br><span class="line">     android:launchMode&#x3D;&quot;singleTask&quot;</span><br><span class="line">     android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line"> &lt;activity</span><br><span class="line">     android:name&#x3D;&quot;.MainActivity2&quot;</span><br><span class="line">     android:launchMode&#x3D;&quot;singleTask&quot;</span><br><span class="line">     android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line"> &lt;activity</span><br><span class="line">     android:name&#x3D;&quot;.MainActivity&quot;</span><br><span class="line">     android:launchMode&#x3D;&quot;singleTask&quot;</span><br><span class="line">     android:exported&#x3D;&quot;true&quot;&gt;</span><br><span class="line">     &lt;intent-filter&gt;</span><br><span class="line">         &lt;action android:name&#x3D;&quot;android.intent.action.MAIN&quot; &#x2F;&gt;</span><br><span class="line">         &lt;category android:name&#x3D;&quot;android.intent.category.LAUNCHER&quot; &#x2F;&gt;</span><br><span class="line">     &lt;&#x2F;intent-filter&gt;</span><br><span class="line"> &lt;&#x2F;activity&gt;</span><br></pre></td></tr></table></figure></div>
+<p>从Activity3 -&gt; Activity4 时</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">      TaskRecord&#123;3fec5b5 #83 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;4&#125;</span><br><span class="line">        Run #4: ActivityRecord&#123;6626c2e u0 com.shaunsheep.ams&#x2F;.MainActivity4 t83&#125;</span><br><span class="line">        Run #3: ActivityRecord&#123;2423d8a u0 com.shaunsheep.ams&#x2F;.MainActivity3 t83&#125;</span><br><span class="line">        Run #2: ActivityRecord&#123;a615701 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t83&#125;</span><br><span class="line">        Run #1: ActivityRecord&#123;746700f u0 com.shaunsheep.ams&#x2F;.MainActivity t83&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>从Activity4 -&gt; Activity2 时</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;3fec5b5 #83 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;2&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;a615701 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t83&#125;</span><br><span class="line">    Run #1: ActivityRecord&#123;746700f u0 com.shaunsheep.ams&#x2F;.MainActivity t83&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>由配置3与配置2、配置4相比，可以看到Activity仅配置Launchemode属性为SingleTask,是不会新建TaskRecord的；换言之，只有当标记为SingleTask且 标记一个新的taskAffinity值时，才会创建一个TaskRecord；</p>
+<p>由配置4与配置2相比，可以看到Activity仅仅配置SingleTask，可以达到的效果是：当一个标记为SingleTask的Activity2被重新启动后，该TaskRecord里面位于Activity2之上的ActivityRecord会被清除；</p>
+<p>当没有配置taskAffinity，SingleTask标记的Activity仅拥有清除特性；</p>
+<p>当配置taskAffinity，SingleTask标记的Activity才会处于一个新的TaskRecord</p>
+<p><strong>引入配置5</strong></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">        android:name&#x3D;&quot;.MainActivity4&quot;</span><br><span class="line">        android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">    &lt;activity</span><br><span class="line">        android:name&#x3D;&quot;.MainActivity3&quot;</span><br><span class="line">        android:launchMode&#x3D;&quot;singleTask&quot;</span><br><span class="line">        android:taskAffinity&#x3D;&quot;com.shaunsheep.ams.singletask.MainActivity3&quot;</span><br><span class="line">        android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">    &lt;activity</span><br><span class="line">        android:name&#x3D;&quot;.MainActivity2&quot;</span><br><span class="line">        android:taskAffinity&#x3D;&quot;com.shaunsheep.ams.singletask.MainActivity2&quot;</span><br><span class="line">        android:launchMode&#x3D;&quot;singleTask&quot;</span><br><span class="line">        android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">    &lt;activity</span><br><span class="line">        android:name&#x3D;&quot;.MainActivity&quot;</span><br><span class="line">        android:exported&#x3D;&quot;true&quot;&gt;</span><br><span class="line">        &lt;intent-filter&gt;</span><br><span class="line">            &lt;action android:name&#x3D;&quot;android.intent.action.MAIN&quot; &#x2F;&gt;</span><br><span class="line">            &lt;category android:name&#x3D;&quot;android.intent.category.LAUNCHER&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;intent-filter&gt;</span><br><span class="line">    &lt;&#x2F;activity&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>从Activity3 -&gt; Activity4 时</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">   TaskRecord&#123;7b3783a #86 A&#x3D;com.shaunsheep.ams.singletask.MainActivity3 U&#x3D;0 StackId&#x3D;1 sz&#x3D;2&#125;</span><br><span class="line">     Run #4: ActivityRecord&#123;57405d2 u0 com.shaunsheep.ams&#x2F;.MainActivity4 t86&#125;</span><br><span class="line">     Run #3: ActivityRecord&#123;c785935 u0 com.shaunsheep.ams&#x2F;.MainActivity3 t86&#125;</span><br><span class="line">   TaskRecord&#123;ce80ceb #85 A&#x3D;com.shaunsheep.ams.singletask.MainActivity2 U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">     Run #2: ActivityRecord&#123;a21fe37 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t85&#125;</span><br><span class="line">   TaskRecord&#123;b7f4a48 #84 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">     Run #1: ActivityRecord&#123;a172b4f u0 com.shaunsheep.ams&#x2F;.MainActivity t84&#125;</span><br><span class="line">   TaskRecord&#123;9e28cc #62 A&#x3D;com.unilife.fridge.haierbase.tft U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">     Run #0: ActivityRecord&#123;4b852ec u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity t62&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>从Activity4 -&gt; Activity2 时</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;ce80ceb #85 A&#x3D;com.shaunsheep.ams.singletask.MainActivity2 U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #4: ActivityRecord&#123;a21fe37 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t85&#125;</span><br><span class="line">  TaskRecord&#123;7b3783a #86 A&#x3D;com.shaunsheep.ams.singletask.MainActivity3 U&#x3D;0 StackId&#x3D;1 sz&#x3D;2&#125;</span><br><span class="line">    Run #3: ActivityRecord&#123;57405d2 u0 com.shaunsheep.ams&#x2F;.MainActivity4 t86&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;c785935 u0 com.shaunsheep.ams&#x2F;.MainActivity3 t86&#125;</span><br><span class="line">  TaskRecord&#123;b7f4a48 #84 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #1: ActivityRecord&#123;a172b4f u0 com.shaunsheep.ams&#x2F;.MainActivity t84&#125;</span><br><span class="line">  TaskRecord&#123;9e28cc #62 A&#x3D;com.unilife.fridge.haierbase.tft U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #0: ActivityRecord&#123;4b852ec u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity t62&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>可以看到，当Activity、Activity2、Activity3分别创建了三个TaskRecord时，Activity3启动的Activity4，两者都在TaskId为#85的TaskRecord里。</p>
+<p>当Activity4启动标记为SingleTask的Activity2时，Activity2所在的#85 Task上移到Stack顶。</p>
+<blockquote>
+<p>启发，SingleInstance、SingleTop的TaskRecord、ActivityRecord分布关系是怎样的呢？</p>
+</blockquote>
+<h1><span id="观察singletop">观察SingleTop</span><a href="#观察singletop" class="header-anchor">#</a></h1><p>配置1：引入4个标记为SingleTop的Activity</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">          android:name&#x3D;&quot;.singletop.MainActivity4&quot;</span><br><span class="line">          android:launchMode&#x3D;&quot;singleTop&quot;</span><br><span class="line">          android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">      &lt;activity</span><br><span class="line">          android:name&#x3D;&quot;.singletop.MainActivity3&quot;</span><br><span class="line">          android:launchMode&#x3D;&quot;singleTop&quot;</span><br><span class="line">          android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">      &lt;activity</span><br><span class="line">          android:name&#x3D;&quot;.singletop.MainActivity2&quot;</span><br><span class="line">          android:launchMode&#x3D;&quot;singleTop&quot;</span><br><span class="line">          android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">      &lt;activity</span><br><span class="line">          android:name&#x3D;&quot;.singletop.MainActivity&quot;</span><br><span class="line">          android:launchMode&#x3D;&quot;singleTop&quot;</span><br><span class="line">          android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+<p>栈顶启动一个处于非栈顶的标记为SingleTop 且未创建的Activity</p>
+<p>Activity3 -&gt; Activity4时</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">   TaskRecord&#123;a809353 #94 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;5&#125;</span><br><span class="line">     Run #5: ActivityRecord&#123;fa4458e u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity4 t94&#125;</span><br><span class="line">     Run #4: ActivityRecord&#123;e960865 u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity3 t94&#125;</span><br><span class="line">     Run #3: ActivityRecord&#123;6a2a418 u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity2 t94&#125;</span><br><span class="line">     Run #2: ActivityRecord&#123;6387394 u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity t94&#125;</span><br><span class="line">     Run #1: ActivityRecord&#123;a909021 u0 com.shaunsheep.ams&#x2F;.LaunchActivity t94&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><strong>测试1：从Activity4 -&gt; Activity2 时，Activity2处于非栈顶且已经被创建</strong>，TaskRecord会装入一个新的Activity2，此时#94有两个Activity2</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;a809353 #94 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;6&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;32759ec u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity2 t94&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;fa4458e u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity4 t94&#125;</span><br><span class="line">    Run #4: ActivityRecord&#123;e960865 u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity3 t94&#125;</span><br><span class="line">    Run #3: ActivityRecord&#123;6a2a418 u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity2 t94&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;6387394 u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity t94&#125;</span><br><span class="line">    Run #1: ActivityRecord&#123;a909021 u0 com.shaunsheep.ams&#x2F;.LaunchActivity t94&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><strong>测试2：栈顶启动一个处于栈顶的标记为SingleTop的Activity，</strong></p>
+<p>Activity3 -&gt; Activity4时</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;4cac736 #104 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;5&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;b712b49 u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity4 t104&#125;</span><br><span class="line">    Run #4: ActivityRecord&#123;8a27a95 u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity3 t104&#125;</span><br><span class="line">    Run #3: ActivityRecord&#123;87017a1 u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity2 t104&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;67f2e6d u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity t104&#125;</span><br><span class="line">    Run #1: ActivityRecord&#123;1cc8763 u0 com.shaunsheep.ams&#x2F;.LaunchActivity t104&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>从Activity4 -&gt; Activity4 时，Activity4已经被创建过，再次启动，因此TaskRecord会重新加载Activity3，并进入onNewIntent方法</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;4cac736 #104 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;5&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;b712b49 u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity4 t104&#125;</span><br><span class="line">    Run #4: ActivityRecord&#123;8a27a95 u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity3 t104&#125;</span><br><span class="line">    Run #3: ActivityRecord&#123;87017a1 u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity2 t104&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;67f2e6d u0 com.shaunsheep.ams&#x2F;.singletop.MainActivity t104&#125;</span><br><span class="line">    Run #1: ActivityRecord&#123;1cc8763 u0 com.shaunsheep.ams&#x2F;.LaunchActivity t104&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>并且Activity4的log得到了打印</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2021-10-09 14:45:43.849 12224-12224&#x2F;com.shaunsheep.ams E&#x2F;ycf: onNewIntent</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">protected void onNewIntent(Intent intent) &#123;</span><br><span class="line">    super.onNewIntent(intent);</span><br><span class="line">    Log.e(&quot;ycf&quot;,&quot;onNewIntent&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+<p><strong>总结SingleTop的小知识：</strong></p>
+<ul>
+<li>由测试1可知，当启动一个未处于栈顶标记为SingleTop的Activity2时，Activity2会重新创建一遍，此时TaskRecord中存在两个Activity2</li>
+<li>由测试2可知，当启动一个处于栈顶的标记为SingleTop的Activity4时，Activity4并不会重新创建，而是进入该Activity的onNewIntent方法</li>
+<li>由测试1、测试2可知，SingleTop并不会新创建一个TaskRecord，仍然处于创建它的Activity所处的TaskRecord内</li>
+</ul>
+<h1><span id="观察singleinstance">观察SingleInstance</span><a href="#观察singleinstance" class="header-anchor">#</a></h1><h2><span id="配置14个singleinstance"><strong>配置1：</strong>4个SingleInstance</span><a href="#配置14个singleinstance" class="header-anchor">#</a></h2><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">    android:name&#x3D;&quot;.singleinstance.MainActivity4&quot;</span><br><span class="line">    android:launchMode&#x3D;&quot;singleInstance&quot;</span><br><span class="line">    android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">&lt;activity</span><br><span class="line">    android:name&#x3D;&quot;.singleinstance.MainActivity3&quot;</span><br><span class="line">    android:launchMode&#x3D;&quot;singleInstance&quot;</span><br><span class="line">    android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">&lt;activity</span><br><span class="line">    android:name&#x3D;&quot;.singleinstance.MainActivity2&quot;</span><br><span class="line">    android:launchMode&#x3D;&quot;singleInstance&quot;</span><br><span class="line">    android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">&lt;activity</span><br><span class="line">    android:name&#x3D;&quot;.singleinstance.MainActivity&quot;</span><br><span class="line">    android:launchMode&#x3D;&quot;singleInstance&quot;</span><br><span class="line">    android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>Activity3 -&gt; Activity4时</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;ceec50d #110 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #9: ActivityRecord&#123;380cf0a u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity4 t110&#125;</span><br><span class="line">  TaskRecord&#123;70c2b67 #109 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #8: ActivityRecord&#123;c7b8b53 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t109&#125;</span><br><span class="line">  TaskRecord&#123;3c97bb2 #108 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;1fd4065 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity2 t108&#125;</span><br><span class="line">  TaskRecord&#123;e261703 #107 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;e1b93e7 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity t107&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>Activity4 -&gt; Activity2时</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;3c97bb2 #108 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #9: ActivityRecord&#123;1fd4065 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity2 t108&#125;</span><br><span class="line">  TaskRecord&#123;ceec50d #110 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #8: ActivityRecord&#123;380cf0a u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity4 t110&#125;</span><br><span class="line">  TaskRecord&#123;70c2b67 #109 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;c7b8b53 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t109&#125;</span><br><span class="line">  TaskRecord&#123;e261703 #107 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;e1b93e7 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity t107&#125;</span><br><span class="line">  TaskRecord&#123;8ce680 #106 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;8277ba3 u0 com.shaunsheep.ams&#x2F;.LaunchActivity t106&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>Activity4 -&gt; Activity4时</p>
+<p>执行了log</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2021-10-09 16:25:30.499 32395-32395&#x2F;com.shaunsheep.ams E&#x2F;ycf: onNewIntent</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;ceec50d #110 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #9: ActivityRecord&#123;380cf0a u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity4 t110&#125;</span><br><span class="line">  TaskRecord&#123;70c2b67 #109 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #8: ActivityRecord&#123;c7b8b53 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t109&#125;</span><br><span class="line">  TaskRecord&#123;3c97bb2 #108 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;1fd4065 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity2 t108&#125;</span><br><span class="line">  TaskRecord&#123;e261703 #107 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;e1b93e7 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity t107&#125;</span><br><span class="line">  TaskRecord&#123;8ce680 #106 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;8277ba3 u0 com.shaunsheep.ams&#x2F;.LaunchActivity t106&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>可以看到，当所有Activity都配置成SingleInstance 时候，</p>
+<p>Activity4 在栈顶启动自己，Activity4没有重新创建</p>
+<p>Activity4 在栈顶启动了Activity2，Activity2 没有重新创建，Activity2 重新置于栈顶</p>
+<h2><span id="配置21个singleinstance"><strong>配置2：</strong>1个SingleInstance</span><a href="#配置21个singleinstance" class="header-anchor">#</a></h2><p>Activity2为singleInstance</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">    android:name&#x3D;&quot;.singleinstance.MainActivity4&quot;</span><br><span class="line">    android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">&lt;activity</span><br><span class="line">    android:name&#x3D;&quot;.singleinstance.MainActivity3&quot;</span><br><span class="line">    android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">&lt;activity</span><br><span class="line">    android:name&#x3D;&quot;.singleinstance.MainActivity2&quot;</span><br><span class="line">    android:launchMode&#x3D;&quot;singleInstance&quot;</span><br><span class="line">    android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line">&lt;activity</span><br><span class="line">    android:name&#x3D;&quot;.singleinstance.MainActivity&quot;</span><br><span class="line">    android:exported&#x3D;&quot;true&quot; &#x2F;&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><strong>测试0：栈列表</strong></p>
+<p>一共有两个TaskRecord，标记启动模式为SingleIntance的Activity2位于Task#135中，Activity1、3、4位于Task#134中</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;9609526 #134 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;4&#125;</span><br><span class="line">    Run #9: ActivityRecord&#123;4fbc425 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity4 t134&#125;</span><br><span class="line">    Run #8: ActivityRecord&#123;2dffdbb u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t134&#125;</span><br><span class="line">  TaskRecord&#123;43e1f14 #135 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;bceb142 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity2 t135&#125;</span><br><span class="line">  TaskRecord&#123;9609526 #134 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;4&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;4215219 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity t134&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;5f3ff00 u0 com.shaunsheep.ams&#x2F;.LaunchActivity t134&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><strong>测试1：启动App，</strong>Activity4 -&gt; Activity2时</p>
+<p>打印了log</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2021-10-09 16:39:16.192 4704-4704&#x2F;com.shaunsheep.ams E&#x2F;ycf: MainActivity2 onNewIntent</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>栈列表有两个#135 和#134，#135有Activity2，#134有Activity4、Activity3、Activity1、LaunchActivity</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;43e1f14 #135 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #9: ActivityRecord&#123;bceb142 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity2 t135&#125;</span><br><span class="line">  TaskRecord&#123;9609526 #134 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;4&#125;</span><br><span class="line">    Run #8: ActivityRecord&#123;4fbc425 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity4 t134&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;2dffdbb u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t134&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;4215219 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity t134&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;5f3ff00 u0 com.shaunsheep.ams&#x2F;.LaunchActivity t134&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><strong>测试2：重启App，</strong>Activity2-&gt;Activity3时</p>
+<p>有两个Task #136和 #137，#136有Activity1、LaunchActivity和Activity3，#137有Activity2</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;e558bba #136 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;3&#125;</span><br><span class="line">    Run #8: ActivityRecord&#123;9fea423 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t136&#125;</span><br><span class="line">  TaskRecord&#123;ab449c8 #137 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;4cbaab5 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity2 t137&#125;</span><br><span class="line">  TaskRecord&#123;e558bba #136 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;3&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;45c62a8 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity t136&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;e23987e u0 com.shaunsheep.ams&#x2F;.LaunchActivity t136&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><strong>测试3：重新启动App</strong>，Activity2-&gt;Activity3时，重新刷新一遍栈列表，方便下一轮测试，此时TaskId会自增，不再是原来的#137 和#136，而是#138 和#139</p>
+<p>在Activity3按下<code>moveTaskToBack(true);</code>，跳回了Activity2</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;717c0c5 #139 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #8: ActivityRecord&#123;1aaf98b u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity2 t139&#125;</span><br><span class="line">  TaskRecord&#123;df04ae3 #138 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;3&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;d5687b0 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t138&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;7423876 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity t138&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;6bbfbbb u0 com.shaunsheep.ams&#x2F;.LaunchActivity t138&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>此时再次Activity2-&gt;Activity3时，重新创建Activity3，注意此时# 138有两个Activity3</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;df04ae3 #138 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;4&#125;</span><br><span class="line">    Run #9: ActivityRecord&#123;5e4f6c3 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t138&#125;</span><br><span class="line">  TaskRecord&#123;717c0c5 #139 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #8: ActivityRecord&#123;1aaf98b u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity2 t139&#125;</span><br><span class="line">  TaskRecord&#123;df04ae3 #138 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;4&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;d5687b0 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t138&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;7423876 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity t138&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;6bbfbbb u0 com.shaunsheep.ams&#x2F;.LaunchActivity t138&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>在第二个Activity3按下finsh或者backPress，直接跳回了第一个Activity3，而非预期的Activity2</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;df04ae3 #138 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;3&#125;</span><br><span class="line">    Run #8: ActivityRecord&#123;d5687b0 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t138&#125;</span><br><span class="line">  TaskRecord&#123;717c0c5 #139 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;1aaf98b u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity2 t139&#125;</span><br><span class="line">  TaskRecord&#123;df04ae3 #138 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;3&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;7423876 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity t138&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;6bbfbbb u0 com.shaunsheep.ams&#x2F;.LaunchActivity t138&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p>在第一个Activity3按下finsh或者backPress，直接跳回了Activity1，而非预期的Activity2</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;df04ae3 #138 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;2&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;7423876 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity t138&#125;</span><br><span class="line">  TaskRecord&#123;717c0c5 #139 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;1aaf98b u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity2 t139&#125;</span><br><span class="line">  TaskRecord&#123;df04ae3 #138 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;2&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;6bbfbbb u0 com.shaunsheep.ams&#x2F;.LaunchActivity t138&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><strong>总结SingleInstance的小知识：</strong></p>
+<ul>
+<li><p>由测试0可知，SingleInstance标记的Activity2，必然会独立存在于一个TaskRecord中，它自己启动的新的Activity3，会存在于默认的Task中，默认的Task是启动Activity2的<strong>Activity1</strong>所在的TaskRecord</p>
+</li>
+<li><p>由测试1可知，SingleInstance所标记的Activity，如果是首次创建，一定会新创建一个TaskRecord，并置于其中；已经创建，则会使得TaskRecord置于Stack顶部</p>
+</li>
+<li><p>由测试2和测试3可知标准Activity 1 -&gt; SingleInstance Activity2 -&gt; 标准Activity 3 ，在Activity3 finsh或backPress会跳入Activity1；在Activity3触发moveTaskToBack会跳入Activity2</p>
+</li>
+<li><p>根据<a target="_blank" rel="noopener" href="https://www.cnblogs.com/Im-Victor/p/9656471.html#singleInstance%E4%B9%8B%E4%BA%8C%E5%9D%91">网络文章</a>如果位于Activity2，按下手机home键，重新进入App后，会显示Activity1，可知SingleInstance标记的Activity也影响home键之后的页面展示</p>
+</li>
+<li><p>由以上三点，可知SingleInstance标记的Activity会影响finsh、backPress、home三类操作之后的页面展示顺序；</p>
+</li>
+</ul>
+<h2><span id="进阶测试activity回退的小bug"><strong>进阶测试——activity回退的小bug：</strong></span><a href="#进阶测试activity回退的小bug" class="header-anchor">#</a></h2><p>继续使用配置2：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">    android:name=<span class="string">&quot;.singleinstance.MainActivity4&quot;</span></span><br><span class="line">    android:exported=<span class="string">&quot;true&quot;</span> /&gt;</span><br><span class="line">&lt;activity</span><br><span class="line">    android:name=<span class="string">&quot;.singleinstance.MainActivity3&quot;</span></span><br><span class="line">    android:exported=<span class="string">&quot;true&quot;</span> /&gt;</span><br><span class="line">&lt;activity</span><br><span class="line">    android:name=<span class="string">&quot;.singleinstance.MainActivity2&quot;</span></span><br><span class="line">    android:launchMode=<span class="string">&quot;singleInstance&quot;</span></span><br><span class="line">    android:exported=<span class="string">&quot;true&quot;</span> /&gt;</span><br><span class="line">&lt;activity</span><br><span class="line">    android:name=<span class="string">&quot;.singleinstance.MainActivity&quot;</span></span><br><span class="line">    android:exported=<span class="string">&quot;true&quot;</span> /&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><img src="http://cdn.yangchaofan.cn/typora/AMS%E4%BD%93%E7%B3%BB-%E5%A5%87%E6%80%AA%E7%9A%84%E7%8E%B0%E8%B1%A1.png" alt="AMS体系-奇怪的现象"></p>
+<blockquote>
+<p>? 在下文中，将moveTaskToBack简写moveback</p>
+</blockquote>
+<p>几个关键的步骤流</p>
+<p><strong>①</strong></p>
+<p>1…4的TaskRecord结果如下：，Task#611 存放Activity1、3、4， Task#612存放Activity2，Task#611在栈顶，此时屏幕上展示的是Activity4，符合TaskRecord中的顺序</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Running <span class="title">activities</span> <span class="params">(most recent first)</span>:</span></span><br><span class="line">  TaskRecord&#123;f170712 #611 A=com.shaunsheep.ams U=0 StackId=1 sz=4&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;7517f4d u0 com.shaunsheep.ams/.singleinstance.MainActivity4 t611&#125;</span><br><span class="line">    Run #4: ActivityRecord&#123;d1ea723 u0 com.shaunsheep.ams/.singleinstance.MainActivity3 t611&#125;</span><br><span class="line">  TaskRecord&#123;bf2d0e0 #612 A=com.shaunsheep.ams U=0 StackId=1 sz=1&#125;</span><br><span class="line">    Run #3: ActivityRecord&#123;15e944a u0 com.shaunsheep.ams/.singleinstance.MainActivity2 t612&#125;</span><br><span class="line">  TaskRecord&#123;f170712 #611 A=com.shaunsheep.ams U=0 StackId=1 sz=4&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;fe3edcb u0 com.shaunsheep.ams/.singleinstance.MainActivity t611&#125;</span><br><span class="line">    Run #1: ActivityRecord&#123;83513cf u0 com.shaunsheep.ams/.LaunchActivity t611&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><strong>②</strong></p>
+<p>4..moveback的结果如下：</p>
+<p>Task#611 存放Activity1、3、4， Task#612存放Activity2，Task#612在栈顶，此时屏幕上展示的是Activity2，符合TaskRecord中的顺序</p>
+<p>思考1Tips：此处产生一个小问题，结果不符合我们期望的顺序——程序只moveback了Activity4，没有moveBack Activity3，为什么moveBack Activity4之后，看不到Activity3而是看到Activity2呢？</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Running <span class="title">activities</span> <span class="params">(most recent first)</span>:</span></span><br><span class="line">    TaskRecord&#123;bf2d0e0 #612 A=com.shaunsheep.ams U=0 StackId=1 sz=1&#125;</span><br><span class="line">      Run #5: ActivityRecord&#123;15e944a u0 com.shaunsheep.ams/.singleinstance.MainActivity2 t612&#125;</span><br><span class="line">    TaskRecord&#123;f170712 #611 A=com.shaunsheep.ams U=0 StackId=1 sz=4&#125;</span><br><span class="line">      Run #4: ActivityRecord&#123;7517f4d u0 com.shaunsheep.ams/.singleinstance.MainActivity4 t611&#125;</span><br><span class="line">      Run #3: ActivityRecord&#123;d1ea723 u0 com.shaunsheep.ams/.singleinstance.MainActivity3 t611&#125;</span><br><span class="line">      Run #2: ActivityRecord&#123;fe3edcb u0 com.shaunsheep.ams/.singleinstance.MainActivity t611&#125;</span><br><span class="line">      Run #1: ActivityRecord&#123;83513cf u0 com.shaunsheep.ams/.LaunchActivity t611&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><strong>③</strong></p>
+<p>2..4的结果如下：</p>
+<p>Task#611 存放Activity1、3、4、3、4， Task#612存放Activity2，Task#611在栈顶，此时屏幕上展示的是Activity4，符合TaskRecord中的顺序</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Running <span class="title">activities</span> <span class="params">(most recent first)</span>:</span></span><br><span class="line">  TaskRecord&#123;f170712 #611 A=com.shaunsheep.ams U=0 StackId=1 sz=6&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;4798b46 u0 com.shaunsheep.ams/.singleinstance.MainActivity4 t611&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;4e20f6c u0 com.shaunsheep.ams/.singleinstance.MainActivity3 t611&#125;</span><br><span class="line">  TaskRecord&#123;bf2d0e0 #612 A=com.shaunsheep.ams U=0 StackId=1 sz=1&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;15e944a u0 com.shaunsheep.ams/.singleinstance.MainActivity2 t612&#125;</span><br><span class="line">  TaskRecord&#123;f170712 #611 A=com.shaunsheep.ams U=0 StackId=1 sz=6&#125;</span><br><span class="line">    Run #4: ActivityRecord&#123;7517f4d u0 com.shaunsheep.ams/.singleinstance.MainActivity4 t611&#125;</span><br><span class="line">    Run #3: ActivityRecord&#123;d1ea723 u0 com.shaunsheep.ams/.singleinstance.MainActivity3 t611&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;fe3edcb u0 com.shaunsheep.ams/.singleinstance.MainActivity t611&#125;</span><br><span class="line">    Run #1: ActivityRecord&#123;83513cf u0 com.shaunsheep.ams/.LaunchActivity t611&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><strong>④</strong></p>
+<p>4…moveBack-2结果如下：与步骤2相比，仅多了1个Activity4、1个Activity3，伴随着思考1，moveBack的特性越发引人关注了</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Running <span class="title">activities</span> <span class="params">(most recent first)</span>:</span></span><br><span class="line">  TaskRecord&#123;bf2d0e0 #612 A=com.shaunsheep.ams U=0 StackId=1 sz=1&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;15e944a u0 com.shaunsheep.ams/.singleinstance.MainActivity2 t612&#125;</span><br><span class="line">  TaskRecord&#123;f170712 #611 A=com.shaunsheep.ams U=0 StackId=1 sz=6&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;4798b46 u0 com.shaunsheep.ams/.singleinstance.MainActivity4 t611&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;4e20f6c u0 com.shaunsheep.ams/.singleinstance.MainActivity3 t611&#125;</span><br><span class="line">    Run #4: ActivityRecord&#123;7517f4d u0 com.shaunsheep.ams/.singleinstance.MainActivity4 t611&#125;</span><br><span class="line">    Run #3: ActivityRecord&#123;d1ea723 u0 com.shaunsheep.ams/.singleinstance.MainActivity3 t611&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;fe3edcb u0 com.shaunsheep.ams/.singleinstance.MainActivity t611&#125;</span><br><span class="line">    Run #1: ActivityRecord&#123;83513cf u0 com.shaunsheep.ams/.LaunchActivity t611&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><strong>⑤</strong></p>
+<p>2…3结果如下：</p>
+<p>可以看到Task#611有Activity1、3、4、3、4、3，Task#612有Activity2，此时屏幕上看到的是Activity3，符合TaskRecord的顺序</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;f170712 #611 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;7&#125;</span><br><span class="line">    Run #8: ActivityRecord&#123;7702d48 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t611&#125;</span><br><span class="line">  TaskRecord&#123;bf2d0e0 #612 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;15e944a u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity2 t612&#125;</span><br><span class="line">  TaskRecord&#123;f170712 #611 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;7&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;4798b46 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity4 t611&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;4e20f6c u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t611&#125;</span><br><span class="line">    Run #4: ActivityRecord&#123;7517f4d u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity4 t611&#125;</span><br><span class="line">    Run #3: ActivityRecord&#123;d1ea723 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t611&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;fe3edcb u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity t611&#125;</span><br><span class="line">    Run #1: ActivityRecord&#123;83513cf u0 com.shaunsheep.ams&#x2F;.LaunchActivity t611&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<p><strong>⑥</strong></p>
+<p>在步骤6我们暂停一下，梳理一下逻辑，在这里我们假定实际开发中有一个需求，退出Activity3，显示启动它的Activity2。我们可以通过哪些方式来实现？最简洁的方式就是finsh 销毁Activity3，那我们来实际操作一下看看结果：</p>
+<p>finsh 3结果如下：</p>
+<p>可以看到Task#611有Activity1、3、4、3、4，Task#612有Activity2，此时屏幕上看到的是Activity4，非常令人震惊，明明在展示Activity3之前，我们看到的Activity2，为什么Activity3销毁，我们看不到Activity2呢？当然下面的TaskRecord已经给出答案，Activity3销毁之后，默认将与Activity3同一TaskRecord的Activity4顶了上来，这也符合TaskRecord列表显示的数据：</p>
+<blockquote>
+<p>Activity3销毁之后看到的是同一TaskRecord的Activity4 而不是启动Activity3的Activity2</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;f170712 #611 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;6&#125;</span><br><span class="line">    Run #7: ActivityRecord&#123;4798b46 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity4 t611&#125;</span><br><span class="line">  TaskRecord&#123;bf2d0e0 #612 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;1&#125;</span><br><span class="line">    Run #6: ActivityRecord&#123;15e944a u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity2 t612&#125;</span><br><span class="line">  TaskRecord&#123;f170712 #611 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;6&#125;</span><br><span class="line">    Run #5: ActivityRecord&#123;4e20f6c u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t611&#125;</span><br><span class="line">    Run #4: ActivityRecord&#123;7517f4d u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity4 t611&#125;</span><br><span class="line">    Run #3: ActivityRecord&#123;d1ea723 u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity3 t611&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;fe3edcb u0 com.shaunsheep.ams&#x2F;.singleinstance.MainActivity t611&#125;</span><br><span class="line">    Run #1: ActivityRecord&#123;83513cf u0 com.shaunsheep.ams&#x2F;.LaunchActivity t611&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+<p>位于栈顶的Activity3如果通过moveTaskToBack方式回退，则可以实现Activity3消失、显示Activity2的效果</p>
+<p>以上问题引发了思考：</p>
+<ul>
+<li><p>startActivity、finsh、moveTaskToBack三者之间有何联系</p>
+</li>
+<li><p>finsh与moveTaskToBack对Activity显示有何区别</p>
+</li>
+</ul>
+<blockquote>
+<p>finsh与moveTaskToBack的对比：</p>
+<p>操作上：</p>
+<ul>
+<li>两者都会操作<code>WindowList&lt;E&gt; mChildren</code>中子元素顺序</li>
+<li>moveToBack是一个移动数组末尾元素至首位的操作</li>
+<li>finsh是一个移除数组末尾元素的操作</li>
+</ul>
+<p>显示上：</p>
+<ul>
+<li>两者最终呈现在界面上的效果，都是将当前顶部Activity隐藏</li>
+<li>两者最明显的区别是，隐藏顶部Activity之后，操作之后，屏幕锁显示的下一个Activity的区别<ul>
+<li>moveTaskToBack会隐藏当前Activity所在的TaskRecord，展示Stack中的下一个TaskRecord</li>
+<li>finsh会销毁当前Activity，并展示当前Activity所在的TaskReord中的下一个Activity，而非实际的Stack存储的ActivityRecord顺序</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h1><span id="帮助文档">帮助文档</span><a href="#帮助文档" class="header-anchor">#</a></h1><h2><span id="adb">adb</span><a href="#adb" class="header-anchor">#</a></h2><h3><span id="查看window">查看Window</span><a href="#查看window" class="header-anchor">#</a></h3><p><code>adb shell &quot;dumpsys window&quot;</code></p>
+<p>主要关注</p>
+<ul>
+<li>WINDOW MANAGER ANIMATOR STATE</li>
+<li>WINDOW MANAGER SESSIONS (dumpsys window sessions)</li>
+<li>WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)</li>
+<li>WINDOW MANAGER TOKENS (dumpsys window tokens)</li>
+</ul>
+<p>截取部分段落</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line">WINDOW MANAGER ANIMATOR STATE (dumpsys window animator)</span><br><span class="line">    DisplayContentsAnimator #0:</span><br><span class="line">      Window #0: WindowStateAnimator&#123;8300f9b com.android.systemui.ImageWallpaper&#125;</span><br><span class="line">      Window #1: WindowStateAnimator&#123;e1a0f38 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity&#125;</span><br><span class="line">      Window #2: WindowStateAnimator&#123;f0bbb11 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSetWifiActivity&#125;</span><br><span class="line">      Window #3: WindowStateAnimator&#123;b240476 com.shaunsheep.ams&#x2F;com.shaunsheep.ams.singletask.MainActivity&#125;</span><br><span class="line">      Window #4: WindowStateAnimator&#123;f60a77 com.shaunsheep.ams&#x2F;com.shaunsheep.ams.singletask.MainActivity2&#125;</span><br><span class="line">      Window #5: WindowStateAnimator&#123;efce6e4 com.shaunsheep.ams&#x2F;com.shaunsheep.ams.singletask.MainActivity3&#125;</span><br><span class="line">      Window #6: WindowStateAnimator&#123;85ff74d DockedStackDivider&#125;</span><br><span class="line">      Window #7: WindowStateAnimator&#123;c3f202 &#125;</span><br><span class="line">      Window #8: WindowStateAnimator&#123;6b6d713 AssistPreviewPanel&#125;</span><br><span class="line">      Window #9: WindowStateAnimator&#123;d138d50 StatusBar&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    mBulkUpdateParams&#x3D;0x8 ORIENTATION_CHANGE_COMPLETE</span><br><span class="line"></span><br><span class="line">WINDOW MANAGER SESSIONS (dumpsys window sessions)</span><br><span class="line">  Session Session&#123;567f3f 9459:u0a10057&#125;:</span><br><span class="line">    mNumWindow&#x3D;3 mCanAddInternalSystemWindow&#x3D;false mAppOverlaySurfaces&#x3D;[] mAlertWindowSurfaces&#x3D;[] mClientDead&#x3D;false mSurfaceSession&#x3D;android.view.SurfaceSession@241bb49</span><br><span class="line">    mPackageName&#x3D;com.shaunsheep.ams</span><br><span class="line">  Session Session&#123;15833c4 622:1000&#125;:</span><br><span class="line">    mNumWindow&#x3D;0 mCanAddInternalSystemWindow&#x3D;true mAppOverlaySurfaces&#x3D;[] mAlertWindowSurfaces&#x3D;[] mClientDead&#x3D;false mSurfaceSession&#x3D;android.view.SurfaceSession@832c4e</span><br><span class="line">    mPackageName&#x3D;com.shaunsheep.ams</span><br><span class="line">  Session Session&#123;337aec5 2545:1000&#125;:</span><br><span class="line">    mNumWindow&#x3D;0 mCanAddInternalSystemWindow&#x3D;true mAppOverlaySurfaces&#x3D;[] mAlertWindowSurfaces&#x3D;[] mClientDead&#x3D;false mSurfaceSession&#x3D;android.view.SurfaceSession@1add16f</span><br><span class="line">    mPackageName&#x3D;com.unilife.fridge.haierbase.navigation</span><br><span class="line">  Session Session&#123;6c2c045 1075:1000&#125;:</span><br><span class="line">    mNumWindow&#x3D;0 mCanAddInternalSystemWindow&#x3D;true mAppOverlaySurfaces&#x3D;[] mAlertWindowSurfaces&#x3D;[] mClientDead&#x3D;false mSurfaceSession&#x3D;android.view.SurfaceSession@7ac2e7c</span><br><span class="line">    mPackageName&#x3D;com.android.settings</span><br><span class="line">  Session Session&#123;851ad14 1300:1000&#125;:</span><br><span class="line">    mNumWindow&#x3D;1 mCanAddInternalSystemWindow&#x3D;true mAppOverlaySurfaces&#x3D;[] mAlertWindowSurfaces&#x3D;[] mClientDead&#x3D;false mSurfaceSession&#x3D;android.view.SurfaceSession@a61c305</span><br><span class="line">    mPackageName&#x3D;com.example.touchdemo</span><br><span class="line">  Session Session&#123;8bd8947 1341:u0a10033&#125;:</span><br><span class="line">    mNumWindow&#x3D;2 mCanAddInternalSystemWindow&#x3D;false mAppOverlaySurfaces&#x3D;[] mAlertWindowSurfaces&#x3D;[] mClientDead&#x3D;false mSurfaceSession&#x3D;android.view.SurfaceSession@fe9bf5a</span><br><span class="line">    mPackageName&#x3D;com.unilife.fridge.haierbase.tft</span><br><span class="line">  Session Session&#123;b4457ef 796:u0a10010&#125;:</span><br><span class="line">    mNumWindow&#x3D;4 mCanAddInternalSystemWindow&#x3D;true mAppOverlaySurfaces&#x3D;[] mAlertWindowSurfaces&#x3D;[] mClientDead&#x3D;false mSurfaceSession&#x3D;android.view.SurfaceSession@870158b</span><br><span class="line">    mPackageName&#x3D;com.android.systemui</span><br><span class="line"></span><br><span class="line">WINDOW MANAGER DISPLAY CONTENTS (dumpsys window displays)</span><br><span class="line">  Display: mDisplayId&#x3D;0</span><br><span class="line">    init&#x3D;1080x1920 160dpi cur&#x3D;1080x1920 app&#x3D;1080x1864 rng&#x3D;1080x1024-1920x1864</span><br><span class="line">    deferred&#x3D;false mLayoutNeeded&#x3D;false mTouchExcludeRegion&#x3D;SkRegion((0,0,1080,1920))</span><br><span class="line"></span><br><span class="line">  Application tokens in top down Z order:</span><br><span class="line">    mStackId&#x3D;1</span><br><span class="line">    mDeferRemoval&#x3D;false</span><br><span class="line">    mFillsParent&#x3D;true</span><br><span class="line">    mBounds&#x3D;[0,0][1080,1920]</span><br><span class="line">      taskId&#x3D;63</span><br><span class="line">        mFillsParent&#x3D;true</span><br><span class="line">        mBounds&#x3D;[0,0][1080,1920]</span><br><span class="line">        mdr&#x3D;false</span><br><span class="line">        appTokens&#x3D;[AppWindowToken&#123;4df35c8 token&#x3D;Token&#123;47c192d ActivityRecord&#123;40ee444 u0 com.shaunsheep.ams&#x2F;.MainActivity t63&#125;&#125;&#125;, AppWindowToken&#123;9051be2 token&#x3D;Token&#123;e661cad ActivityRecord&#123;618c5c4 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t63&#125;&#125;&#125;, AppWindowToken&#123;6e77b06 to</span><br><span class="line">ken&#x3D;Token&#123;f0fb1e1 ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams&#x2F;.MainActivity3 t63&#125;&#125;&#125;]</span><br><span class="line">        mTempInsetBounds&#x3D;[0,0][0,0]</span><br><span class="line">          Activity #2 AppWindowToken&#123;6e77b06 token&#x3D;Token&#123;f0fb1e1 ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams&#x2F;.MainActivity3 t63&#125;&#125;&#125;</span><br><span class="line">          windows&#x3D;[Window&#123;8f48b1d u0 com.shaunsheep.ams&#x2F;com.shaunsheep.ams.singletask.MainActivity3&#125;]</span><br><span class="line">          windowType&#x3D;2 hidden&#x3D;false hasVisible&#x3D;true</span><br><span class="line">          app&#x3D;true mVoiceInteraction&#x3D;false</span><br><span class="line">          task&#x3D;&#123;taskId&#x3D;63 appTokens&#x3D;[AppWindowToken&#123;4df35c8 token&#x3D;Token&#123;47c192d ActivityRecord&#123;40ee444 u0 com.shaunsheep.ams&#x2F;.MainActivity t63&#125;&#125;&#125;, AppWindowToken&#123;9051be2 token&#x3D;Token&#123;e661cad ActivityRecord&#123;618c5c4 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t63&#125;&#125;&#125;, AppWind</span><br><span class="line">owToken&#123;6e77b06 token&#x3D;Token&#123;f0fb1e1 ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams&#x2F;.MainActivity3 t63&#125;&#125;&#125;] mdr&#x3D;false&#125;</span><br><span class="line">           mFillsParent&#x3D;true mOrientation&#x3D;-1</span><br><span class="line">          hiddenRequested&#x3D;false mClientHidden&#x3D;false reportedDrawn&#x3D;true reportedVisible&#x3D;true</span><br><span class="line">          mAppStopped&#x3D;true</span><br><span class="line">          mNumInterestingWindows&#x3D;1 mNumDrawnWindows&#x3D;1 inPendingTransaction&#x3D;false allDrawn&#x3D;true (animator&#x3D;true)</span><br><span class="line">          startingData&#x3D;null removed&#x3D;false firstWindowDrawn&#x3D;true mIsExiting&#x3D;false</span><br><span class="line">          controller&#x3D;AppWindowContainerController&#123; token&#x3D;Token&#123;f0fb1e1 ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams&#x2F;.MainActivity3 t63&#125;&#125; mContainer&#x3D;AppWindowToken&#123;6e77b06 token&#x3D;Token&#123;f0fb1e1 ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams&#x2F;.MainActivity3 t63&#125;&#125;&#125; mListen</span><br><span class="line">er&#x3D;ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams&#x2F;.MainActivity3 t63&#125;&#125;</span><br><span class="line">          Activity #1 AppWindowToken&#123;9051be2 token&#x3D;Token&#123;e661cad ActivityRecord&#123;618c5c4 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t63&#125;&#125;&#125;</span><br><span class="line">          windows&#x3D;[Window&#123;574d6a9 u0 com.shaunsheep.ams&#x2F;com.shaunsheep.ams.singletask.MainActivity2&#125;]</span><br><span class="line">          windowType&#x3D;2 hidden&#x3D;true hasVisible&#x3D;true</span><br><span class="line">          app&#x3D;true mVoiceInteraction&#x3D;false</span><br><span class="line">          task&#x3D;&#123;taskId&#x3D;63 appTokens&#x3D;[AppWindowToken&#123;4df35c8 token&#x3D;Token&#123;47c192d ActivityRecord&#123;40ee444 u0 com.shaunsheep.ams&#x2F;.MainActivity t63&#125;&#125;&#125;, AppWindowToken&#123;9051be2 token&#x3D;Token&#123;e661cad ActivityRecord&#123;618c5c4 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t63&#125;&#125;&#125;, AppWind</span><br><span class="line">owToken&#123;6e77b06 token&#x3D;Token&#123;f0fb1e1 ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams&#x2F;.MainActivity3 t63&#125;&#125;&#125;] mdr&#x3D;false&#125;</span><br><span class="line">           mFillsParent&#x3D;true mOrientation&#x3D;-1</span><br><span class="line">          hiddenRequested&#x3D;true mClientHidden&#x3D;true reportedDrawn&#x3D;false reportedVisible&#x3D;false</span><br><span class="line">          mAppStopped&#x3D;true</span><br><span class="line">          mNumInterestingWindows&#x3D;1 mNumDrawnWindows&#x3D;1 inPendingTransaction&#x3D;false allDrawn&#x3D;true (animator&#x3D;true)</span><br><span class="line">          startingData&#x3D;null removed&#x3D;false firstWindowDrawn&#x3D;true mIsExiting&#x3D;false</span><br><span class="line">          controller&#x3D;AppWindowContainerController&#123; token&#x3D;Token&#123;e661cad ActivityRecord&#123;618c5c4 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t63&#125;&#125; mContainer&#x3D;AppWindowToken&#123;9051be2 token&#x3D;Token&#123;e661cad ActivityRecord&#123;618c5c4 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t63&#125;&#125;&#125; mListen</span><br><span class="line">er&#x3D;ActivityRecord&#123;618c5c4 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t63&#125;&#125;</span><br><span class="line">          Activity #0 AppWindowToken&#123;4df35c8 token&#x3D;Token&#123;47c192d ActivityRecord&#123;40ee444 u0 com.shaunsheep.ams&#x2F;.MainActivity t63&#125;&#125;&#125;</span><br><span class="line">          windows&#x3D;[Window&#123;b61636a u0 com.shaunsheep.ams&#x2F;com.shaunsheep.ams.singletask.MainActivity&#125;]</span><br><span class="line">          windowType&#x3D;2 hidden&#x3D;true hasVisible&#x3D;true</span><br><span class="line">          app&#x3D;true mVoiceInteraction&#x3D;false</span><br><span class="line">          task&#x3D;&#123;taskId&#x3D;63 appTokens&#x3D;[AppWindowToken&#123;4df35c8 token&#x3D;Token&#123;47c192d ActivityRecord&#123;40ee444 u0 com.shaunsheep.ams&#x2F;.MainActivity t63&#125;&#125;&#125;, AppWindowToken&#123;9051be2 token&#x3D;Token&#123;e661cad ActivityRecord&#123;618c5c4 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t63&#125;&#125;&#125;, AppWind</span><br><span class="line">owToken&#123;6e77b06 token&#x3D;Token&#123;f0fb1e1 ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams&#x2F;.MainActivity3 t63&#125;&#125;&#125;] mdr&#x3D;false&#125;</span><br><span class="line">           mFillsParent&#x3D;true mOrientation&#x3D;-1</span><br><span class="line">          hiddenRequested&#x3D;true mClientHidden&#x3D;true reportedDrawn&#x3D;false reportedVisible&#x3D;false</span><br><span class="line">          mAppStopped&#x3D;true</span><br><span class="line">          mNumInterestingWindows&#x3D;1 mNumDrawnWindows&#x3D;1 inPendingTransaction&#x3D;false allDrawn&#x3D;true (animator&#x3D;true)</span><br><span class="line">          startingData&#x3D;null removed&#x3D;false firstWindowDrawn&#x3D;true mIsExiting&#x3D;false</span><br><span class="line">          controller&#x3D;AppWindowContainerController&#123; token&#x3D;Token&#123;47c192d ActivityRecord&#123;40ee444 u0 com.shaunsheep.ams&#x2F;.MainActivity t63&#125;&#125; mContainer&#x3D;AppWindowToken&#123;4df35c8 token&#x3D;Token&#123;47c192d ActivityRecord&#123;40ee444 u0 com.shaunsheep.ams&#x2F;.MainActivity t63&#125;&#125;&#125; mListener</span><br><span class="line">&#x3D;ActivityRecord&#123;40ee444 u0 com.shaunsheep.ams&#x2F;.MainActivity t63&#125;&#125;</span><br><span class="line">      taskId&#x3D;62</span><br><span class="line">        mFillsParent&#x3D;true</span><br><span class="line">        mBounds&#x3D;[0,0][1080,1920]</span><br><span class="line">        mdr&#x3D;false</span><br><span class="line">        appTokens&#x3D;[AppWindowToken&#123;f92e433 token&#x3D;Token&#123;a4766b5 ActivityRecord&#123;4b852ec u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity t62&#125;&#125;&#125;, AppWindowToken&#123;e23349e token&#x3D;Token&#123;bd672d9 ActivityRecord&#123;5129</span><br><span class="line">20 u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSetWifiActivity t62&#125;&#125;&#125;]</span><br><span class="line">        mTempInsetBounds&#x3D;[0,0][0,0]</span><br><span class="line">          Activity #1 AppWindowToken&#123;e23349e token&#x3D;Token&#123;bd672d9 ActivityRecord&#123;512920 u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSetWifiActivity t62&#125;&#125;&#125;</span><br><span class="line">          windows&#x3D;[Window&#123;e22a411 u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSetWifiActivity&#125;]</span><br><span class="line">          windowType&#x3D;2 hidden&#x3D;true hasVisible&#x3D;true</span><br><span class="line">          app&#x3D;true mVoiceInteraction&#x3D;false</span><br><span class="line">          task&#x3D;&#123;taskId&#x3D;62 appTokens&#x3D;[AppWindowToken&#123;f92e433 token&#x3D;Token&#123;a4766b5 ActivityRecord&#123;4b852ec u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity t62&#125;&#125;&#125;, AppWindowToken&#123;e23349e token&#x3D;Token&#123;bd672d9 A</span><br><span class="line">ctivityRecord&#123;512920 u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSetWifiActivity t62&#125;&#125;&#125;] mdr&#x3D;false&#125;</span><br><span class="line">           mFillsParent&#x3D;true mOrientation&#x3D;-1</span><br><span class="line">          hiddenRequested&#x3D;true mClientHidden&#x3D;true reportedDrawn&#x3D;false reportedVisible&#x3D;false</span><br><span class="line">          mAppStopped&#x3D;true</span><br><span class="line">          mNumInterestingWindows&#x3D;1 mNumDrawnWindows&#x3D;1 inPendingTransaction&#x3D;false allDrawn&#x3D;true (animator&#x3D;true)</span><br><span class="line">          startingData&#x3D;null removed&#x3D;false firstWindowDrawn&#x3D;true mIsExiting&#x3D;false</span><br><span class="line">          controller&#x3D;AppWindowContainerController&#123; token&#x3D;Token&#123;bd672d9 ActivityRecord&#123;512920 u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSetWifiActivity t62&#125;&#125; mContainer&#x3D;AppWindowToken&#123;e23349e token&#x3D;Token&#123;bd672d9 Ac</span><br><span class="line">tivityRecord&#123;512920 u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSetWifiActivity t62&#125;&#125;&#125; mListener&#x3D;ActivityRecord&#123;512920 u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSe</span><br><span class="line">tWifiActivity t62&#125;&#125;</span><br><span class="line">          Activity #0 AppWindowToken&#123;f92e433 token&#x3D;Token&#123;a4766b5 ActivityRecord&#123;4b852ec u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity t62&#125;&#125;&#125;</span><br><span class="line">          windows&#x3D;[Window&#123;ba965b4 u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity&#125;]</span><br><span class="line">          windowType&#x3D;2 hidden&#x3D;true hasVisible&#x3D;true</span><br><span class="line">          app&#x3D;true mVoiceInteraction&#x3D;false</span><br><span class="line">          task&#x3D;&#123;taskId&#x3D;62 appTokens&#x3D;[AppWindowToken&#123;f92e433 token&#x3D;Token&#123;a4766b5 ActivityRecord&#123;4b852ec u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity t62&#125;&#125;&#125;, AppWindowToken&#123;e23349e token&#x3D;Token&#123;bd672d9 A</span><br><span class="line">ctivityRecord&#123;512920 u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSetWifiActivity t62&#125;&#125;&#125;] mdr&#x3D;false&#125;</span><br><span class="line">           mFillsParent&#x3D;true mOrientation&#x3D;-1</span><br><span class="line">          hiddenRequested&#x3D;true mClientHidden&#x3D;true reportedDrawn&#x3D;false reportedVisible&#x3D;false</span><br><span class="line">          mAppStopped&#x3D;true</span><br><span class="line">          mNumInterestingWindows&#x3D;1 mNumDrawnWindows&#x3D;1 inPendingTransaction&#x3D;false allDrawn&#x3D;true (animator&#x3D;true)</span><br><span class="line">          startingData&#x3D;null removed&#x3D;false firstWindowDrawn&#x3D;true mIsExiting&#x3D;false</span><br><span class="line">          controller&#x3D;AppWindowContainerController&#123; token&#x3D;Token&#123;a4766b5 ActivityRecord&#123;4b852ec u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity t62&#125;&#125; mContainer&#x3D;AppWindowToken&#123;f92e433 token&#x3D;Token&#123;a4766b5 A</span><br><span class="line">ctivityRecord&#123;4b852ec u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity t62&#125;&#125;&#125; mListener&#x3D;ActivityRecord&#123;4b852ec u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeUser</span><br><span class="line">ProtocolActivity t62&#125;&#125;</span><br><span class="line">    mStackId&#x3D;0</span><br><span class="line">    mDeferRemoval&#x3D;false</span><br><span class="line">    mFillsParent&#x3D;true</span><br><span class="line">    mBounds&#x3D;[0,0][1080,1920]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  DimLayerController</span><br><span class="line">    Task&#x3D;62</span><br><span class="line">      dimLayer&#x3D;shared, animator&#x3D;null, continueDimming&#x3D;false</span><br><span class="line">      mDimSurface&#x3D;Surface(name&#x3D;DimLayerController&#x2F;Stack&#x3D;0) mLayer&#x3D;110999 mAlpha&#x3D;0.0</span><br><span class="line">      mLastBounds&#x3D;[-270,-480][1350,2400] mBounds&#x3D;[-270,-480][1350,2400]</span><br><span class="line">      Last animation:  mDuration&#x3D;200 mStartTime&#x3D;34184572 curTime&#x3D;35019291</span><br><span class="line">       mStartAlpha&#x3D;0.6 mTargetAlpha&#x3D;0.0</span><br><span class="line">    Stack&#x3D;0</span><br><span class="line">      dimLayer&#x3D;shared, animator&#x3D;null, continueDimming&#x3D;false</span><br><span class="line">      mDimSurface&#x3D;Surface(name&#x3D;DimLayerController&#x2F;Stack&#x3D;0) mLayer&#x3D;110999 mAlpha&#x3D;0.0</span><br><span class="line">      mLastBounds&#x3D;[-270,-480][1350,2400] mBounds&#x3D;[-270,-480][1350,2400]</span><br><span class="line">      Last animation:  mDuration&#x3D;200 mStartTime&#x3D;34184572 curTime&#x3D;35019291</span><br><span class="line">       mStartAlpha&#x3D;0.6 mTargetAlpha&#x3D;0.0</span><br><span class="line">    Task&#x3D;63</span><br><span class="line">      dimLayer&#x3D;shared, animator&#x3D;null, continueDimming&#x3D;false</span><br><span class="line">      mDimSurface&#x3D;Surface(name&#x3D;DimLayerController&#x2F;Stack&#x3D;0) mLayer&#x3D;110999 mAlpha&#x3D;0.0</span><br><span class="line">      mLastBounds&#x3D;[-270,-480][1350,2400] mBounds&#x3D;[-270,-480][1350,2400]</span><br><span class="line">      Last animation:  mDuration&#x3D;200 mStartTime&#x3D;34184572 curTime&#x3D;35019291</span><br><span class="line">       mStartAlpha&#x3D;0.6 mTargetAlpha&#x3D;0.0</span><br><span class="line">    Stack&#x3D;1</span><br><span class="line">      dimLayer&#x3D;shared, animator&#x3D;null, continueDimming&#x3D;false</span><br><span class="line">      mDimSurface&#x3D;Surface(name&#x3D;DimLayerController&#x2F;Stack&#x3D;0) mLayer&#x3D;110999 mAlpha&#x3D;0.0</span><br><span class="line">      mLastBounds&#x3D;[-270,-480][1350,2400] mBounds&#x3D;[-270,-480][1350,2400]</span><br><span class="line">      Last animation:  mDuration&#x3D;200 mStartTime&#x3D;34184572 curTime&#x3D;35019291</span><br><span class="line">       mStartAlpha&#x3D;0.6 mTargetAlpha&#x3D;0.0</span><br><span class="line"></span><br><span class="line">WINDOW MANAGER TOKENS (dumpsys window tokens)</span><br><span class="line">  All tokens:</span><br><span class="line">  Display #0</span><br><span class="line">  WindowToken&#123;2cbb668 android.os.BinderProxy@62938f9&#125;</span><br><span class="line">  AppWindowToken&#123;4df35c8 token&#x3D;Token&#123;47c192d ActivityRecord&#123;40ee444 u0 com.shaunsheep.ams&#x2F;.MainActivity t63&#125;&#125;&#125;</span><br><span class="line">  AppWindowToken&#123;f92e433 token&#x3D;Token&#123;a4766b5 ActivityRecord&#123;4b852ec u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity t62&#125;&#125;&#125;</span><br><span class="line">  WallpaperWindowToken&#123;ec08a81 token&#x3D;android.os.Binder@178873c&#125;</span><br><span class="line">  WindowToken&#123;2f47726 android.os.BinderProxy@2c6f5c2&#125;</span><br><span class="line">  WindowToken&#123;bc87f67 android.os.Binder@af389a&#125;</span><br><span class="line">  WindowToken&#123;bd9d114 android.os.BinderProxy@b1561e2&#125;</span><br><span class="line">  WindowToken&#123;2ea4dbd android.os.BinderProxy@e2e8034&#125;</span><br><span class="line">  AppWindowToken&#123;9051be2 token&#x3D;Token&#123;e661cad ActivityRecord&#123;618c5c4 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t63&#125;&#125;&#125;</span><br><span class="line">  AppWindowToken&#123;6e77b06 token&#x3D;Token&#123;f0fb1e1 ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams&#x2F;.MainActivity3 t63&#125;&#125;&#125;</span><br><span class="line">  AppWindowToken&#123;e23349e token&#x3D;Token&#123;bd672d9 ActivityRecord&#123;512920 u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSetWifiActivity t62&#125;&#125;&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+<h3><span id="查看activity">查看Activity</span><a href="#查看activity" class="header-anchor">#</a></h3><p><code>adb shell dumpsys activity</code></p>
+<p>主要关注</p>
+<ul>
+<li><p>Running activities：该stack最近的Activity</p>
+<ul>
+<li><p>TaskRecord：该stack最近的taskrecord</p>
+</li>
+<li><p>TaskId：#63 是com.shaunsheep.ams所在Task的TaskId</p>
+</li>
+<li><p>A：APP包名，com.shaunsheep.ams</p>
+</li>
+<li><p>StackId：Task所在的Stack栈</p>
+</li>
+<li><p>SZ：TaskRecord里面有几个Activity</p>
+<p>如Running activities有两个TaskRecod，#63有3个Activity，#62有2个Activity</p>
+<p>ActivityRecord的顺序从上往下看，MainActivity3、MainActivity2、MainActivity、HomeFirstSetWifiActivity、HomeUserProtocolActivity；</p>
+<p>TaskRecord的顺序从上往下看 #63 #62；</p>
+<p>Stack的存储顺序，就是从上往下看的ActivityRecord顺序，ActivityRecord中包含了TaskRecord信息，因此TaskRecord的展示是可以不连续的</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Running activities (most recent first):</span><br><span class="line">  TaskRecord&#123;dbd02ff #63 A&#x3D;com.shaunsheep.ams U&#x3D;0 StackId&#x3D;1 sz&#x3D;3&#125;</span><br><span class="line">    Run #4: ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams&#x2F;.MainActivity3 t63&#125;</span><br><span class="line">    Run #3: ActivityRecord&#123;618c5c4 u0 com.shaunsheep.ams&#x2F;.MainActivity2 t63&#125;</span><br><span class="line">    Run #2: ActivityRecord&#123;40ee444 u0 com.shaunsheep.ams&#x2F;.MainActivity t63&#125;</span><br><span class="line">  TaskRecord&#123;9e28cc #62 A&#x3D;com.unilife.fridge.haierbase.tft U&#x3D;0 StackId&#x3D;1 sz&#x3D;2&#125;</span><br><span class="line">    Run #1: ActivityRecord&#123;512920 u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSetWifiActivity t62&#125;</span><br><span class="line">    Run #0: ActivityRecord&#123;4b852ec u0 com.unilife.fridge.haierbase.tft&#x2F;com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity t62&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></li>
+</ul>
+</li>
+<li><p>mResumedActivity：该stack栈顶的Activity</p>
+</li>
+<li><p>ResumedActivity：该stack栈顶的Activity</p>
+</li>
+</ul>
+<p>截取部分段落</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">ACTIVITY MANAGER ACTIVITIES (dumpsys activity activities)</span><br><span class="line">Display #0 (activities from top to bottom):</span><br><span class="line">  Stack #1:</span><br><span class="line">  mFullscreen=true</span><br><span class="line">  isSleeping=false</span><br><span class="line">  mBounds=null</span><br><span class="line">    Task id #63</span><br><span class="line">    mFullscreen=true</span><br><span class="line">    mBounds=null</span><br><span class="line">    mMinWidth=-1</span><br><span class="line">    mMinHeight=-1</span><br><span class="line">    mLastNonFullscreenBounds=null</span><br><span class="line">      TaskRecord&#123;dbd02ff #63 A=com.shaunsheep.ams U=0 StackId=1 sz=3&#125;</span><br><span class="line">      Intent &#123; act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=com.shaunsheep.ams/.MainActivity &#125;</span><br><span class="line">        Hist #2: ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams/.MainActivity3 t63&#125;</span><br><span class="line">          Intent &#123; cmp=com.shaunsheep.ams/.MainActivity3 &#125;</span><br><span class="line">          ProcessRecord&#123;25d8a2a 9459:com.shaunsheep.ams/u0a57&#125;</span><br><span class="line">        Hist #1: ActivityRecord&#123;618c5c4 u0 com.shaunsheep.ams/.MainActivity2 t63&#125;</span><br><span class="line">          Intent &#123; cmp=com.shaunsheep.ams/.MainActivity2 &#125;</span><br><span class="line">          ProcessRecord&#123;25d8a2a 9459:com.shaunsheep.ams/u0a57&#125;</span><br><span class="line">        Hist #0: ActivityRecord&#123;40ee444 u0 com.shaunsheep.ams/.MainActivity t63&#125;</span><br><span class="line">          Intent &#123; act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=com.shaunsheep.ams/.MainActivity &#125;</span><br><span class="line">          ProcessRecord&#123;25d8a2a 9459:com.shaunsheep.ams/u0a57&#125;</span><br><span class="line">    Task id #62</span><br><span class="line">    mFullscreen=true</span><br><span class="line">    mBounds=null</span><br><span class="line">    mMinWidth=-1</span><br><span class="line">    mMinHeight=-1</span><br><span class="line">    mLastNonFullscreenBounds=null</span><br><span class="line">      TaskRecord&#123;9e28cc #62 A=com.unilife.fridge.haierbase.tft U=0 StackId=1 sz=2&#125;</span><br><span class="line">      Intent &#123; act=com.unilife.fridge.HomeUserProtocolActivity flg=0x10000000 cmp=com.unilife.fridge.haierbase.tft/com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity &#125;</span><br><span class="line">        Hist #1: ActivityRecord&#123;512920 u0 com.unilife.fridge.haierbase.tft/com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSetWifiActivity t62&#125;</span><br><span class="line">          Intent &#123; act=com.unilife.fridge.HomeFirstSetWifiActivity flg=0x10000000 cmp=com.unilife.fridge.haierbase.tft/com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSetWifiActivity &#125;</span><br><span class="line">          ProcessRecord&#123;60c9996 1341:com.unilife.fridge.haierbase.tft/u0a33&#125;</span><br><span class="line">        Hist #0: ActivityRecord&#123;4b852ec u0 com.unilife.fridge.haierbase.tft/com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity t62&#125;</span><br><span class="line">          Intent &#123; act=com.unilife.fridge.HomeUserProtocolActivity flg=0x10000000 cmp=com.unilife.fridge.haierbase.tft/com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity &#125;</span><br><span class="line">          ProcessRecord&#123;60c9996 1341:com.unilife.fridge.haierbase.tft/u0a33&#125;</span><br><span class="line"></span><br><span class="line">    Running activities (most recent first):</span><br><span class="line">      TaskRecord&#123;dbd02ff #63 A=com.shaunsheep.ams U=0 StackId=1 sz=3&#125;</span><br><span class="line">        Run #4: ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams/.MainActivity3 t63&#125;</span><br><span class="line">        Run #3: ActivityRecord&#123;618c5c4 u0 com.shaunsheep.ams/.MainActivity2 t63&#125;</span><br><span class="line">        Run #2: ActivityRecord&#123;40ee444 u0 com.shaunsheep.ams/.MainActivity t63&#125;</span><br><span class="line">      TaskRecord&#123;9e28cc #62 A=com.unilife.fridge.haierbase.tft U=0 StackId=1 sz=2&#125;</span><br><span class="line">        Run #1: ActivityRecord&#123;512920 u0 com.unilife.fridge.haierbase.tft/com.unilife.fridge.haiercommon.ui.activity.guide.HomeFirstSetWifiActivity t62&#125;</span><br><span class="line">        Run #0: ActivityRecord&#123;4b852ec u0 com.unilife.fridge.haierbase.tft/com.unilife.fridge.haiercommon.ui.activity.guide.HomeUserProtocolActivity t62&#125;</span><br><span class="line"></span><br><span class="line">    mResumedActivity: ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams/.MainActivity3 t63&#125;</span><br><span class="line"></span><br><span class="line">  Stack #0:</span><br><span class="line">  mFullscreen=true</span><br><span class="line">  isSleeping=false</span><br><span class="line">  mBounds=null</span><br><span class="line"></span><br><span class="line">  ResumedActivity: ActivityRecord&#123;f8b5f48 u0 com.shaunsheep.ams/.MainActivity3 t63&#125;</span><br><span class="line">  mFocusedStack=ActivityStack&#123;868d01b stackId=1, 2 tasks&#125; mLastFocusedStack=ActivityStack&#123;868d01b stackId=1, 2 tasks&#125;</span><br><span class="line">  mCurTaskIdForUser=&#123;0=63&#125;</span><br><span class="line">  mUserStackInFront=&#123;&#125;</span><br><span class="line">  mStacks=&#123;0=ActivityStack&#123;ce525e2 stackId=0, 0 tasks&#125;, 1=ActivityStack&#123;868d01b stackId=1, 2 tasks&#125;&#125;</span><br><span class="line">  mLockTaskModeState=NONE  mLockTaskPackages (userId:packages)=</span><br><span class="line">    0:[]</span><br><span class="line"> mLockTaskModeTasks[]</span><br><span class="line">  KeyguardController:</span><br><span class="line">    mKeyguardShowing=false</span><br><span class="line">    mKeyguardGoingAway=false</span><br><span class="line">    mOccluded=false</span><br><span class="line">    mDismissingKeyguardActivity=null</span><br><span class="line">    mDismissalRequested=false</span><br><span class="line">    mVisibilityTransactionDepth=0</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+<h2><span id="activity">Activity</span><a href="#activity" class="header-anchor">#</a></h2><table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onBackPressed()</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>finish()</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>getTaskId</td>
+<td>查看TaskId</td>
+<td></td>
+</tr>
+</tbody></table>
+<h1><span id="usagestatsmanager">UsageStatsManager</span><a href="#usagestatsmanager" class="header-anchor">#</a></h1><p>Android获取栈顶程序<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/ballonge/article/details/51085953">https://blog.csdn.net/ballonge/article/details/51085953</a><br>Android UsageStatsManager的简单使用<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/shanfuming/article/details/58603450">https://blog.csdn.net/shanfuming/article/details/58603450</a><br><a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_7d95a2e70102vna4.html">http://blog.sina.com.cn/s/blog_7d95a2e70102vna4.html</a></p>
+<h1><span id="taskstack">task\stack</span><a href="#taskstack" class="header-anchor">#</a></h1><p>task与stack有什么关系？</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/innost/article/details/47254381">深入理解Android卷二 全文-第六章]深入理解ActivityManagerService_Innost的专栏-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=https://inthecheesefactory.com/blog/understand-android-activity-launchmode/en">Understand Android Activity’s launchMode: standard, singleTop, singleTask and singleInstance</a></p>
+<p><a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=https://developer.android.com/guide/components/tasks-and-back-stack.html">tasks-and-back-stack</a></p>
+<p><a target="_blank" rel="noopener" href="https://link.jianshu.com/?t=http://www.cnblogs.com/hnrainll/archive/2012/12/18/2823064.html">Application、Activity Stack 和 Task的区别</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/82f3af2135a8">Android Stack与Task - 简书 (jianshu.com)</a></p>
+<h1><span id="启动模式">启动模式</span><a href="#启动模式" class="header-anchor">#</a></h1><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/fxjzzyo/article/details/109293098">Activity启动模式singleTask的理解</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Im-Victor/p/9656471.html">Android启动模式之singleinstance的坑</a></p>
+<h1><span id="好问题">好问题</span><a href="#好问题" class="header-anchor">#</a></h1><p>1.Stack、Task中，哪些因素影响Activity的展示顺序？</p>
+<ul>
+<li>启动模式</li>
+<li>finsh、backPress</li>
+<li>moveTaskToBack</li>
+</ul>
+<p>2.SingleInstance使用越多越好吗？每个Activity都设置会怎么样？</p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">
+
+        
+
+      
+    </div>
+
+      <!-- 相关文章推荐 -->
+     
+          
+
+  <div class="popular-posts-header">
+    <i class="fa fa-graduation-cap"></i>
+    相关文章
+  </div>
+
+ <details>
+   <summary>点击查看</summary>
+     <ul class="popular-posts">
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\viewpager-viewpager2-usage\" rel="bookmark">viewpager与viewpager2实践总结</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\lifecycle-activity\" rel="bookmark">Activity各种条件下生命周期小结</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\throttle-debounce-vie-click\" rel="bookmark">Android/Java事件过滤方案小结</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\lifecycle-livedata-databind-viewmodel\" rel="bookmark">Android生命周期感知组件经验总结</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\Android-rxjava-Practice\" rel="bookmark">RjxavaSample练习</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\05\The-most-comprehensive-thinking-of-crash-practice-strategy\" rel="bookmark">Android Crash实践策略最全面思考</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\05\android-crash-who-kill-you\" rel="bookmark">Android Crash揭秘与实践</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\02\mtk-log\" rel="bookmark">mtk-log</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\02\android-bugfree-three-lines\" rel="bookmark">BugFree三剑客异常、日志、工具</a></div>
+         
+       </li>
+     
+     </ul>
+ </details>
+
+
+
+     
+
+    
+    
+    
+
+    <div>
+          
+            
+
+          
+    </div>
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div class="read-over">-------------------本文结束 <i class="fa fa-paw"></i> 感谢您的阅读-------------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+      <div>
+        <div class="share_reward">
+  <div>坚持原创技术分享，感谢您的支持和鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://cdn.yangchaofan.cn/BlogGifRes/20210313/s7mteFUqc8pH.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://cdn.yangchaofan.cn/BlogGifRes/20210313/oQnokBcx6RUO.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    叶金诚
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/" title="n条用例验证Activity4种启动模式的威力与坑">http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" target="_blank">Creative Commons BY-NC-ND 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"> <i class="fa fa-tag"></i> Android</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/01/viewpager-viewpager2-usage/" rel="prev" title="viewpager与viewpager2实践总结">
+                <i class="fa fa-chevron-left"></i> viewpager与viewpager2实践总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/01/lifecycle-activity/" rel="next" title="Activity各种条件下生命周期小结">
+                Activity各种条件下生命周期小结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+//  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+//    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC81Mjc2OC8yOTI0NQ"></div>
+    </div>
+
+  
+
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/">
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.png"
+                alt="" />
+              </a>
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+              <!-- 为Hexo Next主题添加哈林摇特效  -->
+              <a title="收藏到书签，偶尔High一下^_^" rel="alternate" class="mw-harlem_shake_slow wobble shake" href="javascript:void(0)" onclick="javascript:(function go() {function c() {var e = document.createElement('link');e.setAttribute('type', 'text/css');e.setAttribute('rel', 'stylesheet');e.setAttribute('href', f);e.setAttribute('class', l);document.body.appendChild(e)}function h(){var e = document.getElementsByClassName(l);for(var t = 0; t< e.length; t++){document.body.removeChild(e[t])}}function p(){var e = document.createElement('div');e.setAttribute('class', a);document.body.appendChild(e);setTimeout(function(){document.body.removeChild(e)},100)}function d(e){return{height:e.offsetHeight,width:e.offsetWidth}}function v(i){var s = d(i);return s.height>e &amp;&amp;s.height<n &amp;&amp; s.width>t &amp;&amp;s.width<r}function m(e){var t=e;var n=0;while(!!t){n+=t.offsetTop;t=t.offsetParent}return n}function g(){var e=document.documentElement;if(!!window.innerWidth){return window.innerHeight}else if(e &amp;&amp; !isNaN(e.clientHeight)){return e.clientHeight}return 0}function y(){if(window.pageYOffset){return window.pageYOffset}return Math.max(document.documentElement.scrollTop,document.body.scrollTop)}function E(e){var t=m(e);return t>=w &amp;&amp; t<=b+w}var songs=['https://www.liaofuzhan.com/music/无尽光芒.mp3'];function S(){var e=document.getElementById('audio_element_id');if(e!=null){var index=parseInt(e.getAttribute('curSongIndex'));if(index>songs.length-2){index=0;}else{index++;}e.setAttribute('curSongIndex',index);N();}e.src=i;e.play()}function x(e){e.className+=' '+s+' '+o}function T(e){e.className+=' '+s+' '+u[Math.floor(Math.random()*u.length)]}function N(){var e=document.getElementsByClassName(s);var t=new RegExp('\\b'+s+'\\b');for(var n=0;n<e.length;){e[n].className=e[n].className.replace(t,'')}}function initAudioEle(){var e=document.getElementById('audio_element_id');if(e===null){e=document.createElement('audio');e.setAttribute('class',l);e.setAttribute('curSongIndex',0);e.id='audio_element_id';e.loop=false;e.bgcolor=0;e.addEventListener('canplay',function(){setTimeout(function(){x(k)},500);setTimeout(function(){N();p();for(var e=0;e<O.length;e++){T(O[e])}},15500)},true);e.addEventListener('ended',function(){N();h();go();},true);e.innerHTML='<p>If you are reading this,it is because your browser does not support the audio element. We recommend that you get a new browser.</p><p>';document.body.appendChild(e);}}initAudioEle();var e=30;var t=30;var n=350;var r=350;var curSongIndex=parseInt(document.getElementById('audio_element_id').getAttribute('curSongIndex'));var i=songs[curSongIndex];var s='mw-harlem_shake_me';var o='im_first';var u=['im_drunk','im_baked','im_trippin','im_blown'];var a='mw-strobe_light';var f='https://s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css';var l='mw_added_css';var b=g();var w=y();var C=document.getElementsByTagName('*');var k=null;for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){if(E(A)){k=A;break}}}if(A===null){console.warn('Could not find a node of the right size. Please try a different page.');return}c();S();var O=[];for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){O.push(A)}}})()"><i class="fa fa-music"></i> High~</a>
+
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/ShaunSheep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:zuogewoniu@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://www.douban.com/people/jincheng-ycf/" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://www.zhihu.com/people/OscarWildeHawking" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-instagram"></i></a>
+                  </span>
+                
+            </div>
+          
+
+            <!--
+            <div id="music163player">
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1336790004&auto=1&height=66"></iframe>
+            </div>
+            -->
+
+          
+          
+
+          
+          
+
+          <!--近期文章版块 began-->
+          
+              <div class="links-of-blogroll motion-element links-of-blogroll-block">
+                <div class="links-of-blogroll-title">
+                  <i class="fa fa-history fa-" aria-hidden="true"></i>
+                  近期文章
+                </div>
+                <ul class="links-of-blogroll-list">
+                  
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/viewpager-viewpager2-usage/" title="viewpager与viewpager2实践总结" target="_blank">viewpager与viewpager2实践总结</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/launchmode-activity-useage/" title="n条用例验证Activity4种启动模式的威力与坑" target="_blank">n条用例验证Activity4种启动模式的威力与坑</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/lifecycle-activity/" title="Activity各种条件下生命周期小结" target="_blank">Activity各种条件下生命周期小结</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/throttle-debounce-vie-click/" title="Android/Java事件过滤方案小结" target="_blank">Android/Java事件过滤方案小结</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/lifecycle-livedata-databind-viewmodel/" title="Android生命周期感知组件经验总结" target="_blank">Android生命周期感知组件经验总结</a>
+                    </li>
+                  
+                </ul>
+              </div>
+          
+          <!--近期文章版块 end-->
+
+          
+              <!-- canvas粒子时钟 -->
+              <!-- canvas粒子时钟 https://www.cnblogs.com/xiaohuochai/p/6368039.html
+  https://www.html5tricks.com/html5-canvas-dance-time.html
+ -->
+<div id="">
+  <canvas id="canvas" style="width:60%;">
+</div>
+<script async>
+(function(){
+  var WINDOW_WIDTH = 820;
+  		var WINDOW_HEIGHT = 250;
+  		var RADIUS = 7; //球半径
+  		var NUMBER_GAP = 10; //数字之间的间隙
+  		var u=0.65; //碰撞能量损耗系数
+  		var context; //Canvas绘制上下文
+  		var balls = []; //存储彩色的小球
+  		const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]; //彩色小球的颜色
+  		var currentNums = []; //屏幕显示的8个字符
+  		var digit =
+                  [
+                      [
+                          [0,0,1,1,1,0,0],
+                          [0,1,1,0,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,0,1,1,0],
+                          [0,0,1,1,1,0,0]
+                      ],//0
+                      [
+                          [0,0,0,1,1,0,0],
+                          [0,1,1,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [1,1,1,1,1,1,1]
+                      ],//1
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,1,1,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,1,1,1,1,1]
+                      ],//2
+                      [
+                          [1,1,1,1,1,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,1,0,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//3
+                      [
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,1,0],
+                          [0,0,1,1,1,1,0],
+                          [0,1,1,0,1,1,0],
+                          [1,1,0,0,1,1,0],
+                          [1,1,1,1,1,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,1,1]
+                      ],//4
+                      [
+                          [1,1,1,1,1,1,1],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,1,1,1,1,0],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//5
+                      [
+                          [0,0,0,0,1,1,0],
+                          [0,0,1,1,0,0,0],
+                          [0,1,1,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//6
+                      [
+                          [1,1,1,1,1,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0]
+                      ],//7
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//8
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,1,1,0,0,0,0]
+                      ],//9
+                      [
+                          [0,0,0,0],
+                          [0,0,0,0],
+                          [0,1,1,0],
+                          [0,1,1,0],
+                          [0,0,0,0],
+                          [0,0,0,0],
+                          [0,1,1,0],
+                          [0,1,1,0],
+                          [0,0,0,0],
+                          [0,0,0,0]
+                      ]//:
+                  ];
+
+  		function drawDatetime(cxt){
+  			var nums = [];
+
+  			context.fillStyle="#005eac"
+  			var date = new Date();
+  			var offsetX = 70, offsetY = 30;
+  			var hours = date.getHours();
+  			var num1 = Math.floor(hours/10);
+  			var num2 = hours%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+  			nums.push({num: 10}); //冒号
+  			var minutes = date.getMinutes();
+  			var num1 = Math.floor(minutes/10);
+  			var num2 = minutes%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+  			nums.push({num: 10}); //冒号
+  			var seconds = date.getSeconds();
+  			var num1 = Math.floor(seconds/10);
+  			var num2 = seconds%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+
+  			for(var x = 0;x<nums.length;x++){
+  				nums[x].offsetX = offsetX;
+  				offsetX = drawSingleNumber(offsetX,offsetY, nums[x].num,cxt);
+  				//两个数字连一块，应该间隔一些距离
+  				if(x<nums.length-1){
+  					if((nums[x].num!=10) &&(nums[x+1].num!=10)){
+  						offsetX+=NUMBER_GAP;
+  					}
+  				}
+  			}
+
+  			//说明这是初始化
+  			if(currentNums.length ==0){
+  				currentNums = nums;
+  			}else{
+  				//进行比较
+  				for(var index = 0;index<currentNums.length;index++){
+  					if(currentNums[index].num!=nums[index].num){
+  						//不一样时，添加彩色小球
+  						addBalls(nums[index]);
+  						currentNums[index].num=nums[index].num;
+  					}
+  				}
+  			}
+  			renderBalls(cxt);
+  			updateBalls();
+
+  			return date;
+  		}
+
+  		function addBalls (item) {
+  			var num = item.num;
+  			var numMatrix = digit[num];
+  			for(var y = 0;y<numMatrix.length;y++){
+  				for(var x = 0;x<numMatrix[y].length;x++){
+  					if(numMatrix[y][x]==1){
+  						var ball={
+  							offsetX:item.offsetX+RADIUS+RADIUS*2*x,
+  							offsetY:30+RADIUS+RADIUS*2*y,
+  							color:colors[Math.floor(Math.random()*colors.length)],
+  							g:1.5+Math.random(),
+  							vx:Math.pow(-1, Math.ceil(Math.random()*10))*4+Math.random(),
+  							vy:-5
+  						}
+  						balls.push(ball);
+  					}
+  				}
+  			}
+  		}
+
+  		function renderBalls(cxt){
+  			for(var index = 0;index<balls.length;index++){
+  				cxt.beginPath();
+  				cxt.fillStyle=balls[index].color;
+  				cxt.arc(balls[index].offsetX, balls[index].offsetY, RADIUS, 0, 2*Math.PI);
+  				cxt.fill();
+  			}
+  		}
+
+  		function updateBalls () {
+  			var i =0;
+  			for(var index = 0;index<balls.length;index++){
+  				var ball = balls[index];
+  				ball.offsetX += ball.vx;
+  				ball.offsetY += ball.vy;
+  				ball.vy+=ball.g;
+  				if(ball.offsetY > (WINDOW_HEIGHT-RADIUS)){
+  					ball.offsetY= WINDOW_HEIGHT-RADIUS;
+  					ball.vy=-ball.vy*u;
+  				}
+  				if(ball.offsetX>RADIUS&&ball.offsetX<(WINDOW_WIDTH-RADIUS)){
+
+  					balls[i]=balls[index];
+  					i++;
+  				}
+  			}
+  			//去除出边界的球
+  			for(;i<balls.length;i++){
+  				balls.pop();
+  			}
+  		}
+  		function drawSingleNumber(offsetX, offsetY, num, cxt){
+  			var numMatrix = digit[num];
+  			for(var y = 0;y<numMatrix.length;y++){
+  				for(var x = 0;x<numMatrix[y].length;x++){
+  					if(numMatrix[y][x]==1){
+  						cxt.beginPath();
+  						cxt.arc(offsetX+RADIUS+RADIUS*2*x,offsetY+RADIUS+RADIUS*2*y,RADIUS,0,2*Math.PI);
+  						cxt.fill();
+  					}
+  				}
+  			}
+  			cxt.beginPath();
+  			offsetX += numMatrix[0].length*RADIUS*2;
+  			return offsetX;
+  		}
+
+  		var canvas = document.getElementById("canvas");
+  		canvas.width=WINDOW_WIDTH;
+  		canvas.height=WINDOW_HEIGHT;
+  		context = canvas.getContext("2d");
+
+  		//记录当前绘制的时刻
+  		var currentDate = new Date();
+
+  		setInterval(function(){
+  			//清空整个Canvas，重新绘制内容
+  			context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  			drawDatetime(context);
+  		}, 50)
+})();
+</script>
+
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">启动模式的使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">标准模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">singleTop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">singleTask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">singleInstance</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">观察Task</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Task小知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">研究手段</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">观察SingleTask</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">观察SingleTop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">观察SingleInstance</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.1.</span> <span class="nav-text">配置1：4个SingleInstance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.2.</span> <span class="nav-text">配置2：1个SingleInstance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.3.</span> <span class="nav-text">进阶测试——activity回退的小bug：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">帮助文档</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.1.</span> <span class="nav-text">adb</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">8.1.1.</span> <span class="nav-text">查看Window</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">8.1.2.</span> <span class="nav-text">查看Activity</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.2.</span> <span class="nav-text">Activity</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">UsageStatsManager</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">10.</span> <span class="nav-text">task\stack</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">11.</span> <span class="nav-text">启动模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">12.</span> <span class="nav-text">好问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+      
+
+      <!-- 标签云 -->
+      <!--
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+      <h3 class="widget-title">Tag Cloud</h3>
+      <div id="myCanvasContainer" class="widget tagcloud">
+          <canvas width="250" height="250" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/" rel="tag">项目架构</a><span class="tag-list-count">1</span></li></ul>
+          </canvas>
+      </div>
+      </div>
+      
+      -->
+      <!-- 标签云 -->
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+       <i class="fa fa-heartbeat"></i>
+  </span>
+  <!--
+    <span class="author" itemprop="copyrightHolder"> &nbsp;叶金诚</span>
+  -->
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">164k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+
+        
+<div class="busuanzi-count">
+  <!--
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  -->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+   
+
+  
+  
+    
+      <span class="site-uv">
+        
+        我的第 <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 位朋友，
+      </span>
+    
+
+    
+      <span class="site-pv">
+        历经 <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次回眸才与你相遇
+        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      </span>
+    
+  
+
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="60" alpha="0.1"  zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='https://www.yangchaofan.cn" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='https://www.yangchaofan.cn" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+    <script>  function addCount(Counter){var $visitors=$('.leancloud_visitors');var url=$visitors.attr('id').trim();var title=$visitors.attr('data-flag-title').trim();Counter('get','/classes/Counter',{where:JSON.stringify({url})}).done(function({results}){if(results.length>0){var counter=results[0]; var $element=$(document.getElementById(url));$element.find('.leancloud-visitors-count').text(counter.time+1);Counter('put','/classes/Counter/'+counter.objectId,JSON.stringify({time:{'__op':'Increment','amount':1}})) .fail(function({responseJSON}){console.log('Failed to save Visitor num, with error message: '+responseJSON.error);})}else{ Counter('post','/classes/Counter',JSON.stringify({title:title,url:url,time:1})).done(function(){var $element=$(document.getElementById(url));$element.find('.leancloud-visitors-count').text(1);}).fail(function(){console.log('Failed to create');});}}).fail(function({responseJSON}){console.log('LeanCloud Counter Error: '+responseJSON.code+' '+responseJSON.error);});}$(function(){$.get('https://app-router.leancloud.cn/2/route?appId='+'MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz').done(function({api_server}){var Counter=function(method,url,data){return $.ajax({method:method,url:'https://'+api_server+'/1.1'+url,headers:{'X-LC-Id':'MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz','X-LC-Key':'pi8Pa2aH3XpcaovMyqIXVuOP','Content-Type':'application/json',},data:data});};  const localhost=/http:\/\/(localhost|127.0.0.1|0.0.0.0)/;if(localhost.test(document.URL))return;addCount(Counter);});});</script>
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+
+  <!-- Tidio 在线联系功能、鼠标点击特效、页面反馈...-->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+
+
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+    <script async src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script async src="/js/cursor/explosion.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+  <script async language="javascript">
+
+    var div = document.createElement("div");
+    //插入到自定义的theme-info或者copyright之后
+    var copyright = document.querySelector(".theme-info2") || document.querySelector(".copyright");
+
+    function show_run_time(){
+        window.setTimeout("show_run_time()", 1000);
+      // BirthDay=new Date("08/07/2019 20:00:00");
+        BirthDay=new Date("08/07/2016 20:00:00");
+        today=new Date();
+        timeold=(today.getTime()-BirthDay.getTime());
+        sectimeold=timeold/1000
+        secondsold=Math.floor(sectimeold);
+        msPerDay=24*60*60*1000
+        e_daysold=timeold/msPerDay
+        daysold=Math.floor(e_daysold);
+        e_hrsold=(e_daysold-daysold)*24;
+        hrsold=setzero(Math.floor(e_hrsold));
+        e_minsold=(e_hrsold-hrsold)*60;
+        minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+        seconds=setzero(Math.floor((e_minsold-minsold)*60));
+
+        // 使用zh-Hans.yml的文字替换
+        div.innerHTML = "我已在此等候你 " + "<span style='color: #1890ff'> " + daysold + " </span> 天 <span style='color: #1890ff'>" + hrsold + " </span>时 <span style='color: #1890ff'>" + minsold + " </span>分 <span style='color: #1890ff'>" + seconds + " </span>秒 ";
+
+        document.querySelector(".footer-inner").insertBefore(div, copyright.nextSibling);
+
+    }
+    function setzero(i){
+        if (i<10)
+        {i="0" + i};
+        return i;
+    }
+
+    show_run_time();
+
+  </script>
+
+
+
+
+<!-- 旋转魔方 -->
+
+   
+      
+<style>
+  /*最外层容器样式*/
+  .wrap {
+    width: 0px;
+    height: 0px;
+    /*margin: 80px;*/
+    /*position: relative;*/
+	     /*显示位置*/
+    position: fixed;
+    bottom: 120px;
+    right: 240px;
+    z-index: 999;
+  }
+
+  /*包裹所有容器样式*/
+  .cube {
+    width: 0px;
+    height: 0px;
+    margin: 0 auto;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(-80deg);
+    animation: rotate linear 10s infinite;
+  }
+
+  @-webkit-keyframes rotate {
+    from {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+    to {
+      transform: rotateX(360deg) rotateY(360deg);
+    }
+  }
+
+  .cube div {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    opacity: 0.8;
+    transition: all .4s;
+  }
+
+  /*定义所有图片样式*/
+  .pic {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cube .out_front {
+    transform: rotateY(0deg) translateZ(25px);
+  }
+
+  .cube .out_back {
+    transform: translateZ(-25px) rotateY(180deg);
+  }
+
+  .cube .out_left {
+    transform: rotateY(-90deg) translateZ(25px);
+  }
+
+  .cube .out_right {
+    transform: rotateY(90deg) translateZ(25px);
+  }
+
+  .cube .out_top {
+    transform: rotateX(90deg) translateZ(25px);
+  }
+
+  .cube .out_bottom {
+    transform: rotateX(-90deg) translateZ(25px);
+  }
+
+  /*定义小正方体样式*/
+  .cube span {
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+  }
+
+  .cube .in_pic {
+    width: 25px;
+    height:25px;
+  }
+
+  .cube .in_front {
+    transform: rotateY(0deg) translateZ(12px);
+  }
+
+  .cube .in_back {
+    transform: translateZ(-12px) rotateY(180deg);
+  }
+
+  .cube .in_left {
+    transform: rotateY(-90deg) translateZ(12px);
+  }
+
+  .cube .in_right {
+    transform: rotateY(90deg) translateZ(12px);
+  }
+
+  .cube .in_top {
+    transform: rotateX(90deg) translateZ(12px);
+  }
+
+  .cube .in_bottom {
+    transform: rotateX(-90deg) translateZ(12px);
+  }
+
+  /*鼠标移入后样式*/
+  .cube:hover .out_front {
+    transform: rotateY(0deg) translateZ(50px);
+  }
+
+  .cube:hover .out_back {
+    transform: translateZ(-50px) rotateY(180deg);
+  }
+
+  .cube:hover .out_left {
+    transform: rotateY(-90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_right {
+    transform: rotateY(90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_top {
+    transform: rotateX(90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+  }
+</style>
+
+<div class="wrap">
+
+		<!--包裹所有元素的容器-->
+		<div class="cube">
+			<!--前面图片 -->
+			<div class="out_front">
+			  <a onclick="back2top()">
+				  <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+				</a>
+			</div>
+			<!--后面图片 -->
+			<div class="out_back">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--左面图片 -->
+			<div class="out_left">
+        <a onclick="back2top()">
+				  <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+				</a>
+			</div>
+			<!--右面图片 -->
+			<div class="out_right">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--上面图片 -->
+			<div class="out_top">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--下面图片 -->
+			<div class="out_bottom">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+
+			<!--小正方体 -->
+			<span class="in_front">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_back">
+			     <img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_left">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_right">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_top">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_bottom">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+		</div>
+
+</div>
+
+<script>
+  function back2top(){
+    $('html, body').animate({scrollTop: 0}, 500);
+  }
+</script>
+
+   
+
+
+<!-- Console 输出第三方个性化字体 -->
+
+  <script async type="text/javascript" src="/figlet/fetch.min.js"></script>
+  <script type="text/javascript" src="/figlet/figlet.js"></script>
+  <script type="text/javascript">
+
+      figlet.defaults({fontPath: "/figlet/fonts"});
+      figlet("Welcome To Leaface", "Big Money-ne", function(err, text) {
+          if (err) {
+              console.log("something went wrong...");
+              console.dir(err);
+              return;
+          }
+          console.log(text);
+      });
+  </script>
+
+
+  <!-- Console 输出自定义字体 -->
+  
+    <script async type="text/javascript">
+        var text = "Welcome To Leaface";
+        var date = '2022-07-06';
+        console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
+        console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+        console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+        console.info('\n' + ' %c Leafae Wechat %c leaface ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+       // console.log("%c Time: " + date, "font-size:100px;white:"+fcolor+";border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);  background-image: linear-gradient(to right, orangered, orange, gold, lightgreen, cyan, dodgerblue, mediumpurple, hotpink, orangered);");
+       // console.log("%c .", "padding:300px 600px;line-height:10px;background:url(https://s2.ax1x.com/2019/10/17/KkoAJJ.md.png) no-repeat;");
+    </script>
+  
+
+
+  <!-- 看板娘 -->
+  
+      <script async src="/live2d-widget/autoload.js"></script>
+  
+	<!-- leafacePlayer -->
+	
+	<script id="lfz" src="https://player.liaofuzhan.com/player/player.js" key=1368557075310858241></script>
+	
+
+  
+
+  
+
+  <!-- 代码块复制功能 -->
+  <script async type="text/javascript" src="/js/src/clipboard.min.js"></script>
+  <script async type="text/javascript" src="/js/src/clipboard-use.js"></script>
+ 
+
+  <!--share.js-->
+  <link async rel="stylesheet" href="/sharejs/css/share.min.css">
+  <script async src="/sharejs/js/social-share.min.js"></script>
+
+  <!-- 模仿知乎卡片样式链接、崩溃欺骗特效 -->
+  <script async type="text/javascript" src="/js/src/linkcard.js"></script>
+
+  <!--崩溃欺骗 放在js文件最后-->
+  <!--
+  <script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+  -->
+
+ 
+
+</body>
+</html>

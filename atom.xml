@@ -6,7 +6,7 @@
   <link href="http://www.yangchaofan.cn/atom.xml" rel="self"/>
   
   <link href="http://www.yangchaofan.cn/"/>
-  <updated>2021-07-10T09:23:13.710Z</updated>
+  <updated>2022-07-06T14:31:55.477Z</updated>
   <id>http://www.yangchaofan.cn/</id>
   
   <author>
@@ -15,6 +15,161 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>viewpager与viewpager2实践总结</title>
+    <link href="http://www.yangchaofan.cn/2022/01/viewpager-viewpager2-usage/"/>
+    <id>http://www.yangchaofan.cn/2022/01/viewpager-viewpager2-usage/</id>
+    <published>2022-01-22T07:15:44.000Z</published>
+    <updated>2022-07-06T14:31:55.477Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;code概述&quot;&gt;Code概述&lt;/span&gt;&lt;a hre</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>n条用例验证Activity4种启动模式的威力与坑</title>
+    <link href="http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/"/>
+    <id>http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/</id>
+    <published>2022-01-19T14:16:35.000Z</published>
+    <updated>2022-07-06T14:25:13.848Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;启动模式的使用场景&quot;&gt;启动模式的使用场景&lt;/span&gt;</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Activity各种条件下生命周期小结</title>
+    <link href="http://www.yangchaofan.cn/2022/01/lifecycle-activity/"/>
+    <id>http://www.yangchaofan.cn/2022/01/lifecycle-activity/</id>
+    <published>2022-01-16T14:16:35.000Z</published>
+    <updated>2022-07-06T14:20:22.979Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;activity生命周期&quot;&gt;Activity生命周期&lt;</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android/Java事件过滤方案小结</title>
+    <link href="http://www.yangchaofan.cn/2022/01/throttle-debounce-vie-click/"/>
+    <id>http://www.yangchaofan.cn/2022/01/throttle-debounce-vie-click/</id>
+    <published>2022-01-13T10:13:12.000Z</published>
+    <updated>2022-07-06T14:47:41.882Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;什么是防抖动？举一个典型场景：&lt;/p&gt;
+&lt;p&gt;笔者处理一个bug，【留言板】</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android生命周期感知组件经验总结</title>
+    <link href="http://www.yangchaofan.cn/2022/01/lifecycle-livedata-databind-viewmodel/"/>
+    <id>http://www.yangchaofan.cn/2022/01/lifecycle-livedata-databind-viewmodel/</id>
+    <published>2022-01-11T00:13:12.000Z</published>
+    <updated>2022-07-06T14:10:23.953Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;问题引入&quot;&gt;问题引入&lt;/span&gt;&lt;a href=&quot;#</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+    <category term="AndroidUI优化" scheme="http://www.yangchaofan.cn/tags/AndroidUI%E4%BC%98%E5%8C%96/"/>
+    
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/tags/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RjxavaSample练习</title>
+    <link href="http://www.yangchaofan.cn/2022/01/Android-rxjava-Practice/"/>
+    <id>http://www.yangchaofan.cn/2022/01/Android-rxjava-Practice/</id>
+    <published>2022-01-06T14:33:57.000Z</published>
+    <updated>2022-07-06T14:46:52.552Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;rxjava-sample-项目介绍&quot;&gt;Rxjava </summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>编程人生价值观</title>
@@ -466,170 +621,6 @@
     
     
     <category term="程序人生，杂谈" scheme="http://www.yangchaofan.cn/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>波尔克</title>
-    <link href="http://www.yangchaofan.cn/2021/02/website_nickname/"/>
-    <id>http://www.yangchaofan.cn/2021/02/website_nickname/</id>
-    <published>2021-02-16T00:50:49.000Z</published>
-    <updated>2021-06-11T16:14:31.205Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;波尔克&quot;&gt;&lt;a href=&quot;#波尔克&quot; class=&quot;headerlink&quot; title=&quot;波尔克&quot;&gt;&lt;/a&gt;波尔克&lt;/h1&gt;&lt;p&gt;（谐音“博儿客”）&lt;/p&gt;
-&lt;h1 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h1&gt;&lt;p&gt;个人网站用了有四年了，期间一直都是用PHP+MySql的方式部署在阿里云，从备案域名折腾服务器，到调试各种插件，从制定学习计划，到学课程，又是边写文章边研究Markdown排版，种种事情花了很大功夫。今年1月份发生了一件事情——服务器到期，那会儿工作忙一直拖着续费的事情。阿里清空了磁盘，我也是事后才注意到通知短信，发现网站的文章数据全丢的那一刻，整个人浑身感觉都不好了。&lt;/p&gt;
-&lt;p&gt;痛定思痛，决定文章还是要继续写，写哪里呢CSDN、博客园、简书、掘金都只适合当存档的地方，毕竟没有个人网站用起来有感情。想起来之前工作的时候，为了写音视频直播学了Node，注意过Hexo框架，这个框架可以快速搭个人网站。哎哟不错哦，一拍大腿说干就干。谁让咱是行动派！&lt;/p&gt;
-&lt;p&gt;最终我花了一天时间，使用码云仓库+Hexo搭一个小型静态网站。优点是：免费，简单，便捷，最大优点是动静分离，静态资源放国内仓库，占磁盘空间的图片资源放CDN服务器，通过域名转发访问，加载效率杠杠滴。&lt;/p&gt;
-&lt;p&gt;这篇文章主要包含了个人网站的技术架构和常见问题。包括使用的oss管理平台、域名管理、评论管理、文章编辑与发布、网站编辑管理等功能的设计与实现。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="杂谈" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/"/>
-    
-    <category term="日记" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
-    
-    
-    <category term="杂谈" scheme="http://www.yangchaofan.cn/tags/%E6%9D%82%E8%B0%88/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android插件化技术选型</title>
-    <link href="http://www.yangchaofan.cn/2021/01/Android-plug-in-technology-selection/"/>
-    <id>http://www.yangchaofan.cn/2021/01/Android-plug-in-technology-selection/</id>
-    <published>2021-01-27T12:33:07.000Z</published>
-    <updated>2021-06-07T12:39:13.697Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h2&gt;&lt;span id=&quot;插件化&quot;&gt;插件化&lt;/span&gt;&lt;a href=&quot;#插件</summary>
-      
-    
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
-    
-    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
-    
-    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
-    
-    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android组件化实践指南</title>
-    <link href="http://www.yangchaofan.cn/2021/01/Android-component-Practice-Guide/"/>
-    <id>http://www.yangchaofan.cn/2021/01/Android-component-Practice-Guide/</id>
-    <published>2021-01-17T12:31:06.000Z</published>
-    <updated>2021-06-10T15:11:10.345Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;组件化基本概念&quot;&gt;组件化基本概念&lt;/span&gt;&lt;a h</summary>
-      
-    
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
-    
-    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
-    
-    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
-    
-    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
-    
-    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android大厂架构设计最佳实践</title>
-    <link href="http://www.yangchaofan.cn/2021/01/android-structure-best-practice/"/>
-    <id>http://www.yangchaofan.cn/2021/01/android-structure-best-practice/</id>
-    <published>2021-01-07T12:28:33.000Z</published>
-    <updated>2021-06-22T15:05:28.495Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;android架构设计最佳实践&quot;&gt;Android架构设</summary>
-      
-    
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
-    
-    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
-    
-    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
-    
-    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
-    
-    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AndroidHandler百问百答</title>
-    <link href="http://www.yangchaofan.cn/2020/08/handler%20TOP%20100%20Questions/"/>
-    <id>http://www.yangchaofan.cn/2020/08/handler%20TOP%20100%20Questions/</id>
-    <published>2020-08-10T01:50:49.000Z</published>
-    <updated>2021-03-06T13:51:20.688Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1&gt;&lt;span id=&quot;android百问百答-那些年被问过的handler原</summary>
-      
-    
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
-    
-    <category term="应用层" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BA%94%E7%94%A8%E5%B1%82/"/>
-    
-    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
-    
-    <category term="Handler" scheme="http://www.yangchaofan.cn/tags/Handler/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>dp动态规划的抽象思考过程</title>
-    <link href="http://www.yangchaofan.cn/2020/06/the-abstract-thinking-process-of-dynamic-programming/"/>
-    <id>http://www.yangchaofan.cn/2020/06/the-abstract-thinking-process-of-dynamic-programming/</id>
-    <published>2020-06-17T12:48:39.000Z</published>
-    <updated>2021-07-07T12:54:54.700Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;动态规划&quot;&gt;&lt;a href=&quot;#动态规划&quot; class=&quot;headerlink&quot; title=&quot;动态规划&quot;&gt;&lt;/a&gt;动态规划&lt;/h1&gt;&lt;p&gt;本文主要讲了动态规划四要素，并且用一个数字三角形为例，介绍了两种动态规划抽象思考过程，如何根据输入的二维数组，抽象出矩阵坐标，介绍两种完全相反的实现方式——自底向上、自顶向下。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="计算机科学" scheme="http://www.yangchaofan.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
-    
-    <category term="算法" scheme="http://www.yangchaofan.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="算法" scheme="http://www.yangchaofan.cn/tags/%E7%AE%97%E6%B3%95/"/>
-    
-    <category term="数据结构" scheme="http://www.yangchaofan.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
