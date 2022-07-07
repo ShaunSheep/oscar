@@ -538,7 +538,7 @@
 <blockquote>
 <p>前三个是先到达先处理型，第四个是厚道的后处理型</p>
 </blockquote>
-<h2><span id="传统计算时间间隔">传统计算时间间隔</span><a href="#传统计算时间间隔" class="header-anchor">#</a></h2><p>第一次触发事件的时候记录一个时间戳，下一次触发事件时，再记录一个时间戳，在指定的时间间隔内，返回false，不去执行后续的业务逻辑</p>
+<h2 id="传统计算时间间隔"><a href="#传统计算时间间隔" class="headerlink" title="传统计算时间间隔"></a>传统计算时间间隔<a href="#传统计算时间间隔" class="header-anchor">#</a></h2><p>第一次触发事件的时候记录一个时间戳，下一次触发事件时，再记录一个时间戳，在指定的时间间隔内，返回false，不去执行后续的业务逻辑</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class MBUtils &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 两次点击按钮接口之间的点击间隔不能少于1300毫秒，人为控制这个开关</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static final long MIN_CLICK_DELAY_TIME &#x3D; 1300;</span><br><span class="line">    private static long lastClickTime;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @return true：频繁点击 ；fasle 不是频繁点击</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public boolean isFastClick() &#123;</span><br><span class="line">        boolean flag &#x3D; true;</span><br><span class="line">        long curClickTime &#x3D; System.currentTimeMillis();</span><br><span class="line">        if ((curClickTime - lastClickTime) &gt;&#x3D; MIN_CLICK_DELAY_TIME) &#123;</span><br><span class="line">            flag &#x3D; false;</span><br><span class="line">        &#125;</span><br><span class="line">        lastClickTime &#x3D; curClickTime;</span><br><span class="line">        return flag;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
 
@@ -546,7 +546,7 @@
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">  public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) &#123;</span><br><span class="line">      MessageBean bean &#x3D; mbsAdapter.getData().get(position);</span><br><span class="line">      if (view.getId() &#x3D;&#x3D; R.id.iv_delete) &#123;</span><br><span class="line">          if(MBUtils.isFastClick())&#123;</span><br><span class="line">			  &#x2F;&#x2F; 点击太快不予执行</span><br><span class="line">              return;</span><br><span class="line">          &#125;</span><br><span class="line">    	  mbRequest.deleteSingle(bean, position);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></div>
 
 
-<h2><span id="rxjava">RxJava</span><a href="#rxjava" class="header-anchor">#</a></h2><p>这种方案的效果是，当一个动作连续触发，则只执行第一次。主要利用了Rxjava#throttleFirst方法的特性，在指定时间间隔内，Observer不会收到subscribe发来的消息，达到防抖动的效果</p>
+<h2 id="rxjava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava<a href="#rxjava" class="header-anchor">#</a></h2><p>这种方案的效果是，当一个动作连续触发，则只执行第一次。主要利用了Rxjava#throttleFirst方法的特性，在指定时间间隔内，Observer不会收到subscribe发来的消息，达到防抖动的效果</p>
 <ul>
 <li>ObservableOnSubscribe用于观察View的Click事件，在接收到系统发来的click消息后，通过onNext传递给它的观察者</li>
 <li>Observer用于接收消息，一旦Rxjava底层发来了消息，将在onNext处理它，并通过myClickListener返回给上层，进行下一步的业务处理</li>
@@ -556,7 +556,7 @@
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MBUtils.throttleFirstProcess(1, TimeUnit.SECONDS, childView, new MBUtils.ThrottleClickListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onClick(View view) &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></div>
 
 
-<h2><span id="rxbinding">RxBinding</span><a href="#rxbinding" class="header-anchor">#</a></h2><p>RxBinding是一款非常强大组件库，用于将特定的UI组件与事件绑定起来，如将一个Button与Button的点击事件绑定。</p>
+<h2 id="rxbinding"><a href="#RxBinding" class="headerlink" title="RxBinding"></a>RxBinding<a href="#rxbinding" class="header-anchor">#</a></h2><p>RxBinding是一款非常强大组件库，用于将特定的UI组件与事件绑定起来，如将一个Button与Button的点击事件绑定。</p>
 <p>以下是针对本文提到到频繁点击删除按钮的过滤用法，通过RxView对象，将Button对象与click事件绑定，用户点击Button后，会执行subscribe的Action#Call回调</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Button btn &#x3D; helper.itemView.findViewById(R.id.iv_delete);</span><br><span class="line">RxView.clicks(btn)</span><br><span class="line">        .throttleFirst(3, TimeUnit.SECONDS)</span><br><span class="line">        .subscribe(new Action1&lt;Void&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void call(Void aVoid) &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></div>
 <p>RxView支持哪些事件？</p>
@@ -567,7 +567,7 @@
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation &#39;com.jakewharton.rxbinding4:rxbinding:4.0.0&#39;  # 按需使用 implementation &#39;com.jakewharton.rxbinding4:rxbinding-core:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-appcompat:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-drawerlayout:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-leanback:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-recyclerview:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-slidingpanelayout:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-swiperefreshlayout:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-viewpager:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-viewpager2:4.0.0&#39; # 按需使用 implementation &#39;com.jakewharton.rxbinding4:rxbinding-material:4.0.0&#39;</span><br></pre></td></tr></table></figure></div>
 
 
-<h2><span id="同一任务执行最后一次">同一任务执行最后一次</span><a href="#同一任务执行最后一次" class="header-anchor">#</a></h2><p>这种方案简单的说，当一个动作连续触发，则只执行最后一次。</p>
+<h2 id="同一任务执行最后一次"><a href="#同一任务执行最后一次" class="headerlink" title="同一任务执行最后一次"></a>同一任务执行最后一次<a href="#同一任务执行最后一次" class="header-anchor">#</a></h2><p>这种方案简单的说，当一个动作连续触发，则只执行最后一次。</p>
 <p>查看代码，只有一个方法throttleFirstProcess方法会接收Runnnable对象作为value，以任务名作为key存储在一个ConcurrentHashMap里，每个Runnable的特点是将被延时1秒执行</p>
 <p>为了实现只执行最后一次的效果，我们主要利用了ConcurrentHashMap对象put方法的特性，</p>
 <p>举个例子，第一次执行Delete任务，ConcurrentHashMap会记下一个key为Delete，value为Rannable的任务；</p>
@@ -582,7 +582,7 @@
 
 
 <p>1秒内点击多次，会创建n个同名为删除留言的Runnable，只有最后一个存入的Runnable才会被执行。</p>
-<h2><span id="总结">总结</span><a href="#总结" class="header-anchor">#</a></h2><table>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结<a href="#总结" class="header-anchor">#</a></h2><table>
 <thead>
 <tr>
 <th align="left"></th>
@@ -1381,7 +1381,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">传统计算时间间隔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">RxJava</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">RxBinding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">同一任务执行最后一次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E8%AE%A1%E7%AE%97%E6%97%B6%E9%97%B4%E9%97%B4%E9%9A%94"><span class="nav-number">1.</span> <span class="nav-text">传统计算时间间隔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rxjava"><span class="nav-number">2.</span> <span class="nav-text">RxJava</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rxbinding"><span class="nav-number">3.</span> <span class="nav-text">RxBinding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8C%E4%B8%80%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E6%9C%80%E5%90%8E%E4%B8%80%E6%AC%A1"><span class="nav-number">4.</span> <span class="nav-text">同一任务执行最后一次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
@@ -1436,7 +1436,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">164k</span>
+    <span title="Site words total count">167.1k</span>
   
 </div>
 
@@ -2346,7 +2346,7 @@
   
     <script async type="text/javascript">
         var text = "Welcome To Leaface";
-        var date = '2022-07-06';
+        var date = '2022-07-07';
         console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
         console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
         console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');

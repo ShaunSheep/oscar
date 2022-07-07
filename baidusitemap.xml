@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.yangchaofan.cn//2022/01/lifecycle-livedata-databind-viewmodel/</loc>
+    <lastmod>2022-07-07</lastmod>
+  </url>
+  <url>
     <loc>http://www.yangchaofan.cn//2022/01/throttle-debounce-vie-click/</loc>
     <lastmod>2022-07-06</lastmod>
   </url>
@@ -18,10 +22,6 @@
   </url>
   <url>
     <loc>http://www.yangchaofan.cn//2022/01/lifecycle-activity/</loc>
-    <lastmod>2022-07-06</lastmod>
-  </url>
-  <url>
-    <loc>http://www.yangchaofan.cn//2022/01/lifecycle-livedata-databind-viewmodel/</loc>
     <lastmod>2022-07-06</lastmod>
   </url>
   <url>
