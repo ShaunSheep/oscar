@@ -6,7 +6,7 @@
   <link href="http://www.yangchaofan.cn/atom.xml" rel="self"/>
   
   <link href="http://www.yangchaofan.cn/"/>
-  <updated>2022-07-06T14:31:55.477Z</updated>
+  <updated>2022-07-27T15:50:44.967Z</updated>
   <id>http://www.yangchaofan.cn/</id>
   
   <author>
@@ -15,6 +15,201 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Jetpack-生命周期组件库Lifecycle</title>
+    <link href="http://www.yangchaofan.cn/2023/05/jetpack-lifecycle-mmvm-usage/"/>
+    <id>http://www.yangchaofan.cn/2023/05/jetpack-lifecycle-mmvm-usage/</id>
+    <published>2023-05-27T15:32:43.000Z</published>
+    <updated>2022-07-27T15:50:44.967Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Jetpack生命周期组件&quot;&gt;&lt;a href=&quot;#Jetpack生命周期组件&quot; class=&quot;headerlink&quot; title=&quot;Jetpack生命周期组件&quot;&gt;&lt;/a&gt;Jetpack生命周期组件&lt;/h1&gt;&lt;p&gt;本文主要针对lifecycle引入的背景以及lifecycle比传统监听生命周期优势做了详细对比，也介绍了具体用法。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jetpack-生命周期组件库Paging</title>
+    <link href="http://www.yangchaofan.cn/2022/07/jetpack-paging-mmvm-usage/"/>
+    <id>http://www.yangchaofan.cn/2022/07/jetpack-paging-mmvm-usage/</id>
+    <published>2022-07-27T15:40:55.699Z</published>
+    <updated>2022-07-27T15:51:02.549Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Paging&quot;&gt;&lt;a href=&quot;#Paging&quot; class=&quot;headerlink&quot; title=&quot;Paging&quot;&gt;&lt;/a&gt;Paging&lt;/h1&gt;&lt;h2 id=&quot;用途&quot;&gt;&lt;a href=&quot;#用途&quot; class=&quot;headerlink&quot; title=&quot;用途&quot;&gt;&lt;/a&gt;用途&lt;/h2&gt;&lt;p&gt;对数据按需加载，实现无限滚动，支持从本地存储和网络加载。&lt;/p&gt;
+&lt;h2 id=&quot;优势&quot;&gt;&lt;a href=&quot;#优势&quot; class=&quot;headerlink&quot; title=&quot;优势&quot;&gt;&lt;/a&gt;优势&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;支持与Jetpack包下的库组合使用&lt;/li&gt;
+&lt;li&gt;支持第三方库 RxJava&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android项目Gradle常见用途</title>
+    <link href="http://www.yangchaofan.cn/2022/02/Android-gradle-usage/"/>
+    <id>http://www.yangchaofan.cn/2022/02/Android-gradle-usage/</id>
+    <published>2022-02-27T15:21:24.000Z</published>
+    <updated>2022-07-27T15:48:29.511Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本文介绍了Gradle在Android项目开发中的应用，包括配置SrouceSets、定义全局常量、组件化、定义Apk名称、App包名、依赖项配置等。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jetpack-生命周期组件库ViewModel</title>
+    <link href="http://www.yangchaofan.cn/2022/01/jetpack-viewmodel-mmvm-usage/"/>
+    <id>http://www.yangchaofan.cn/2022/01/jetpack-viewmodel-mmvm-usage/</id>
+    <published>2022-01-27T06:36:25.000Z</published>
+    <updated>2022-07-27T15:51:13.109Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Viewmodel&quot;&gt;&lt;a href=&quot;#Viewmodel&quot; class=&quot;headerlink&quot; title=&quot;Viewmodel&quot;&gt;&lt;/a&gt;Viewmodel&lt;/h1&gt;&lt;h2 id=&quot;用途&quot;&gt;&lt;a href=&quot;#用途&quot; class=&quot;headerlink&quot; title=&quot;用途&quot;&gt;&lt;/a&gt;用途&lt;/h2&gt;&lt;p&gt;用于关注界面相关的数据，关注生命周期期间所需的数据&lt;/p&gt;
+&lt;p&gt;例如：屏幕旋转、语言、时区发生更改后继续显示的数据。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关键：对数据的管理、存储数据，是一种管理数据的方式&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;优势&quot;&gt;&lt;a href=&quot;#优势&quot; class=&quot;headerlink&quot; title=&quot;优势&quot;&gt;&lt;/a&gt;优势&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;销毁或重建后，页面瞬时态的数据会丢失，如rotate后，ViewModel不会被销毁，Activity的成员变了会销毁&lt;/li&gt;
+&lt;li&gt;比onSaveInstanceState能存的数据量更大，如网络请求查询回来的用户列表接口、bitmap、网络缓存的视频流适合放在Viewmodel里，不适合放在OnSaveInstanceState&lt;/li&gt;
+&lt;li&gt;避免页面销毁后，异步任务返回造成的内存泄漏；&lt;/li&gt;
+&lt;li&gt;减少代码维护量，避免手动编写代码管理这些资源的释放&lt;/li&gt;
+&lt;li&gt;Activity、Fragment不应对关注数据的处理，而只应该关注将数据显示到界面上&lt;/li&gt;
+&lt;li&gt;从Activity和Fragment中分离出视图所需数据的管理责任，让代码逻辑解耦，让开发者管理业务和界面的关系更高效&lt;/li&gt;
+&lt;li&gt;在Activity、Fragment之间共享数据，无需持有引用，无需相互调用，无需担心被其他Fragment生命周期影响</summary>
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jetpack-生命周期组件库Databinding</title>
+    <link href="http://www.yangchaofan.cn/2022/01/jetpack-daabinding-mmvm-usage/"/>
+    <id>http://www.yangchaofan.cn/2022/01/jetpack-daabinding-mmvm-usage/</id>
+    <published>2022-01-27T05:37:42.000Z</published>
+    <updated>2022-07-27T15:49:45.399Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Databinding&quot;&gt;&lt;a href=&quot;#Databinding&quot; class=&quot;headerlink&quot; title=&quot;Databinding&quot;&gt;&lt;/a&gt;Databinding&lt;/h1&gt;&lt;p&gt;本文主要讲了Databinding以下用法：Activity用法、Fragment用法、Recycleview用法、布局引用、更新字段、事件处理等。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jetpack-生命周期组件库LiveData</title>
+    <link href="http://www.yangchaofan.cn/2022/01/jetpack-livedata-mmvm-usage/"/>
+    <id>http://www.yangchaofan.cn/2022/01/jetpack-livedata-mmvm-usage/</id>
+    <published>2022-01-27T05:34:18.000Z</published>
+    <updated>2022-07-27T15:50:54.993Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;LiveData&quot;&gt;&lt;a href=&quot;#LiveData&quot; class=&quot;headerlink&quot; title=&quot;LiveData&quot;&gt;&lt;/a&gt;LiveData&lt;/h1&gt;&lt;h2 id=&quot;用途&quot;&gt;&lt;a href=&quot;#用途&quot; class=&quot;headerlink&quot; title=&quot;用途&quot;&gt;&lt;/a&gt;用途&lt;/h2&gt;&lt;p&gt;可观察的数据存储类&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;关键： 是一种数据类型&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;优势&quot;&gt;&lt;a href=&quot;#优势&quot; class=&quot;headerlink&quot; title=&quot;优势&quot;&gt;&lt;/a&gt;优势&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;可感知其他组件的生命周期，如Activity、Fragment、Service&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;只通知处于活跃状态的观察者；非活跃的观察者不会收到通知&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;确保界面实时响应数据的变化—数据变化，会进入Observer#onStateChange回调&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;不会发生内存泄漏–Observer会绑定到Lifecycle，其关联的组件销毁后，Observer会自我释放&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;不会因为Activity停止导致crash–Observer处于非活跃状态，它不会收到任何LiveData事件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;数据始终保持最新状态–从非活跃状态变为活跃状态，Observer会收到最新的数据，后台Activity返回前台后会立刻接收最新的数据&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;兼容系统配置更改–由于设备更改重新创建了Activity、Fragment，Observer会立即收到livedata的最新数据，这一切都不需要额外开发代码&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;共享资源–使用单例模式扩展LiveData，以便于在整个App内共享数据。具体用法参考本节&lt;strong&gt;基本用法#共享值&lt;/strong&gt;&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
   
   <entry>
     <title>viewpager与viewpager2实践总结</title>
@@ -112,36 +307,6 @@
     <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
     <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android生命周期感知组件经验总结</title>
-    <link href="http://www.yangchaofan.cn/2022/01/lifecycle-livedata-databind-viewmodel/"/>
-    <id>http://www.yangchaofan.cn/2022/01/lifecycle-livedata-databind-viewmodel/</id>
-    <published>2022-01-11T00:13:12.000Z</published>
-    <updated>2022-07-07T14:59:40.219Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;问题引入&quot;&gt;&lt;a href=&quot;#问题引入&quot; class=&quot;head</summary>
-      
-    
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
-    
-    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
-    
-    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
-    
-    <category term="项目架构" scheme="http://www.yangchaofan.cn/tags/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
-    
-    <category term="AndroidUI优化" scheme="http://www.yangchaofan.cn/tags/AndroidUI%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   
@@ -409,218 +574,9 @@
     
     <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
-    <category term="AndroidUI优化" scheme="http://www.yangchaofan.cn/tags/AndroidUI%E4%BC%98%E5%8C%96/"/>
-    
     <category term="Android性能优化" scheme="http://www.yangchaofan.cn/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
-  </entry>
-  
-  <entry>
-    <title>《学习革命解读》心得</title>
-    <link href="http://www.yangchaofan.cn/2021/02/learn-relovation-notes/"/>
-    <id>http://www.yangchaofan.cn/2021/02/learn-relovation-notes/</id>
-    <published>2021-02-18T14:00:49.000Z</published>
-    <updated>2021-04-10T16:05:48.945Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;书籍&quot;&gt;&lt;a href=&quot;#书籍&quot; class=&quot;headerlink&quot; title=&quot;书籍&quot;&gt;&lt;/a&gt;书籍&lt;/h1&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;名称&lt;/th&gt;
-&lt;th&gt;详情&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;封面&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;&lt;img src=&quot;http://cdn.yangchaofan.cn/q4YBAFxP4wGABmEDAADtx3MZXfQ102_b.jpg&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;作者&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;&lt;a href=&quot;https://book.douban.com/search/%E5%88%98%E8%A8%80&quot;&gt;刘言&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;出版社&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;青海人民出版社&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;介绍&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;书籍每一开分为左右两页，左侧为精华总结、心得、名人关于学习的见解，对人有启发；右侧是作者的解读，主要讲了：&lt;br&gt;实用的学习总论如正文的思考训练、数学学习方法；&lt;br&gt;走出学习的困境，消除错误学习观念、消除学习疲劳的方法，消除学习的三大障碍&lt;br&gt;快速学习法的20个事件，如控制大脑学习韵律节奏、通过五官影响学习感受&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;</summary>
-    
-    
-    
-    <category term="家庭教育" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
-    
-    <category term="学习方法" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
-    
-    
-    <category term="学习方法" scheme="http://www.yangchaofan.cn/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《高效学习方法全集》日记</title>
-    <link href="http://www.yangchaofan.cn/2021/02/super-learn-skills/"/>
-    <id>http://www.yangchaofan.cn/2021/02/super-learn-skills/</id>
-    <published>2021-02-17T07:26:29.000Z</published>
-    <updated>2021-02-17T07:52:02.425Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;高效学习方法全集高中版&quot;&gt;&lt;a href=&quot;#高效学习方法全集高中版&quot; class=&quot;headerlink&quot; title=&quot;高效学习方法全集高中版&quot;&gt;&lt;/a&gt;高效学习方法全集高中版&lt;/h1&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;名称&lt;/th&gt;
-&lt;th&gt;详情&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;封面&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;&lt;img src=&quot;http://cdn.yangchaofan.cn/%E9%AB%98%E6%95%88%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95%E9%AB%98%E4%B8%AD%E7%89%88.jpg&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;作者&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;新教育学习研究机构&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;出版社&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;湖北教育出版社&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;介绍&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;此书有许多状元的学习经验方法总结。譬如预习一节，关于预习的3个目的；譬如复习一节，黄金五分钟和睡前复习法，譬如如何做题一章有做题的禁忌、题目的选择、做题的时机、做题的思考、最后总结等&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;</summary>
-    
-    
-    
-    <category term="家庭教育" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
-    
-    <category term="学习方法" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
-    
-    
-    <category term="学习方法" scheme="http://www.yangchaofan.cn/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《如何高效学习》心得</title>
-    <link href="http://www.yangchaofan.cn/2021/02/study-more-efficiency/"/>
-    <id>http://www.yangchaofan.cn/2021/02/study-more-efficiency/</id>
-    <published>2021-02-17T04:37:23.000Z</published>
-    <updated>2021-04-02T12:51:32.440Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;如何高效学习&quot;&gt;&lt;a href=&quot;#如何高效学习&quot; class=&quot;headerlink&quot; title=&quot;如何高效学习&quot;&gt;&lt;/a&gt;如何高效学习&lt;/h1&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;&lt;strong&gt;名称&lt;/strong&gt;&lt;/th&gt;
-&lt;th&gt;&lt;strong&gt;详情&lt;/strong&gt;&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;封面&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;&lt;img src=&quot;http://cdn.yangchaofan.cn/s27172838.jpg&quot; width=25%&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;作者&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;[&lt;a href=&quot;https://book.douban.com/author/625722/&quot;&gt;加拿大] 斯科特·扬&lt;/a&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;出版社&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;机械工业出版社&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;介绍&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;“学习的最高原则：定义出学习的活动，并做到它们”&lt;br&gt;如何用整体学习法学会作者提倡的整体学习法？如何用比喻记住比喻技术——比喻法-光线摄入眼球，眼球对光的感觉，视网膜的感觉，大脑对光的感觉，大脑中的声音&lt;br&gt;&lt;img src=&quot;http://cdn.yangchaofan.cn/biyufa.png&quot; width=&quot;20%&quot;&gt;&lt;br&gt;当我的思维库里有如此多的思维技术，我该如何运用呢？&lt;br/&gt;学习理论和学习技术是整体性学习策略的重要组成部分，它俩同等重要，没有先后。&lt;br/&gt;我喜欢在这两个技术中融入自己的学习方法，如《学习革命的解读》、《超效学方法解码》、《高效学习方法全集》中的一些方法。&lt;br/&gt;将“学习理论”和“学习技术”应用实践到生活中去是非常必要的步骤，我喜欢做一些智力挑战、智力思维训练巩固我的整体性学习策略。&lt;br/&gt;我需要选择，选择将哪些技术当作我习惯技术——好比趁手的兵器。&lt;br/&gt;我需要问为什么，当前场景下为什么需要使用这种技术，而不用其他技术；&lt;br/&gt;我需要练习薄弱的思维，我思维弱项是处理抽象数据、数学公式等，那我就要着重训练内在化、随意信息的处理。&lt;br/&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;</summary>
-    
-    
-    
-    <category term="家庭教育" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
-    
-    <category term="学习方法" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
-    
-    
-    <category term="学习方法" scheme="http://www.yangchaofan.cn/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>《超效学习方法解码》心得</title>
-    <link href="http://www.yangchaofan.cn/2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/"/>
-    <id>http://www.yangchaofan.cn/2021/02/chao-xiao-xue-xi-fang-fa-jie-ma/</id>
-    <published>2021-02-17T03:37:23.000Z</published>
-    <updated>2021-02-17T07:41:30.517Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;《超效学习方法解码》&quot;&gt;&lt;a href=&quot;#《超效学习方法解码》&quot; class=&quot;headerlink&quot; title=&quot;《超效学习方法解码》&quot;&gt;&lt;/a&gt;《超效学习方法解码》&lt;/h1&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;名称&lt;/th&gt;
-&lt;th&gt;详情&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;封面&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;&lt;img src=&quot;http://cdn.yangchaofan.cn/gaoxiao%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95.jpg&quot; width=&quot;50%&quot; height=&quot;50%&quot;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;作者&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;曹婷&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;出版社&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;星火教育研究院&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;介绍&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;分为学习基础篇、学习修炼篇、学习问题对症篇；学习对症篇主要解决语文、数学、英文、历史、政治的疑难杂症；学习修炼篇提供了预习、听课、复习、做题的基本思路，克服困难的方法；学习基础篇主要讲了时间管理、注意力管理、记忆力的小技巧。&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;&lt;/table&gt;</summary>
-    
-    
-    
-    <category term="家庭教育" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/"/>
-    
-    <category term="学习方法" scheme="http://www.yangchaofan.cn/categories/%E5%AE%B6%E5%BA%AD%E6%95%99%E8%82%B2/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
-    
-    
-    <category term="学习方法" scheme="http://www.yangchaofan.cn/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>程序员吃的是青春饭吗？</title>
-    <link href="http://www.yangchaofan.cn/2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/"/>
-    <id>http://www.yangchaofan.cn/2021/02/Is%20coder%20need%20more%20younger%EF%BC%9F/</id>
-    <published>2021-02-16T01:50:49.000Z</published>
-    <updated>2021-04-03T18:24:59.810Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;程序员吃的是青春饭吗？&quot;&gt;&lt;a href=&quot;#程序员吃的是青春饭吗？&quot; class=&quot;headerlink&quot; title=&quot;程序员吃的是青春饭吗？&quot;&gt;&lt;/a&gt;程序员吃的是青春饭吗？&lt;/h1&gt;&lt;p&gt;昨天在知乎上看到一个提问&lt;a href=&quot;https://www.zhihu.com/question/444102247&quot;&gt;“程序员为什么是吃青春饭，而不是像医生律师一样越老越值钱？”&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;翻了一百多个回答，大多答主都是顺着题主的逻辑假定答的&lt;/p&gt;
-&lt;p&gt;即许多人都是心中假设此前提成立：“程序员是吃青春饭”、“律师医生越老越值钱”&lt;/p&gt;
-&lt;p&gt;基于“程序员确实吃青春饭”很容易可以得到以下这些“由果倒因”“贩卖焦虑”的观点：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;医生可以独立出售个人价值，程序员不行&lt;/li&gt;
-&lt;li&gt;医生知识更新慢，程序员知识更新快&lt;/li&gt;
-&lt;li&gt;医生是非劳动密集，程序员是劳动密集&lt;/li&gt;
-&lt;li&gt;医生卖的是个人服务，程序员卖的是coding能力&lt;/li&gt;
-&lt;li&gt;医生服务的是人，程序员服务的是计算机&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;可如果题主或答主们的前提假定是错的呢？&lt;/p&gt;
-&lt;p&gt;如果存在“程序员越老越值钱”的事实呢？</summary>
-    
-    
-    
-    <category term="杂谈" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/"/>
-    
-    <category term="日记" scheme="http://www.yangchaofan.cn/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/"/>
-    
-    
-    <category term="程序人生，杂谈" scheme="http://www.yangchaofan.cn/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/"/>
+    <category term="AndroidUI优化" scheme="http://www.yangchaofan.cn/tags/AndroidUI%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   

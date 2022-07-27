@@ -1261,6 +1261,1961 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2023/05/jetpack-lifecycle-mmvm-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2023/05/jetpack-lifecycle-mmvm-usage/" itemprop="url">Jetpack-生命周期组件库Lifecycle</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+             
+
+             
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2023-05-27T23:32:43+08:00">
+                2023-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">项目架构</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">开源框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2023/05/jetpack-lifecycle-mmvm-usage/" class="leancloud_visitors" data-flag-title="Jetpack-生命周期组件库Lifecycle">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          <!--
+          
+          -->
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数&#58;</span>
+                
+                <span title="字数">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">时长 &asymp;</span>
+                
+                <span title="时长">
+                  6 分钟
+                </span>
+              
+            </span>
+          
+
+          <!-- 隐藏文章内标题下，内容描述
+          
+          -->
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Jetpack生命周期组件"><a href="#Jetpack生命周期组件" class="headerlink" title="Jetpack生命周期组件"></a>Jetpack生命周期组件</h1><p>本文主要针对lifecycle引入的背景以及lifecycle比传统监听生命周期优势做了详细对比，也介绍了具体用法。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2023/05/jetpack-lifecycle-mmvm-usage/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+      <!-- 相关文章推荐 -->
+     
+          
+
+  <div class="popular-posts-header">
+    <i class="fa fa-graduation-cap"></i>
+    相关文章
+  </div>
+
+ <details>
+   <summary>点击查看</summary>
+     <ul class="popular-posts">
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\07\jetpack-paging-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Paging</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-viewmodel-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库ViewModel</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-daabinding-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Databinding</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-livedata-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库LiveData</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\Android-component-Practice-Guide\" rel="bookmark">Android组件化实践指南</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\android-structure-best-practice\" rel="bookmark">Android大厂架构设计最佳实践</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\02\Android-gradle-usage\" rel="bookmark">Android项目Gradle常见用途</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\throttle-debounce-vie-click\" rel="bookmark">Android/Java事件过滤方案小结</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\Android-rxjava-Practice\" rel="bookmark">RjxavaSample练习</a></div>
+         
+       </li>
+     
+     </ul>
+ </details>
+
+
+
+     
+
+    
+    
+    
+
+    <div>
+          
+    </div>
+
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2022/07/jetpack-paging-mmvm-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/07/jetpack-paging-mmvm-usage/" itemprop="url">Jetpack-生命周期组件库Paging</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+             
+
+             
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-07-27T23:40:55+08:00">
+                2022-07-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">项目架构</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">开源框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2022/07/jetpack-paging-mmvm-usage/" class="leancloud_visitors" data-flag-title="Jetpack-生命周期组件库Paging">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          <!--
+          
+          -->
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数&#58;</span>
+                
+                <span title="字数">
+                  957
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">时长 &asymp;</span>
+                
+                <span title="时长">
+                  4 分钟
+                </span>
+              
+            </span>
+          
+
+          <!-- 隐藏文章内标题下，内容描述
+          
+          -->
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Paging"><a href="#Paging" class="headerlink" title="Paging"></a>Paging</h1><h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><p>对数据按需加载，实现无限滚动，支持从本地存储和网络加载。</p>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><ul>
+<li>支持与Jetpack包下的库组合使用</li>
+<li>支持第三方库 RxJava</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2022/07/jetpack-paging-mmvm-usage/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+      <!-- 相关文章推荐 -->
+     
+          
+
+  <div class="popular-posts-header">
+    <i class="fa fa-graduation-cap"></i>
+    相关文章
+  </div>
+
+ <details>
+   <summary>点击查看</summary>
+     <ul class="popular-posts">
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2023\05\jetpack-lifecycle-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Lifecycle</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-viewmodel-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库ViewModel</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-daabinding-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Databinding</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-livedata-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库LiveData</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\Android-component-Practice-Guide\" rel="bookmark">Android组件化实践指南</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\android-structure-best-practice\" rel="bookmark">Android大厂架构设计最佳实践</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\02\Android-gradle-usage\" rel="bookmark">Android项目Gradle常见用途</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\throttle-debounce-vie-click\" rel="bookmark">Android/Java事件过滤方案小结</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\Android-rxjava-Practice\" rel="bookmark">RjxavaSample练习</a></div>
+         
+       </li>
+     
+     </ul>
+ </details>
+
+
+
+     
+
+    
+    
+    
+
+    <div>
+          
+    </div>
+
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2022/02/Android-gradle-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/02/Android-gradle-usage/" itemprop="url">Android项目Gradle常见用途</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+             
+
+             
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-02-27T23:21:24+08:00">
+                2022-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">项目架构</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">开源框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2022/02/Android-gradle-usage/" class="leancloud_visitors" data-flag-title="Android项目Gradle常见用途">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          <!--
+          
+          -->
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数&#58;</span>
+                
+                <span title="字数">
+                  4.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">时长 &asymp;</span>
+                
+                <span title="时长">
+                  21 分钟
+                </span>
+              
+            </span>
+          
+
+          <!-- 隐藏文章内标题下，内容描述
+          
+          -->
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>本文介绍了Gradle在Android项目开发中的应用，包括配置SrouceSets、定义全局常量、组件化、定义Apk名称、App包名、依赖项配置等。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2022/02/Android-gradle-usage/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+      <!-- 相关文章推荐 -->
+     
+          
+
+  <div class="popular-posts-header">
+    <i class="fa fa-graduation-cap"></i>
+    相关文章
+  </div>
+
+ <details>
+   <summary>点击查看</summary>
+     <ul class="popular-posts">
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2023\05\jetpack-lifecycle-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Lifecycle</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\07\jetpack-paging-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Paging</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-viewmodel-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库ViewModel</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-daabinding-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Databinding</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-livedata-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库LiveData</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\Android-rxjava-Practice\" rel="bookmark">RjxavaSample练习</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\Android-plug-in-technology-selection\" rel="bookmark">Android插件化技术选型</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\Android-component-Practice-Guide\" rel="bookmark">Android组件化实践指南</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\android-structure-best-practice\" rel="bookmark">Android大厂架构设计最佳实践</a></div>
+         
+       </li>
+     
+     </ul>
+ </details>
+
+
+
+     
+
+    
+    
+    
+
+    <div>
+          
+    </div>
+
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2022/01/jetpack-viewmodel-mmvm-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/01/jetpack-viewmodel-mmvm-usage/" itemprop="url">Jetpack-生命周期组件库ViewModel</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+             
+
+             
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-27T14:36:25+08:00">
+                2022-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">项目架构</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">开源框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2022/01/jetpack-viewmodel-mmvm-usage/" class="leancloud_visitors" data-flag-title="Jetpack-生命周期组件库ViewModel">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          <!--
+          
+          -->
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数&#58;</span>
+                
+                <span title="字数">
+                  2.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">时长 &asymp;</span>
+                
+                <span title="时长">
+                  13 分钟
+                </span>
+              
+            </span>
+          
+
+          <!-- 隐藏文章内标题下，内容描述
+          
+          -->
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Viewmodel"><a href="#Viewmodel" class="headerlink" title="Viewmodel"></a>Viewmodel</h1><h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><p>用于关注界面相关的数据，关注生命周期期间所需的数据</p>
+<p>例如：屏幕旋转、语言、时区发生更改后继续显示的数据。</p>
+<blockquote>
+<p>关键：对数据的管理、存储数据，是一种管理数据的方式</p>
+</blockquote>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><ul>
+<li>销毁或重建后，页面瞬时态的数据会丢失，如rotate后，ViewModel不会被销毁，Activity的成员变了会销毁</li>
+<li>比onSaveInstanceState能存的数据量更大，如网络请求查询回来的用户列表接口、bitmap、网络缓存的视频流适合放在Viewmodel里，不适合放在OnSaveInstanceState</li>
+<li>避免页面销毁后，异步任务返回造成的内存泄漏；</li>
+<li>减少代码维护量，避免手动编写代码管理这些资源的释放</li>
+<li>Activity、Fragment不应对关注数据的处理，而只应该关注将数据显示到界面上</li>
+<li>从Activity和Fragment中分离出视图所需数据的管理责任，让代码逻辑解耦，让开发者管理业务和界面的关系更高效</li>
+<li>在Activity、Fragment之间共享数据，无需持有引用，无需相互调用，无需担心被其他Fragment生命周期影响
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2022/01/jetpack-viewmodel-mmvm-usage/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+      <!-- 相关文章推荐 -->
+     
+          
+
+  <div class="popular-posts-header">
+    <i class="fa fa-graduation-cap"></i>
+    相关文章
+  </div>
+
+ <details>
+   <summary>点击查看</summary>
+     <ul class="popular-posts">
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2023\05\jetpack-lifecycle-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Lifecycle</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\07\jetpack-paging-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Paging</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-daabinding-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Databinding</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-livedata-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库LiveData</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\Android-component-Practice-Guide\" rel="bookmark">Android组件化实践指南</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\android-structure-best-practice\" rel="bookmark">Android大厂架构设计最佳实践</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\02\Android-gradle-usage\" rel="bookmark">Android项目Gradle常见用途</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\throttle-debounce-vie-click\" rel="bookmark">Android/Java事件过滤方案小结</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\Android-rxjava-Practice\" rel="bookmark">RjxavaSample练习</a></div>
+         
+       </li>
+     
+     </ul>
+ </details>
+
+
+
+     
+
+    
+    
+    
+
+    <div>
+          
+    </div>
+
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2022/01/jetpack-daabinding-mmvm-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/01/jetpack-daabinding-mmvm-usage/" itemprop="url">Jetpack-生命周期组件库Databinding</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+             
+
+             
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-27T13:37:42+08:00">
+                2022-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">项目架构</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">开源框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2022/01/jetpack-daabinding-mmvm-usage/" class="leancloud_visitors" data-flag-title="Jetpack-生命周期组件库Databinding">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          <!--
+          
+          -->
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数&#58;</span>
+                
+                <span title="字数">
+                  6.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">时长 &asymp;</span>
+                
+                <span title="时长">
+                  29 分钟
+                </span>
+              
+            </span>
+          
+
+          <!-- 隐藏文章内标题下，内容描述
+          
+          -->
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="Databinding"><a href="#Databinding" class="headerlink" title="Databinding"></a>Databinding</h1><p>本文主要讲了Databinding以下用法：Activity用法、Fragment用法、Recycleview用法、布局引用、更新字段、事件处理等。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2022/01/jetpack-daabinding-mmvm-usage/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+      <!-- 相关文章推荐 -->
+     
+          
+
+  <div class="popular-posts-header">
+    <i class="fa fa-graduation-cap"></i>
+    相关文章
+  </div>
+
+ <details>
+   <summary>点击查看</summary>
+     <ul class="popular-posts">
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2023\05\jetpack-lifecycle-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Lifecycle</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\07\jetpack-paging-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Paging</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-viewmodel-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库ViewModel</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-livedata-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库LiveData</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\Android-component-Practice-Guide\" rel="bookmark">Android组件化实践指南</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\android-structure-best-practice\" rel="bookmark">Android大厂架构设计最佳实践</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\02\Android-gradle-usage\" rel="bookmark">Android项目Gradle常见用途</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\throttle-debounce-vie-click\" rel="bookmark">Android/Java事件过滤方案小结</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\Android-rxjava-Practice\" rel="bookmark">RjxavaSample练习</a></div>
+         
+       </li>
+     
+     </ul>
+ </details>
+
+
+
+     
+
+    
+    
+    
+
+    <div>
+          
+    </div>
+
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2022/01/jetpack-livedata-mmvm-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2022/01/jetpack-livedata-mmvm-usage/" itemprop="url">Jetpack-生命周期组件库LiveData</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+             
+
+             
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-27T13:34:18+08:00">
+                2022-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">项目架构</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
+                    <span itemprop="name">开源框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2022/01/jetpack-livedata-mmvm-usage/" class="leancloud_visitors" data-flag-title="Jetpack-生命周期组件库LiveData">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          <!--
+          
+          -->
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数&#58;</span>
+                
+                <span title="字数">
+                  1.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">时长 &asymp;</span>
+                
+                <span title="时长">
+                  5 分钟
+                </span>
+              
+            </span>
+          
+
+          <!-- 隐藏文章内标题下，内容描述
+          
+          -->
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="LiveData"><a href="#LiveData" class="headerlink" title="LiveData"></a>LiveData</h1><h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><p>可观察的数据存储类</p>
+<blockquote>
+<p>关键： 是一种数据类型</p>
+</blockquote>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><ul>
+<li><p>可感知其他组件的生命周期，如Activity、Fragment、Service</p>
+</li>
+<li><p>只通知处于活跃状态的观察者；非活跃的观察者不会收到通知</p>
+</li>
+<li><p>确保界面实时响应数据的变化—数据变化，会进入Observer#onStateChange回调</p>
+</li>
+<li><p>不会发生内存泄漏–Observer会绑定到Lifecycle，其关联的组件销毁后，Observer会自我释放</p>
+</li>
+<li><p>不会因为Activity停止导致crash–Observer处于非活跃状态，它不会收到任何LiveData事件</p>
+</li>
+<li><p>数据始终保持最新状态–从非活跃状态变为活跃状态，Observer会收到最新的数据，后台Activity返回前台后会立刻接收最新的数据</p>
+</li>
+<li><p>兼容系统配置更改–由于设备更改重新创建了Activity、Fragment，Observer会立即收到livedata的最新数据，这一切都不需要额外开发代码</p>
+</li>
+<li><p>共享资源–使用单例模式扩展LiveData，以便于在整个App内共享数据。具体用法参考本节<strong>基本用法#共享值</strong></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2022/01/jetpack-livedata-mmvm-usage/" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+      <!-- 相关文章推荐 -->
+     
+          
+
+  <div class="popular-posts-header">
+    <i class="fa fa-graduation-cap"></i>
+    相关文章
+  </div>
+
+ <details>
+   <summary>点击查看</summary>
+     <ul class="popular-posts">
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2023\05\jetpack-lifecycle-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Lifecycle</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\07\jetpack-paging-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Paging</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-viewmodel-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库ViewModel</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-daabinding-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Databinding</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\Android-component-Practice-Guide\" rel="bookmark">Android组件化实践指南</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2021\01\android-structure-best-practice\" rel="bookmark">Android大厂架构设计最佳实践</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\02\Android-gradle-usage\" rel="bookmark">Android项目Gradle常见用途</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\throttle-debounce-vie-click\" rel="bookmark">Android/Java事件过滤方案小结</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\Android-rxjava-Practice\" rel="bookmark">RjxavaSample练习</a></div>
+         
+       </li>
+     
+     </ul>
+ </details>
+
+
+
+     
+
+    
+    
+    
+
+    <div>
+          
+    </div>
+
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2022/01/viewpager-viewpager2-usage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1453,6 +3408,48 @@ h1-->B(基本用法)
        <li class="popular-posts-item">
          
          
+         <div class="popular-posts-title"><a href="\2023\05\jetpack-lifecycle-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Lifecycle</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\07\jetpack-paging-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Paging</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\02\Android-gradle-usage\" rel="bookmark">Android项目Gradle常见用途</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-viewmodel-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库ViewModel</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-daabinding-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Databinding</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-livedata-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库LiveData</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
          <div class="popular-posts-title"><a href="\2022\01\launchmode-activity-useage\" rel="bookmark">n条用例验证Activity4种启动模式的威力与坑</a></div>
          
        </li>
@@ -1474,49 +3471,7 @@ h1-->B(基本用法)
        <li class="popular-posts-item">
          
          
-         <div class="popular-posts-title"><a href="\2022\01\lifecycle-livedata-databind-viewmodel\" rel="bookmark">Android生命周期感知组件经验总结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
          <div class="popular-posts-title"><a href="\2022\01\Android-rxjava-Practice\" rel="bookmark">RjxavaSample练习</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\05\The-most-comprehensive-thinking-of-crash-practice-strategy\" rel="bookmark">Android Crash实践策略最全面思考</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\05\android-crash-who-kill-you\" rel="bookmark">Android Crash揭秘与实践</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\02\mtk-log\" rel="bookmark">mtk-log</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\02\android-bugfree-three-lines\" rel="bookmark">BugFree三剑客异常、日志、工具</a></div>
          
        </li>
      
@@ -1775,6 +3730,48 @@ singleTop#特性：
        <li class="popular-posts-item">
          
          
+         <div class="popular-posts-title"><a href="\2023\05\jetpack-lifecycle-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Lifecycle</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\07\jetpack-paging-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Paging</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\02\Android-gradle-usage\" rel="bookmark">Android项目Gradle常见用途</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-viewmodel-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库ViewModel</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-daabinding-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Databinding</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-livedata-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库LiveData</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
          <div class="popular-posts-title"><a href="\2022\01\viewpager-viewpager2-usage\" rel="bookmark">viewpager与viewpager2实践总结</a></div>
          
        </li>
@@ -1796,1921 +3793,7 @@ singleTop#特性：
        <li class="popular-posts-item">
          
          
-         <div class="popular-posts-title"><a href="\2022\01\lifecycle-livedata-databind-viewmodel\" rel="bookmark">Android生命周期感知组件经验总结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
          <div class="popular-posts-title"><a href="\2022\01\Android-rxjava-Practice\" rel="bookmark">RjxavaSample练习</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\05\The-most-comprehensive-thinking-of-crash-practice-strategy\" rel="bookmark">Android Crash实践策略最全面思考</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\05\android-crash-who-kill-you\" rel="bookmark">Android Crash揭秘与实践</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\02\mtk-log\" rel="bookmark">mtk-log</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\02\android-bugfree-three-lines\" rel="bookmark">BugFree三剑客异常、日志、工具</a></div>
-         
-       </li>
-     
-     </ul>
- </details>
-
-
-
-     
-
-    
-    
-    
-
-    <div>
-          
-    </div>
-
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2022/01/lifecycle-activity/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="叶金诚的站点">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/01/lifecycle-activity/" itemprop="url">Activity各种条件下生命周期小结</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-             
-
-             
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-16T22:16:35+08:00">
-                2022-01-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2022/01/lifecycle-activity/" class="leancloud_visitors" data-flag-title="Activity各种条件下生命周期小结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">浏览&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          <!--
-          
-          -->
-
-          
-            <span class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数&#58;</span>
-                
-                <span title="字数">
-                  3.7k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">时长 &asymp;</span>
-                
-                <span title="时长">
-                  20 分钟
-                </span>
-              
-            </span>
-          
-
-          <!-- 隐藏文章内标题下，内容描述
-          
-          -->
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Activity生命周期#应用层管理Activity生命周期的方式#方法1：
-
-在Application中存储一个全局数据集list，子元素是Activity
-BaseActivity#onCreate调用Application的#add方法添加Activity
-在退出App时，遍历数据集的所有Ac
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2022/01/lifecycle-activity/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-      <!-- 相关文章推荐 -->
-     
-          
-
-  <div class="popular-posts-header">
-    <i class="fa fa-graduation-cap"></i>
-    相关文章
-  </div>
-
- <details>
-   <summary>点击查看</summary>
-     <ul class="popular-posts">
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\viewpager-viewpager2-usage\" rel="bookmark">viewpager与viewpager2实践总结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\launchmode-activity-useage\" rel="bookmark">n条用例验证Activity4种启动模式的威力与坑</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\throttle-debounce-vie-click\" rel="bookmark">Android/Java事件过滤方案小结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\lifecycle-livedata-databind-viewmodel\" rel="bookmark">Android生命周期感知组件经验总结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\Android-rxjava-Practice\" rel="bookmark">RjxavaSample练习</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\05\The-most-comprehensive-thinking-of-crash-practice-strategy\" rel="bookmark">Android Crash实践策略最全面思考</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\05\android-crash-who-kill-you\" rel="bookmark">Android Crash揭秘与实践</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\02\mtk-log\" rel="bookmark">mtk-log</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\02\android-bugfree-three-lines\" rel="bookmark">BugFree三剑客异常、日志、工具</a></div>
-         
-       </li>
-     
-     </ul>
- </details>
-
-
-
-     
-
-    
-    
-    
-
-    <div>
-          
-    </div>
-
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2022/01/throttle-debounce-vie-click/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="叶金诚的站点">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/01/throttle-debounce-vie-click/" itemprop="url">Android/Java事件过滤方案小结</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-             
-
-             
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-13T18:13:12+08:00">
-                2022-01-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">项目架构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2022/01/throttle-debounce-vie-click/" class="leancloud_visitors" data-flag-title="Android/Java事件过滤方案小结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">浏览&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          <!--
-          
-          -->
-
-          
-            <span class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数&#58;</span>
-                
-                <span title="字数">
-                  1.8k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">时长 &asymp;</span>
-                
-                <span title="时长">
-                  7 分钟
-                </span>
-              
-            </span>
-          
-
-          <!-- 隐藏文章内标题下，内容描述
-          
-          -->
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          什么是防抖动？举一个典型场景：
-笔者处理一个bug，【留言板】留言列表点击编辑，多次点击删除键，提示“留言发送失败” ,问题表现为点击删除按钮多次，发出了同一个请求多次，服务端无法响应返回了失败的响应码。
-12345678910@Overridepublic void onItemChildClic
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2022/01/throttle-debounce-vie-click/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-      <!-- 相关文章推荐 -->
-     
-          
-
-  <div class="popular-posts-header">
-    <i class="fa fa-graduation-cap"></i>
-    相关文章
-  </div>
-
- <details>
-   <summary>点击查看</summary>
-     <ul class="popular-posts">
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\01\Android-component-Practice-Guide\" rel="bookmark">Android组件化实践指南</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\01\android-structure-best-practice\" rel="bookmark">Android大厂架构设计最佳实践</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2018\02\MVC-MVP-MVVM -of -architecture -selection\" rel="bookmark">架构选型之MVC、MVP、MVVM</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\viewpager-viewpager2-usage\" rel="bookmark">viewpager与viewpager2实践总结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\launchmode-activity-useage\" rel="bookmark">n条用例验证Activity4种启动模式的威力与坑</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\lifecycle-activity\" rel="bookmark">Activity各种条件下生命周期小结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\lifecycle-livedata-databind-viewmodel\" rel="bookmark">Android生命周期感知组件经验总结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\Android-rxjava-Practice\" rel="bookmark">RjxavaSample练习</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\05\The-most-comprehensive-thinking-of-crash-practice-strategy\" rel="bookmark">Android Crash实践策略最全面思考</a></div>
-         
-       </li>
-     
-     </ul>
- </details>
-
-
-
-     
-
-    
-    
-    
-
-    <div>
-          
-    </div>
-
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2022/01/lifecycle-livedata-databind-viewmodel/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="叶金诚的站点">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/01/lifecycle-livedata-databind-viewmodel/" itemprop="url">Android生命周期感知组件经验总结</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-             
-
-             
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-11T08:13:12+08:00">
-                2022-01-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">项目架构</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2022/01/lifecycle-livedata-databind-viewmodel/" class="leancloud_visitors" data-flag-title="Android生命周期感知组件经验总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">浏览&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          <!--
-          
-          -->
-
-          
-            <span class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数&#58;</span>
-                
-                <span title="字数">
-                  9.6k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">时长 &asymp;</span>
-                
-                <span title="时长">
-                  44 分钟
-                </span>
-              
-            </span>
-          
-
-          <!-- 隐藏文章内标题下，内容描述
-          
-          -->
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          问题引入#当组件需要具备生命周期感知能力时，我们传统写法如下
-
-定义接口类、定义对象，在Activity、Fragment的生命周期手动回调接口
-
-123456789101112131415161718192021222324252627282930313233343536373839class M
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2022/01/lifecycle-livedata-databind-viewmodel/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-      <!-- 相关文章推荐 -->
-     
-          
-
-  <div class="popular-posts-header">
-    <i class="fa fa-graduation-cap"></i>
-    相关文章
-  </div>
-
- <details>
-   <summary>点击查看</summary>
-     <ul class="popular-posts">
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\02\Client-Skeleton-Screen\" rel="bookmark">Android骨架屏详解</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\viewpager-viewpager2-usage\" rel="bookmark">viewpager与viewpager2实践总结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\launchmode-activity-useage\" rel="bookmark">n条用例验证Activity4种启动模式的威力与坑</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\lifecycle-activity\" rel="bookmark">Activity各种条件下生命周期小结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\throttle-debounce-vie-click\" rel="bookmark">Android/Java事件过滤方案小结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\Android-rxjava-Practice\" rel="bookmark">RjxavaSample练习</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\05\The-most-comprehensive-thinking-of-crash-practice-strategy\" rel="bookmark">Android Crash实践策略最全面思考</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\05\android-crash-who-kill-you\" rel="bookmark">Android Crash揭秘与实践</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\02\mtk-log\" rel="bookmark">mtk-log</a></div>
-         
-       </li>
-     
-     </ul>
- </details>
-
-
-
-     
-
-    
-    
-    
-
-    <div>
-          
-    </div>
-
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2022/01/Android-rxjava-Practice/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="叶金诚的站点">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2022/01/Android-rxjava-Practice/" itemprop="url">RjxavaSample练习</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-             
-
-             
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-01-06T22:33:57+08:00">
-                2022-01-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
-                    <span itemprop="name">开源框架</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2022/01/Android-rxjava-Practice/" class="leancloud_visitors" data-flag-title="RjxavaSample练习">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">浏览&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          <!--
-          
-          -->
-
-          
-            <span class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数&#58;</span>
-                
-                <span title="字数">
-                  3.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">时长 &asymp;</span>
-                
-                <span title="时长">
-                  12 分钟
-                </span>
-              
-            </span>
-          
-
-          <!-- 隐藏文章内标题下，内容描述
-          
-          -->
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Rxjava sample 项目介绍#引入依赖#基础依赖#依赖后可以使用rxjava操作符
-12implementation &#x27;io.reactivex.rxjava2:rxjava:2.2.2&#x27;implementation &#x27;io.reactivex.rxjava2:
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2022/01/Android-rxjava-Practice/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-      <!-- 相关文章推荐 -->
-     
-          
-
-  <div class="popular-posts-header">
-    <i class="fa fa-graduation-cap"></i>
-    相关文章
-  </div>
-
- <details>
-   <summary>点击查看</summary>
-     <ul class="popular-posts">
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\07\android-ipc-best-practice\" rel="bookmark">Android跨进程通信方案选型</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\01\Android-plug-in-technology-selection\" rel="bookmark">Android插件化技术选型</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\01\Android-component-Practice-Guide\" rel="bookmark">Android组件化实践指南</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\01\android-structure-best-practice\" rel="bookmark">Android大厂架构设计最佳实践</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2016\04\Android-TOP-100-Program\" rel="bookmark">Android 百大框架排行榜</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\viewpager-viewpager2-usage\" rel="bookmark">viewpager与viewpager2实践总结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\launchmode-activity-useage\" rel="bookmark">n条用例验证Activity4种启动模式的威力与坑</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\lifecycle-activity\" rel="bookmark">Activity各种条件下生命周期小结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\throttle-debounce-vie-click\" rel="bookmark">Android/Java事件过滤方案小结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\lifecycle-livedata-databind-viewmodel\" rel="bookmark">Android生命周期感知组件经验总结</a></div>
-         
-       </li>
-     
-     </ul>
- </details>
-
-
-
-     
-
-    
-    
-    
-
-    <div>
-          
-    </div>
-
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2021/07/programming-life-values/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="叶金诚的站点">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/07/programming-life-values/" itemprop="url">编程人生价值观</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-             
-
-             
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-10T16:10:15+08:00">
-                2021-07-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9D%82%E8%B0%88/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%9D%82%E8%B0%88/%E6%97%A5%E8%AE%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">日记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2021/07/programming-life-values/" class="leancloud_visitors" data-flag-title="编程人生价值观">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">浏览&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          <!--
-          
-          -->
-
-          
-            <span class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数&#58;</span>
-                
-                <span title="字数">
-                  4.8k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">时长 &asymp;</span>
-                
-                <span title="时长">
-                  16 分钟
-                </span>
-              
-            </span>
-          
-
-          <!-- 隐藏文章内标题下，内容描述
-          
-          -->
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          7月第一周读完了两本程序访谈类书籍《编程人生》《编程大师访谈录》。这两本书34位专家对编程的看法，给了我很大的启发，最大的收获在于重新调整了编程的价值观，调整了一些编程工作中的习性。
-
-
-.vkr-url-wrapper {
-    padding: 10px;
-    border-radius:
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/07/programming-life-values/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-      <!-- 相关文章推荐 -->
-     
-          
-
-  <div class="popular-posts-header">
-    <i class="fa fa-graduation-cap"></i>
-    相关文章
-  </div>
-
- <details>
-   <summary>点击查看</summary>
-     <ul class="popular-posts">
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\04\Career-stability-experience\" rel="bookmark">职业稳定性杂谈</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\02\Is coder need more younger？\" rel="bookmark">程序员吃的是青春饭吗？</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2019\01\why-dose-it-take-three-years-to-interview-a-guy？\" rel="bookmark">为什么要花3年时间面试一个人？</a></div>
-         
-       </li>
-     
-     </ul>
- </details>
-
-
-
-     
-
-    
-    
-    
-
-    <div>
-          
-    </div>
-
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2021/07/android-ipc-best-practice/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="叶金诚的站点">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2021/07/android-ipc-best-practice/" itemprop="url">Android跨进程通信方案选型</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-             
-
-             
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-02T20:28:33+08:00">
-                2021-07-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/" itemprop="url" rel="index">
-                    <span itemprop="name">项目架构</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index">
-                    <span itemprop="name">开源框架</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2021/07/android-ipc-best-practice/" class="leancloud_visitors" data-flag-title="Android跨进程通信方案选型">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">浏览&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          <!--
-          
-          -->
-
-          
-            <span class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数&#58;</span>
-                
-                <span title="字数">
-                  7.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">时长 &asymp;</span>
-                
-                <span title="时长">
-                  35 分钟
-                </span>
-              
-            </span>
-          
-
-          <!-- 隐藏文章内标题下，内容描述
-          
-          -->
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          跨进程通信方案#原生方案#
-
-
-对比项管道Pipe
-管道Pipe
-socket
-AIDL
-Messenger
-MemoryFIle
-signal
-FileObserver
-UrlScheme
-
-
-
-wiki
-PipePipedWriterPipedReader
-Socket ServerSocket
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2021/07/android-ipc-best-practice/" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-      <!-- 相关文章推荐 -->
-     
-          
-
-  <div class="popular-posts-header">
-    <i class="fa fa-graduation-cap"></i>
-    相关文章
-  </div>
-
- <details>
-   <summary>点击查看</summary>
-     <ul class="popular-posts">
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\01\Android-component-Practice-Guide\" rel="bookmark">Android组件化实践指南</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\01\android-structure-best-practice\" rel="bookmark">Android大厂架构设计最佳实践</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\throttle-debounce-vie-click\" rel="bookmark">Android/Java事件过滤方案小结</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\Android-rxjava-Practice\" rel="bookmark">RjxavaSample练习</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\01\Android-plug-in-technology-selection\" rel="bookmark">Android插件化技术选型</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2018\02\MVC-MVP-MVVM -of -architecture -selection\" rel="bookmark">架构选型之MVC、MVP、MVVM</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2016\04\Android-TOP-100-Program\" rel="bookmark">Android 百大框架排行榜</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2021\05\android-fat-aar-useage\" rel="bookmark">Android依赖库处理框架——Fataar</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2019\06\android-hotfix\" rel="bookmark">Android 热补丁技术详解大全</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\01\viewpager-viewpager2-usage\" rel="bookmark">viewpager与viewpager2实践总结</a></div>
          
        </li>
      
@@ -3819,7 +3902,7 @@ Socket ServerSocket
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -3841,7 +3924,7 @@ Socket ServerSocket
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -3914,23 +3997,23 @@ Socket ServerSocket
                   
                   
                     <li class='my-links-of-blogroll-li'>
-                      <a href="/2022/01/viewpager-viewpager2-usage/" title="viewpager与viewpager2实践总结" target="_blank">viewpager与viewpager2实践总结</a>
+                      <a href="/2023/05/jetpack-lifecycle-mmvm-usage/" title="Jetpack-生命周期组件库Lifecycle" target="_blank">Jetpack-生命周期组件库Lifecycle</a>
                     </li>
                   
                     <li class='my-links-of-blogroll-li'>
-                      <a href="/2022/01/launchmode-activity-useage/" title="n条用例验证Activity4种启动模式的威力与坑" target="_blank">n条用例验证Activity4种启动模式的威力与坑</a>
+                      <a href="/2022/07/jetpack-paging-mmvm-usage/" title="Jetpack-生命周期组件库Paging" target="_blank">Jetpack-生命周期组件库Paging</a>
                     </li>
                   
                     <li class='my-links-of-blogroll-li'>
-                      <a href="/2022/01/lifecycle-activity/" title="Activity各种条件下生命周期小结" target="_blank">Activity各种条件下生命周期小结</a>
+                      <a href="/2022/02/Android-gradle-usage/" title="Android项目Gradle常见用途" target="_blank">Android项目Gradle常见用途</a>
                     </li>
                   
                     <li class='my-links-of-blogroll-li'>
-                      <a href="/2022/01/throttle-debounce-vie-click/" title="Android/Java事件过滤方案小结" target="_blank">Android/Java事件过滤方案小结</a>
+                      <a href="/2022/01/jetpack-viewmodel-mmvm-usage/" title="Jetpack-生命周期组件库ViewModel" target="_blank">Jetpack-生命周期组件库ViewModel</a>
                     </li>
                   
                     <li class='my-links-of-blogroll-li'>
-                      <a href="/2022/01/lifecycle-livedata-databind-viewmodel/" title="Android生命周期感知组件经验总结" target="_blank">Android生命周期感知组件经验总结</a>
+                      <a href="/2022/01/jetpack-daabinding-mmvm-usage/" title="Jetpack-生命周期组件库Databinding" target="_blank">Jetpack-生命周期组件库Databinding</a>
                     </li>
                   
                 </ul>
@@ -4251,7 +4334,7 @@ Socket ServerSocket
       <h3 class="widget-title">Tag Cloud</h3>
       <div id="myCanvasContainer" class="widget tagcloud">
           <canvas width="250" height="250" id="resCanvas" style="width=100%">
-              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">20</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/" rel="tag">项目架构</a><span class="tag-list-count">1</span></li></ul>
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">3</span></li></ul>
           </canvas>
       </div>
       </div>
@@ -4285,7 +4368,7 @@ Socket ServerSocket
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">167.1k</span>
+    <span title="Site words total count">174.5k</span>
   
 </div>
 
@@ -5200,7 +5283,7 @@ Socket ServerSocket
   
     <script async type="text/javascript">
         var text = "Welcome To Leaface";
-        var date = '2022-07-07';
+        var date = '2022-07-27';
         console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
         console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
         console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
