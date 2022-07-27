@@ -6,7 +6,7 @@
   <link href="http://www.yangchaofan.cn/atom.xml" rel="self"/>
   
   <link href="http://www.yangchaofan.cn/"/>
-  <updated>2022-07-27T15:50:44.967Z</updated>
+  <updated>2022-07-27T15:48:29.511Z</updated>
   <id>http://www.yangchaofan.cn/</id>
   
   <author>
@@ -15,64 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>Jetpack-生命周期组件库Lifecycle</title>
-    <link href="http://www.yangchaofan.cn/2023/05/jetpack-lifecycle-mmvm-usage/"/>
-    <id>http://www.yangchaofan.cn/2023/05/jetpack-lifecycle-mmvm-usage/</id>
-    <published>2023-05-27T15:32:43.000Z</published>
-    <updated>2022-07-27T15:50:44.967Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;Jetpack生命周期组件&quot;&gt;&lt;a href=&quot;#Jetpack生命周期组件&quot; class=&quot;headerlink&quot; title=&quot;Jetpack生命周期组件&quot;&gt;&lt;/a&gt;Jetpack生命周期组件&lt;/h1&gt;&lt;p&gt;本文主要针对lifecycle引入的背景以及lifecycle比传统监听生命周期优势做了详细对比，也介绍了具体用法。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
-    
-    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
-    
-    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
-    
-    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
-    
-    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Jetpack-生命周期组件库Paging</title>
-    <link href="http://www.yangchaofan.cn/2022/07/jetpack-paging-mmvm-usage/"/>
-    <id>http://www.yangchaofan.cn/2022/07/jetpack-paging-mmvm-usage/</id>
-    <published>2022-07-27T15:40:55.699Z</published>
-    <updated>2022-07-27T15:51:02.549Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;Paging&quot;&gt;&lt;a href=&quot;#Paging&quot; class=&quot;headerlink&quot; title=&quot;Paging&quot;&gt;&lt;/a&gt;Paging&lt;/h1&gt;&lt;h2 id=&quot;用途&quot;&gt;&lt;a href=&quot;#用途&quot; class=&quot;headerlink&quot; title=&quot;用途&quot;&gt;&lt;/a&gt;用途&lt;/h2&gt;&lt;p&gt;对数据按需加载，实现无限滚动，支持从本地存储和网络加载。&lt;/p&gt;
-&lt;h2 id=&quot;优势&quot;&gt;&lt;a href=&quot;#优势&quot; class=&quot;headerlink&quot; title=&quot;优势&quot;&gt;&lt;/a&gt;优势&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;支持与Jetpack包下的库组合使用&lt;/li&gt;
-&lt;li&gt;支持第三方库 RxJava&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
-    
-    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
-    
-    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
-    
-    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
-    
-    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
-    
-  </entry>
   
   <entry>
     <title>Android项目Gradle常见用途</title>
@@ -94,6 +36,137 @@
     
     
     <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jetpack-生命周期组件库Lifecycle</title>
+    <link href="http://www.yangchaofan.cn/2022/01/jetpack-lifecycle-mmvm-usage/"/>
+    <id>http://www.yangchaofan.cn/2022/01/jetpack-lifecycle-mmvm-usage/</id>
+    <published>2022-01-27T15:32:43.000Z</published>
+    <updated>2022-07-27T15:57:59.023Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Jetpack生命周期组件&quot;&gt;&lt;a href=&quot;#Jetpack生命周期组件&quot; class=&quot;headerlink&quot; title=&quot;Jetpack生命周期组件&quot;&gt;&lt;/a&gt;Jetpack生命周期组件&lt;/h1&gt;&lt;p&gt;本文主要针对lifecycle引入的背景以及lifecycle比传统监听生命周期优势做了详细对比，也介绍了具体用法。&lt;/p&gt;
+&lt;h1 id=&quot;问题引入&quot;&gt;&lt;a href=&quot;#问题引入&quot; class=&quot;headerlink&quot; title=&quot;问题引入&quot;&gt;&lt;/a&gt;问题引入&lt;/h1&gt;&lt;p&gt;当组件需要具备生命周期感知能力时，我们传统写法如下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定义接口类、定义对象，在Activity、Fragment的生命周期手动回调接口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MyLocationListener&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MyLocationListener&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Context context, Callback callback)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// ...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// connect to system location service&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;stop&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// disconnect from system location service&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MyActivity&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;AppCompatActivity&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; MyLocationListener myLocationListener;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onCreate&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(...)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        myLocationListener = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; MyLocationListener(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;, location -&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;// update UI&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onStart&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;.onStart();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Util.checkUserStatus(result -&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;// what if this callback is invoked AFTER activity is stopped?&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (result) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                myLocationListener.start();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onStop&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;.onStop();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        myLocationListener.stop();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;传统写法具备如下缺点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;太多组件需要维护生命周期状态，会写太多的生命周期接口回调&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;组件的回调不一定会按照Activity生命周期的调用顺序执行；Activitiy的onStart中有异步任务，可能出现组件#onStop先执行，组件#onstart后执行的情况，造成内存泄漏&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如这么写，会有很明显的问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;每个子组件我们都需要要将myLocationListener#start、#stop调用一遍，如果有十几个组件，代码写出来很酸爽；&lt;/li&gt;
+&lt;li&gt;myLocationListener#start是异步的，可能会晚于myLocationListener#stop执行&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MyActivity&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;AppCompatActivity&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; MyLocationListener myLocationListener;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onCreate&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(...)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        myLocationListener = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; MyLocationListener(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;, location -&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;// update UI&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onStart&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;.onStart();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Util.checkUserStatus(result -&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;// what if this callback is invoked AFTER activity is stopped?&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (result) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                myLocationListener.start();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onStop&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;.onStop();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        myLocationListener.stop();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+&lt;p&gt;&lt;a href=&quot;https://developer.android.google.cn/reference/androidx/lifecycle/package-summary?hl=zh-cn&quot;&gt;&lt;code&gt;androidx.lifecycle&lt;/code&gt;&lt;/a&gt; 软件包提供的类和接口可帮助您以弹性和隔离的方式解决这些问题。&lt;/p&gt;
+&lt;p&gt;本文主要围绕生命周期感知型组件展开,讲解以这些组件的用法。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Jetpack-生命周期组件库Paging</title>
+    <link href="http://www.yangchaofan.cn/2022/01/jetpack-paging-mmvm-usage/"/>
+    <id>http://www.yangchaofan.cn/2022/01/jetpack-paging-mmvm-usage/</id>
+    <published>2022-01-27T13:40:55.000Z</published>
+    <updated>2022-07-27T15:59:13.662Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;Paging&quot;&gt;&lt;a href=&quot;#Paging&quot; class=&quot;headerlink&quot; title=&quot;Paging&quot;&gt;&lt;/a&gt;Paging&lt;/h1&gt;&lt;h2 id=&quot;用途&quot;&gt;&lt;a href=&quot;#用途&quot; class=&quot;headerlink&quot; title=&quot;用途&quot;&gt;&lt;/a&gt;用途&lt;/h2&gt;&lt;p&gt;对数据按需加载，实现无限滚动，支持从本地存储和网络加载。&lt;/p&gt;
+&lt;h2 id=&quot;优势&quot;&gt;&lt;a href=&quot;#优势&quot; class=&quot;headerlink&quot; title=&quot;优势&quot;&gt;&lt;/a&gt;优势&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;支持与Jetpack包下的库组合使用&lt;/li&gt;
+&lt;li&gt;支持第三方库 RxJava&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;基本用法&quot;&gt;&lt;a href=&quot;#基本用法&quot; class=&quot;headerlink&quot; title=&quot;基本用法&quot;&gt;&lt;/a&gt;基本用法&lt;/h2&gt;&lt;h3 id=&quot;增加依赖&quot;&gt;&lt;a href=&quot;#增加依赖&quot; class=&quot;headerlink&quot; title=&quot;增加依赖&quot;&gt;&lt;/a&gt;增加依赖&lt;/h3&gt;&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// paging&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;quot;androidx.paging:paging-runtime:2.1.0-alpha01&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;com.squareup.retrofit2:retrofit:2.0.0&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;com.squareup.retrofit2:converter-gson:2.0.0&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;com.squareup.retrofit2:adapter-rxjava2:2.2.0&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;常见API&quot;&gt;&lt;a href=&quot;#常见API&quot; class=&quot;headerlink&quot; title=&quot;常见API&quot;&gt;&lt;/a&gt;常见API&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;参考&lt;a href=&quot;https://segmentfault.com/a/1190000038953354&quot;&gt;https://segmentfault.com/a/1190000038953354&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;使用Paging库进行分页加载时，需要用到几个核心的类，分别是PagedListAdapter、PageList和DataSource。&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;API&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;PagedListAdapter&lt;/td&gt;
+&lt;td&gt;RecyclerView的适配器，扩展了原生的差分更新功能&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PagedList&lt;/td&gt;
+&lt;td&gt;数据结构集合，存储&lt;code&gt;DataSource&lt;/code&gt;中分页不变的内容列表，按条件获取数据&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DataSource&lt;/td&gt;
+&lt;td&gt;加载数据至&lt;code&gt;PagedList&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DataSource.Factory&lt;/td&gt;
+&lt;td&gt;创建&lt;code&gt;DataSrouce&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;LivePagedListBuilder&lt;/td&gt;
+&lt;td&gt;设置分页加载的配置项，设置&lt;code&gt;DataSource.Factory&lt;/code&gt;，设置&lt;code&gt;DataSource&lt;/code&gt;，返回&lt;code&gt;LiveData&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&quot;https://developer.android.google.cn/reference/kotlin/androidx/paging/PagingSource.LoadParams?hl=zh-cn&quot;&gt;&lt;code&gt;LoadParams&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;加载的关键信息，包括加载的键，和加载的页数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href=&quot;https://developer.android.google.cn/reference/kotlin/androidx/paging/PagingSource.LoadResult?hl=zh-cn&quot;&gt;&lt;code&gt;LoadResult&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;加载成功返回&lt;code&gt;LoadResult.Page&lt;/code&gt;,加载失败返回&lt;code&gt;LoadResult.Error&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h5 id=&quot;PagedListAdapter&quot;&gt;&lt;a href=&quot;#PagedListAdapter&quot; class=&quot;headerlink&quot; title=&quot;PagedListAdapter&quot;&gt;&lt;/a&gt;PagedListAdapter&lt;/h5&gt;&lt;p&gt;众所周知，在&lt;code&gt;Android&lt;/code&gt;列表开发中需要使用&lt;code&gt;RecyclerView&lt;/code&gt;，并且需要配合自定义&lt;code&gt;Adapter&lt;/code&gt;。&lt;code&gt;PagedListAdapter&lt;/code&gt;继承于RecyclerView.Adapter，这表明它也是一个&lt;code&gt;RecyclerView.Adapter&lt;/code&gt;，并且扩展了&lt;code&gt;RecyclerView.Adapter&lt;/code&gt;的支持异步差分更新功能，该功能依赖于匿名内部类&lt;code&gt; DiffUtil.ItemCallback&amp;lt;T&amp;gt;&lt;/code&gt;,使用时必须复写&lt;code&gt;areItemsTheSame&lt;/code&gt;、&lt;code&gt;areContentsTheSame&lt;/code&gt;方法。&lt;/p&gt;
+&lt;h5 id=&quot;PageList&quot;&gt;&lt;a href=&quot;#PageList&quot; class=&quot;headerlink&quot; title=&quot;PageList&quot;&gt;&lt;/a&gt;PageList&lt;/h5&gt;&lt;p&gt;&lt;code&gt;PageList&lt;/code&gt;是用于通知&lt;code&gt;DataSource&lt;/code&gt;何时获取数据，以及如何获取数据。比如，何时获取第一页数据，以及何时开始加载数据等待。并且，&lt;code&gt;DataSource&lt;/code&gt;数据源都将通过&lt;code&gt;PageList&lt;/code&gt;设置给&lt;code&gt;PagedListAdapter&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;LivePagedListBuilder&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;设置分页加载的配置项，通过传入&lt;code&gt;DataSource.Factory&lt;/code&gt;，在&lt;code&gt;Factory&lt;/code&gt;的&lt;code&gt;create&lt;/code&gt;方法里，返回&lt;code&gt;DataSource&lt;/code&gt;，返回&lt;code&gt;Adapter&lt;/code&gt;可以使用的&lt;code&gt;LiveData&lt;/code&gt;,并通知页面，将新数据刷新到布局上；通过传入&lt;code&gt;PagedList.Config&lt;/code&gt;设置分页参数如&lt;code&gt;pageSize&lt;/code&gt;、&lt;code&gt;prefetchDistance&lt;/code&gt;等&lt;/p&gt;
+&lt;h5 id=&quot;DataSource&quot;&gt;&lt;a href=&quot;#DataSource&quot; class=&quot;headerlink&quot; title=&quot;DataSource&quot;&gt;&lt;/a&gt;DataSource&lt;/h5&gt;&lt;p&gt;DataSource主要用于执行数据的加载操作，数据载入操作&lt;strong&gt;必须在子线程中进行&lt;/strong&gt;，否则会造成主线程的阻塞。DataSource的来源可以是网路，也可以是本地的数据库，如Room。根据分页机制的不同，DataSource可以有3种来源，分别是PageKeyedDataSource、PositionalDataSource和ItemKeyedDataSource。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;PageKeyedDataSource&lt;/strong&gt;：根据传入的页面num获取某一页的数据，比如获取第2页的数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PositionalDataSource&lt;/strong&gt;：分页时默认显示的第几页。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ItemKeyedDataSource&lt;/strong&gt;：封装了上一页、下一页的能力&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="开源框架" scheme="http://www.yangchaofan.cn/categories/Android/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
+    
+    <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
     
     <category term="开源框架" scheme="http://www.yangchaofan.cn/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/"/>
     
@@ -143,10 +216,41 @@
     <link href="http://www.yangchaofan.cn/2022/01/jetpack-daabinding-mmvm-usage/"/>
     <id>http://www.yangchaofan.cn/2022/01/jetpack-daabinding-mmvm-usage/</id>
     <published>2022-01-27T05:37:42.000Z</published>
-    <updated>2022-07-27T15:49:45.399Z</updated>
+    <updated>2022-07-27T15:59:41.982Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;Databinding&quot;&gt;&lt;a href=&quot;#Databinding&quot; class=&quot;headerlink&quot; title=&quot;Databinding&quot;&gt;&lt;/a&gt;Databinding&lt;/h1&gt;&lt;p&gt;本文主要讲了Databinding以下用法：Activity用法、Fragment用法、Recycleview用法、布局引用、更新字段、事件处理等。&lt;/p&gt;</summary>
+    <summary type="html">&lt;h1 id=&quot;Databinding&quot;&gt;&lt;a href=&quot;#Databinding&quot; class=&quot;headerlink&quot; title=&quot;Databinding&quot;&gt;&lt;/a&gt;Databinding&lt;/h1&gt;&lt;p&gt;本文主要讲了Databinding以下用法：Activity用法、Fragment用法、Recycleview用法、布局引用、更新字段、事件处理等。&lt;/p&gt;
+&lt;p&gt;参考&lt;a href=&quot;https://cloud.tencent.com/developer/article/1909533&quot;&gt;&lt;a href=&quot;https://juejin.cn/post/6844903609079971854#heading-3&quot;&gt;Android DataBinding 从入门到进阶 - 掘金 (juejin.cn)&lt;/a&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;用途&quot;&gt;&lt;a href=&quot;#用途&quot; class=&quot;headerlink&quot; title=&quot;用途&quot;&gt;&lt;/a&gt;用途&lt;/h2&gt;&lt;p&gt;声明式的将视图与数据绑定，而程序式的调用视图组件属性去设置&lt;/p&gt;
+&lt;p&gt;如程序式的做法&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;TextView textView = findViewById(R.id.sample_text);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;textView.setText(viewModel.getUserName());&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;声明式的做法&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;TextView&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        android:text=&lt;span class=&quot;string&quot;&gt;&amp;quot;@&amp;#123;viewmodel.userName&amp;#125;&amp;quot;&lt;/span&gt; /&amp;gt;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;数据绑定类.setViewModel(viewmodel)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+&lt;h2 id=&quot;常见问题&quot;&gt;&lt;a href=&quot;#常见问题&quot; class=&quot;headerlink&quot; title=&quot;常见问题&quot;&gt;&lt;/a&gt;常见问题&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;问题1：&lt;/strong&gt;使用数据绑定类还是视图绑定类？&lt;/p&gt;
+&lt;p&gt;解决：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果只是取代findViewById，可以使用视图绑定类&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;问题2：&lt;/strong&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;If you don&lt;span class=&quot;string&quot;&gt;&amp;#x27;t use an inflation method taking a DataBindingComponent, use DataBindingUtil.setDefaultComponent or make all BindingAdapter methods static.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;解决：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;@BindingAdapter&lt;/code&gt;注解声明的方法必须是静态的&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;问题3：&lt;/strong&gt;databinding能在子线程直接设置对象的值吗？&lt;/p&gt;
+&lt;p&gt;写demo验证：起子线程调用databinding设置变量值&lt;/p&gt;
+&lt;p&gt;button点击事件代码如下，经过验证，每点一下，界面是可以实时刷新的。&lt;/p&gt;
+&lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;baseObservableInThread&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(View view)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Thread(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Runnable() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            Log.e(&lt;span class=&quot;string&quot;&gt;&amp;quot;DatabindingActivity&amp;quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&amp;quot;accept: &amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;// 更新指定字段&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            user.setUserName(&lt;span class=&quot;string&quot;&gt;&amp;quot;jordan&amp;quot;&lt;/span&gt; + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; + &lt;span class=&quot;string&quot;&gt;&amp;quot;号&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            user.setPassWord(&lt;span class=&quot;string&quot;&gt;&amp;quot;jordan-love-&amp;quot;&lt;/span&gt; + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;).start();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;官方文档专门描述了：异步设置数据的前提是，数据源不能是集合。——《&lt;a href=&quot;https://developer.android.google.cn/topic/libraries/data-binding/generated-binding?hl=zh-cn#viewstubs&quot;&gt;生成的绑定类-后台线程&lt;/a&gt;》&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;问题4：&lt;/strong&gt;能替代handler通知主线程更新ui的作用吗？&lt;/p&gt;
+&lt;p&gt;答：确实不需要handler通知主线程刷新UI了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;问题5：&lt;/strong&gt;那还需要handler吗？&lt;/p&gt;
+&lt;p&gt;答：handler仍然可用于多线程通信&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;问题6：&lt;/strong&gt;databinding可观察对象发生更改时，界面是在当前帧显示变化还是下一帧显示变化？&lt;/p&gt;
+&lt;p&gt;答：当可变或可观察对象发生更改时，绑定会按照计划在下一帧之前发生更改。但有时必须立即执行绑定。要强制执行，请使用 &lt;a href=&quot;https://developer.android.google.cn/reference/androidx/databinding/ViewDataBinding?hl=zh-cn#executePendingBindings()&quot;&gt;&lt;code&gt;executePendingBindings()&lt;/code&gt;&lt;/a&gt; 方法。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;问题7：&lt;/strong&gt;双向绑定可能会引入无限循环&lt;/p&gt;
+&lt;p&gt;使用双向数据绑定时，请注意不要引入无限循环。当用户更改特性时，系统会调用使用 &lt;code&gt;@InverseBindingAdapter&lt;/code&gt; 注释的方法，并且该值将分配给后备属性。继而调用使用 &lt;code&gt;@BindingAdapter&lt;/code&gt; 注释的方法，从而触发对使用 &lt;code&gt;@InverseBindingAdapter&lt;/code&gt; 注释的方法的另一个调用，依此类推。&lt;/p&gt;
+&lt;p&gt;解决：通过比较使用 &lt;code&gt;@BindingAdapter&lt;/code&gt; 注释的方法中的新值和旧值，可以打破可能出现的无限循环。&lt;/p&gt;</summary>
     
     
     
@@ -216,13 +320,106 @@
     <link href="http://www.yangchaofan.cn/2022/01/viewpager-viewpager2-usage/"/>
     <id>http://www.yangchaofan.cn/2022/01/viewpager-viewpager2-usage/</id>
     <published>2022-01-22T07:15:44.000Z</published>
-    <updated>2022-07-06T14:31:55.477Z</updated>
+    <updated>2022-07-27T16:01:00.793Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;code概述&quot;&gt;&lt;a href=&quot;#Code概述&quot; class=&quot;</summary>
-      
+    <summary type="html">&lt;h1 id=&quot;Code概述&quot;&gt;&lt;a href=&quot;#Code概述&quot; class=&quot;headerlink&quot; title=&quot;Code概述&quot;&gt;&lt;/a&gt;Code概述&lt;/h1&gt;&lt;p&gt;工程包括2部分&lt;/p&gt;
+&lt;pre class=&quot;mermaid&quot;&gt;graph LR
+h1(ViewPager知识体系)--&gt;A(常见类和API)
+h1--&gt;B(基本用法)
+    B--&gt;PagerAdapter
+    B--&gt;FragmentPagerAdapter
+    B--&gt;FragmetnStatePagerAdpater
+    B--&gt;RecyclerView.Adapter+FragmentStateAdapter
+    B--&gt;未完成Fragment+FragmentManager+FragmentTranscation
+h1--&gt;C(高阶用法)
+    C--&gt;P(PageTransformer)
+        P--&gt;一页多个
+        P--&gt;层叠
+        P--&gt;居中缩放
+    C--&gt;child(未完成-子项控制-5种adapter的用法区别)
+        child--&gt;remove
+        child--&gt;update
+        child--&gt;replace
+        child--&gt;insert&lt;/pre&gt;
+
+
+
+
+
+&lt;h1 id=&quot;常见API&quot;&gt;&lt;a href=&quot;#常见API&quot; class=&quot;headerlink&quot; title=&quot;常见API&quot;&gt;&lt;/a&gt;常见API&lt;/h1&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;名称&lt;/th&gt;
+&lt;th&gt;用途&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;ViewPager&lt;/td&gt;
+&lt;td&gt;视图组件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;ViewPager2&lt;/td&gt;
+&lt;td&gt;视图组件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PagerAdapter&lt;/td&gt;
+&lt;td&gt;viewpager1适配器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FragmentPagerAdapter&lt;/td&gt;
+&lt;td&gt;viewpager1适配器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FragmentStatePagerAdapter&lt;/td&gt;
+&lt;td&gt;viewpager1适配器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;RecyclerView.Adapter&lt;/td&gt;
+&lt;td&gt;viewpager2适配器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FragmentStateAdapter&lt;/td&gt;
+&lt;td&gt;viewpager2适配器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FragmentTransaction&lt;/td&gt;
+&lt;td&gt;Fragment事物控制&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FragmentManager&lt;/td&gt;
+&lt;td&gt;Fragment管理器&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Fragment&lt;/td&gt;
+&lt;td&gt;视图组件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;h1 id=&quot;标准用法&quot;&gt;&lt;a href=&quot;#标准用法&quot; class=&quot;headerlink&quot; title=&quot;标准用法&quot;&gt;&lt;/a&gt;标准用法&lt;/h1&gt;&lt;h2 id=&quot;ViewPager&quot;&gt;&lt;a href=&quot;#ViewPager&quot; class=&quot;headerlink&quot; title=&quot;ViewPager&quot;&gt;&lt;/a&gt;ViewPager&lt;/h2&gt;&lt;p&gt;总结&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;滑动有哪些方法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;setCurrentItem、arrowScroll&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;能监听哪些事件：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;onPageScrolled、onPageSelected、onPageScrollStateChanged&lt;/li&gt;
+&lt;li&gt;SCROLL_STATE_IDLE、SCROLL_STATE_DRAGGING、SCROLL_STATE_SETTLING&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;不同事件之间的区别：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;setAdapter是否进入回调&lt;/li&gt;
+&lt;li&gt;动作没完成是否进入回调&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;假滑了解吗：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Viewpager通过fakeBy来与其他组件联动&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.apiref.com/android-zh/android/support/v4/view/ViewPager.html&quot;&gt;ViewPager - Android中文版 - API参考文档 (apiref.com)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://developer.android.google.cn/reference/androidx/viewpager/widget/ViewPager?hl=zh_cn&quot;&gt;ViewPager  | Android Developers (google.cn)&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</summary>
     
     
     
@@ -240,13 +437,46 @@
     <link href="http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/"/>
     <id>http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/</id>
     <published>2022-01-19T14:16:35.000Z</published>
-    <updated>2022-07-06T14:25:13.848Z</updated>
+    <updated>2022-07-27T16:01:48.098Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;启动模式的使用场景&quot;&gt;&lt;a href=&quot;#启动模式的使用场景&quot; c</summary>
-      
+    <summary type="html">&lt;h1 id=&quot;启动模式的使用场景&quot;&gt;&lt;a href=&quot;#启动模式的使用场景&quot; class=&quot;headerlink&quot; title=&quot;启动模式的使用场景&quot;&gt;&lt;/a&gt;启动模式的使用场景&lt;/h1&gt;&lt;h2 id=&quot;标准模式&quot;&gt;&lt;a href=&quot;#标准模式&quot; class=&quot;headerlink&quot; title=&quot;标准模式&quot;&gt;&lt;/a&gt;标准模式&lt;/h2&gt;&lt;p&gt;特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;任何页面，如无必要，默认为标准模式，start启动一次创建一个新的Activity&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适合场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;任何页面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;singleTop&quot;&gt;&lt;a href=&quot;#singleTop&quot; class=&quot;headerlink&quot; title=&quot;singleTop&quot;&gt;&lt;/a&gt;singleTop&lt;/h2&gt;&lt;p&gt;特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果该实例已有，且位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，不会重新创建&lt;/li&gt;
+&lt;li&gt;如果该实例已有，不位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，会重新创建&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适合场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;消息推送： 在单聊页面点击消息通知重新进入一个新的单聊页面&lt;/li&gt;
+&lt;li&gt;商品推荐：在A商品详情页面点击运营推荐进入一个新的B商品详情页面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;singleTask&quot;&gt;&lt;a href=&quot;#singleTask&quot; class=&quot;headerlink&quot; title=&quot;singleTask&quot;&gt;&lt;/a&gt;singleTask&lt;/h2&gt;&lt;p&gt;特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果该实例已经存在（存在于同一个TaskRecord的？还是存在于Stack中？）但该实例之上还有别的Activity，start启动一次，不会重新创建，会清除该实例之上的所有Activity（清除Stack中其上面的所有？还是TaskRecord内其上面的所有？）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适合场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;应用中的主页&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;singleInstance&quot;&gt;&lt;a href=&quot;#singleInstance&quot; class=&quot;headerlink&quot; title=&quot;singleInstance&quot;&gt;&lt;/a&gt;singleInstance&lt;/h2&gt;&lt;p&gt;特性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;创建一个新的栈结构，似的Activity存在于新的TaskRecord中&lt;/li&gt;
+&lt;li&gt;如果ActivityA已经存在，通过start方式启动ActivityA，则不会重新创建ActivityA&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适合场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;适用于于App主业务分开的页面&lt;/li&gt;
+&lt;li&gt;大型App的设置页面&lt;/li&gt;
+&lt;li&gt;闹铃App，闹铃提醒页面与闹铃设置页面分离&lt;/li&gt;
+&lt;/ul&gt;</summary>
     
     
     
@@ -264,13 +494,21 @@
     <link href="http://www.yangchaofan.cn/2022/01/lifecycle-activity/"/>
     <id>http://www.yangchaofan.cn/2022/01/lifecycle-activity/</id>
     <published>2022-01-16T14:16:35.000Z</published>
-    <updated>2022-07-06T14:20:22.979Z</updated>
+    <updated>2022-07-27T16:03:23.638Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;activity生命周期&quot;&gt;&lt;a href=&quot;#Activity生</summary>
-      
+    <summary type="html">&lt;h1 id=&quot;Activity生命周期&quot;&gt;&lt;a href=&quot;#Activity生命周期&quot; class=&quot;headerlink&quot; title=&quot;Activity生命周期&quot;&gt;&lt;/a&gt;Activity生命周期&lt;/h1&gt;&lt;h1 id=&quot;应用层管理Activity生命周期的方式&quot;&gt;&lt;a href=&quot;#应用层管理Activity生命周期的方式&quot; class=&quot;headerlink&quot; title=&quot;应用层管理Activity生命周期的方式&quot;&gt;&lt;/a&gt;应用层管理Activity生命周期的方式&lt;/h1&gt;&lt;p&gt;&lt;strong&gt;方法1：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在&lt;code&gt;Application&lt;/code&gt;中存储一个全局数据集list，子元素是&lt;code&gt;Activity&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BaseActivity#onCreat&lt;/code&gt;e调用&lt;code&gt;Application&lt;/code&gt;的#add方法添加&lt;code&gt;Activity&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在退出&lt;code&gt;App&lt;/code&gt;时，遍历数据集的所有&lt;code&gt;Activity&lt;/code&gt;，调用&lt;code&gt;finsh&lt;/code&gt;方法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;方法2：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在&lt;code&gt;Application&lt;/code&gt;中调用&lt;code&gt;registerActivityLifecycleCallbacks(activityLifecycleCallbacks);&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;编写&lt;code&gt;ActivityLifecycleCallbacks&lt;/code&gt;子类实现，复写接口中生命周期监听方法&lt;/li&gt;
+&lt;li&gt;在每个监听方法里，对一个全局数据集list进行增删改查,list中的子元素是Activity&lt;/li&gt;
+&lt;/ol&gt;</summary>
     
     
     
@@ -288,14 +526,27 @@
     <link href="http://www.yangchaofan.cn/2022/01/throttle-debounce-vie-click/"/>
     <id>http://www.yangchaofan.cn/2022/01/throttle-debounce-vie-click/</id>
     <published>2022-01-13T10:13:12.000Z</published>
-    <updated>2022-07-06T14:47:41.882Z</updated>
+    <updated>2022-07-27T16:03:51.272Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;什么是防抖动？举一个典型场景：&lt;/p&gt;
-&lt;p&gt;笔者处理一个bug，【留言板】</summary>
-      
+    <summary type="html">&lt;p&gt;什么是防抖动？举一个典型场景：&lt;/p&gt;
+&lt;p&gt;笔者处理一个bug，【留言板】留言列表点击编辑，多次点击删除键，提示“留言发送失败” ,问题表现为点击删除按钮多次，发出了同一个请求多次，服务端无法响应返回了失败的响应码。&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@Override&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    MessageBean bean &amp;#x3D; mbsAdapter.getData().get(position);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if (view.getId() &amp;#x3D;&amp;#x3D; R.id.iv_delete) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        mbRequest.deleteSingle(bean, position);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        StatisticsUtilFamilyMeals.mbDelete(this, MBHomePageActivity.class.getSimpleName());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; else if (view.getId() &amp;#x3D;&amp;#x3D; R.id.iv_resend) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        mbRequest.updateCacheMessage(bean, position);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+
+&lt;p&gt;测试人员频繁点击一个Delete按钮，多次发出了同一份Request，该Request中携带了相同的请求体，服务端只能处理一份，先到达的Request将被服务端处理，后到达的Request将被服务端标记为处理失败，客户端会依次收到处理成功、处理失败、处理失败……&lt;/p&gt;
+&lt;p&gt;以上就是一个典型的点击事件频繁创建的问题，为了防止事件的频繁创建、响应、发出Request、让服务端处理，我们一般会做防抖动——即将点击事件过滤调。&lt;/p&gt;
+&lt;p&gt;防抖动方案按事件的产生顺序和处理顺序的方向来划分，可分为“先到达先处理型”和“后到达后处理型”&lt;/p&gt;
+&lt;p&gt;本文包括以下几种&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;传统计算时间间隔&lt;/li&gt;
+&lt;li&gt;RxJava&lt;/li&gt;
+&lt;li&gt;RxBinding&lt;/li&gt;
+&lt;li&gt;同一任务执行最后一次&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;前三个是先到达先处理型，第四个是厚道的后处理型&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
@@ -315,13 +566,19 @@
     <link href="http://www.yangchaofan.cn/2022/01/Android-rxjava-Practice/"/>
     <id>http://www.yangchaofan.cn/2022/01/Android-rxjava-Practice/</id>
     <published>2022-01-06T14:33:57.000Z</published>
-    <updated>2022-07-06T14:46:52.552Z</updated>
+    <updated>2022-07-27T16:04:18.141Z</updated>
     
     
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;rxjava-sample-项目介绍&quot;&gt;&lt;a href=&quot;#Rxj</summary>
-      
+    <summary type="html">&lt;h1 id=&quot;Rxjava-sample-项目介绍&quot;&gt;&lt;a href=&quot;#Rxjava-sample-项目介绍&quot; class=&quot;headerlink&quot; title=&quot;Rxjava sample 项目介绍&quot;&gt;&lt;/a&gt;Rxjava sample 项目介绍&lt;/h1&gt;&lt;h2 id=&quot;引入依赖&quot;&gt;&lt;a href=&quot;#引入依赖&quot; class=&quot;headerlink&quot; title=&quot;引入依赖&quot;&gt;&lt;/a&gt;引入依赖&lt;/h2&gt;&lt;h3 id=&quot;基础依赖&quot;&gt;&lt;a href=&quot;#基础依赖&quot; class=&quot;headerlink&quot; title=&quot;基础依赖&quot;&gt;&lt;/a&gt;基础依赖&lt;/h3&gt;&lt;p&gt;依赖后可以使用rxjava操作符&lt;/p&gt;
+&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;io.reactivex.rxjava2:rxjava:2.2.2&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;io.reactivex.rxjava2:rxandroid:2.1.0&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;扩展依赖&quot;&gt;&lt;a href=&quot;#扩展依赖&quot; class=&quot;headerlink&quot; title=&quot;扩展依赖&quot;&gt;&lt;/a&gt;扩展依赖&lt;/h3&gt;&lt;p&gt;网络库，可以返回Observable对象，方便后续操作符操作&lt;/p&gt;
+&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;com.amitshekhar.android:rx2-android-networking:1.0.2&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;生命周期库，使用后可以将rxjava与Adnroid组件生命周期关联&lt;/p&gt;
+&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;com.trello.rxlifecycle4:rxlifecycle:4.0.2&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;UI布局组件，使用后按钮可以自适应布局，自动换行&lt;/p&gt;
+&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;com.google.android:flexbox:2.0.1&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;项目结构&quot;&gt;&lt;a href=&quot;#项目结构&quot; class=&quot;headerlink&quot; title=&quot;项目结构&quot;&gt;&lt;/a&gt;项目结构&lt;/h2&gt;&lt;p&gt;此项目按目录分为如下多个package，每一个package表示rxjava一类用法，接下来我们一级一级目录来研究这些用法&lt;/p&gt;
+&lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;├─java&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│  └─com&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│      └─shaunsheep&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│          └─rxjavasample&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              ├─observable // 被观察者&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              ├─operators&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─arithmetic // 数学运算符&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─combine // 结合&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─condition // 条件运算符&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─connect // 链接&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─create // 创建&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─&lt;span class=&quot;keyword&quot;&gt;filter&lt;/span&gt;  // 过滤&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─model // 模型&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  └─transform // 变换&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              ├─scene   // 典型场景&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─bus  // 事件总线&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  └─cache // 三级缓存&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │      ├─controller&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │      └─model&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              └─schedulers // 调度器&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
     
     

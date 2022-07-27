@@ -101,16 +101,16 @@
 
 
 
-<meta name="description" content="启动模式的使用场景#标准模式#特性：  任何页面，如无必要，默认为标准模式，start启动一次创建一个新的Activity  适合场景：  任何页面  singleTop#特性：  如果该实例已有，且位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，不会重新创建 如果该实例已有，不位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，会重新创">
+<meta name="description" content="启动模式的使用场景标准模式特性：  任何页面，如无必要，默认为标准模式，start启动一次创建一个新的Activity  适合场景：  任何页面  singleTop特性：  如果该实例已有，且位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，不会重新创建 如果该实例已有，不位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，会重新创建">
 <meta property="og:type" content="article">
 <meta property="og:title" content="n条用例验证Activity4种启动模式的威力与坑">
 <meta property="og:url" content="http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/index.html">
 <meta property="og:site_name" content="叶金诚的站点">
-<meta property="og:description" content="启动模式的使用场景#标准模式#特性：  任何页面，如无必要，默认为标准模式，start启动一次创建一个新的Activity  适合场景：  任何页面  singleTop#特性：  如果该实例已有，且位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，不会重新创建 如果该实例已有，不位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，会重新创">
+<meta property="og:description" content="启动模式的使用场景标准模式特性：  任何页面，如无必要，默认为标准模式，start启动一次创建一个新的Activity  适合场景：  任何页面  singleTop特性：  如果该实例已有，且位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，不会重新创建 如果该实例已有，不位于栈顶（是Stack顶部还是TaskRecord顶部？），start启动一次，会重新创建">
 <meta property="og:locale">
 <meta property="og:image" content="http://cdn.yangchaofan.cn/typora/AMS%E4%BD%93%E7%B3%BB-%E5%A5%87%E6%80%AA%E7%9A%84%E7%8E%B0%E8%B1%A1.png">
 <meta property="article:published_time" content="2022-01-19T14:16:35.000Z">
-<meta property="article:modified_time" content="2022-07-06T14:25:13.848Z">
+<meta property="article:modified_time" content="2022-07-27T16:01:48.098Z">
 <meta property="article:author" content="叶金诚">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
@@ -554,13 +554,12 @@
 </ul>
 <p>适合场景：</p>
 <ul>
-<li><p>适用于于App主业务分开的页面</p>
-</li>
-<li><p>大型App的设置页面</p>
-</li>
-<li><p>闹铃App，闹铃提醒页面与闹铃设置页面分离</p>
-</li>
+<li>适用于于App主业务分开的页面</li>
+<li>大型App的设置页面</li>
+<li>闹铃App，闹铃提醒页面与闹铃设置页面分离</li>
 </ul>
+<a id="more"></a>
+
 <h1 id="观察task"><a href="#观察Task" class="headerlink" title="观察Task"></a>观察Task<a href="#观察task" class="header-anchor">#</a></h1><ol>
 <li>标准Activity1 -&gt; 标准Activity2</li>
 <li>标准Activity1 -&gt; SingleTask 标记Activity2</li>
@@ -868,21 +867,21 @@
        <li class="popular-posts-item">
          
          
-         <div class="popular-posts-title"><a href="\2023\05\jetpack-lifecycle-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Lifecycle</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\07\jetpack-paging-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Paging</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
          <div class="popular-posts-title"><a href="\2022\02\Android-gradle-usage\" rel="bookmark">Android项目Gradle常见用途</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-lifecycle-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Lifecycle</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-paging-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Paging</a></div>
          
        </li>
      
@@ -1276,15 +1275,15 @@
                   
                   
                     <li class='my-links-of-blogroll-li'>
-                      <a href="/2023/05/jetpack-lifecycle-mmvm-usage/" title="Jetpack-生命周期组件库Lifecycle" target="_blank">Jetpack-生命周期组件库Lifecycle</a>
-                    </li>
-                  
-                    <li class='my-links-of-blogroll-li'>
-                      <a href="/2022/07/jetpack-paging-mmvm-usage/" title="Jetpack-生命周期组件库Paging" target="_blank">Jetpack-生命周期组件库Paging</a>
-                    </li>
-                  
-                    <li class='my-links-of-blogroll-li'>
                       <a href="/2022/02/Android-gradle-usage/" title="Android项目Gradle常见用途" target="_blank">Android项目Gradle常见用途</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/jetpack-lifecycle-mmvm-usage/" title="Jetpack-生命周期组件库Lifecycle" target="_blank">Jetpack-生命周期组件库Lifecycle</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/jetpack-paging-mmvm-usage/" title="Jetpack-生命周期组件库Paging" target="_blank">Jetpack-生命周期组件库Paging</a>
                     </li>
                   
                     <li class='my-links-of-blogroll-li'>
@@ -2573,7 +2572,7 @@
   
     <script async type="text/javascript">
         var text = "Welcome To Leaface";
-        var date = '2022-07-27';
+        var date = '2022-07-28';
         console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
         console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
         console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');

@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://www.yangchaofan.cn//2022/01/jetpack-viewmodel-mmvm-usage/</loc>
+    <loc>http://www.yangchaofan.cn//2022/01/Android-rxjava-Practice/</loc>
     <lastmod>2022-07-27</lastmod>
   </url>
   <url>
-    <loc>http://www.yangchaofan.cn//2022/07/jetpack-paging-mmvm-usage/</loc>
+    <loc>http://www.yangchaofan.cn//2022/01/throttle-debounce-vie-click/</loc>
     <lastmod>2022-07-27</lastmod>
   </url>
   <url>
-    <loc>http://www.yangchaofan.cn//2022/01/jetpack-livedata-mmvm-usage/</loc>
+    <loc>http://www.yangchaofan.cn//2022/01/lifecycle-activity/</loc>
     <lastmod>2022-07-27</lastmod>
   </url>
   <url>
-    <loc>http://www.yangchaofan.cn//2023/05/jetpack-lifecycle-mmvm-usage/</loc>
+    <loc>http://www.yangchaofan.cn//2022/01/launchmode-activity-useage/</loc>
+    <lastmod>2022-07-27</lastmod>
+  </url>
+  <url>
+    <loc>http://www.yangchaofan.cn//2022/01/viewpager-viewpager2-usage/</loc>
     <lastmod>2022-07-27</lastmod>
   </url>
   <url>
@@ -21,28 +25,24 @@
     <lastmod>2022-07-27</lastmod>
   </url>
   <url>
-    <loc>http://www.yangchaofan.cn//2022/02/Android-gradle-usage/</loc>
+    <loc>http://www.yangchaofan.cn//2022/01/jetpack-paging-mmvm-usage/</loc>
     <lastmod>2022-07-27</lastmod>
   </url>
   <url>
-    <loc>http://www.yangchaofan.cn//2022/01/throttle-debounce-vie-click/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <loc>http://www.yangchaofan.cn//2022/01/jetpack-lifecycle-mmvm-usage/</loc>
+    <lastmod>2022-07-27</lastmod>
   </url>
   <url>
-    <loc>http://www.yangchaofan.cn//2022/01/Android-rxjava-Practice/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <loc>http://www.yangchaofan.cn//2022/01/jetpack-viewmodel-mmvm-usage/</loc>
+    <lastmod>2022-07-27</lastmod>
   </url>
   <url>
-    <loc>http://www.yangchaofan.cn//2022/01/viewpager-viewpager2-usage/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <loc>http://www.yangchaofan.cn//2022/01/jetpack-livedata-mmvm-usage/</loc>
+    <lastmod>2022-07-27</lastmod>
   </url>
   <url>
-    <loc>http://www.yangchaofan.cn//2022/01/launchmode-activity-useage/</loc>
-    <lastmod>2022-07-06</lastmod>
-  </url>
-  <url>
-    <loc>http://www.yangchaofan.cn//2022/01/lifecycle-activity/</loc>
-    <lastmod>2022-07-06</lastmod>
+    <loc>http://www.yangchaofan.cn//2022/02/Android-gradle-usage/</loc>
+    <lastmod>2022-07-27</lastmod>
   </url>
   <url>
     <loc>http://www.yangchaofan.cn//2021/07/programming-life-values/</loc>

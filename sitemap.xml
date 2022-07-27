@@ -2,28 +2,35 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://www.yangchaofan.cn/2022/01/jetpack-viewmodel-mmvm-usage/</loc>
+    <loc>http://www.yangchaofan.cn/2022/01/Android-rxjava-Practice/</loc>
     
     <lastmod>2022-07-27</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.yangchaofan.cn/2022/07/jetpack-paging-mmvm-usage/</loc>
+    <loc>http://www.yangchaofan.cn/2022/01/throttle-debounce-vie-click/</loc>
     
     <lastmod>2022-07-27</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.yangchaofan.cn/2022/01/jetpack-livedata-mmvm-usage/</loc>
+    <loc>http://www.yangchaofan.cn/2022/01/lifecycle-activity/</loc>
     
     <lastmod>2022-07-27</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.yangchaofan.cn/2023/05/jetpack-lifecycle-mmvm-usage/</loc>
+    <loc>http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/</loc>
+    
+    <lastmod>2022-07-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.yangchaofan.cn/2022/01/viewpager-viewpager2-usage/</loc>
     
     <lastmod>2022-07-27</lastmod>
     
@@ -37,44 +44,37 @@
   </url>
   
   <url>
-    <loc>http://www.yangchaofan.cn/2022/02/Android-gradle-usage/</loc>
+    <loc>http://www.yangchaofan.cn/2022/01/jetpack-paging-mmvm-usage/</loc>
     
     <lastmod>2022-07-27</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.yangchaofan.cn/2022/01/throttle-debounce-vie-click/</loc>
+    <loc>http://www.yangchaofan.cn/2022/01/jetpack-lifecycle-mmvm-usage/</loc>
     
-    <lastmod>2022-07-06</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yangchaofan.cn/2022/01/Android-rxjava-Practice/</loc>
-    
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-07-27</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.yangchaofan.cn/2022/01/viewpager-viewpager2-usage/</loc>
+    <loc>http://www.yangchaofan.cn/2022/01/jetpack-viewmodel-mmvm-usage/</loc>
     
-    <lastmod>2022-07-06</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/</loc>
-    
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-07-27</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.yangchaofan.cn/2022/01/lifecycle-activity/</loc>
+    <loc>http://www.yangchaofan.cn/2022/01/jetpack-livedata-mmvm-usage/</loc>
     
-    <lastmod>2022-07-06</lastmod>
+    <lastmod>2022-07-27</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.yangchaofan.cn/2022/02/Android-gradle-usage/</loc>
+    
+    <lastmod>2022-07-27</lastmod>
     
   </url>
   
@@ -354,14 +354,14 @@
   </url>
   
   <url>
-    <loc>http://www.yangchaofan.cn/tags/BugFree/</loc>
+    <loc>http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/</loc>
     <lastmod>2022-07-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/</loc>
+    <loc>http://www.yangchaofan.cn/tags/BugFree/</loc>
     <lastmod>2022-07-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

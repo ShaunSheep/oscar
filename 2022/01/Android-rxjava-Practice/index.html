@@ -101,19 +101,19 @@
 
 
 
-<meta name="description" content="Rxjava sample 项目介绍#引入依赖#基础依赖#依赖后可以使用rxjava操作符 12implementation &amp;#x27;io.reactivex.rxjava2:rxjava:2.2.2&amp;#x27;implementation &amp;#x27;io.reactivex.rxjava2:rxandroid:2.1.0&amp;#x27; 扩展依赖#网络库，可以返回Observable对象，方便">
+<meta name="description" content="Rxjava sample 项目介绍引入依赖基础依赖依赖后可以使用rxjava操作符 12implementation &amp;#x27;io.reactivex.rxjava2:rxjava:2.2.2&amp;#x27;implementation &amp;#x27;io.reactivex.rxjava2:rxandroid:2.1.0&amp;#x27; 扩展依赖网络库，可以返回Observable对象，方便后续操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RjxavaSample练习">
 <meta property="og:url" content="http://www.yangchaofan.cn/2022/01/Android-rxjava-Practice/index.html">
 <meta property="og:site_name" content="叶金诚的站点">
-<meta property="og:description" content="Rxjava sample 项目介绍#引入依赖#基础依赖#依赖后可以使用rxjava操作符 12implementation &amp;#x27;io.reactivex.rxjava2:rxjava:2.2.2&amp;#x27;implementation &amp;#x27;io.reactivex.rxjava2:rxandroid:2.1.0&amp;#x27; 扩展依赖#网络库，可以返回Observable对象，方便">
+<meta property="og:description" content="Rxjava sample 项目介绍引入依赖基础依赖依赖后可以使用rxjava操作符 12implementation &amp;#x27;io.reactivex.rxjava2:rxjava:2.2.2&amp;#x27;implementation &amp;#x27;io.reactivex.rxjava2:rxandroid:2.1.0&amp;#x27; 扩展依赖网络库，可以返回Observable对象，方便后续操作">
 <meta property="og:locale">
 <meta property="og:image" content="https://mcxiaoke.gitbooks.io/rxdocs/content/images/S.AsyncSubject.png">
 <meta property="og:image" content="https://mcxiaoke.gitbooks.io/rxdocs/content/images/S.PublishSubject.png">
 <meta property="og:image" content="https://mcxiaoke.gitbooks.io/rxdocs/content/images/S.BehaviorSubject.png">
 <meta property="og:image" content="https://mcxiaoke.gitbooks.io/rxdocs/content/images/S.ReplaySubject.png">
 <meta property="article:published_time" content="2022-01-06T14:33:57.000Z">
-<meta property="article:modified_time" content="2022-07-06T14:46:52.552Z">
+<meta property="article:modified_time" content="2022-07-27T16:04:18.141Z">
 <meta property="article:author" content="叶金诚">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="开源框架">
@@ -535,6 +535,8 @@
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="GROOVY"><figure class="iseeu highlight /groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;com.google.android:flexbox:2.0.1&#x27;</span></span><br></pre></td></tr></table></figure></div>
 <h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构<a href="#项目结构" class="header-anchor">#</a></h2><p>此项目按目录分为如下多个package，每一个package表示rxjava一类用法，接下来我们一级一级目录来研究这些用法</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="POWERSHELL"><figure class="iseeu highlight /powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">├─java</span><br><span class="line">│  └─com</span><br><span class="line">│      └─shaunsheep</span><br><span class="line">│          └─rxjavasample</span><br><span class="line">│              ├─observable // 被观察者</span><br><span class="line">│              ├─operators</span><br><span class="line">│              │  ├─arithmetic // 数学运算符</span><br><span class="line">│              │  ├─combine // 结合</span><br><span class="line">│              │  ├─condition // 条件运算符</span><br><span class="line">│              │  ├─connect // 链接</span><br><span class="line">│              │  ├─create // 创建</span><br><span class="line">│              │  ├─<span class="keyword">filter</span>  // 过滤</span><br><span class="line">│              │  ├─model // 模型</span><br><span class="line">│              │  └─transform // 变换</span><br><span class="line">│              ├─scene   // 典型场景</span><br><span class="line">│              │  ├─bus  // 事件总线</span><br><span class="line">│              │  └─cache // 三级缓存</span><br><span class="line">│              │      ├─controller</span><br><span class="line">│              │      └─model</span><br><span class="line">│              └─schedulers // 调度器</span><br></pre></td></tr></table></figure></div>
+<a id="more"></a>
+
 <h2 id="observable"><a href="#observable" class="headerlink" title="observable"></a>observable<a href="#observable" class="header-anchor">#</a></h2><p>此部分文件结构</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="POWERSHELL"><figure class="iseeu highlight /powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">|-- AsyncSubjectActivity.java // 四种Subject之一</span><br><span class="line">|-- BehaviorSubjectActivity.java  // 四种Subject之一</span><br><span class="line">|-- PublishSubjectActivity.java  // 四种Subject之一</span><br><span class="line">|-- ReplaySubjectActivity.java  // 四种Subject之一</span><br><span class="line">|-- CompletableActivity.java // Completable消息</span><br><span class="line">|-- FlowableActivity.java // Flowable背压</span><br><span class="line">|-- ObservableActivity.java // Observable基础用法</span><br><span class="line">-- SingleActivity.java // Single消息</span><br></pre></td></tr></table></figure></div>
 <h3 id="observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable<a href="#observable" class="header-anchor">#</a></h3><p><strong>观察者和被观察者</strong>：Observable指被观察者，Observer指观察者或订阅者</p>
@@ -971,21 +973,21 @@ ReplaySubject：ReplaySubject会发射所有来自原始Observable的数据给�
        <li class="popular-posts-item">
          
          
-         <div class="popular-posts-title"><a href="\2023\05\jetpack-lifecycle-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Lifecycle</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
-         <div class="popular-posts-title"><a href="\2022\07\jetpack-paging-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Paging</a></div>
-         
-       </li>
-     
-       <li class="popular-posts-item">
-         
-         
          <div class="popular-posts-title"><a href="\2022\02\Android-gradle-usage\" rel="bookmark">Android项目Gradle常见用途</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-lifecycle-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Lifecycle</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\01\jetpack-paging-mmvm-usage\" rel="bookmark">Jetpack-生命周期组件库Paging</a></div>
          
        </li>
      
@@ -1381,15 +1383,15 @@ ReplaySubject：ReplaySubject会发射所有来自原始Observable的数据给�
                   
                   
                     <li class='my-links-of-blogroll-li'>
-                      <a href="/2023/05/jetpack-lifecycle-mmvm-usage/" title="Jetpack-生命周期组件库Lifecycle" target="_blank">Jetpack-生命周期组件库Lifecycle</a>
-                    </li>
-                  
-                    <li class='my-links-of-blogroll-li'>
-                      <a href="/2022/07/jetpack-paging-mmvm-usage/" title="Jetpack-生命周期组件库Paging" target="_blank">Jetpack-生命周期组件库Paging</a>
-                    </li>
-                  
-                    <li class='my-links-of-blogroll-li'>
                       <a href="/2022/02/Android-gradle-usage/" title="Android项目Gradle常见用途" target="_blank">Android项目Gradle常见用途</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/jetpack-lifecycle-mmvm-usage/" title="Jetpack-生命周期组件库Lifecycle" target="_blank">Jetpack-生命周期组件库Lifecycle</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/jetpack-paging-mmvm-usage/" title="Jetpack-生命周期组件库Paging" target="_blank">Jetpack-生命周期组件库Paging</a>
                     </li>
                   
                     <li class='my-links-of-blogroll-li'>
@@ -2678,7 +2680,7 @@ ReplaySubject：ReplaySubject会发射所有来自原始Observable的数据给�
   
     <script async type="text/javascript">
         var text = "Welcome To Leaface";
-        var date = '2022-07-27';
+        var date = '2022-07-28';
         console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
         console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
         console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
