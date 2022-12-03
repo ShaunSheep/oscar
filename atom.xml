@@ -6,7 +6,7 @@
   <link href="http://www.yangchaofan.cn/atom.xml" rel="self"/>
   
   <link href="http://www.yangchaofan.cn/"/>
-  <updated>2022-07-27T15:48:29.511Z</updated>
+  <updated>2022-12-03T13:15:36.839Z</updated>
   <id>http://www.yangchaofan.cn/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android内存优化案例-优化某App的121内存泄漏</title>
+    <link href="http://www.yangchaofan.cn/2022/10/performance-android-121-Memory-leaks/"/>
+    <id>http://www.yangchaofan.cn/2022/10/performance-android-121-Memory-leaks/</id>
+    <published>2022-10-01T13:34:41.000Z</published>
+    <updated>2022-12-03T13:15:36.839Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;内存泄漏案例5-某app121个内存泄漏&quot;&gt;&lt;a href=&quot;#内</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="性能优化" scheme="http://www.yangchaofan.cn/categories/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+    <category term="Performance" scheme="http://www.yangchaofan.cn/categories/Android/Performance/"/>
+    
+    
+    <category term="Performance" scheme="http://www.yangchaofan.cn/tags/Performance/"/>
+    
+    <category term="Android,BugFree" scheme="http://www.yangchaofan.cn/tags/Android-BugFree/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android内存泄漏4讲</title>
+    <link href="http://www.yangchaofan.cn/2022/09/android-performance-four-tips/"/>
+    <id>http://www.yangchaofan.cn/2022/09/android-performance-four-tips/</id>
+    <published>2022-09-07T12:28:33.000Z</published>
+    <updated>2022-12-03T13:15:32.834Z</updated>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;android内存泄漏案例4讲&quot;&gt;&lt;a href=&quot;#Androi</summary>
+      
+    
+    
+    
+    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
+    
+    <category term="性能优化" scheme="http://www.yangchaofan.cn/categories/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
+    <category term="Performance" scheme="http://www.yangchaofan.cn/categories/Android/Performance/"/>
+    
+    
+    <category term="Performance" scheme="http://www.yangchaofan.cn/tags/Performance/"/>
+    
+    <category term="Android,BugFree" scheme="http://www.yangchaofan.cn/tags/Android-BugFree/"/>
+    
+  </entry>
   
   <entry>
     <title>Android项目Gradle常见用途</title>
@@ -55,6 +111,7 @@
 &lt;li&gt;定义接口类、定义对象，在Activity、Fragment的生命周期手动回调接口&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;29&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;30&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;31&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;32&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;33&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;34&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;35&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;36&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;37&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;38&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;39&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MyLocationListener&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MyLocationListener&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(Context context, Callback callback)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// ...&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// connect to system location service&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;stop&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;comment&quot;&gt;// disconnect from system location service&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MyActivity&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;AppCompatActivity&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; MyLocationListener myLocationListener;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onCreate&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(...)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        myLocationListener = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; MyLocationListener(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;, location -&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;// update UI&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onStart&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;.onStart();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Util.checkUserStatus(result -&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;// what if this callback is invoked AFTER activity is stopped?&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (result) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                myLocationListener.start();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onStop&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;.onStop();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        myLocationListener.stop();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
 &lt;p&gt;传统写法具备如下缺点&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;太多组件需要维护生命周期状态，会写太多的生命周期接口回调&lt;/p&gt;
@@ -68,6 +125,7 @@
 &lt;li&gt;myLocationListener#start是异步的，可能会晚于myLocationListener#stop执行&lt;/li&gt;
 &lt;/ol&gt;
 &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;MyActivity&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;extends&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;AppCompatActivity&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;private&lt;/span&gt; MyLocationListener myLocationListener;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onCreate&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(...)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        myLocationListener = &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; MyLocationListener(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;, location -&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;// update UI&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onStart&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;.onStart();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        Util.checkUserStatus(result -&amp;gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;// what if this callback is invoked AFTER activity is stopped?&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (result) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                myLocationListener.start();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;onStop&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;keyword&quot;&gt;super&lt;/span&gt;.onStop();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        myLocationListener.stop();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
 
 
 &lt;p&gt;&lt;a href=&quot;https://developer.android.google.cn/reference/androidx/lifecycle/package-summary?hl=zh-cn&quot;&gt;&lt;code&gt;androidx.lifecycle&lt;/code&gt;&lt;/a&gt; 软件包提供的类和接口可帮助您以弹性和隔离的方式解决这些问题。&lt;/p&gt;
@@ -104,6 +162,7 @@
 &lt;li&gt;支持第三方库 RxJava&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&quot;基本用法&quot;&gt;&lt;a href=&quot;#基本用法&quot; class=&quot;headerlink&quot; title=&quot;基本用法&quot;&gt;&lt;/a&gt;基本用法&lt;/h2&gt;&lt;h3 id=&quot;增加依赖&quot;&gt;&lt;a href=&quot;#增加依赖&quot; class=&quot;headerlink&quot; title=&quot;增加依赖&quot;&gt;&lt;/a&gt;增加依赖&lt;/h3&gt;&lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;// paging&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;quot;androidx.paging:paging-runtime:2.1.0-alpha01&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;com.squareup.retrofit2:retrofit:2.0.0&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;com.squareup.retrofit2:converter-gson:2.0.0&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;com.squareup.retrofit2:adapter-rxjava2:2.2.0&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
 &lt;h3 id=&quot;常见API&quot;&gt;&lt;a href=&quot;#常见API&quot; class=&quot;headerlink&quot; title=&quot;常见API&quot;&gt;&lt;/a&gt;常见API&lt;/h3&gt;&lt;blockquote&gt;
 &lt;p&gt;参考&lt;a href=&quot;https://segmentfault.com/a/1190000038953354&quot;&gt;https://segmentfault.com/a/1190000038953354&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -224,8 +283,10 @@
 &lt;h2 id=&quot;用途&quot;&gt;&lt;a href=&quot;#用途&quot; class=&quot;headerlink&quot; title=&quot;用途&quot;&gt;&lt;/a&gt;用途&lt;/h2&gt;&lt;p&gt;声明式的将视图与数据绑定，而程序式的调用视图组件属性去设置&lt;/p&gt;
 &lt;p&gt;如程序式的做法&lt;/p&gt;
 &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;TextView textView = findViewById(R.id.sample_text);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;textView.setText(viewModel.getUserName());&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
 &lt;p&gt;声明式的做法&lt;/p&gt;
 &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;lt;TextView&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        android:text=&lt;span class=&quot;string&quot;&gt;&amp;quot;@&amp;#123;viewmodel.userName&amp;#125;&amp;quot;&lt;/span&gt; /&amp;gt;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;数据绑定类.setViewModel(viewmodel)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
 
 
 &lt;h2 id=&quot;常见问题&quot;&gt;&lt;a href=&quot;#常见问题&quot; class=&quot;headerlink&quot; title=&quot;常见问题&quot;&gt;&lt;/a&gt;常见问题&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;问题1：&lt;/strong&gt;使用数据绑定类还是视图绑定类？&lt;/p&gt;
@@ -235,12 +296,14 @@
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;问题2：&lt;/strong&gt;&lt;/p&gt;
 &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;If you don&lt;span class=&quot;string&quot;&gt;&amp;#x27;t use an inflation method taking a DataBindingComponent, use DataBindingUtil.setDefaultComponent or make all BindingAdapter methods static.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
 &lt;p&gt;解决：&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;@BindingAdapter&lt;/code&gt;注解声明的方法必须是静态的&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;问题3：&lt;/strong&gt;databinding能在子线程直接设置对象的值吗？&lt;/p&gt;
 &lt;p&gt;写demo验证：起子线程调用databinding设置变量值&lt;/p&gt;
 &lt;p&gt;button点击事件代码如下，经过验证，每点一下，界面是可以实时刷新的。&lt;/p&gt;
 &lt;figure class=&quot;highlight java&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;baseObservableInThread&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(View view)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Thread(&lt;span class=&quot;keyword&quot;&gt;new&lt;/span&gt; Runnable() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;meta&quot;&gt;@Override&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            Log.e(&lt;span class=&quot;string&quot;&gt;&amp;quot;DatabindingActivity&amp;quot;&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&amp;quot;accept: &amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            &lt;span class=&quot;comment&quot;&gt;// 更新指定字段&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            user.setUserName(&lt;span class=&quot;string&quot;&gt;&amp;quot;jordan&amp;quot;&lt;/span&gt; + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt; + &lt;span class=&quot;string&quot;&gt;&amp;quot;号&amp;quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;            user.setPassWord(&lt;span class=&quot;string&quot;&gt;&amp;quot;jordan-love-&amp;quot;&lt;/span&gt; + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;).start();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
 &lt;p&gt;官方文档专门描述了：异步设置数据的前提是，数据源不能是集合。——《&lt;a href=&quot;https://developer.android.google.cn/topic/libraries/data-binding/generated-binding?hl=zh-cn#viewstubs&quot;&gt;生成的绑定类-后台线程&lt;/a&gt;》&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;问题4：&lt;/strong&gt;能替代handler通知主线程更新ui的作用吗？&lt;/p&gt;
 &lt;p&gt;答：确实不需要handler通知主线程刷新UI了。&lt;/p&gt;
@@ -437,7 +500,7 @@ h1--&gt;C(高阶用法)
     <link href="http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/"/>
     <id>http://www.yangchaofan.cn/2022/01/launchmode-activity-useage/</id>
     <published>2022-01-19T14:16:35.000Z</published>
-    <updated>2022-07-27T16:01:48.098Z</updated>
+    <updated>2022-12-03T13:00:58.437Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;启动模式的使用场景&quot;&gt;&lt;a href=&quot;#启动模式的使用场景&quot; class=&quot;headerlink&quot; title=&quot;启动模式的使用场景&quot;&gt;&lt;/a&gt;启动模式的使用场景&lt;/h1&gt;&lt;h2 id=&quot;标准模式&quot;&gt;&lt;a href=&quot;#标准模式&quot; class=&quot;headerlink&quot; title=&quot;标准模式&quot;&gt;&lt;/a&gt;标准模式&lt;/h2&gt;&lt;p&gt;特性：&lt;/p&gt;
@@ -534,6 +597,7 @@ h1--&gt;C(高阶用法)
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;@Override&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    MessageBean bean &amp;#x3D; mbsAdapter.getData().get(position);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    if (view.getId() &amp;#x3D;&amp;#x3D; R.id.iv_delete) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        mbRequest.deleteSingle(bean, position);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        StatisticsUtilFamilyMeals.mbDelete(this, MBHomePageActivity.class.getSimpleName());&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125; else if (view.getId() &amp;#x3D;&amp;#x3D; R.id.iv_resend) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;        mbRequest.updateCacheMessage(bean, position);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
 
+
 &lt;p&gt;测试人员频繁点击一个Delete按钮，多次发出了同一份Request，该Request中携带了相同的请求体，服务端只能处理一份，先到达的Request将被服务端处理，后到达的Request将被服务端标记为处理失败，客户端会依次收到处理成功、处理失败、处理失败……&lt;/p&gt;
 &lt;p&gt;以上就是一个典型的点击事件频繁创建的问题，为了防止事件的频繁创建、响应、发出Request、让服务端处理，我们一般会做防抖动——即将点击事件过滤调。&lt;/p&gt;
 &lt;p&gt;防抖动方案按事件的产生顺序和处理顺序的方向来划分，可分为“先到达先处理型”和“后到达后处理型”&lt;/p&gt;
@@ -571,12 +635,16 @@ h1--&gt;C(高阶用法)
     
     <summary type="html">&lt;h1 id=&quot;Rxjava-sample-项目介绍&quot;&gt;&lt;a href=&quot;#Rxjava-sample-项目介绍&quot; class=&quot;headerlink&quot; title=&quot;Rxjava sample 项目介绍&quot;&gt;&lt;/a&gt;Rxjava sample 项目介绍&lt;/h1&gt;&lt;h2 id=&quot;引入依赖&quot;&gt;&lt;a href=&quot;#引入依赖&quot; class=&quot;headerlink&quot; title=&quot;引入依赖&quot;&gt;&lt;/a&gt;引入依赖&lt;/h2&gt;&lt;h3 id=&quot;基础依赖&quot;&gt;&lt;a href=&quot;#基础依赖&quot; class=&quot;headerlink&quot; title=&quot;基础依赖&quot;&gt;&lt;/a&gt;基础依赖&lt;/h3&gt;&lt;p&gt;依赖后可以使用rxjava操作符&lt;/p&gt;
 &lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;io.reactivex.rxjava2:rxjava:2.2.2&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;io.reactivex.rxjava2:rxandroid:2.1.0&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
 &lt;h3 id=&quot;扩展依赖&quot;&gt;&lt;a href=&quot;#扩展依赖&quot; class=&quot;headerlink&quot; title=&quot;扩展依赖&quot;&gt;&lt;/a&gt;扩展依赖&lt;/h3&gt;&lt;p&gt;网络库，可以返回Observable对象，方便后续操作符操作&lt;/p&gt;
 &lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;com.amitshekhar.android:rx2-android-networking:1.0.2&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
 &lt;p&gt;生命周期库，使用后可以将rxjava与Adnroid组件生命周期关联&lt;/p&gt;
 &lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;com.trello.rxlifecycle4:rxlifecycle:4.0.2&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
 &lt;p&gt;UI布局组件，使用后按钮可以自适应布局，自动换行&lt;/p&gt;
 &lt;figure class=&quot;highlight groovy&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;implementation &lt;span class=&quot;string&quot;&gt;&amp;#x27;com.google.android:flexbox:2.0.1&amp;#x27;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
 &lt;h2 id=&quot;项目结构&quot;&gt;&lt;a href=&quot;#项目结构&quot; class=&quot;headerlink&quot; title=&quot;项目结构&quot;&gt;&lt;/a&gt;项目结构&lt;/h2&gt;&lt;p&gt;此项目按目录分为如下多个package，每一个package表示rxjava一类用法，接下来我们一级一级目录来研究这些用法&lt;/p&gt;
 &lt;figure class=&quot;highlight powershell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;├─java&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│  └─com&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│      └─shaunsheep&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│          └─rxjavasample&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              ├─observable // 被观察者&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              ├─operators&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─arithmetic // 数学运算符&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─combine // 结合&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─condition // 条件运算符&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─connect // 链接&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─create // 创建&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─&lt;span class=&quot;keyword&quot;&gt;filter&lt;/span&gt;  // 过滤&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─model // 模型&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  └─transform // 变换&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              ├─scene   // 典型场景&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  ├─bus  // 事件总线&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │  └─cache // 三级缓存&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │      ├─controller&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              │      └─model&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│              └─schedulers // 调度器&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;</summary>
     
@@ -666,9 +734,9 @@ h1--&gt;C(高阶用法)
     
     <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
     
-    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
-    
     <category term="项目架构" scheme="http://www.yangchaofan.cn/categories/Android/%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84/"/>
+    
+    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
     
     
     <category term="技术选型" scheme="http://www.yangchaofan.cn/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
@@ -760,7 +828,7 @@ h1--&gt;C(高阶用法)
     <link href="http://www.yangchaofan.cn/2021/02/mtk-log/"/>
     <id>http://www.yangchaofan.cn/2021/02/mtk-log/</id>
     <published>2021-02-27T01:13:12.000Z</published>
-    <updated>2021-04-02T12:50:08.517Z</updated>
+    <updated>2022-12-03T13:00:43.268Z</updated>
     
     
     <summary type="html">&lt;h1 id=&quot;MTK-log&quot;&gt;&lt;a href=&quot;#MTK-log&quot; class=&quot;headerlink&quot; title=&quot;MTK log&quot;&gt;&lt;/a&gt;&lt;a href=&quot;https://www.pianshen.com/article/4121163154/&quot;&gt;MTK log&lt;/a&gt;&lt;/h1&gt;&lt;h2 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h2&gt;&lt;p&gt;mtklog是由log生成工具MTKLogger生成的一系列问题追踪文件，其主要作用就是对系统或者应用产生的异常进行快速定位，从而解决问题。&lt;/p&gt;
@@ -770,70 +838,14 @@ h1--&gt;C(高阶用法)
     
     <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
     
-    <category term="BugFree" scheme="http://www.yangchaofan.cn/categories/Android/BugFree/"/>
+    <category term="Performance" scheme="http://www.yangchaofan.cn/categories/Performance/"/>
     
-    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
+    <category term="BugFree" scheme="http://www.yangchaofan.cn/categories/Android/BugFree/"/>
     
     
     <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
     
     <category term="BugFree" scheme="http://www.yangchaofan.cn/tags/BugFree/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BugFree三剑客异常、日志、工具</title>
-    <link href="http://www.yangchaofan.cn/2021/02/android-bugfree-three-lines/"/>
-    <id>http://www.yangchaofan.cn/2021/02/android-bugfree-three-lines/</id>
-    <published>2021-02-27T00:13:12.000Z</published>
-    <updated>2021-02-27T04:21:16.707Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;BugFree三剑客异常、日志、工具—Android开发排查问题小结&quot;&gt;&lt;a href=&quot;#BugFree三剑客异常、日志、工具—Android开发排查问题小结&quot; class=&quot;headerlink&quot; title=&quot;BugFree三剑客异常、日志、工具—Android开发排查问题小结&quot;&gt;&lt;/a&gt;BugFree三剑客异常、日志、工具—Android开发排查问题小结&lt;/h1&gt;&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;程序员编写程序、调试代码的时候不可避免的会遇到各种问题，如页面显示不正确，如数据层数据组装操作未按照期望的业务逻辑执行。&lt;/p&gt;
-&lt;p&gt;造成这些问题的原因大多分为以下几种：有些是条件语句执行错误，有些是Java层的Exception如空指针、集合边界越界问题，有些是较难找到原因的OOM、ANR、Crash、系统SWT重启问题。面对扑面而来的问题，程序员很容易束手无策。笔者结合自己的经验，总结了BugFree中必不可少的三剑客：异常、日志、工具，期望通过这3个“帮手”，帮助各位排查开发难题。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
-    
-    <category term="BugFree" scheme="http://www.yangchaofan.cn/categories/Android/BugFree/"/>
-    
-    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
-    
-    <category term="BugFree" scheme="http://www.yangchaofan.cn/tags/BugFree/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android骨架屏详解</title>
-    <link href="http://www.yangchaofan.cn/2021/02/Client-Skeleton-Screen/"/>
-    <id>http://www.yangchaofan.cn/2021/02/Client-Skeleton-Screen/</id>
-    <published>2021-02-27T00:13:12.000Z</published>
-    <updated>2021-06-07T13:29:48.897Z</updated>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;android骨架屏详解&quot;&gt;&lt;a href=&quot;#Android骨架</summary>
-      
-    
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/categories/Android/"/>
-    
-    <category term="面试" scheme="http://www.yangchaofan.cn/categories/Android/%E9%9D%A2%E8%AF%95/"/>
-    
-    <category term="性能优化" scheme="http://www.yangchaofan.cn/categories/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    
-    
-    <category term="Android" scheme="http://www.yangchaofan.cn/tags/Android/"/>
-    
-    <category term="Android性能优化" scheme="http://www.yangchaofan.cn/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
-    
-    <category term="AndroidUI优化" scheme="http://www.yangchaofan.cn/tags/AndroidUI%E4%BC%98%E5%8C%96/"/>
     
   </entry>
   

@@ -1,0 +1,2704 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+      
+    
+    
+      
+    
+  <script async src="//cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  <link href="//cdn.jsdelivr.net/npm/pace-js@1.0.2/themes/blue/pace-theme-minimal.css" rel="stylesheet">
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+<link href="https://fonts.loli.net/css?family=EB+Garamond:400,400i,700,700i|Noto+Serif+SC:400,500,700&display=swap&subset=chinese-simplified" rel="stylesheet">
+
+
+
+
+  
+
+<link href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Performance,Android,BugFree," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="叶金诚的站点" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Android内存泄漏案例4讲#概述#主要讲解内存泄漏的4种情况：Activity、fragment、view、异步任务 内存问题概述#内存泄漏的关注点——对象占据的内存  本该回收的对象，无法被垃圾处理器回收； 程序不再使用的对象，无法被垃圾处理器回收； 在页面生命周期销毁后，页面持有、创建过的对象无法被垃圾处理器回收； 在任务（线程、Service、广播）结束后，任务持有、创建过的对象无法被垃">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android内存泄漏4讲">
+<meta property="og:url" content="http://www.yangchaofan.cn/2022/09/android-performance-four-tips/index.html">
+<meta property="og:site_name" content="叶金诚的站点">
+<meta property="og:description" content="Android内存泄漏案例4讲#概述#主要讲解内存泄漏的4种情况：Activity、fragment、view、异步任务 内存问题概述#内存泄漏的关注点——对象占据的内存  本该回收的对象，无法被垃圾处理器回收； 程序不再使用的对象，无法被垃圾处理器回收； 在页面生命周期销毁后，页面持有、创建过的对象无法被垃圾处理器回收； 在任务（线程、Service、广播）结束后，任务持有、创建过的对象无法被垃">
+<meta property="og:locale">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1359811-2a89b5bec9e345ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-profile-memory%E5%AE%9E%E6%97%B6%E9%A2%84%E8%A7%88%E5%8A%9F%E8%83%BD.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-hprof%E6%96%87%E4%BB%B6%E9%A2%84%E8%A7%88%E5%8A%9F%E8%83%BD.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E2%80%94%E2%80%94%E6%9C%89leaks%E7%9A%84.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof-%E8%A7%82%E5%AF%9FActivity%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%B3%84%E6%BC%8F.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/image-20221114174703825.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-dialog%E6%8C%81%E6%9C%89Activity%E5%AF%BC%E8%87%B4%E6%B3%84%E6%BC%8F.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-MediaplayerListener%E6%9C%AA%E8%A7%A3%E7%BB%91.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-%E4%B8%93%E8%BE%91%E5%88%97%E8%A1%A8%E9%A1%B5%E4%BC%98%E5%8C%96%E5%89%8D.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-%E4%B8%93%E8%BE%91%E5%88%97%E8%A1%A8%E9%A1%B5%E4%BC%98%E5%8C%96%E5%90%8E.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-fragment%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/右侧悬浮窗.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-view%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F-%E4%BC%98%E5%8C%96%E5%89%8D.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/image-20221116103835001.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-message%E6%8C%81%E6%9C%89view.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/image-20221115164344291.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-view%E6%9C%AA%E5%9B%9E%E6%94%B6.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/image-20221115180242196.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-view%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F-%E4%BC%98%E5%8C%96%E5%89%8D.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/image-20221115152920373.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-rxjava%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F1.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-rxjava%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F2-%E5%AE%9A%E4%BD%8D%E4%BB%A3%E7%A0%81%E4%BD%8D%E7%BD%AE.jpg">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/image-20221118150623915.png">
+<meta property="og:image" content="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-rxjava%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F-%E4%BC%98%E5%8C%96%E5%90%8E.jpg">
+<meta property="article:published_time" content="2022-09-07T12:28:33.000Z">
+<meta property="article:modified_time" content="2022-12-03T13:15:32.834Z">
+<meta property="article:author" content="叶金诚">
+<meta property="article:tag" content="Performance">
+<meta property="article:tag" content="Android,BugFree">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1359811-2a89b5bec9e345ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"flipBounceYIn","post_header":"perspectiveRightIn","post_body":"fadeIn","coll_header":"swoopIn","sidebar":"shrinkIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.yangchaofan.cn/2022/09/android-performance-four-tips/"/>
+
+
+
+
+
+<!-- 设置文章需要密码访问 -->
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  <title>Android内存泄漏4讲 | 叶金诚的站点</title>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  
+	<!-- leafacePlayer -->
+	
+      <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+      <meta name="baidu-site-verification" content="code-lde50FghqK" />
+
+	
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <!--fork me from github-->
+    <a target="_blank" rel="noopener" href="https://github.com/ShaunSheep" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#64CEAA; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">叶金诚的站点</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">汇贤雅叙</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-film"></i> <br />
+            
+            电影
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-图书">
+          <a href="/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            图书
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-links">
+          <a href="/links/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-link"></i> <br />
+            
+            友链
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.yangchaofan.cn/2022/09/android-performance-four-tips/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="叶金诚的站点">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Android内存泄漏4讲</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+             
+
+             
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2022-09-07T20:28:33+08:00">
+                2022-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" itemprop="url" rel="index">
+                    <span itemprop="name">性能优化</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/Performance/" itemprop="url" rel="index">
+                    <span itemprop="name">Performance</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2022/09/android-performance-four-tips/" class="leancloud_visitors" data-flag-title="Android内存泄漏4讲">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">浏览&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          <!--
+          
+          -->
+
+          
+            <span class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数&#58;</span>
+                
+                <span title="字数">
+                  6.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">时长 &asymp;</span>
+                
+                <span title="时长">
+                  26 分钟
+                </span>
+              
+            </span>
+          
+
+          <!-- 隐藏文章内标题下，内容描述
+          
+          -->
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="android内存泄漏案例4讲"><a href="#Android内存泄漏案例4讲" class="headerlink" title="Android内存泄漏案例4讲"></a>Android内存泄漏案例4讲<a href="#android内存泄漏案例4讲" class="header-anchor">#</a></h1><h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述<a href="#概述" class="header-anchor">#</a></h1><p>主要讲解内存泄漏的4种情况：Activity、fragment、view、异步任务</p>
+<h1 id="内存问题概述"><a href="#内存问题概述" class="headerlink" title="内存问题概述"></a>内存问题概述<a href="#内存问题概述" class="header-anchor">#</a></h1><p>内存泄漏的关注点——对象占据的内存</p>
+<ul>
+<li>本该回收的对象，无法被垃圾处理器回收；</li>
+<li>程序不再使用的对象，无法被垃圾处理器回收；</li>
+<li>在页面生命周期销毁后，页面持有、创建过的对象无法被垃圾处理器回收；</li>
+<li>在任务（线程、Service、广播）结束后，任务持有、创建过的对象无法被垃圾处理器回收</li>
+</ul>
+<p>Android内存问题l类型概述</p>
+<p>内存抖动的表现形式：</p>
+<ol>
+<li>忽高忽低，锯齿状</li>
+</ol>
+<p>内存泄漏的表现形式：</p>
+<ol>
+<li>页面或任务已经结束，相关的对象仍然被GC root索引，导致垃圾回收器无法回收，内存片段仍然存在</li>
+</ol>
+<p>内存溢出的表现形式：</p>
+<ol>
+<li><p>App可用内存已到达系统规定的上限，如某型号手机规定单个App最大可分配内存为196mb</p>
+</li>
+<li><p>系统能为App分配的内存不足，系统可分配内存已经到达上限，如系统可用只有1mb，app需要20mb</p>
+</li>
+</ol>
+<p>本文要讲的是内存泄漏的4种类型。</p>
+<h1 id="内存泄漏的危害"><a href="#内存泄漏的危害" class="headerlink" title="内存泄漏的危害"></a>内存泄漏的危害<a href="#内存泄漏的危害" class="header-anchor">#</a></h1><p>典型的例子：创建8000个实例就会导致内存溢出了</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.example.a;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Outer</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Outer</span><span class="params">(<span class="keyword">int</span> size)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = <span class="keyword">new</span> <span class="keyword">int</span>[size];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Innner</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">Innner <span class="title">createInner</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Innner();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        List&lt;Object&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</span><br><span class="line">            list.add(<span class="keyword">new</span> Outer(<span class="number">100000</span>).createInner());</span><br><span class="line">            System.out.println(counter++);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h1 id="android中内存泄漏的判断方式"><a href="#Android中内存泄漏的判断方式" class="headerlink" title="Android中内存泄漏的判断方式"></a>Android中内存泄漏的判断方式<a href="#android中内存泄漏的判断方式" class="header-anchor">#</a></h1><blockquote>
+<p>判断一个对象是否无法被回收，最佳的判断方式是定义清楚这个对象预期的生命周期，通常对象是随着页面、任务的生命周期产生和消亡的，Android中可以借此机制判断是否存在泄漏现象：</p>
+</blockquote>
+<ol>
+<li><code>Activity</code>:通过查看<code>Activity#mDestroyed</code>属性来判断<code>Activity</code>是否已经销毁，如果为true，表明该<code>Activity</code>已经被标记为销毁状态，此时<strong>hprof文件中若仍然存在此Activity</strong>，则表明这个<code>Activity</code>占据的内存处于泄漏状态；</li>
+<li><code>Fragment</code>：通过<code>Fragment#mFragmentManager</code>属性来判断该<code>Fragment</code>是否处于无用状态，如果<code>mFragmentManager</code>为空，且<strong>hprof文件中若仍然存在</strong>此<code>Fragment</code>，则表明<code>Fragment</code>占据的内存处于泄漏状态；</li>
+<li><code>View</code>：通过<code>un wrapper#mContext</code>获得<code>Activity</code>，如果<code>Activity</code>不为空，则按照判断<code>Activity</code>的方式判断<code>Activity</code>是否泄漏</li>
+<li><code>ContextWrapper</code>：通过<code>unwrapper ContextWrapper获</code>得<code>Activity</code>，如果<code>Activity</code>不为空，则按照判断Activity的方式判断Activity是否泄漏</li>
+<li><code>Dialog</code>，通过判断<code>mDecor</code>是否为空。<code>mDecor</code>为空，表明<code>Dialog</code>处于不被引用的状态，<code>mDecor</code>仍然<strong>存在在hporf里</strong>且为空，则表明Dialog泄漏了</li>
+<li><code>MessageQueue</code>：通过判断<code>MessageQueue#mQuitting</code>或<code>mQuiting</code>是否退出，如果该值是<code>true</code>且未被回收，则认为是泄漏。</li>
+<li><code>ViewRootImpl</code>：通过<code>ViewRootImpl</code>是否为空来判断，为空表明处于无用状态，为空且未被回收则被认为是泄漏</li>
+<li><code>Window</code>：通过<code>Window#mDestroyed</code>来判断<code>window</code>是否处于无用状态，<code>mDestroyed</code>为<code>true</code>且未被回收，则认为是泄漏</li>
+<li><code>Toast</code>：拿到<code>mTN</code>，通过<code>mTN#mView</code>是否为空来判断当前<code>Toast</code>是否已<code>经hide</code>，如果<code>mView</code>为空，表明<code>Toast</code>已经<code>hide</code>，此时<code>Toast</code>未被回收则认为是泄漏</li>
+<li><code>Editor</code>：<code>Editor</code>是用于TextView处理<code>editable text</code>的辅助类，通过<code>ditor#mTextView</code>为空来判断<code>Ediator</code>是否处于无用状态；如果mTextView为空且未被回收则认为<code>Editor</code>泄漏了</li>
+</ol>
+<p>内存泄漏的典型 场景</p>
+<ol>
+<li>非静态内部类、非静态匿名内部类持有外部类对象的引用：常见的如<code>Listener</code>、<code>CallBack</code>、<code>Handler</code>、<code>Dialog</code></li>
+<li>非静态的<code>Handler</code>，持有<code>Activity</code>，<code>Message</code>持有<code>Handler</code>，<code>Message</code>被<code>MessageQueue</code>持有，主线程<code>MessageQueue</code>持久存在，导致Activity不会被释放</li>
+<li>资源对象未关闭：数据库连接、<code>Cursor</code>、<code>IO</code>流使用完后未close</li>
+<li>属性动画：未及时使用<code>cancel</code>关闭；<code>Animator</code>持续存在，导致<code>Animator</code>持有的<code>Activity</code>、<code>Fragment</code>、<code>View</code>泄漏（<code>Animator#updateListener</code>一般都是匿名内部类，匿名内部类的问题参考场景1）</li>
+<li>逻辑问题：广播监听后未及时解注册；</li>
+</ol>
+<h1 id="认识hprof文件"><a href="#认识Hprof文件" class="headerlink" title="认识Hprof文件"></a>认识Hprof文件<a href="#认识hprof文件" class="header-anchor">#</a></h1><p>Hprof文件导出</p>
+<ul>
+<li>通过调用<code>Debug.dumpHprofData(String filePath)</code>方法来生成hprof文件</li>
+<li>通过执行shell命令<code>adb shell am dumpheap pid /data/local/tmp/x.hprof</code>来生成指定进程的hprof文件到目标目录</li>
+</ul>
+<p>Heap分区：</p>
+<ol>
+<li><code>app heap</code>：当前<code>App</code>在堆中占据的内存</li>
+<li><code>image heap</code>：系统启动镜像，包括启动期间预加载的类</li>
+<li><code>zygote heap</code>：所有<code>App</code>的父进程，所有<code>App</code>共享<code>zygote</code>的内存空间，<code>zygote</code>预加载了许多资源和代码，供所有<code>App</code>读取</li>
+</ol>
+<p>Instance View：</p>
+<ol>
+<li><p><code>depth</code>：从<code>gc root</code>到当前对象的引用链最短深度。被gc root引用到的对象不会被回收。</p>
+<p>个人收获：<code>depath = 0</code>，表示不被gc root引用，即会被垃圾回收器回收。</p>
+<p>个人收获：常见<code>gc root</code>有5种——局部变量、<code>Activity threads</code>、静态变量、<code>JNI</code>引用、类加载器</p>
+</li>
+<li><p><code>native size</code>：<code>native</code>对象占据的内存大小</p>
+</li>
+<li><p><code>shallow size</code>：对象本身占用的内存，何为对象本身？不包括它引用的其他实例</p>
+<p>个人收获：<code>shallow size = 类定义+ 父类变量所占空间大小 + 类成员变量所占空间 + [ alignment]</code></p>
+<p>类定义：固定为8<code>Byte</code></p>
+<p>父类变量所占空间大小：当前类继承了其他类的成员变量，显然这些变量是占用空间的</p>
+<p>自身变量：当前类的成员变量，如果是基本数据类型，则按基本类型计算；如果是引用数据类型，则固定为4byte，当前类仅持有变量名，</p>
+<p><code>alignment</code>：指位数对齐，目的是让<code>shallow zie</code>的值为8的倍数，如某个类A，前三项计算结果未15<code>byte</code>，则<code>shallo size</code>为了达到8的倍数，会设置一个<code>alignment</code>值，凑够16<code>byte</code>。</p>
+</li>
+<li><p><code>retained size</code>：Retained Size是指, 当实例A被回收时, 可以同时被回收的实例的Shallow Size之和</p>
+</li>
+</ol>
+<p>Instance View易混淆概念：</p>
+<p>shallow size：</p>
+<p><code>Shallow Size</code>是指实例<strong>自身</strong>占用的内存, 可以理解为保存该’数据结构’需要多少内存, 注意<strong>不包括</strong>它引用的其他实例</p>
+<p>retained size：</p>
+<p>实例A的<code>Retained Size</code>是指, 当实例A被回收时, 可以<strong>同时被回收</strong>的实例的Shallow Size之和</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1359811-2a89b5bec9e345ab.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1200/format/webp" alt="img"></p>
+<p>图中A, B, C, D四个实例, 为了方便计算, 我们假设所有实例的Shallow Size都是1kb</p>
+<p>删除D实例：垃圾回收期会移除D实例;<code>D实例的Retained Size=Shallow Size=1kb</code></p>
+<p>删除C实例：垃圾回收器会移除C和D实例;<code>C实例的Retained Size = C实例的Shallow Size + D实例的Shallow Size = 2kb</code></p>
+<p>删除B实例：垃圾回收器会移除B实例，因为C仍然被A引用，所以C不会被移除，同理D也不会被移除;<code>B实例的Retained Size=Shallow Size=1kb</code></p>
+<p>删除A实例：垃圾回收器会移除B、C、D实例;<code>A实例的Retained Size=4kb</code></p>
+<p>怎么从prof文件内分析内存泄漏？</p>
+<p>熟能生巧——memory profiler</p>
+<p>实时预览功能区：</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-profile-memory%E5%AE%9E%E6%97%B6%E9%A2%84%E8%A7%88%E5%8A%9F%E8%83%BD.jpg" alt="hprof分析-profile-memory实时预览功能"></p>
+<p>Hprof文件预览区：</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-hprof%E6%96%87%E4%BB%B6%E9%A2%84%E8%A7%88%E5%8A%9F%E8%83%BD.jpg" alt="hprof分析-hprof文件预览功能"></p>
+<h1 id="案例1hprof文件显示出了内存泄漏"><a href="#案例1——hprof文件显示出了内存泄漏" class="headerlink" title="案例1——hprof文件显示出了内存泄漏"></a>案例1——hprof文件显示出了内存泄漏<a href="#案例1hprof文件显示出了内存泄漏" class="header-anchor">#</a></h1><p>本案例如图所示，Profiler将内存泄漏的分析结果直接显示到了工具栏上，我们只需要按步骤展开方法调用链即可找到泄漏点</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E6%96%87%E4%BB%B6%E5%88%86%E6%9E%90%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E2%80%94%E2%80%94%E6%9C%89leaks%E7%9A%84.jpg" alt="hprof文件分析内存泄漏——有leaks的"></p>
+<p>①点+导入<code>hprof</code>文件</p>
+<p>②选择<code>app</code> 堆存储</p>
+<p>③根据类名排序</p>
+<p>④仅展示<code>Activity</code>、<code>Fragment</code>内存泄漏</p>
+<p>⑤过滤关键字，如<code>app</code>进程的包名</p>
+<p>⑥点击<code>Leaks</code>，下方<code>Class Name</code>区域会展示出内存泄漏的类名</p>
+<p>⑦在<code>Class Name</code>区域点击选择要观察的类名</p>
+<p>⑧在<code>Instance List</code>区域点击选择该类的实例</p>
+<p>⑨在<code>Instace Details</code>区域点击<code>References</code> 选项卡</p>
+<p>⑩选中 <code>GC root only</code>，一层一层展开引用链</p>
+<p>也可以在第9步时候观察Activity的生命周期来判断内存泄漏</p>
+<p>可以看到一个页面存在三个实例，这三个实例都因为某些原因无法被垃圾回收器回收。我们逐一分析下。</p>
+<p><strong>第三个Activity实例:</strong></p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof-%E8%A7%82%E5%AF%9FActivity%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E6%B3%84%E6%BC%8F.jpg" alt="hprof-观察Activity生命周期判断是否泄漏"></p>
+<p>首先点击<code>Fields</code>，查看<code>Activity</code>的生命周期，可以看到<code>Instacen Details - Fields -Instance视图</code>中<code>Activity#mDestroyed = true</code> ，表明此页面已经销毁了</p>
+<blockquote>
+<p>Android中内存泄漏的判断方式#Activity内存泄漏判断方式一节也提到观察mDestroyed字段来判断Activity是否出现了内存泄漏</p>
+</blockquote>
+<p><img src="http://cdn.yangchaofan.cn/typora/image-20221114174703825.png" alt="image-20221114174703825"></p>
+<p>其次点击<code>References</code>，点一层层展开引用链，可以看到<code>Activity</code>使用了<code>PlayUtil</code>，<code>PlayUtil</code>初始化的时候传入了此<code>Activity</code>，而<code>PlayUtil</code>是一个单例类，该单例类全局持有了此<code>Activity</code>的实例，导致<code>Activity</code>一直被<code>PlayUtil</code>持有着，在<code>Activity</code>生命周期结束后，<code>Activity</code>占据的堆内存，无法被垃圾回收器回收，出现了泄漏的情况。</p>
+<p>单例类持有<code>Activity</code>,导致<code>Activity</code>占据的内存无法被释放，遇到这种问题，解决起来也很容易：</p>
+<ol>
+<li>替换<code>context</code>，使用<code>ApplicationContext</code></li>
+<li>使用一个更轻量无任何业务的<code>Activity</code>来初始化<code>PlayUtil</code></li>
+<li>如无必要不要使用<code>context</code></li>
+</ol>
+<p><code>PlayUtil</code>问题，笔者采用了方法3：</p>
+<p>修改前</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="title">PlayUtil</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">  m_MediaPlayerIml = MediaPlayerIml.getInstance();</span><br><span class="line">   <span class="keyword">this</span>.m_context = context;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>修改后</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">private</span> <span class="title">PlayUtil</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">    m_MediaPlayerIml = MediaPlayerIml.getInstance();</span><br><span class="line">     <span class="comment">// 兼容老代码，保留入参context，但不使用，避免内存泄漏</span></span><br><span class="line"><span class="comment">//     this.m_context = context;</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>这样可以达到<code>PlayUtil</code>不持有<code>Activity</code>的目的，在<code>Activity#onDestroyed</code>时候，<code>Activity</code>占据的内存将被垃圾回收器回收。</p>
+<p><strong>接着我们继续看该Activity的第二个实例</strong>，查看该实例的生命周期可知该Activity已经处于Destroyed状态，但内存未被回收，这是为什么呢？</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-dialog%E6%8C%81%E6%9C%89Activity%E5%AF%BC%E8%87%B4%E6%B3%84%E6%BC%8F.jpg" alt="hprof分析-dialog持有Activity导致泄漏"></p>
+<p>我们继续查看<code>References</code>，可以看到Activity被<code>LoadProgress</code>持有了，且无法被释放。</p>
+<p>笔者分析可能是<code>Activity#showLoading</code>期间，<code>Activity</code>转入后台或其他因素，并未来得及调用<code>dissLoading</code>导致<code>LoadProgress</code>工具类持续持有该Activity的引用，产生了内存泄漏。我们来看看问题代码</p>
+<p><strong>问题代码</strong></p>
+<p>Activity#initLoading，传入了当前Activity</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">private void initLoading() &#123;</span><br><span class="line">      if (this.viewModel !&#x3D; null) &#123;</span><br><span class="line">          this.viewModel.showLoading.observe(this, new Observer&lt;Boolean&gt;() &#123;</span><br><span class="line">              public void onChanged(Boolean aBoolean) &#123;</span><br><span class="line">                  if (aBoolean) &#123;</span><br><span class="line">                      if (!LoadProgress.get().getDialog(BaseActivity.this).isShowing()) &#123;</span><br><span class="line">                          LoadProgress.get().getDialog(BaseActivity.this).show();</span><br><span class="line">                      &#125;</span><br><span class="line">                  &#125; else &#123;</span><br><span class="line">                      LoadProgress.get().dismissDialog(BaseActivity.this);</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">              &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>LoadProgress内使用HashMap缓存了传入的Activity</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.dialogs.put(context, lp);</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>解决方法</strong></p>
+<p>遇到这种问题也很好处理——在适当的时机清除<code>HashMap</code>缓存的<code>Activity</code>引用。</p>
+<p>按照这种思路，我们看到：<code>LoadProgress</code>工具类里提供了<code>HashMap</code>的清空方法<code>LoadProgress#cleanUpTrash</code>，那么我们在合适的地方，清空`Activity缓存即可</p>
+<p>在<code>Activity#onDestroyed</code>调用</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void onDestroy() &#123;</span><br><span class="line">    super.onDestroy();</span><br><span class="line">    &#x2F;&#x2F; 清空缓存</span><br><span class="line">    LoadProgress.get().cleanUpTrash();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>这样，当<code>Activity</code>生命周期处于<code>onDestroyed</code>的时候，<code>HashMap</code>会清空持有的<code>Activity</code>，避免<code>Activity</code>内存泄漏</p>
+<p><strong>最后我们来看</strong><code>Activity</code><strong>的第一个实例</strong></p>
+<p>有前两个泄漏点的分析经验，可得知<code>Activity</code>此时已经处于<code>onDestroyed</code>状态，被某个类引用了，导致<code>Activity的</code>内存无法回收.</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-MediaplayerListener%E6%9C%AA%E8%A7%A3%E7%BB%91.jpg" alt="hprof分析-MediaplayerListener未解绑"></p>
+<p>熟能生巧，我们按图索骥可看到是<code>MediaplayerIml</code>通过<code>mMediaPlayListenerCacheList</code>持有了该Activity，该类是用于存储播放回调的，用于<code>AIDL</code>服务端通知<code>Client</code>的回调，更新播放界面。</p>
+<p><strong>问题代码</strong></p>
+<p><code>Activity#onCreate</code>时候调用了注册回调</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mediaPlayerIml.registerListener(playListener);</span><br></pre></td></tr></table></figure></div>
+
+<p><code>MediaPlayerIml#registerListener</code>内部通过<code>list</code>缓存了<code>Activity</code></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">private</span> List&lt;MediaPlayListener&gt; mMediaPlayListenerCacheList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">registerListener</span><span class="params">(MediaPlayListener listener)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (!mMediaPlayListenerCacheList.contains(listener)) &#123;</span><br><span class="line">           mMediaPlayListenerCacheList.add(listener);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>解决方法</strong></p>
+<p>在适当的时机清除<code>MediaPlayerIml</code>持有的<code>Activity</code>:</p>
+<p><code>Activity#onDestroy</code>是个很不错的选择</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroy();</span><br><span class="line">        <span class="keyword">if</span>(mediaPlayerIml!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            mediaPlayerIml.unregisterListener(playListener);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 清空缓存</span></span><br><span class="line">        LoadProgress.get().cleanUpTrash();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p><strong>总结3个内存泄漏点</strong></p>
+<ol>
+<li><code>PlayUtil</code>构造函数持有<code>Activity</code>未释放</li>
+<li><code>LoadProgress</code>成员变量<code>HashMap</code>持有<code>Activity</code>未释放</li>
+<li><code>AIDL</code>远程服务端持有<code>Listener</code>，<code>Listener</code>持有<code>Activity</code>未释放</li>
+</ol>
+<p><strong>优化效果</strong></p>
+<p>优化前<code>Activity</code>进入3次创建了3份实例：</p>
+<p>优化前，多次进入该页面，产生4个实例，有3个实例无法被垃圾回收，出现了内存泄漏的情况</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-%E4%B8%93%E8%BE%91%E5%88%97%E8%A1%A8%E9%A1%B5%E4%BC%98%E5%8C%96%E5%89%8D.jpg" alt="hprof分析-专辑列表页优化前"></p>
+<p>优化后，多次进入该页面，只产生一个实例</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-%E4%B8%93%E8%BE%91%E5%88%97%E8%A1%A8%E9%A1%B5%E4%BC%98%E5%8C%96%E5%90%8E.jpg" alt="hprof分析-专辑列表页优化后"></p>
+<p>根据<code>Retained Szie</code>来看，优化前后节省内存，效果减少至原先的 （49937/332 = ）$1/150$ 。由此可见<code>Activity</code>及时回收，极大的节省了内存占用。</p>
+<h1 id="案例2hprof文件显示出fragment内存泄漏"><a href="#案例2——hprof文件显示出Fragment内存泄漏" class="headerlink" title="案例2——hprof文件显示出Fragment内存泄漏"></a>案例2——hprof文件显示出Fragment内存泄漏<a href="#案例2hprof文件显示出fragment内存泄漏" class="header-anchor">#</a></h1><p>接下来我们来看fragment内存泄漏，老规矩查看fields和references，确保它符合内存泄漏的情形；我们点击jump to source查看泄漏的位置</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-fragment%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F.jpg" alt="hprof分析-fragment内存泄漏"></p>
+<p>问题代码：<code>Fragment#MZBannerView#内部类Runnbale</code></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Banner 切换时间间隔</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">int</span> mDelayedTime = <span class="number">5000</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> Runnable mLoopRunnable = <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (mIsAutoPlay) &#123;</span><br><span class="line">                mCurrentItem = mViewPager.getCurrentItem();</span><br><span class="line">                mCurrentItem++;</span><br><span class="line">                <span class="keyword">if</span> (mCurrentItem &gt; mAdapter.getCount() - <span class="number">1</span>) &#123;</span><br><span class="line">                    mCurrentItem = <span class="number">0</span>;</span><br><span class="line">                    mViewPager.setCurrentItem(mCurrentItem, <span class="keyword">false</span>);</span><br><span class="line">                    mHandler.postDelayed(<span class="keyword">this</span>, mDelayedTime);</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    mViewPager.setCurrentItem(mCurrentItem);</span><br><span class="line">                    mHandler.postDelayed(<span class="keyword">this</span>, mDelayedTime);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                mHandler.postDelayed(<span class="keyword">this</span>, mDelayedTime);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>可以看到<code>Fragment</code>内存泄漏的第一个原因，内部类<code>runnable</code>持有了<code>view</code>的实例，每个<code>Runnbale</code>会发送一个延时5秒的消息，消息发送期间，有可能<code>view</code>、<code>fragment</code>已经结束了生命周期，此时产生了内存泄漏。</p>
+<p>解决办法也很简单，view离开窗口的时候，释放<code>Handler</code>中消息，释放<code>Runnbale</code>对<code>view</code> 的引用。</p>
+<ol>
+<li>静态<code>Runnbale</code>内部类+对<code>view</code>的弱引用(此部分代码与前面的示例很相似，不重复贴代码了)</li>
+<li>离开窗口<code>remove#handler</code>消息</li>
+</ol>
+<p><code>view</code>对<code>Activity</code>暴露了<code>pause</code>方法，在<code>Activity</code>销毁时，强制清<code>空handler</code>的任务；</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 停止轮播</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pause</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    mIsAutoPlay = <span class="keyword">false</span>;</span><br><span class="line">    mHandler.removeCallbacks(mLoopRunnable);</span><br><span class="line">    mBannerPageClickListener = <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>Activity代码：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onDestroy();</span><br><span class="line">    dataBing.homeBanner.pause();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+
+
+
+<h1 id="案例3view内存泄漏"><a href="#案例3——view内存泄漏" class="headerlink" title="案例3——view内存泄漏"></a>案例3——view内存泄漏<a href="#案例3view内存泄漏" class="header-anchor">#</a></h1><p>前文提到，<code>profile#Leaks</code>视图无法展示非<code>Activity</code>、非<code>Fragment</code>的内存泄漏，换言之，除了<code>Activity</code>、<code>Fragment</code>的内存泄漏外，其他类的内存问题我们只能自己检索<code>hprof</code>文件查询了。</p>
+<p>下面有一个极佳的view内存泄漏例子，它的操作步骤为：</p>
+<ol>
+<li>播放音乐，唤醒音乐悬浮窗</li>
+<li>播放一段时间后，关闭音乐悬浮窗</li>
+<li>重复步骤1和2</li>
+</ol>
+<p>悬浮窗长这个样</p>
+<img src="http://cdn.yangchaofan.cn/typora/右侧悬浮窗.jpg" alt="右侧悬浮窗" style="zoom:50%;">
+
+<p>我们重复三次之后，得到一份hprof文件，下面我们来分析一下内存泄漏问题</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-view%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F-%E4%BC%98%E5%8C%96%E5%89%8D.jpg" alt="hprof分析-view内存泄漏-优化前"></p>
+<p>①输入<code>view</code>的名称</p>
+<p>②选择<code>view</code></p>
+<p>③可以看到分配了3个实例对象</p>
+<p>④<code>Instance List </code>视图显示，<code>view</code>有3个实例对象及其引用</p>
+<p>我们从上至下依次看3分实例的调用链</p>
+<p><strong>view的第一个实例</strong></p>
+<p>先查看Fields区域，观察<code>mLayoutmode</code>值，判断<code>view</code>是否离开了窗口，如果已经离开了窗口，表明view未被回收，存在内存泄漏</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/image-20221116103835001.png" alt="image-20221116103835001"></p>
+<p>可以看到<code>mLayoutMode = -1</code> ，表明布局已经离开屏幕了，此实例存在内存泄漏的情况</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-message%E6%8C%81%E6%9C%89view.jpg" alt="hprof分析-message持有view"></p>
+<p>接着我们查看<code>References</code>区域，逐级点开我们发现<code>Handler</code>发送的<code>Message</code>持有了当前<code>view</code>，导致<code>view</code>在离开窗口的时候，无法被垃圾回收器回收。</p>
+<p>右键点击查看问题代码</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/image-20221115164344291.png" alt="image-20221115164344291"></p>
+<p>问题代码：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">playHandler.post(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                tv_play.setText(playItem.getProgramTitle());</span><br><span class="line">                tb_play.setSelected(<span class="keyword">true</span>);</span><br><span class="line">                initView();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>看到<code>new Runnbale</code>，这是是匿名内部类，<a target="_blank" rel="noopener" href="https://blog.csdn.net/cmder1000/article/details/108091460">匿名内部类持有当前类的引用</a>，匿名<code>Runnbale</code>未执行完毕，<code>Runnbale</code>内存未释放的时候，<code>view</code>就无法被释放，而匿名<code>Runnbale</code>的释放时机不可控，由<code>Handler</code>、<code>Looper</code>、<code>Runnbale</code>执行情况影响。</p>
+<p>那么我们该怎么优化呢？</p>
+<ol start="2">
+<li>使用非匿名或静态的<code>Handler</code>+弱引用，处理此任务</li>
+<li>在主线程处理此任务</li>
+<li><code>view</code>退出的时候释放<code>Message</code>对<code>view</code>的引用</li>
+</ol>
+<p><strong>笔者采用了方案3：</strong></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tv_play.setText(playItem.getProgramTitle());</span><br><span class="line">tb_play.setSelected(<span class="keyword">true</span>);</span><br><span class="line">initView();</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>遇到了异常提示非UI线程更新UI，可知该代码块默认在子线程执行</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ViewRootImpl: Accessibility content change on non-UI thread. Future Android versions will <span class="keyword">throw</span> an exception.</span><br><span class="line">    android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views.</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>遂作罢放弃方案2，方案1代码与下面view的第三个实例写法一致，不重复写了；我们解释一下方案3：</p>
+<blockquote>
+<p>view退出的时候释放Message对view的引用</p>
+</blockquote>
+<p>根据上图所示，我们看到<code>Message-Runnbale-View</code>的引用关系可知，<code>Looper</code>中的<code>Message</code>持续的引用<code>view</code>，我们最高效释放内存的做法是<code>view</code>离开窗口的时候，斩断<code>Message</code>与<code>view</code>的引用关系，那么我们该怎么做呢？答案是：</p>
+<ol>
+<li>结束子线程任务</li>
+<li>清空<code>Looper</code>缓存的<code>Message</code></li>
+<li>释放<code>Handler</code></li>
+</ol>
+<p>第一步：结束子线程任务很简单</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thread.interrupt()</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>本案例给<code>Handler</code>传入的是<code>Runnbale</code>，<code>Handler</code>未提供结束<code>Runnbale</code>的接口，此项优化搁置</p>
+<p>第二步：清空<code>Message</code></p>
+<p>已知<code>Looper</code>提供了清空<code>Message</code>的接口</p>
+<ol>
+<li><code>Looper#quit</code></li>
+<li><code>Looper#quitSafely</code></li>
+<li>主线程的Looper无法退出</li>
+</ol>
+<p>已知Handler提供了释放Message的接口</p>
+<ol>
+<li><code>Handler#removeCallbacksAndMessages</code></li>
+</ol>
+<p>那我们优化起来就很简单了，清空<code>Handler</code>持有的<code>Message</code></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDetachedFromWindow</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDetachedFromWindow();</span><br><span class="line"> 		...</span><br><span class="line">        <span class="comment">// 释放message，断开message-Runnbale-view的引用链</span></span><br><span class="line">        <span class="keyword">if</span> (playHandler != <span class="keyword">null</span>) &#123;</span><br><span class="line">            playHandler.removeCallbacksAndMessages(<span class="keyword">null</span>);</span><br><span class="line">            playHandler = <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>主线程调<code>quit</code>和<code>quitSafely</code>会抛异常,所以Looper相关API无法在主线程调用，不适合当前的例子，遂作罢：</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java.lang.IllegalStateException: Main thread not allowed to quit.</span><br><span class="line">    at android.os.MessageQueue.quit(MessageQueue.java:417)</span><br><span class="line">    at android.os.Looper.quitSafely(Looper.java:284)</span><br><span class="line">    at com.unilife.common.floatwindow.view.MediaPlayerRight.onDetachedFromWindow(MediaPlayerRight.java:256)</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+
+
+
+<p>我们继续看<strong>view的第二个实例</strong></p>
+<p>先查看Fields区域，观察<code>mLayoutmode</code>值，判断<code>view</code>是否离开了窗口，如果已经离开了窗口，表明view未被回收，存在内存泄漏</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-view%E6%9C%AA%E5%9B%9E%E6%94%B6.jpg" alt="hprof分析-view未回收"></p>
+<p>可以看到<code>mLayoutMode = -1</code> ，表明布局已经离开屏幕了，此实例存在内存泄漏的情况</p>
+<p>接着我们看References区域，观察调用链</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/image-20221115180242196.png" alt="image-20221115180242196"></p>
+<p>可以看到<code>MediaPlayerIml</code>有一个成员变量<code>mMediaPlayListenerCacheList</code>，缓存了<code>MediaPlayListener</code>，<code>MediaPlayListener</code>又是在<code>view</code>实例里面创建的,并且作为内部类，它持有<code>view</code>的实例。现在我们得到了清晰的调用链，<code>MediaPlayerIml-&gt;mMediaPlayListenerCacheList-&gt;MediaPlayListener-&gt;view</code>,<code>MediaPlayerIml</code>引用<code>view</code>导致<code>view</code>实例无法被释放</p>
+<p>查看问题代码：</p>
+<p>笔者发现<code>view#onDetachedFromWindow</code>已经触发了移除<code>list#listener</code>操作</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDetachedFromWindow</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">super</span>.onDetachedFromWindow();</span><br><span class="line">      mediaPlayerIml.unregisterListener(playListener);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>可以看到内部实现是<code>remove</code>调引用的</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 取消注册listener</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> listener</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">unregisterListener</span><span class="params">(MediaPlayListener listener)</span> </span>&#123;</span><br><span class="line">      mMediaPlayListenerCacheList.remove(listener);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>那为什么会未回收持续占用内存呢？</p>
+<ol>
+<li>抓拍<code>hprof</code>文件期间，代码未执行到<code>unregisterListener</code>，导致<code>view</code>内存未得到释放</li>
+<li><code>mMediaPlayListenerCacheList</code>添加的<code>listener</code>与<code>remove</code>的<code>listener</code>不是同一个</li>
+<li>此处没有产生内存泄漏,判断<code>view</code>是否应该被回收的依据有问题</li>
+</ol>
+<p>搁置疑问，接着我们来看<strong>view的第三个实例</strong>，节省时间，笔者直接调到代码索引出，展示问题代码：</p>
+<p><strong>view#非静态内部类</strong></p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 播放进度条刷新控</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> Handler m_handler = <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.handleMessage(msg);</span><br><span class="line">        <span class="keyword">switch</span> (msg.what) &#123;</span><br><span class="line">            <span class="keyword">case</span> MSG_FLUSH_SEEKBAR:</span><br><span class="line">                <span class="keyword">boolean</span> isPlaying = mediaPlayerIml != <span class="keyword">null</span> &amp;&amp; mediaPlayerIml.getPlayStatus() == QingtingConfig.PLAY;</span><br><span class="line">                <span class="keyword">if</span> (isPlaying) &#123;</span><br><span class="line">                    <span class="keyword">int</span> currentTime = mediaPlayerIml.getCurrentTime();</span><br><span class="line">                    <span class="keyword">int</span> totalTime = mediaPlayerIml.getTotalTime();</span><br><span class="line">                    mSeekBar.setMax(totalTime);</span><br><span class="line">                    mSeekBar.setProgress(currentTime);</span><br><span class="line">                    mPrograssBar.setMaxProgress(totalTime);</span><br><span class="line">                    mPrograssBar.setCurrentProgress(currentTime);</span><br><span class="line">                    LoggerUtils.instance().logE(<span class="string">&quot;mediaPlayJindu&quot;</span>, <span class="string">&quot;mediaPlayJindu&quot;</span> + totalTime + <span class="string">&quot;/&quot;</span> + currentTime);</span><br><span class="line">                &#125;</span><br><span class="line">                m_handler.sendEmptyMessageDelayed(MSG_FLUSH_SEEKBAR, MSG_FLUSH_TIME);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>可以看到此处还是使用了非静态内部类<code>m_handler</code>，<code>m_handler</code>持有当前<code>view</code> 的引用，<code>m_handler</code>如果长期存在，那么<code>view</code>的内存也不会被释放</p>
+<p>解决方法如下：</p>
+<ol>
+<li>定义外部类<code>Handler</code></li>
+<li>定义静态内部类</li>
+<li>定义静态内部类+弱引用</li>
+</ol>
+<p>笔者采用了方案3：</p>
+<p>定义静态内部类</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>  <span class="keyword">static</span>  <span class="class"><span class="keyword">class</span> <span class="title">UpdateHandler</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;</span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">final</span> WeakReference&lt;MediaPlayerIml&gt; mediaPlayerImlWeakReference;</span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">final</span> WeakReference&lt;SeekBar&gt; seekBarWeakReference;</span><br><span class="line">      <span class="keyword">private</span> <span class="keyword">final</span> WeakReference&lt;QQCircleProgressBar&gt; progressBarWeakReference;</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="title">UpdateHandler</span><span class="params">(MediaPlayerIml mediaPlayerIml, SeekBar seekBar, QQCircleProgressBar progressBar)</span> </span>&#123;</span><br><span class="line">          mediaPlayerImlWeakReference = <span class="keyword">new</span> WeakReference&lt;MediaPlayerIml&gt;(mediaPlayerIml);</span><br><span class="line">          seekBarWeakReference = <span class="keyword">new</span> WeakReference&lt;SeekBar&gt;(seekBar);</span><br><span class="line">          progressBarWeakReference = <span class="keyword">new</span> WeakReference&lt;QQCircleProgressBar&gt;(progressBar);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">super</span>.handleMessage(msg);</span><br><span class="line">          <span class="keyword">if</span> (msg.what == MSG_FLUSH_SEEKBAR) &#123;</span><br><span class="line">              MediaPlayerIml mediaPlayerIml = mediaPlayerImlWeakReference.get();</span><br><span class="line">              SeekBar seekBar = seekBarWeakReference.get();</span><br><span class="line">              QQCircleProgressBar qqCircleProgressBar =progressBarWeakReference.get();</span><br><span class="line">              <span class="keyword">boolean</span> isPlaying = mediaPlayerIml != <span class="keyword">null</span> &amp;&amp; mediaPlayerIml.getPlayStatus() == QingtingConfig.PLAY;</span><br><span class="line">              <span class="keyword">if</span> (isPlaying &amp;&amp; seekBar!=<span class="keyword">null</span> &amp;&amp; qqCircleProgressBar != <span class="keyword">null</span>) &#123;</span><br><span class="line">                  <span class="keyword">int</span> currentTime = mediaPlayerIml.getCurrentTime();</span><br><span class="line">                  <span class="keyword">int</span> totalTime = mediaPlayerIml.getTotalTime();</span><br><span class="line">                  seekBar.setMax(totalTime);</span><br><span class="line">                  seekBar.setProgress(currentTime);</span><br><span class="line">                  qqCircleProgressBar.setMaxProgress(totalTime);</span><br><span class="line">                  qqCircleProgressBar.setCurrentProgress(currentTime);</span><br><span class="line">                  LoggerUtils.instance().logE(<span class="string">&quot;mediaPlayJindu&quot;</span>, <span class="string">&quot;mediaPlayJindu&quot;</span> + totalTime + <span class="string">&quot;/&quot;</span> + currentTime);</span><br><span class="line">              &#125;</span><br><span class="line">              sendEmptyMessageDelayed(MSG_FLUSH_SEEKBAR, MSG_FLUSH_TIME);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>在<code>view</code>使用时，初始化<code>handler</code>，构造参数传入组件id；</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">m_handler = <span class="keyword">new</span> UpdateHandler(MediaPlayerIml.getInstance(),mSeekBar,mPrograssBar);</span><br><span class="line">m_handler.sendEmptyMessage(MSG_FLUSH_SEEKBAR);</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>在view离开窗口时候，销毁handler数据；</p>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDetachedFromWindow</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onDetachedFromWindow();</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span>(m_handler!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        m_handler.removeCallbacksAndMessages(<span class="keyword">null</span>);</span><br><span class="line">        m_handler = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+
+<p>总结我们针对此按理做的优化</p>
+<ol>
+<li>静态<code>Handler</code>+弱引用，释放了对<code>handler</code>对<code>view</code>的引用，让<code>view</code>及时销毁，view占据的内存及时被垃圾回收器释放</li>
+<li>释放了<code>Message</code>对<code>view</code>的引用,在view及时退出界面的时候，立即斩断<code>message</code>对<code>view</code></li>
+</ol>
+<p>回顾一下优化前的实例数量，多次操作,隐藏展示悬浮窗之后，内存中存在多份悬浮窗实例，之前创建过的悬浮窗内存一直无法被回收:</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-view%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F-%E4%BC%98%E5%8C%96%E5%89%8D.jpg" alt="hprof分析-view内存泄漏-优化前"></p>
+<p>优化后效果，多次操作，当屏幕上存在一个<code>view</code>时，只存在一份<code>view</code>实例：</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/image-20221115152920373.png" alt="image-20221115152920373"></p>
+<p>在<code>InstanceList</code>里可以看到<code>Instance</code>数量为1，同样的操作次数下，优化前占用内存280824byte；优化后750byte，内存减少至原先的$1/374$；由此可见，view的就及时回收，极大的节省了内存占用。</p>
+<h1 id="案例4异步任务内存泄漏"><a href="#案例4——异步任务内存泄漏" class="headerlink" title="案例4——异步任务内存泄漏"></a>案例4——异步任务内存泄漏<a href="#案例4异步任务内存泄漏" class="header-anchor">#</a></h1><p>异步任务，代指起子线程异步完成一些数据操作、网络接口请求等，通常会使用以下API：</p>
+<ol>
+<li><code>Runnbale</code>，<code>Thread</code>,线程池</li>
+<li><code>RxJava</code></li>
+<li><code>HandlerThread</code></li>
+<li><code>Timer</code>定时器</li>
+</ol>
+<p>而这些异步任务很有可能操作内存泄漏，下面我们以<code>Rxjava</code>为例，演示此问题，线程、线程池的问题也类似，就不再一一演示了。</p>
+<p>大多数项目的网络基础库，传入Rxjava的是匿名<code>Observer</code>，任务过多时，未执行的任务的<code>Observer</code>会持有当前页面的引用，造成内存泄漏，演示出这个场景</p>
+<p>那么问题来了</p>
+<ol>
+<li><code>rxjava</code>就会存在内存泄漏吗？</li>
+<li><code>subscribe</code>传入的匿名内部类<code>Consumer</code>实例不会造成内存泄漏吗？</li>
+<li>异步任务返回时，<code>Activity</code>已经处于<code>onDestroyed</code>状态，<code>Observer</code>持有``Activity<code>引用，</code>Activity`内存还能被回收吗？</li>
+</ol>
+<p>我们来验证一下<code>rxjava</code>的泄漏场景：</p>
+<p>假设我们在<code>Activity#onResume</code>方法里，写了异步任务，任务结束后，设置view的属性，在任务结束之前，我们会调用<code>Activity#finsh</code>操作退出当前页面，如下坨屎：页面在12秒后实际已经处于`onDestroyed状态了</p>
+<blockquote>
+<p>为了演示问题，我将延时时间增大，写成12秒，模拟异步任务返回的情况</p>
+</blockquote>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Observable.timer(<span class="number">12000</span>, TimeUnit.MILLISECONDS)</span><br><span class="line">        .subscribeOn(AndroidSchedulers.mainThread())</span><br><span class="line">        .subscribe(<span class="keyword">new</span> Consumer&lt;Long&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(Long aLong)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                dataBinding.layoutWelcome.setVisibility(View.GONE);</span><br><span class="line">                ...其他view 的引用</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>测试步骤为：进入<code>Activity</code>-立刻退出<code>Activity</code>-一段时间之后观察<code>Activity</code>的内存是否被回收</p>
+<p>我们得到一份<code>hprof</code>文件，来分析下</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-rxjava%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F1.jpg" alt="hprof分析-rxjava内存泄漏1"></p>
+<p>老规矩先看下<code>Instance-Details-Instance</code>区域，<code>Activity</code>的生命周期<code>onDestroyed</code>的值是否为<code>true</code>，按步骤点击一看，确实为true，证明<code>Activity</code>已经离开窗口了，处于销毁的生命周期中，我们期望的时候垃圾回收器可以回收Activity占据的内存，但事实上我们在Hprof文件看到了，表明<code>Activity</code>占据的内存未回收。</p>
+<p>紧着着我们面临下一个问题，如何找到导致Activity内存泄漏的原因呢？谁引用了<code>Activity</code>？</p>
+<p>点击<code>Instance-Details-References</code>区域，我们可以很快得到答案，按步骤点击<code>Jump to Source</code><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-rxjava%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F2-%E5%AE%9A%E4%BD%8D%E4%BB%A3%E7%A0%81%E4%BD%8D%E7%BD%AE.jpg" alt="hprof分析-rxjava内存泄漏2-定位代码位置"></p>
+<p>果然，立刻跳转到内存泄漏所在的代码块，终于我们通过分析hprof文件找到了问题所在:</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/image-20221118150623915.png" alt="image-20221118150623915"></p>
+<p>那么如何解决此问题呢？<code>rxjava</code>提供了<code>CompositeDisposable</code>解决此类泄漏问题，做法如下：</p>
+<ol>
+<li>创建实例对象</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 管理rxjava的任务，及时释放，不执行emitter#onNext</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> CompositeDisposable compositeDisposable = <span class="keyword">new</span> CompositeDisposable();</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>用<code>compositeDisposable</code>实例去控制任务的生命周期</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">compositeDisposable.add(Observable.timer(<span class="number">12000</span>, TimeUnit.MILLISECONDS)</span><br><span class="line">             .subscribeOn(AndroidSchedulers.mainThread())</span><br><span class="line">             .subscribe(<span class="keyword">new</span> Consumer&lt;Long&gt;() &#123;</span><br><span class="line">                 <span class="meta">@Override</span></span><br><span class="line">                 <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">accept</span><span class="params">(Long aLong)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">                     dataBinding.layoutWelcome.setVisibility(View.GONE);</span><br><span class="line">                     processIntent(getIntent());</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;));</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<ol start="3">
+<li>页面生命周期<code>onDestroyed</code>期间清空任务</li>
+</ol>
+<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onDestroy();</span><br><span class="line">    compositeDisposable.clear();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<p>优化后的效果：</p>
+<p><img src="http://cdn.yangchaofan.cn/typora/hprof%E5%88%86%E6%9E%90-rxjava%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F-%E4%BC%98%E5%8C%96%E5%90%8E.jpg" alt="hprof分析-rxjava内存泄漏-优化后"></p>
+<p>优化后可看到<code>Depth</code>为空，<code>GC root</code> 为空，表明没有其他实例引用<code>Activity</code>了，当垃圾回收器扫描到此实例，该实例内存会被回收。</p>
+<p>还记得开头的问题吗？</p>
+<ol>
+<li><code>rxjava</code>就会存在内存泄漏吗？答：会存在，<code>consumer</code>作为<code>Activity</code>的内部类，持有当前<code>Activity</code>的引用，任务未结束，<code>Activity</code>已销毁就会出现内存泄漏</li>
+<li><code>subscribe</code>传入的匿名内部类<code>Consumer</code>实例不会造成内存泄漏吗？答：只要是匿名内部类，就很有可能内存泄漏，上例子已经证明会产生内存问题。</li>
+<li>异步任务返回时，<code>Activity</code>已经处于<code>onDestroyed</code>状态，<code>Observer</code>持有``Activity<code>引用，</code>Activity`内存还能被回收吗？答：无法被回收</li>
+</ol>
+<h1 id="片段式的经验"><a href="#片段式的经验" class="headerlink" title="片段式的经验"></a>片段式的经验<a href="#片段式的经验" class="header-anchor">#</a></h1><ol>
+<li>静态内部类多次创建，有什么问题吗？-不确定</li>
+<li>静态内部类的实例，需要手动释放吗？-不确定</li>
+<li>仍未找到准确的属性能够判定view是否离开窗口</li>
+<li>静态类要调用一些非静态方法，可能需要扩展更多的弱引用实例通过静态类构造函数传进来</li>
+<li>跨App跳转，很难避免标准模式的<code>Activity</code>不被多次创建，但是可以做到Activity退出一次，就释放一次Activity内存，这是基本要求</li>
+<li>静态内部类使用某些实例前，可能需要判断该实例是否为空——在异步场景很容易出现空指针</li>
+<li>尽量不要在<code>xml</code>中定义一些<code>view</code>，如<code>TextureView</code>、<code>Surfaceview</code>，他们默认是与<code>Activity</code>绑定的，他们的构造函数传入的<code>context</code>是<code>Activity</code>实例，有可能造成内存泄漏,最好改为代码动态创建这些复杂的view</li>
+<li>glide为什么会内存泄漏？</li>
+<li>MVP为什么会内存泄漏？参考DeviceSetFragment的泄漏点3例子</li>
+<li><code>context</code>被<code>view</code>持有，<code>view</code>需要及时释放对<code>context</code>的引用，释放方式为<code>view = null</code>；这样就可以减少指向<code>context</code>的引用了；当指向<code>context</code>的引用总数为<code>0</code>，<code>context（Activity）</code>就会被回收了</li>
+<li>有些内存问题需要特定的条件才能出现，如开启关闭摄像头、输入搜索框之后清空搜索框、先进入B页面再回退刷新A页面，monkey无法替代人来操作这些步骤，人为点击还是有意义的</li>
+<li>发现一个泄漏点，解决完之后，再重复测试，才有可能发现下一个泄漏点，只有解决第一个泄漏点，才能发现其他未出现的泄漏点</li>
+<li>优化完之后可能会发现原先无法复现的新问题，优化之后要继续进行大量的重复测试，直到确保不出现泄漏情况才能结束优化工作</li>
+</ol>
+<h1 id="待求证的疑问"><a href="#待求证的疑问" class="headerlink" title="待求证的疑问"></a>待求证的疑问<a href="#待求证的疑问" class="header-anchor">#</a></h1><ol>
+<li><code>System.exit(0)</code>杀死进程，能释放该进程下的所有内存吗？</li>
+<li>非静态内部类持有当前类的引用，还是非静态内部类的实例持有当前类的引用？</li>
+<li>有必要把所有的内部类都定义成静态吗？参考<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000042870246#item-6">java - Java 内部类有坑。。100 % 内存泄露！_个人文章 - SegmentFault 思否</a>、<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28197253">(8 封私信 / 80 条消息) 为什么Java内部类要设计成静态和非静态两种？ - 知乎 (zhihu.com)</a></li>
+</ol>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">
+
+        
+
+      
+    </div>
+
+      <!-- 相关文章推荐 -->
+     
+          
+
+  <div class="popular-posts-header">
+    <i class="fa fa-graduation-cap"></i>
+    相关文章
+  </div>
+
+ <details>
+   <summary>点击查看</summary>
+     <ul class="popular-posts">
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2022\10\performance-android-121-Memory-leaks\" rel="bookmark">Android内存优化案例-优化某App的121内存泄漏</a></div>
+         
+       </li>
+     
+       <li class="popular-posts-item">
+         
+         
+         <div class="popular-posts-title"><a href="\2016\06\performance-android\" rel="bookmark">Android性能优化【史诗巨著之内存篇】</a></div>
+         
+       </li>
+     
+     </ul>
+ </details>
+
+
+
+     
+
+    
+    
+    
+
+    <div>
+          
+            
+
+          
+    </div>
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div class="read-over">-------------------本文结束 <i class="fa fa-paw"></i> 感谢您的阅读-------------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+      <div>
+        <div class="share_reward">
+  <div>坚持原创技术分享，感谢您的支持和鼓励！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://cdn.yangchaofan.cn/BlogGifRes/20210313/s7mteFUqc8pH.png" alt=" 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://cdn.yangchaofan.cn/BlogGifRes/20210313/oQnokBcx6RUO.png" alt=" 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    叶金诚
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.yangchaofan.cn/2022/09/android-performance-four-tips/" title="Android内存泄漏4讲">http://www.yangchaofan.cn/2022/09/android-performance-four-tips/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" rel="external nofollow" target="_blank">Creative Commons BY-NC-ND 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Performance/" rel="tag"> <i class="fa fa-tag"></i> Performance</a>
+          
+            <a href="/tags/Android-BugFree/" rel="tag"> <i class="fa fa-tag"></i> Android,BugFree</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2022/10/performance-android-121-Memory-leaks/" rel="prev" title="Android内存优化案例-优化某App的121内存泄漏">
+                <i class="fa fa-chevron-left"></i> Android内存优化案例-优化某App的121内存泄漏
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2022/02/Android-gradle-usage/" rel="next" title="Android项目Gradle常见用途">
+                Android项目Gradle常见用途 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "1",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      },
+      "slide": {
+        "bdImg": "5",
+        "bdPos": "left",
+        "bdTop": "100"
+      }
+    }
+  </script>
+
+<script>
+//  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+//    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC81Mjc2OC8yOTI0NQ"></div>
+    </div>
+
+  
+
+
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <a href="/">
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.png"
+                alt="" />
+              </a>
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+              <!-- 为Hexo Next主题添加哈林摇特效  -->
+              <a title="收藏到书签，偶尔High一下^_^" rel="alternate" class="mw-harlem_shake_slow wobble shake" href="javascript:void(0)" onclick="javascript:(function go() {function c() {var e = document.createElement('link');e.setAttribute('type', 'text/css');e.setAttribute('rel', 'stylesheet');e.setAttribute('href', f);e.setAttribute('class', l);document.body.appendChild(e)}function h(){var e = document.getElementsByClassName(l);for(var t = 0; t< e.length; t++){document.body.removeChild(e[t])}}function p(){var e = document.createElement('div');e.setAttribute('class', a);document.body.appendChild(e);setTimeout(function(){document.body.removeChild(e)},100)}function d(e){return{height:e.offsetHeight,width:e.offsetWidth}}function v(i){var s = d(i);return s.height>e &amp;&amp;s.height<n &amp;&amp; s.width>t &amp;&amp;s.width<r}function m(e){var t=e;var n=0;while(!!t){n+=t.offsetTop;t=t.offsetParent}return n}function g(){var e=document.documentElement;if(!!window.innerWidth){return window.innerHeight}else if(e &amp;&amp; !isNaN(e.clientHeight)){return e.clientHeight}return 0}function y(){if(window.pageYOffset){return window.pageYOffset}return Math.max(document.documentElement.scrollTop,document.body.scrollTop)}function E(e){var t=m(e);return t>=w &amp;&amp; t<=b+w}var songs=['https://www.liaofuzhan.com/music/无尽光芒.mp3'];function S(){var e=document.getElementById('audio_element_id');if(e!=null){var index=parseInt(e.getAttribute('curSongIndex'));if(index>songs.length-2){index=0;}else{index++;}e.setAttribute('curSongIndex',index);N();}e.src=i;e.play()}function x(e){e.className+=' '+s+' '+o}function T(e){e.className+=' '+s+' '+u[Math.floor(Math.random()*u.length)]}function N(){var e=document.getElementsByClassName(s);var t=new RegExp('\\b'+s+'\\b');for(var n=0;n<e.length;){e[n].className=e[n].className.replace(t,'')}}function initAudioEle(){var e=document.getElementById('audio_element_id');if(e===null){e=document.createElement('audio');e.setAttribute('class',l);e.setAttribute('curSongIndex',0);e.id='audio_element_id';e.loop=false;e.bgcolor=0;e.addEventListener('canplay',function(){setTimeout(function(){x(k)},500);setTimeout(function(){N();p();for(var e=0;e<O.length;e++){T(O[e])}},15500)},true);e.addEventListener('ended',function(){N();h();go();},true);e.innerHTML='<p>If you are reading this,it is because your browser does not support the audio element. We recommend that you get a new browser.</p><p>';document.body.appendChild(e);}}initAudioEle();var e=30;var t=30;var n=350;var r=350;var curSongIndex=parseInt(document.getElementById('audio_element_id').getAttribute('curSongIndex'));var i=songs[curSongIndex];var s='mw-harlem_shake_me';var o='im_first';var u=['im_drunk','im_baked','im_trippin','im_blown'];var a='mw-strobe_light';var f='https://s3.amazonaws.com/moovweb-marketing/playground/harlem-shake-style.css';var l='mw_added_css';var b=g();var w=y();var C=document.getElementsByTagName('*');var k=null;for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){if(E(A)){k=A;break}}}if(A===null){console.warn('Could not find a node of the right size. Please try a different page.');return}c();S();var O=[];for(var L=0;L<C.length;L++){var A=C[L];if(v(A)){O.push(A)}}})()"><i class="fa fa-music"></i> High~</a>
+
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/ShaunSheep" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:zuogewoniu@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://www.douban.com/people/jincheng-ycf/" target="_blank" title="豆瓣">
+                      
+                        <i class="fa fa-fw fa-stack-overflow"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://www.zhihu.com/people/OscarWildeHawking" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-instagram"></i></a>
+                  </span>
+                
+            </div>
+          
+
+            <!--
+            <div id="music163player">
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1336790004&auto=1&height=66"></iframe>
+            </div>
+            -->
+
+          
+          
+
+          
+          
+
+          <!--近期文章版块 began-->
+          
+              <div class="links-of-blogroll motion-element links-of-blogroll-block">
+                <div class="links-of-blogroll-title">
+                  <i class="fa fa-history fa-" aria-hidden="true"></i>
+                  近期文章
+                </div>
+                <ul class="links-of-blogroll-list">
+                  
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/10/performance-android-121-Memory-leaks/" title="Android内存优化案例-优化某App的121内存泄漏" target="_blank">Android内存优化案例-优化某App的121内存泄漏</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/09/android-performance-four-tips/" title="Android内存泄漏4讲" target="_blank">Android内存泄漏4讲</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/02/Android-gradle-usage/" title="Android项目Gradle常见用途" target="_blank">Android项目Gradle常见用途</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/jetpack-lifecycle-mmvm-usage/" title="Jetpack-生命周期组件库Lifecycle" target="_blank">Jetpack-生命周期组件库Lifecycle</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/01/jetpack-paging-mmvm-usage/" title="Jetpack-生命周期组件库Paging" target="_blank">Jetpack-生命周期组件库Paging</a>
+                    </li>
+                  
+                </ul>
+              </div>
+          
+          <!--近期文章版块 end-->
+
+          
+              <!-- canvas粒子时钟 -->
+              <!-- canvas粒子时钟 https://www.cnblogs.com/xiaohuochai/p/6368039.html
+  https://www.html5tricks.com/html5-canvas-dance-time.html
+ -->
+<div id="">
+  <canvas id="canvas" style="width:60%;">
+</div>
+<script async>
+(function(){
+  var WINDOW_WIDTH = 820;
+  		var WINDOW_HEIGHT = 250;
+  		var RADIUS = 7; //球半径
+  		var NUMBER_GAP = 10; //数字之间的间隙
+  		var u=0.65; //碰撞能量损耗系数
+  		var context; //Canvas绘制上下文
+  		var balls = []; //存储彩色的小球
+  		const colors = ["#33B5E5","#0099CC","#AA66CC","#9933CC","#99CC00","#669900","#FFBB33","#FF8800","#FF4444","#CC0000"]; //彩色小球的颜色
+  		var currentNums = []; //屏幕显示的8个字符
+  		var digit =
+                  [
+                      [
+                          [0,0,1,1,1,0,0],
+                          [0,1,1,0,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,0,1,1,0],
+                          [0,0,1,1,1,0,0]
+                      ],//0
+                      [
+                          [0,0,0,1,1,0,0],
+                          [0,1,1,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [1,1,1,1,1,1,1]
+                      ],//1
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,1,1,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,1,1,1,1,1]
+                      ],//2
+                      [
+                          [1,1,1,1,1,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,1,0,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//3
+                      [
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,1,0],
+                          [0,0,1,1,1,1,0],
+                          [0,1,1,0,1,1,0],
+                          [1,1,0,0,1,1,0],
+                          [1,1,1,1,1,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,1,1]
+                      ],//4
+                      [
+                          [1,1,1,1,1,1,1],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,1,1,1,1,0],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//5
+                      [
+                          [0,0,0,0,1,1,0],
+                          [0,0,1,1,0,0,0],
+                          [0,1,1,0,0,0,0],
+                          [1,1,0,0,0,0,0],
+                          [1,1,0,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//6
+                      [
+                          [1,1,1,1,1,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,0,1,1,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0],
+                          [0,0,1,1,0,0,0]
+                      ],//7
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,1,1,0]
+                      ],//8
+                      [
+                          [0,1,1,1,1,1,0],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [1,1,0,0,0,1,1],
+                          [0,1,1,1,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,0,1,1],
+                          [0,0,0,0,1,1,0],
+                          [0,0,0,1,1,0,0],
+                          [0,1,1,0,0,0,0]
+                      ],//9
+                      [
+                          [0,0,0,0],
+                          [0,0,0,0],
+                          [0,1,1,0],
+                          [0,1,1,0],
+                          [0,0,0,0],
+                          [0,0,0,0],
+                          [0,1,1,0],
+                          [0,1,1,0],
+                          [0,0,0,0],
+                          [0,0,0,0]
+                      ]//:
+                  ];
+
+  		function drawDatetime(cxt){
+  			var nums = [];
+
+  			context.fillStyle="#005eac"
+  			var date = new Date();
+  			var offsetX = 70, offsetY = 30;
+  			var hours = date.getHours();
+  			var num1 = Math.floor(hours/10);
+  			var num2 = hours%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+  			nums.push({num: 10}); //冒号
+  			var minutes = date.getMinutes();
+  			var num1 = Math.floor(minutes/10);
+  			var num2 = minutes%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+  			nums.push({num: 10}); //冒号
+  			var seconds = date.getSeconds();
+  			var num1 = Math.floor(seconds/10);
+  			var num2 = seconds%10;
+  			nums.push({num: num1});
+  			nums.push({num: num2});
+
+  			for(var x = 0;x<nums.length;x++){
+  				nums[x].offsetX = offsetX;
+  				offsetX = drawSingleNumber(offsetX,offsetY, nums[x].num,cxt);
+  				//两个数字连一块，应该间隔一些距离
+  				if(x<nums.length-1){
+  					if((nums[x].num!=10) &&(nums[x+1].num!=10)){
+  						offsetX+=NUMBER_GAP;
+  					}
+  				}
+  			}
+
+  			//说明这是初始化
+  			if(currentNums.length ==0){
+  				currentNums = nums;
+  			}else{
+  				//进行比较
+  				for(var index = 0;index<currentNums.length;index++){
+  					if(currentNums[index].num!=nums[index].num){
+  						//不一样时，添加彩色小球
+  						addBalls(nums[index]);
+  						currentNums[index].num=nums[index].num;
+  					}
+  				}
+  			}
+  			renderBalls(cxt);
+  			updateBalls();
+
+  			return date;
+  		}
+
+  		function addBalls (item) {
+  			var num = item.num;
+  			var numMatrix = digit[num];
+  			for(var y = 0;y<numMatrix.length;y++){
+  				for(var x = 0;x<numMatrix[y].length;x++){
+  					if(numMatrix[y][x]==1){
+  						var ball={
+  							offsetX:item.offsetX+RADIUS+RADIUS*2*x,
+  							offsetY:30+RADIUS+RADIUS*2*y,
+  							color:colors[Math.floor(Math.random()*colors.length)],
+  							g:1.5+Math.random(),
+  							vx:Math.pow(-1, Math.ceil(Math.random()*10))*4+Math.random(),
+  							vy:-5
+  						}
+  						balls.push(ball);
+  					}
+  				}
+  			}
+  		}
+
+  		function renderBalls(cxt){
+  			for(var index = 0;index<balls.length;index++){
+  				cxt.beginPath();
+  				cxt.fillStyle=balls[index].color;
+  				cxt.arc(balls[index].offsetX, balls[index].offsetY, RADIUS, 0, 2*Math.PI);
+  				cxt.fill();
+  			}
+  		}
+
+  		function updateBalls () {
+  			var i =0;
+  			for(var index = 0;index<balls.length;index++){
+  				var ball = balls[index];
+  				ball.offsetX += ball.vx;
+  				ball.offsetY += ball.vy;
+  				ball.vy+=ball.g;
+  				if(ball.offsetY > (WINDOW_HEIGHT-RADIUS)){
+  					ball.offsetY= WINDOW_HEIGHT-RADIUS;
+  					ball.vy=-ball.vy*u;
+  				}
+  				if(ball.offsetX>RADIUS&&ball.offsetX<(WINDOW_WIDTH-RADIUS)){
+
+  					balls[i]=balls[index];
+  					i++;
+  				}
+  			}
+  			//去除出边界的球
+  			for(;i<balls.length;i++){
+  				balls.pop();
+  			}
+  		}
+  		function drawSingleNumber(offsetX, offsetY, num, cxt){
+  			var numMatrix = digit[num];
+  			for(var y = 0;y<numMatrix.length;y++){
+  				for(var x = 0;x<numMatrix[y].length;x++){
+  					if(numMatrix[y][x]==1){
+  						cxt.beginPath();
+  						cxt.arc(offsetX+RADIUS+RADIUS*2*x,offsetY+RADIUS+RADIUS*2*y,RADIUS,0,2*Math.PI);
+  						cxt.fill();
+  					}
+  				}
+  			}
+  			cxt.beginPath();
+  			offsetX += numMatrix[0].length*RADIUS*2;
+  			return offsetX;
+  		}
+
+  		var canvas = document.getElementById("canvas");
+  		canvas.width=WINDOW_WIDTH;
+  		canvas.height=WINDOW_HEIGHT;
+  		context = canvas.getContext("2d");
+
+  		//记录当前绘制的时刻
+  		var currentDate = new Date();
+
+  		setInterval(function(){
+  			//清空整个Canvas，重新绘制内容
+  			context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  			drawDatetime(context);
+  		}, 50)
+})();
+</script>
+
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#android%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E6%A1%88%E4%BE%8B4%E8%AE%B2"><span class="nav-number">1.</span> <span class="nav-text">Android内存泄漏案例4讲</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E9%97%AE%E9%A2%98%E6%A6%82%E8%BF%B0"><span class="nav-number">3.</span> <span class="nav-text">内存问题概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%9A%84%E5%8D%B1%E5%AE%B3"><span class="nav-number">4.</span> <span class="nav-text">内存泄漏的危害</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#android%E4%B8%AD%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F%E7%9A%84%E5%88%A4%E6%96%AD%E6%96%B9%E5%BC%8F"><span class="nav-number">5.</span> <span class="nav-text">Android中内存泄漏的判断方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%A4%E8%AF%86hprof%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">认识Hprof文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B1hprof%E6%96%87%E4%BB%B6%E6%98%BE%E7%A4%BA%E5%87%BA%E4%BA%86%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="nav-number">7.</span> <span class="nav-text">案例1——hprof文件显示出了内存泄漏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B2hprof%E6%96%87%E4%BB%B6%E6%98%BE%E7%A4%BA%E5%87%BAfragment%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="nav-number">8.</span> <span class="nav-text">案例2——hprof文件显示出Fragment内存泄漏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B3view%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="nav-number">9.</span> <span class="nav-text">案例3——view内存泄漏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B4%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E5%86%85%E5%AD%98%E6%B3%84%E6%BC%8F"><span class="nav-number">10.</span> <span class="nav-text">案例4——异步任务内存泄漏</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%87%E6%AE%B5%E5%BC%8F%E7%9A%84%E7%BB%8F%E9%AA%8C"><span class="nav-number">11.</span> <span class="nav-text">片段式的经验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BE%85%E6%B1%82%E8%AF%81%E7%9A%84%E7%96%91%E9%97%AE"><span class="nav-number">12.</span> <span class="nav-text">待求证的疑问</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+      
+
+      <!-- 标签云 -->
+      <!--
+      
+      <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+      <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+      <div class="widget-wrap">
+      <h3 class="widget-title">Tag Cloud</h3>
+      <div id="myCanvasContainer" class="widget tagcloud">
+          <canvas width="250" height="250" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-BugFree/" rel="tag">Android,BugFree</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">3</span></li></ul>
+          </canvas>
+      </div>
+      </div>
+      
+      -->
+      <!-- 标签云 -->
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+       <i class="fa fa-heartbeat"></i>
+  </span>
+  <!--
+    <span class="author" itemprop="copyrightHolder"> &nbsp;叶金诚</span>
+  -->
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">190.3k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+
+        
+<div class="busuanzi-count">
+  <!--
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  -->
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+   
+
+  
+  
+    
+      <span class="site-uv">
+        
+        我的第 <span class="busuanzi-value" id="busuanzi_value_site_uv"></span> 位朋友，
+      </span>
+    
+
+    
+      <span class="site-pv">
+        历经 <span class="busuanzi-value" id="busuanzi_value_site_pv"></span> 次回眸才与你相遇
+        <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      </span>
+    
+  
+
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery@2.1.3/dist/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/velocity-animate@1.2.1/velocity.ui.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="60" alpha="0.1"  zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='https://www.yangchaofan.cn" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='https://www.yangchaofan.cn" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+    <script>  function addCount(Counter){var $visitors=$('.leancloud_visitors');var url=$visitors.attr('id').trim();var title=$visitors.attr('data-flag-title').trim();Counter('get','/classes/Counter',{where:JSON.stringify({url})}).done(function({results}){if(results.length>0){var counter=results[0]; var $element=$(document.getElementById(url));$element.find('.leancloud-visitors-count').text(counter.time+1);Counter('put','/classes/Counter/'+counter.objectId,JSON.stringify({time:{'__op':'Increment','amount':1}})) .fail(function({responseJSON}){console.log('Failed to save Visitor num, with error message: '+responseJSON.error);})}else{ Counter('post','/classes/Counter',JSON.stringify({title:title,url:url,time:1})).done(function(){var $element=$(document.getElementById(url));$element.find('.leancloud-visitors-count').text(1);}).fail(function(){console.log('Failed to create');});}}).fail(function({responseJSON}){console.log('LeanCloud Counter Error: '+responseJSON.code+' '+responseJSON.error);});}$(function(){$.get('https://app-router.leancloud.cn/2/route?appId='+'MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz').done(function({api_server}){var Counter=function(method,url,data){return $.ajax({method:method,url:'https://'+api_server+'/1.1'+url,headers:{'X-LC-Id':'MFn6psRe8xtnq9sq6lv9MJks-gzGzoHsz','X-LC-Key':'pi8Pa2aH3XpcaovMyqIXVuOP','Content-Type':'application/json',},data:data});};  const localhost=/http:\/\/(localhost|127.0.0.1|0.0.0.0)/;if(localhost.test(document.URL))return;addCount(Counter);});});</script>
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+
+  <!-- Tidio 在线联系功能、鼠标点击特效、页面反馈...-->
+  <script type="text/javascript" src="/js/src/clipboard.min.js"></script>
+<script type="text/javascript" src="/js/src/clipboard-use.js"></script>
+
+
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas>
+    <script async src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script async src="/js/cursor/explosion.min.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/src/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+
+
+
+
+  <script async language="javascript">
+
+    var div = document.createElement("div");
+    //插入到自定义的theme-info或者copyright之后
+    var copyright = document.querySelector(".theme-info2") || document.querySelector(".copyright");
+
+    function show_run_time(){
+        window.setTimeout("show_run_time()", 1000);
+      // BirthDay=new Date("08/07/2019 20:00:00");
+        BirthDay=new Date("08/07/2016 20:00:00");
+        today=new Date();
+        timeold=(today.getTime()-BirthDay.getTime());
+        sectimeold=timeold/1000
+        secondsold=Math.floor(sectimeold);
+        msPerDay=24*60*60*1000
+        e_daysold=timeold/msPerDay
+        daysold=Math.floor(e_daysold);
+        e_hrsold=(e_daysold-daysold)*24;
+        hrsold=setzero(Math.floor(e_hrsold));
+        e_minsold=(e_hrsold-hrsold)*60;
+        minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+        seconds=setzero(Math.floor((e_minsold-minsold)*60));
+
+        // 使用zh-Hans.yml的文字替换
+        div.innerHTML = "我已在此等候你 " + "<span style='color: #1890ff'> " + daysold + " </span> 天 <span style='color: #1890ff'>" + hrsold + " </span>时 <span style='color: #1890ff'>" + minsold + " </span>分 <span style='color: #1890ff'>" + seconds + " </span>秒 ";
+
+        document.querySelector(".footer-inner").insertBefore(div, copyright.nextSibling);
+
+    }
+    function setzero(i){
+        if (i<10)
+        {i="0" + i};
+        return i;
+    }
+
+    show_run_time();
+
+  </script>
+
+
+
+
+<!-- 旋转魔方 -->
+
+   
+      
+<style>
+  /*最外层容器样式*/
+  .wrap {
+    width: 0px;
+    height: 0px;
+    /*margin: 80px;*/
+    /*position: relative;*/
+	     /*显示位置*/
+    position: fixed;
+    bottom: 120px;
+    right: 240px;
+    z-index: 999;
+  }
+
+  /*包裹所有容器样式*/
+  .cube {
+    width: 0px;
+    height: 0px;
+    margin: 0 auto;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(-80deg);
+    animation: rotate linear 10s infinite;
+  }
+
+  @-webkit-keyframes rotate {
+    from {
+      transform: rotateX(0deg) rotateY(0deg);
+    }
+    to {
+      transform: rotateX(360deg) rotateY(360deg);
+    }
+  }
+
+  .cube div {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    opacity: 0.8;
+    transition: all .4s;
+  }
+
+  /*定义所有图片样式*/
+  .pic {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cube .out_front {
+    transform: rotateY(0deg) translateZ(25px);
+  }
+
+  .cube .out_back {
+    transform: translateZ(-25px) rotateY(180deg);
+  }
+
+  .cube .out_left {
+    transform: rotateY(-90deg) translateZ(25px);
+  }
+
+  .cube .out_right {
+    transform: rotateY(90deg) translateZ(25px);
+  }
+
+  .cube .out_top {
+    transform: rotateX(90deg) translateZ(25px);
+  }
+
+  .cube .out_bottom {
+    transform: rotateX(-90deg) translateZ(25px);
+  }
+
+  /*定义小正方体样式*/
+  .cube span {
+    display: block;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+  }
+
+  .cube .in_pic {
+    width: 25px;
+    height:25px;
+  }
+
+  .cube .in_front {
+    transform: rotateY(0deg) translateZ(12px);
+  }
+
+  .cube .in_back {
+    transform: translateZ(-12px) rotateY(180deg);
+  }
+
+  .cube .in_left {
+    transform: rotateY(-90deg) translateZ(12px);
+  }
+
+  .cube .in_right {
+    transform: rotateY(90deg) translateZ(12px);
+  }
+
+  .cube .in_top {
+    transform: rotateX(90deg) translateZ(12px);
+  }
+
+  .cube .in_bottom {
+    transform: rotateX(-90deg) translateZ(12px);
+  }
+
+  /*鼠标移入后样式*/
+  .cube:hover .out_front {
+    transform: rotateY(0deg) translateZ(50px);
+  }
+
+  .cube:hover .out_back {
+    transform: translateZ(-50px) rotateY(180deg);
+  }
+
+  .cube:hover .out_left {
+    transform: rotateY(-90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_right {
+    transform: rotateY(90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_top {
+    transform: rotateX(90deg) translateZ(50px);
+  }
+
+  .cube:hover .out_bottom {
+    transform: rotateX(-90deg) translateZ(50px);
+  }
+</style>
+
+<div class="wrap">
+
+		<!--包裹所有元素的容器-->
+		<div class="cube">
+			<!--前面图片 -->
+			<div class="out_front">
+			  <a onclick="back2top()">
+				  <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+				</a>
+			</div>
+			<!--后面图片 -->
+			<div class="out_back">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--左面图片 -->
+			<div class="out_left">
+        <a onclick="back2top()">
+				  <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+				</a>
+			</div>
+			<!--右面图片 -->
+			<div class="out_right">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--上面图片 -->
+			<div class="out_top">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+			<!--下面图片 -->
+			<div class="out_bottom">
+				<a onclick="back2top()">
+          <img src="http://cdn.yangchaofan.cn/BlogGifRes/20210307/lAq9mKTioPeO.png" class="pic" />
+        </a>
+			</div>
+
+			<!--小正方体 -->
+			<span class="in_front">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_back">
+			     <img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_left">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_right">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_top">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+			<span class="in_bottom">
+				<img src="https://s2.ax1x.com/2019/10/14/KptCPf.th.jpg" class="in_pic" />
+			</span>
+		</div>
+
+</div>
+
+<script>
+  function back2top(){
+    $('html, body').animate({scrollTop: 0}, 500);
+  }
+</script>
+
+   
+
+
+<!-- Console 输出第三方个性化字体 -->
+
+  <script async type="text/javascript" src="/figlet/fetch.min.js"></script>
+  <script type="text/javascript" src="/figlet/figlet.js"></script>
+  <script type="text/javascript">
+
+      figlet.defaults({fontPath: "/figlet/fonts"});
+      figlet("Welcome To Leaface", "Big Money-ne", function(err, text) {
+          if (err) {
+              console.log("something went wrong...");
+              console.dir(err);
+              return;
+          }
+          console.log(text);
+      });
+  </script>
+
+
+  <!-- Console 输出自定义字体 -->
+  
+    <script async type="text/javascript">
+        var text = "Welcome To Leaface";
+        var date = '2022-12-03';
+        console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
+        console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+        console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+        console.info('\n' + ' %c Leafae Wechat %c leaface ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
+       // console.log("%c Time: " + date, "font-size:100px;white:"+fcolor+";border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);  background-image: linear-gradient(to right, orangered, orange, gold, lightgreen, cyan, dodgerblue, mediumpurple, hotpink, orangered);");
+       // console.log("%c .", "padding:300px 600px;line-height:10px;background:url(https://s2.ax1x.com/2019/10/17/KkoAJJ.md.png) no-repeat;");
+    </script>
+  
+
+
+  <!-- 看板娘 -->
+  
+      <script async src="/live2d-widget/autoload.js"></script>
+  
+	<!-- leafacePlayer -->
+	
+	<script id="lfz" src="https://player.liaofuzhan.com/player/player.js" key=1368557075310858241></script>
+	
+
+  
+
+  
+
+  <!-- 代码块复制功能 -->
+  <script async type="text/javascript" src="/js/src/clipboard.min.js"></script>
+  <script async type="text/javascript" src="/js/src/clipboard-use.js"></script>
+ 
+
+  <!--share.js-->
+  <link async rel="stylesheet" href="/sharejs/css/share.min.css">
+  <script async src="/sharejs/js/social-share.min.js"></script>
+
+  <!-- 模仿知乎卡片样式链接、崩溃欺骗特效 -->
+  <script async type="text/javascript" src="/js/src/linkcard.js"></script>
+
+  <!--崩溃欺骗 放在js文件最后-->
+  <!--
+  <script type="text/javascript" src="/js/src/crash_cheat.js"></script>
+  -->
+
+ 
+
+</body>
+</html>

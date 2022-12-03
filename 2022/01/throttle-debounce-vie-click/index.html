@@ -525,6 +525,7 @@
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) &#123;</span><br><span class="line">    MessageBean bean &#x3D; mbsAdapter.getData().get(position);</span><br><span class="line">    if (view.getId() &#x3D;&#x3D; R.id.iv_delete) &#123;</span><br><span class="line">        mbRequest.deleteSingle(bean, position);</span><br><span class="line">        StatisticsUtilFamilyMeals.mbDelete(this, MBHomePageActivity.class.getSimpleName());</span><br><span class="line">    &#125; else if (view.getId() &#x3D;&#x3D; R.id.iv_resend) &#123;</span><br><span class="line">        mbRequest.updateCacheMessage(bean, position);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
 
+
 <p>测试人员频繁点击一个Delete按钮，多次发出了同一份Request，该Request中携带了相同的请求体，服务端只能处理一份，先到达的Request将被服务端处理，后到达的Request将被服务端标记为处理失败，客户端会依次收到处理成功、处理失败、处理失败……</p>
 <p>以上就是一个典型的点击事件频繁创建的问题，为了防止事件的频繁创建、响应、发出Request、让服务端处理，我们一般会做防抖动——即将点击事件过滤调。</p>
 <p>防抖动方案按事件的产生顺序和处理顺序的方向来划分，可分为“先到达先处理型”和“后到达后处理型”</p>
@@ -538,14 +539,16 @@
 <blockquote>
 <p>前三个是先到达先处理型，第四个是厚道的后处理型</p>
 </blockquote>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="传统计算时间间隔"><a href="#传统计算时间间隔" class="headerlink" title="传统计算时间间隔"></a>传统计算时间间隔<a href="#传统计算时间间隔" class="header-anchor">#</a></h2><p>第一次触发事件的时候记录一个时间戳，下一次触发事件时，再记录一个时间戳，在指定的时间间隔内，返回false，不去执行后续的业务逻辑</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public class MBUtils &#123;</span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 两次点击按钮接口之间的点击间隔不能少于1300毫秒，人为控制这个开关</span><br><span class="line">     *&#x2F;</span><br><span class="line">    private static final long MIN_CLICK_DELAY_TIME &#x3D; 1300;</span><br><span class="line">    private static long lastClickTime;</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * @return true：频繁点击 ；fasle 不是频繁点击</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public boolean isFastClick() &#123;</span><br><span class="line">        boolean flag &#x3D; true;</span><br><span class="line">        long curClickTime &#x3D; System.currentTimeMillis();</span><br><span class="line">        if ((curClickTime - lastClickTime) &gt;&#x3D; MIN_CLICK_DELAY_TIME) &#123;</span><br><span class="line">            flag &#x3D; false;</span><br><span class="line">        &#125;</span><br><span class="line">        lastClickTime &#x3D; curClickTime;</span><br><span class="line">        return flag;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
 
+
 <p>将文章开头提到的错误代码改为：</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">  public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) &#123;</span><br><span class="line">      MessageBean bean &#x3D; mbsAdapter.getData().get(position);</span><br><span class="line">      if (view.getId() &#x3D;&#x3D; R.id.iv_delete) &#123;</span><br><span class="line">          if(MBUtils.isFastClick())&#123;</span><br><span class="line">			  &#x2F;&#x2F; 点击太快不予执行</span><br><span class="line">              return;</span><br><span class="line">          &#125;</span><br><span class="line">    	  mbRequest.deleteSingle(bean, position);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></div>
+
 
 
 <h2 id="rxjava"><a href="#RxJava" class="headerlink" title="RxJava"></a>RxJava<a href="#rxjava" class="header-anchor">#</a></h2><p>这种方案的效果是，当一个动作连续触发，则只执行第一次。主要利用了Rxjava#throttleFirst方法的特性，在指定时间间隔内，Observer不会收到subscribe发来的消息，达到防抖动的效果</p>
@@ -554,19 +557,23 @@
 <li>Observer用于接收消息，一旦Rxjava底层发来了消息，将在onNext处理它，并通过myClickListener返回给上层，进行下一步的业务处理</li>
 </ul>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">public class MBUtils &#123;</span><br><span class="line"></span><br><span class="line">    public interface ThrottleClickListener &#123;</span><br><span class="line">        void onClick(View view);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void throttleFirstProcess(long delay, TimeUnit unit, final View view, final ThrottleClickListener myClickListener) &#123;</span><br><span class="line">        ObservableOnSubscribe&lt;View&gt; subscribe &#x3D; new ObservableOnSubscribe&lt;View&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void subscribe(final ObservableEmitter&lt;View&gt; emitter) throws Exception &#123;</span><br><span class="line">                view.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">                    @Override</span><br><span class="line">                    public void onClick(View v) &#123;</span><br><span class="line">                        emitter.onNext(view);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        Observer&lt;View&gt; observer &#x3D; new Observer&lt;View&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onSubscribe(Disposable d) &#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onNext(View view) &#123;</span><br><span class="line">                myClickListener.onClick(view);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onError(Throwable e) &#123;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onComplete() &#123;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        Observable</span><br><span class="line">                .create(subscribe)</span><br><span class="line">                .throttleFirst(delay,unit)</span><br><span class="line">                .subscribe(observer);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
 <p>将文章开头提到的错误代码改为：</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MBUtils.throttleFirstProcess(1, TimeUnit.SECONDS, childView, new MBUtils.ThrottleClickListener() &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onClick(View view) &#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></div>
+
 
 
 <h2 id="rxbinding"><a href="#RxBinding" class="headerlink" title="RxBinding"></a>RxBinding<a href="#rxbinding" class="header-anchor">#</a></h2><p>RxBinding是一款非常强大组件库，用于将特定的UI组件与事件绑定起来，如将一个Button与Button的点击事件绑定。</p>
 <p>以下是针对本文提到到频繁点击删除按钮的过滤用法，通过RxView对象，将Button对象与click事件绑定，用户点击Button后，会执行subscribe的Action#Call回调</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Button btn &#x3D; helper.itemView.findViewById(R.id.iv_delete);</span><br><span class="line">RxView.clicks(btn)</span><br><span class="line">        .throttleFirst(3, TimeUnit.SECONDS)</span><br><span class="line">        .subscribe(new Action1&lt;Void&gt;() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void call(Void aVoid) &#123;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure></div>
+
 <p>RxView支持哪些事件？</p>
 <blockquote>
 <p>clicks<br>longClicks<br>draws<br>drag<br>layoutChange<br>scrollChange<br>setVisibility<br>setClickable<br>attaches<br>detaches<br>focusChanges<br>globalLayouts<br>hovers<br>touches</p>
 </blockquote>
 <p>集成方式：</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation &#39;com.jakewharton.rxbinding4:rxbinding:4.0.0&#39;  # 按需使用 implementation &#39;com.jakewharton.rxbinding4:rxbinding-core:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-appcompat:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-drawerlayout:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-leanback:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-recyclerview:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-slidingpanelayout:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-swiperefreshlayout:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-viewpager:4.0.0&#39; implementation &#39;com.jakewharton.rxbinding4:rxbinding-viewpager2:4.0.0&#39; # 按需使用 implementation &#39;com.jakewharton.rxbinding4:rxbinding-material:4.0.0&#39;</span><br></pre></td></tr></table></figure></div>
+
 
 
 <h2 id="同一任务执行最后一次"><a href="#同一任务执行最后一次" class="headerlink" title="同一任务执行最后一次"></a>同一任务执行最后一次<a href="#同一任务执行最后一次" class="header-anchor">#</a></h2><p>这种方案简单的说，当一个动作连续触发，则只执行最后一次。</p>
@@ -578,9 +585,11 @@
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class MBUtils &#123;</span><br><span class="line">    private static final ScheduledExecutorService SCHEDULE &#x3D; Executors.newSingleThreadScheduledExecutor();</span><br><span class="line">    private static final ConcurrentHashMap&lt;Object, Future&lt;?&gt;&gt; DELAYED_MAP &#x3D; new ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    &#x2F;**</span><br><span class="line">     * 防抖動，只处理最后一次任务</span><br><span class="line">     * @param key 任务key值，同key代表过滤</span><br><span class="line">     * @param runnable 子线程执行任务</span><br><span class="line">     * @param delay 同一任务多少米内过滤</span><br><span class="line">     * @param unit 时间单位</span><br><span class="line">     *&#x2F;</span><br><span class="line">    public static void throttleFirstProcess(final Object key, final Runnable runnable, long delay, TimeUnit unit) &#123;</span><br><span class="line">        final Future&lt;?&gt; prev &#x3D; DELAYED_MAP.put(key, SCHEDULE.schedule(() -&gt; &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                runnable.run();</span><br><span class="line">            &#125; finally &#123;</span><br><span class="line">                DELAYED_MAP.remove(key);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, delay, unit));</span><br><span class="line">        if (prev !&#x3D; null) &#123;</span><br><span class="line">            prev.cancel(true);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
 
+
 <p>使用起来也很简单：</p>
 <p>将文章前面提到的错误代码改为：</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) &#123;</span><br><span class="line">    MessageBean bean &#x3D; mbsAdapter.getData().get(position);</span><br><span class="line">    if (view.getId() &#x3D;&#x3D; R.id.iv_delete) &#123;</span><br><span class="line">        &#x2F;&#x2F; 3秒内频繁点击，只处理最后一笔提交的任务</span><br><span class="line">        MBUtils.throttleFirstProcess(&quot;删除留言&quot;,()-&gt;&#123;mbRequest.deleteSingle(bean, position); &#125;,1, TimeUnit.SECONDS);</span><br><span class="line">		...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
 
 
 <p>1秒内点击多次，会创建n个同名为删除留言的Runnable，只有最后一个存入的Runnable才会被执行。</p>
@@ -956,7 +965,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -967,7 +976,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -978,7 +987,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1051,6 +1060,14 @@
                   
                   
                     <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/10/performance-android-121-Memory-leaks/" title="Android内存优化案例-优化某App的121内存泄漏" target="_blank">Android内存优化案例-优化某App的121内存泄漏</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/09/android-performance-four-tips/" title="Android内存泄漏4讲" target="_blank">Android内存泄漏4讲</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
                       <a href="/2022/02/Android-gradle-usage/" title="Android项目Gradle常见用途" target="_blank">Android项目Gradle常见用途</a>
                     </li>
                   
@@ -1060,14 +1077,6 @@
                   
                     <li class='my-links-of-blogroll-li'>
                       <a href="/2022/01/jetpack-paging-mmvm-usage/" title="Jetpack-生命周期组件库Paging" target="_blank">Jetpack-生命周期组件库Paging</a>
-                    </li>
-                  
-                    <li class='my-links-of-blogroll-li'>
-                      <a href="/2022/01/jetpack-viewmodel-mmvm-usage/" title="Jetpack-生命周期组件库ViewModel" target="_blank">Jetpack-生命周期组件库ViewModel</a>
-                    </li>
-                  
-                    <li class='my-links-of-blogroll-li'>
-                      <a href="/2022/01/jetpack-daabinding-mmvm-usage/" title="Jetpack-生命周期组件库Databinding" target="_blank">Jetpack-生命周期组件库Databinding</a>
                     </li>
                   
                 </ul>
@@ -1404,7 +1413,7 @@
       <h3 class="widget-title">Tag Cloud</h3>
       <div id="myCanvasContainer" class="widget tagcloud">
           <canvas width="250" height="250" id="resCanvas" style="width=100%">
-              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">3</span></li></ul>
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-BugFree/" rel="tag">Android,BugFree</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">3</span></li></ul>
           </canvas>
       </div>
       </div>
@@ -1438,7 +1447,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">174.5k</span>
+    <span title="Site words total count">190.3k</span>
   
 </div>
 
@@ -2348,7 +2357,7 @@
   
     <script async type="text/javascript">
         var text = "Welcome To Leaface";
-        var date = '2022-07-28';
+        var date = '2022-12-03';
         console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
         console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
         console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');

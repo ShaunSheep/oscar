@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://www.yangchaofan.cn//2022/10/performance-android-121-Memory-leaks/</loc>
+    <lastmod>2022-12-03</lastmod>
+  </url>
+  <url>
+    <loc>http://www.yangchaofan.cn//2022/09/android-performance-four-tips/</loc>
+    <lastmod>2022-12-03</lastmod>
+  </url>
+  <url>
+    <loc>http://www.yangchaofan.cn//2016/06/performance-android/</loc>
+    <lastmod>2022-12-03</lastmod>
+  </url>
+  <url>
+    <loc>http://www.yangchaofan.cn//2022/01/launchmode-activity-useage/</loc>
+    <lastmod>2022-12-03</lastmod>
+  </url>
+  <url>
+    <loc>http://www.yangchaofan.cn//2021/02/mtk-log/</loc>
+    <lastmod>2022-12-03</lastmod>
+  </url>
+  <url>
+    <loc>http://www.yangchaofan.cn//2021/02/android-bugfree-three-lines/</loc>
+    <lastmod>2022-12-03</lastmod>
+  </url>
+  <url>
+    <loc>http://www.yangchaofan.cn//2015/08/learing-plan/</loc>
+    <lastmod>2022-12-03</lastmod>
+  </url>
+  <url>
+    <loc>http://www.yangchaofan.cn//2021/02/website_nickname/</loc>
+    <lastmod>2022-07-30</lastmod>
+  </url>
+  <url>
     <loc>http://www.yangchaofan.cn//2022/01/Android-rxjava-Practice/</loc>
     <lastmod>2022-07-27</lastmod>
   </url>
@@ -10,10 +42,6 @@
   </url>
   <url>
     <loc>http://www.yangchaofan.cn//2022/01/lifecycle-activity/</loc>
-    <lastmod>2022-07-27</lastmod>
-  </url>
-  <url>
-    <loc>http://www.yangchaofan.cn//2022/01/launchmode-activity-useage/</loc>
     <lastmod>2022-07-27</lastmod>
   </url>
   <url>
@@ -69,14 +97,6 @@
     <lastmod>2021-06-22</lastmod>
   </url>
   <url>
-    <loc>http://www.yangchaofan.cn//2021/02/website_nickname/</loc>
-    <lastmod>2021-06-11</lastmod>
-  </url>
-  <url>
-    <loc>http://www.yangchaofan.cn//2015/08/learing-plan/</loc>
-    <lastmod>2021-06-11</lastmod>
-  </url>
-  <url>
     <loc>http://www.yangchaofan.cn//2021/05/The-most-comprehensive-thinking-of-crash-practice-strategy/</loc>
     <lastmod>2021-06-11</lastmod>
   </url>
@@ -129,15 +149,7 @@
     <lastmod>2021-04-02</lastmod>
   </url>
   <url>
-    <loc>http://www.yangchaofan.cn//2021/02/mtk-log/</loc>
-    <lastmod>2021-04-02</lastmod>
-  </url>
-  <url>
     <loc>http://www.yangchaofan.cn//2019/01/why-dose-it-take-three-years-to-interview-a-guy%EF%BC%9F/</loc>
-    <lastmod>2021-03-14</lastmod>
-  </url>
-  <url>
-    <loc>http://www.yangchaofan.cn//2016/06/performance-android/</loc>
     <lastmod>2021-03-14</lastmod>
   </url>
   <url>
@@ -146,10 +158,6 @@
   </url>
   <url>
     <loc>http://www.yangchaofan.cn//2016/04/Android-TOP-100-Program/</loc>
-    <lastmod>2021-02-27</lastmod>
-  </url>
-  <url>
-    <loc>http://www.yangchaofan.cn//2021/02/android-bugfree-three-lines/</loc>
     <lastmod>2021-02-27</lastmod>
   </url>
   <url>

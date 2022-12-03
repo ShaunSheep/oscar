@@ -118,7 +118,7 @@
 <meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/Qm2wlH7QktoL.png?imageslim">
 <meta property="og:image" content="http://cdn.yangchaofan.cn/blog/20210227/Xchbq9MizBGV.png?imageslim">
 <meta property="article:published_time" content="2021-02-27T01:13:12.000Z">
-<meta property="article:modified_time" content="2021-04-02T12:50:08.517Z">
+<meta property="article:modified_time" content="2022-12-03T13:00:43.268Z">
 <meta property="article:author" content="叶金诚">
 <meta property="article:tag" content="Android">
 <meta property="article:tag" content="BugFree">
@@ -445,8 +445,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/BugFree/" itemprop="url" rel="index">
-                    <span itemprop="name">BugFree</span>
+                  <a href="/categories/Performance/" itemprop="url" rel="index">
+                    <span itemprop="name">Performance</span>
                   </a>
                 </span>
 
@@ -456,8 +456,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index">
-                    <span itemprop="name">面试</span>
+                  <a href="/categories/Android/BugFree/" itemprop="url" rel="index">
+                    <span itemprop="name">BugFree</span>
                   </a>
                 </span>
 
@@ -543,7 +543,7 @@
       
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="mtk-log"><a href="#MTK-log" class="headerlink" title="MTK log"></a><a target="_blank" rel="noopener" href="https://www.pianshen.com/article/4121163154/">MTK log</a><a href="#mtk-log" class="header-anchor">#</a></h1><h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍<a href="#介绍" class="header-anchor">#</a></h2><p>mtklog是由log生成工具MTKLogger生成的一系列问题追踪文件，其主要作用就是对系统或者应用产生的异常进行快速定位，从而解决问题。</p>
 <p>log文件名称为：<br>crash_log ：崩溃日志，主要输出 程序崩溃造成的crash log<br>events_log：事件日志，主要输出记录各个activity周期及事件<br>kernel_log：底层驱动，按键，低内存相关log<br>sys_log：系统日志，Exception定位点<br>radio_log：输出通话，网络状态变化<br>main_log：详尽输出每一步的log</p>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="开启和关闭"><a href="#开启和关闭" class="headerlink" title="开启和关闭"></a>开启和关闭<a href="#开启和关闭" class="header-anchor">#</a></h2><p>（1）在拨号盘界面输入*#9646633# ：<br>（2）进入EngineerMode的第一个Telephony界面：<br>（3）向左滑动进入Log and Debugging界面：<br>（4）点击MTKLogger 菜单：点击log设置图标可进入log设置界面，如果我只要打印MobileLog可将ModemLog，NetworkLog，GPSlog关闭，点击蓝底色1 即可：<br>（5）点击开始（红色播放按键）按键：<br>（6）log 开启：<br>（7）当我们已经发现异常时，当关闭log，并截图记录时间点，下拉进入下拉栏界面，点击MTKLogger is running：<br>（8）点击停止按键</p>
 <h2 id="log总览"><a href="#Log总览" class="headerlink" title="Log总览**"></a>Log总览**<a href="#log总览" class="header-anchor">#</a></h2><ul>
@@ -580,6 +580,7 @@
 <li><strong>解决方法</strong></li>
 </ul>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">alps&#x2F;kernel-3.18&#x2F;init&#x2F;Kconfig</span><br><span class="line">config LOG_BUF_SHIFT</span><br><span class="line">       default 17  --- &gt; 21   2^21&#x3D;2MB buffer</span><br><span class="line"></span><br><span class="line">alps&#x2F;system&#x2F;core&#x2F;liblog&#x2F;include&#x2F;private&#x2F;android_logger.h</span><br><span class="line">#define LOG_BUFFER_SIZE (2048 * 1024)    #log和logd一致</span><br><span class="line">123456</span><br></pre></td></tr></table></figure></div>
+
 <h3 id="电脑端pc-tool"><a href="#电脑端PC-tool" class="headerlink" title="电脑端PC tool"></a><strong>电脑端PC tool</strong><a href="#电脑端pc-tool" class="header-anchor">#</a></h3><h4 id="adb"><a href="#adb" class="headerlink" title="adb"></a><strong>adb</strong><a href="#adb" class="header-anchor">#</a></h4><h5 id="logcat"><a href="#logcat" class="headerlink" title="logcat"></a><strong>logcat</strong><a href="#logcat" class="header-anchor">#</a></h5><ul>
 <li><strong>介绍</strong></li>
 </ul>
@@ -615,12 +616,15 @@
 </tbody></table>
 <p>例如：</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;开发过程中获取log</span><br><span class="line">Log.i(&quot;MyActivity&quot;,&quot;MyClass.getView() - get item number&quot;+position);</span><br><span class="line">&#x2F;&#x2F;adb获取log</span><br><span class="line">adb logcat</span><br><span class="line">1234</span><br></pre></td></tr></table></figure></div>
+
 <p>adb logcat输出的日志格式如下：</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">I&#x2F;ActivityManager( 1754): Waited long enough for: ServiceRecord&#123;2b24178c u0 com.google.android.gms&#x2F;.checkin.CheckinService&#125;</span><br></pre></td></tr></table></figure></div>
+
 <ul>
 <li><strong>实例</strong></li>
 </ul>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SHELL"><figure class="iseeu highlight /shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb logcat –b radio</span><br><span class="line">adb logcat –b system</span><br><span class="line">adb logcat –b events</span><br><span class="line">adb logcat –b main</span><br><span class="line">1234</span><br></pre></td></tr></table></figure></div>
+
 <ul>
 <li><strong>优势</strong></li>
 </ul>
@@ -633,6 +637,7 @@
 <li><strong>位置</strong></li>
 </ul>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;data&#x2F;aee_exp</span><br><span class="line">&#x2F;data&#x2F;vendor&#x2F;mtklog&#x2F;aee_exp</span><br><span class="line">12</span><br></pre></td></tr></table></figure></div>
+
 <h4 id="gat"><a href="#GAT" class="headerlink" title="GAT"></a><strong>GAT</strong><a href="#gat" class="header-anchor">#</a></h4><p><img src="http://cdn.yangchaofan.cn/blog/20210227/nwDUjynnBdXh.png?imageslim" alt="mark"></p>
 <ul>
 <li><strong>BugReport</strong></li>
@@ -686,14 +691,17 @@
 <li><code>alps/system/core/rootdir/init.rc</code></li>
 </ol>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="R"><figure class="iseeu highlight /r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">on property:ro.debuggable=<span class="number">1</span></span><br><span class="line">    <span class="comment"># Give writes to anyone for the trace folder on debug builds.</span></span><br><span class="line">    <span class="comment"># The folder is used to store method traces.</span></span><br><span class="line">    chmod <span class="number">0773</span> /data/misc/trace</span><br><span class="line">    start console</span><br><span class="line">//add begin</span><br><span class="line">on property:ro.debuggable=<span class="number">0</span></span><br><span class="line">    <span class="comment"># Give writes to anyone for the trace folder on debug builds.</span></span><br><span class="line">    <span class="comment"># The folder is used to store method traces.</span></span><br><span class="line">    chmod <span class="number">0773</span> /data/misc/trace</span><br><span class="line">    start console</span><br><span class="line">setprop persist.sys.usb.config mass_storage,adb //add end</span><br><span class="line">123456789101112</span><br></pre></td></tr></table></figure></div>
+
 <ol>
 <li><code>alps/kernel-3.18/drivers/misc/mediatek/mtprof/bootprof.c</code></li>
 </ol>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> CONFIG_MT_PRINTK_UART_CONSOLE</span></span><br><span class="line">    <span class="comment">//mt_disable_uart();</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"><span class="number">123</span></span><br></pre></td></tr></table></figure></div>
+
 <ol>
 <li><code>alps/build/make/core/main.mk</code></li>
 </ol>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MAKEFILE"><figure class="iseeu highlight /makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ifeq</span> (true,<span class="variable">$(<span class="built_in">strip</span> <span class="variable">$(enable_target_debugging)</span>)</span>)  <span class="comment"># Target is more debuggable and adbd is on by default</span></span><br><span class="line">  ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1  <span class="comment"># Enable Dalvik lock contention logging.</span></span><br><span class="line">  ADDITIONAL_BUILD_PROPERTIES += dalvik.vm.lockprof.threshold=500   <span class="comment"># Include the debugging/testing OTA keys in this build.</span></span><br><span class="line">  INCLUDE_TEST_OTA_KEYS := true</span><br><span class="line"><span class="keyword">else</span> <span class="comment"># !enable_target_debugging</span></span><br><span class="line">  <span class="comment"># Target is less debuggable and adbd is off by default</span></span><br><span class="line">  ADDITIONAL_DEFAULT_PROPERTIES += ro.debuggable=1</span><br><span class="line"><span class="keyword">endif</span> <span class="comment"># !enable_target_debugging</span></span><br><span class="line">12345678</span><br></pre></td></tr></table></figure></div>
+
 <p>编译好后，user版本刷入eng版本的lk+boot， 抓取uart 或者上层log</p>
 <p>如需抓取开机向导前的log，由于系统还未正式起来，请焊uart线，uart log中输入<code>adb logcat &amp;</code>将上层log输出到uart log中</p>
 <h2 id="aee异常机制"><a href="#AEE异常机制" class="headerlink" title="AEE异常机制"></a><strong>AEE异常机制</strong><a href="#aee异常机制" class="header-anchor">#</a></h2><h3 id="aee介绍"><a href="#AEE介绍" class="headerlink" title="AEE介绍"></a><strong>AEE介绍</strong><a href="#aee介绍" class="header-anchor">#</a></h3><p><code>AEE (Android Exception Engine)</code>是安卓的一个异常捕获和调试信息生成机制。</p>
@@ -779,6 +787,7 @@
 <li><strong>重启原因记录</strong></li>
 </ul>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">last_reboot_reason</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> fiq_step;</span><br><span class="line">    <span class="keyword">uint32_t</span> exp_type; <span class="comment">/* 0xaeedeadX: X=1 (HWT), X=2 (KE), X=3 (nested panic) */</span></span><br><span class="line">    <span class="keyword">uint32_t</span> reboot_mode;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint32_t</span> last_irq_enter[NR_CPUS];</span><br><span class="line">    <span class="keyword">uint64_t</span> jiffies_last_irq_enter[NR_CPUS];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint32_t</span> last_irq_exit[NR_CPUS];</span><br><span class="line">    <span class="keyword">uint64_t</span> jiffies_last_irq_exit[NR_CPUS];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint64_t</span> jiffies_last_sched[NR_CPUS];</span><br><span class="line">    <span class="keyword">char</span> last_sched_comm[NR_CPUS][TASK_COMM_LEN];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint8_t</span> hotplug_data1[NR_CPUS], <span class="keyword">uint8_t</span> hotplug_data2;</span><br><span class="line">    <span class="keyword">uint64_t</span> hotplug_data3;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint32_t</span> mcdi_wfi, mcdi_r15, deepidle_data, sodi_data, spm_suspend_data;</span><br><span class="line">    <span class="keyword">uint64_t</span> cpu_dormant[NR_CPUS];</span><br><span class="line">    <span class="keyword">uint32_t</span> clk_data[<span class="number">8</span>], suspend_debug_flag;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint8_t</span> cpu_dvfs_vproc_big, cpu_dvfs_vproc_little, cpu_dvfs_oppidx, cpu_dvfs_status;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint8_t</span> gpu_dvfs_vgpu, gpu_dvfs_oppidx, gpu_dvfs_status;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint64_t</span> ptp_cpu_big_volt, ptp_cpu_little_volt, ptp_gpu_volt, ptp_temp;</span><br><span class="line">    <span class="keyword">uint8_t</span> ptp_status;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">uint8_t</span> thermal_temp1, thermal_temp2, thermal_temp3, thermal_temp4, thermal_temp5;</span><br><span class="line">    <span class="keyword">uint8_t</span> thermal_status;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">void</span> *kparams;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="number">12345678910111213141516171819202122232425262728293031323334</span></span><br></pre></td></tr></table></figure></div>
+
 <h2 id="实际应用总结"><a href="#实际应用总结" class="headerlink" title="实际应用总结"></a><strong>实际应用总结</strong><a href="#实际应用总结" class="header-anchor">#</a></h2><h3 id="usr状态不同现象手机如何抓取有效log"><a href="#usr状态，不同现象手机如何抓取有效log" class="headerlink" title="usr状态，不同现象手机如何抓取有效log"></a><strong>usr状态，不同现象手机如何抓取有效log</strong><a href="#usr状态不同现象手机如何抓取有效log" class="header-anchor">#</a></h3><ol>
 <li>可正常开机</li>
 </ol>
@@ -806,9 +815,11 @@
 <p>A：采用adb logcat方式实时过滤带关键字关键level的log （包括kernel log）</p>
 <h3 id="log分析与调试技巧"><a href="#Log分析与调试技巧" class="headerlink" title="Log分析与调试技巧"></a><strong>Log分析与调试技巧</strong><a href="#log分析与调试技巧" class="header-anchor">#</a></h3><h4 id="android开机流程图"><a href="#Android开机流程图" class="headerlink" title="Android开机流程图"></a><strong>Android开机流程图</strong><a href="#android开机流程图" class="header-anchor">#</a></h4><p><img src="http://cdn.yangchaofan.cn/blog/20210227/Qm2wlH7QktoL.png?imageslim" alt="mark"></p>
 <h4 id="bootprof"><a href="#bootprof" class="headerlink" title="bootprof"></a><strong>bootprof</strong><a href="#bootprof" class="header-anchor">#</a></h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell cat &#x2F;proc&#x2F;bootprof or mktlog bootprof file</span><br></pre></td></tr></table></figure></div>
+
 <p><img src="http://cdn.yangchaofan.cn/blog/20210227/Xchbq9MizBGV.png?imageslim" alt="mark"></p>
 <h4 id="实际案例不开机类"><a href="#实际案例（不开机类）" class="headerlink" title="实际案例（不开机类）"></a><strong>实际案例（不开机类）</strong><a href="#实际案例不开机类" class="header-anchor">#</a></h4><h5 id="文件系统损坏导致挂载失败"><a href="#文件系统损坏导致挂载失败" class="headerlink" title="文件系统损坏导致挂载失败"></a><strong>文件系统损坏导致挂载失败</strong><a href="#文件系统损坏导致挂载失败" class="header-anchor">#</a></h5><p>System mount fail 导致 service 起不来，readback system分区对比看是否文件破坏。</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[138:kworker&#x2F;u16:2]device-mapper: verity: 179:30: metadata block 716579 is corrupted</span><br><span class="line">[246:init]JBD2: IO error reading journal superblock</span><br><span class="line">[246:init]EXT4-fs (dm-0): error loading journal</span><br><span class="line">[246:init]fs_mgr: __mount(source&#x3D;&#x2F;dev&#x2F;block&#x2F;dm-0,target&#x3D;&#x2F;system,type&#x3D;ext4)&#x3D;-1  &lt;&lt;&#x3D;&#x3D;&#x3D;文件系统挂载失败</span><br><span class="line">[246:init]EXT4-fs (mmcblk0p31): VFS: Can&#39;t find ext4 filesystem</span><br><span class="line">12345</span><br></pre></td></tr></table></figure></div>
+
 <p>经常遇到无法开机的问题，低概率、难复现，而且软、硬体跨度大，不易掌握与追踪；</p>
 <p>事后分析:</p>
 <p>部分有硬件实际损坏、系统映像档被破坏，或用户拔电池导致系统核心文件损坏…等几种原因。其中一部分导致无法开机的问题是由于不当操作使得文件损坏导致的。</p>
@@ -817,7 +828,9 @@
 <p>检查kernel log是否有<strong>emmc i/o error</strong>相关log</p>
 <p>如果是单机问题检查emmc相关供电或作替换物料交叉实验</p>
 <div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[ 5.030802] &lt;0&gt;.(0)[165:mmcqd&#x2F;0]mmcblk0: error -110 transferring data, sector 5448262, nr 442, cmd</span><br><span class="line">response 0x900, card status 0x0</span><br><span class="line">[ 5.032358] &lt;0&gt;.(0)[165:mmcqd&#x2F;0]blk_update_request: I&#x2F;O error, dev mmcblk0, sector 5448262</span><br><span class="line">[ 5.130190] &lt;0&gt;.(0)[179:init]EXT4-fs (dm-0): unable to read superblock</span><br><span class="line">[ 5.131325] &lt;0&gt;.(0)[179:init]fs_mgr: __mount(source&#x3D;&#x2F;dev&#x2F;block&#x2F;dm-0,target&#x3D;&#x2F;system,type&#x3D;ext4)&#x3D;-1  &lt;&lt;&#x3D;&#x3D;&#x3D;文件系统挂载失败</span><br><span class="line">12345</span><br></pre></td></tr></table></figure></div>
+
 <h5 id="preloader-hang-by-mem-test-fail"><a href="#preloader-hang-by-mem-test-fail" class="headerlink" title="preloader hang by mem test fail"></a><strong>preloader hang by mem test fail</strong><a href="#preloader-hang-by-mem-test-fail" class="header-anchor">#</a></h5><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[50:31:154] [MEM] complex R&#x2F;W mem test fail :FFFFFFFF</span><br><span class="line">[50:31:155] &lt;ASSERT&gt; memory.c:line 105 0</span><br><span class="line">[50:31:155] PL fatal error</span><br><span class="line">[50:31:155] PL delay for Long Press Reboot</span><br><span class="line">[50:31:159] power key is pressed</span><br><span class="line">[50:36:117] [PLF]Emergency Dwld mode(timeout: 5s)</span><br><span class="line">[50:36:119] mtk_arch_reset at pre-loader!</span><br><span class="line">1234567</span><br></pre></td></tr></table></figure></div>
+
 <ul>
 <li><strong>场景追溯</strong></li>
 </ul>
@@ -1165,7 +1178,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">文章</span>
                 </a>
               </div>
@@ -1176,7 +1189,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1187,7 +1200,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1260,6 +1273,14 @@
                   
                   
                     <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/10/performance-android-121-Memory-leaks/" title="Android内存优化案例-优化某App的121内存泄漏" target="_blank">Android内存优化案例-优化某App的121内存泄漏</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
+                      <a href="/2022/09/android-performance-four-tips/" title="Android内存泄漏4讲" target="_blank">Android内存泄漏4讲</a>
+                    </li>
+                  
+                    <li class='my-links-of-blogroll-li'>
                       <a href="/2022/02/Android-gradle-usage/" title="Android项目Gradle常见用途" target="_blank">Android项目Gradle常见用途</a>
                     </li>
                   
@@ -1269,14 +1290,6 @@
                   
                     <li class='my-links-of-blogroll-li'>
                       <a href="/2022/01/jetpack-paging-mmvm-usage/" title="Jetpack-生命周期组件库Paging" target="_blank">Jetpack-生命周期组件库Paging</a>
-                    </li>
-                  
-                    <li class='my-links-of-blogroll-li'>
-                      <a href="/2022/01/jetpack-viewmodel-mmvm-usage/" title="Jetpack-生命周期组件库ViewModel" target="_blank">Jetpack-生命周期组件库ViewModel</a>
-                    </li>
-                  
-                    <li class='my-links-of-blogroll-li'>
-                      <a href="/2022/01/jetpack-daabinding-mmvm-usage/" title="Jetpack-生命周期组件库Databinding" target="_blank">Jetpack-生命周期组件库Databinding</a>
                     </li>
                   
                 </ul>
@@ -1613,7 +1626,7 @@
       <h3 class="widget-title">Tag Cloud</h3>
       <div id="myCanvasContainer" class="widget tagcloud">
           <canvas width="250" height="250" id="resCanvas" style="width=100%">
-              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">25</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">3</span></li></ul>
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a><span class="tag-list-count">24</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-BugFree/" rel="tag">Android,BugFree</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AndroidUI%E4%BC%98%E5%8C%96/" rel="tag">AndroidUI优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">Android性能优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BugFree/" rel="tag">BugFree</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Communication/" rel="tag">Communication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/" rel="tag">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Performance/" rel="tag">Performance</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%B8%AA%E4%BA%BA%E6%95%99%E8%82%B2/" rel="tag">个人教育</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%A6%E4%B9%A0%E6%96%B9%E6%B3%95/" rel="tag">学习方法</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90%E6%A1%86%E6%9E%B6/" rel="tag">开源框架</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/" rel="tag">技术选型</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A8%8B%E5%BA%8F%E4%BA%BA%E7%94%9F%EF%BC%8C%E6%9D%82%E8%B0%88/" rel="tag">程序人生，杂谈</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">3</span></li></ul>
           </canvas>
       </div>
       </div>
@@ -1647,7 +1660,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">174.5k</span>
+    <span title="Site words total count">190.3k</span>
   
 </div>
 
@@ -2557,7 +2570,7 @@
   
     <script async type="text/javascript">
         var text = "Welcome To Leaface";
-        var date = '2022-07-28';
+        var date = '2022-12-03';
         console.log("%c " + text, "font-size:100px;color:white;border-radius:20px;height:200px; background:-webkit-linear-gradient(yellow,orange,red,green,blue,purple);text-shadow: 0 1px 0 #ccc,0 2px 0 #c9c9c9,0 3px 0 #bbb,0 4px 0 #b9b9b9,0 5px 0 #aaa,0 6px 1px rgba(0,0,0,.1),0 0 5px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.3),0 3px 5px rgba(0,0,0,.2),0 5px 10px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.2),0 20px 20px rgba(0,0,0,.15);");
         console.info('\n' + ' %c Leafae Site %c https://www.liaofuzhan.com ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
         console.info('\n' + ' %c Leafae QQ %c 793458585 ' + '\n', 'color: #fadfa3; background: #030307; padding:5px 0;', 'background: #fadfa3; padding:5px 0;');
